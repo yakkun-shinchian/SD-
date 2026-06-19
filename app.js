@@ -1,6 +1,7 @@
 /* =========================================================================
  * NurseTube（ナースチューブ）アプリ本体
- * 依存：data.js（CATEGORIES, PROGRAMS, EXAM_DATE）
+ * 〜 ずんだもんが看護を解説してくれる勉強用YouTubeなのだ 〜
+ * 依存：data.js（CATEGORIES, PROGRAMS, EXAM_DATE, PRESENTER）
  * ルーティングはURLハッシュで管理：
  *   #/                       … ホーム（すべて）
  *   #/category/<カテゴリ>     … カテゴリ絞り込み
@@ -9,6 +10,9 @@
  * ========================================================================= */
 (function () {
   "use strict";
+
+  // ずんだもんカラー（アバター用の枝豆グリーンなのだ）
+  const ZUNDA_GREEN = "#5cb96b";
 
   // ----------------------- DOM参照 -----------------------
   const main = document.getElementById("main");
@@ -57,13 +61,6 @@
     return Math.floor(days / 365) + "年前";
   }
 
-  // 文字列から安定したHSL色を作る（アバター用）
-  function colorFromString(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    return `hsl(${Math.abs(hash) % 360}, 55%, 45%)`;
-  }
-
   // hexを暗く／明るくする
   function shade(hex, percent) {
     const n = parseInt(hex.replace("#", ""), 16);
@@ -91,12 +88,11 @@
   }
 
   function cardHtml(p) {
-    const av = colorFromString(p.channel);
     return `
       <article class="card" data-goto="#/watch/${p.id}">
         ${thumbHtml(p)}
         <div class="card__meta">
-          <span class="avatar" style="background:${av}">${escapeHtml(p.channel.charAt(0))}</span>
+          <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(p.channel.charAt(0))}</span>
           <div class="card__info">
             <h3 class="card__title">${escapeHtml(p.title)}</h3>
             <div class="card__sub">${escapeHtml(p.channel)}</div>
@@ -111,7 +107,7 @@
   function gridHtml(list) {
     if (!list.length) {
       return `<div class="empty"><div class="empty__icon">🔍</div>
-        <p>該当する番組が見つかりませんでした。<br />別のキーワードやカテゴリでお試しください。</p></div>`;
+        <p>その番組は見つからなかったのだ…。<br />べつのキーワードやカテゴリで探してほしいのだ。</p></div>`;
     }
     return `<div class="grid">${list.map(cardHtml).join("")}</div>`;
   }
@@ -141,8 +137,8 @@
     const list = key === "all" ? PROGRAMS : PROGRAMS.filter((p) => p.category === key);
     const cat = catOf(key);
     const heading = key === "all"
-      ? `おすすめの番組 <span class="muted">全${PROGRAMS.length}本</span>`
-      : `${cat ? cat.icon + " " : ""}${escapeHtml(cat ? cat.label : key)} <span class="muted">${list.length}本</span>`;
+      ? `ずんだもんのおすすめ番組なのだ <span class="muted">全${PROGRAMS.length}本</span>`
+      : `${cat ? cat.icon + " " : ""}${escapeHtml(cat ? cat.label : key)}の番組なのだ <span class="muted">${list.length}本</span>`;
     main.innerHTML = chipsHtml(key) +
       `<h2 class="section-title">${heading}</h2>` + gridHtml(list);
   }
@@ -157,7 +153,7 @@
       return hay.includes(lower);
     });
     main.innerHTML =
-      `<h2 class="section-title">「${escapeHtml(q)}」の検索結果 <span class="muted">${list.length}件</span></h2>` +
+      `<h2 class="section-title">「${escapeHtml(q)}」の検索結果なのだ <span class="muted">${list.length}件</span></h2>` +
       gridHtml(list);
   }
 
@@ -177,9 +173,9 @@
       <div class="player-placeholder">
         <h3>${escapeHtml(p.title)}</h3>
         <a class="btn-yt" href="${ytSearch}" target="_blank" rel="noopener">
-          ▶ YouTubeでこのテーマを見る
+          ▶ YouTubeで見るのだ
         </a>
-        <small>（data.js の videoId に動画IDを設定すると、ここで埋め込み再生できます）</small>
+        <small>（data.js の videoId に動画IDを入れると、ここで埋め込み再生できるのだ）</small>
       </div>
     </div>`;
   }
@@ -189,7 +185,7 @@
       .filter((p) => p.id !== current.id)
       .sort((a, b) => (b.category === current.category) - (a.category === current.category))
       .slice(0, 8);
-    return `<aside class="related"><h3>関連する番組</h3>${related.map((p) => `
+    return `<aside class="related"><h3>関連する番組なのだ</h3>${related.map((p) => `
       <div class="related-item" data-goto="#/watch/${p.id}">
         ${thumbHtml(p, { noPlay: true })}
         <div class="related-item__info">
@@ -205,21 +201,20 @@
     renderSidebar(null);
     if (!p) {
       main.innerHTML = `<div class="empty"><div class="empty__icon">📺</div>
-        <p>番組が見つかりませんでした。</p><a class="btn-yt" href="#/">ホームに戻る</a></div>`;
+        <p>番組が見つからなかったのだ。</p><a class="btn-yt" href="#/">ホームにもどるのだ</a></div>`;
       return;
     }
-    const av = colorFromString(p.channel);
     const tags = (p.tags || []).map((t) => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
     main.innerHTML = `
-      <a class="back-link" href="#/">← 一覧に戻る</a>
+      <a class="back-link" href="#/">← 一覧にもどるのだ</a>
       <div class="watch">
         <div class="watch__primary">
           ${playerHtml(p)}
           <h1 class="watch__title">${escapeHtml(p.title)}</h1>
           <div class="watch__bar">
             <div class="watch__channel">
-              <span class="avatar" style="background:${av}">${escapeHtml(p.channel.charAt(0))}</span>
-              <div><b>${escapeHtml(p.channel)}</b><small>${escapeHtml(p.category)}</small></div>
+              <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(p.channel.charAt(0))}</span>
+              <div><b>${escapeHtml(p.channel)}</b><small>${escapeHtml(p.category)}の解説なのだ</small></div>
             </div>
             <div class="watch__tags">${tags}</div>
           </div>
@@ -238,7 +233,7 @@
     closeSidebar();
     main.scrollTop = 0;
     window.scrollTo(0, 0);
-    document.title = "NurseTube ナースチューブ｜看護師のための勉強用YouTube";
+    document.title = "NurseTube ナースチューブ｜ずんだもんと学ぶ看護のYouTube";
 
     const hash = location.hash.replace(/^#/, "") || "/";
     const parts = hash.split("/").filter(Boolean); // 例: ["watch","anat01"]
@@ -298,8 +293,8 @@
     const days = Math.ceil((target - new Date()) / 86400000);
     if (isNaN(days)) return;
     examCountdown.innerHTML = days > 0
-      ? `国試まであと<br /><strong>${days}</strong> 日`
-      : `国家試験<br />おつかれさま！`;
+      ? `国試まであと<br /><strong>${days}</strong> 日なのだ`
+      : `国家試験<br />おつかれさまなのだ!`;
   }
 
   // ----------------------- 起動 -----------------------

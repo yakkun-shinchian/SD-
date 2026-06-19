@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NurseTube ナースチューブ｜看護師のための勉強用YouTube</title>
+  <meta name="description" content="看護師・看護学生のための、動画で学ぶ学習ポータル。解剖生理・薬理・看護技術・疾患・国家試験対策をカテゴリ別の番組で学べます。" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ef4444'/><polygon points='40,32 40,68 70,50' fill='white'/></svg>" />
+</head>
+<body>
+  <!-- ============ ヘッダー ============ -->
+  <header class="topbar">
+    <div class="topbar__left">
+      <button id="menuToggle" class="icon-btn" aria-label="メニュー">
+        <span class="hamburger"></span>
+      </button>
+      <a href="#/" class="logo" aria-label="ホームへ">
+        <span class="logo__play">▶</span>
+        <span class="logo__text">Nurse<strong>Tube</strong></span>
+        <span class="logo__sub">ナースチューブ</span>
+      </a>
+    </div>
+
+    <form id="searchForm" class="search" role="search">
+      <input id="searchInput" class="search__input" type="search"
+             placeholder="番組やキーワードを検索（例：心電図、採血、糖尿病）" autocomplete="off" />
+      <button class="search__btn" type="submit" aria-label="検索">🔍</button>
+    </form>
+
+    <div class="topbar__right">
+      <div id="examCountdown" class="countdown" title="看護師国家試験までの日数（data.js で変更できます）"></div>
+      <button id="themeToggle" class="icon-btn" aria-label="テーマ切り替え">🌙</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- ============ サイドバー（カテゴリ） ============ -->
+    <nav id="sidebar" class="sidebar" aria-label="カテゴリ">
+      <ul id="categoryList" class="category-list"></ul>
+      <div class="sidebar__foot">
+        <p>看護師のための<br />勉強用 動画ポータル</p>
+      </div>
+    </nav>
+    <div id="backdrop" class="backdrop" hidden></div>
+
+    <!-- ============ メイン ============ -->
+    <main id="main" class="main" tabindex="-1">
+      <!-- ここに app.js が描画します -->
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

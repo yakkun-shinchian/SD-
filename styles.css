@@ -324,6 +324,70 @@ button { font-family: inherit; cursor: pointer; }
 .empty { text-align: center; color: var(--text-sub); padding: 60px 20px; }
 .empty__icon { font-size: 48px; }
 
+/* ============ 自動再生レッスン（番組プレーヤー） ============ */
+.lesson { position: absolute; inset: 0; display: flex; flex-direction: column; color: #fff; }
+.lesson__stage {
+  position: relative; flex: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 12px; padding: 32px 34px 62px;
+}
+.lesson__badge, .lesson__speaker {
+  position: absolute; top: 12px; background: rgba(0, 0, 0, .42);
+  padding: 3px 12px; border-radius: 20px; font-size: 12px;
+}
+.lesson__badge { left: 14px; }
+.lesson__speaker { right: 14px; }
+.lesson__scene h2 {
+  margin: 0 0 10px; font-size: clamp(18px, 3vw, 30px); line-height: 1.35;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .45);
+}
+.lesson__scene ul {
+  margin: 0; padding-left: 1.25em; display: flex; flex-direction: column;
+  gap: 7px; font-size: clamp(13px, 1.9vw, 18px);
+}
+.lesson__scene li { text-shadow: 0 1px 8px rgba(0, 0, 0, .5); }
+.lesson__caption {
+  position: absolute; left: 16px; right: 16px; bottom: 46px; margin: 0 auto;
+  max-width: 760px; text-align: center; line-height: 1.5;
+  font-size: clamp(12px, 1.7vw, 15px);
+  background: rgba(0, 0, 0, .5); padding: 7px 12px; border-radius: 8px;
+}
+.lesson__big {
+  position: absolute; inset: 0; margin: auto; width: 76px; height: 76px;
+  border-radius: 50%; border: none; background: rgba(0, 0, 0, .55); color: #fff;
+  font-size: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform .1s, background .15s;
+}
+.lesson__big:hover { background: rgba(0, 0, 0, .7); transform: scale(1.06); }
+.lesson__big[hidden] { display: none; }
+.lesson__bar {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 10px 9px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .55));
+}
+.lesson__progress {
+  height: 4px; background: rgba(255, 255, 255, .3); border-radius: 2px;
+  overflow: hidden; margin-bottom: 6px;
+}
+.lesson__progress span { display: block; height: 100%; width: 0; background: #fff; transition: width .35s ease; }
+.lesson__btns { display: flex; align-items: center; gap: 4px; }
+.lesson__btns button {
+  background: transparent; border: none; color: #fff; font-size: 16px;
+  cursor: pointer; padding: 4px 7px; border-radius: 6px; line-height: 1;
+}
+.lesson__btns button:hover { background: rgba(255, 255, 255, .18); }
+.lesson__btns .spacer { flex: 1; }
+.lesson__counter { font-size: 12px; opacity: .92; margin-left: 4px; }
+
+.play-hint { font-size: 13px; color: var(--text-sub); margin: 10px 0 0; }
+.yt-more { margin: 12px 0 0; }
+.yt-more a { color: var(--accent-strong); font-weight: 600; font-size: 13px; }
+.yt-more a:hover { text-decoration: underline; }
+
+@media (max-width: 560px) {
+  .lesson__stage { padding: 24px 18px 58px; }
+  .lesson__scene ul { gap: 5px; }
+}
+
 /* ============ レスポンシブ ============ */
 @media (max-width: 1000px) {
   .watch { grid-template-columns: 1fr; }

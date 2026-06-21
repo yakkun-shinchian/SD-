@@ -225,7 +225,7 @@
   }
 
   // スライド自動再生コントローラ（Web Speech APIで読み上げ）
-  function createLesson(scenes) {
+  function createLesson(programId, scenes) {
     const root = document.getElementById("lessonRoot");
     if (!root || !scenes || !scenes.length) return null;
 
@@ -243,7 +243,17 @@
 
     const synth = window.speechSynthesis || null;
     let idx = 0, playing = false, muted = false, ended = false;
-    let token = 0, timer = null, jpVoice = null;
+    let token = 0, timer = null, jpVoice = null, audioEl = null;
+
+    // そのシーンに本物の音声ファイル(VOICEVOX等)があれば、そのパスを返す
+    const audioFor = (i) =>
+      (typeof AUDIO_FILES !== "undefined" && AUDIO_FILES[programId + "-" + (i + 1)]) || null;
+    function stopAudio() {
+      if (audioEl) {
+        try { audioEl.pause(); } catch (e) {}
+        audioEl.onended = null; audioEl.onerror = null; audioEl = null;
+      }
+    }
 
     function pickVoice() {
       if (!synth) return;
@@ -258,7 +268,11 @@
     }
 
     const clearTimer = () => { if (timer) { clearTimeout(timer); timer = null; } };
-    const stopSpeech = () => { clearTimer(); if (synth) { try { synth.cancel(); } catch (e) {} } };
+    const stopSpeech = () => {
+      clearTimer();
+      if (synth) { try { synth.cancel(); } catch (e) {} }
+      stopAudio();
+    };
 
     function renderScene() {
       const s = scenes[idx];
@@ -279,16 +293,9 @@
       progFill.style.width = "100%";
     }
 
-    function speakScene() {
-      token++;
-      const my = token;
-      const s = scenes[idx];
-      const advance = () => {
-        if (my !== token || !playing) return;
-        token++; // このシーンの保留中タイマー／onendを無効化
-        if (idx < scenes.length - 1) { idx++; renderScene(); speakScene(); }
-        else { finish(); }
-      };
+    // 音声ファイルが無いときの読み上げ／無音自動送り
+    function ttsOrTimer(s, advance, my) {
+      if (my !== token) return;
       clearTimer();
       if (synth && !muted) {
         try { synth.cancel(); } catch (e) {}
@@ -302,6 +309,37 @@
         timer = setTimeout(advance, estDuration(s.narration) + 3000);
       } else {
         timer = setTimeout(advance, estDuration(s.narration));
+      }
+    }
+
+    function speakScene() {
+      token++;
+      const my = token;
+      const s = scenes[idx];
+      const advance = () => {
+        if (my !== token || !playing) return;
+        token++; // このシーンの保留中タイマー／onend／音声を無効化
+        clearTimer();
+        stopAudio();
+        if (synth) { try { synth.cancel(); } catch (e) {} }
+        if (idx < scenes.length - 1) { idx++; renderScene(); speakScene(); }
+        else { finish(); }
+      };
+      clearTimer();
+      const src = audioFor(idx);
+      if (src && !muted) {
+        // 本物のずんだもん音声(VOICEVOX等)があれば、それを再生
+        stopAudio();
+        audioEl = new Audio(src);
+        audioEl.onended = advance;
+        audioEl.onerror = () => { stopAudio(); ttsOrTimer(s, advance, my); };
+        const pr = audioEl.play();
+        if (pr && pr.catch) pr.catch(() => { stopAudio(); ttsOrTimer(s, advance, my); });
+        // 音声が止まった場合の安全網(長めの保険タイマー)
+        timer = setTimeout(advance, Math.max(estDuration(s.narration) * 2, 20000));
+      } else {
+        // 音声ファイルが無ければ端末の読み上げ(または無音で自動送り)
+        ttsOrTimer(s, advance, my);
       }
     }
 
@@ -371,7 +409,7 @@
       <div class="watch">
         <div class="watch__primary">
           ${playerHtml(p)}
-          ${hasLesson ? `<p class="play-hint">▶ 再生ボタンを押すと、ずんだもんがスライドで解説してくれるのだ（音声は端末の読み上げ機能を使うのだ）</p>` : ""}
+          ${hasLesson ? `<p class="play-hint">▶ 再生ボタンを押すと、ずんだもんがスライドで解説してくれるのだ（音声ファイルがあれば本物の声、無ければ端末の読み上げを使うのだ）</p>` : ""}
           <h1 class="watch__title">${escapeHtml(p.title)}</h1>
           <div class="watch__bar">
             <div class="watch__channel">
@@ -390,7 +428,7 @@
       </div>`;
     document.title = `${p.title}｜NurseTube`;
 
-    if (hasLesson) activeLesson = createLesson(scenesOf(p.id));
+    if (hasLesson) activeLesson = createLesson(p.id, scenesOf(p.id));
   }
 
   // ----------------------- ルーター -----------------------

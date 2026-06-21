@@ -80,7 +80,29 @@ SCENES["myvideo01"] = [
 ];
 ```
 
-> 本物のずんだもん音声を付けたい場合は、各 `narration` を [VOICEVOX](https://voicevox.hr2.jp/) に貼って音声を作れます（利用時は「VOICEVOX:ずんだもん」のクレジット表記が必要です）。
+> 本物のずんだもん音声を付けたい場合は、各 `narration` を [VOICEVOX](https://voicevox.hr2.jp/) で音声化して差し込めます（手順は次のセクション）。
+
+## 本物のずんだもん音声にする（VOICEVOX）
+
+端末の読み上げではなく、**本物のずんだもん音声**で再生させることもできます。台本は VOICEVOX にそのまま流し込めるよう、テキストと対応表に書き出してあります。
+
+```bash
+# 1) 台本を VOICEVOX 用に書き出す（scenes.js を編集したら再実行）
+node tools/build-voicevox.mjs
+#   → voicevox/narration.txt（1行=1ナレーション・全118行）
+#   → voicevox/manifest.json / manifest.csv（順番と番組ID・ファイル名の対応表）
+
+# 2) VOICEVOX で narration.txt を読み込み、話者「ずんだもん（ノーマル）」で一括書き出し
+#    → 書き出した wav を voicevox/export/ に入れる
+
+# 3) 書き出した音声をアプリ用に整列＆対応表を生成
+node tools/link-audio.mjs
+#   → audio/<番組ID-シーン番号>.wav にコピーし、audio/manifest.js を自動生成
+```
+
+- アプリは各シーンで `audio/manifest.js`（`AUDIO_FILES`）にある音声を優先再生し、無ければ端末の読み上げにフォールバックします。**作った分だけ**本物の声に置き換わります。
+- 詳しい手順・手動で用意する方法は **[`voicevox/README.md`](voicevox/README.md)** を参照してください。
+- ⚠️ VOICEVOXのずんだもん音声を使う場合は「**VOICEVOX:ずんだもん**」のクレジット表記が必要です。
 
 ## カテゴリの追加・変更
 
@@ -104,6 +126,9 @@ SCENES["myvideo01"] = [
 ├── app.js       … 動作（描画・ルーティング・検索・自動再生プレーヤー）
 ├── data.js      … 番組カタログ（メタ情報。ここに番組を追加）
 ├── scenes.js    … 各番組の解説台本（スライド＋ナレーション）
+├── audio/       … 音声ファイルと対応表（manifest.js）。本物の声を使うとき
+├── voicevox/    … VOICEVOX用の書き出しデータ＋手順（README.md）
+├── tools/       … 台本→VOICEVOX書き出し / 音声整列スクリプト
 └── README.md
 ```
 

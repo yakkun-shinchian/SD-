@@ -1,0 +1,6 @@
+# VOICEVOXからの一括書き出しを置く中間フォルダ（生データは管理しない）
+voicevox/export/
+
+# OS / エディタ
+.DS_Store
+Thumbs.db

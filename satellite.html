@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>衛星追跡システム | Satellite Tracker</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    :root {
+      --bg: #050a15;
+      --panel: rgba(4, 10, 22, 0.92);
+      --border: rgba(60, 120, 255, 0.25);
+      --text: #a0c4e8;
+      --text-bright: #e8f4ff;
+      --accent: #00aaff;
+      --success: #00ff88;
+      --warn: #ffcc00;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; font-family: 'Courier New', 'Consolas', monospace; background: var(--bg); color: var(--text); }
+    #map { position: fixed; inset: 0; z-index: 0; }
+
+    /* ── Header ── */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--panel); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 16px;
+      padding: 10px 16px; height: 52px;
+    }
+    .header-logo { font-size: 1.15rem; font-weight: bold; color: var(--text-bright); letter-spacing: 0.06em; white-space: nowrap; }
+    .header-logo span { color: var(--accent); }
+    .header-status { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; flex-shrink: 0; }
+    .dot.live { background: var(--success); box-shadow: 0 0 6px var(--success); animation: blink 1.5s infinite; }
+    .dot.error { background: #ff4444; }
+    .dot.loading { background: var(--warn); }
+    @keyframes blink { 50% { opacity: 0.3; } }
+    .header-time { margin-left: auto; font-size: 0.72rem; color: var(--accent); white-space: nowrap; }
+
+    /* ── Left Panel ── */
+    .panel-left {
+      position: fixed; top: 60px; left: 12px; z-index: 900;
+      background: var(--panel); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px; width: 250px; max-height: calc(100vh - 80px); overflow-y: auto;
+    }
+    .panel-section { margin-bottom: 14px; }
+    .panel-label { font-size: 0.65rem; letter-spacing: 0.12em; color: #6699cc; text-transform: uppercase; margin-bottom: 8px; }
+
+    .cat-btn {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; padding: 8px 10px; margin-bottom: 6px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(60,120,255,0.15);
+      border-radius: 7px; cursor: pointer; color: var(--text); font-family: inherit;
+      font-size: 0.78rem; text-align: left; transition: all 0.18s; position: relative;
+    }
+    .cat-btn:hover { background: rgba(0,150,255,0.1); border-color: rgba(0,150,255,0.4); }
+    .cat-btn.on { background: rgba(0,150,255,0.14); border-color: rgba(0,150,255,0.6); color: var(--text-bright); }
+    .cat-btn .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .cat-btn .cat-name { flex: 1; line-height: 1.3; }
+    .cat-btn .cat-count { font-size: 0.65rem; background: rgba(0,150,255,0.2); padding: 1px 6px; border-radius: 10px; color: var(--accent); }
+    .cat-btn .cat-toggle { font-size: 0.65rem; color: #557799; }
+
+    /* ── Info Panel ── */
+    .info-panel {
+      position: fixed; bottom: 16px; right: 16px; z-index: 900;
+      background: var(--panel); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px; width: 280px;
+    }
+    .info-panel[hidden] { display: none; }
+    .info-title { font-size: 0.9rem; font-weight: bold; color: var(--text-bright); margin-bottom: 10px; padding-right: 20px; line-height: 1.3; }
+    .info-close { position: absolute; top: 12px; right: 12px; background: none; border: none; color: #668; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid rgba(60,120,255,0.1); font-size: 0.75rem; }
+    .info-row:last-child { border-bottom: none; }
+    .info-key { color: #6699cc; }
+    .info-val { color: var(--text-bright); font-weight: bold; text-align: right; }
+    .info-cat { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; margin-bottom: 8px; }
+
+    /* ── Satellite Markers ── */
+    .sat-dot {
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .sat-dot:hover { transform: scale(2); }
+    .sat-iss {
+      width: 14px !important; height: 14px !important;
+      margin-top: -7px !important; margin-left: -7px !important;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 6px 0 currentColor; }
+      70%  { box-shadow: 0 0 6px 10px transparent; }
+      100% { box-shadow: 0 0 6px 0 currentColor; }
+    }
+    .sat-pulse { animation: pulse 2s infinite; }
+
+    /* ── Notice Box ── */
+    .notice {
+      position: fixed; bottom: 16px; left: 270px; z-index: 900;
+      background: var(--panel); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 160, 0, 0.35); border-radius: 10px;
+      overflow: hidden; max-width: 320px;
+    }
+    .notice-toggle {
+      width: 100%; padding: 8px 14px; background: none; border: none;
+      color: var(--warn); font-family: inherit; font-size: 0.75rem;
+      cursor: pointer; text-align: left; letter-spacing: 0.03em;
+    }
+    .notice-toggle:hover { background: rgba(255,200,0,0.08); }
+    .notice-body { padding: 0 14px 12px; font-size: 0.72rem; line-height: 1.7; }
+    .notice-body p { margin-bottom: 6px; }
+    .notice-body p:last-child { margin-bottom: 0; }
+    .notice-body[hidden] { display: none; }
+
+    /* ── Orbit Path ── */
+    .orbit-past { stroke: rgba(0,255,136,0.3) !important; }
+    .orbit-future { stroke: rgba(0,255,136,0.7) !important; }
+
+    /* ── Loading Overlay ── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: var(--bg); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+    }
+    .overlay[hidden] { display: none; }
+    .overlay-title { font-size: 1.5rem; color: var(--accent); }
+    .overlay-sub { font-size: 0.85rem; color: var(--text); }
+    .spinner { width: 36px; height: 36px; border: 3px solid rgba(0,170,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Leaflet overrides ── */
+    .leaflet-control-attribution { background: rgba(4,10,22,0.8) !important; color: #446 !important; font-size: 10px !important; }
+    .leaflet-control-attribution a { color: #558 !important; }
+    .leaflet-control-zoom { border: 1px solid var(--border) !important; }
+    .leaflet-control-zoom a { background: var(--panel) !important; color: var(--text-bright) !important; border-color: var(--border) !important; }
+    .leaflet-tooltip {
+      background: var(--panel) !important; border: 1px solid var(--border) !important;
+      color: var(--text-bright) !important; font-family: 'Courier New', monospace !important;
+      font-size: 0.7rem !important; padding: 3px 8px !important; border-radius: 4px !important;
+      box-shadow: none !important;
+    }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+      background: var(--panel) !important; color: var(--text) !important; border: 1px solid var(--border) !important;
+    }
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #334; border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div class="overlay" id="overlay">
+  <div class="spinner"></div>
+  <div class="overlay-title">🛸 衛星追跡システム</div>
+  <div class="overlay-sub" id="overlayMsg">Celestrak から軌道データを取得中...</div>
+</div>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-logo">🛸 <span>衛星</span>追跡システム</div>
+  <div class="header-status">
+    <div class="dot loading" id="statusDot"></div>
+    <span id="statusText">初期化中...</span>
+  </div>
+  <div class="header-time" id="headerTime"></div>
+</div>
+
+<!-- Left panel -->
+<div class="panel-left">
+  <div class="panel-section">
+    <div class="panel-label">カテゴリ（クリックで表示切替）</div>
+    <div id="catButtons"></div>
+  </div>
+  <div class="panel-section" style="margin-bottom:0">
+    <div class="panel-label">合計衛星数</div>
+    <div id="totalCount" style="font-size:1.4rem;color:var(--accent);font-weight:bold;">-</div>
+    <div style="font-size:0.65rem;color:#6699cc;margin-top:2px;">表示中のみカウント</div>
+  </div>
+</div>
+
+<!-- Info panel -->
+<div class="info-panel" id="infoPanel" hidden>
+  <button class="info-close" id="infoClose">✕</button>
+  <div id="infoContent"></div>
+</div>
+
+<!-- Notice about stealth fighters -->
+<div class="notice">
+  <button class="notice-toggle" id="noticeToggle">⚠️ ステルス戦闘機・軍用機の追跡について</button>
+  <div class="notice-body" id="noticeBody" hidden>
+    <p>🔒 <strong style="color:#ffcc00">ステルス戦闘機の追跡は不可能です</strong><br>
+    軍用機（特にステルス機）はADS-Bトランスポンダーを意図的にOFFにするか非搭載であるため、FlightRadarなどの民間システムでの位置追跡は原理的に不可能です。</p>
+    <p>🛰 <strong style="color:var(--accent)">軍事衛星について</strong><br>
+    本アプリに表示される軍事衛星は、米宇宙軍（USSF）/ NORADが公開している軌道要素（TLE）に基づくものです。機密指定・ステルス衛星（ブラックサット）は含まれません。</p>
+    <p>📡 <strong>データソース：</strong><br>
+    <a href="https://celestrak.org" target="_blank" rel="noopener" style="color:var(--accent)">Celestrak.org</a>（米国・公開TLEデータベース）</p>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/satellite.js@4.1.3/dist/satellite.min.js"></script>
+<script>
+'use strict';
+
+// ================================================================
+//  Category definitions
+// ================================================================
+const CATEGORIES = [
+  {
+    id: 'stations',
+    name: 'ISS / 宇宙ステーション',
+    icon: '🛸',
+    color: '#00ff88',
+    url: 'https://celestrak.org/pub/TLE/stations.txt',
+    filter: null,
+    size: 14,
+    pulse: true,
+    orbitPath: true,
+    defaultOn: true,
+    priority: 100,
+    country: null,
+  },
+  {
+    id: 'weather',
+    name: '気象衛星（ひまわり他）',
+    icon: '🌤',
+    color: '#ffcc00',
+    url: 'https://celestrak.org/pub/TLE/weather.txt',
+    filter: null,
+    size: 8,
+    pulse: false,
+    orbitPath: false,
+    defaultOn: false,
+    priority: 90,
+    country: null,
+  },
+  {
+    id: 'russia',
+    name: 'ロシア軍事衛星',
+    icon: '🇷🇺',
+    color: '#ff4444',
+    url: 'https://celestrak.org/pub/TLE/military.txt',
+    filter: (n) => /^COSMOS-|^KOSMOS-/i.test(n) ||
+                   /MERIDIAN|MOLNIYA|TSELINA|PERSONA|BARS-M|PION-NKS|STRELA|RADUGA|BLAGOVEST|LUCH/i.test(n),
+    size: 7,
+    pulse: false,
+    orbitPath: false,
+    defaultOn: false,
+    priority: 80,
+    country: 'RU',
+  },
+  {
+    id: 'china',
+    name: '中国軍事衛星',
+    icon: '🇨🇳',
+    color: '#ff8800',
+    url: 'https://celestrak.org/pub/TLE/military.txt',
+    filter: (n) => /YAOGAN|SHIJIAN|TIANHUI|GAOFEN|ZIYUAN|SHIYAN|LUDI|JIANBING|TJS/i.test(n),
+    size: 7,
+    pulse: false,
+    orbitPath: false,
+    defaultOn: false,
+    priority: 70,
+    country: 'CN',
+  },
+  {
+    id: 'usa',
+    name: 'アメリカ軍事衛星',
+    icon: '🇺🇸',
+    color: '#4499ff',
+    url: 'https://celestrak.org/pub/TLE/military.txt',
+    filter: (n) => /^USA \d/i.test(n) || /WGS-|MILSTAR|AEHF-|MUOS-|SBIRS|DSP-|NAVSTAR|ADVANCED EHF/i.test(n),
+    size: 7,
+    pulse: false,
+    orbitPath: false,
+    defaultOn: false,
+    priority: 60,
+    country: 'US',
+  },
+];
+
+// ================================================================
+//  App state
+// ================================================================
+const app = {
+  map: null,
+  layers: {},      // categoryId → L.layerGroup
+  tleCache: {},    // categoryId → [{name, satrec, tle1, tle2}]
+  markers: {},     // categoryId → [L.marker]
+  enabled: {},     // categoryId → bool
+  orbitPolylines: [],
+  selectedSat: null,
+  updateLoop: null,
+};
+
+// ================================================================
+//  Utilities
+// ================================================================
+function setOverlay(msg) {
+  document.getElementById('overlayMsg').textContent = msg;
+}
+function hideOverlay() {
+  document.getElementById('overlay').hidden = true;
+}
+function setStatus(state, text) {
+  const dot = document.getElementById('statusDot');
+  dot.className = 'dot ' + state;
+  document.getElementById('statusText').textContent = text;
+}
+function updateClock() {
+  const now = new Date();
+  document.getElementById('headerTime').textContent =
+    now.toUTCString().replace('GMT', 'UTC').replace(',', '');
+}
+
+// ================================================================
+//  Map init
+// ================================================================
+function initMap() {
+  app.map = L.map('map', {
+    center: [25, 145],
+    zoom: 3,
+    zoomControl: false,
+    minZoom: 2,
+    maxBounds: [[-90, -400], [90, 400]],
+  });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org">OpenStreetMap</a> © <a href="https://carto.com">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 10,
+  }).addTo(app.map);
+  L.control.zoom({ position: 'bottomright' }).addTo(app.map);
+  app.map.on('click', () => closeInfo());
+}
+
+// ================================================================
+//  TLE parsing
+// ================================================================
+function parseTLE(text) {
+  const lines = text.replace(/\r/g, '').split('\n').map(l => l.trim()).filter(Boolean);
+  const sats = [];
+  for (let i = 0; i + 2 < lines.length; i += 3) {
+    const n0 = lines[i];
+    const n1 = lines[i + 1];
+    const n2 = lines[i + 2];
+    if (!n1.startsWith('1 ') || !n2.startsWith('2 ')) {
+      // Try 2-line without name prefix
+      continue;
+    }
+    const name = n0.replace(/^0 /, '').trim();
+    try {
+      const satrec = satellite.twoline2satrec(n1, n2);
+      if (satrec.error !== 0) continue;
+      sats.push({ name, satrec, tle1: n1, tle2: n2 });
+    } catch (e) { /* skip bad TLE */ }
+  }
+  return sats;
+}
+
+// ================================================================
+//  Position propagation
+// ================================================================
+function getPosition(satrec, date = new Date()) {
+  try {
+    const pv = satellite.propagate(satrec, date);
+    if (!pv || !pv.position || typeof pv.position === 'boolean') return null;
+    const gmst = satellite.gstime(date);
+    const gd = satellite.eciToGeodetic(pv.position, gmst);
+    const lat = satellite.degreesLat(gd.latitude);
+    const lng = satellite.degreesLong(gd.longitude);
+    const alt = gd.height;
+    let spd = null;
+    if (pv.velocity) {
+      const v = pv.velocity;
+      spd = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    }
+    return { lat, lng, alt, speed: spd };
+  } catch (e) { return null; }
+}
+
+// ================================================================
+//  Orbit path (for ISS)
+// ================================================================
+function drawOrbitPath(satrec) {
+  clearOrbitPath();
+  const now = new Date();
+  const PERIOD_MIN = 95;
+  const STEP = 1;
+  const pastSeg = [], futureSeg1 = [], futureSeg2 = [];
+
+  // Past 5 min
+  let prevLng = null;
+  let pastLines = [[]];
+  for (let i = -5; i <= 0; i++) {
+    const t = new Date(now.getTime() + i * 60000);
+    const pos = getPosition(satrec, t);
+    if (!pos) continue;
+    if (prevLng !== null && Math.abs(pos.lng - prevLng) > 180) pastLines.push([]);
+    pastLines[pastLines.length - 1].push([pos.lat, pos.lng]);
+    prevLng = pos.lng;
+  }
+  // Future orbit
+  prevLng = null;
+  let futureLines = [[]];
+  for (let i = 0; i <= PERIOD_MIN; i += STEP) {
+    const t = new Date(now.getTime() + i * 60000);
+    const pos = getPosition(satrec, t);
+    if (!pos) continue;
+    if (prevLng !== null && Math.abs(pos.lng - prevLng) > 180) futureLines.push([]);
+    futureLines[futureLines.length - 1].push([pos.lat, pos.lng]);
+    prevLng = pos.lng;
+  }
+
+  const orbitGroup = L.layerGroup();
+  pastLines.forEach(seg => {
+    if (seg.length > 1)
+      L.polyline(seg, { color: '#00ff88', weight: 1.5, opacity: 0.35, dashArray: '4,4' }).addTo(orbitGroup);
+  });
+  futureLines.forEach(seg => {
+    if (seg.length > 1)
+      L.polyline(seg, { color: '#00ff88', weight: 1.5, opacity: 0.7 }).addTo(orbitGroup);
+  });
+  orbitGroup.addTo(app.map);
+  app.orbitPolylines.push(orbitGroup);
+}
+
+function clearOrbitPath() {
+  app.orbitPolylines.forEach(l => app.map.removeLayer(l));
+  app.orbitPolylines = [];
+}
+
+// ================================================================
+//  Satellite icon
+// ================================================================
+function makeSatIcon(cat, selected = false) {
+  const sz = selected ? cat.size * 1.8 : cat.size;
+  const glow = selected ? `0 0 10px ${cat.color}, 0 0 20px ${cat.color}88` : `0 0 5px ${cat.color}88`;
+  const pulse = (cat.pulse || selected) ? 'sat-pulse' : '';
+  const issClass = cat.id === 'stations' ? 'sat-iss' : '';
+  return L.divIcon({
+    html: `<div class="sat-dot ${pulse} ${issClass}" style="width:${sz}px;height:${sz}px;background:${cat.color};box-shadow:${glow};border-radius:50%;"></div>`,
+    className: '',
+    iconSize: [sz, sz],
+    iconAnchor: [sz / 2, sz / 2],
+    tooltipAnchor: [sz / 2, 0],
+  });
+}
+
+// ================================================================
+//  Info panel
+// ================================================================
+function openInfo(sat, cat, pos) {
+  app.selectedSat = { sat, cat };
+  const panel = document.getElementById('infoPanel');
+  const content = document.getElementById('infoContent');
+
+  const altStr = pos.alt ? pos.alt.toFixed(1) + ' km' : '-';
+  const spdStr = pos.speed ? (pos.speed * 3600).toFixed(0) + ' km/h' : '-';
+  const flagStr = cat.icon + ' ' + cat.name;
+
+  content.innerHTML = `
+    <div class="info-cat" style="background:${cat.color}22;border:1px solid ${cat.color}66;color:${cat.color}">${flagStr}</div>
+    <div class="info-title">${sat.name}</div>
+    <div class="info-row"><span class="info-key">緯度 Latitude</span><span class="info-val">${pos.lat.toFixed(4)}°</span></div>
+    <div class="info-row"><span class="info-key">経度 Longitude</span><span class="info-val">${pos.lng.toFixed(4)}°</span></div>
+    <div class="info-row"><span class="info-key">高度 Altitude</span><span class="info-val">${altStr}</span></div>
+    <div class="info-row"><span class="info-key">速度 Speed</span><span class="info-val">${spdStr}</span></div>
+    <div class="info-row"><span class="info-key">NORAD ID</span><span class="info-val">${sat.tle2 ? sat.tle2.substring(2, 7).trim() : '-'}</span></div>
+    <div class="info-row"><span class="info-key">軌道傾斜角</span><span class="info-val">${sat.tle2 ? parseFloat(sat.tle2.substring(8, 16)).toFixed(2) + '°' : '-'}</span></div>
+  `;
+  panel.hidden = false;
+  panel.style.position = 'fixed';
+
+  // Draw orbit for ISS
+  if (cat.orbitPath) drawOrbitPath(sat.satrec);
+}
+
+function closeInfo() {
+  document.getElementById('infoPanel').hidden = true;
+  app.selectedSat = null;
+  clearOrbitPath();
+}
+
+// ================================================================
+//  Marker management
+// ================================================================
+function buildMarkers(catId) {
+  const cat = CATEGORIES.find(c => c.id === catId);
+  const sats = app.tleCache[catId] || [];
+  if (!app.layers[catId]) {
+    app.layers[catId] = L.layerGroup();
+  }
+  const layer = app.layers[catId];
+  layer.clearLayers();
+  app.markers[catId] = [];
+
+  sats.forEach(sat => {
+    const pos = getPosition(sat.satrec);
+    if (!pos) return;
+    const marker = L.marker([pos.lat, pos.lng], { icon: makeSatIcon(cat) });
+    marker.bindTooltip(sat.name, { permanent: false, direction: 'top', offset: [0, -4] });
+    marker.on('click', (e) => {
+      e.originalEvent.stopPropagation();
+      openInfo(sat, cat, pos);
+      // Update icon
+      app.markers[catId].forEach(m => m.setIcon(makeSatIcon(cat)));
+      marker.setIcon(makeSatIcon(cat, true));
+      app.selectedSat._marker = marker;
+    });
+    marker.addTo(layer);
+    app.markers[catId].push(marker);
+  });
+
+  if (app.enabled[catId]) layer.addTo(app.map);
+}
+
+function updatePositions() {
+  const now = new Date();
+  CATEGORIES.forEach(cat => {
+    if (!app.enabled[cat.id]) return;
+    const sats = app.tleCache[cat.id] || [];
+    const markers = app.markers[cat.id] || [];
+    sats.forEach((sat, i) => {
+      const m = markers[i];
+      if (!m) return;
+      const pos = getPosition(sat.satrec, now);
+      if (!pos) return;
+      m.setLatLng([pos.lat, pos.lng]);
+      // Update info panel if this is selected
+      if (app.selectedSat && app.selectedSat.sat === sat) {
+        openInfo(sat, cat, pos);
+        m.setIcon(makeSatIcon(cat, true));
+      }
+    });
+  });
+  updateOrbitIfNeeded();
+}
+
+let orbitRedrawTimer = 0;
+function updateOrbitIfNeeded() {
+  if (!app.selectedSat) return;
+  const now = Date.now();
+  if (now - orbitRedrawTimer > 60000 && app.selectedSat.cat.orbitPath) {
+    drawOrbitPath(app.selectedSat.sat.satrec);
+    orbitRedrawTimer = now;
+  }
+}
+
+function updateTotalCount() {
+  let total = 0;
+  CATEGORIES.forEach(cat => {
+    if (app.enabled[cat.id]) total += (app.markers[cat.id] || []).length;
+  });
+  document.getElementById('totalCount').textContent = total.toLocaleString() + ' 機';
+}
+
+// ================================================================
+//  Category toggle
+// ================================================================
+function toggleCategory(catId) {
+  const cat = CATEGORIES.find(c => c.id === catId);
+  app.enabled[catId] = !app.enabled[catId];
+  const layer = app.layers[catId];
+  if (app.enabled[catId]) {
+    if (layer) layer.addTo(app.map);
+  } else {
+    if (layer) app.map.removeLayer(layer);
+    if (app.selectedSat && app.selectedSat.cat.id === catId) closeInfo();
+  }
+  renderCatButtons();
+  updateTotalCount();
+}
+
+function renderCatButtons() {
+  const container = document.getElementById('catButtons');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const on = app.enabled[cat.id];
+    const count = (app.markers[cat.id] || []).length;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (on ? ' on' : '');
+    btn.innerHTML = `
+      <div class="cat-dot" style="background:${cat.color};box-shadow:0 0 6px ${cat.color}"></div>
+      <span class="cat-name">${cat.icon} ${cat.name}</span>
+      ${count > 0 ? `<span class="cat-count">${count}</span>` : ''}
+      <span class="cat-toggle">${on ? '▶ 表示中' : '— 非表示'}</span>
+    `;
+    btn.onclick = () => {
+      // If not yet loaded, fetch on demand
+      if (!app.tleCache[cat.id]) {
+        fetchAndDisplay(cat).then(() => {
+          app.enabled[cat.id] = false; // Will be toggled back
+          toggleCategory(cat.id);
+        });
+      } else {
+        toggleCategory(cat.id);
+      }
+    };
+    container.appendChild(btn);
+  });
+}
+
+// ================================================================
+//  Data fetching
+// ================================================================
+async function fetchTLE(cat) {
+  const resp = await fetch(cat.url, {
+    headers: { 'Accept': 'text/plain' },
+    cache: 'default',
+  });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  const text = await resp.text();
+  let sats = parseTLE(text);
+  if (cat.filter) sats = sats.filter(s => cat.filter(s.name));
+  return sats;
+}
+
+async function fetchAndDisplay(cat) {
+  try {
+    const sats = await fetchTLE(cat);
+    app.tleCache[cat.id] = sats;
+    buildMarkers(cat.id);
+    renderCatButtons();
+    updateTotalCount();
+    return sats;
+  } catch (e) {
+    console.error('TLE fetch failed for', cat.id, e);
+    app.tleCache[cat.id] = [];
+    return [];
+  }
+}
+
+// ================================================================
+//  Notice toggle
+// ================================================================
+document.getElementById('noticeToggle').addEventListener('click', () => {
+  const body = document.getElementById('noticeBody');
+  body.hidden = !body.hidden;
+});
+document.getElementById('infoClose').addEventListener('click', closeInfo);
+
+// ================================================================
+//  Bootstrap
+// ================================================================
+async function main() {
+  initMap();
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Init enabled state
+  CATEGORIES.forEach(cat => { app.enabled[cat.id] = cat.defaultOn; });
+  renderCatButtons();
+
+  // Fetch default-on categories first
+  const defaultCats = CATEGORIES.filter(c => c.defaultOn);
+  const otherCats   = CATEGORIES.filter(c => !c.defaultOn);
+
+  setOverlay('ISS の軌道データを取得中...');
+  setStatus('loading', 'データ取得中...');
+
+  let anyOk = false;
+  for (const cat of defaultCats) {
+    setOverlay(`${cat.icon} ${cat.name} の軌道データを取得中...`);
+    try {
+      await fetchAndDisplay(cat);
+      anyOk = true;
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  hideOverlay();
+
+  if (anyOk) {
+    setStatus('live', 'リアルタイム追跡中');
+  } else {
+    setStatus('error', 'データ取得失敗 – Celestrak に接続できません');
+  }
+
+  // Start update loop (2s)
+  app.updateLoop = setInterval(() => {
+    updatePositions();
+    updateTotalCount();
+  }, 2000);
+
+  // Prefetch other categories in background (staggered)
+  let delay = 2000;
+  for (const cat of otherCats) {
+    setTimeout(async () => {
+      await fetchAndDisplay(cat);
+      // Don't show them — just cache
+    }, delay);
+    delay += 3000;
+  }
+}
+
+main().catch(e => {
+  hideOverlay();
+  setStatus('error', 'エラー: ' + e.message);
+  console.error(e);
+});
+</script>
+</body>
+</html>

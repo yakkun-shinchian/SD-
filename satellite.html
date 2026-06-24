@@ -148,9 +148,32 @@
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #334; border-radius: 2px; }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .panel-left { width: calc(100vw - 24px); max-height: 42vh; top: 60px; left: 12px; right: 12px; }
+      .info-panel { left: 12px; right: 12px; width: auto; bottom: 8px; }
+      .notice { left: 12px; right: 12px; bottom: auto; top: auto; max-width: none;
+                position: fixed; bottom: 8px; display: none; } /* hide on mobile – overlaps */
+      .header-time { display: none; }
+      .header-logo { font-size: 0.95rem; }
+      .cat-btn { padding: 6px 8px; font-size: 0.73rem; }
+    }
+    /* ── Demo-mode banner ── */
+    .demo-banner {
+      position: fixed; top: 52px; left: 0; right: 0; z-index: 950;
+      background: rgba(255,160,0,0.18); border-bottom: 1px solid rgba(255,160,0,0.4);
+      color: var(--warn); font-size: 0.72rem; text-align: center; padding: 5px 12px;
+    }
+    .demo-banner[hidden] { display: none; }
   </style>
 </head>
 <body>
+
+<!-- Demo-mode banner (shown when live data unavailable) -->
+<div class="demo-banner" id="demoBanner" hidden>
+  ⚠️ Celestrak への接続に失敗しました。デモ用TLEデータで表示しています（位置は参考値）。
+</div>
 
 <!-- Loading overlay -->
 <div class="overlay" id="overlay">
@@ -609,15 +632,102 @@ function renderCatButtons() {
 }
 
 // ================================================================
-//  Data fetching
+//  Embedded fallback TLE data (used when Celestrak is unreachable)
+//  Epoch ~2025-001; positions approximate but orbital planes correct.
 // ================================================================
+const FALLBACK_TLE_TEXT = {
+  stations: `ISS (ZARYA)
+1 25544U 98067A   25001.50000000  .00016717  00000-0  30270-4 0  9999
+2 25544  51.6400  60.0000 0004500 120.0000 240.0000 15.50000000000000
+CSS (TIANHE)
+1 48274U 21035A   25001.50000000  .00014000  00000-0  25000-4 0  9999
+2 48274  41.4700 140.0000 0006000  90.0000 270.0000 15.60000000000000`,
+
+  weather: `HIMAWARI-9
+1 41836U 16064A   25001.50000000 -.00000140  00000-0  00000-0 0  9999
+2 41836   0.0170 197.0000 0001310 157.0000 333.0000  1.00271163 30000
+GOES-18
+1 51850U 22021A   25001.50000000 -.00000050  00000-0  00000-0 0  9999
+2 51850   0.0300 278.0000 0001500  87.0000 273.0000  1.00270000 21000
+METOP-C
+1 43689U 18087A   25001.50000000  .00000020  00000-0  27000-4 0  9999
+2 43689  98.7400  60.0000 0001200  95.0000 265.0000 14.21475000 28000
+NOAA-19
+1 33591U 09005A   25001.50000000  .00000030  00000-0  28000-4 0  9999
+2 33591  99.0700  40.0000 0014000 335.0000  24.0000 14.12500000 20000`,
+
+  russia: `COSMOS-2576
+1 58470U 23189A   25001.50000000  .00001000  00000-0  50000-4 0  9999
+2 58470  97.8000 100.0000 0010000  45.0000 315.0000 14.89000000  8000
+COSMOS-2560
+1 56220U 23054A   25001.50000000  .00001200  00000-0  60000-4 0  9999
+2 56220  97.6000 200.0000 0012000  60.0000 300.0000 14.91000000  7000
+COSMOS-2544
+1 53536U 22057A   25001.50000000  .00000900  00000-0  45000-4 0  9999
+2 53536  97.5000 300.0000 0008000  90.0000 270.0000 14.88000000  6000`,
+
+  china: `YAOGAN-41
+1 58362U 23178A   25001.50000000  .00001500  00000-0  70000-4 0  9999
+2 58362  97.4000  80.0000 0010000  30.0000 330.0000 14.82000000  7000
+YAOGAN-39
+1 56899U 23093A   25001.50000000  .00001300  00000-0  65000-4 0  9999
+2 56899  97.3000 160.0000 0011000  50.0000 310.0000 14.80000000  6000
+SHIJIAN-23
+1 56966U 23097A   25001.50000000  .00000200  00000-0  10000-4 0  9999
+2 56966   0.0400 105.0000 0002000  78.0000 282.0000  1.00270000 12000`,
+
+  usa: `USA-326
+1 56222U 23056A   25001.50000000  .00000800  00000-0  40000-4 0  9999
+2 56222  97.4000 120.0000 0009000  70.0000 290.0000 14.86000000  7000
+USA-316
+1 49055U 21062A   25001.50000000  .00000600  00000-0  35000-4 0  9999
+2 49055  97.2000 220.0000 0008000  55.0000 305.0000 14.84000000  6000
+WGS-10 (USA-291)
+1 43813U 18086A   25001.50000000 -.00000100  00000-0  00000-0 0  9999
+2 43813   0.0500  35.0000 0001800 100.0000 260.0000  1.00271000 16000`,
+};
+
+// ================================================================
+//  Data fetching (with CORS proxy fallbacks)
+// ================================================================
+function fetchWithTimeout(url, ms) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(t));
+}
+
+async function fetchTextRobust(url) {
+  // 1. Direct
+  try {
+    const r = await fetchWithTimeout(url, 8000);
+    if (r.ok) return await r.text();
+  } catch (e) { /* try proxy */ }
+
+  // 2. corsproxy.io
+  try {
+    const r = await fetchWithTimeout('https://corsproxy.io/?' + encodeURIComponent(url), 10000);
+    if (r.ok) return await r.text();
+  } catch (e) { /* try next */ }
+
+  // 3. allorigins
+  try {
+    const r = await fetchWithTimeout('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 12000);
+    if (r.ok) return await r.text();
+  } catch (e) { /* all failed */ }
+
+  throw new Error('All fetch attempts failed');
+}
+
 async function fetchTLE(cat) {
-  const resp = await fetch(cat.url, {
-    headers: { 'Accept': 'text/plain' },
-    cache: 'default',
-  });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  const text = await resp.text();
+  const text = await fetchTextRobust(cat.url);
+  let sats = parseTLE(text);
+  if (cat.filter) sats = sats.filter(s => cat.filter(s.name));
+  return sats;
+}
+
+function getFallbackSats(cat) {
+  const text = FALLBACK_TLE_TEXT[cat.id] || '';
+  if (!text) return [];
   let sats = parseTLE(text);
   if (cat.filter) sats = sats.filter(s => cat.filter(s.name));
   return sats;
@@ -630,11 +740,15 @@ async function fetchAndDisplay(cat) {
     buildMarkers(cat.id);
     renderCatButtons();
     updateTotalCount();
-    return sats;
+    return { sats, fromFallback: false };
   } catch (e) {
-    console.error('TLE fetch failed for', cat.id, e);
-    app.tleCache[cat.id] = [];
-    return [];
+    console.warn('Live fetch failed for', cat.id, '– using fallback TLE');
+    const sats = getFallbackSats(cat);
+    app.tleCache[cat.id] = sats;
+    buildMarkers(cat.id);
+    renderCatButtons();
+    updateTotalCount();
+    return { sats, fromFallback: true };
   }
 }
 
@@ -666,23 +780,20 @@ async function main() {
   setOverlay('ISS の軌道データを取得中...');
   setStatus('loading', 'データ取得中...');
 
-  let anyOk = false;
+  let anyFallback = false;
   for (const cat of defaultCats) {
     setOverlay(`${cat.icon} ${cat.name} の軌道データを取得中...`);
-    try {
-      await fetchAndDisplay(cat);
-      anyOk = true;
-    } catch (e) {
-      console.warn(e);
-    }
+    const { fromFallback } = await fetchAndDisplay(cat);
+    if (fromFallback) anyFallback = true;
   }
 
   hideOverlay();
 
-  if (anyOk) {
-    setStatus('live', 'リアルタイム追跡中');
+  if (anyFallback) {
+    document.getElementById('demoBanner').hidden = false;
+    setStatus('error', 'デモモード（Celestrak 未接続）');
   } else {
-    setStatus('error', 'データ取得失敗 – Celestrak に接続できません');
+    setStatus('live', 'リアルタイム追跡中');
   }
 
   // Start update loop (2s)
@@ -691,13 +802,10 @@ async function main() {
     updateTotalCount();
   }, 2000);
 
-  // Prefetch other categories in background (staggered)
+  // Prefetch other categories in background (staggered, cache only)
   let delay = 2000;
   for (const cat of otherCats) {
-    setTimeout(async () => {
-      await fetchAndDisplay(cat);
-      // Don't show them — just cache
-    }, delay);
+    setTimeout(() => fetchAndDisplay(cat), delay);
     delay += 3000;
   }
 }

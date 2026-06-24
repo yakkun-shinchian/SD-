@@ -2,648 +2,212 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>衛星追跡システム | Satellite Tracker</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>3D 衛星追跡 | Satellite Tracker</title>
   <style>
     :root {
-      --bg: #050a15;
-      --panel: rgba(4, 10, 22, 0.92);
-      --border: rgba(60, 120, 255, 0.25);
-      --text: #a0c4e8;
-      --text-bright: #e8f4ff;
+      --panel: rgba(3, 8, 20, 0.88);
+      --border: rgba(60,130,255,0.22);
+      --text: #90bce0;
+      --bright: #ddeeff;
       --accent: #00aaff;
-      --success: #00ff88;
+      --ok: #00ff88;
       --warn: #ffcc00;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; overflow: hidden; font-family: 'Courier New', 'Consolas', monospace; background: var(--bg); color: var(--text); }
-    #map { position: fixed; inset: 0; z-index: 0; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; height:100%; overflow:hidden; background:#020812; font-family:'Courier New',Consolas,monospace; color:var(--text); }
+
+    #c { position:fixed; inset:0; display:block; }
+
+    /* ── Loading ── */
+    .overlay { position:fixed; inset:0; z-index:900; background:#020812;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; }
+    .overlay[hidden] { display:none; }
+    .ov-title { font-size:1.6rem; color:var(--accent); letter-spacing:.08em; }
+    .ov-msg { font-size:.8rem; color:var(--text); }
+    .spinner { width:40px; height:40px; border:3px solid rgba(0,170,255,.15); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
 
     /* ── Header ── */
-    .header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: var(--panel); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 16px;
-      padding: 10px 16px; height: 52px;
-    }
-    .header-logo { font-size: 1.15rem; font-weight: bold; color: var(--text-bright); letter-spacing: 0.06em; white-space: nowrap; }
-    .header-logo span { color: var(--accent); }
-    .header-status { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #555; flex-shrink: 0; }
-    .dot.live { background: var(--success); box-shadow: 0 0 6px var(--success); animation: blink 1.5s infinite; }
-    .dot.error { background: #ff4444; }
-    .dot.loading { background: var(--warn); }
-    @keyframes blink { 50% { opacity: 0.3; } }
-    .header-time { margin-left: auto; font-size: 0.72rem; color: var(--accent); white-space: nowrap; }
+    .hdr { position:fixed; top:0; left:0; right:0; z-index:500; height:50px;
+      background:var(--panel); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; padding:0 14px; gap:14px; }
+    .hdr-title { font-size:1rem; font-weight:bold; color:var(--bright); white-space:nowrap; }
+    .hdr-title em { color:var(--accent); font-style:normal; }
+    .hdr-status { display:flex; align-items:center; gap:6px; font-size:.68rem; }
+    .dot { width:7px; height:7px; border-radius:50%; background:#444; flex-shrink:0; transition:background .3s; }
+    .dot.live { background:var(--ok); box-shadow:0 0 5px var(--ok); animation:blink 1.6s infinite; }
+    .dot.err  { background:#f44; }
+    .dot.load { background:var(--warn); }
+    @keyframes blink { 50% { opacity:.25; } }
+    .hdr-time { margin-left:auto; font-size:.65rem; color:var(--accent); white-space:nowrap; }
 
-    /* ── Left Panel ── */
-    .panel-left {
-      position: fixed; top: 60px; left: 12px; z-index: 900;
-      background: var(--panel); backdrop-filter: blur(12px);
-      border: 1px solid var(--border); border-radius: 10px;
-      padding: 14px; width: 250px; max-height: calc(100vh - 80px); overflow-y: auto;
-    }
-    .panel-section { margin-bottom: 14px; }
-    .panel-label { font-size: 0.65rem; letter-spacing: 0.12em; color: #6699cc; text-transform: uppercase; margin-bottom: 8px; }
+    /* ── Left panel ── */
+    .panel { position:fixed; top:58px; left:10px; z-index:500; width:240px;
+      background:var(--panel); backdrop-filter:blur(14px);
+      border:1px solid var(--border); border-radius:10px; padding:12px;
+      max-height:calc(100vh - 80px); overflow-y:auto; }
+    .p-label { font-size:.6rem; letter-spacing:.13em; color:#5577aa; text-transform:uppercase; margin-bottom:8px; }
+    .cat-btn { display:flex; align-items:center; gap:7px; width:100%; padding:7px 9px;
+      margin-bottom:5px; background:rgba(255,255,255,.03); border:1px solid rgba(60,130,255,.12);
+      border-radius:7px; cursor:pointer; color:var(--text); font-family:inherit; font-size:.74rem;
+      text-align:left; transition:all .18s; }
+    .cat-btn:hover { background:rgba(0,160,255,.1); border-color:rgba(0,160,255,.4); }
+    .cat-btn.on { background:rgba(0,150,255,.14); border-color:rgba(0,150,255,.55); color:var(--bright); }
+    .cat-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+    .cat-name { flex:1; line-height:1.3; }
+    .cat-count { font-size:.62rem; padding:1px 5px; border-radius:8px; background:rgba(0,150,255,.18); color:var(--accent); }
+    .cat-lbl { font-size:.6rem; color:#445566; }
+    .p-total { margin-top:4px; }
+    .p-total-num { font-size:1.3rem; color:var(--accent); font-weight:bold; }
+    .p-total-sub { font-size:.6rem; color:#5577aa; margin-top:2px; }
 
-    .cat-btn {
-      display: flex; align-items: center; gap: 8px;
-      width: 100%; padding: 8px 10px; margin-bottom: 6px;
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(60,120,255,0.15);
-      border-radius: 7px; cursor: pointer; color: var(--text); font-family: inherit;
-      font-size: 0.78rem; text-align: left; transition: all 0.18s; position: relative;
-    }
-    .cat-btn:hover { background: rgba(0,150,255,0.1); border-color: rgba(0,150,255,0.4); }
-    .cat-btn.on { background: rgba(0,150,255,0.14); border-color: rgba(0,150,255,0.6); color: var(--text-bright); }
-    .cat-btn .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .cat-btn .cat-name { flex: 1; line-height: 1.3; }
-    .cat-btn .cat-count { font-size: 0.65rem; background: rgba(0,150,255,0.2); padding: 1px 6px; border-radius: 10px; color: var(--accent); }
-    .cat-btn .cat-toggle { font-size: 0.65rem; color: #557799; }
+    /* ── Info panel ── */
+    .info { position:fixed; bottom:14px; right:12px; z-index:500; width:270px;
+      background:var(--panel); backdrop-filter:blur(14px);
+      border:1px solid var(--border); border-radius:10px; padding:14px; }
+    .info[hidden] { display:none; }
+    .info-close { position:absolute; top:10px; right:10px; background:none; border:none;
+      color:#446; cursor:pointer; font-size:1.1rem; line-height:1; }
+    .info-cat { display:inline-block; padding:2px 8px; border-radius:8px; font-size:.62rem; margin-bottom:7px; }
+    .info-name { font-size:.88rem; font-weight:bold; color:var(--bright); margin-bottom:9px; line-height:1.3; padding-right:18px; }
+    .info-row { display:flex; justify-content:space-between; align-items:center;
+      padding:3px 0; border-bottom:1px solid rgba(60,130,255,.1); font-size:.71rem; }
+    .info-row:last-child { border:none; }
+    .info-k { color:#5577aa; }
+    .info-v { color:var(--bright); font-weight:bold; }
 
-    /* ── Info Panel ── */
-    .info-panel {
-      position: fixed; bottom: 16px; right: 16px; z-index: 900;
-      background: var(--panel); backdrop-filter: blur(12px);
-      border: 1px solid var(--border); border-radius: 10px;
-      padding: 16px; width: 280px;
-    }
-    .info-panel[hidden] { display: none; }
-    .info-title { font-size: 0.9rem; font-weight: bold; color: var(--text-bright); margin-bottom: 10px; padding-right: 20px; line-height: 1.3; }
-    .info-close { position: absolute; top: 12px; right: 12px; background: none; border: none; color: #668; cursor: pointer; font-size: 1.1rem; line-height: 1; }
-    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid rgba(60,120,255,0.1); font-size: 0.75rem; }
-    .info-row:last-child { border-bottom: none; }
-    .info-key { color: #6699cc; }
-    .info-val { color: var(--text-bright); font-weight: bold; text-align: right; }
-    .info-cat { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; margin-bottom: 8px; }
+    /* ── Demo banner ── */
+    .demo { position:fixed; top:50px; left:0; right:0; z-index:490;
+      background:rgba(255,150,0,.15); border-bottom:1px solid rgba(255,150,0,.35);
+      color:var(--warn); font-size:.68rem; text-align:center; padding:5px 10px; }
+    .demo[hidden] { display:none; }
 
-    /* ── Satellite Markers ── */
-    .sat-dot {
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    .sat-dot:hover { transform: scale(2); }
-    .sat-iss {
-      width: 14px !important; height: 14px !important;
-      margin-top: -7px !important; margin-left: -7px !important;
-    }
-    @keyframes pulse {
-      0%   { box-shadow: 0 0 6px 0 currentColor; }
-      70%  { box-shadow: 0 0 6px 10px transparent; }
-      100% { box-shadow: 0 0 6px 0 currentColor; }
-    }
-    .sat-pulse { animation: pulse 2s infinite; }
-
-    /* ── Notice Box ── */
-    .notice {
-      position: fixed; bottom: 16px; left: 270px; z-index: 900;
-      background: var(--panel); backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 160, 0, 0.35); border-radius: 10px;
-      overflow: hidden; max-width: 320px;
-    }
-    .notice-toggle {
-      width: 100%; padding: 8px 14px; background: none; border: none;
-      color: var(--warn); font-family: inherit; font-size: 0.75rem;
-      cursor: pointer; text-align: left; letter-spacing: 0.03em;
-    }
-    .notice-toggle:hover { background: rgba(255,200,0,0.08); }
-    .notice-body { padding: 0 14px 12px; font-size: 0.72rem; line-height: 1.7; }
-    .notice-body p { margin-bottom: 6px; }
-    .notice-body p:last-child { margin-bottom: 0; }
-    .notice-body[hidden] { display: none; }
-
-    /* ── Orbit Path ── */
-    .orbit-past { stroke: rgba(0,255,136,0.3) !important; }
-    .orbit-future { stroke: rgba(0,255,136,0.7) !important; }
-
-    /* ── Loading Overlay ── */
-    .overlay {
-      position: fixed; inset: 0; z-index: 2000;
-      background: var(--bg); display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px;
-    }
-    .overlay[hidden] { display: none; }
-    .overlay-title { font-size: 1.5rem; color: var(--accent); }
-    .overlay-sub { font-size: 0.85rem; color: var(--text); }
-    .spinner { width: 36px; height: 36px; border: 3px solid rgba(0,170,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Leaflet overrides ── */
-    .leaflet-control-attribution { background: rgba(4,10,22,0.8) !important; color: #446 !important; font-size: 10px !important; }
-    .leaflet-control-attribution a { color: #558 !important; }
-    .leaflet-control-zoom { border: 1px solid var(--border) !important; }
-    .leaflet-control-zoom a { background: var(--panel) !important; color: var(--text-bright) !important; border-color: var(--border) !important; }
-    .leaflet-tooltip {
-      background: var(--panel) !important; border: 1px solid var(--border) !important;
-      color: var(--text-bright) !important; font-family: 'Courier New', monospace !important;
-      font-size: 0.7rem !important; padding: 3px 8px !important; border-radius: 4px !important;
-      box-shadow: none !important;
-    }
-    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-      background: var(--panel) !important; color: var(--text) !important; border: 1px solid var(--border) !important;
-    }
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #334; border-radius: 2px; }
+    /* ── Notice ── */
+    .notice { position:fixed; bottom:14px; left:258px; z-index:500; max-width:290px;
+      background:var(--panel); backdrop-filter:blur(14px);
+      border:1px solid rgba(255,150,0,.3); border-radius:10px; overflow:hidden; }
+    .notice-btn { width:100%; padding:8px 12px; background:none; border:none;
+      color:var(--warn); font-family:inherit; font-size:.7rem; cursor:pointer; text-align:left; }
+    .notice-btn:hover { background:rgba(255,200,0,.07); }
+    .notice-body { padding:0 12px 10px; font-size:.68rem; line-height:1.75; }
+    .notice-body[hidden] { display:none; }
+    .notice-body p { margin-bottom:5px; }
+    .notice-body p:last-child { margin-bottom:0; }
 
     /* ── Mobile ── */
-    @media (max-width: 600px) {
-      .panel-left { width: calc(100vw - 24px); max-height: 42vh; top: 60px; left: 12px; right: 12px; }
-      .info-panel { left: 12px; right: 12px; width: auto; bottom: 8px; }
-      .notice { left: 12px; right: 12px; bottom: auto; top: auto; max-width: none;
-                position: fixed; bottom: 8px; display: none; } /* hide on mobile – overlaps */
-      .header-time { display: none; }
-      .header-logo { font-size: 0.95rem; }
-      .cat-btn { padding: 6px 8px; font-size: 0.73rem; }
+    @media(max-width:580px) {
+      .panel { width:calc(100vw - 20px); right:10px; max-height:38vh; }
+      .info  { left:10px; right:10px; width:auto; bottom:8px; }
+      .notice { display:none; }
+      .hdr-time { display:none; }
     }
-    /* ── Demo-mode banner ── */
-    .demo-banner {
-      position: fixed; top: 52px; left: 0; right: 0; z-index: 950;
-      background: rgba(255,160,0,0.18); border-bottom: 1px solid rgba(255,160,0,0.4);
-      color: var(--warn); font-size: 0.72rem; text-align: center; padding: 5px 12px;
-    }
-    .demo-banner[hidden] { display: none; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width:3px; }
+    ::-webkit-scrollbar-thumb { background:#334; border-radius:2px; }
   </style>
 </head>
 <body>
 
-<!-- Demo-mode banner (shown when live data unavailable) -->
-<div class="demo-banner" id="demoBanner" hidden>
-  ⚠️ Celestrak への接続に失敗しました。デモ用TLEデータで表示しています（位置は参考値）。
-</div>
+<canvas id="c"></canvas>
 
-<!-- Loading overlay -->
 <div class="overlay" id="overlay">
   <div class="spinner"></div>
-  <div class="overlay-title">🛸 衛星追跡システム</div>
-  <div class="overlay-sub" id="overlayMsg">Celestrak から軌道データを取得中...</div>
+  <div class="ov-title">🛸 3D 衛星追跡</div>
+  <div class="ov-msg" id="ovMsg">Three.js を初期化中...</div>
 </div>
 
-<!-- Map -->
-<div id="map"></div>
-
-<!-- Header -->
-<div class="header">
-  <div class="header-logo">🛸 <span>衛星</span>追跡システム</div>
-  <div class="header-status">
-    <div class="dot loading" id="statusDot"></div>
-    <span id="statusText">初期化中...</span>
-  </div>
-  <div class="header-time" id="headerTime"></div>
+<div class="demo" id="demoBanner" hidden>
+  ⚠️ Celestrak 未接続 — デモ用TLEで表示（位置は参考値）
 </div>
 
-<!-- Left panel -->
-<div class="panel-left">
-  <div class="panel-section">
-    <div class="panel-label">カテゴリ（クリックで表示切替）</div>
-    <div id="catButtons"></div>
+<div class="hdr">
+  <div class="hdr-title">🌍 <em>3D</em> 衛星追跡システム</div>
+  <div class="hdr-status">
+    <div class="dot load" id="sDot"></div>
+    <span id="sTxt">初期化中...</span>
   </div>
-  <div class="panel-section" style="margin-bottom:0">
-    <div class="panel-label">合計衛星数</div>
-    <div id="totalCount" style="font-size:1.4rem;color:var(--accent);font-weight:bold;">-</div>
-    <div style="font-size:0.65rem;color:#6699cc;margin-top:2px;">表示中のみカウント</div>
+  <div class="hdr-time" id="hTime"></div>
+</div>
+
+<div class="panel" id="panelLeft">
+  <div class="p-label" style="margin-bottom:6px">カテゴリ（タップで切替）</div>
+  <div id="catBtns"></div>
+  <div class="p-total">
+    <div class="p-label">表示中の衛星</div>
+    <div class="p-total-num" id="totalNum">—</div>
+    <div class="p-total-sub">機</div>
   </div>
 </div>
 
-<!-- Info panel -->
-<div class="info-panel" id="infoPanel" hidden>
+<div class="info" id="infoPanel" hidden>
   <button class="info-close" id="infoClose">✕</button>
-  <div id="infoContent"></div>
+  <div id="infoBody"></div>
 </div>
 
-<!-- Notice about stealth fighters -->
 <div class="notice">
-  <button class="notice-toggle" id="noticeToggle">⚠️ ステルス戦闘機・軍用機の追跡について</button>
+  <button class="notice-btn" id="noticeTgl">⚠️ ステルス機・軍用機について</button>
   <div class="notice-body" id="noticeBody" hidden>
-    <p>🔒 <strong style="color:#ffcc00">ステルス戦闘機の追跡は不可能です</strong><br>
-    軍用機（特にステルス機）はADS-Bトランスポンダーを意図的にOFFにするか非搭載であるため、FlightRadarなどの民間システムでの位置追跡は原理的に不可能です。</p>
-    <p>🛰 <strong style="color:var(--accent)">軍事衛星について</strong><br>
-    本アプリに表示される軍事衛星は、米宇宙軍（USSF）/ NORADが公開している軌道要素（TLE）に基づくものです。機密指定・ステルス衛星（ブラックサット）は含まれません。</p>
-    <p>📡 <strong>データソース：</strong><br>
-    <a href="https://celestrak.org" target="_blank" rel="noopener" style="color:var(--accent)">Celestrak.org</a>（米国・公開TLEデータベース）</p>
+    <p>🔒 <strong style="color:var(--warn)">ステルス戦闘機の追跡は不可能</strong><br>
+      軍用機はADS-Bを意図的にOFFにするため民間システムでの追跡は原理的に不可能です。</p>
+    <p>🛰 <strong style="color:var(--accent)">表示中の軍事衛星</strong><br>
+      米宇宙軍（NORAD）が公開するTLEデータのみ使用。機密衛星は含まれません。</p>
+    <p>📡 <strong>データ：</strong><a href="https://celestrak.org" target="_blank" rel="noopener" style="color:var(--accent)">Celestrak.org</a></p>
   </div>
 </div>
 
-<!-- Scripts -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- CDN Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/satellite.js@4.1.3/dist/satellite.min.js"></script>
+
 <script>
 'use strict';
+/* ============================================================
+ *  3D Satellite Tracker
+ *  Three.js r128 + satellite.js v4
+ * ============================================================ */
 
-// ================================================================
-//  Category definitions
-// ================================================================
+// ────────────────────────────────────────────────────────────
+//  Config & categories
+// ────────────────────────────────────────────────────────────
+const EARTH_R    = 1.0;
+const EARTH_KM   = 6371;
+
 const CATEGORIES = [
-  {
-    id: 'stations',
-    name: 'ISS / 宇宙ステーション',
-    icon: '🛸',
-    color: '#00ff88',
-    url: 'https://celestrak.org/pub/TLE/stations.txt',
-    filter: null,
-    size: 14,
-    pulse: true,
-    orbitPath: true,
-    defaultOn: true,
-    priority: 100,
-    country: null,
-  },
-  {
-    id: 'weather',
-    name: '気象衛星（ひまわり他）',
-    icon: '🌤',
-    color: '#ffcc00',
-    url: 'https://celestrak.org/pub/TLE/weather.txt',
-    filter: null,
-    size: 8,
-    pulse: false,
-    orbitPath: false,
-    defaultOn: false,
-    priority: 90,
-    country: null,
-  },
-  {
-    id: 'russia',
-    name: 'ロシア軍事衛星',
-    icon: '🇷🇺',
-    color: '#ff4444',
-    url: 'https://celestrak.org/pub/TLE/military.txt',
-    filter: (n) => /^COSMOS-|^KOSMOS-/i.test(n) ||
-                   /MERIDIAN|MOLNIYA|TSELINA|PERSONA|BARS-M|PION-NKS|STRELA|RADUGA|BLAGOVEST|LUCH/i.test(n),
-    size: 7,
-    pulse: false,
-    orbitPath: false,
-    defaultOn: false,
-    priority: 80,
-    country: 'RU',
-  },
-  {
-    id: 'china',
-    name: '中国軍事衛星',
-    icon: '🇨🇳',
-    color: '#ff8800',
-    url: 'https://celestrak.org/pub/TLE/military.txt',
-    filter: (n) => /YAOGAN|SHIJIAN|TIANHUI|GAOFEN|ZIYUAN|SHIYAN|LUDI|JIANBING|TJS/i.test(n),
-    size: 7,
-    pulse: false,
-    orbitPath: false,
-    defaultOn: false,
-    priority: 70,
-    country: 'CN',
-  },
-  {
-    id: 'usa',
-    name: 'アメリカ軍事衛星',
-    icon: '🇺🇸',
-    color: '#4499ff',
-    url: 'https://celestrak.org/pub/TLE/military.txt',
-    filter: (n) => /^USA \d/i.test(n) || /WGS-|MILSTAR|AEHF-|MUOS-|SBIRS|DSP-|NAVSTAR|ADVANCED EHF/i.test(n),
-    size: 7,
-    pulse: false,
-    orbitPath: false,
-    defaultOn: false,
-    priority: 60,
-    country: 'US',
-  },
+  { id:'stations', name:'ISS / 宇宙ステーション', icon:'🛸', color:'#00ff88',
+    url:'https://celestrak.org/pub/TLE/stations.txt',   filter:null,
+    spriteSize:0.07, orbitPath:true,  defaultOn:true },
+  { id:'weather',  name:'気象衛星（ひまわり他）',  icon:'🌤', color:'#ffcc00',
+    url:'https://celestrak.org/pub/TLE/weather.txt',    filter:null,
+    spriteSize:0.035, orbitPath:false, defaultOn:false },
+  { id:'russia',   name:'ロシア軍事衛星',           icon:'🇷🇺', color:'#ff4455',
+    url:'https://celestrak.org/pub/TLE/military.txt',
+    filter:n=>/^COSMOS-|^KOSMOS-/i.test(n)||/MERIDIAN|MOLNIYA|TSELINA|PERSONA|BARS-M|STRELA|RADUGA|BLAGOVEST/i.test(n),
+    spriteSize:0.028, orbitPath:false, defaultOn:false },
+  { id:'china',    name:'中国軍事衛星',             icon:'🇨🇳', color:'#ff8800',
+    url:'https://celestrak.org/pub/TLE/military.txt',
+    filter:n=>/YAOGAN|SHIJIAN|TIANHUI|GAOFEN|ZIYUAN|SHIYAN|JIANBING|TJS/i.test(n),
+    spriteSize:0.028, orbitPath:false, defaultOn:false },
+  { id:'usa',      name:'アメリカ軍事衛星',         icon:'🇺🇸', color:'#4499ff',
+    url:'https://celestrak.org/pub/TLE/military.txt',
+    filter:n=>/^USA \d/i.test(n)||/WGS-|MILSTAR|AEHF-|MUOS-|SBIRS|NAVSTAR/i.test(n),
+    spriteSize:0.028, orbitPath:false, defaultOn:false },
 ];
 
-// ================================================================
-//  App state
-// ================================================================
-const app = {
-  map: null,
-  layers: {},      // categoryId → L.layerGroup
-  tleCache: {},    // categoryId → [{name, satrec, tle1, tle2}]
-  markers: {},     // categoryId → [L.marker]
-  enabled: {},     // categoryId → bool
-  orbitPolylines: [],
-  selectedSat: null,
-  updateLoop: null,
-};
-
-// ================================================================
-//  Utilities
-// ================================================================
-function setOverlay(msg) {
-  document.getElementById('overlayMsg').textContent = msg;
-}
-function hideOverlay() {
-  document.getElementById('overlay').hidden = true;
-}
-function setStatus(state, text) {
-  const dot = document.getElementById('statusDot');
-  dot.className = 'dot ' + state;
-  document.getElementById('statusText').textContent = text;
-}
-function updateClock() {
-  const now = new Date();
-  document.getElementById('headerTime').textContent =
-    now.toUTCString().replace('GMT', 'UTC').replace(',', '');
-}
-
-// ================================================================
-//  Map init
-// ================================================================
-function initMap() {
-  app.map = L.map('map', {
-    center: [25, 145],
-    zoom: 3,
-    zoomControl: false,
-    minZoom: 2,
-    maxBounds: [[-90, -400], [90, 400]],
-  });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org">OpenStreetMap</a> © <a href="https://carto.com">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 10,
-  }).addTo(app.map);
-  L.control.zoom({ position: 'bottomright' }).addTo(app.map);
-  app.map.on('click', () => closeInfo());
-}
-
-// ================================================================
-//  TLE parsing
-// ================================================================
-function parseTLE(text) {
-  const lines = text.replace(/\r/g, '').split('\n').map(l => l.trim()).filter(Boolean);
-  const sats = [];
-  for (let i = 0; i + 2 < lines.length; i += 3) {
-    const n0 = lines[i];
-    const n1 = lines[i + 1];
-    const n2 = lines[i + 2];
-    if (!n1.startsWith('1 ') || !n2.startsWith('2 ')) {
-      // Try 2-line without name prefix
-      continue;
-    }
-    const name = n0.replace(/^0 /, '').trim();
-    try {
-      const satrec = satellite.twoline2satrec(n1, n2);
-      if (satrec.error !== 0) continue;
-      sats.push({ name, satrec, tle1: n1, tle2: n2 });
-    } catch (e) { /* skip bad TLE */ }
-  }
-  return sats;
-}
-
-// ================================================================
-//  Position propagation
-// ================================================================
-function getPosition(satrec, date = new Date()) {
-  try {
-    const pv = satellite.propagate(satrec, date);
-    if (!pv || !pv.position || typeof pv.position === 'boolean') return null;
-    const gmst = satellite.gstime(date);
-    const gd = satellite.eciToGeodetic(pv.position, gmst);
-    const lat = satellite.degreesLat(gd.latitude);
-    const lng = satellite.degreesLong(gd.longitude);
-    const alt = gd.height;
-    let spd = null;
-    if (pv.velocity) {
-      const v = pv.velocity;
-      spd = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    }
-    return { lat, lng, alt, speed: spd };
-  } catch (e) { return null; }
-}
-
-// ================================================================
-//  Orbit path (for ISS)
-// ================================================================
-function drawOrbitPath(satrec) {
-  clearOrbitPath();
-  const now = new Date();
-  const PERIOD_MIN = 95;
-  const STEP = 1;
-  const pastSeg = [], futureSeg1 = [], futureSeg2 = [];
-
-  // Past 5 min
-  let prevLng = null;
-  let pastLines = [[]];
-  for (let i = -5; i <= 0; i++) {
-    const t = new Date(now.getTime() + i * 60000);
-    const pos = getPosition(satrec, t);
-    if (!pos) continue;
-    if (prevLng !== null && Math.abs(pos.lng - prevLng) > 180) pastLines.push([]);
-    pastLines[pastLines.length - 1].push([pos.lat, pos.lng]);
-    prevLng = pos.lng;
-  }
-  // Future orbit
-  prevLng = null;
-  let futureLines = [[]];
-  for (let i = 0; i <= PERIOD_MIN; i += STEP) {
-    const t = new Date(now.getTime() + i * 60000);
-    const pos = getPosition(satrec, t);
-    if (!pos) continue;
-    if (prevLng !== null && Math.abs(pos.lng - prevLng) > 180) futureLines.push([]);
-    futureLines[futureLines.length - 1].push([pos.lat, pos.lng]);
-    prevLng = pos.lng;
-  }
-
-  const orbitGroup = L.layerGroup();
-  pastLines.forEach(seg => {
-    if (seg.length > 1)
-      L.polyline(seg, { color: '#00ff88', weight: 1.5, opacity: 0.35, dashArray: '4,4' }).addTo(orbitGroup);
-  });
-  futureLines.forEach(seg => {
-    if (seg.length > 1)
-      L.polyline(seg, { color: '#00ff88', weight: 1.5, opacity: 0.7 }).addTo(orbitGroup);
-  });
-  orbitGroup.addTo(app.map);
-  app.orbitPolylines.push(orbitGroup);
-}
-
-function clearOrbitPath() {
-  app.orbitPolylines.forEach(l => app.map.removeLayer(l));
-  app.orbitPolylines = [];
-}
-
-// ================================================================
-//  Satellite icon
-// ================================================================
-function makeSatIcon(cat, selected = false) {
-  const sz = selected ? cat.size * 1.8 : cat.size;
-  const glow = selected ? `0 0 10px ${cat.color}, 0 0 20px ${cat.color}88` : `0 0 5px ${cat.color}88`;
-  const pulse = (cat.pulse || selected) ? 'sat-pulse' : '';
-  const issClass = cat.id === 'stations' ? 'sat-iss' : '';
-  return L.divIcon({
-    html: `<div class="sat-dot ${pulse} ${issClass}" style="width:${sz}px;height:${sz}px;background:${cat.color};box-shadow:${glow};border-radius:50%;"></div>`,
-    className: '',
-    iconSize: [sz, sz],
-    iconAnchor: [sz / 2, sz / 2],
-    tooltipAnchor: [sz / 2, 0],
-  });
-}
-
-// ================================================================
-//  Info panel
-// ================================================================
-function openInfo(sat, cat, pos) {
-  app.selectedSat = { sat, cat };
-  const panel = document.getElementById('infoPanel');
-  const content = document.getElementById('infoContent');
-
-  const altStr = pos.alt ? pos.alt.toFixed(1) + ' km' : '-';
-  const spdStr = pos.speed ? (pos.speed * 3600).toFixed(0) + ' km/h' : '-';
-  const flagStr = cat.icon + ' ' + cat.name;
-
-  content.innerHTML = `
-    <div class="info-cat" style="background:${cat.color}22;border:1px solid ${cat.color}66;color:${cat.color}">${flagStr}</div>
-    <div class="info-title">${sat.name}</div>
-    <div class="info-row"><span class="info-key">緯度 Latitude</span><span class="info-val">${pos.lat.toFixed(4)}°</span></div>
-    <div class="info-row"><span class="info-key">経度 Longitude</span><span class="info-val">${pos.lng.toFixed(4)}°</span></div>
-    <div class="info-row"><span class="info-key">高度 Altitude</span><span class="info-val">${altStr}</span></div>
-    <div class="info-row"><span class="info-key">速度 Speed</span><span class="info-val">${spdStr}</span></div>
-    <div class="info-row"><span class="info-key">NORAD ID</span><span class="info-val">${sat.tle2 ? sat.tle2.substring(2, 7).trim() : '-'}</span></div>
-    <div class="info-row"><span class="info-key">軌道傾斜角</span><span class="info-val">${sat.tle2 ? parseFloat(sat.tle2.substring(8, 16)).toFixed(2) + '°' : '-'}</span></div>
-  `;
-  panel.hidden = false;
-  panel.style.position = 'fixed';
-
-  // Draw orbit for ISS
-  if (cat.orbitPath) drawOrbitPath(sat.satrec);
-}
-
-function closeInfo() {
-  document.getElementById('infoPanel').hidden = true;
-  app.selectedSat = null;
-  clearOrbitPath();
-}
-
-// ================================================================
-//  Marker management
-// ================================================================
-function buildMarkers(catId) {
-  const cat = CATEGORIES.find(c => c.id === catId);
-  const sats = app.tleCache[catId] || [];
-  if (!app.layers[catId]) {
-    app.layers[catId] = L.layerGroup();
-  }
-  const layer = app.layers[catId];
-  layer.clearLayers();
-  app.markers[catId] = [];
-
-  sats.forEach(sat => {
-    const pos = getPosition(sat.satrec);
-    if (!pos) return;
-    const marker = L.marker([pos.lat, pos.lng], { icon: makeSatIcon(cat) });
-    marker.bindTooltip(sat.name, { permanent: false, direction: 'top', offset: [0, -4] });
-    marker.on('click', (e) => {
-      e.originalEvent.stopPropagation();
-      openInfo(sat, cat, pos);
-      // Update icon
-      app.markers[catId].forEach(m => m.setIcon(makeSatIcon(cat)));
-      marker.setIcon(makeSatIcon(cat, true));
-      app.selectedSat._marker = marker;
-    });
-    marker.addTo(layer);
-    app.markers[catId].push(marker);
-  });
-
-  if (app.enabled[catId]) layer.addTo(app.map);
-}
-
-function updatePositions() {
-  const now = new Date();
-  CATEGORIES.forEach(cat => {
-    if (!app.enabled[cat.id]) return;
-    const sats = app.tleCache[cat.id] || [];
-    const markers = app.markers[cat.id] || [];
-    sats.forEach((sat, i) => {
-      const m = markers[i];
-      if (!m) return;
-      const pos = getPosition(sat.satrec, now);
-      if (!pos) return;
-      m.setLatLng([pos.lat, pos.lng]);
-      // Update info panel if this is selected
-      if (app.selectedSat && app.selectedSat.sat === sat) {
-        openInfo(sat, cat, pos);
-        m.setIcon(makeSatIcon(cat, true));
-      }
-    });
-  });
-  updateOrbitIfNeeded();
-}
-
-let orbitRedrawTimer = 0;
-function updateOrbitIfNeeded() {
-  if (!app.selectedSat) return;
-  const now = Date.now();
-  if (now - orbitRedrawTimer > 60000 && app.selectedSat.cat.orbitPath) {
-    drawOrbitPath(app.selectedSat.sat.satrec);
-    orbitRedrawTimer = now;
-  }
-}
-
-function updateTotalCount() {
-  let total = 0;
-  CATEGORIES.forEach(cat => {
-    if (app.enabled[cat.id]) total += (app.markers[cat.id] || []).length;
-  });
-  document.getElementById('totalCount').textContent = total.toLocaleString() + ' 機';
-}
-
-// ================================================================
-//  Category toggle
-// ================================================================
-function toggleCategory(catId) {
-  const cat = CATEGORIES.find(c => c.id === catId);
-  app.enabled[catId] = !app.enabled[catId];
-  const layer = app.layers[catId];
-  if (app.enabled[catId]) {
-    if (layer) layer.addTo(app.map);
-  } else {
-    if (layer) app.map.removeLayer(layer);
-    if (app.selectedSat && app.selectedSat.cat.id === catId) closeInfo();
-  }
-  renderCatButtons();
-  updateTotalCount();
-}
-
-function renderCatButtons() {
-  const container = document.getElementById('catButtons');
-  container.innerHTML = '';
-  CATEGORIES.forEach(cat => {
-    const on = app.enabled[cat.id];
-    const count = (app.markers[cat.id] || []).length;
-    const btn = document.createElement('button');
-    btn.className = 'cat-btn' + (on ? ' on' : '');
-    btn.innerHTML = `
-      <div class="cat-dot" style="background:${cat.color};box-shadow:0 0 6px ${cat.color}"></div>
-      <span class="cat-name">${cat.icon} ${cat.name}</span>
-      ${count > 0 ? `<span class="cat-count">${count}</span>` : ''}
-      <span class="cat-toggle">${on ? '▶ 表示中' : '— 非表示'}</span>
-    `;
-    btn.onclick = () => {
-      // If not yet loaded, fetch on demand
-      if (!app.tleCache[cat.id]) {
-        fetchAndDisplay(cat).then(() => {
-          app.enabled[cat.id] = false; // Will be toggled back
-          toggleCategory(cat.id);
-        });
-      } else {
-        toggleCategory(cat.id);
-      }
-    };
-    container.appendChild(btn);
-  });
-}
-
-// ================================================================
-//  Embedded fallback TLE data (used when Celestrak is unreachable)
-//  Epoch ~2025-001; positions approximate but orbital planes correct.
-// ================================================================
-const FALLBACK_TLE_TEXT = {
-  stations: `ISS (ZARYA)
+// ────────────────────────────────────────────────────────────
+//  Fallback TLE (offline / CORS blocked)
+// ────────────────────────────────────────────────────────────
+const FALLBACK_TLE = {
+  stations:`ISS (ZARYA)
 1 25544U 98067A   25001.50000000  .00016717  00000-0  30270-4 0  9999
 2 25544  51.6400  60.0000 0004500 120.0000 240.0000 15.50000000000000
 CSS (TIANHE)
 1 48274U 21035A   25001.50000000  .00014000  00000-0  25000-4 0  9999
 2 48274  41.4700 140.0000 0006000  90.0000 270.0000 15.60000000000000`,
-
-  weather: `HIMAWARI-9
+  weather:`HIMAWARI-9
 1 41836U 16064A   25001.50000000 -.00000140  00000-0  00000-0 0  9999
 2 41836   0.0170 197.0000 0001310 157.0000 333.0000  1.00271163 30000
 GOES-18
@@ -655,8 +219,7 @@ METOP-C
 NOAA-19
 1 33591U 09005A   25001.50000000  .00000030  00000-0  28000-4 0  9999
 2 33591  99.0700  40.0000 0014000 335.0000  24.0000 14.12500000 20000`,
-
-  russia: `COSMOS-2576
+  russia:`COSMOS-2576
 1 58470U 23189A   25001.50000000  .00001000  00000-0  50000-4 0  9999
 2 58470  97.8000 100.0000 0010000  45.0000 315.0000 14.89000000  8000
 COSMOS-2560
@@ -665,8 +228,7 @@ COSMOS-2560
 COSMOS-2544
 1 53536U 22057A   25001.50000000  .00000900  00000-0  45000-4 0  9999
 2 53536  97.5000 300.0000 0008000  90.0000 270.0000 14.88000000  6000`,
-
-  china: `YAOGAN-41
+  china:`YAOGAN-41
 1 58362U 23178A   25001.50000000  .00001500  00000-0  70000-4 0  9999
 2 58362  97.4000  80.0000 0010000  30.0000 330.0000 14.82000000  7000
 YAOGAN-39
@@ -675,8 +237,7 @@ YAOGAN-39
 SHIJIAN-23
 1 56966U 23097A   25001.50000000  .00000200  00000-0  10000-4 0  9999
 2 56966   0.0400 105.0000 0002000  78.0000 282.0000  1.00270000 12000`,
-
-  usa: `USA-326
+  usa:`USA-326
 1 56222U 23056A   25001.50000000  .00000800  00000-0  40000-4 0  9999
 2 56222  97.4000 120.0000 0009000  70.0000 290.0000 14.86000000  7000
 USA-316
@@ -687,132 +248,555 @@ WGS-10 (USA-291)
 2 43813   0.0500  35.0000 0001800 100.0000 260.0000  1.00271000 16000`,
 };
 
-// ================================================================
-//  Data fetching (with CORS proxy fallbacks)
-// ================================================================
-function fetchWithTimeout(url, ms) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), ms);
-  return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(t));
-}
-
-async function fetchTextRobust(url) {
-  // 1. Direct
-  try {
-    const r = await fetchWithTimeout(url, 8000);
-    if (r.ok) return await r.text();
-  } catch (e) { /* try proxy */ }
-
-  // 2. corsproxy.io
-  try {
-    const r = await fetchWithTimeout('https://corsproxy.io/?' + encodeURIComponent(url), 10000);
-    if (r.ok) return await r.text();
-  } catch (e) { /* try next */ }
-
-  // 3. allorigins
-  try {
-    const r = await fetchWithTimeout('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 12000);
-    if (r.ok) return await r.text();
-  } catch (e) { /* all failed */ }
-
-  throw new Error('All fetch attempts failed');
-}
-
-async function fetchTLE(cat) {
-  const text = await fetchTextRobust(cat.url);
-  let sats = parseTLE(text);
-  if (cat.filter) sats = sats.filter(s => cat.filter(s.name));
-  return sats;
-}
-
-function getFallbackSats(cat) {
-  const text = FALLBACK_TLE_TEXT[cat.id] || '';
-  if (!text) return [];
-  let sats = parseTLE(text);
-  if (cat.filter) sats = sats.filter(s => cat.filter(s.name));
-  return sats;
-}
-
-async function fetchAndDisplay(cat) {
-  try {
-    const sats = await fetchTLE(cat);
-    app.tleCache[cat.id] = sats;
-    buildMarkers(cat.id);
-    renderCatButtons();
-    updateTotalCount();
-    return { sats, fromFallback: false };
-  } catch (e) {
-    console.warn('Live fetch failed for', cat.id, '– using fallback TLE');
-    const sats = getFallbackSats(cat);
-    app.tleCache[cat.id] = sats;
-    buildMarkers(cat.id);
-    renderCatButtons();
-    updateTotalCount();
-    return { sats, fromFallback: true };
+// ────────────────────────────────────────────────────────────
+//  TLE helpers
+// ────────────────────────────────────────────────────────────
+function parseTLE(text) {
+  const lines = text.replace(/\r/g,'').split('\n').map(l=>l.trim()).filter(Boolean);
+  const sats = [];
+  for (let i=0; i+2<lines.length; i+=3) {
+    if (!lines[i+1].startsWith('1 ')||!lines[i+2].startsWith('2 ')) continue;
+    const name = lines[i].replace(/^0 /,'').trim();
+    try {
+      const sr = satellite.twoline2satrec(lines[i+1], lines[i+2]);
+      if (sr.error !== 0) continue;
+      sats.push({name, satrec:sr, tle1:lines[i+1], tle2:lines[i+2]});
+    } catch(e) {}
   }
+  return sats;
 }
 
-// ================================================================
-//  Notice toggle
-// ================================================================
-document.getElementById('noticeToggle').addEventListener('click', () => {
-  const body = document.getElementById('noticeBody');
-  body.hidden = !body.hidden;
+function fetchT(url, ms) {
+  const c = new AbortController();
+  const t = setTimeout(()=>c.abort(), ms);
+  return fetch(url, {signal:c.signal}).finally(()=>clearTimeout(t));
+}
+
+async function fetchRobust(url) {
+  // Direct
+  try { const r=await fetchT(url,8000); if(r.ok) return await r.text(); } catch(e){}
+  // corsproxy.io
+  try { const r=await fetchT('https://corsproxy.io/?'+encodeURIComponent(url),10000); if(r.ok) return await r.text(); } catch(e){}
+  // allorigins
+  try { const r=await fetchT('https://api.allorigins.win/raw?url='+encodeURIComponent(url),12000); if(r.ok) return await r.text(); } catch(e){}
+  throw new Error('fetch failed');
+}
+
+function getSatPos(satrec, date=new Date()) {
+  try {
+    const pv = satellite.propagate(satrec, date);
+    if (!pv||!pv.position||typeof pv.position==='boolean') return null;
+    const gmst = satellite.gstime(date);
+    const gd   = satellite.eciToGeodetic(pv.position, gmst);
+    const lat  = satellite.degreesLat(gd.latitude);
+    const lng  = satellite.degreesLong(gd.longitude);
+    const alt  = gd.height;
+    let spd = null;
+    if (pv.velocity) { const v=pv.velocity; spd=Math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z); }
+    return {lat, lng, alt, speed:spd};
+  } catch(e) { return null; }
+}
+
+// ────────────────────────────────────────────────────────────
+//  Coordinate conversion: geographic → Three.js 3D
+//  Matches THREE.SphereGeometry default UV mapping
+// ────────────────────────────────────────────────────────────
+function llaToVec3(lat, lng, altKm=0) {
+  const r = EARTH_R + (altKm/EARTH_KM)*EARTH_R;
+  const phi   = (lng+180) * Math.PI/180;   // azimuthal (longitude)
+  const theta = (90-lat)  * Math.PI/180;   // polar (colatitude)
+  return new THREE.Vector3(
+    -r * Math.sin(phi) * Math.sin(theta),
+     r * Math.cos(theta),
+     r * Math.cos(phi) * Math.sin(theta)
+  );
+}
+
+// ────────────────────────────────────────────────────────────
+//  App state
+// ────────────────────────────────────────────────────────────
+const app = {
+  scene:null, camera:null, renderer:null, controls:null,
+  raycaster: new THREE.Raycaster(),
+  tleCache: {},          // categoryId → [{name,satrec,tle1,tle2}]
+  groups: {},            // categoryId → THREE.Group
+  sprites: {},           // categoryId → [sprite]
+  satData: new Map(),    // sprite.uuid → {sat, cat}
+  orbitLines: [],
+  enabled: {},
+  selectedSprite: null,
+  texCache: {},
+};
+
+// ────────────────────────────────────────────────────────────
+//  Sprite texture (glowing dot)
+// ────────────────────────────────────────────────────────────
+function getSpriteTex(hexColor) {
+  if (app.texCache[hexColor]) return app.texCache[hexColor];
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(64,64,2,64,64,60);
+  g.addColorStop(0,   hexColor);
+  g.addColorStop(0.25,hexColor);
+  g.addColorStop(0.6, hexColor+'88');
+  g.addColorStop(1,   hexColor+'00');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(64,64,64,0,Math.PI*2); ctx.fill();
+  const tex = new THREE.CanvasTexture(c);
+  return (app.texCache[hexColor] = tex);
+}
+
+// ────────────────────────────────────────────────────────────
+//  Scene initialisation
+// ────────────────────────────────────────────────────────────
+function initScene() {
+  const canvas = document.getElementById('c');
+  const W = window.innerWidth, H = window.innerHeight;
+
+  // Renderer
+  app.renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+  app.renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  app.renderer.setSize(W, H);
+  app.renderer.shadowMap.enabled = false;
+
+  // Scene
+  app.scene = new THREE.Scene();
+
+  // Camera: positioned to see ~1/3 of globe
+  app.camera = new THREE.PerspectiveCamera(45, W/H, 0.01, 500);
+  app.camera.position.set(0.3, 0.8, 2.4);
+  app.camera.lookAt(0,0,0);
+
+  // OrbitControls
+  app.controls = new THREE.OrbitControls(app.camera, canvas);
+  app.controls.enableDamping = true;
+  app.controls.dampingFactor = 0.06;
+  app.controls.minDistance  = 1.18;
+  app.controls.maxDistance  = 8;
+  app.controls.enablePan    = false;
+  app.controls.autoRotate   = false;
+
+  // ── Stars ──
+  const starPos = new Float32Array(15000*3);
+  for (let i=0;i<starPos.length;i++) starPos[i]=(Math.random()-.5)*400;
+  const starGeo = new THREE.BufferGeometry();
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos,3));
+  app.scene.add(new THREE.Points(starGeo,
+    new THREE.PointsMaterial({color:0xffffff,size:0.35,sizeAttenuation:true})));
+
+  // ── Lighting ──
+  app.scene.add(new THREE.AmbientLight(0x102040, 1.2));
+  const sun = new THREE.DirectionalLight(0xfff8e0, 2.8);
+  sun.position.set(5, 2, 4);
+  app.scene.add(sun);
+
+  // ── Earth ──
+  const earthGeo = new THREE.SphereGeometry(EARTH_R, 80, 80);
+  const earthMat = new THREE.MeshPhongMaterial({
+    specular: new THREE.Color(0x1a2a44),
+    shininess: 12,
+  });
+  const earth = new THREE.Mesh(earthGeo, earthMat);
+  app.scene.add(earth);
+
+  // Load Earth texture
+  const loader = new THREE.TextureLoader();
+  loader.load(
+    'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg',
+    tex => { earthMat.map = tex; earthMat.needsUpdate = true; },
+    undefined,
+    () => {
+      // Fallback: solid ocean blue
+      earthMat.color.set(0x1a4e7a);
+    }
+  );
+
+  // ── Atmosphere glow ──
+  app.scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(EARTH_R*1.035, 40, 40),
+    new THREE.MeshPhongMaterial({
+      color:0x2255cc, transparent:true, opacity:0.13,
+      side:THREE.BackSide, depthWrite:false,
+    })
+  ));
+
+  // ── Cloud layer (subtle) ──
+  loader.load(
+    'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-clouds.png',
+    tex => {
+      const clouds = new THREE.Mesh(
+        new THREE.SphereGeometry(EARTH_R*1.005, 60, 60),
+        new THREE.MeshPhongMaterial({map:tex, transparent:true, opacity:0.28, depthWrite:false})
+      );
+      clouds.rotation.y = 0.3;
+      app.scene.add(clouds);
+      app.cloudMesh = clouds;
+    }
+  );
+
+  // ── Satellite groups ──
+  CATEGORIES.forEach(cat => {
+    const g = new THREE.Group();
+    g.visible = app.enabled[cat.id] || false;
+    app.groups[cat.id] = g;
+    app.scene.add(g);
+    app.sprites[cat.id] = [];
+  });
+
+  // Raycaster
+  app.raycaster.params.Sprite = {threshold: 0.05};
+
+  // Resize
+  window.addEventListener('resize', () => {
+    const w=window.innerWidth, h=window.innerHeight;
+    app.camera.aspect = w/h;
+    app.camera.updateProjectionMatrix();
+    app.renderer.setSize(w,h);
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+//  Orbit path
+// ────────────────────────────────────────────────────────────
+function clearOrbitLines() {
+  app.orbitLines.forEach(l => app.scene.remove(l));
+  app.orbitLines = [];
+}
+
+function drawOrbitPath(satrec, color) {
+  clearOrbitLines();
+  const now = new Date();
+  const pts = [], pts2 = [];
+
+  // Past 8 min (dashed = faded)
+  for (let s=-480; s<=0; s+=30) {
+    const pos = getSatPos(satrec, new Date(now.getTime()+s*1000));
+    if (pos) pts.push(llaToVec3(pos.lat, pos.lng, pos.alt));
+  }
+  // Future orbit (~95 min)
+  for (let s=0; s<=5700; s+=30) {
+    const pos = getSatPos(satrec, new Date(now.getTime()+s*1000));
+    if (pos) pts2.push(llaToVec3(pos.lat, pos.lng, pos.alt));
+  }
+
+  const addLine = (points, opacity, dashed) => {
+    if (points.length < 2) return;
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({
+      color, transparent:true, opacity, depthWrite:false
+    });
+    const line = new THREE.Line(geo, mat);
+    app.scene.add(line);
+    app.orbitLines.push(line);
+  };
+  addLine(pts,  0.3, true);
+  addLine(pts2, 0.8, false);
+}
+
+// ────────────────────────────────────────────────────────────
+//  Build satellite sprites for a category
+// ────────────────────────────────────────────────────────────
+function buildGroup(catId) {
+  const cat  = CATEGORIES.find(c=>c.id===catId);
+  const sats = app.tleCache[catId] || [];
+  const group = app.groups[catId];
+  // Remove old
+  while (group.children.length) group.remove(group.children[0]);
+  app.sprites[catId] = [];
+
+  const mat = new THREE.SpriteMaterial({
+    map:getSpriteTex(cat.color), depthWrite:false, transparent:true,
+    blending:THREE.AdditiveBlending,
+  });
+
+  sats.forEach(sat => {
+    const pos = getSatPos(sat.satrec);
+    if (!pos) return;
+    const sprite = new THREE.Sprite(mat.clone());
+    const sz = cat.spriteSize;
+    sprite.scale.set(sz,sz,1);
+    sprite.position.copy(llaToVec3(pos.lat, pos.lng, pos.alt));
+    group.add(sprite);
+    app.sprites[catId].push(sprite);
+    app.satData.set(sprite.uuid, {sat, cat});
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+//  Real-time position update
+// ────────────────────────────────────────────────────────────
+function updatePositions() {
+  const now = new Date();
+  CATEGORIES.forEach(cat => {
+    if (!app.enabled[cat.id]) return;
+    const sats    = app.tleCache[cat.id] || [];
+    const sprites = app.sprites[cat.id] || [];
+    sprites.forEach((sp, i) => {
+      const sat = sats[i];
+      if (!sat) return;
+      const pos = getSatPos(sat.satrec, now);
+      if (!pos) return;
+      sp.position.copy(llaToVec3(pos.lat, pos.lng, pos.alt));
+      // Update info panel if selected
+      if (app.selectedSprite === sp) updateInfoPos(sat, cat, pos);
+    });
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+//  Info panel
+// ────────────────────────────────────────────────────────────
+function openInfo(sprite, sat, cat) {
+  app.selectedSprite = sprite;
+  const pos = getSatPos(sat.satrec);
+  if (!pos) return;
+  showInfoContent(sat, cat, pos);
+  document.getElementById('infoPanel').hidden = false;
+  if (cat.orbitPath) drawOrbitPath(sat.satrec, cat.color);
+}
+
+function showInfoContent(sat, cat, pos) {
+  const noradId = sat.tle2 ? sat.tle2.substring(2,7).trim() : '-';
+  const inc     = sat.tle2 ? parseFloat(sat.tle2.substring(8,16)).toFixed(2)+'°' : '-';
+  const altStr  = pos.alt  ? pos.alt.toFixed(1)+' km' : '-';
+  const spdStr  = pos.speed? (pos.speed*3600).toFixed(0)+' km/h' : '-';
+  document.getElementById('infoBody').innerHTML = `
+    <div class="info-cat" style="background:${cat.color}22;border:1px solid ${cat.color}66;color:${cat.color}">${cat.icon} ${cat.name}</div>
+    <div class="info-name">${sat.name}</div>
+    <div class="info-row"><span class="info-k">緯度</span><span class="info-v">${pos.lat.toFixed(4)}°</span></div>
+    <div class="info-row"><span class="info-k">経度</span><span class="info-v">${pos.lng.toFixed(4)}°</span></div>
+    <div class="info-row"><span class="info-k">高度</span><span class="info-v">${altStr}</span></div>
+    <div class="info-row"><span class="info-k">速度</span><span class="info-v">${spdStr}</span></div>
+    <div class="info-row"><span class="info-k">NORAD ID</span><span class="info-v">${noradId}</span></div>
+    <div class="info-row"><span class="info-k">軌道傾斜角</span><span class="info-v">${inc}</span></div>
+  `;
+}
+
+function updateInfoPos(sat, cat, pos) {
+  showInfoContent(sat, cat, pos);
+}
+
+function closeInfo() {
+  app.selectedSprite = null;
+  document.getElementById('infoPanel').hidden = true;
+  clearOrbitLines();
+}
+
+// ────────────────────────────────────────────────────────────
+//  Click / touch detection
+// ────────────────────────────────────────────────────────────
+function handlePick(clientX, clientY) {
+  const canvas = document.getElementById('c');
+  const rect = canvas.getBoundingClientRect();
+  const ndcX = ((clientX-rect.left)/rect.width)*2-1;
+  const ndcY = -((clientY-rect.top)/rect.height)*2+1;
+  app.raycaster.setFromCamera(new THREE.Vector2(ndcX, ndcY), app.camera);
+
+  // Collect all visible sprites
+  const allSprites = [];
+  CATEGORIES.forEach(cat => {
+    if (app.enabled[cat.id]) allSprites.push(...(app.sprites[cat.id]||[]));
+  });
+
+  const hits = app.raycaster.intersectObjects(allSprites);
+  if (hits.length > 0) {
+    const sp  = hits[0].object;
+    const meta = app.satData.get(sp.uuid);
+    if (meta) {
+      openInfo(sp, meta.sat, meta.cat);
+      return;
+    }
+  }
+  closeInfo();
+}
+
+document.getElementById('c').addEventListener('click', e => {
+  // Ignore if OrbitControls moved the camera
+  if (app.controls._moved) return;
+  handlePick(e.clientX, e.clientY);
 });
+document.getElementById('c').addEventListener('touchend', e => {
+  if (e.changedTouches.length===0) return;
+  handlePick(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+}, {passive:true});
+
+// Track whether controls dragged (to distinguish click vs drag)
+{
+  let dragging=false;
+  document.getElementById('c').addEventListener('mousedown',()=>{dragging=false;});
+  document.getElementById('c').addEventListener('mousemove',()=>{dragging=true;});
+  document.getElementById('c').addEventListener('mouseup',()=>{ app.controls._moved=dragging; });
+}
+
 document.getElementById('infoClose').addEventListener('click', closeInfo);
 
-// ================================================================
-//  Bootstrap
-// ================================================================
-async function main() {
-  initMap();
-  updateClock();
-  setInterval(updateClock, 1000);
+// ────────────────────────────────────────────────────────────
+//  Category UI
+// ────────────────────────────────────────────────────────────
+function renderCatButtons() {
+  const container = document.getElementById('catBtns');
+  container.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const on    = app.enabled[cat.id];
+    const count = (app.sprites[cat.id]||[]).length;
+    const btn   = document.createElement('button');
+    btn.className = 'cat-btn'+(on?' on':'');
+    btn.innerHTML = `
+      <div class="cat-dot" style="background:${cat.color};box-shadow:0 0 5px ${cat.color}"></div>
+      <span class="cat-name">${cat.icon} ${cat.name}</span>
+      ${count>0?`<span class="cat-count">${count}</span>`:''}
+      <span class="cat-lbl">${on?'▶ ON':'– OFF'}</span>
+    `;
+    btn.onclick = () => toggleCat(cat.id);
+    container.appendChild(btn);
+  });
+  const total = CATEGORIES.reduce((s,c)=>s+(app.enabled[c.id]?(app.sprites[c.id]||[]).length:0),0);
+  document.getElementById('totalNum').textContent = total.toLocaleString();
+}
 
+function toggleCat(catId) {
+  if (!app.tleCache[catId]) {
+    // Fetch on first enable
+    const cat = CATEGORIES.find(c=>c.id===catId);
+    fetchAndDisplay(cat).then(()=>{
+      app.enabled[catId] = true;
+      app.groups[catId].visible = true;
+      renderCatButtons();
+    });
+  } else {
+    app.enabled[catId] = !app.enabled[catId];
+    app.groups[catId].visible = app.enabled[catId];
+    if (!app.enabled[catId] && app.selectedSprite) {
+      const meta = app.satData.get(app.selectedSprite.uuid);
+      if (meta && meta.cat.id===catId) closeInfo();
+    }
+    renderCatButtons();
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+//  Data fetch
+// ────────────────────────────────────────────────────────────
+async function fetchAndDisplay(cat) {
+  try {
+    const text = await fetchRobust(cat.url);
+    let sats = parseTLE(text);
+    if (cat.filter) sats = sats.filter(s=>cat.filter(s.name));
+    app.tleCache[cat.id] = sats;
+    buildGroup(cat.id);
+    renderCatButtons();
+    return false; // not fallback
+  } catch(e) {
+    console.warn('Live TLE failed for', cat.id, '— using fallback');
+    const sats = parseTLE(FALLBACK_TLE[cat.id]||'');
+    app.tleCache[cat.id] = sats;
+    buildGroup(cat.id);
+    renderCatButtons();
+    return true; // fallback
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+//  Header clock
+// ────────────────────────────────────────────────────────────
+function setStatus(state, text) {
+  document.getElementById('sDot').className = 'dot '+state;
+  document.getElementById('sTxt').textContent = text;
+}
+function updateClock() {
+  document.getElementById('hTime').textContent =
+    new Date().toUTCString().replace('GMT','UTC').replace(',','');
+}
+
+// ────────────────────────────────────────────────────────────
+//  Notice toggle
+// ────────────────────────────────────────────────────────────
+document.getElementById('noticeTgl').addEventListener('click',()=>{
+  const b=document.getElementById('noticeBody');
+  b.hidden=!b.hidden;
+});
+
+// ────────────────────────────────────────────────────────────
+//  Animation loop
+// ────────────────────────────────────────────────────────────
+let lastUpdate = 0;
+function animate(ts) {
+  requestAnimationFrame(animate);
+  app.controls.update();
+  // Update satellite positions every 2s
+  if (ts - lastUpdate > 2000) {
+    updatePositions();
+    lastUpdate = ts;
+  }
+  // Slowly rotate clouds
+  if (app.cloudMesh) app.cloudMesh.rotation.y += 0.00005;
+  app.renderer.render(app.scene, app.camera);
+}
+
+// ────────────────────────────────────────────────────────────
+//  Bootstrap
+// ────────────────────────────────────────────────────────────
+async function main() {
   // Init enabled state
   CATEGORIES.forEach(cat => { app.enabled[cat.id] = cat.defaultOn; });
+
+  document.getElementById('ovMsg').textContent = 'Three.js シーンを構築中...';
+  initScene();
   renderCatButtons();
 
-  // Fetch default-on categories first
-  const defaultCats = CATEGORIES.filter(c => c.defaultOn);
-  const otherCats   = CATEGORIES.filter(c => !c.defaultOn);
+  document.getElementById('ovMsg').textContent = 'ISS の軌道データを取得中...';
+  setStatus('load', '取得中...');
 
-  setOverlay('ISS の軌道データを取得中...');
-  setStatus('loading', 'データ取得中...');
-
+  const defaultCats = CATEGORIES.filter(c=>c.defaultOn);
   let anyFallback = false;
+
   for (const cat of defaultCats) {
-    setOverlay(`${cat.icon} ${cat.name} の軌道データを取得中...`);
-    const { fromFallback } = await fetchAndDisplay(cat);
-    if (fromFallback) anyFallback = true;
+    document.getElementById('ovMsg').textContent = `${cat.icon} ${cat.name} の軌道データを取得中...`;
+    const fb = await fetchAndDisplay(cat);
+    if (fb) anyFallback = true;
+    app.groups[cat.id].visible = true;
   }
 
-  hideOverlay();
+  document.getElementById('overlay').hidden = true;
 
   if (anyFallback) {
     document.getElementById('demoBanner').hidden = false;
-    setStatus('error', 'デモモード（Celestrak 未接続）');
+    setStatus('err', 'デモモード（Celestrak 未接続）');
   } else {
     setStatus('live', 'リアルタイム追跡中');
   }
 
-  // Start update loop (2s)
-  app.updateLoop = setInterval(() => {
-    updatePositions();
-    updateTotalCount();
-  }, 2000);
-
-  // Prefetch other categories in background (staggered, cache only)
-  let delay = 2000;
-  for (const cat of otherCats) {
-    setTimeout(() => fetchAndDisplay(cat), delay);
-    delay += 3000;
+  // ISS orbit path on start
+  const issSats = app.tleCache['stations'] || [];
+  if (issSats.length > 0) {
+    drawOrbitPath(issSats[0].satrec, '#00ff88');
+    // Re-draw orbit every 5 minutes
+    setInterval(()=>{
+      if (app.orbitLines.length > 0 && !app.selectedSprite) {
+        const sat = (app.tleCache['stations']||[])[0];
+        if (sat) drawOrbitPath(sat.satrec, '#00ff88');
+      }
+    }, 300000);
   }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Background prefetch
+  const others = CATEGORIES.filter(c=>!c.defaultOn);
+  let delay = 3000;
+  others.forEach(cat => {
+    setTimeout(()=>fetchAndDisplay(cat), delay);
+    delay += 4000;
+  });
+
+  animate(0);
 }
 
 main().catch(e => {
-  hideOverlay();
-  setStatus('error', 'エラー: ' + e.message);
+  document.getElementById('overlay').hidden = true;
+  setStatus('err', 'エラー: '+e.message);
   console.error(e);
 });
 </script>

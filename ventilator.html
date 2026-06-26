@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VentSim｜人工呼吸器モニター・シミュレーター（EVITAタイプ）</title>
+<meta name="description" content="Dräger EVITA 2/4 タイプの人工呼吸器モニター画面デモ。正常肺・COPD・ARDS・喘息などの病態別に圧/流量/換気量波形を表示し、FiO2・タイダルボリューム・PEEP・プレッシャーサポート・強制換気回数や各換気モード（IPPV/SIMV/BIPAP/CPAP/APRV等）を切り替えられる学習用シミュレーターなのだ。" />
+<style>
+  :root{
+    --bg:#05080c; --panel:#0d141c; --panel2:#121b25; --line:#1f2b38;
+    --txt:#e7eef5; --sub:#8aa0b4; --accent:#37d0a8;
+    --paw:#ffd23f;     /* 圧波形 黄 */
+    --flow:#46e07a;    /* 流量波形 緑 */
+    --vol:#4fc3ff;     /* 換気量波形 水色 */
+    --warn:#ff5d5d; --grid:#13202c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:"Segoe UI",system-ui,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    display:flex; flex-direction:column; min-height:100vh;
+  }
+  /* ===== ヘッダー ===== */
+  header{
+    display:flex; align-items:center; gap:14px; padding:8px 16px;
+    background:linear-gradient(#101a24,#0a121a); border-bottom:1px solid var(--line);
+  }
+  .brand{font-weight:800; letter-spacing:.5px; font-size:18px; color:#fff}
+  .brand small{color:var(--accent); font-weight:700}
+  .device{color:var(--sub); font-size:12px}
+  header .mode-now{
+    margin-left:auto; display:flex; align-items:center; gap:18px; font-size:13px;
+  }
+  .pill{background:#13202c; border:1px solid var(--line); border-radius:999px; padding:4px 12px}
+  .pill b{color:#fff}
+  .clock{font-variant-numeric:tabular-nums; color:var(--sub)}
+  /* ===== レイアウト ===== */
+  .wrap{display:grid; grid-template-columns:1fr 260px; gap:10px; padding:10px; flex:1; min-height:0}
+  @media(max-width:880px){ .wrap{grid-template-columns:1fr} }
+  .scopes{display:flex; flex-direction:column; gap:8px; min-height:0}
+  .scope{
+    position:relative; background:#04070a; border:1px solid var(--line);
+    border-radius:8px; overflow:hidden; flex:1; min-height:120px;
+  }
+  .scope canvas{display:block; width:100%; height:100%}
+  .scope .lbl{
+    position:absolute; top:6px; left:10px; font-size:12px; font-weight:700;
+    text-shadow:0 0 6px #000; pointer-events:none;
+  }
+  .scope .unit{position:absolute; top:6px; right:10px; font-size:11px; color:var(--sub)}
+  /* ===== 右：実測値 ===== */
+  .numbers{display:flex; flex-direction:column; gap:8px; min-height:0; overflow:auto}
+  .numgrid{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .num{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:8px 10px; position:relative;
+  }
+  .num .k{font-size:10px; color:var(--sub); letter-spacing:.3px}
+  .num .v{font-size:24px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.1}
+  .num .u{font-size:10px; color:var(--sub); margin-left:3px; font-weight:500}
+  .num.paw .v{color:var(--paw)} .num.flow .v{color:var(--flow)} .num.vol .v{color:var(--vol)}
+  .num.alarm{border-color:var(--warn); animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{background:#2a0e0e}}
+  .sechead{font-size:11px; color:var(--sub); letter-spacing:1px; margin:4px 2px -2px; text-transform:uppercase}
+  /* ===== 下：コントロール ===== */
+  .controls{
+    background:var(--panel); border-top:1px solid var(--line); padding:10px 14px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px 16px;
+    align-items:end;
+  }
+  .ctl{display:flex; flex-direction:column; gap:4px}
+  .ctl label{font-size:11px; color:var(--sub); display:flex; justify-content:space-between}
+  .ctl label b{color:#fff; font-variant-numeric:tabular-nums; font-size:13px}
+  .ctl select, .ctl input[type=range]{width:100%}
+  .ctl select{
+    background:var(--panel2); color:var(--txt); border:1px solid var(--line);
+    border-radius:6px; padding:6px 8px; font-size:13px;
+  }
+  input[type=range]{accent-color:var(--accent); height:22px}
+  .ctl.disabled{opacity:.35; pointer-events:none}
+  .btnrow{display:flex; gap:8px; flex-wrap:wrap}
+  button.act{
+    background:var(--accent); color:#04120d; border:0; border-radius:6px;
+    padding:8px 14px; font-weight:800; cursor:pointer; font-size:13px;
+  }
+  button.ghost{background:transparent; color:var(--txt); border:1px solid var(--line)}
+  button.act:active{transform:translateY(1px)}
+  .legend{font-size:11px; color:var(--sub); padding:2px 14px 10px}
+  .legend span{margin-right:14px}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:middle}
+  details.help{margin:0 14px 12px; color:var(--sub); font-size:12px}
+  details.help summary{cursor:pointer; color:var(--txt)}
+  details.help li{margin:3px 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Vent<small>Sim</small></div>
+  <div class="device">人工呼吸器モニター・シミュレーター（EVITAタイプ）｜学習デモ</div>
+  <div class="mode-now">
+    <span class="pill">モード <b id="hdMode">—</b></span>
+    <span class="pill">病態 <b id="hdCond">—</b></span>
+    <span class="pill">f<sub>total</sub> <b id="hdRR">—</b>/min</span>
+    <span class="clock" id="clock">00:00</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- 波形 -->
+  <div class="scopes">
+    <div class="scope">
+      <canvas id="cPaw"></canvas>
+      <div class="lbl" style="color:var(--paw)">気道内圧 Paw（圧波形）</div>
+      <div class="unit">cmH₂O</div>
+    </div>
+    <div class="scope">
+      <canvas id="cFlow"></canvas>
+      <div class="lbl" style="color:var(--flow)">流量 Flow（流量波形）</div>
+      <div class="unit">L/min</div>
+    </div>
+    <div class="scope">
+      <canvas id="cVol"></canvas>
+      <div class="lbl" style="color:var(--vol)">換気量 Volume（ボリューム波形）</div>
+      <div class="unit">mL</div>
+    </div>
+  </div>
+
+  <!-- 実測値 -->
+  <div class="numbers">
+    <div class="sechead">実測値 Monitoring</div>
+    <div class="numgrid">
+      <div class="num paw"><div class="k">Ppeak 最高気道内圧</div><div class="v"><span id="mPpeak">–</span><span class="u">cmH₂O</span></div></div>
+      <div class="num paw"><div class="k">Pmean 平均気道内圧</div><div class="v"><span id="mPmean">–</span><span class="u">cmH₂O</span></div></div>
+      <div class="num paw"><div class="k">Pplat プラトー圧</div><div class="v"><span id="mPplat">–</span><span class="u">cmH₂O</span></div></div>
+      <div class="num paw"><div class="k">PEEP / auto-PEEP</div><div class="v"><span id="mPeep">–</span><span class="u">cmH₂O</span></div></div>
+      <div class="num vol"><div class="k">VTe 1回換気量</div><div class="v"><span id="mVt">–</span><span class="u">mL</span></div></div>
+      <div class="num vol"><div class="k">MV 分時換気量</div><div class="v"><span id="mMv">–</span><span class="u">L/min</span></div></div>
+      <div class="num flow"><div class="k">f total 総呼吸回数</div><div class="v"><span id="mF">–</span><span class="u">/min</span></div></div>
+      <div class="num"><div class="k">FiO₂ 吸入酸素濃度</div><div class="v"><span id="mFio2">–</span><span class="u">%</span></div></div>
+      <div class="num"><div class="k">Cdyn コンプライアンス</div><div class="v"><span id="mComp">–</span><span class="u">mL/cmH₂O</span></div></div>
+      <div class="num"><div class="k">R 気道抵抗</div><div class="v"><span id="mRes">–</span><span class="u">cmH₂O/L/s</span></div></div>
+      <div class="num"><div class="k">I:E 吸気呼気比</div><div class="v"><span id="mIE">–</span></div></div>
+      <div class="num"><div class="k">SpO₂（推定）</div><div class="v"><span id="mSpo2">–</span><span class="u">%</span></div></div>
+    </div>
+    <div class="sechead">アラーム Alarm</div>
+    <div id="alarmBox" style="font-size:12px;color:var(--sub)">なし</div>
+  </div>
+</div>
+
+<!-- コントロール -->
+<div class="controls" id="controls">
+  <div class="ctl">
+    <label>換気モード Mode</label>
+    <select id="selMode"></select>
+  </div>
+  <div class="ctl">
+    <label>肺の病態 Condition</label>
+    <select id="selCond"></select>
+  </div>
+  <div class="ctl" data-p="fio2">
+    <label>FiO₂ 吸入酸素濃度 <b><span id="lFio2"></span>%</b></label>
+    <input type="range" id="rFio2" min="21" max="100" step="1">
+  </div>
+  <div class="ctl" data-p="vt">
+    <label>タイダルボリューム VT <b><span id="lVt"></span>mL</b></label>
+    <input type="range" id="rVt" min="200" max="800" step="10">
+  </div>
+  <div class="ctl" data-p="rr">
+    <label>強制換気回数 RR <b><span id="lRr"></span>/min</b></label>
+    <input type="range" id="rRr" min="4" max="40" step="1">
+  </div>
+  <div class="ctl" data-p="peep">
+    <label>PEEP <b><span id="lPeep"></span>cmH₂O</b></label>
+    <input type="range" id="rPeep" min="0" max="24" step="1">
+  </div>
+  <div class="ctl" data-p="ps">
+    <label>プレッシャーサポート PS/ASB <b><span id="lPs"></span>cmH₂O</b></label>
+    <input type="range" id="rPs" min="0" max="30" step="1">
+  </div>
+  <div class="ctl" data-p="pinsp">
+    <label>Pinsp 吸気圧 <b><span id="lPinsp"></span>cmH₂O</b></label>
+    <input type="range" id="rPinsp" min="5" max="40" step="1">
+  </div>
+  <div class="ctl" data-p="ie">
+    <label>吸気時間 Ti <b><span id="lTi"></span>s</b></label>
+    <input type="range" id="rTi" min="0.5" max="3" step="0.1">
+  </div>
+  <div class="ctl">
+    <label>表示スピード Sweep <b><span id="lSweep"></span></b></label>
+    <input type="range" id="rSweep" min="6" max="20" step="1">
+  </div>
+  <div class="ctl">
+    <label>操作</label>
+    <div class="btnrow">
+      <button class="act" id="btnRun">⏸ 停止</button>
+      <button class="ghost" id="btnFreeze">フリーズ</button>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <span><i class="dot" style="background:var(--paw)"></i>圧 Paw</span>
+  <span><i class="dot" style="background:var(--flow)"></i>流量 Flow</span>
+  <span><i class="dot" style="background:var(--vol)"></i>換気量 Volume</span>
+  <span style="color:#5a6b7a">※ 教育用デモです。実機の数値・挙動とは異なります。臨床判断には使用しないでください。</span>
+</div>
+
+<details class="help">
+  <summary>各モード・病態の説明（クリックで開く）</summary>
+  <div id="helpBody"></div>
+</details>
+
+<script>
+/* =========================================================================
+   VentSim — 人工呼吸器モニター・シミュレーター（EVITAタイプ・教育用デモ）
+   単一コンパートメント肺モデル（抵抗R・コンプライアンスC）で
+   気道内圧 / 流量 / 換気量 をリアルタイム計算して描画する。
+   ========================================================================= */
+
+/* ---- 肺の病態プリセット（C: L/cmH2O, R: cmH2O/(L/s)） ---- */
+const CONDITIONS = {
+  normal: { name:"正常肺",        C:0.050, R:5,  spo2:98, desc:"健常肺。コンプライアンス・抵抗ともに正常。波形は教科書的な形になる。" },
+  ards:   { name:"ARDS",          C:0.022, R:8,  spo2:88, desc:"硬い肺（低コンプライアンス）。同じ換気量でも圧が高くなり、肺保護のため低VT・高PEEPが基本。" },
+  copd:   { name:"COPD（慢性閉塞性肺疾患）", C:0.065, R:18, spo2:90, desc:"高コンプライアンス＋高抵抗。呼気が遅く、呼気終末に流量が0へ戻りきらず auto-PEEP（エアトラッピング）が生じやすい。" },
+  asthma: { name:"気管支喘息（発作）", C:0.048, R:26, spo2:91, desc:"著明な気道抵抗上昇（気管支攣縮）。最高気道内圧が上がり、呼気流速が低下する。" },
+  fibrosis:{name:"肺線維症",       C:0.028, R:6,  spo2:90, desc:"拘束性で硬い肺。低コンプライアンスで圧が上がりやすい。" },
+  healthy:{ name:"健常肺（自発強め）", C:0.055, R:4,  spo2:99, desc:"自発呼吸が保たれた状態。CPAP/PSVなどの自発モードの確認に。" },
+};
+
+/* ---- 換気モード（EVITA搭載モードを網羅） ---- */
+/* kind: 'vc'=量規定 'pc'=圧規定 'simv'=同期間欠 'spont'=自発+補助 'cpap'=持続陽圧 'aprv' */
+const MODES = {
+  ippv:   { name:"IPPV / CMV（量規定調節換気）", kind:'vc',   uses:['vt','rr','peep','fio2','ie'],
+            desc:"全呼吸を設定VTで強制換気。流量は矩形（一定流量）、圧は漸増。最も基本的な調節換気。" },
+  ippva:  { name:"IPPVassist（補助／調節換気）", kind:'vc',   uses:['vt','rr','peep','fio2','ie','ps'],
+            desc:"患者トリガで設定VTを送る。トリガが無ければ設定回数で強制。" },
+  cmvac:  { name:"VC-AC（量規定アシストコントロール）", kind:'vc', uses:['vt','rr','peep','fio2','ie'],
+            desc:"量規定の補助／調節換気。すべての呼吸を設定VTで補助。" },
+  simv:   { name:"SIMV（同期式間欠的強制換気・量規定）", kind:'simv', uses:['vt','rr','peep','fio2','ie','ps'],
+            desc:"設定回数の強制換気（量規定）＋その間の自発呼吸をPS/ASBで補助。ウィーニングに使用。" },
+  psimv:  { name:"SIMV（圧規定）+ PS", kind:'simv', pc:true, uses:['pinsp','rr','peep','fio2','ie','ps'],
+            desc:"強制換気を圧規定で行うSIMV。間の自発はPSで補助。" },
+  mmv:    { name:"MMV（強制分時換気）+ ASB", kind:'simv', uses:['vt','rr','peep','fio2','ie','ps'],
+            desc:"目標分時換気量を保証。自発が足りない分だけ強制換気を追加する。" },
+  pcv:    { name:"PCV+ / PC-CMV（圧規定調節換気）", kind:'pc', uses:['pinsp','rr','peep','fio2','ie','ps'],
+            desc:"設定吸気圧で換気。流量は漸減波（decelerating）。VTはコンプライアンス・抵抗で変動。" },
+  bipap:  { name:"BIPAP / BiLevel（二相性気道陽圧）", kind:'pc', spont:true, uses:['pinsp','rr','peep','fio2','ie','ps'],
+            desc:"高圧相(Pinsp)と低圧相(PEEP)を時間で切替え、どちらの相でも自発呼吸が可能。EVITAの中心的モード。" },
+  bipapa: { name:"BIPAP Assist（同期型二相性）", kind:'pc', spont:true, uses:['pinsp','rr','peep','fio2','ie','ps'],
+            desc:"患者トリガに同期して高圧相へ移行するBIPAP。" },
+  aprv:   { name:"APRV（気道圧開放換気）", kind:'aprv', spont:true, uses:['pinsp','peep','fio2'],
+            desc:"高い気道圧(Phigh)を長く保持し、ごく短時間だけ低圧(Plow)へ開放。自発呼吸を保持しつつ平均気道内圧を高く保つ。" },
+  cpap:   { name:"CPAP（持続気道陽圧・純自発）", kind:'cpap', uses:['peep','fio2'],
+            desc:"一定の陽圧(PEEP/CPAP)を維持。換気は患者の自発のみ。補助圧なし。" },
+  cpapps: { name:"CPAP/ASB ＝ PSV（プレッシャーサポート）", kind:'spont', uses:['ps','peep','fio2'],
+            desc:"自発呼吸ごとに設定PSで圧補助。最も一般的な自発補助モード。" },
+  asb:    { name:"ASB（自発呼吸補助・Pressure Support）", kind:'spont', uses:['ps','peep','fio2'],
+            desc:"Assisted Spontaneous Breathing。CPAP/ASBと同義のプレッシャーサポート。" },
+  pps:    { name:"PPS（比例補助換気）", kind:'spont', uses:['ps','peep','fio2'],
+            desc:"患者の吸気努力に比例して補助圧を発生させる自発モード。" },
+  nivps:  { name:"NIV（非侵襲）+ PS", kind:'spont', uses:['ps','peep','fio2'],
+            desc:"マスク非侵襲換気でのプレッシャーサポート。リーク許容。" },
+};
+
+/* ---- 既定パラメータ ---- */
+const params = {
+  mode:'bipap', cond:'normal',
+  fio2:50, vt:450, rr:14, peep:5, ps:10, pinsp:18, ti:1.2, sweep:12,
+};
+
+/* ===== 状態（物理シミュレーション） ===== */
+const sim = {
+  t:0,            // 経過時間 s
+  V:0,            // 肺気量（PEEP相当位からの相対容量, L）
+  pmus:0,         // 患者筋圧（自発, cmH2O 負で吸気）
+  running:true, frozen:false,
+  // 直近の計測
+  ppeak:0, pmin:99, pmeanSum:0, pmeanN:0, pplat:0,
+  vtPeak:0, vtThis:0, lastVte:0, autoPeep:0,
+  breaths:0, lastBreathT:0, fTotal:0, mvAcc:0, mvWin:[],
+  spo2:98,
+};
+
+/* ===== 波形バッファ ===== */
+const FS = 100;                 // サンプリング 100Hz
+let bufLen = FS * 12;           // 12秒分
+const buf = { paw:new Float32Array(bufLen), flow:new Float32Array(bufLen), vol:new Float32Array(bufLen) };
+let head = 0, filled = 0;
+
+/* ===== DOM ===== */
+const $ = id => document.getElementById(id);
+const scopes = {
+  paw:{cv:$('cPaw'), color:getCss('--paw'), range:[-5,45],  zero:false},
+  flow:{cv:$('cFlow'),color:getCss('--flow'),range:[-60,60], zero:true},
+  vol:{cv:$('cVol'), color:getCss('--vol'), range:[0,800],  zero:false},
+};
+function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+
+/* ===== UI 構築 ===== */
+function buildSelectors(){
+  const sm=$('selMode'); sm.innerHTML='';
+  for(const k in MODES){const o=document.createElement('option');o.value=k;o.textContent=MODES[k].name;sm.appendChild(o);}
+  sm.value=params.mode;
+  const sc=$('selCond'); sc.innerHTML='';
+  for(const k in CONDITIONS){const o=document.createElement('option');o.value=k;o.textContent=CONDITIONS[k].name;sc.appendChild(o);}
+  sc.value=params.cond;
+  // help
+  let h='<p><b>■ 換気モード</b></p><ul>';
+  for(const k in MODES) h+=`<li><b>${MODES[k].name}</b>：${MODES[k].desc}</li>`;
+  h+='</ul><p><b>■ 肺の病態</b></p><ul>';
+  for(const k in CONDITIONS) h+=`<li><b>${CONDITIONS[k].name}</b>：${CONDITIONS[k].desc}</li>`;
+  h+='</ul>';
+  $('helpBody').innerHTML=h;
+}
+
+const sliders = [
+  ['fio2','rFio2','lFio2'],['vt','rVt','lVt'],['rr','rRr','lRr'],
+  ['peep','rPeep','lPeep'],['ps','rPs','lPs'],['pinsp','rPinsp','lPinsp'],
+];
+function syncSliders(){
+  $('rFio2').value=params.fio2; $('lFio2').textContent=params.fio2;
+  $('rVt').value=params.vt;     $('lVt').textContent=params.vt;
+  $('rRr').value=params.rr;     $('lRr').textContent=params.rr;
+  $('rPeep').value=params.peep; $('lPeep').textContent=params.peep;
+  $('rPs').value=params.ps;     $('lPs').textContent=params.ps;
+  $('rPinsp').value=params.pinsp;$('lPinsp').textContent=params.pinsp;
+  $('rTi').value=params.ti;     $('lTi').textContent=params.ti.toFixed(1);
+  $('rSweep').value=params.sweep;$('lSweep').textContent=params.sweep+'s';
+}
+/* モードに応じて使うパラメータだけ有効化 */
+function applyModeUI(){
+  const m=MODES[params.mode];
+  document.querySelectorAll('.ctl[data-p]').forEach(el=>{
+    const p=el.getAttribute('data-p');
+    el.classList.toggle('disabled', !m.uses.includes(p));
+  });
+  $('hdMode').textContent=m.name.split('（')[0].split(' /')[0];
+  $('hdCond').textContent=CONDITIONS[params.cond].name;
+}
+
+/* ===== モデル：1ステップ進める ===== */
+const dt = 1/FS;
+function step(){
+  const m = MODES[params.mode];
+  const cond = CONDITIONS[params.cond];
+  const C = cond.C, R = cond.R;
+  const peep = params.peep;
+
+  // 呼吸サイクルのタイミング
+  const Ttot = 60/Math.max(1,params.rr);
+  let Ti = params.ti;
+  if(m.kind==='aprv'){ Ti = Ttot - 0.6; }           // APRV：高圧相を長く
+  Ti = Math.min(Ti, Ttot*0.8);
+  const phase = sim.t % Ttot;
+  const inInsp = phase < Ti;
+
+  let flow=0;        // L/s (+:吸気 into lung)
+  let paw=peep;      // cmH2O
+  const Palv = sim.V / C;   // 肺胞圧（PEEP基準からの相対）, +PEEPで絶対
+
+  // --- 患者の自発筋圧（自発を含むモード） ---
+  let pmus=0;
+  const spontModes = (m.kind==='spont'||m.kind==='cpap'||m.kind==='aprv'||m.spont);
+  if(spontModes){
+    // 自発呼吸（病態で努力が変化）。健常/COPDで自発強め
+    const sf = (params.cond==='healthy')?1.3:(params.cond==='copd'?1.0:0.7);
+    const srate = (m.kind==='cpap'||m.kind==='spont') ? params.rr : params.rr*0.9;
+    const sp = (sim.t*srate/60)%1;
+    // 吸気努力：前半に負圧
+    pmus = (sp<0.4)? -6*sf*Math.sin(sp/0.4*Math.PI) : 0;
+  }
+  sim.pmus=pmus;
+
+  if(m.kind==='vc' || (m.kind==='simv' && !m.pc)){
+    // --- 量規定（一定流量） ---
+    if(inInsp){
+      const Qset = (params.vt/1000)/Ti;          // L/s 一定流量
+      flow = Qset;
+      paw = peep + Palv + flow*R;                // 抵抗成分＋弾性成分
+    }else{
+      flow = -(Palv + (-pmus))/R;                 // 受動呼出
+      paw = peep + Math.max(0, flow*R + Palv*0); // 呼気はPEEP付近
+      paw = peep;                                 // 呼気弁開放
+    }
+  }
+  else if(m.kind==='pc' || (m.kind==='simv'&&m.pc) || m.kind==='aprv'){
+    // --- 圧規定（吸気圧一定 → 漸減流量） ---
+    if(inInsp){
+      const Pset = (m.kind==='aprv') ? params.pinsp : params.pinsp; // 高圧相
+      paw = peep + Pset;
+      flow = (Pset - Palv)/R;                     // 漸減
+    }else{
+      paw = peep;
+      flow = -(Palv)/R;                           // 受動呼出
+    }
+    flow += -pmus/R*0.3;                          // 自発の上乗せ（小）
+  }
+  else if(m.kind==='spont'){
+    // --- 自発＋プレッシャーサポート（PSV/ASB/PPS/NIV） ---
+    // 患者トリガ：吸気努力中はPSまで加圧
+    const trig = pmus < -1.0;
+    if(trig){
+      paw = peep + params.ps;
+      flow = (params.ps - Palv - pmus)/R;
+    }else{
+      paw = peep;
+      flow = -(Palv)/R;
+    }
+  }
+  else if(m.kind==='cpap'){
+    // --- 純CPAP：圧一定、換気は自発のみ ---
+    paw = peep;                                   // 一定（±に揺れる程度）
+    flow = (-(pmus) - Palv)/R;                    // 自発筋圧で出入り
+    paw = peep + Math.max(-3,Math.min(3, -pmus*0.4)); // わずかな圧変動
+  }
+
+  // 容量更新（L）
+  sim.V += flow*dt;
+  if(sim.V < 0) sim.V = 0;                         // 肺はFRC以下にならない（簡略）
+
+  // 絶対気道内圧の下限
+  if(paw < 0) paw = 0;
+
+  // === バッファ書込み（流量はL/min、容量はmL）===
+  buf.paw[head]=paw;
+  buf.flow[head]=flow*60;
+  buf.vol[head]=sim.V*1000;
+  head=(head+1)%bufLen; if(filled<bufLen) filled++;
+
+  // === 計測 ===
+  // 進行中の呼吸の最大圧・平均圧・最大容量を蓄積
+  sim.ppeak=Math.max(sim.ppeak,paw);
+  sim.pmeanSum+=paw; sim.pmeanN++;
+  sim.vtPeak=Math.max(sim.vtPeak, sim.V*1000);
+
+  // 呼吸の検出：流量が呼気→吸気へ立ち上がった瞬間を「吸気開始」とする（全モード共通）
+  const refractory = 0.6;                     // 連続誤検出の抑制（s）
+  const onset = (sim.prevFlow<=0.005 && flow>0.02) && (sim.t - sim.lastBreathT > refractory);
+  if(onset){
+    const endExpVol = sim.V;                  // 吸気直前＝呼気終末肺気量
+    // 直近呼吸を確定（初回呼吸から計測）
+    {
+      sim.lastVte = Math.max(0, sim.vtPeak - endExpVol*1000);   // 1回換気量
+      sim.pplat   = peep + (sim.lastVte/1000)/C;                // プラトー圧（弾性圧）
+      sim.autoPeep= (endExpVol/C > 0.8) ? (endExpVol/C) : 0;    // 残気由来の内因性PEEP
+      const interval = sim.t - sim.lastBreathT;
+      const f = 60/Math.max(0.5,interval);
+      sim.fTotal = sim.fTotal? sim.fTotal*0.6 + f*0.4 : f;      // 平滑化した総呼吸回数
+      sim.ppeakLast=sim.ppeak;
+      sim.pmeanLast=sim.pmeanSum/Math.max(1,sim.pmeanN);
+      sim.breaths++;
+    }
+    // 次の呼吸のためリセット
+    sim.lastBreathT=sim.t;
+    sim.ppeak=paw; sim.pmeanSum=paw; sim.pmeanN=1; sim.vtPeak=sim.V*1000;
+  }
+  sim.prevFlow=flow;
+
+  sim.t += dt;
+}
+
+/* ===== 描画 ===== */
+function resizeCanvas(s){
+  const cv=s.cv, r=cv.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+  cv.width=r.width*dpr; cv.height=r.height*dpr;
+  const ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+  s.w=r.width; s.h=r.height; s.ctx=ctx;
+}
+function drawScope(s, data){
+  const ctx=s.ctx; if(!ctx) return;
+  const w=s.w,h=s.h;
+  ctx.clearRect(0,0,w,h);
+  // グリッド
+  ctx.strokeStyle=getCss('--grid'); ctx.lineWidth=1;
+  ctx.beginPath();
+  for(let x=0;x<=w;x+=w/8){ctx.moveTo(x,0);ctx.lineTo(x,h);}
+  for(let y=0;y<=h;y+=h/4){ctx.moveTo(0,y);ctx.lineTo(w,y);}
+  ctx.stroke();
+  // ゼロ基線
+  const [lo,hi]=s.range;
+  const y0 = h - ( (0-lo)/(hi-lo) )*h;
+  if(s.zero){ ctx.strokeStyle='#26384a'; ctx.beginPath(); ctx.moveTo(0,y0); ctx.lineTo(w,y0); ctx.stroke(); }
+  // 波形：表示秒数 = sweep
+  const sweep=params.sweep;
+  const n=Math.min(filled, FS*sweep);
+  ctx.strokeStyle=s.color; ctx.lineWidth=1.8; ctx.lineJoin='round';
+  ctx.shadowColor=s.color; ctx.shadowBlur=6;
+  ctx.beginPath();
+  for(let i=0;i<n;i++){
+    const idx=(head - n + i + bufLen*2)%bufLen;
+    let v=data[idx];
+    v=Math.max(lo,Math.min(hi,v));
+    const x=(i/(FS*sweep))*w;
+    const y=h-((v-lo)/(hi-lo))*h;
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.stroke(); ctx.shadowBlur=0;
+}
+
+/* ===== 数値パネル更新 ===== */
+function updateNumbers(){
+  const m=MODES[params.mode], cond=CONDITIONS[params.cond];
+  const ppeak=sim.ppeakLast||0, pmean=sim.pmeanLast||0;
+  $('mPpeak').textContent=ppeak?ppeak.toFixed(0):'–';
+  $('mPmean').textContent=pmean?pmean.toFixed(0):'–';
+  $('mPplat').textContent=sim.pplat?sim.pplat.toFixed(0):'–';
+  $('mPeep').textContent= (params.peep + (sim.autoPeep>0.8?sim.autoPeep:0)).toFixed(0)
+       + (sim.autoPeep>0.8?` (+${sim.autoPeep.toFixed(0)})`:'');
+  $('mVt').textContent=sim.lastVte?sim.lastVte.toFixed(0):'–';
+  const mv=(sim.lastVte/1000)*sim.fTotal;
+  $('mMv').textContent=mv?mv.toFixed(1):'–';
+  $('mF').textContent=sim.fTotal?sim.fTotal.toFixed(0):'–';
+  $('mFio2').textContent=params.fio2;
+  $('mComp').textContent=(cond.C*1000).toFixed(0);
+  $('mRes').textContent=cond.R.toFixed(0);
+  // I:E
+  const Ttot=60/params.rr; let Ti=Math.min(params.ti,Ttot*0.8);
+  if(m.kind==='aprv')Ti=Ttot-0.6;
+  const ratio=(Ttot-Ti)/Ti;
+  $('mIE').textContent='1 : '+ratio.toFixed(1);
+  // SpO2推定（FiO2と病態で変動）
+  let spo2=cond.spo2 + (params.fio2-40)*0.08 + (params.peep)*0.15;
+  spo2=Math.max(80,Math.min(100,spo2));
+  $('mSpo2').textContent=spo2.toFixed(0);
+  $('hdRR').textContent=sim.fTotal?sim.fTotal.toFixed(0):params.rr;
+
+  // アラーム判定
+  const alarms=[];
+  if(ppeak>40) alarms.push('⚠ 気道内圧上限 (Ppeak '+ppeak.toFixed(0)+')');
+  if(sim.autoPeep>3) alarms.push('⚠ auto-PEEP / エアトラッピング');
+  if(mv>0 && mv<3) alarms.push('⚠ 分時換気量低下');
+  if(spo2<90) alarms.push('⚠ 低酸素 (SpO₂ '+spo2.toFixed(0)+'%)');
+  const box=$('alarmBox');
+  if(alarms.length){ box.innerHTML=alarms.map(a=>`<div style="color:var(--warn)">${a}</div>`).join(''); }
+  else box.textContent='なし';
+}
+
+/* ===== メインループ ===== */
+let lastTs=0, acc=0;
+function loop(ts){
+  if(!lastTs)lastTs=ts;
+  let elapsed=(ts-lastTs)/1000; lastTs=ts;
+  if(elapsed>0.25)elapsed=0.25;
+  if(sim.running && !sim.frozen){
+    acc+=elapsed;
+    while(acc>=dt){ step(); acc-=dt; }
+  }
+  drawScope(scopes.paw, buf.paw);
+  drawScope(scopes.flow, buf.flow);
+  drawScope(scopes.vol, buf.vol);
+  // 時計
+  const sec=Math.floor(sim.t);
+  $('clock').textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
+  requestAnimationFrame(loop);
+}
+setInterval(updateNumbers, 250);
+
+/* ===== イベント ===== */
+function bind(){
+  $('selMode').addEventListener('change',e=>{params.mode=e.target.value;applyModeUI();});
+  $('selCond').addEventListener('change',e=>{
+    params.cond=e.target.value; applyModeUI();
+    sim.spo2=CONDITIONS[params.cond].spo2;
+    // 病態に応じた推奨初期値（任意の親切機能）
+    if(params.cond==='ards'){ params.vt=380; params.peep=12; params.rr=22; params.fio2=70; }
+    if(params.cond==='copd'){ params.rr=10; params.ti=1.0; params.peep=5; }
+    syncSliders();
+  });
+  $('rFio2').addEventListener('input',e=>{params.fio2=+e.target.value;$('lFio2').textContent=params.fio2;});
+  $('rVt').addEventListener('input',e=>{params.vt=+e.target.value;$('lVt').textContent=params.vt;});
+  $('rRr').addEventListener('input',e=>{params.rr=+e.target.value;$('lRr').textContent=params.rr;});
+  $('rPeep').addEventListener('input',e=>{params.peep=+e.target.value;$('lPeep').textContent=params.peep;});
+  $('rPs').addEventListener('input',e=>{params.ps=+e.target.value;$('lPs').textContent=params.ps;});
+  $('rPinsp').addEventListener('input',e=>{params.pinsp=+e.target.value;$('lPinsp').textContent=params.pinsp;});
+  $('rTi').addEventListener('input',e=>{params.ti=+e.target.value;$('lTi').textContent=params.ti.toFixed(1);});
+  $('rSweep').addEventListener('input',e=>{params.sweep=+e.target.value;$('lSweep').textContent=params.sweep+'s';});
+  $('btnRun').addEventListener('click',()=>{
+    sim.running=!sim.running;
+    $('btnRun').textContent=sim.running?'⏸ 停止':'▶ 再開';
+  });
+  $('btnFreeze').addEventListener('click',()=>{
+    sim.frozen=!sim.frozen;
+    $('btnFreeze').textContent=sim.frozen?'解除':'フリーズ';
+    $('btnFreeze').classList.toggle('act',sim.frozen);
+  });
+  window.addEventListener('resize',()=>Object.values(scopes).forEach(resizeCanvas));
+}
+
+/* ===== 起動 ===== */
+function init(){
+  buildSelectors(); syncSliders(); applyModeUI(); bind();
+  Object.values(scopes).forEach(resizeCanvas);
+  requestAnimationFrame(loop);
+}
+init();
+</script>
+</body>
+</html>

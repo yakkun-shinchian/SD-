@@ -172,9 +172,12 @@
         <div class="lesson__stage">
           <span class="lesson__badge">${c.icon} ${escapeHtml(p.category)}</span>
           <span class="lesson__speaker">🫛 ずんだもん</span>
-          <div class="lesson__scene">
-            <h2 id="slideHeading"></h2>
-            <ul id="slidePoints"></ul>
+          <div class="lesson__body" id="lessonBody">
+            <div class="lesson__figure" id="slideFigure"></div>
+            <div class="lesson__scene">
+              <h2 id="slideHeading"></h2>
+              <ul id="slidePoints"></ul>
+            </div>
           </div>
           <div class="lesson__caption" id="slideCaption"></div>
           <button class="lesson__big" id="bigPlay" aria-label="再生する">▶</button>
@@ -224,6 +227,32 @@
     return Math.max(2600, 900 + text.length * 130);
   }
 
+  // そのシーンの「映像」を返す（優先順位：動画クリップ → 本物の写真 → 図解SVG）
+  function visualHtml(key, scene) {
+    // 1) シーンに動画ID(本物のクリップ)があれば最優先で埋め込み
+    if (scene && scene.videoId) {
+      return `<iframe class="fig-media" src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(scene.videoId)}?rel=0"
+        title="clip" allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+    }
+    // 2) 本物の写真(CT/MRI等)が images/manifest.js に登録されていれば表示
+    if (typeof IMAGES !== "undefined" && IMAGES[key]) {
+      const v = IMAGES[key];
+      const src = typeof v === "string" ? v : v.src;
+      const alt = (v && typeof v === "object" && v.alt) ? v.alt : "";
+      const credit = (v && typeof v === "object" && v.credit)
+        ? `<span class="fig-credit">${escapeHtml(v.credit)}</span>` : "";
+      return `<div class="fig-photo"><img class="fig-media" src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy">${credit}</div>`;
+    }
+    // 3) 図解(SVG)。scene.figure または SCENE_FIGURES の割り当てを使う
+    const name = (scene && scene.figure) ||
+      (typeof SCENE_FIGURES !== "undefined" && SCENE_FIGURES[key]) || null;
+    if (name && typeof FIGURES !== "undefined" && typeof FIGURES[name] === "function") {
+      return FIGURES[name]();
+    }
+    return "";
+  }
+
   // スライド自動再生コントローラ（Web Speech APIで読み上げ）
   function createLesson(programId, scenes) {
     const root = document.getElementById("lessonRoot");
@@ -232,6 +261,8 @@
     const headingEl = document.getElementById("slideHeading");
     const pointsEl = document.getElementById("slidePoints");
     const captionEl = document.getElementById("slideCaption");
+    const figureEl = document.getElementById("slideFigure");
+    const bodyEl = document.getElementById("lessonBody");
     const counterEl = document.getElementById("counter");
     const progFill = document.getElementById("progFill");
     const bigPlay = document.getElementById("bigPlay");
@@ -281,6 +312,10 @@
       captionEl.textContent = s.narration;
       counterEl.textContent = (idx + 1) + " / " + scenes.length;
       progFill.style.width = (((idx + 1) / scenes.length) * 100) + "%";
+      // 図解／写真／動画クリップを表示（あれば横並びレイアウトに）
+      const vis = visualHtml(programId + "-" + (idx + 1), s);
+      figureEl.innerHTML = vis;
+      bodyEl.classList.toggle("has-figure", !!vis);
     }
 
     function setPlayingUI(on) {

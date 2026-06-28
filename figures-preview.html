@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>図解プレビュー｜NurseTube</title>
+  <style>
+    body { margin: 0; padding: 24px; background: #11161c; color: #e8edf2;
+      font-family: system-ui, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; }
+    h1 { font-size: 18px; }
+    p.note { color: #9fb0c0; font-size: 13px; max-width: 720px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 18px; }
+    .item { background: linear-gradient(135deg, #2a6df0 0%, #173a86 100%); border-radius: 14px; padding: 12px; }
+    .item h2 { font-size: 13px; margin: 0 0 8px; color: #fff; }
+    .item svg { width: 100%; height: auto; border-radius: 10px; display: block; }
+    .fig__bg { fill: rgba(255, 255, 255, .94); }
+    /* アニメ（app本体と同じ動き） */
+    .fig-pulse { transform-box: fill-box; transform-origin: center; animation: figPulse 1.15s ease-in-out infinite; }
+    .fig-flow { animation: figFlow 1.6s ease-in-out infinite; }
+    .fig-breathe { transform-box: fill-box; transform-origin: center; animation: figBreathe 3s ease-in-out infinite; }
+    .fig-dia { animation: figDia 3s ease-in-out infinite; }
+    .ecg-line { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: ecgDraw 3.4s linear infinite; }
+    @keyframes figPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+    @keyframes figFlow { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+    @keyframes figBreathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.07); } }
+    @keyframes figDia { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+    @keyframes ecgDraw { to { stroke-dashoffset: 0; } }
+  </style>
+</head>
+<body>
+  <h1>🩺 図解プレビュー（figures.js）</h1>
+  <p class="note">各番組のスライドに使う図解の一覧なのだ。CT/MRI風の断層図は「学習用イメージ（模式図）」で、本物の写真は images/ に入れると差し替わるのだ。</p>
+  <div class="grid" id="grid"></div>
+  <script src="figures.js"></script>
+  <script>
+    const grid = document.getElementById("grid");
+    Object.keys(FIGURES).forEach((name) => {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = '<h2>' + name + '</h2>' + FIGURES[name]();
+      grid.appendChild(div);
+    });
+  </script>
+</body>
+</html>

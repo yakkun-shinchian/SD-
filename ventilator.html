@@ -2,9 +2,17 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>VentSim｜人工呼吸器モニター・シミュレーター（EVITAタイプ）</title>
 <meta name="description" content="Dräger EVITA 2/4 タイプの人工呼吸器モニター画面デモ。正常肺・COPD・ARDS・喘息などの病態別に圧/流量/換気量波形を表示し、FiO2・タイダルボリューム・PEEP・プレッシャーサポート・強制換気回数や各換気モード（IPPV/SIMV/BIPAP/CPAP/APRV等）を切り替えられる学習用シミュレーターなのだ。" />
+<!-- iPad / iPhone：ホーム画面に追加してアプリのように全画面で使えるようにする -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="VentSim" />
+<meta name="theme-color" content="#05080c" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2305080c'/><polyline points='8,60 24,60 32,30 44,78 54,60 70,60' fill='none' stroke='%2346e07a' stroke-width='5'/></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2305080c'/><polyline points='8,60 24,60 32,30 44,78 54,60 70,60' fill='none' stroke='%2346e07a' stroke-width='6'/></svg>" />
 <style>
   :root{
     --bg:#05080c; --panel:#0d141c; --panel2:#121b25; --line:#1f2b38;
@@ -20,6 +28,22 @@
     background:var(--bg); color:var(--txt);
     font-family:"Segoe UI",system-ui,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
     display:flex; flex-direction:column; min-height:100vh;
+    /* iPad/iPhone：タップ遅延をなくす・余白の二重スクロールを防ぐ・ノッチ回避 */
+    touch-action:manipulation;
+    -webkit-text-size-adjust:100%;
+    overscroll-behavior:none;
+    padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+  }
+  /* タッチで指でつかみやすい大きめのスライダーつまみ */
+  input[type=range]{-webkit-appearance:none; appearance:none; background:transparent; height:34px}
+  input[type=range]::-webkit-slider-runnable-track{height:6px; border-radius:3px; background:#23323f}
+  input[type=range]::-moz-range-track{height:6px; border-radius:3px; background:#23323f}
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:26px; height:26px; margin-top:-10px;
+    border-radius:50%; background:var(--accent); border:2px solid #04120d; cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:26px; height:26px; border-radius:50%; background:var(--accent); border:2px solid #04120d; cursor:pointer;
   }
   /* ===== ヘッダー ===== */
   header{
@@ -37,7 +61,15 @@
   .clock{font-variant-numeric:tabular-nums; color:var(--sub)}
   /* ===== レイアウト ===== */
   .wrap{display:grid; grid-template-columns:1fr 260px; gap:10px; padding:10px; flex:1; min-height:0}
-  @media(max-width:880px){ .wrap{grid-template-columns:1fr} }
+  /* iPad縦持ちなど：数値パネルを波形の下へ。数値は横並びの省スペース表示に */
+  @media(max-width:880px){
+    .wrap{grid-template-columns:1fr}
+    .numbers{overflow:visible}
+    .numgrid{grid-template-columns:repeat(4,1fr)}
+    .num .v{font-size:20px}
+    .scope{min-height:110px}
+  }
+  @media(max-width:560px){ .numgrid{grid-template-columns:repeat(3,1fr)} }
   .scopes{display:flex; flex-direction:column; gap:8px; min-height:0}
   .scope{
     position:relative; background:#04070a; border:1px solid var(--line);
@@ -77,8 +109,10 @@
     background:var(--panel2); color:var(--txt); border:1px solid var(--line);
     border-radius:6px; padding:6px 8px; font-size:13px;
   }
-  input[type=range]{accent-color:var(--accent); height:22px}
   .ctl.disabled{opacity:.35; pointer-events:none}
+  /* 副：そのモードの主役ではないが、操作は常に可能（薄めに表示するだけ） */
+  .ctl.secondary{opacity:.7}
+  .ctl.secondary label{color:#6f8499}
   .btnrow{display:flex; gap:8px; flex-wrap:wrap}
   button.act{
     background:var(--accent); color:#04120d; border:0; border-radius:6px;
@@ -328,12 +362,17 @@ function syncSliders(){
   $('rTi').value=params.ti;     $('lTi').textContent=params.ti.toFixed(1);
   $('rSweep').value=params.sweep;$('lSweep').textContent=params.sweep+'s';
 }
-/* モードに応じて使うパラメータだけ有効化 */
+/* 全パラメータを常に操作可能にする。
+   そのモードで主に使うものは「主」、補助的なものは「副」と色分け表示するだけで、
+   どのスライダー／メニューも画面上でいつでも操作できる。 */
 function applyModeUI(){
   const m=MODES[params.mode];
   document.querySelectorAll('.ctl[data-p]').forEach(el=>{
     const p=el.getAttribute('data-p');
-    el.classList.toggle('disabled', !m.uses.includes(p));
+    el.classList.remove('disabled');               // 灰色化（操作不可）はしない
+    el.classList.toggle('secondary', !m.uses.includes(p)); // 主/副の見た目だけ切替
+    const tag=el.querySelector('.use-tag');
+    if(tag) tag.textContent = m.uses.includes(p)?'主':'副';
   });
   $('hdMode').textContent=m.name.split('（')[0].split(' /')[0];
   $('hdCond').textContent=CONDITIONS[params.cond].name;

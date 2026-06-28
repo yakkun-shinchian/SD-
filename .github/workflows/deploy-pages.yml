@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+# リポジトリ全体（NurseTube の index.html と 3D衛星追跡の satellite.html）を
+# GitHub Pages へ公開するワークフローなのだ。
+# - デフォルトブランチへ push されるたびに自動デプロイ
+# - 手動実行（workflow_dispatch）も可能
+
+on:
+  push:
+    branches:
+      - claude/sleepy-albattani-z4782h
+  workflow_dispatch:
+
+# Pages へのデプロイに必要な権限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時デプロイは1つに制限（途中キャンセルはしない）
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Pages を有効化し、ビルド方式を「GitHub Actions」に設定（未有効でも自動でON）
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # リポジトリ全体を成果物としてアップロード
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      # GitHub Pages へデプロイ
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

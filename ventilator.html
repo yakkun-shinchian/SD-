@@ -79,6 +79,9 @@
   }
   input[type=range]{accent-color:var(--accent); height:22px}
   .ctl.disabled{opacity:.35; pointer-events:none}
+  /* 副：そのモードの主役ではないが、操作は常に可能（薄めに表示するだけ） */
+  .ctl.secondary{opacity:.7}
+  .ctl.secondary label{color:#6f8499}
   .btnrow{display:flex; gap:8px; flex-wrap:wrap}
   button.act{
     background:var(--accent); color:#04120d; border:0; border-radius:6px;
@@ -328,12 +331,17 @@ function syncSliders(){
   $('rTi').value=params.ti;     $('lTi').textContent=params.ti.toFixed(1);
   $('rSweep').value=params.sweep;$('lSweep').textContent=params.sweep+'s';
 }
-/* モードに応じて使うパラメータだけ有効化 */
+/* 全パラメータを常に操作可能にする。
+   そのモードで主に使うものは「主」、補助的なものは「副」と色分け表示するだけで、
+   どのスライダー／メニューも画面上でいつでも操作できる。 */
 function applyModeUI(){
   const m=MODES[params.mode];
   document.querySelectorAll('.ctl[data-p]').forEach(el=>{
     const p=el.getAttribute('data-p');
-    el.classList.toggle('disabled', !m.uses.includes(p));
+    el.classList.remove('disabled');               // 灰色化（操作不可）はしない
+    el.classList.toggle('secondary', !m.uses.includes(p)); // 主/副の見た目だけ切替
+    const tag=el.querySelector('.use-tag');
+    if(tag) tag.textContent = m.uses.includes(p)?'主':'副';
   });
   $('hdMode').textContent=m.name.split('（')[0].split(' /')[0];
   $('hdCond').textContent=CONDITIONS[params.cond].name;

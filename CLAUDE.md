@@ -85,6 +85,21 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `voicevox/` | VOICEVOX export data + detailed how-to (`voicevox/README.md`) |
 | `README.md` | User-facing docs (Japanese) |
 
+Standalone side apps live at the repo root and are independent of the
+NurseTube router (same "vanilla, no build" rules apply):
+
+| File | Purpose |
+|------|---------|
+| `ventilator.html` | VentSim — ventilator monitor simulator (single file) |
+| `satellite.html` | 3D satellite tracker (single file) |
+| `ai-council.html` | AI四賢者会議 — UI + playback engine for the 4-AI debate |
+| `ai-council-data.js` | Agents (ChatGPT/Claude/Gemini/Grok/ずんだもん), phases, meters |
+| `ai-council-era-*.js` | One era per file: 20 rounds of scripted debate (`AICouncil.addEra`) |
+
+⚠ The AI Council debate is **scripted fiction** imitating each AI's style — it
+calls no APIs and must never be presented as real model output. Keep the
+disclaimer in `ai-council.html` and `README.md` intact when editing.
+
 ## Common tasks
 
 ### Add or edit a program

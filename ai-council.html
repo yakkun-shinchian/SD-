@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>AI四賢者会議｜ChatGPT・Claude・Gemini・Grokが一つの時代を20ラウンド議論するのだ</title>
+<meta name="description" content="ChatGPT・Claude・Gemini・Grokの4つのAIが、一つの時代について20ラウンド議論し、答えを精査していく会議アプリ。第1相で正確さを詰め、第2相で通説を反証し、第3相で人間らしさ・感情・心を入れていく。司会はずんだもんなのだ。" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="AI Council" />
+<meta name="theme-color" content="#0b0f16" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b0f16'/><circle cx='34' cy='36' r='11' fill='%2310a37f'/><circle cx='66' cy='36' r='11' fill='%23d97757'/><circle cx='34' cy='68' r='11' fill='%234285f4'/><circle cx='66' cy='68' r='11' fill='%23a855f7'/></svg>" />
+<style>
+  :root{
+    --bg:#0b0f16; --bg2:#111826; --panel:#131b29; --panel2:#182233; --line:#243044;
+    --txt:#e8eef7; --sub:#93a4bb; --dim:#63748c;
+    --accent:#6aa9ff; --gold:#f0a500; --pink:#e0518a;
+    --gpt:#10a37f; --claude:#d97757; --gemini:#4285f4; --grok:#a855f7; --zunda:#5cb96b;
+    --radius:14px;
+  }
+  html[data-theme="light"]{
+    --bg:#f3f5f9; --bg2:#ffffff; --panel:#ffffff; --panel2:#f0f3f8; --line:#dde3ec;
+    --txt:#141b26; --sub:#4d5b70; --dim:#7d8a9c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",system-ui,sans-serif;
+    display:flex; flex-direction:column; min-height:100dvh;
+    -webkit-text-size-adjust:100%; overscroll-behavior:none;
+    padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+  }
+  button{font-family:inherit; color:inherit; cursor:pointer}
+
+  /* ============ ヘッダー ============ */
+  .top{
+    display:flex; align-items:center; gap:12px; padding:10px 14px;
+    background:var(--bg2); border-bottom:1px solid var(--line); flex:0 0 auto;
+    padding-top:calc(10px + env(safe-area-inset-top));
+  }
+  .brand{display:flex; align-items:center; gap:9px; font-weight:800; letter-spacing:.02em}
+  .brand .dots{display:grid; grid-template-columns:9px 9px; gap:3px}
+  .brand .dots i{width:9px;height:9px;border-radius:50%}
+  .brand h1{font-size:1.02rem; margin:0; white-space:nowrap}
+  .brand small{display:block; font-size:.62rem; color:var(--dim); font-weight:600; letter-spacing:.08em}
+  .top .era-chip{
+    margin-left:6px; font-size:.75rem; padding:5px 11px; border-radius:999px;
+    background:var(--panel2); border:1px solid var(--line); color:var(--sub); white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis; max-width:38vw;
+  }
+  .top .spacer{flex:1}
+  .tbtn{
+    background:var(--panel2); border:1px solid var(--line); border-radius:9px;
+    padding:7px 11px; font-size:.76rem; font-weight:700; transition:.15s;
+    white-space:nowrap; flex:0 0 auto;
+  }
+  .tbtn:hover{border-color:var(--accent); color:var(--accent)}
+
+  /* ============ 開始画面 ============ */
+  .start{
+    position:fixed; inset:0; z-index:900; background:var(--bg);
+    overflow-y:auto; padding:34px 18px calc(40px + env(safe-area-inset-bottom));
+  }
+  .start[hidden]{display:none}
+  .start-in{max-width:940px; margin:0 auto}
+  .start h2{font-size:1.6rem; margin:0 0 6px; letter-spacing:.01em}
+  .start .lead{color:var(--sub); font-size:.88rem; line-height:1.85; margin:0 0 22px}
+  .members{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-bottom:24px}
+  .member{
+    background:var(--panel); border:1px solid var(--line); border-left-width:4px;
+    border-radius:12px; padding:11px 13px;
+  }
+  .member b{display:block; font-size:.92rem; margin-bottom:2px}
+  .member span{font-size:.7rem; color:var(--dim); font-weight:700; letter-spacing:.06em}
+  .member p{margin:6px 0 0; font-size:.74rem; color:var(--sub); line-height:1.7}
+  .sec-label{
+    font-size:.66rem; letter-spacing:.16em; color:var(--dim); font-weight:800;
+    margin:0 0 10px; text-transform:uppercase;
+  }
+  .eras{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px}
+  .era-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px; text-align:left; width:100%; transition:.18s; position:relative; overflow:hidden;
+  }
+  .era-card:hover{transform:translateY(-2px); border-color:var(--accent); box-shadow:0 10px 30px rgba(0,0,0,.28)}
+  .era-card .ic{font-size:1.7rem; line-height:1}
+  .era-card h3{margin:8px 0 2px; font-size:1.2rem}
+  .era-card .per{font-size:.72rem; color:var(--dim); font-weight:700; letter-spacing:.08em}
+  .era-card .q{margin:10px 0 0; font-size:.86rem; color:var(--txt); font-weight:700; line-height:1.6}
+  .era-card .ld{margin:8px 0 0; font-size:.74rem; color:var(--sub); line-height:1.75}
+  .era-card .go{margin-top:12px; font-size:.74rem; color:var(--accent); font-weight:800}
+  .disclaimer{
+    margin-top:26px; padding:12px 14px; border-radius:11px; font-size:.72rem; line-height:1.8;
+    background:rgba(240,165,0,.08); border:1px solid rgba(240,165,0,.3); color:var(--sub);
+  }
+  .disclaimer b{color:var(--gold)}
+
+  /* ============ レイアウト ============ */
+  .wrap{flex:1; display:grid; grid-template-columns:1fr 330px; gap:14px; padding:14px; min-height:0}
+  .stage{display:flex; flex-direction:column; min-height:0; min-width:0}
+
+  /* フェーズバー */
+  .phases{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:10px; flex:0 0 auto}
+  .ph{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:8px 10px; opacity:.45; transition:.3s;
+  }
+  .ph.on{opacity:1; border-color:currentColor}
+  .ph.done{opacity:.7}
+  .ph b{font-size:.76rem; display:block}
+  .ph span{font-size:.64rem; color:var(--sub); display:block; margin-top:2px; line-height:1.5}
+
+  /* 議事録 */
+  .log{
+    flex:1; overflow-y:auto; background:var(--panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px; scroll-behavior:smooth; min-height:0;
+  }
+  .rhead{
+    display:flex; align-items:center; gap:10px; margin:22px 0 12px;
+    font-size:.72rem; color:var(--dim); font-weight:800; letter-spacing:.08em;
+  }
+  .rhead:first-child{margin-top:0}
+  .rhead .n{
+    background:var(--panel2); border:1px solid var(--line); border-radius:7px;
+    padding:3px 8px; color:var(--txt);
+  }
+  .rhead .tp{color:var(--sub); font-weight:700; letter-spacing:0; font-size:.8rem; flex:1}
+  .rhead .line{height:1px; background:var(--line); flex:0 0 18px}
+
+  .msg{display:flex; gap:11px; margin:0 0 14px; animation:fade .35s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  .msg .av{
+    flex:0 0 38px; height:38px; border-radius:11px; display:flex; align-items:center;
+    justify-content:center; font-size:1rem; font-weight:800; color:#fff;
+  }
+  .msg .bd{flex:1; min-width:0}
+  .msg .nm{font-size:.78rem; font-weight:800; margin-bottom:3px; display:flex; align-items:center; gap:7px}
+  .msg .nm i{font-style:normal; font-size:.6rem; color:var(--dim); font-weight:700; letter-spacing:.08em;
+    border:1px solid var(--line); border-radius:5px; padding:1px 5px}
+  .msg .tx{font-size:.87rem; line-height:1.95; color:var(--txt); white-space:pre-wrap; word-break:break-word}
+  .msg.mod .tx{color:var(--zunda); font-weight:700}
+  .msg .tx.typing::after{content:"▍"; color:var(--accent); animation:blink .8s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .msg[hidden]{display:none}
+
+  .ansline{
+    margin:2px 0 6px 49px; padding:9px 12px; border-radius:10px; font-size:.78rem; line-height:1.8;
+    background:var(--panel2); border-left:3px solid var(--accent); color:var(--sub);
+  }
+  .ansline b{color:var(--accent); font-size:.66rem; letter-spacing:.1em; display:block; margin-bottom:3px}
+
+  .final{
+    margin:26px 0 8px; padding:20px; border-radius:var(--radius);
+    background:linear-gradient(160deg, rgba(106,169,255,.1), rgba(224,81,138,.08));
+    border:1px solid var(--accent);
+  }
+  .final h3{margin:0 0 4px; font-size:1.1rem}
+  .final .fq{font-size:.75rem; color:var(--sub); margin:0 0 14px}
+  .final p{font-size:.88rem; line-height:2.05; margin:0 0 13px}
+  .final .note{font-size:.7rem; color:var(--dim); line-height:1.8; margin:0; padding-top:10px; border-top:1px solid var(--line)}
+  .final .acts{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+
+  /* ============ 右パネル ============ */
+  .side{display:flex; flex-direction:column; gap:12px; min-height:0; overflow-y:auto}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:14px}
+  .card h4{
+    margin:0 0 11px; font-size:.64rem; letter-spacing:.16em; color:var(--dim);
+    font-weight:800; text-transform:uppercase;
+  }
+  .meter{margin-bottom:13px}
+  .meter:last-child{margin-bottom:0}
+  .meter .mh{display:flex; justify-content:space-between; align-items:baseline; font-size:.76rem; margin-bottom:5px}
+  .meter .mh b{font-weight:800}
+  .meter .mh span{font-size:.9rem; font-weight:800; font-variant-numeric:tabular-nums}
+  .bar{height:7px; border-radius:4px; background:var(--panel2); overflow:hidden}
+  .bar i{display:block; height:100%; width:0; border-radius:4px; transition:width .7s cubic-bezier(.2,.8,.3,1)}
+  .meter .md{font-size:.64rem; color:var(--dim); margin-top:4px; line-height:1.5}
+  .spark{width:100%; height:76px; display:block; margin-top:4px}
+  .now{font-size:.83rem; line-height:1.9; color:var(--txt)}
+  .now .rn{font-size:.64rem; color:var(--dim); font-weight:800; letter-spacing:.1em; display:block; margin-bottom:6px}
+  .who{display:flex; flex-wrap:wrap; gap:6px}
+  .who button{
+    font-size:.7rem; font-weight:700; padding:5px 9px; border-radius:999px;
+    background:var(--panel2); border:1px solid var(--line); transition:.15s; opacity:.4;
+  }
+  .who button.on{opacity:1}
+
+  /* ============ コントロール ============ */
+  .ctrl{
+    flex:0 0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:var(--bg2); border-top:1px solid var(--line);
+  }
+  .cbtn{
+    background:var(--panel2); border:1px solid var(--line); border-radius:10px;
+    min-width:42px; height:40px; padding:0 12px; font-size:.85rem; font-weight:800; transition:.15s;
+  }
+  .cbtn:hover{border-color:var(--accent); color:var(--accent)}
+  .cbtn.play{background:var(--accent); border-color:var(--accent); color:#08101c; min-width:96px}
+  .cbtn:disabled{opacity:.35; cursor:not-allowed}
+  .rng{flex:1; min-width:150px; display:flex; align-items:center; gap:10px}
+  .rng input{flex:1; accent-color:var(--accent); height:34px}
+  .rng .lab{font-size:.72rem; color:var(--sub); font-weight:800; white-space:nowrap; font-variant-numeric:tabular-nums}
+  .spd{display:flex; gap:4px}
+  .spd button{
+    background:var(--panel2); border:1px solid var(--line); border-radius:8px;
+    height:34px; padding:0 9px; font-size:.7rem; font-weight:800; opacity:.5;
+  }
+  .spd button.on{opacity:1; border-color:var(--accent); color:var(--accent)}
+
+  .toast{
+    position:fixed; left:50%; bottom:86px; transform:translateX(-50%) translateY(12px);
+    background:var(--panel2); border:1px solid var(--accent); color:var(--txt);
+    padding:9px 16px; border-radius:999px; font-size:.78rem; font-weight:700;
+    opacity:0; pointer-events:none; transition:.25s; z-index:950;
+  }
+  .toast.on{opacity:1; transform:translateX(-50%)}
+
+  /* ============ レスポンシブ ============ */
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr; padding:10px; gap:10px}
+    .side{flex-direction:row; overflow-x:auto; overflow-y:visible; padding-bottom:2px}
+    .side .card{flex:0 0 262px}
+    .side .card.wide{flex:0 0 300px}
+    .log{min-height:44vh}
+    .phases{gap:6px}
+    .ph{padding:6px 8px}
+    .ph span{display:none}
+    .top .era-chip{max-width:30vw}
+  }
+  @media (max-width:560px){
+    .top{padding:8px 10px; gap:8px; padding-top:calc(8px + env(safe-area-inset-top))}
+    .brand h1{font-size:.88rem}
+    .brand small{display:none}
+    .top .era-chip{display:none}
+    .tbtn{padding:6px 9px; font-size:.68rem}
+    .ph b{font-size:.66rem; line-height:1.35}
+    .ctrl{gap:7px}
+    .cbtn{height:38px; min-width:38px; padding:0 9px}
+    .cbtn.play{min-width:84px}
+    .rng{order:5; width:100%; flex-basis:100%}
+    .log{padding:13px}
+    .msg .av{flex-basis:32px; height:32px; font-size:.9rem}
+    .ansline{margin-left:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= ヘッダー ================= -->
+<header class="top">
+  <div class="brand">
+    <div class="dots">
+      <i style="background:var(--gpt)"></i><i style="background:var(--claude)"></i>
+      <i style="background:var(--gemini)"></i><i style="background:var(--grok)"></i>
+    </div>
+    <div>
+      <h1>AI四賢者会議</h1>
+      <small>AI COUNCIL / 20 ROUNDS</small>
+    </div>
+  </div>
+  <div id="eraChip" class="era-chip" hidden></div>
+  <div class="spacer"></div>
+  <button id="btnHome" class="tbtn" hidden>議題を変える</button>
+  <button id="btnTheme" class="tbtn" aria-label="テーマ切り替え">🌙</button>
+</header>
+
+<!-- ================= 開始画面 ================= -->
+<div id="start" class="start">
+  <div class="start-in">
+    <h2>ひとつの時代を、4つのAIが20ラウンド議論するのだ</h2>
+    <p class="lead">
+      ChatGPT・Claude・Gemini・Grok が同じ議題に向き合い、20回のラウンドをかけて答えを磨いていきます。<br />
+      <b>第1相</b>でまず事実の正確さを詰め、<b>第2相</b>で通説を疑って視点を増やし、<b>第3相</b>でそこに生きた人の感情・心へ降りていきます。司会はずんだもんなのだ。
+    </p>
+
+    <p class="sec-label">参加するAI</p>
+    <div id="members" class="members"></div>
+
+    <p class="sec-label">議題を選ぶ</p>
+    <div id="eras" class="eras"></div>
+
+    <div class="disclaimer">
+      <b>⚠ この会議はフィクションです。</b><br />
+      発言はすべて、各AIの「作風」をイメージして書かれた脚本であり、実在の ChatGPT / Claude / Gemini / Grok が生成した出力ではありません。
+      また、扱う歴史的事実・統計には諸説があり、研究の途上にあるものも含まれます。学習の入口としてお使いください。
+    </div>
+  </div>
+</div>
+
+<!-- ================= 本編 ================= -->
+<div class="wrap">
+  <div class="stage">
+    <div id="phases" class="phases"></div>
+    <div id="log" class="log" aria-live="polite"></div>
+  </div>
+
+  <aside class="side">
+    <div class="card">
+      <h4>議論の到達度</h4>
+      <div id="meters"></div>
+    </div>
+    <div class="card wide">
+      <h4>推移（20ラウンド）</h4>
+      <svg id="spark" class="spark" viewBox="0 0 300 76" preserveAspectRatio="none" aria-hidden="true"></svg>
+    </div>
+    <div class="card wide">
+      <h4>現時点の答え</h4>
+      <div id="now" class="now"><span class="rn">ROUND 00</span>まだ議論が始まっていないのだ。</div>
+    </div>
+    <div class="card">
+      <h4>発言者フィルタ</h4>
+      <div id="who" class="who"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- ================= コントロール ================= -->
+<div class="ctrl">
+  <button id="btnPrev" class="cbtn" title="前のラウンド（←）">⏮</button>
+  <button id="btnPlay" class="cbtn play" title="再生・一時停止（スペース）">▶ 再生</button>
+  <button id="btnNext" class="cbtn" title="次のラウンド（→）">⏭</button>
+  <div class="rng">
+    <span id="rlabel" class="lab">ROUND 00 / 20</span>
+    <input id="slider" type="range" min="0" max="20" value="0" step="1" aria-label="ラウンド" />
+  </div>
+  <div class="spd" id="spd"></div>
+  <button id="btnEnd" class="cbtn" title="最終回答まで一気に進む">最終回答へ</button>
+  <button id="btnCopy" class="cbtn" title="議事録をコピー">📋</button>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="ai-council-data.js"></script>
+<script src="ai-council-era-sengoku.js"></script>
+<script src="ai-council-era-showa.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  /* ===================== ユーティリティ ===================== */
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const el = {
+    start: $("start"), members: $("members"), eras: $("eras"),
+    eraChip: $("eraChip"), btnHome: $("btnHome"), btnTheme: $("btnTheme"),
+    phases: $("phases"), log: $("log"), meters: $("meters"), spark: $("spark"),
+    now: $("now"), who: $("who"),
+    btnPrev: $("btnPrev"), btnPlay: $("btnPlay"), btnNext: $("btnNext"),
+    btnEnd: $("btnEnd"), btnCopy: $("btnCopy"),
+    slider: $("slider"), rlabel: $("rlabel"), spd: $("spd"), toast: $("toast")
+  };
+
+  /* ===================== 状態 ===================== */
+  const S = {
+    era: null,
+    timeline: [],   // 再生単位のフラット配列
+    i: 0,           // 表示済み件数
+    playing: false,
+    speed: 1,
+    token: 0,       // 古いタイマー／タイピングを無効化するためのトークン
+    hidden: new Set(),  // 非表示にしている発言者ID
+    stick: true,        // 末尾追従スクロール
+    timer: null
+  };
+
+  const SPEEDS = [0.5, 1, 2, 4];
+
+  /* ===================== テーマ ===================== */
+  const THEME_KEY = "ai-council-theme";
+  function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    el.btnTheme.textContent = t === "light" ? "☀️" : "🌙";
+    try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+  }
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    applyTheme(saved || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
+  } catch (e) { applyTheme("dark"); }
+  el.btnTheme.onclick = () =>
+    applyTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
+
+  function toast(msg) {
+    el.toast.textContent = msg;
+    el.toast.classList.add("on");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => el.toast.classList.remove("on"), 1800);
+  }
+
+  /* ===================== 開始画面の描画 ===================== */
+  function renderStart() {
+    el.members.innerHTML = AICouncil.agents.map(a => `
+      <div class="member" style="border-left-color:${a.color}">
+        <b style="color:${a.color}">${esc(a.name)}</b>
+        <span>${esc(a.tag)}</span>
+        <p>${esc(a.style)}</p>
+      </div>`).join("");
+
+    el.eras.innerHTML = AICouncil.eras.map(e => `
+      <button class="era-card" data-era="${esc(e.id)}">
+        <div class="ic">${esc(e.icon)}</div>
+        <h3 style="color:${e.color}">${esc(e.title)}</h3>
+        <div class="per">${esc(e.period)}　全${e.rounds.length}ラウンド</div>
+        <p class="q">「${esc(e.question)}」</p>
+        <p class="ld">${esc(e.lead)}</p>
+        <div class="go">この議題で会議を開く →</div>
+      </button>`).join("");
+
+    el.eras.querySelectorAll(".era-card").forEach(b => {
+      b.onclick = () => openEra(b.dataset.era);
+    });
+  }
+
+  /* ===================== タイムライン構築 ===================== */
+  function buildTimeline(era) {
+    const tl = [];
+    era.rounds.forEach((r, ri) => {
+      tl.push({ kind: "head", ri, topic: r.topic });
+      r.turns.forEach(t => tl.push({ kind: "turn", ri, agent: t.a, text: t.t }));
+      tl.push({ kind: "mod", ri, text: r.mod, answer: r.answer, scores: r.scores });
+    });
+    tl.push({ kind: "final" });
+    return tl;
+  }
+
+  const roundStartIndex = ri => S.timeline.findIndex(x => x.kind === "head" && x.ri === ri);
+
+  /* ===================== 会議を開く ===================== */
+  function openEra(id) {
+    const era = AICouncil.getEra(id);
+    if (!era) return;
+    S.era = era;
+    S.timeline = buildTimeline(era);
+    S.hidden.clear();
+
+    el.start.hidden = true;
+    el.btnHome.hidden = false;
+    el.eraChip.hidden = false;
+    el.eraChip.textContent = era.icon + " " + era.title + "：" + era.question;
+    el.slider.max = String(era.rounds.length);
+    document.title = "AI四賢者会議｜" + era.title + " — " + era.question;
+
+    renderPhases();
+    renderMeters();
+    renderWho();
+    reset();
+    setPlaying(true);
+  }
+
+  function goHome() {
+    setPlaying(false);
+    S.token++;
+    el.start.hidden = false;
+    el.btnHome.hidden = true;
+    el.eraChip.hidden = true;
+    document.title = "AI四賢者会議｜ChatGPT・Claude・Gemini・Grokが一つの時代を20ラウンド議論するのだ";
+  }
+  el.btnHome.onclick = goHome;
+
+  /* ===================== フェーズ表示 ===================== */
+  function renderPhases() {
+    el.phases.innerHTML = AICouncil.phases.map(p => `
+      <div class="ph" data-ph="${p.id}" style="color:${p.color}">
+        <b>${esc(p.name)}</b>
+        <span>R${p.range[0]}–${p.range[1]}　${esc(p.desc)}</span>
+      </div>`).join("");
+  }
+
+  function updatePhases(round) {
+    const cur = round >= 1 ? AICouncil.phaseOf(round).id : -1;
+    el.phases.querySelectorAll(".ph").forEach(n => {
+      const id = Number(n.dataset.ph);
+      n.classList.toggle("on", id === cur);
+      n.classList.toggle("done", id < cur);
+    });
+  }
+
+  /* ===================== メーター ===================== */
+  function renderMeters() {
+    el.meters.innerHTML = AICouncil.meters.map(m => `
+      <div class="meter" data-key="${m.key}">
+        <div class="mh"><b style="color:${m.color}">${esc(m.label)}</b><span data-v>0</span></div>
+        <div class="bar"><i style="background:${m.color}"></i></div>
+        <div class="md">${esc(m.desc)}</div>
+      </div>`).join("");
+  }
+
+  function updateMeters(scores) {
+    AICouncil.meters.forEach(m => {
+      const box = el.meters.querySelector('[data-key="' + m.key + '"]');
+      if (!box) return;
+      const v = scores ? scores[m.key] : 0;
+      box.querySelector("[data-v]").textContent = v;
+      box.querySelector(".bar i").style.width = v + "%";
+    });
+  }
+
+  /* ===================== 推移グラフ ===================== */
+  function renderSpark(upto) {
+    const rounds = S.era ? S.era.rounds : [];
+    const n = rounds.length || 20;
+    const W = 300, H = 76, pad = 6;
+    const x = i => pad + (W - pad * 2) * (i / Math.max(1, n - 1));
+    const y = v => H - pad - (H - pad * 2) * (v / 100);
+
+    let out = "";
+    // 目盛り
+    [25, 50, 75].forEach(v => {
+      out += `<line x1="0" y1="${y(v)}" x2="${W}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+    });
+    AICouncil.meters.forEach(m => {
+      const pts = [];
+      for (let i = 0; i < upto; i++) pts.push(x(i) + "," + y(rounds[i].scores[m.key]));
+      if (pts.length > 1) {
+        out += `<polyline points="${pts.join(" ")}" fill="none" stroke="${m.color}" stroke-width="2"
+                 stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>`;
+      }
+      if (pts.length) {
+        const last = pts[pts.length - 1].split(",");
+        out += `<circle cx="${last[0]}" cy="${last[1]}" r="2.8" fill="${m.color}"/>`;
+      }
+    });
+    el.spark.innerHTML = out;
+  }
+
+  /* ===================== 発言者フィルタ ===================== */
+  function renderWho() {
+    el.who.innerHTML = AICouncil.agents.map(a => `
+      <button data-a="${esc(a.id)}" class="on"
+              style="border-color:${a.color}; color:${a.color}">${esc(a.name)}</button>`).join("");
+    el.who.querySelectorAll("button").forEach(b => {
+      b.onclick = () => {
+        const id = b.dataset.a;
+        if (S.hidden.has(id)) { S.hidden.delete(id); b.classList.add("on"); }
+        else { S.hidden.add(id); b.classList.remove("on"); }
+        el.log.querySelectorAll('[data-agent="' + id + '"]').forEach(n => { n.hidden = S.hidden.has(id); });
+      };
+    });
+  }
+
+  /* ===================== 議事録の描画 ===================== */
+  function addHead(item) {
+    const n = document.createElement("div");
+    n.className = "rhead";
+    n.innerHTML = `<span class="n">ROUND ${String(item.ri + 1).padStart(2, "0")}</span>
+                   <span class="tp">${esc(item.topic)}</span><span class="line"></span>`;
+    el.log.appendChild(n);
+    return n;
+  }
+
+  function addMsg(item) {
+    const a = AICouncil.getAgent(item.agent || "zunda");
+    const n = document.createElement("div");
+    n.className = "msg" + (item.kind === "mod" ? " mod" : "");
+    n.dataset.agent = a.id;
+    n.hidden = S.hidden.has(a.id);
+    n.innerHTML = `
+      <div class="av" style="background:${a.color}">${esc(a.mark)}</div>
+      <div class="bd">
+        <div class="nm" style="color:${a.color}">${esc(a.name)}<i>${esc(a.tag)}</i></div>
+        <div class="tx"></div>
+      </div>`;
+    el.log.appendChild(n);
+    return n.querySelector(".tx");
+  }
+
+  function addAnswer(item) {
+    const n = document.createElement("div");
+    n.className = "ansline";
+    n.innerHTML = `<b>現時点の答え</b>${esc(item.answer)}`;
+    el.log.appendChild(n);
+  }
+
+  function addFinal() {
+    const f = S.era.final;
+    const n = document.createElement("div");
+    n.className = "final";
+    n.innerHTML =
+      `<h3>${esc(f.title)}</h3>
+       <p class="fq">議題：${esc(S.era.question)}</p>` +
+      f.body.map(p => `<p>${esc(p)}</p>`).join("") +
+      `<div class="acts">
+         <button class="cbtn" data-act="copy">📋 議事録をコピー</button>
+         <button class="cbtn" data-act="save">💾 テキストで保存</button>
+         <button class="cbtn" data-act="again">↻ もう一度</button>
+       </div>
+       <p class="note">${esc(f.note)}</p>`;
+    el.log.appendChild(n);
+    n.querySelector('[data-act="copy"]').onclick = copyLog;
+    n.querySelector('[data-act="save"]').onclick = saveLog;
+    n.querySelector('[data-act="again"]').onclick = () => { reset(); setPlaying(true); };
+  }
+
+  /* ===================== タイピング ===================== */
+  function typeInto(node, text, token, done) {
+    const per = Math.max(6, 26 / S.speed);   // 1文字あたりms
+    let i = 0;
+    node.classList.add("typing");
+    (function step() {
+      if (token !== S.token) return;
+      // 1フレームで数文字ずつ（高速時に破綻しないように）
+      const chunk = S.speed >= 4 ? 5 : S.speed >= 2 ? 3 : 1;
+      i = Math.min(text.length, i + chunk);
+      node.textContent = text.slice(0, i);
+      if (S.stick) el.log.scrollTop = el.log.scrollHeight;
+      if (i < text.length) { S.timer = setTimeout(step, per * chunk); }
+      else { node.classList.remove("typing"); done(); }
+    })();
+  }
+
+  /* ===================== 再生エンジン ===================== */
+  function applyRoundState(ri) {
+    const r = S.era.rounds[ri];
+    updateMeters(r.scores);
+    renderSpark(ri + 1);
+    el.now.innerHTML = `<span class="rn">ROUND ${String(ri + 1).padStart(2, "0")} / ${S.era.rounds.length}</span>${esc(r.answer)}`;
+    el.slider.value = String(ri + 1);
+    el.rlabel.textContent = `ROUND ${String(ri + 1).padStart(2, "0")} / ${S.era.rounds.length}`;
+    updatePhases(ri + 1);
+  }
+
+  /* 1件表示する。instant=true なら即時描画 */
+  function showItem(item, instant, onDone) {
+    if (item.kind === "head") {
+      addHead(item);
+      // 進行中のラウンド番号とフェーズを先に反映する
+      el.rlabel.textContent = `ROUND ${String(item.ri + 1).padStart(2, "0")} / ${S.era.rounds.length}`;
+      updatePhases(item.ri + 1);
+      if (S.stick) el.log.scrollTop = el.log.scrollHeight;
+      onDone();
+      return;
+    }
+    if (item.kind === "final") {
+      addFinal();
+      if (S.stick) el.log.scrollTop = el.log.scrollHeight;
+      onDone();
+      return;
+    }
+    const node = addMsg(item);
+    const after = () => {
+      if (item.kind === "mod") { addAnswer(item); applyRoundState(item.ri); }
+      if (S.stick) el.log.scrollTop = el.log.scrollHeight;
+      onDone();
+    };
+    if (instant) { node.textContent = item.text; after(); }
+    else typeInto(node, item.text, S.token, after);
+  }
+
+  function step() {
+    if (!S.playing || S.i >= S.timeline.length) {
+      if (S.i >= S.timeline.length) setPlaying(false);
+      return;
+    }
+    const token = S.token;
+    const item = S.timeline[S.i++];
+    showItem(item, false, () => {
+      if (token !== S.token) return;
+      const pause = item.kind === "mod" ? 1100 : item.kind === "head" ? 420 : 700;
+      S.timer = setTimeout(step, pause / S.speed);
+    });
+  }
+
+  /* タイピング中の発言を即座に完成させる（一時停止・スキップ時） */
+  function finishTyping() {
+    const t = el.log.querySelector(".tx.typing");
+    if (!t) return;
+    clearTimeout(S.timer);
+    t.classList.remove("typing");
+    const item = S.timeline[S.i - 1];
+    if (!item || !item.text) return;
+    t.textContent = item.text;
+    if (item.kind === "mod") {
+      const last = el.log.lastElementChild;
+      if (!last || !last.classList.contains("ansline")) {
+        addAnswer(item);
+        applyRoundState(item.ri);
+      }
+    }
+    el.log.scrollTop = el.log.scrollHeight;
+  }
+
+  function setPlaying(on) {
+    if (!on) {
+      finishTyping();
+      clearTimeout(S.timer);
+      S.token++;
+      S.playing = false;
+      el.btnPlay.textContent = "▶ 再生";
+      return;
+    }
+    if (S.i >= S.timeline.length) reset();   // 最後まで見終わっていたら頭から
+    clearTimeout(S.timer);
+    S.token++;
+    S.playing = true;
+    el.btnPlay.textContent = "⏸ 一時停止";
+    step();
+  }
+
+  /* done ラウンドまで見終わった状態を一気に描画する（done = 0〜20） */
+  function jumpToRound(done) {
+    setPlaying(false);
+    S.token++;
+    el.log.innerHTML = "";
+    S.stick = true;
+
+    const end = done >= S.era.rounds.length ? S.timeline.length : roundStartIndex(done);
+    for (let k = 0; k < end; k++) showItem(S.timeline[k], true, () => {});
+    S.i = end;
+
+    if (done > 0) {
+      applyRoundState(done - 1);
+    } else {
+      updateMeters(null);
+      renderSpark(0);
+      el.now.innerHTML = `<span class="rn">ROUND 00</span>まだ議論が始まっていないのだ。`;
+      el.slider.value = "0";
+      el.rlabel.textContent = `ROUND 00 / ${S.era.rounds.length}`;
+      updatePhases(0);
+    }
+    el.log.scrollTop = el.log.scrollHeight;
+  }
+
+  function reset() { jumpToRound(0); }
+
+  function currentRound() {
+    // 表示済みの最後のラウンド番号（1始まり、未開始は0）
+    let r = 0;
+    for (let k = 0; k < S.i; k++) if (S.timeline[k].kind === "mod") r = S.timeline[k].ri + 1;
+    return r;
+  }
+
+  /* ===================== 操作 ===================== */
+  el.btnPlay.onclick = () => setPlaying(!S.playing);
+
+  el.btnNext.onclick = () => {
+    const r = Math.min(S.era.rounds.length - 1, currentRound());
+    jumpToRound(r);
+    setPlaying(true);
+  };
+
+  el.btnPrev.onclick = () => {
+    const r = Math.max(0, currentRound() - 1);
+    jumpToRound(r);
+    setPlaying(true);
+  };
+
+  el.slider.oninput = () => { jumpToRound(Number(el.slider.value)); };
+
+  el.btnEnd.onclick = () => { jumpToRound(S.era.rounds.length); };
+
+  /* 議事録クリックで、タイピング中の発言を即座に全部出す */
+  el.log.addEventListener("click", () => {
+    if (!el.log.querySelector(".tx.typing")) return;
+    finishTyping();
+    if (S.playing) { S.timer = setTimeout(step, 260); }
+  });
+
+  /* 手動スクロールしたら追従をやめる */
+  el.log.addEventListener("scroll", () => {
+    S.stick = el.log.scrollHeight - el.log.scrollTop - el.log.clientHeight < 60;
+  });
+
+  /* 速度ボタン */
+  el.spd.innerHTML = SPEEDS.map(s =>
+    `<button data-s="${s}" class="${s === 1 ? "on" : ""}">${s}x</button>`).join("");
+  el.spd.querySelectorAll("button").forEach(b => {
+    b.onclick = () => {
+      S.speed = Number(b.dataset.s);
+      el.spd.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+    };
+  });
+
+  /* ===================== 書き出し ===================== */
+  function buildText() {
+    if (!S.era) return "";
+    const L = [];
+    L.push("AI四賢者会議 — " + S.era.title + "（" + S.era.period + "）");
+    L.push("議題：" + S.era.question);
+    L.push("※ 各AIの作風をイメージした創作（フィクション）です。実際のAIの出力ではありません。");
+    L.push("");
+    S.era.rounds.forEach((r, i) => {
+      const ph = AICouncil.phaseOf(i + 1);
+      L.push("──────────────────────────────");
+      L.push("ROUND " + String(i + 1).padStart(2, "0") + "／" + ph.name);
+      L.push("争点：" + r.topic);
+      L.push("");
+      r.turns.forEach(t => {
+        const a = AICouncil.getAgent(t.a);
+        L.push("【" + a.name + "】" + t.t);
+      });
+      L.push("【ずんだもん】" + r.mod);
+      L.push("→ 現時点の答え：" + r.answer);
+      L.push("　（正確さ " + r.scores.fact + " ／ 多面性 " + r.scores.view + " ／ 人間らしさ " + r.scores.heart + "）");
+      L.push("");
+    });
+    L.push("══════════════════════════════");
+    L.push("■ " + S.era.final.title);
+    S.era.final.body.forEach(p => { L.push(p); L.push(""); });
+    L.push(S.era.final.note);
+    return L.join("\n");
+  }
+
+  function copyLog() {
+    const txt = buildText();
+    const ok = () => toast("議事録をコピーしたのだ");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(ok, fallback);
+    } else fallback();
+    function fallback() {
+      const ta = document.createElement("textarea");
+      ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); ok(); } catch (e) { toast("コピーできなかったのだ"); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function saveLog() {
+    const blob = new Blob([buildText()], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ai-council-" + S.era.id + ".txt";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast("テキストを保存したのだ");
+  }
+
+  el.btnCopy.onclick = copyLog;
+
+  /* ===================== キーボード ===================== */
+  document.addEventListener("keydown", e => {
+    if (!el.start.hidden) return;
+    if (e.target.tagName === "INPUT") return;
+    if (e.code === "Space") { e.preventDefault(); setPlaying(!S.playing); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); el.btnNext.click(); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); el.btnPrev.click(); }
+    else if (e.key === "Escape") goHome();
+  });
+
+  /* ===================== 起動 ===================== */
+  renderStart();
+  renderPhases();
+  renderMeters();
+  renderWho();
+  renderSpark(0);
+
+  // #sengoku / #showa のように直接開ける
+  const hash = location.hash.replace("#", "");
+  if (hash && AICouncil.getEra(hash)) openEra(hash);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>AI円卓会議｜4つのAIがひとつの時代を20ラウンド議論する</title>
+<meta name="description" content="ChatGPT・Claude・Gemini・Grokの4体が、ひとつの時代について20ラウンド議論し、答えを『正確さ』→『多角性』→『人間らしさ・感情・心』の順に高めていく会議シミュレーター。収録データで即再生でき、自分のAPIキーを入れれば本物のAIで議論させられます。" />
+<meta name="theme-color" content="#0b0e14" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="AI円卓会議" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b0e14'/><circle cx='50' cy='28' r='11' fill='%2310a37f'/><circle cx='74' cy='58' r='11' fill='%234a8cff'/><circle cx='50' cy='80' r='11' fill='%23d97757'/><circle cx='26' cy='58' r='11' fill='%238b6cff'/></svg>" />
+<style>
+  :root{
+    --bg:#0b0e14; --bg2:#121722; --panel:#151b28; --panel2:#1b2331;
+    --line:#252f42; --txt:#e8eef7; --sub:#93a3ba; --dim:#6c7d95;
+    --acc:#4a8cff; --hum:#d97757;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f6fa; --bg2:#ffffff; --panel:#ffffff; --panel2:#eef2f8;
+    --line:#dbe2ec; --txt:#16202e; --sub:#5a6b80; --dim:#8494a8;
+    --shadow:0 8px 24px rgba(20,35,60,.08);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    line-height:1.75; font-size:15px;
+    display:flex; flex-direction:column; min-height:100vh;
+    -webkit-text-size-adjust:100%;
+  }
+  button,input,select{font:inherit;color:inherit}
+
+  /* ============ ヘッダー ============ */
+  .top{
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    padding:10px 16px; background:var(--panel); border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:30;
+  }
+  .brand{display:flex; align-items:center; gap:10px; min-width:0}
+  .brand__dots{position:relative;width:30px;height:30px;flex:none}
+  .brand__dots i{position:absolute;width:12px;height:12px;border-radius:50%}
+  .brand__dots i:nth-child(1){top:0;left:9px;background:#10a37f}
+  .brand__dots i:nth-child(2){top:9px;right:0;background:#4a8cff}
+  .brand__dots i:nth-child(3){bottom:0;left:9px;background:#d97757}
+  .brand__dots i:nth-child(4){top:9px;left:0;background:#8b6cff}
+  .brand__txt{font-weight:700;letter-spacing:.02em;white-space:nowrap}
+  .brand__sub{color:var(--dim);font-size:.72rem;white-space:nowrap}
+  .badge{
+    font-size:.68rem; font-weight:700; letter-spacing:.06em;
+    padding:3px 9px; border-radius:999px; border:1px solid var(--line);
+  }
+  .badge--demo{color:var(--sub); background:var(--panel2)}
+  .badge--live{color:#0b0e14; background:#46e07a; border-color:#46e07a}
+  .top__spacer{flex:1}
+  .iconbtn{
+    background:var(--panel2); border:1px solid var(--line); border-radius:10px;
+    padding:7px 12px; cursor:pointer; font-size:.82rem; white-space:nowrap;
+  }
+  .iconbtn:hover{border-color:var(--acc)}
+
+  /* ============ 議題バー ============ */
+  .topicbar{
+    padding:14px 16px; background:linear-gradient(180deg,var(--panel),transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .topicbar__q{font-size:1.12rem;font-weight:700;letter-spacing:.01em}
+  .topicbar__t{color:var(--sub);font-size:.85rem;margin-top:2px}
+
+  /* ============ レイアウト ============ */
+  .wrap{
+    flex:1; display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:16px;
+    padding:16px; max-width:1400px; width:100%; margin:0 auto; min-height:0;
+  }
+  .col{display:flex;flex-direction:column;min-height:0;gap:12px}
+
+  /* ============ 会議ログ ============ */
+  #log{
+    flex:1; overflow-y:auto; background:var(--bg2); border:1px solid var(--line);
+    border-radius:var(--radius); padding:18px; min-height:52vh; scroll-behavior:smooth;
+  }
+  .intro{border-left:3px solid var(--acc); padding:6px 0 6px 14px; margin-bottom:22px}
+  .intro__q{font-size:1.15rem;font-weight:700}
+  .intro__t{color:var(--sub);font-size:.85rem;margin-top:4px}
+  .intro__d{color:var(--sub);font-size:.85rem;margin-top:10px}
+  .intro__note{color:var(--dim);font-size:.78rem;margin-top:8px}
+
+  .round-head{
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+    margin:26px 0 14px; padding:8px 12px; border-radius:10px;
+    background:color-mix(in srgb, var(--c) 12%, transparent);
+    border-left:3px solid var(--c);
+  }
+  .round-head__no{font-weight:700;font-size:.9rem;color:var(--c)}
+  .round-head__theme{font-size:.92rem}
+  .round-head__phase{margin-left:auto;font-size:.7rem;color:var(--dim);letter-spacing:.06em}
+
+  .msg{display:flex; gap:12px; padding:10px 0; animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .msg__avatar{
+    flex:none; width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+    background:color-mix(in srgb, var(--c) 22%, transparent);
+    color:var(--c); font-size:1rem; border:1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  }
+  .msg__body{min-width:0;flex:1}
+  .msg__head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+  .msg__name{font-weight:700;font-size:.88rem;color:var(--c)}
+  .msg__role{font-size:.7rem;color:var(--dim)}
+  .msg__tag{
+    font-size:.66rem; padding:1px 7px; border-radius:999px;
+    border:1px solid var(--line); color:var(--sub); background:var(--panel2);
+  }
+  .msg__text{font-size:.94rem; white-space:pre-wrap; word-break:break-word; min-height:1.75em}
+
+  .answer-inline{
+    margin:16px 0 6px; padding:12px 14px; border-radius:12px;
+    background:var(--panel2); border:1px solid var(--line);
+  }
+  .answer-inline__label{font-size:.7rem;color:var(--dim);letter-spacing:.06em}
+  .answer-inline p{font-size:.92rem;margin-top:4px}
+  .answer-inline__scores{display:flex;gap:8px;margin-top:8px}
+  .chip{font-size:.7rem;padding:2px 9px;border-radius:999px;border:1px solid var(--line)}
+  .chip--acc{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 45%,transparent)}
+  .chip--hum{color:var(--hum);border-color:color-mix(in srgb,var(--hum) 45%,transparent)}
+
+  .final{
+    margin:30px 0 10px; padding:20px; border-radius:var(--radius);
+    background:linear-gradient(160deg,color-mix(in srgb,var(--hum) 14%,var(--panel)),var(--panel));
+    border:1px solid color-mix(in srgb,var(--hum) 35%,var(--line));
+  }
+  .final__title{font-size:1.05rem;margin-bottom:12px;color:var(--hum)}
+  .final p{margin-bottom:12px;font-size:.95rem}
+  .final__meta{color:var(--dim);font-size:.75rem;margin:0}
+
+  /* ============ 操作バー ============ */
+  .ctrl{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:10px 14px;
+  }
+  .btn{
+    background:var(--panel2); border:1px solid var(--line); border-radius:10px;
+    padding:9px 16px; cursor:pointer; font-size:.85rem; white-space:nowrap;
+  }
+  .btn:hover:not(:disabled){border-color:var(--acc)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn--primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700}
+  .btn--ghost{background:transparent}
+  .ctrl__spacer{flex:1}
+  .ctrl label{font-size:.75rem;color:var(--sub);display:flex;align-items:center;gap:6px}
+  select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:.8rem}
+  progress{width:100%;height:6px;border:0;border-radius:999px;overflow:hidden;background:var(--panel2)}
+  progress::-webkit-progress-bar{background:var(--panel2)}
+  progress::-webkit-progress-value{background:linear-gradient(90deg,var(--acc),var(--hum))}
+  progress::-moz-progress-bar{background:var(--acc)}
+  .live-status{
+    font-size:.78rem;color:var(--sub);background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:8px 12px;
+  }
+  .live-status.is-error{color:#ff8a8a;border-color:#5a2b2b}
+
+  /* ============ サイドパネル ============ */
+  .card{
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:14px; flex:none;   /* 縦に潰さない */
+  }
+  .card__title{
+    font-size:.72rem; letter-spacing:.1em; color:var(--dim);
+    text-transform:uppercase; margin-bottom:10px;
+  }
+  .roundnum{font-size:1.6rem;font-weight:700;line-height:1.2}
+  .roundnum span{font-size:.85rem;color:var(--dim);font-weight:400}
+
+  .phases{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:10px}
+  .phase{
+    display:grid; grid-template-columns:auto 1fr; gap:2px 10px; align-items:center;
+    padding:8px 10px; border-radius:10px; border:1px solid var(--line);
+    opacity:.45; transition:.25s;
+  }
+  .phase.is-now{opacity:1;border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+  .phase.is-done{opacity:.75}
+  .phase__no{font-size:.62rem;letter-spacing:.08em;color:var(--c);font-weight:700}
+  .phase__name{font-size:.9rem;font-weight:700;grid-column:2;grid-row:1}
+  .phase__sub{grid-column:2;font-size:.72rem;color:var(--sub)}
+  .phase__goal{font-size:.76rem;color:var(--sub);margin-top:10px}
+
+  .gauge{margin-bottom:12px}
+  .gauge__head{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem}
+  .gauge__val{font-weight:700;font-size:1.1rem}
+  .gauge__track{height:8px;border-radius:999px;background:var(--panel2);overflow:hidden;margin-top:4px}
+  .gauge__fill{height:100%;width:0;border-radius:999px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+  .gauge--acc .gauge__val,.gauge--acc .gauge__head{color:var(--acc)}
+  .gauge--acc .gauge__fill{background:linear-gradient(90deg,#2f6fe0,var(--acc))}
+  .gauge--hum .gauge__val,.gauge--hum .gauge__head{color:var(--hum)}
+  .gauge--hum .gauge__fill{background:linear-gradient(90deg,#c05f3d,var(--hum))}
+  .spark{color:var(--txt);margin-top:4px}
+  .spark__legend{display:flex;gap:12px;font-size:.68rem;color:var(--dim)}
+  .spark__legend i{display:inline-block;width:10px;height:2px;vertical-align:middle;margin-right:4px}
+
+  #answerText{font-size:.9rem}
+  #answerText.is-flash{animation:flash .8s ease}
+  @keyframes flash{from{background:color-mix(in srgb,var(--acc) 25%,transparent)}to{background:transparent}}
+  .answer__round{font-size:.7rem;color:var(--dim)}
+
+  .roster{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .roster__item{
+    display:flex;gap:10px;padding:8px 10px;border-radius:10px;
+    border:1px solid var(--line);transition:.2s;
+  }
+  .roster__item.is-speaking{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+  .roster__mark{color:var(--c);font-size:.95rem}
+  .roster__body{display:flex;flex-direction:column;min-width:0}
+  .roster__name{font-size:.85rem;font-weight:700}
+  .roster__role{font-size:.7rem;color:var(--c)}
+  .roster__trait{font-size:.72rem;color:var(--sub);line-height:1.5;margin-top:2px}
+
+  /* ============ 設定ダイアログ ============ */
+  dialog{
+    border:none;border-radius:16px;padding:0;margin:auto;background:var(--panel);color:var(--txt);
+    max-width:680px;width:calc(100% - 24px);box-shadow:var(--shadow);
+  }
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  .dlg{padding:20px;max-height:85vh;overflow-y:auto}
+  .dlg__title{font-size:1.05rem;margin-bottom:14px}
+  .dlg__sec{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+  .dlg__sec h3{font-size:.85rem;margin-bottom:10px;color:var(--sub)}
+  .dlg__field{display:flex;flex-direction:column;gap:4px;font-size:.76rem;color:var(--sub);margin-bottom:10px}
+  .dlg__note{font-size:.75rem;color:var(--dim);margin-bottom:14px;line-height:1.7}
+  input[type=text],input[type=password],input[type=number]{
+    background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:9px 11px;
+    font-size:.85rem;width:100%;
+  }
+  input:focus{outline:2px solid color-mix(in srgb,var(--acc) 60%,transparent);outline-offset:1px}
+  .presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .preset{
+    background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+    padding:5px 11px;font-size:.72rem;cursor:pointer;
+  }
+  .preset:hover{border-color:var(--acc)}
+  .prov{border:1px solid var(--line);border-left:3px solid var(--c);border-radius:12px;padding:12px;margin-bottom:10px}
+  .prov__head{display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:10px}
+  .prov__mark{color:var(--c)}
+  .prov__name{font-weight:700;font-size:.88rem}
+  .prov__role{font-size:.7rem;color:var(--dim)}
+  .prov__grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .prov__grid label{display:flex;flex-direction:column;gap:4px;font-size:.72rem;color:var(--sub)}
+  .prov__base{grid-column:1/-1}
+  .dlg__foot{display:flex;gap:8px;align-items:center;margin-top:18px;flex-wrap:wrap}
+  .spacer{flex:1}
+
+  /* ============ レスポンシブ ============ */
+  @media (max-width:980px){
+    /* 1カラム時はグリッドをやめる（行が等分に伸びてカードが重なるため） */
+    .wrap{display:flex;flex-direction:column;padding:12px}
+    .wrap > .col{flex:none}
+    #log{min-height:58vh}
+    .prov__grid{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    body{font-size:14px}
+    .brand__sub{display:none}
+    .ctrl{padding:8px 10px;gap:8px}
+    .btn{padding:8px 12px;font-size:.8rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ヘッダー ============ -->
+<header class="top">
+  <div class="brand">
+    <div class="brand__dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div>
+      <div class="brand__txt">AI円卓会議</div>
+      <div class="brand__sub">4つのAIが、ひとつの時代を語り尽くす</div>
+    </div>
+  </div>
+  <span id="modeBadge" class="badge badge--demo">収録モード</span>
+  <div class="top__spacer"></div>
+  <button id="settingsBtn" class="iconbtn" type="button">⚙ 議題とAPI設定</button>
+  <button id="exportBtn" class="iconbtn" type="button">⤓ 議事録を保存</button>
+  <button id="themeToggle" class="iconbtn" type="button" aria-label="配色を切り替え">☀️</button>
+</header>
+
+<!-- ============ 議題 ============ -->
+<div class="topicbar">
+  <div id="questionText" class="topicbar__q">この時代とは、いったい何だったのか。</div>
+  <div class="topicbar__t">議題：<span id="topicText">高度経済成長期の日本（1955–1973）</span></div>
+</div>
+
+<!-- ============ 本体 ============ -->
+<div class="wrap">
+
+  <!-- 会議ログ -->
+  <div class="col">
+    <div id="log" aria-live="polite"></div>
+
+    <div class="ctrl">
+      <button id="playBtn" class="btn btn--primary" type="button">▶ 議論を始める</button>
+      <button id="nextBtn" class="btn" type="button">⏭ このラウンドを飛ばす</button>
+      <button id="allBtn" class="btn btn--ghost" type="button">⏩ 全文を一気に表示</button>
+      <button id="resetBtn" class="btn btn--ghost" type="button">↺ 最初から</button>
+      <div class="ctrl__spacer"></div>
+      <label>速度
+        <select id="speedSel">
+          <option value="0.7">0.7×</option>
+          <option value="1">1×</option>
+          <option value="1.5" selected>1.5×</option>
+          <option value="2.5">2.5×</option>
+          <option value="4">4×</option>
+        </select>
+      </label>
+    </div>
+    <progress id="progress" value="0" max="100"></progress>
+    <div id="liveStatus" class="live-status" hidden></div>
+  </div>
+
+  <!-- サイドパネル -->
+  <div class="col col--side">
+
+    <section class="card">
+      <div class="card__title">進行</div>
+      <div class="roundnum"><span id="roundNow">0</span><span> / <span id="roundTotal">20</span> ラウンド</span></div>
+      <ul id="phaseSteps" class="phases"></ul>
+      <p id="phaseGoal" class="phase__goal"></p>
+    </section>
+
+    <section class="card">
+      <div class="card__title">答えの品質</div>
+      <div class="gauge gauge--acc">
+        <div class="gauge__head"><span>正確さ</span><span class="gauge__val" id="accVal">0</span></div>
+        <div class="gauge__track"><div class="gauge__fill" id="accBar"></div></div>
+      </div>
+      <div class="gauge gauge--hum">
+        <div class="gauge__head"><span>人間らしさ・心</span><span class="gauge__val" id="humVal">0</span></div>
+        <div class="gauge__track"><div class="gauge__fill" id="humBar"></div></div>
+      </div>
+      <div id="spark" class="spark"></div>
+      <div class="spark__legend">
+        <span><i style="background:#4a8cff"></i>正確さ</span>
+        <span><i style="background:#d97757"></i>人間らしさ</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card__title">現時点の答え</div>
+      <div class="answer__round" id="answerRound">開始前</div>
+      <p id="answerText">まだ何も決まっていません。議論を始めてください。</p>
+    </section>
+
+    <section class="card">
+      <div class="card__title">参加者</div>
+      <ul id="roster" class="roster"></ul>
+    </section>
+
+  </div>
+</div>
+
+<dialog id="settings"></dialog>
+
+<script src="ai-council/council-data.js"></script>
+<script src="ai-council/council-app.js"></script>
+</body>
+</html>

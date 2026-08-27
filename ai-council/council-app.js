@@ -45,6 +45,7 @@
 
   const state = {
     mode: "demo",          // "demo" | "live"
+    demoIndex: 0,          // 収録データの何本目か
     session: null,         // { topic, question, rounds: [], final }
     totalRounds: 20,
     r: 0,                  // 次に再生するラウンドの index
@@ -123,6 +124,8 @@
     el.resetBtn = $("#resetBtn");
     el.speedSel = $("#speedSel");
     el.progress = $("#progress");
+    el.demoPick = $("#demoPick");
+    el.demoSel = $("#demoSel");
     el.settings = $("#settings");
     el.liveStatus = $("#liveStatus");
   }
@@ -427,6 +430,7 @@
     el.allBtn.disabled = state.mode === "live";
     el.modeBadge.textContent = state.mode === "live" ? "LIVE API" : "収録モード";
     el.modeBadge.className = "badge " + (state.mode === "live" ? "badge--live" : "badge--demo");
+    if (el.demoPick) el.demoPick.hidden = state.mode === "live" || demoList().length < 2;
   }
 
   /* ================= ライブAPIモード ================= */
@@ -792,7 +796,7 @@
     $("#cfgDemo", el.settings).addEventListener("click", () => {
       readSettings();
       el.settings.close();
-      startDemo();
+      startDemo(state.demoIndex);
     });
     $("#cfgStart", el.settings).addEventListener("click", () => {
       readSettings();
@@ -822,15 +826,35 @@
 
   /* ================= セッション開始 ================= */
 
-  function startDemo() {
+  // 収録データの一覧（council-data*.js が登録する）
+  function demoList() {
+    return (window.COUNCIL_DEMOS && window.COUNCIL_DEMOS.length)
+      ? window.COUNCIL_DEMOS
+      : [COUNCIL_DEMO];
+  }
+
+  function renderDemoPicker() {
+    const list = demoList();
+    if (!el.demoSel) return;
+    el.demoSel.innerHTML = list.map((d, i) =>
+      `<option value="${i}"${i === state.demoIndex ? " selected" : ""}>${escapeHtml(d.topic)}</option>`).join("");
+    // 収録が1本しかないときは選ぶ意味がないので隠す
+    el.demoPick.hidden = list.length < 2 || state.mode === "live";
+  }
+
+  function startDemo(index) {
     if (state.live.abort) state.live.abort.abort();
+    const list = demoList();
+    state.demoIndex = Math.max(0, Math.min(list.length - 1, Number(index) || 0));
     state.mode = "demo";
-    state.totalRounds = COUNCIL_DEMO.rounds.length;
-    state.session = JSON.parse(JSON.stringify(COUNCIL_DEMO));
+    const demo = list[state.demoIndex];
+    state.totalRounds = demo.rounds.length;
+    state.session = JSON.parse(JSON.stringify(demo));
     el.topic.textContent = state.session.topic;
     el.question.textContent = state.session.question;
     el.roundTotal.textContent = state.totalRounds;
     el.liveStatus.hidden = true;
+    renderDemoPicker();
     resetSession();
   }
 
@@ -871,14 +895,15 @@
     try { saved = localStorage.getItem(THEME_KEY) || "dark"; } catch (e) { /* noop */ }
     applyTheme(saved);
 
-    startDemo();
+    startDemo(0);
 
+    el.demoSel.addEventListener("change", () => startDemo(el.demoSel.value));
     el.playBtn.addEventListener("click", play);
     el.nextBtn.addEventListener("click", skipRound);
     el.allBtn.addEventListener("click", showAll);
     el.resetBtn.addEventListener("click", () => {
       if (state.mode === "live" && state.live.abort) state.live.abort.abort();
-      if (state.mode === "live") startLive(); else { startDemo(); }
+      if (state.mode === "live") startLive(); else startDemo(state.demoIndex);
     });
     el.speedSel.addEventListener("change", () => { state.speed = Number(el.speedSel.value); });
     $("#settingsBtn").addEventListener("click", openSettings);

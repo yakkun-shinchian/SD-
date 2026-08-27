@@ -113,7 +113,7 @@ const COUNCIL_PHASES = [
 const COUNCIL_DEMO = {
   topic: "高度経済成長期の日本（1955–1973）",
   question: "この時代とは、いったい何だったのか。",
-  note: "収録モードのデータです。他の時代を議論するには、設定からライブAPIモードに切り替えてください。",
+  note: "収録モードのデータです。上の「収録された議題」で時代を切り替えられます。ここにない時代を議論するには、設定からライブAPIモードに切り替えてください。",
   rounds: [
 
     /* ================= フェーズ1：精査 ================= */
@@ -400,3 +400,7 @@ const COUNCIL_DEMO = {
 window.COUNCIL_AGENTS = COUNCIL_AGENTS;
 window.COUNCIL_PHASES = COUNCIL_PHASES;
 window.COUNCIL_DEMO = COUNCIL_DEMO;
+
+/* 収録データの一覧（他の時代は別ファイルから push して追加する） */
+window.COUNCIL_DEMOS = window.COUNCIL_DEMOS || [];
+window.COUNCIL_DEMOS.push(COUNCIL_DEMO);

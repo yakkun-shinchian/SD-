@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>AI円卓会議｜4つのAIがひとつの時代を20ラウンド議論する</title>
-<meta name="description" content="ChatGPT・Claude・Gemini・Grokの4体が、ひとつの時代について20ラウンド議論し、答えを『正確さ』→『多角性』→『人間らしさ・感情・心』の順に高めていく会議シミュレーター。収録データで即再生でき、自分のAPIキーを入れれば本物のAIで議論させられます。" />
+<meta name="description" content="ChatGPT・Claude・Gemini・Grokの4体が、ひとつの時代について20ラウンド議論し、答えを『正確さ』→『多角性』→『人間らしさ・感情・心』の順に高めていく会議シミュレーター。「高度経済成長期の日本」と「生成AIの時代」の2本を収録済みで即再生でき、自分のAPIキーを入れれば本物のAIで好きな時代を議論させられます。" />
 <meta name="theme-color" content="#0b0e14" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
@@ -69,6 +69,9 @@
   }
   .topicbar__q{font-size:1.12rem;font-weight:700;letter-spacing:.01em}
   .topicbar__t{color:var(--sub);font-size:.85rem;margin-top:2px}
+  .demopick{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.75rem;color:var(--dim);flex-wrap:wrap}
+  .demopick[hidden]{display:none}
+  .demopick select{max-width:100%}
 
   /* ============ レイアウト ============ */
   .wrap{
@@ -289,6 +292,10 @@
 <div class="topicbar">
   <div id="questionText" class="topicbar__q">この時代とは、いったい何だったのか。</div>
   <div class="topicbar__t">議題：<span id="topicText">高度経済成長期の日本（1955–1973）</span></div>
+  <label id="demoPick" class="demopick" hidden>
+    <span>収録された議題</span>
+    <select id="demoSel"></select>
+  </label>
 </div>
 
 <!-- ============ 本体 ============ -->
@@ -362,6 +369,7 @@
 <dialog id="settings"></dialog>
 
 <script src="ai-council/council-data.js"></script>
+<script src="ai-council/council-data-ai-era.js"></script>
 <script src="ai-council/council-app.js"></script>
 </body>
 </html>

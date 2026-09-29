@@ -21,11 +21,13 @@ tone and language when editing content.
 
 ## How to run
 
-No build step, no dependencies. Open `index.html` directly in a browser, or
-serve the folder (recommended so search/theme persistence work reliably):
+No build step, no dependencies. The site root `index.html` is the
+**VentSim ventilator monitor** (a standalone single-file app). The NurseTube
+app lives at `nurse.html` — open it directly, or serve the folder
+(recommended so search/theme persistence work reliably):
 
 ```bash
-python3 -m http.server 8000   # then open http://localhost:8000
+python3 -m http.server 8000   # ventilator: http://localhost:8000/  ·  NurseTube: http://localhost:8000/nurse.html
 ```
 
 The Node scripts in `tools/` require Node.js (developed against Node 22) and
@@ -34,8 +36,8 @@ have **no npm dependencies** — they use only the `node:` built-ins.
 ## Architecture
 
 Plain **HTML + CSS + vanilla JavaScript**. No framework, no bundler, no
-package.json. Scripts are loaded as plain globals via `<script>` tags in
-this order (see `index.html`):
+package.json. The NurseTube scripts are loaded as plain globals via
+`<script>` tags in this order (see `nurse.html`):
 
 ```
 data.js  → scenes.js → audio/manifest.js → app.js
@@ -74,7 +76,9 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Page skeleton (header, sidebar, main); loads the scripts |
+| `index.html` | **Site landing: VentSim ventilator monitor simulator** (standalone, self-contained; not part of NurseTube) |
+| `ventilator.html` | Legacy-URL redirect to `index.html` |
+| `nurse.html` | NurseTube page skeleton (header, sidebar, main); loads the scripts below |
 | `styles.css` | YouTube-style UI, player, light/dark theme |
 | `app.js` | Rendering, routing, search, slideshow player (IIFE) |
 | `data.js` | Program catalog + categories + exam date (**add programs here**) |

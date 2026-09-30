@@ -156,7 +156,10 @@
     main.classList.add("home-main");
     const picks = ["base01", "anat01", "exam03"].map(byId).filter(Boolean);
     const visualNames = ["vitals", "heart", "ecg"];
-    main.innerHTML = `<section class="welcome" aria-labelledby="welcomeTitle">
+    main.innerHTML = `<a class="instagram-banner" href="https://www.instagram.com/yakubon_studio/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @yakubon_studio を開く（新しいタブ）">
+      <svg class="instagram-banner__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+      <span class="instagram-banner__copy"><strong>Instagram <span>@yakubon_studio</span></strong><span>イラストと動画で、一緒に看護を学ぼう。</span></span><span class="instagram-banner__cta">見に行く <span aria-hidden="true">↗</span></span>
+      </a><section class="welcome" aria-labelledby="welcomeTitle">
       <img class="welcome__art" src="images/nursetube-hero.webp" alt="青い制服の先輩と後輩が、一緒にノートを開いて学んでいる" width="1536" height="1024" fetchpriority="high">
       <div class="welcome__copy"><h1 id="welcomeTitle">看護の「わからない」を、<br>ひとつずつ。</h1>
       <p>見て、聴いて、触って。<br class="mobile-break">「なるほど」を育てよう。</p>

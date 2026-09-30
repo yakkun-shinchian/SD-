@@ -160,21 +160,23 @@
       <img class="welcome__art" src="images/nursetube-hero.webp" alt="青い制服の先輩と後輩が、一緒にノートを開いて学んでいる" width="1536" height="1024" fetchpriority="high">
       <div class="welcome__copy"><h1 id="welcomeTitle">看護の「わからない」を、<br>ひとつずつ。</h1>
       <p>見て、聴いて、触って。<br class="mobile-break">「なるほど」を育てよう。</p>
-      <div class="welcome__actions"><button class="warm-btn" type="button" data-scroll-catalog>教材を探す <span aria-hidden="true">›</span></button>
+      <div class="welcome__actions"><a class="warm-btn" href="#/watch/base01">▶ バイタルサインの動画を見る</a><button class="warm-btn" type="button" data-scroll-catalog>教材を探す <span aria-hidden="true">›</span></button>
       <a class="warm-btn warm-btn--outline" href="index.html">人工呼吸器を体験する <span aria-hidden="true">›</span></a></div></div></section>
       <nav class="subject-nav" aria-label="分野から教材を探す">${CATEGORIES.filter(c => c.key !== "all").map(c => `<a href="#/category/${encodeURIComponent(c.key)}"><span aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</a>`).join("")}</nav>
-      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、図解とスライドで。", "波形の見方を、ひとつずつ。"][i]}</p>${i === 0 ? '<span class="lesson-status">イラストと会話で学ぶ</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
+      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、図解とスライドで。", "波形の見方を、ひとつずつ。"][i]}</p>${i === 0 ? '<span class="lesson-status">更新：V5イラスト・音声付き動画</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
       <section id="learningCatalog" class="learning-section"><h2>すべての教材 <small>全${PROGRAMS.length}本</small></h2>${gridHtml(PROGRAMS)}</section>
       <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><span>YAKUBON STUDIO</span></footer>`;
   }
 
   function renderEnhanced(p, lesson) {
     main.classList.add("enhanced-main");
+    const hasVideo = p.id === "base01";
     main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a>
       <article class="v5-lesson"><header class="v5-heading"><span class="lesson-status">基礎看護学 · イラストと会話</span><h1>${escapeHtml(lesson.title)}</h1><p>${escapeHtml(lesson.intro)}</p></header>
+      ${hasVideo ? `<section class="v5-video-section" aria-label="音声付きV5動画"><p>画面中央の ▶ を押すと、先輩と後輩の会話が音声付きで再生されます。<br>2枚目・4枚目を描き直した4枚のV5イラストで学びましょう。</p><div class="v5-video-player"><video id="v5Video" controls playsinline preload="metadata" poster="vitals-v5-01.jpg" aria-label="バイタルサインの音声付き動画"><source src="vitals-v5-player-v2.mp4" type="video/mp4">動画を再生できない場合は、下の会話文をご覧ください。</video><button id="v5VideoPlay" class="v5-video-play" type="button" aria-label="バイタルサインの動画を再生"><span>▶<small id="v5VideoLabel">再生する</small></span></button></div><p id="v5VideoStatus" role="status" aria-live="polite"></p><p class="v5-video-credit">声：CoeFont／後輩「汎用式概念χ-soft-v2」（CV：ろさちゃん）、先輩「後藤邑子」</p></section>` : ""}
       <section class="v5-intro"><img src="${lesson.image}" alt="先輩と後輩が患者さんの様子とバイタルサインを確認するイラスト" width="1536" height="1024"><div><h2>${escapeHtml(lesson.hook)}</h2><p>測って終わりにせず、<br><strong>「いつもと違う？」まで見る。</strong></p><p>ここを押さえると、観察がつながります。</p></div></section>
       <section class="v5-section"><h2>先輩と後輩の、なるほど会話</h2><div class="dialogue">${lesson.dialogue.map(d => `<div class="dialogue__line ${d.role === "先輩" ? "dialogue__line--senior" : ""}"><span class="dialogue__role">${d.role}</span><p>${escapeHtml(d.text)}</p></div>`).join("")}</div>
-      <div class="dialogue-audio"><button id="dialoguePlay" class="warm-btn" type="button">会話を聴く</button><button id="dialogueStop" class="audio-stop" type="button">停止</button><span id="dialogueStatus" role="status">端末の日本語音声で読み上げます（指定話者の音声は未収録）。</span></div></section>
+      <div class="dialogue-audio"><button id="dialoguePlay" class="warm-btn" type="button">会話を聴く</button><button id="dialogueStop" class="audio-stop" type="button">停止</button><span id="dialogueStatus" role="status">端末の日本語音声で読み上げます（動画では指定CoeFontの音声を使用）。</span></div></section>
       <section class="v5-section takeaway"><h2>今日、持ち帰る3つ</h2><ul>${lesson.summary.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul></section>
       <section class="v5-section"><h2>成人・安静時の参考値</h2><p>一律の「安全ライン」ではありません。年齢・疾患・測定条件で異なります。</p><div class="range-table-wrap"><table class="range-table"><thead><tr><th scope="col">項目</th><th scope="col">参考値</th><th scope="col">観察のポイント</th></tr></thead><tbody>${lesson.ranges.map(r => `<tr><th scope="row">${escapeHtml(r[0])}</th><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td></tr>`).join("")}</tbody></table></div></section>
       <section class="v5-section"><h2>もう少し詳しく学ぶ</h2><div class="v5-detail-list">${lesson.details.map(d => `<div><h3>${escapeHtml(d.title)}</h3><p>${escapeHtml(d.text)}</p></div>`).join("")}</div></section>
@@ -195,6 +197,28 @@
     let dialogueToken = 0;
     const status = document.getElementById("dialogueStatus");
     const stopDialogue = () => { dialogueToken++; if (synth) synth.cancel(); status.textContent = "読み上げを停止しました。"; };
+    const video = document.getElementById("v5Video");
+    if (video) {
+      const button = document.getElementById("v5VideoPlay");
+      const label = document.getElementById("v5VideoLabel");
+      const videoStatus = document.getElementById("v5VideoStatus");
+      const showPlay = () => {
+        button.hidden = false; button.disabled = false; button.removeAttribute("aria-busy");
+        label.textContent = video.ended ? "もう一度再生" : "再生する";
+      };
+      button.addEventListener("click", () => {
+        if (video.ended) video.currentTime = 0;
+        button.disabled = true; button.setAttribute("aria-busy", "true");
+        videoStatus.textContent = "読み込み中…";
+        video.play().catch(() => { showPlay(); videoStatus.textContent = "再生できませんでした。下の操作バーから再生するか、ページを読み直してください。"; });
+      });
+      video.addEventListener("play", () => { stopDialogue(); slideshow?.pause(); });
+      video.addEventListener("playing", () => { button.hidden = true; button.disabled = false; button.removeAttribute("aria-busy"); videoStatus.textContent = ""; });
+      video.addEventListener("pause", showPlay);
+      video.addEventListener("ended", showPlay);
+      video.addEventListener("error", () => { showPlay(); videoStatus.textContent = "動画を読み込めませんでした。下の会話文でも復習できます。"; });
+      ["dialoguePlay", "btnPlay", "bigPlay", "btnReplay"].forEach(id => document.getElementById(id)?.addEventListener("click", () => video.pause(), true));
+    }
     document.getElementById("dialogueStop").addEventListener("click", stopDialogue);
     document.getElementById("dialoguePlay").addEventListener("click", () => {
       if (!synth || typeof SpeechSynthesisUtterance === "undefined") { status.textContent = "この端末では読み上げを利用できません。会話の文章で復習できます。"; return; }
@@ -216,7 +240,7 @@
     document.getElementById("btnPlay").addEventListener("click", stopDialogue, true);
     document.getElementById("bigPlay").addEventListener("click", stopDialogue, true);
     document.getElementById("btnReplay").addEventListener("click", stopDialogue, true);
-    activeLesson = { destroy() { stopDialogue(); slideshow?.destroy(); } };
+    activeLesson = { destroy() { video?.pause(); stopDialogue(); slideshow?.destroy(); } };
   }
 
   function renderSearch(query) {
@@ -476,6 +500,7 @@
     setPlayingUI(false);
 
     return {
+      pause,
       destroy() {
         playing = false; token++; stopSpeech();
         if (synth) { try { synth.removeEventListener("voiceschanged", pickVoice); } catch (e) {} }

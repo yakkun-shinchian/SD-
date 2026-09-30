@@ -510,6 +510,18 @@ button { font-family: inherit; cursor: pointer; }
 :focus-visible { outline:3px solid #267dc5; outline-offset:4px; }
 .enhanced-main { max-width:1080px; }
 .v5-heading { padding:24px 0 30px; }
+.v5-video-section { margin:0 0 40px; }
+.v5-video-section p { line-height:1.9; }
+.v5-video-player { position:relative; width:min(100%,380px); margin:24px auto; overflow:hidden; border-radius:14px; background:#f4eee4; box-shadow:0 12px 35px #2e4d3820; }
+.v5-video-player video { display:block; width:100%; aspect-ratio:9/16; object-fit:contain; }
+.v5-video-play { position:absolute; inset:0 0 56px; width:100%; display:flex; align-items:center; justify-content:center; border:0; background:transparent; cursor:pointer; }
+.v5-video-play[hidden] { display:none; }
+.v5-video-play > span { display:flex; flex-direction:column; align-items:center; gap:7px; min-width:112px; padding:16px; border:2px solid white; border-radius:24px; background:#253f35e8; color:white; font-size:32px; box-shadow:0 4px 18px #0004; }
+.v5-video-play small { font-size:15px; font-weight:bold; }
+.v5-video-play:focus-visible > span { outline:4px solid #ffca72; outline-offset:4px; }
+.v5-video-play:disabled { cursor:wait; }
+#v5VideoStatus { min-height:1.8em; text-align:center; font-size:14px; }
+.v5-video-credit { color:var(--text-sub); font-size:13px; }
 .v5-heading h1 { font-size:clamp(25px,3vw,38px); line-height:1.6; margin:16px 0; }
 .v5-heading p { line-height:1.9; color:var(--text-sub); }
 .v5-intro { display:grid; grid-template-columns:1.1fr 1fr; align-items:center; gap:34px; }

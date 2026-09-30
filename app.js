@@ -166,7 +166,7 @@
       <div class="welcome__actions"><a class="warm-btn" href="#/watch/base01">▶ バイタルサインの動画を見る</a><button class="warm-btn" type="button" data-scroll-catalog>教材を探す <span aria-hidden="true">›</span></button>
       <a class="warm-btn warm-btn--outline" href="index.html">人工呼吸器を体験する <span aria-hidden="true">›</span></a></div></div></section>
       <nav class="subject-nav" aria-label="分野から教材を探す">${CATEGORIES.filter(c => c.key !== "all").map(c => `<a href="#/category/${encodeURIComponent(c.key)}"><span aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</a>`).join("")}</nav>
-      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、図解とスライドで。", "波形の見方を、ひとつずつ。"][i]}</p>${i === 0 ? '<span class="lesson-status">更新：V5イラスト・音声付き動画</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
+      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、イラストと会話で。", "波形の見方を、ひとつずつ。"][i]}</p>${i <= 1 ? '<span class="lesson-status">更新：V5イラスト・音声付き動画</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
       <section id="learningCatalog" class="learning-section"><h2>すべての教材 <small>全${PROGRAMS.length}本</small></h2>${gridHtml(PROGRAMS)}</section>
       <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><span>YAKUBON STUDIO</span></footer>`;
   }
@@ -244,6 +244,27 @@
     document.getElementById("bigPlay").addEventListener("click", stopDialogue, true);
     document.getElementById("btnReplay").addEventListener("click", stopDialogue, true);
     activeLesson = { destroy() { video?.pause(); stopDialogue(); slideshow?.destroy(); } };
+  }
+
+  function renderAnatomyV5(p, lesson) {
+    main.classList.add("enhanced-main");
+    main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a><article class="v5-lesson">
+      <header class="v5-heading"><span class="lesson-status">${escapeHtml(p.category)} · V5イラスト・音声付き動画</span><h1>${escapeHtml(lesson.title)}</h1><p>${escapeHtml(lesson.intro)}</p></header>
+      <section class="v5-video-section"><p>画面中央の ▶ を押すと、先輩と後輩の会話が音声付きで再生されます。</p><div class="v5-video-player"><video id="v5Video" controls playsinline preload="metadata" poster="${escapeHtml(lesson.poster)}" aria-label="${escapeHtml(lesson.title)}の音声付き動画"><source src="${escapeHtml(lesson.video)}" type="video/mp4">動画を再生できない場合は、下の会話文をご覧ください。</video><button id="v5VideoPlay" class="v5-video-play" type="button" aria-label="${escapeHtml(lesson.title)}の動画を再生"><span>▶<small id="v5VideoLabel">再生する</small></span></button></div><p id="v5VideoStatus" role="status" aria-live="polite"></p><p class="v5-video-credit">声：CoeFont／後輩「汎用式概念χ-soft-v2」（CV：ろさちゃん）、先輩「後藤邑子」</p></section>
+      <section class="v5-section takeaway"><h2>今日、持ち帰る3つ</h2><ul>${lesson.summary.map(t=>`<li>${escapeHtml(t)}</li>`).join("")}</ul></section>
+      <section class="v5-section"><h2>血液の流れをたどろう</h2><p>${lesson.flow.map(escapeHtml).join(" → ")}</p><p>ポンプ・部屋・扉のイラストは、しくみを理解するための比喩です。</p></section>
+      <section class="v5-section"><h2>イラストと会話で復習</h2>${lesson.pages.map(d=>`<details class="v5-anatomy-page"><summary>${d.page}. ${escapeHtml(d.title.replace(/\n/g," "))}</summary><img src="anat01-v5-page-${String(d.page).padStart(2,"0")}.jpg" alt="${escapeHtml(d.title.replace(/\n/g," "))}" width="1080" height="1920" loading="lazy"><div class="dialogue"><div class="dialogue__line"><span class="dialogue__role">後輩</span><p>${escapeHtml(d.junior)}</p></div><div class="dialogue__line dialogue__line--senior"><span class="dialogue__role">先輩</span><p>${escapeHtml(d.senior)}</p></div>${d.closing?`<div class="dialogue__line"><span class="dialogue__role">後輩</span><p>${escapeHtml(d.closing)}</p></div>`:""}</div></details>`).join("")}</section>
+      <section class="v5-section"><h2>もう少し詳しく学ぶ</h2><p>これまでの解説本文も、文章で復習できます。</p><div class="v5-detail-list">${scenesOf(p.id).map(d=>`<div><h3>${escapeHtml(d.heading)}</h3><p>${escapeHtml(d.narration)}</p></div>`).join("")}</div></section>
+      <section class="v5-section references"><h2>参考資料</h2><a href="https://www.nhlbi.nih.gov/health/heart/blood-flow" target="_blank" rel="noopener noreferrer">NHLBI：How Blood Flows through the Heart</a><p>内容照合：2026年10月1日</p></section><footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><a href="#/">ほかの教材へ</a></footer></article>`;
+    document.title = `${lesson.title}｜NurseTube`;
+    const video=document.getElementById("v5Video"),button=document.getElementById("v5VideoPlay"),label=document.getElementById("v5VideoLabel"),status=document.getElementById("v5VideoStatus");
+    const showPlay=()=>{button.hidden=false;button.disabled=false;button.removeAttribute("aria-busy");label.textContent=video.ended?"もう一度再生":"再生する";};
+    button.addEventListener("click",()=>{if(video.ended)video.currentTime=0;button.disabled=true;button.setAttribute("aria-busy","true");status.textContent="読み込み中…";video.play().catch(()=>{showPlay();status.textContent="再生できませんでした。下の操作バーから再生してください。";});});
+    video.addEventListener("playing",()=>{button.hidden=true;button.disabled=false;button.removeAttribute("aria-busy");status.textContent="";});
+    video.addEventListener("pause",showPlay);video.addEventListener("ended",showPlay);
+    video.addEventListener("error",()=>{showPlay();status.textContent="動画を読み込めませんでした。下の会話文でも復習できます。";});
+    const onVisibility=()=>{if(document.hidden)video.pause();};document.addEventListener("visibilitychange",onVisibility);
+    activeLesson={destroy(){video.pause();video.removeAttribute("src");video.querySelector("source")?.removeAttribute("src");video.load();document.removeEventListener("visibilitychange",onVisibility);}};
   }
 
   function renderSearch(query) {
@@ -535,7 +556,7 @@
         <p>番組が見つからなかったのだ。</p><a class="btn-yt" href="#/">ホームにもどるのだ</a></div>`;
       return;
     }
-    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { renderEnhanced(p, ENHANCED_LESSONS[id]); return; }
+    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { const lesson = ENHANCED_LESSONS[id]; if (lesson.kind === "anatomy-v5") renderAnatomyV5(p, lesson); else renderEnhanced(p, lesson); return; }
     const tags = (p.tags || []).map((t) => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
     const hasLesson = !p.videoId && scenesOf(p.id);
     main.innerHTML = `

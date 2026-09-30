@@ -601,3 +601,7 @@ button { font-family: inherit; cursor: pointer; }
   .range-table { font-size:14px; } .range-table th,.range-table td { padding:10px 8px; } .range-table td:nth-child(2) { width:30%; }
   .quiz { padding:20px; } .takeaway { padding:20px; } .takeaway ul { font-size:16px; }
 }
+
+.v5-anatomy-page { margin:18px 0; }
+.v5-anatomy-page summary { cursor:pointer; font-weight:700; padding:12px 0; }
+.v5-anatomy-page > img { display:block; width:min(100%,380px); height:auto; margin:12px auto; border-radius:12px; }

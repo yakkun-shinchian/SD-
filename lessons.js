@@ -39,3 +39,84 @@ const ENHANCED_LESSONS = {
     ],
   },
 };
+
+ENHANCED_LESSONS.anat01 = {
+  "kind": "anatomy-v5",
+  "title": "心臓の解剖と血液の流れ",
+  "intro": "右は肺へ、左は全身へ。先輩と後輩の会話で、心臓のしくみをひとつずつ。",
+  "poster": "anat01-v5-page-01.jpg",
+  "video": "anat01-v5-review.mp4",
+  "summary": [
+    "右心室から肺へ送り、肺静脈で左心房へ戻る",
+    "左心室から全身へ送り、大静脈で右心房へ戻る",
+    "4つの弁が血液の逆流を防ぐ"
+  ],
+  "flow": [
+    "全身",
+    "上・下大静脈",
+    "右心房",
+    "三尖弁",
+    "右心室",
+    "肺動脈弁",
+    "肺動脈",
+    "肺",
+    "肺静脈",
+    "左心房",
+    "僧帽弁",
+    "左心室",
+    "大動脈弁",
+    "大動脈",
+    "全身"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "title": "心臓は\n２つのポンプ！",
+      "junior": "先輩、心臓の右と左って、何が違うんですか？",
+      "senior": "右は肺へ、左は全身へ。まず送り先で分けよう！",
+      "summary": "右は肺へ／左は全身へ",
+      "art": "Two large friendly hand-painted pump metaphors, one beside a lung icon and one beside a body silhouette. No anatomical cross section or arrows."
+    },
+    {
+      "page": 2,
+      "title": "４つの部屋は\n受け取る・送る",
+      "junior": "心房と心室、名前がごちゃごちゃになります。",
+      "senior": "心房は受け取り、心室は送り出す部屋。右と左に１組ずつあるよ。",
+      "summary": "心房＝受け取る／心室＝送り出す",
+      "art": "A dollhouse metaphor with four unlabeled rooms, two receiving trays and two pumps. Explicitly a metaphor, not an anatomical heart diagram. No extra labels."
+    },
+    {
+      "page": 3,
+      "title": "肺で酸素を\n受け取る！",
+      "junior": "右心室から出た血液は、どこへ行くんですか？",
+      "senior": "肺動脈で肺へ。酸素を受け取って、肺静脈で左心房へ戻るよ。",
+      "summary": "肺循環＝心臓と肺の往復",
+      "art": "Friendly cartoon lung icon and red blood cell character taking an oxygen parcel. Illustrative metaphor only, no vessels or arrows."
+    },
+    {
+      "page": 4,
+      "title": "左心室から\n全身へ出発！",
+      "junior": "肺から帰ってきた血液は、次にどうなるんですか？",
+      "senior": "左心房から左心室へ。大動脈で全身に酸素を届け、大静脈で右心房へ戻るよ。",
+      "summary": "体循環＝心臓と全身の往復",
+      "art": "Red blood cell courier delivering an oxygen parcel to a simple human silhouette. No vascular map or arrows; conceptual courier metaphor."
+    },
+    {
+      "page": 5,
+      "title": "４つの弁は\n逆流防止の扉",
+      "junior": "血液が、後ろへ戻らないのはどうしてですか？",
+      "senior": "弁が逆流を防ぐから。右は三尖弁と肺動脈弁、左は僧帽弁と大動脈弁だよ。",
+      "summary": "弁＝逆流を防ぐ",
+      "art": "Simple hinged one-way door metaphor with a red blood cell approaching. No anatomical valve reconstruction or flow arrows. Friendly clear door, not an exact valve diagram."
+    },
+    {
+      "page": 6,
+      "title": "動脈・静脈は\n向きで覚える！",
+      "junior": "動脈なら、必ず酸素が多いんですよね？",
+      "senior": "名前は心臓から出るか、戻るかで決まるよ。肺動脈は酸素が少なく、肺静脈は多いんだ。",
+      "summary": "右は肺へ／左は全身へ／弁は逆流防止",
+      "art": "Two nurse characters confidently checking a clipboard with a simple heart icon. No anatomical section, arrows or added text.",
+      "closing": "フォローしていただくと励みになります。よろしくお願いします。"
+    }
+  ]
+};

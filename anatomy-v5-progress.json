@@ -1,0 +1,37 @@
+[
+  {
+    "id": "anat01",
+    "title": "心臓の解剖と血液の流れ",
+    "state": "確認待ち",
+    "review_approved": false,
+    "replacement_done": false
+  },
+  {
+    "id": "anat02",
+    "title": "腎臓のはたらき・ネフロンと尿",
+    "state": "未制作",
+    "review_approved": false,
+    "replacement_done": false
+  },
+  {
+    "id": "anat03",
+    "title": "呼吸のメカニズムとガス交換",
+    "state": "未制作",
+    "review_approved": false,
+    "replacement_done": false
+  },
+  {
+    "id": "anat04",
+    "title": "交感神経と副交感神経",
+    "state": "未制作",
+    "review_approved": false,
+    "replacement_done": false
+  },
+  {
+    "id": "anat05",
+    "title": "ホルモンと内分泌系",
+    "state": "未制作",
+    "review_approved": false,
+    "replacement_done": false
+  }
+]

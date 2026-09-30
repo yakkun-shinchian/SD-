@@ -96,7 +96,7 @@ const PROGRAMS = [
   // --- 基礎看護学 ---
   {
     id: "base01",
-    title: "バイタルサイン測定の基本と正常値【保存版】",
+    title: "バイタルサイン｜数字の向こうの患者さんを見る",
     category: "基礎看護学",
     channel: PRESENTER,
     durationSec: 935,

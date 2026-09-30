@@ -126,21 +126,21 @@ const FIGURES = {
 
   // ---- バイタルサイン（モニター風） ----
   vitals() {
-    return `<svg viewBox="0 0 400 300" class="fig" role="img" aria-label="バイタルサインの正常値">
+    return `<svg viewBox="0 0 400 300" class="fig" role="img" aria-label="成人安静時の参考値。測定条件や疾患で異なる">
       <rect width="400" height="300" rx="14" fill="#0d1622"/>
       <path class="ecg-line" d="M16 70 H120 l10 0 l8 -34 l10 60 l8 -26 H210 l10 0 l8 -34 l10 60 l8 -26 H384"
             fill="none" stroke="#39e08a" stroke-width="3"/>
       <g font-family="inherit">
         <text x="20" y="120" font-size="13" fill="#9fb3c8">体温</text>
-        <text x="20" y="146" font-size="20" font-weight="700" fill="#fff">36〜37 ℃</text>
+        <text x="20" y="146" font-size="20" font-weight="700" fill="#fff">36.5〜37.3 ℃</text>
         <text x="210" y="120" font-size="13" fill="#9fb3c8">脈拍</text>
         <text x="210" y="146" font-size="20" font-weight="700" fill="#46d18a">60〜100 /分</text>
         <text x="20" y="190" font-size="13" fill="#9fb3c8">呼吸</text>
         <text x="20" y="216" font-size="20" font-weight="700" fill="#fff">12〜20 /分</text>
         <text x="210" y="190" font-size="13" fill="#9fb3c8">血圧</text>
-        <text x="210" y="216" font-size="20" font-weight="700" fill="#fff">120/80 mmHg</text>
+        <text x="210" y="216" font-size="20" font-weight="700" fill="#fff">普段の値と比較</text>
         <text x="20" y="260" font-size="13" fill="#9fb3c8">SpO₂</text>
-        <text x="20" y="286" font-size="20" font-weight="700" fill="#46c7d1">96〜99 %</text>
+        <text x="20" y="286" font-size="20" font-weight="700" fill="#46c7d1">95〜100 %</text>
       </g>
     </svg>`;
   },

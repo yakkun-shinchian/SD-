@@ -35,6 +35,8 @@
   const ytSearchUrl = (p) =>
     "https://www.youtube.com/results?search_query=" + encodeURIComponent("看護 " + p.title);
 
+  function safeDecode(value) { try { return decodeURIComponent(value); } catch (e) { return value; } }
+
   function escapeHtml(str) {
     return String(str).replace(/[&<>"']/g, (c) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
@@ -95,7 +97,7 @@
 
   function cardHtml(p) {
     return `
-      <article class="card" data-goto="#/watch/${p.id}">
+      <a class="card" href="#/watch/${encodeURIComponent(p.id)}">
         ${thumbHtml(p)}
         <div class="card__meta">
           <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(p.channel.charAt(0))}</span>
@@ -103,11 +105,11 @@
             <h3 class="card__title">${escapeHtml(p.title)}</h3>
             <div class="card__sub">${escapeHtml(p.channel)}</div>
             <div class="card__sub">
-              <span>${formatViews(p.views)} 回視聴</span><span>${relativeDate(p.published)}</span>
+              <span>${scenesOf(p.id) ? scenesOf(p.id).length + "場面で学ぶ" : "教材"}</span>
             </div>
           </div>
         </div>
-      </article>`;
+      </a>`;
   }
 
   function gridHtml(list) {
@@ -145,8 +147,76 @@
     const heading = key === "all"
       ? `ずんだもんのおすすめ番組なのだ <span class="muted">全${PROGRAMS.length}本</span>`
       : `${cat ? cat.icon + " " : ""}${escapeHtml(cat ? cat.label : key)}の番組なのだ <span class="muted">${list.length}本</span>`;
+    if (key === "all") { renderWarmHome(); return; }
     main.innerHTML = chipsHtml(key) +
       `<h2 class="section-title">${heading}</h2>` + gridHtml(list);
+  }
+
+  function renderWarmHome() {
+    main.classList.add("home-main");
+    const picks = ["base01", "anat01", "exam03"].map(byId).filter(Boolean);
+    const visualNames = ["vitals", "heart", "ecg"];
+    main.innerHTML = `<section class="welcome" aria-labelledby="welcomeTitle">
+      <img class="welcome__art" src="images/nursetube-hero.webp" alt="青い制服の先輩と後輩が、一緒にノートを開いて学んでいる" width="1536" height="1024" fetchpriority="high">
+      <div class="welcome__copy"><h1 id="welcomeTitle">看護の「わからない」を、<br>ひとつずつ。</h1>
+      <p>見て、聴いて、触って。<br class="mobile-break">「なるほど」を育てよう。</p>
+      <div class="welcome__actions"><button class="warm-btn" type="button" data-scroll-catalog>教材を探す <span aria-hidden="true">›</span></button>
+      <a class="warm-btn warm-btn--outline" href="index.html">人工呼吸器を体験する <span aria-hidden="true">›</span></a></div></div></section>
+      <nav class="subject-nav" aria-label="分野から教材を探す">${CATEGORIES.filter(c => c.key !== "all").map(c => `<a href="#/category/${encodeURIComponent(c.key)}"><span aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</a>`).join("")}</nav>
+      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、図解とスライドで。", "波形の見方を、ひとつずつ。"][i]}</p>${i === 0 ? '<span class="lesson-status">イラストと会話で学ぶ</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
+      <section id="learningCatalog" class="learning-section"><h2>すべての教材 <small>全${PROGRAMS.length}本</small></h2>${gridHtml(PROGRAMS)}</section>
+      <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><span>YAKUBON STUDIO</span></footer>`;
+  }
+
+  function renderEnhanced(p, lesson) {
+    main.classList.add("enhanced-main");
+    main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a>
+      <article class="v5-lesson"><header class="v5-heading"><span class="lesson-status">基礎看護学 · イラストと会話</span><h1>${escapeHtml(lesson.title)}</h1><p>${escapeHtml(lesson.intro)}</p></header>
+      <section class="v5-intro"><img src="${lesson.image}" alt="先輩と後輩が患者さんの様子とバイタルサインを確認するイラスト" width="1536" height="1024"><div><h2>${escapeHtml(lesson.hook)}</h2><p>測って終わりにせず、<br><strong>「いつもと違う？」まで見る。</strong></p><p>ここを押さえると、観察がつながります。</p></div></section>
+      <section class="v5-section"><h2>先輩と後輩の、なるほど会話</h2><div class="dialogue">${lesson.dialogue.map(d => `<div class="dialogue__line ${d.role === "先輩" ? "dialogue__line--senior" : ""}"><span class="dialogue__role">${d.role}</span><p>${escapeHtml(d.text)}</p></div>`).join("")}</div>
+      <div class="dialogue-audio"><button id="dialoguePlay" class="warm-btn" type="button">会話を聴く</button><button id="dialogueStop" class="audio-stop" type="button">停止</button><span id="dialogueStatus" role="status">端末の日本語音声で読み上げます（指定話者の音声は未収録）。</span></div></section>
+      <section class="v5-section takeaway"><h2>今日、持ち帰る3つ</h2><ul>${lesson.summary.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul></section>
+      <section class="v5-section"><h2>成人・安静時の参考値</h2><p>一律の「安全ライン」ではありません。年齢・疾患・測定条件で異なります。</p><div class="range-table-wrap"><table class="range-table"><thead><tr><th scope="col">項目</th><th scope="col">参考値</th><th scope="col">観察のポイント</th></tr></thead><tbody>${lesson.ranges.map(r => `<tr><th scope="row">${escapeHtml(r[0])}</th><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td></tr>`).join("")}</tbody></table></div></section>
+      <section class="v5-section"><h2>もう少し詳しく学ぶ</h2><div class="v5-detail-list">${lesson.details.map(d => `<div><h3>${escapeHtml(d.title)}</h3><p>${escapeHtml(d.text)}</p></div>`).join("")}</div></section>
+      <section class="v5-section quiz"><h2>1問だけ、確かめよう</h2><p>${escapeHtml(lesson.quiz.question)}</p><div class="quiz__options">${lesson.quiz.options.map((o,i) => `<button type="button" data-quiz-answer="${i}">${escapeHtml(o)}</button>`).join("")}</div><p id="quizFeedback" class="quiz__feedback" role="status" hidden></p></section>
+      <section class="v5-section"><h2>スライドでも復習</h2><p>既存のスライド構成を残し、参考値の説明を見直しました。</p>${lessonHtml(p)}</section>
+      <section class="v5-section references"><h2>参考資料</h2><ul>${lesson.sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener">${escapeHtml(s.title)}</a></li>`).join("")}</ul><p>資料照合・更新：${lesson.reviewed}。学習用教材です。実際の観察・対応は施設の手順と患者さんごとの指示を確認してください。</p></section>
+      <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><a href="#/">ほかの教材へ</a></footer></article>`;
+    document.title = `${lesson.title}｜NurseTube`;
+    document.querySelectorAll("[data-quiz-answer]").forEach(button => button.addEventListener("click", () => {
+      const correct = Number(button.dataset.quizAnswer) === lesson.quiz.correct;
+      const feedback = document.getElementById("quizFeedback");
+      feedback.hidden = false;
+      feedback.textContent = `${correct ? "正解です。" : "もう一度、患者さんの様子に注目してみよう。"} ${lesson.quiz.explanation}`;
+      document.querySelectorAll("[data-quiz-answer]").forEach(b => b.setAttribute("aria-pressed", String(b === button)));
+    }));
+    const slideshow = createLesson(p.id, scenesOf(p.id));
+    const synth = window.speechSynthesis;
+    let dialogueToken = 0;
+    const status = document.getElementById("dialogueStatus");
+    const stopDialogue = () => { dialogueToken++; if (synth) synth.cancel(); status.textContent = "読み上げを停止しました。"; };
+    document.getElementById("dialogueStop").addEventListener("click", stopDialogue);
+    document.getElementById("dialoguePlay").addEventListener("click", () => {
+      if (!synth || typeof SpeechSynthesisUtterance === "undefined") { status.textContent = "この端末では読み上げを利用できません。会話の文章で復習できます。"; return; }
+      slideshow?.destroy(); stopDialogue(); const myToken = dialogueToken;
+      let index = 0;
+      const speakNext = () => {
+        if (myToken !== dialogueToken) return;
+        if (index >= lesson.dialogue.length) { status.textContent = "読み上げが終わりました。"; return; }
+        const d = lesson.dialogue[index++];
+        const utterance = new SpeechSynthesisUtterance(d.text);
+        utterance.lang = "ja-JP"; utterance.rate = 1; utterance.pitch = d.role === "先輩" ? 1 : 1.12;
+        const voice = synth.getVoices().find(v => /^ja/i.test(v.lang)); if (voice) utterance.voice = voice;
+        status.textContent = `${d.role}の会話を読み上げ中（${index}/${lesson.dialogue.length}）`;
+        utterance.onend = speakNext;
+        utterance.onerror = () => { if (myToken === dialogueToken) status.textContent = "読み上げを終了しました。端末の音声設定も確認してください。"; };
+        synth.speak(utterance);
+      }; speakNext();
+    });
+    document.getElementById("btnPlay").addEventListener("click", stopDialogue, true);
+    document.getElementById("bigPlay").addEventListener("click", stopDialogue, true);
+    document.getElementById("btnReplay").addEventListener("click", stopDialogue, true);
+    activeLesson = { destroy() { stopDialogue(); slideshow?.destroy(); } };
   }
 
   function renderSearch(query) {
@@ -424,7 +494,7 @@
         <div class="related-item__info">
           <p class="related-item__title">${escapeHtml(p.title)}</p>
           <p class="related-item__sub">${escapeHtml(p.channel)}</p>
-          <p class="related-item__sub">${formatViews(p.views)} 回視聴・${relativeDate(p.published)}</p>
+          <p class="related-item__sub">${escapeHtml(p.category)}</p>
         </div>
       </div>`).join("")}</aside>`;
   }
@@ -437,6 +507,7 @@
         <p>番組が見つからなかったのだ。</p><a class="btn-yt" href="#/">ホームにもどるのだ</a></div>`;
       return;
     }
+    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { renderEnhanced(p, ENHANCED_LESSONS[id]); return; }
     const tags = (p.tags || []).map((t) => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
     const hasLesson = !p.videoId && scenesOf(p.id);
     main.innerHTML = `
@@ -454,7 +525,7 @@
             <div class="watch__tags">${tags}</div>
           </div>
           <div class="desc-box">
-            <div class="stat">${formatViews(p.views)} 回視聴・${relativeDate(p.published)}・${formatDuration(p.durationSec)}</div>
+            <div class="stat">${escapeHtml(p.category)}・${formatDuration(p.durationSec)}</div>
             ${escapeHtml(p.description)}
             <p class="yt-more"><a href="${ytSearchUrl(p)}" target="_blank" rel="noopener">▶ もっと詳しくはYouTubeでも探せるのだ</a></p>
           </div>
@@ -469,20 +540,21 @@
   // ----------------------- ルーター -----------------------
   function router() {
     if (activeLesson) { activeLesson.destroy(); activeLesson = null; }
+    main.classList.remove("home-main", "enhanced-main");
     closeSidebar();
     main.scrollTop = 0;
     window.scrollTo(0, 0);
-    document.title = "NurseTube ナースチューブ｜ずんだもんと学ぶ看護のYouTube";
+    document.title = "NurseTube｜YAKUBON STUDIO 看護の学び";
 
     const hash = location.hash.replace(/^#/, "") || "/";
     const parts = hash.split("/").filter(Boolean); // 例: ["watch","anat01"]
 
     if (parts[0] === "watch" && parts[1]) {
-      renderWatch(decodeURIComponent(parts[1]));
+      renderWatch(safeDecode(parts[1]));
     } else if (parts[0] === "category" && parts[1]) {
-      renderHome(decodeURIComponent(parts[1]));
+      renderHome(safeDecode(parts[1]));
     } else if (parts[0] === "search" && parts[1]) {
-      const q = decodeURIComponent(parts[1]);
+      const q = safeDecode(parts[1]);
       searchInput.value = q;
       renderSearch(q);
     } else {
@@ -493,6 +565,7 @@
   // ----------------------- イベント -----------------------
   // カード等のクリック → data-goto のハッシュへ
   document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-scroll-catalog]")) { document.getElementById("learningCatalog")?.scrollIntoView({ behavior: "auto" }); return; }
     const el = e.target.closest("[data-goto]");
     if (el) {
       e.preventDefault();
@@ -510,7 +583,7 @@
   function applyTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
     themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
-    localStorage.setItem("nursetube-theme", theme);
+    try { localStorage.setItem("nursetube-theme", theme); } catch (e) {}
   }
   themeToggle.addEventListener("click", () => {
     const cur = document.documentElement.getAttribute("data-theme");
@@ -542,10 +615,11 @@
   });
 
   // ----------------------- 起動 -----------------------
-  const saved = localStorage.getItem("nursetube-theme");
+  let saved = null;
+  try { saved = localStorage.getItem("nursetube-theme"); } catch (e) {}
   const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   applyTheme(saved || (prefersDark ? "dark" : "light"));
-  renderCountdown();
+  // 固定の国試日程は確認前のため表示しない。
   window.addEventListener("hashchange", router);
   router();
 })();

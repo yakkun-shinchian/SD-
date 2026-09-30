@@ -9,14 +9,14 @@
   {
     "id": "anat02",
     "title": "腎臓のはたらき・ネフロンと尿",
-    "state": "確認待ち",
-    "review_approved": false,
-    "replacement_done": false
+    "state": "交換済み",
+    "review_approved": true,
+    "replacement_done": true
   },
   {
     "id": "anat03",
     "title": "呼吸のメカニズムとガス交換",
-    "state": "未制作",
+    "state": "制作中",
     "review_approved": false,
     "replacement_done": false
   },

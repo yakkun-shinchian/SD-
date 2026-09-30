@@ -46,10 +46,10 @@ const PROGRAMS = [
   },
   {
     id: "anat02",
-    title: "腎臓のはたらき｜ネフロンと尿ができる仕組み",
+    title: "腎臓のはたらき｜V5イラストと会話で学ぶ",
     category: "解剖生理学",
     channel: PRESENTER,
-    durationSec: 845,
+    durationSec: 98,
     views: 96200,
     published: "2026-03-02",
     videoId: "",

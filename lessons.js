@@ -120,3 +120,123 @@ ENHANCED_LESSONS.anat01 = {
     }
   ]
 };
+
+ENHANCED_LESSONS.anat02 = {
+  "kind": "anatomy-v5",
+  "title": "腎臓のはたらき｜ネフロンと尿ができるしくみ",
+  "intro": "こす・取り戻す・尿へ移す。先輩と後輩の会話で、体の調整係をひとつずつ。",
+  "poster": "anat02-v5-page-01.jpg",
+  "video": "anat02-v5-review.mp4",
+  "summary": [
+    "腎臓は老廃物を捨て、水分・電解質を調整する",
+    "ろ過・再吸収・分泌を、移動の向きで整理する",
+    "尿量だけで判断せず、検査や体の状態も合わせて見る"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "title": "腎臓は\n体の調整係！",
+      "junior": "腎臓って、尿を作るだけですか？",
+      "senior": "老廃物を捨て、水分と電解質のバランスも整えるよ。",
+      "summary": "捨てる＋バランスを整える",
+      "art": "Friendly bean-shaped kidney mascot operating a balance scale between blue water-drop and small mineral symbols. Conceptual metaphor, not anatomical diagram. No extra words or arrows."
+    },
+    {
+      "page": 2,
+      "title": "尿を作る工房\nネフロン",
+      "junior": "ネフロンって、何のことですか？",
+      "senior": "糸球体と尿細管のセット。こすフィルターと、取り戻す通り道だよ。",
+      "summary": "糸球体＋尿細管＝ネフロン",
+      "art": "Tiny craft workshop with an unlabelled strainer and a winding conveyor, friendly conceptual metaphor for a filtering and reclaiming workshop. No reconstructed kidney cross section, no vascular arrows."
+    },
+    {
+      "page": 3,
+      "title": "まず、こす！\nこれが「ろ過」",
+      "junior": "血液が、そのまま尿になるんですか？",
+      "senior": "水や小さな物質がこされて原尿に。血球や大きなたんぱく質は、通常は残るよ。",
+      "summary": "原尿＝尿のもと",
+      "art": "A kitchen strainer metaphor with small blue water drops below, large red blood cell and large protein parcel retained above. No germs, no real vascular diagram, no arrows."
+    },
+    {
+      "page": 4,
+      "title": "必要なものは\n取り戻す！",
+      "junior": "原尿を、全部捨てちゃうんですか？",
+      "senior": "水やブドウ糖などを血液へ戻すよ。これが再吸収。原尿の大部分は戻るんだ。",
+      "summary": "再吸収＝尿細管から血液へ",
+      "art": "A reclaiming worker metaphor calmly collecting water drops and sugar cube parcels into a red collection basket. Conceptual only; no vessel or tube labelled, no arrows."
+    },
+    {
+      "page": 5,
+      "title": "尿の側へ\n追加で移す！",
+      "junior": "分泌は、再吸収と何が違うんですか？",
+      "senior": "向きが逆だよ。血液から尿細管へ、余分な酸などを移すのが分泌なんだ。",
+      "summary": "分泌＝血液から尿細管へ",
+      "art": "Parcel transfer metaphor: a friendly worker places an acid parcel in a yellow urine collection basket from beside a red blood-side basket. No chemical formula or added text, no arrows, no precise diagram."
+    },
+    {
+      "page": 6,
+      "title": "水の節約係\n抗利尿ホルモン",
+      "junior": "抗利尿ホルモンって何ですか？",
+      "senior": "ADHとも呼ぶよ。集合管で水を血液へ戻し、尿を濃くするんだ。",
+      "summary": "ADH＝水を取り戻す調整",
+      "art": "A friendly blue water drop saved in a safe transparent reservoir by a gentle kidney mascot adjusting a dial. Hormone control metaphor, no tap draining water to outside, no arrows."
+    },
+    {
+      "page": 7,
+      "title": "血圧を支える\nホルモン連携",
+      "junior": "腎臓は、血圧にも関わるんですか？",
+      "senior": "レニン・アンジオテンシン・アルドステロン系。塩分と水を保ち、血圧を支えるよ。",
+      "summary": "塩分・水分・血圧を調整",
+      "art": "Three friendly relay team messenger mascots beside a water drop and small salt parcel. Conceptual teamwork metaphor, no unrelated hearts or celebration, no direction arrows, no extra text."
+    },
+    {
+      "page": 8,
+      "title": "尿量だけで\n安心しない！",
+      "junior": "尿が出ていれば、腎臓は大丈夫ですか？",
+      "senior": "尿量だけでは決められないよ。血液検査や尿検査、体の様子も合わせて見るんだ。",
+      "summary": "尿量＋検査＋体の様子",
+      "art": "Two nurses checking a clipboard showing small urine collection cup, blood sample tube and calm patient silhouette symbols. No additional duplicate nurses, no extra text.",
+      "closing": "フォローしていただけると励みになります。よろしくお願いします。"
+    }
+  ],
+  "explanations": [
+    {
+      "title": "3つの働きの向き",
+      "text": "ろ過：糸球体の血液 → 原尿。再吸収：尿細管の中 → 血液。分泌：血液 → 尿細管の中。工房や荷物運びのイラストは、しくみを理解するための比喩です。"
+    },
+    {
+      "title": "ネフロンの正式な構成",
+      "text": "ネフロンは、腎小体（糸球体とボウマン嚢）と尿細管からなる腎臓の機能単位です。各腎臓に約100万個あります。動画では、まず「糸球体と尿細管のセット」として紹介しています。原尿は糸球体でろ過され、ボウマン嚢に集まる尿のもとです。尿細管で必要な物質や水が再吸収され、余分な酸などが分泌されます。"
+    },
+    {
+      "title": "ホルモンによる調整",
+      "text": "抗利尿ホルモン（ADH、バソプレシン）は、主に集合管で水の再吸収を促し、尿を濃くする方向に働きます。腎臓で作られるホルモンではなく、視床下部で作られ、下垂体後葉から放出されます。"
+    },
+    {
+      "title": "ホルモンによる調整",
+      "text": "レニン・アンジオテンシン・アルドステロン系は血圧と体液量の調整に関わります。アンジオテンシンⅡには血管を収縮させる働きがあり、副腎皮質から分泌されるアルドステロンは腎臓でナトリウムの再吸収とカリウムの排泄を促します。塩分と水の保持も、血圧を支える働きにつながります。"
+    },
+    {
+      "title": "観察につなげる",
+      "text": "尿が出ていても、腎機能が正常とは限りません。腎機能は、血液検査から推算する糸球体ろ過量（eGFR）、尿中アルブミンなどの尿検査、経過や体の状態を合わせて評価します。尿量だけで判断しないことが大切です。"
+    }
+  ],
+  "sources": [
+    {
+      "title": "NIDDK：Your Kidneys & How They Work",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/kidneys-how-they-work"
+    },
+    {
+      "title": "NIDDK：Diabetes Insipidus",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/diabetes-insipidus"
+    },
+    {
+      "title": "NIDDK：Chronic Kidney Disease Tests & Diagnosis",
+      "url": "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/tests-diagnosis"
+    },
+    {
+      "title": "Society for Endocrinology：Aldosterone",
+      "url": "https://www.yourhormones.info/hormones/aldosterone/"
+    }
+  ]
+};

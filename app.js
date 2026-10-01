@@ -79,12 +79,25 @@
     return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
   }
 
+  const anatomyV5Of = (id) => {
+    const lesson = typeof ENHANCED_LESSONS !== "undefined" ? ENHANCED_LESSONS[id] : null;
+    return lesson && lesson.kind === "anatomy-v5" ? lesson : null;
+  };
+
   // 番組サムネイル（CSSグラデーション＋タイトル）を生成
   function thumbHtml(p, opts = {}) {
     const c = catOf(p.category) || { color: "#666", icon: "🎬" };
     const grad = `linear-gradient(135deg, ${c.color} 0%, ${shade(c.color, -35)} 100%)`;
     const play = opts.noPlay ? "" :
       `<div class="thumb__play"><span>▶</span></div>`;
+    const lesson = anatomyV5Of(p.id);
+    if (lesson) return `
+      <div class="thumb thumb--v5">
+        <img class="thumb__v5-image" src="${escapeHtml(lesson.poster)}" width="1080" height="1920" loading="lazy" alt="" />
+        <span class="thumb__cat">V5イラスト・会話動画</span>
+        <div class="thumb__title">${escapeHtml(lesson.title)}</div>
+        <span class="thumb__dur">${formatDuration(p.durationSec)}</span>${play}
+      </div>`;
     return `
       <div class="thumb" style="background:${grad}">
         <span class="thumb__cat">${c.icon} ${escapeHtml(p.category)}</span>
@@ -96,16 +109,18 @@
   }
 
   function cardHtml(p) {
+    const lesson = anatomyV5Of(p.id);
+    const channel = lesson ? "先輩と後輩の会話" : p.channel;
     return `
       <a class="card" href="#/watch/${encodeURIComponent(p.id)}">
         ${thumbHtml(p)}
         <div class="card__meta">
-          <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(p.channel.charAt(0))}</span>
+          <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(channel.charAt(0))}</span>
           <div class="card__info">
             <h3 class="card__title">${escapeHtml(p.title)}</h3>
-            <div class="card__sub">${escapeHtml(p.channel)}</div>
+            <div class="card__sub">${escapeHtml(channel)}</div>
             <div class="card__sub">
-              <span>${scenesOf(p.id) ? scenesOf(p.id).length + "場面で学ぶ" : "教材"}</span>
+              <span>${lesson ? lesson.pages.length + "枚のイラスト・音声付き" : (scenesOf(p.id) ? scenesOf(p.id).length + "場面で学ぶ" : "教材")}</span>
             </div>
           </div>
         </div>

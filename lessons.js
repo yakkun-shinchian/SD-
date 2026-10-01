@@ -506,7 +506,7 @@ ENHANCED_LESSONS.anat05 = {
   "title": "ホルモンと内分泌系",
   "intro": "体内のメッセージを、出る場所・働き・観察で整理。先輩と後輩の会話で学ぼう。",
   "poster": "anat05-v5-page-01.jpg",
-  "video": "anat05-v5-review.mp4",
+  "video": "anat05-v5-review.mp4?v=20261001-reading-v2",
   "summary": [
     "出る場所・働き・観察で整理する",
     "すべてが下垂体の命令ではない",

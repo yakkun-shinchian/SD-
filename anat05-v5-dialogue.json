@@ -103,10 +103,10 @@
     "page": 2,
     "role": "senior",
     "text": "受容体という受け取り口がある細胞に働くよ。鍵と鍵穴のような関係なんだ。",
-    "reading": "受容体という受け取り口がある細胞に働くよ。鍵と鍵穴のような関係なんだ。",
+    "reading": "受容体という受け取り口がある細胞に働くよ。かぎとかぎあなのような関係なんだ。",
     "image": "anat05-v5-page-02.jpg",
     "audio": "anat05-v5-voice-04.mp3",
-    "source_audio": "4_0_後藤邑子_受容体とい.mp3",
+    "source_audio": "18_0_後藤邑子_受容体とい.mp3",
     "effect": {
       "type": "speaker-underline",
       "static_reason": "全文読解・二項比較のため保持",
@@ -367,10 +367,10 @@
     "page": 6,
     "role": "senior",
     "text": "体のエネルギーの使い方に関わるよ。多いと動悸や暑がり、少ないと寒がりや疲れやすさが見られるんだ。",
-    "reading": "体のエネルギーの使い方に関わるよ。多いと動悸や暑がり、少ないと寒がりや疲れやすさが見られるんだ。",
+    "reading": "体のエネルギーの使い方に関わるよ。多いとどうきやあつがり、少ないとさむがりや疲れやすさが見られるんだ。",
     "image": "anat05-v5-page-06.jpg",
     "audio": "anat05-v5-voice-12.mp3",
-    "source_audio": "12_0_後藤邑子_体のエネル.mp3",
+    "source_audio": "19_0_後藤邑子_体のエネル (1).mp3",
     "effect": {
       "type": "speaker-underline+focus-ring",
       "static_reason": null,
@@ -384,7 +384,7 @@
       "period": 1,
       "meaning": "話者の吹き出しを示す",
       "start": 0,
-      "end": 9.091,
+      "end": 9.143,
       "x": 550,
       "y": 665,
       "width": 360,
@@ -392,8 +392,8 @@
       "color": "0xe65983"
     },
     "start": 65.567,
-    "audio_duration": 9.090612,
-    "duration": 9.466666666666667
+    "audio_duration": 9.142857,
+    "duration": 9.5
   },
   {
     "scene": 13,
@@ -424,7 +424,7 @@
       "height": 5,
       "color": "0x7561d9"
     },
-    "start": 75.033,
+    "start": 75.067,
     "audio_duration": 3.526531,
     "duration": 3.9
   },
@@ -457,7 +457,7 @@
       "height": 5,
       "color": "0xe65983"
     },
-    "start": 78.933,
+    "start": 78.967,
     "audio_duration": 8.724898,
     "duration": 9.1
   },
@@ -490,7 +490,7 @@
       "height": 5,
       "color": "0x7561d9"
     },
-    "start": 88.033,
+    "start": 88.067,
     "audio_duration": 3.395918,
     "duration": 3.7666666666666666
   },
@@ -523,7 +523,7 @@
       "height": 5,
       "color": "0xe65983"
     },
-    "start": 91.8,
+    "start": 91.833,
     "audio_duration": 10.736327,
     "duration": 11.1
   },
@@ -556,7 +556,7 @@
       "height": 5,
       "color": "0x7561d9"
     },
-    "start": 102.9,
+    "start": 102.933,
     "audio_duration": 4.963265,
     "duration": 5.333333333333333
   }

@@ -70,7 +70,7 @@ const PROGRAMS = [
   },
   {
     id: "anat04",
-    title: "自律神経まとめ｜交感神経と副交感神経の作用一覧",
+    title: "交感神経と副交感神経｜V5イラストと会話で学ぶ",
     category: "解剖生理学",
     channel: PRESENTER,
     durationSec: 124,
@@ -82,7 +82,7 @@ const PROGRAMS = [
   },
   {
     id: "anat05",
-    title: "ホルモンと内分泌系の全体像をスッキリ整理",
+    title: "ホルモンと内分泌系｜V5イラストと会話で学ぶ",
     category: "解剖生理学",
     channel: PRESENTER,
     durationSec: 109,

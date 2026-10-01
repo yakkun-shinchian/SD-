@@ -120,8 +120,8 @@
   },
   "technical_checks": {
     "date": "2026-10-01",
-    "sha256": "376411120fcad926167740eebf5375ef2cdf0aa63a1e8b59bf0bde333aa253fc",
-    "duration": 108.256315,
+    "sha256": "24013292dea07b93d20c974825975109ec5b37b3ed84d7ffe5a9e4f0341c7fec",
+    "duration": 108.289649,
     "pages": 8,
     "utterances": 17,
     "dimensions": [
@@ -173,7 +173,12 @@
         "mean_absolute_difference": 5.7697928994082845
       }
     ],
-    "ASR": "未実施：全文一致の検収とは報告しない",
-    "bgm": "なし：会話を聞き取りやすくするため"
+    "ASR": {
+      "original_job": "b166ef26-0ef7-43b9-9475-1f7f56ec51c3",
+      "result": "17発話を検出。鍵／鍵穴・暑がりの文字起こし差分に対し、発話4と12の読みをひらがな指定で再生成。修正版の再文字起こし待ち。",
+      "human_listening_review": false
+    },
+    "bgm": "なし：会話を聞き取りやすくするため",
+    "full_decode": "PASS"
   }
 }

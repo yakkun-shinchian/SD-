@@ -84,19 +84,24 @@
     return lesson && ["anatomy-v5", "illustrated-v6"].includes(lesson.kind) ? lesson : null;
   };
 
+  // 表示用の情報。既存のバイタル動画プレーヤーはそのまま利用する。
+  const cardLessonOf = (id) => id === "base01"
+    ? { title: "バイタルサイン｜数字の向こうの患者さんを見る", poster: "vitals-v5-01.jpg", pages: new Array(4), durationSec: 50 }
+    : anatomyV5Of(id);
+
   // 番組サムネイル（CSSグラデーション＋タイトル）を生成
   function thumbHtml(p, opts = {}) {
     const c = catOf(p.category) || { color: "#666", icon: "🎬" };
     const grad = `linear-gradient(135deg, ${c.color} 0%, ${shade(c.color, -35)} 100%)`;
     const play = opts.noPlay ? "" :
       `<div class="thumb__play"><span>▶</span></div>`;
-    const lesson = anatomyV5Of(p.id);
+    const lesson = cardLessonOf(p.id);
     if (lesson) return `
       <div class="thumb thumb--v5">
         <img class="thumb__v5-image" src="${escapeHtml(lesson.poster)}" width="1080" height="1920" loading="lazy" alt="" />
         <span class="thumb__cat">${escapeHtml(lesson.version || "V5")}イラスト・会話動画</span>
         <div class="thumb__title">${escapeHtml(lesson.title)}</div>
-        <span class="thumb__dur">${formatDuration(p.durationSec)}</span>${play}
+        <span class="thumb__dur">${formatDuration(lesson.durationSec || p.durationSec)}</span>${play}
       </div>`;
     return `
       <div class="thumb" style="background:${grad}">
@@ -120,7 +125,7 @@
   }
 
   function cardHtml(p) {
-    const lesson = anatomyV5Of(p.id);
+    const lesson = cardLessonOf(p.id);
     const channel = lesson ? "先輩と後輩の会話" : p.channel;
     return `
       <a class="card" href="#/watch/${encodeURIComponent(p.id)}">
@@ -192,7 +197,7 @@
       <div class="welcome__actions"><a class="warm-btn" href="#/watch/base01">▶ バイタルサインの動画を見る</a><button class="warm-btn" type="button" data-scroll-catalog>教材を探す <span aria-hidden="true">›</span></button>
       <a class="warm-btn warm-btn--outline" href="index.html">人工呼吸器を体験する <span aria-hidden="true">›</span></a></div></div></section>
       <nav class="subject-nav" aria-label="分野から教材を探す">${CATEGORIES.filter(c => c.key !== "all").map(c => `<a href="#/category/${encodeURIComponent(c.key)}"><span aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</a>`).join("")}</nav>
-      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、イラストと会話で。", "波形の見方を、ひとつずつ。"][i]}</p>${i <= 1 ? '<span class="lesson-status">更新：V5イラスト・音声付き動画</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
+      <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : i === 1 ? `<img src="anat01-v5-page-01.jpg" alt="心臓は2つのポンプ。先輩と後輩がイラストで解説" width="1080" height="1920" loading="lazy" style="object-fit:contain">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、イラストと会話で。", "波形の見方を、ひとつずつ。"][i]}</p>${i <= 1 ? '<span class="lesson-status">更新：V5イラスト・音声付き動画</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
       <p class="legacy-views-note">閲覧回数は旧サイトに保存されていた表示値を引き継いでいます。実人数・現在のアクセス解析とは未照合です。動画を交換してもこの記録は残します。</p>\n      <section id="learningCatalog" class="learning-section"><h2>すべての教材 <small>全${PROGRAMS.length}本</small></h2>${gridHtml(PROGRAMS)}</section>
       <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><span>YAKUBON STUDIO</span></footer>`;
   }
@@ -708,4 +713,3 @@
   window.addEventListener("hashchange", router);
   router();
 })();
-

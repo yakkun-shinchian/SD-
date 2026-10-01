@@ -1,0 +1,329 @@
+{
+  "lessonId": "exam01",
+  "status": "review-only; old lesson retained",
+  "chapters": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 12.5833
+    },
+    {
+      "page": 2,
+      "start": 12.5833,
+      "end": 25.5833
+    },
+    {
+      "page": 3,
+      "start": 25.5833,
+      "end": 38.5833
+    },
+    {
+      "page": 4,
+      "start": 38.5833,
+      "end": 55.1667
+    },
+    {
+      "page": 5,
+      "start": 55.1667,
+      "end": 75.0833
+    },
+    {
+      "page": 6,
+      "start": 75.0833,
+      "end": 89.75
+    },
+    {
+      "page": 7,
+      "start": 89.75,
+      "end": 104.8333
+    },
+    {
+      "page": 8,
+      "start": 104.8333,
+      "end": 122.5
+    }
+  ],
+  "voices": [
+    {
+      "voice": 1,
+      "page": 1,
+      "speaker": "junior",
+      "start": 0.35,
+      "end": 4.367,
+      "duration": 4.0170208333333335
+    },
+    {
+      "voice": 2,
+      "page": 1,
+      "speaker": "senior",
+      "start": 4.647,
+      "end": 11.7639,
+      "duration": 7.116875
+    },
+    {
+      "voice": 3,
+      "page": 2,
+      "speaker": "junior",
+      "start": 12.9333,
+      "end": 16.5904,
+      "duration": 3.6571041666666666
+    },
+    {
+      "voice": 4,
+      "page": 2,
+      "speaker": "senior",
+      "start": 16.8704,
+      "end": 24.7652,
+      "duration": 7.894791666666666
+    },
+    {
+      "voice": 5,
+      "page": 3,
+      "speaker": "junior",
+      "start": 25.9333,
+      "end": 30.0781,
+      "duration": 4.144729166666667
+    },
+    {
+      "voice": 6,
+      "page": 3,
+      "speaker": "senior",
+      "start": 30.3581,
+      "end": 37.7884,
+      "duration": 7.430354166666667
+    },
+    {
+      "voice": 7,
+      "page": 4,
+      "speaker": "junior",
+      "start": 38.9333,
+      "end": 42.5557,
+      "duration": 3.622333333333333
+    },
+    {
+      "voice": 8,
+      "page": 4,
+      "speaker": "senior",
+      "start": 42.8357,
+      "end": 54.3644,
+      "duration": 11.528708333333332
+    },
+    {
+      "voice": 9,
+      "page": 5,
+      "speaker": "junior",
+      "start": 55.5167,
+      "end": 59.5105,
+      "duration": 3.9938333333333333
+    },
+    {
+      "voice": 10,
+      "page": 5,
+      "speaker": "senior",
+      "start": 59.7905,
+      "end": 74.2681,
+      "duration": 14.477645833333334
+    },
+    {
+      "voice": 11,
+      "page": 6,
+      "speaker": "junior",
+      "start": 75.4333,
+      "end": 79.4968,
+      "duration": 4.063458333333333
+    },
+    {
+      "voice": 12,
+      "page": 6,
+      "speaker": "senior",
+      "start": 79.7768,
+      "end": 88.9486,
+      "duration": 9.171854166666666
+    },
+    {
+      "voice": 13,
+      "page": 7,
+      "speaker": "junior",
+      "start": 90.1,
+      "end": 95.9282,
+      "duration": 5.828229166666667
+    },
+    {
+      "voice": 14,
+      "page": 7,
+      "speaker": "senior",
+      "start": 96.2082,
+      "end": 104.0217,
+      "duration": 7.813479166666666
+    },
+    {
+      "voice": 15,
+      "page": 8,
+      "speaker": "junior",
+      "start": 105.1833,
+      "end": 109.3397,
+      "duration": 4.156333333333333
+    },
+    {
+      "voice": 16,
+      "page": 8,
+      "speaker": "senior",
+      "start": 109.6197,
+      "end": 116.516,
+      "duration": 6.8962916666666665
+    },
+    {
+      "voice": 17,
+      "page": 8,
+      "speaker": "junior",
+      "start": 116.796,
+      "end": 121.6953,
+      "duration": 4.899375
+    }
+  ],
+  "probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "width": 1080,
+        "height": 1920,
+        "coded_width": 1080,
+        "coded_height": 1920,
+        "closed_captions": 0,
+        "film_grain": 0,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "9:16",
+        "pix_fmt": "yuv420p",
+        "level": 40,
+        "color_range": "tv",
+        "color_space": "bt470bg",
+        "chroma_location": "center",
+        "field_order": "progressive",
+        "refs": 1,
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "24/1",
+        "avg_frame_rate": "24/1",
+        "time_base": "1/12288",
+        "start_pts": 258,
+        "start_time": "0.020996",
+        "duration_ts": 1505280,
+        "duration": "122.500000",
+        "bit_rate": "253618",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "2940",
+        "extradata_size": 49,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "vendor_id": "[0][0][0][0]",
+          "encoder": "Lavc60.31.102 libx264"
+        }
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_long_name": "AAC (Advanced Audio Coding)",
+        "profile": "LC",
+        "codec_type": "audio",
+        "codec_tag_string": "mp4a",
+        "codec_tag": "0x6134706d",
+        "sample_fmt": "fltp",
+        "sample_rate": "48000",
+        "channels": 1,
+        "channel_layout": "mono",
+        "bits_per_sample": 0,
+        "initial_padding": 0,
+        "id": "0x2",
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/48000",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 5880992,
+        "duration": "122.520667",
+        "bit_rate": "86260",
+        "nb_frames": "5755",
+        "extradata_size": 5,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "SoundHandler",
+          "vendor_id": "[0][0][0][0]"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/workspace/scratch/5abb2b3e9a3c/exam01-v6-review.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "122.520996",
+      "size": "5291395",
+      "bit_rate": "345501",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf60.16.100"
+      }
+    }
+  },
+  "sha256": "f84718068e7051004d669737b23b292c69ad66f107ec4cfbcded0f74e57b9b2f",
+  "decode": "PASS",
+  "medicalReview": "sources checked 2026-10-01; facility ranges and measurement conditions stated",
+  "audioTranscriptReview": "generation text checked; listening and ASR not yet completed",
+  "motion": "independent speaker indicator; medical text and figures stable; static comparison lesson",
+  "snsSafeArea": "not certified",
+  "bytes": 5291395
+}

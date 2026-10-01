@@ -108,6 +108,17 @@
       </div>`;
   }
 
+  // 旧サイトの閲覧表示は、動画ファイルとは独立して保持する。
+  function historicalViews(p) {
+    const archive = typeof NURSETUBE_LEGACY_VIEWS !== "undefined" ? NURSETUBE_LEGACY_VIEWS : {};
+    const n = archive[p.id];
+    return Number.isSafeInteger(n) && n >= 0 ? n : null;
+  }
+  function viewsHtml(p) {
+    const n = historicalViews(p);
+    return n === null ? "" : `<p class="legacy-views" title="旧サイトに保存されていた表示値。アクセス解析・実人数とは未照合です。">旧サイトの閲覧表示：<strong>${n.toLocaleString("ja-JP")}回</strong></p>`;
+  }
+
   function cardHtml(p) {
     const lesson = anatomyV5Of(p.id);
     const channel = lesson ? "先輩と後輩の会話" : p.channel;
@@ -118,7 +129,7 @@
           <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(channel.charAt(0))}</span>
           <div class="card__info">
             <h3 class="card__title">${escapeHtml(p.title)}</h3>
-            <div class="card__sub">${escapeHtml(channel)}</div>
+            <div class="card__sub">${escapeHtml(channel)}</div>${viewsHtml(p)}
             <div class="card__sub">
               <span>${lesson ? lesson.pages.length + "枚のイラスト・音声付き" : (scenesOf(p.id) ? scenesOf(p.id).length + "場面で学ぶ" : "教材")}</span>
             </div>
@@ -182,7 +193,7 @@
       <a class="warm-btn warm-btn--outline" href="index.html">人工呼吸器を体験する <span aria-hidden="true">›</span></a></div></div></section>
       <nav class="subject-nav" aria-label="分野から教材を探す">${CATEGORIES.filter(c => c.key !== "all").map(c => `<a href="#/category/${encodeURIComponent(c.key)}"><span aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</a>`).join("")}</nav>
       <section class="learning-section"><h2>今日の学びを見つけよう</h2><div class="featured-lessons">${picks.map((p,i) => `<a class="featured-lesson" href="#/watch/${p.id}"><div class="featured-lesson__art">${i === 0 ? `<img src="images/vitals-v5.webp" alt="バイタルを一緒に学ぶ先輩と後輩" width="1536" height="1024" loading="lazy">` : FIGURES[visualNames[i]]()}</div><div class="featured-lesson__copy"><h3>${["バイタルサイン", "心臓と血液の流れ", "心電図の基本"][i]}</h3><p>${["数字と患者さんの様子を、一緒に。", "血液の旅を、イラストと会話で。", "波形の見方を、ひとつずつ。"][i]}</p>${i <= 1 ? '<span class="lesson-status">更新：V5イラスト・音声付き動画</span>' : '<span class="lesson-status lesson-status--plain">既存のスライド教材</span>'}</div></a>`).join("")}</div></section>
-      <section id="learningCatalog" class="learning-section"><h2>すべての教材 <small>全${PROGRAMS.length}本</small></h2>${gridHtml(PROGRAMS)}</section>
+      <p class="legacy-views-note">閲覧回数は旧サイトに保存されていた表示値を引き継いでいます。実人数・現在のアクセス解析とは未照合です。動画を交換してもこの記録は残します。</p>\n      <section id="learningCatalog" class="learning-section"><h2>すべての教材 <small>全${PROGRAMS.length}本</small></h2>${gridHtml(PROGRAMS)}</section>
       <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><span>YAKUBON STUDIO</span></footer>`;
   }
 
@@ -190,7 +201,7 @@
     main.classList.add("enhanced-main");
     const hasVideo = p.id === "base01";
     main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a>
-      <article class="v5-lesson"><header class="v5-heading"><span class="lesson-status">基礎看護学 · イラストと会話</span><h1>${escapeHtml(lesson.title)}</h1><p>${escapeHtml(lesson.intro)}</p></header>
+      <article class="v5-lesson"><header class="v5-heading"><span class="lesson-status">基礎看護学 · イラストと会話</span><h1>${escapeHtml(lesson.title)}</h1>${viewsHtml(p)}<p>${escapeHtml(lesson.intro)}</p></header>
       ${hasVideo ? `<section class="v5-video-section" aria-label="音声付きV5動画"><p>画面中央の ▶ を押すと、先輩と後輩の会話が音声付きで再生されます。<br>2枚目・4枚目を描き直した4枚のV5イラストで学びましょう。</p><div class="v5-video-player"><video id="v5Video" controls playsinline preload="metadata" poster="vitals-v5-01.jpg" aria-label="バイタルサインの音声付き動画"><source src="vitals-v5-player-v2.mp4" type="video/mp4">動画を再生できない場合は、下の会話文をご覧ください。</video><button id="v5VideoPlay" class="v5-video-play" type="button" aria-label="バイタルサインの動画を再生"><span>▶<small id="v5VideoLabel">再生する</small></span></button></div><p id="v5VideoStatus" role="status" aria-live="polite"></p><p class="v5-video-credit">声：CoeFont／後輩「汎用式概念χ-soft-v2」（CV：ろさちゃん）、先輩「後藤邑子」</p></section>` : ""}
       <section class="v5-intro"><img src="${lesson.image}" alt="先輩と後輩が患者さんの様子とバイタルサインを確認するイラスト" width="1536" height="1024"><div><h2>${escapeHtml(lesson.hook)}</h2><p>測って終わりにせず、<br><strong>「いつもと違う？」まで見る。</strong></p><p>ここを押さえると、観察がつながります。</p></div></section>
       <section class="v5-section"><h2>先輩と後輩の、なるほど会話</h2><div class="dialogue">${lesson.dialogue.map(d => `<div class="dialogue__line ${d.role === "先輩" ? "dialogue__line--senior" : ""}"><span class="dialogue__role">${d.role}</span><p>${escapeHtml(d.text)}</p></div>`).join("")}</div>
@@ -264,7 +275,7 @@
   function renderAnatomyV5(p, lesson) {
     main.classList.add("enhanced-main");
     main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a><article class="v5-lesson">
-      <header class="v5-heading"><span class="lesson-status">${escapeHtml(p.category)} · V5イラスト・音声付き動画</span><h1>${escapeHtml(lesson.title)}</h1><p>${escapeHtml(lesson.intro)}</p></header>
+      <header class="v5-heading"><span class="lesson-status">${escapeHtml(p.category)} · V5イラスト・音声付き動画</span><h1>${escapeHtml(lesson.title)}</h1>${viewsHtml(p)}<p>${escapeHtml(lesson.intro)}</p></header>
       <section class="v5-video-section"><p>画面中央の ▶ を押すと、先輩と後輩の会話が音声付きで再生されます。</p><div class="v5-video-player"><video id="v5Video" controls playsinline preload="metadata" poster="${escapeHtml(lesson.poster)}" aria-label="${escapeHtml(lesson.title)}の音声付き動画"><source src="${escapeHtml(lesson.video)}" type="video/mp4">動画を再生できない場合は、下の会話文をご覧ください。</video><button id="v5VideoPlay" class="v5-video-play" type="button" aria-label="${escapeHtml(lesson.title)}の動画を再生"><span>▶<small id="v5VideoLabel">再生する</small></span></button></div><p id="v5VideoStatus" role="status" aria-live="polite"></p><p class="v5-video-credit">声：CoeFont／後輩「汎用式概念χ-soft-v2」（CV：ろさちゃん）、先輩「後藤邑子」</p></section>
       <section class="v5-section takeaway"><h2>今日、持ち帰る3つ</h2><ul>${lesson.summary.map(t=>`<li>${escapeHtml(t)}</li>`).join("")}</ul></section>
       ${lesson.flow?`<section class="v5-section"><h2>血液の流れをたどろう</h2><p>${lesson.flow.map(escapeHtml).join(" → ")}</p><p>ポンプ・部屋・扉のイラストは、しくみを理解するための比喩です。</p></section>`:""}${lesson.explanations?`<section class="v5-section"><h2>しくみを文章で整理</h2>${lesson.explanations.map(d=>`<h3>${escapeHtml(d.title)}</h3><p>${escapeHtml(d.text)}</p>`).join("")}</section>`:""}
@@ -580,7 +591,7 @@
         <div class="watch__primary">
           ${playerHtml(p)}
           ${hasLesson ? `<p class="play-hint">▶ 再生ボタンを押すと、ずんだもんがスライドで解説してくれるのだ（音声ファイルがあれば本物の声、無ければ端末の読み上げを使うのだ）</p>` : ""}
-          <h1 class="watch__title">${escapeHtml(p.title)}</h1>
+          <h1 class="watch__title">${escapeHtml(p.title)}</h1>${viewsHtml(p)}
           <div class="watch__bar">
             <div class="watch__channel">
               <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(p.channel.charAt(0))}</span>
@@ -665,12 +676,19 @@
   // 国家試験までのカウントダウン
   function renderCountdown() {
     if (typeof EXAM_DATE === "undefined") return;
-    const target = new Date(EXAM_DATE + "T00:00:00");
-    const days = Math.ceil((target - new Date()) / 86400000);
-    if (isNaN(days)) return;
-    examCountdown.innerHTML = days > 0
-      ? `国試まであと<br /><strong>${days}</strong> 日なのだ`
-      : `国家試験<br />おつかれさまなのだ!`;
+    const japanDate = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"
+    }).formatToParts(new Date());
+    const part = type => japanDate.find(p => p.type === type).value;
+    const today = Date.UTC(Number(part("year")), Number(part("month")) - 1, Number(part("day")));
+    const [year, month, day] = EXAM_DATE.split("-").map(Number);
+    const days = Math.round((Date.UTC(year, month - 1, day) - today) / 86400000);
+    if (!Number.isFinite(days)) return;
+    const message = days > 0 ? `国試まであと <strong>${days}</strong> 日` :
+      days === 0 ? "今日は看護師国家試験の日です" : "国家試験、おつかれさまでした";
+    if (examCountdown) examCountdown.innerHTML = message;
+    const highlight = document.getElementById("examHighlight");
+    if (highlight) highlight.innerHTML = `<div><span>第116回 看護師国家試験</span><p>${message}</p></div><div class="exam-highlight__detail"><time datetime="2027-02-14">2027年2月14日（日）</time><a href="https://www.mhlw.go.jp/kouseiroudoushou/shikaku_shiken/kangoshi/" target="_blank" rel="noopener noreferrer">厚生労働省の正式日程 ↗</a><span>今日のひとつが、力になる。</span></div>`;
   }
 
   // 端末を離れる／タブを閉じるときは読み上げを止める
@@ -683,7 +701,11 @@
   try { saved = localStorage.getItem("nursetube-theme"); } catch (e) {}
   const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   applyTheme(saved || (prefersDark ? "dark" : "light"));
-  // 固定の国試日程は確認前のため表示しない。
+  renderCountdown();
+  // 開いたまま日付が変わった場合も日本時間で更新する。
+  setInterval(renderCountdown, 60000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) renderCountdown(); });
   window.addEventListener("hashchange", router);
   router();
 })();
+

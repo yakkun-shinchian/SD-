@@ -81,7 +81,7 @@
 
   const anatomyV5Of = (id) => {
     const lesson = typeof ENHANCED_LESSONS !== "undefined" ? ENHANCED_LESSONS[id] : null;
-    return lesson && lesson.kind === "anatomy-v5" ? lesson : null;
+    return lesson && ["anatomy-v5", "illustrated-v6"].includes(lesson.kind) ? lesson : null;
   };
 
   // 番組サムネイル（CSSグラデーション＋タイトル）を生成
@@ -94,7 +94,7 @@
     if (lesson) return `
       <div class="thumb thumb--v5">
         <img class="thumb__v5-image" src="${escapeHtml(lesson.poster)}" width="1080" height="1920" loading="lazy" alt="" />
-        <span class="thumb__cat">V5イラスト・会話動画</span>
+        <span class="thumb__cat">${escapeHtml(lesson.version || "V5")}イラスト・会話動画</span>
         <div class="thumb__title">${escapeHtml(lesson.title)}</div>
         <span class="thumb__dur">${formatDuration(p.durationSec)}</span>${play}
       </div>`;
@@ -275,11 +275,11 @@
   function renderAnatomyV5(p, lesson) {
     main.classList.add("enhanced-main");
     main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a><article class="v5-lesson">
-      <header class="v5-heading"><span class="lesson-status">${escapeHtml(p.category)} · V5イラスト・音声付き動画</span><h1>${escapeHtml(lesson.title)}</h1>${viewsHtml(p)}<p>${escapeHtml(lesson.intro)}</p></header>
+      <header class="v5-heading"><span class="lesson-status">${escapeHtml(p.category)} · ${escapeHtml(lesson.version || "V5")}イラスト・音声付き動画</span><h1>${escapeHtml(lesson.title)}</h1>${viewsHtml(p)}<p>${escapeHtml(lesson.intro)}</p></header>
       <section class="v5-video-section"><p>画面中央の ▶ を押すと、先輩と後輩の会話が音声付きで再生されます。</p><div class="v5-video-player"><video id="v5Video" controls playsinline preload="metadata" poster="${escapeHtml(lesson.poster)}" aria-label="${escapeHtml(lesson.title)}の音声付き動画"><source src="${escapeHtml(lesson.video)}" type="video/mp4">動画を再生できない場合は、下の会話文をご覧ください。</video><button id="v5VideoPlay" class="v5-video-play" type="button" aria-label="${escapeHtml(lesson.title)}の動画を再生"><span>▶<small id="v5VideoLabel">再生する</small></span></button></div><p id="v5VideoStatus" role="status" aria-live="polite"></p><p class="v5-video-credit">声：CoeFont／後輩「汎用式概念χ-soft-v2」（CV：ろさちゃん）、先輩「後藤邑子」</p></section>
       <section class="v5-section takeaway"><h2>今日、持ち帰る3つ</h2><ul>${lesson.summary.map(t=>`<li>${escapeHtml(t)}</li>`).join("")}</ul></section>
       ${lesson.flow?`<section class="v5-section"><h2>血液の流れをたどろう</h2><p>${lesson.flow.map(escapeHtml).join(" → ")}</p><p>ポンプ・部屋・扉のイラストは、しくみを理解するための比喩です。</p></section>`:""}${lesson.explanations?`<section class="v5-section"><h2>しくみを文章で整理</h2>${lesson.explanations.map(d=>`<h3>${escapeHtml(d.title)}</h3><p>${escapeHtml(d.text)}</p>`).join("")}</section>`:""}
-      <section class="v5-section"><h2>イラストと会話で復習</h2>${lesson.pages.map(d=>`<details class="v5-anatomy-page"><summary>${d.page}. ${escapeHtml(d.title.replace(/\n/g," "))}</summary><img src="${escapeHtml(p.id)}-v5-page-${String(d.page).padStart(2,"0")}.jpg" alt="${escapeHtml(d.title.replace(/\n/g," "))}" width="1080" height="1920" loading="lazy"><div class="dialogue"><div class="dialogue__line"><span class="dialogue__role">後輩</span><p>${escapeHtml(d.junior)}</p></div><div class="dialogue__line dialogue__line--senior"><span class="dialogue__role">先輩</span><p>${escapeHtml(d.senior)}</p></div>${d.closing?`<div class="dialogue__line"><span class="dialogue__role">後輩</span><p>${escapeHtml(d.closing)}</p></div>`:""}</div></details>`).join("")}</section>
+      <section class="v5-section"><h2>イラストと会話で復習</h2>${lesson.pages.map(d=>`<details class="v5-anatomy-page"><summary>${d.page}. ${escapeHtml(d.title.replace(/\n/g," "))}</summary><img src="${escapeHtml(d.image || `${p.id}-v5-page-${String(d.page).padStart(2,"0")}.jpg`)}" alt="${escapeHtml(d.title.replace(/\n/g," "))}" width="1080" height="1920" loading="lazy"><div class="dialogue"><div class="dialogue__line"><span class="dialogue__role">後輩</span><p>${escapeHtml(d.junior)}</p></div><div class="dialogue__line dialogue__line--senior"><span class="dialogue__role">先輩</span><p>${escapeHtml(d.senior)}</p></div>${d.closing?`<div class="dialogue__line"><span class="dialogue__role">後輩</span><p>${escapeHtml(d.closing)}</p></div>`:""}</div></details>`).join("")}</section>
       <section class="v5-section"><h2>もう少し詳しく学ぶ</h2><p>これまでの解説本文も、文章で復習できます。</p><div class="v5-detail-list">${scenesOf(p.id).map(d=>`<div><h3>${escapeHtml(d.heading)}</h3><p>${escapeHtml(d.narration)}</p></div>`).join("")}</div></section>
       <section class="v5-section references"><h2>参考資料</h2>${(lesson.sources || [{title:"NHLBI：How Blood Flows through the Heart",url:"https://www.nhlbi.nih.gov/health/heart/blood-flow"}]).map(d=>`<p><a href="${escapeHtml(d.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(d.title)}</a></p>`).join("")}<p>内容照合：2026年10月1日</p></section><footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><a href="#/">ほかの教材へ</a></footer></article>`;
     document.title = `${lesson.title}｜NurseTube`;
@@ -582,7 +582,7 @@
         <p>番組が見つからなかったのだ。</p><a class="btn-yt" href="#/">ホームにもどるのだ</a></div>`;
       return;
     }
-    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { const lesson = ENHANCED_LESSONS[id]; if (lesson.kind === "anatomy-v5") renderAnatomyV5(p, lesson); else renderEnhanced(p, lesson); return; }
+    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { const lesson = ENHANCED_LESSONS[id]; if (["anatomy-v5", "illustrated-v6"].includes(lesson.kind)) renderAnatomyV5(p, lesson); else renderEnhanced(p, lesson); return; }
     const tags = (p.tags || []).map((t) => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
     const hasLesson = !p.videoId && scenesOf(p.id);
     main.innerHTML = `

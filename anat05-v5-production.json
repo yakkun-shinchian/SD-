@@ -1,0 +1,179 @@
+{
+  "storyboard": [
+    {
+      "page": 1,
+      "title": "ホルモンは\n体内のメッセージ！",
+      "junior": "ホルモンって、名前が多くて混乱します。",
+      "senior": "どこから出て、何を調整するかで整理しよう。症状と検査を合わせて見るのが大切だよ。",
+      "summary": "出る場所・働き・観察で整理",
+      "art": "A large friendly sealed message envelope beside a simple observation clipboard. No anatomy, text labels, blood vessels or precise scientific diagrams."
+    },
+    {
+      "page": 2,
+      "title": "届くだけでは\n働かない！",
+      "junior": "血液に乗れば、どの細胞にも効くんですか？",
+      "senior": "受容体という受け取り口がある細胞に働くよ。鍵と鍵穴のような関係なんだ。",
+      "summary": "受容体＝メッセージの受け取り口",
+      "art": "A large key fitting one matching lock, a different lock nearby. Clearly a key-and-lock metaphor. No molecular diagram or extra text."
+    },
+    {
+      "page": 3,
+      "title": "多くのホルモンは\n指令のリレー！",
+      "junior": "全部、下垂体の命令で動くんですか？",
+      "senior": "多くは視床下部と下垂体が調整するよ。でも、血糖で調整されるインスリンなど例外もあるんだ。",
+      "summary": "「全部が同じ指令」ではない",
+      "art": "Three unlabelled friendly relay batons arranged loosely left to right, separate glucose parcel beside them. No arrows, brain anatomy, gland diagrams or extra labels."
+    },
+    {
+      "page": 4,
+      "title": "増えたら控える\n自動調節！",
+      "junior": "ホルモンは、出し続けるんですか？",
+      "senior": "増えたホルモンが上流の分泌を抑える仕組みがあるよ。負のフィードバックと呼ぶんだ。",
+      "summary": "負のフィードバック＝出しすぎを抑える",
+      "art": "A simple friendly room thermostat beside an unlabelled adjustable dial. Metaphor for feedback; no numerical readings, arrows or actual hormone pathway."
+    },
+    {
+      "page": 5,
+      "title": "血糖を下げる・上げる\n二つの役割！",
+      "junior": "血糖を調整するのは、インスリンだけですか？",
+      "senior": "膵臓のインスリンは血糖を下げ、グルカゴンは上げる方向に働くよ。二つの役割で覚えよう。",
+      "summary": "インスリンは下げる／グルカゴンは上げる",
+      "art": "Two unlabelled friendly controls beside glucose-sugar parcel mascots. No arrows or fake insulin signaling diagram; neutral conceptual glucose adjustment."
+    },
+    {
+      "page": 6,
+      "title": "甲状腺は\nエネルギーの調整係！",
+      "junior": "甲状腺ホルモンは、何をするんですか？",
+      "senior": "体のエネルギーの使い方に関わるよ。多いと動悸や暑がり、少ないと寒がりや疲れやすさが見られるんだ。",
+      "summary": "症状だけで診断はしない",
+      "art": "A friendly battery mascot and an adjustable energy dial. No thyroid anatomy, flame on body, numerical values or medical pathways."
+    },
+    {
+      "page": 7,
+      "title": "副腎は\n皮質と髄質！",
+      "junior": "副腎のホルモンは、全部同じですか？",
+      "senior": "外側の皮質からコルチゾール、内側の髄質からアドレナリンなどが出るよ。場所と働きを分けよう。",
+      "summary": "皮質と髄質は、別に整理",
+      "art": "Two large clearly separated unlabelled baskets with different envelope parcels. Metaphor for two production sites; NOT an adrenal cross section or kidney illustration."
+    },
+    {
+      "page": 8,
+      "title": "名前の丸暗記より\n患者さんとつなぐ！",
+      "junior": "ホルモンの量だけ見れば、わかりますか？",
+      "senior": "量だけでは決められないよ。受け取り方の問題もあるから、症状、検査、薬の影響を合わせて考えよう。",
+      "summary": "出る場所・働き・観察で整理",
+      "art": "Exactly the same two nurses with a simple observation clipboard bearing heart, thermometer and test-tube icons. No extra labels or third person.",
+      "closing": "フォローしていただけると励みになります。よろしくお願いします。"
+    }
+  ],
+  "sources": [
+    {
+      "title": "MSD／Merck Manual：Endocrine Glands",
+      "url": "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/biology-of-the-endocrine-system/endocrine-glands"
+    },
+    {
+      "title": "MSD／Merck Manual：Endocrine Function",
+      "url": "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/biology-of-the-endocrine-system/endocrine-function"
+    },
+    {
+      "title": "NIDDK：What Is Diabetes?",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes"
+    },
+    {
+      "title": "NIDDK：Hyperthyroidism",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/hyperthyroidism"
+    },
+    {
+      "title": "NIDDK：Hypothyroidism",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/hypothyroidism"
+    },
+    {
+      "title": "NIDDK：Adrenal Insufficiency & Addison’s Disease",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/adrenal-insufficiency-addisons-disease"
+    },
+    {
+      "title": "MSD／Merck Manual：Overview of the Adrenal Glands",
+      "url": "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/adrenal-gland-disorders/overview-of-the-adrenal-glands"
+    },
+    {
+      "title": "MedlinePlus：Antidiuretic hormone blood test",
+      "url": "https://medlineplus.gov/ency/article/003702.htm"
+    }
+  ],
+  "medical_review": {
+    "checked": "2026-10-01",
+    "scope": "看護学生向け基礎解剖生理の教材。個別の診断・投与指示なし。",
+    "corrections": [
+      "すべての内分泌腺が下垂体指令という一般化を修正",
+      "ホルモン不足だけでなく受容体・抵抗性を区別",
+      "甲状腺症状だけの診断を避ける",
+      "副腎皮質と髄質を区別"
+    ],
+    "sources": [
+      "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/biology-of-the-endocrine-system/endocrine-glands",
+      "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/biology-of-the-endocrine-system/endocrine-function",
+      "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
+      "https://www.niddk.nih.gov/health-information/endocrine-diseases/hyperthyroidism",
+      "https://www.niddk.nih.gov/health-information/endocrine-diseases/hypothyroidism",
+      "https://www.niddk.nih.gov/health-information/endocrine-diseases/adrenal-insufficiency-addisons-disease"
+    ]
+  },
+  "technical_checks": {
+    "date": "2026-10-01",
+    "sha256": "376411120fcad926167740eebf5375ef2cdf0aa63a1e8b59bf0bde333aa253fc",
+    "duration": 108.256315,
+    "pages": 8,
+    "utterances": 17,
+    "dimensions": [
+      1080,
+      1920
+    ],
+    "full_source_audio_placed": true,
+    "source_voice_selection_checked": true,
+    "tail_padding_seconds_min": 0.3500683333333332,
+    "motion": [
+      {
+        "page": 1,
+        "roi": [
+          200,
+          1370,
+          260,
+          260
+        ],
+        "mean_absolute_difference": 4.849309664694281
+      },
+      {
+        "page": 3,
+        "roi": [
+          350,
+          1410,
+          260,
+          260
+        ],
+        "mean_absolute_difference": 5.891060157790927
+      },
+      {
+        "page": 4,
+        "roi": [
+          590,
+          1450,
+          260,
+          260
+        ],
+        "mean_absolute_difference": 4.597751479289941
+      },
+      {
+        "page": 6,
+        "roi": [
+          330,
+          1350,
+          260,
+          260
+        ],
+        "mean_absolute_difference": 5.7697928994082845
+      }
+    ],
+    "ASR": "未実施：全文一致の検収とは報告しない",
+    "bgm": "なし：会話を聞き取りやすくするため"
+  }
+}

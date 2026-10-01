@@ -23,15 +23,17 @@
   {
     "id": "anat04",
     "title": "交感神経と副交感神経",
-    "state": "確認待ち",
-    "review_approved": false,
-    "replacement_done": false
+    "state": "交換済み",
+    "review_approved": true,
+    "replacement_done": true
   },
   {
     "id": "anat05",
     "title": "ホルモンと内分泌系",
-    "state": "未制作",
+    "state": "交換済み",
     "review_approved": false,
-    "replacement_done": false
+    "replacement_done": true,
+    "batch_completion_authorized": true,
+    "authorization": "ユーザーの「もう全部すべちゃってください」で個別確認を省略し、解剖生理学の残りをまとめて制作・交換。"
   }
 ]

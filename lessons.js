@@ -380,3 +380,275 @@ ENHANCED_LESSONS.anat03 = {
     }
   ]
 };
+
+ENHANCED_LESSONS.anat04 = {
+  "kind": "anatomy-v5",
+  "title": "交感神経と副交感神経",
+  "intro": "活動の交感・休息の副交感。臓器ごとの違いまで、先輩と後輩の会話で整理しよう。",
+  "poster": "anat04-v5-page-01.jpg",
+  "video": "anat04-v5-review.mp4",
+  "summary": [
+    "活動の交感・休息と消化の副交感",
+    "すべての臓器が逆作用とは限らない",
+    "数値・症状・薬・経過を合わせて観察する"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "title": "自律神経は\n体の自動調整係！",
+      "junior": "自律神経って、気合いで動かすんですか？",
+      "senior": "意識しなくても、心拍や消化を調整するよ。まずは活動の交感、休息の副交感で整理しよう。",
+      "summary": "交感＝活動／副交感＝休息",
+      "art": "A friendly control-panel metaphor with two unlabelled colored knobs, a heart mascot and a stomach mascot. No nervous anatomy, graphs, extra labels or arrows."
+    },
+    {
+      "page": 2,
+      "title": "交感神経は\n活動の準備！",
+      "junior": "緊張すると、なぜ心臓がドキドキするんですか？",
+      "senior": "交感神経が心拍を増やし、体を活動に備えるんだ。瞳孔は広がり、消化の動きは抑えられるよ。",
+      "summary": "心拍は増える／消化は控えめ",
+      "art": "A cheerful heart mascot beside a small running-shoe symbol and a calm resting stomach mascot. No tiny extra people, no numerical heart rate or ECG."
+    },
+    {
+      "page": 3,
+      "title": "副交感神経は\n休息と消化！",
+      "junior": "休んでいるときは、体も全部お休みですか？",
+      "senior": "心拍はゆっくりになるけれど、消化は進むよ。副交感神経は、休息と消化を支えるんだ。",
+      "summary": "心拍はゆっくり／消化は進む",
+      "art": "A relaxed heart mascot beside a friendly busy stomach mascot sorting simple food parcels. Not a digestive anatomy diagram. No labels or additional speech."
+    },
+    {
+      "page": 4,
+      "title": "いつも真逆？\n臓器ごとに考える！",
+      "junior": "交感神経と副交感神経は、いつもシーソーですか？",
+      "senior": "逆向きに働く臓器もあるけれど、全部ではないよ。体全体のオン・オフではなく、臓器ごとに考えよう。",
+      "summary": "「全部が逆」ではない",
+      "art": "Three friendly organ mascots heart, stomach and skin each with a small different unlabelled adjustment knob. Metaphor, not detailed organ or pathway diagrams. No seesaw and no arrows."
+    },
+    {
+      "page": 5,
+      "title": "汗のスイッチは\n交感神経！",
+      "junior": "汗をかくのも、副交感神経ですか？",
+      "senior": "主に交感神経だよ。汗腺は、二つの神経がいつも逆に働くという覚え方の例外なんだ。",
+      "summary": "汗腺は、交感神経が担当",
+      "art": "A friendly sweat-drop mascot beside a plain skin-surface symbol. No anatomical skin cross section, nerves or gland ducts. Nurses thoughtful, not exaggerated anxious sweating."
+    },
+    {
+      "page": 6,
+      "title": "血管の調整は\n主に交感神経！",
+      "junior": "副交感神経は、血管を全部広げるんですか？",
+      "senior": "そうとは言えないよ。多くの血管は、主に交感神経が調整する。血圧を単純な逆作用で覚えないでね。",
+      "summary": "血圧は、単純な逆ではない",
+      "art": "A friendly unlabelled faucet and a soft flexible tube beside a control dial. A diameter-adjustment metaphor only. NO scientific blood-vessel diagram or arrows, no blood or fluid in the faucet."
+    },
+    {
+      "page": 7,
+      "title": "薬の作用は\n受け取り口で変わる！",
+      "junior": "交感神経に関わる薬なら、全部同じ作用ですか？",
+      "senior": "違うよ。受容体という受け取り口で作用が変わる。薬は、どの受容体に働くかで考えよう。",
+      "summary": "受容体＝信号の受け取り口",
+      "art": "A large friendly key fitting one of two different lock shapes. Metaphor for receptors; no molecular structure, extra text, drug names, dosing or anatomical diagrams."
+    },
+    {
+      "page": 8,
+      "title": "数字ひとつで\n決めつけない！",
+      "junior": "心拍が速ければ、交感神経のせいですか？",
+      "senior": "それだけでは決められないよ。血圧、体温、痛み、薬や体の状態も合わせて観察しよう。",
+      "summary": "数値と、患者さんを一緒に見る",
+      "art": "Exactly two nurses, senior holding a small observation clipboard with plain heart, thermometer and medicine icons, no extra written labels or numbers. No third nurse, no organ diagram.",
+      "closing": "フォローしていただけると励みになります。よろしくお願いします。"
+    }
+  ],
+  "explanations": [
+    {
+      "title": "自律神経は「体の自動調整係」",
+      "text": "自律神経は、意識して動かさなくても心臓、内臓の平滑筋、分泌腺などを調整します。交感神経と副交感神経が、体の内部環境を保つ働きに関わっています。\n\n「活動の交感・休息と消化の副交感」は入口となる覚え方です。休息中にも交感神経は働き、活動中にも副交感神経の働きがあります。体全体のスイッチが一斉に切り替わるわけではありません。\n\n"
+    },
+    {
+      "title": "典型的な作用を整理",
+      "text": "心拍数：交感神経は増加、副交感神経は減少。瞳孔：交感神経は散瞳、副交感神経は縮瞳。消化管の運動：交感神経は一般に抑制、副交感神経は一般に促進。汗腺と多くの血管は主に交感神経の支配を受けます。臓器・受容体・状況により作用は異なります。"
+    },
+    {
+      "title": "全部の臓器がシーソーになるわけではない",
+      "text": "心拍数や瞳孔の大きさのように、二つの神経が逆向きの作用を示すものがあります。一方、汗腺や多くの血管は主に交感神経の支配を受けます。「交感神経の反対を副交感神経が必ず行う」とは覚えないようにしましょう。消化管には腸管神経系による調整もあります。\n\n"
+    },
+    {
+      "title": "血圧は単純な逆作用で覚えない",
+      "text": "血圧には、心臓から送り出す血液の量や血管の抵抗などが関わります。多くの血管では、交感神経の緊張の変化が血管の太さの調整に関わります。「副交感神経が全身の血管を広げる」という説明は適切ではありません。\n\n"
+    },
+    {
+      "title": "信号の物質と、受け取り口の違い",
+      "text": "神経の信号を受け取る場所を受容体といいます。同じ信号の物質でも、受容体や臓器によって作用が変わります。薬も、どの受容体に働き、信号を強めるのか、遮るのかを分けて学びます。\n\n交感神経・副交感神経とも、神経節までの節前線維はアセチルコリンを使います。臓器に向かう節後線維では、交感神経は主にノルアドレナリン、副交感神経はアセチルコリンを使います。交感神経でも汗腺の節後線維はアセチルコリンを使う点が、重要な例外です。\n\n副腎髄質は交感神経の信号を受け、アドレナリンやノルアドレナリンを血液中に放出します。「交感神経はすべてアドレナリン」と一括りにせず、神経伝達とホルモン分泌を区別します。\n\n"
+    },
+    {
+      "title": "数値と患者さんを一緒に見る",
+      "text": "心拍数だけで、自律神経の状態や原因を決めることはできません。血圧、体温、痛み、薬、活動状況、症状、変化の経過などを合わせて観察します。急な変化や体調不良があれば、指導者・担当者に報告して評価につなげます。\n\n"
+    }
+  ],
+  "sources": [
+    {
+      "title": "MSD／Merck Manual：Overview of the Autonomic Nervous System",
+      "url": "https://www.merckmanuals.com/home/brain-spinal-cord-and-nerve-disorders/autonomic-nervous-system-disorders/overview-of-the-autonomic-nervous-system"
+    },
+    {
+      "title": "OpenStax：Anatomy and Physiology 2e — Divisions of the Autonomic Nervous System",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-1-divisions-of-the-autonomic-nervous-system"
+    },
+    {
+      "title": "OpenStax：Anatomy and Physiology 2e — Autonomic Reflexes and Homeostasis",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/15-2-autonomic-reflexes-and-homeostasis"
+    }
+  ]
+};
+
+ENHANCED_LESSONS.anat05 = {
+  "kind": "anatomy-v5",
+  "title": "ホルモンと内分泌系",
+  "intro": "体内のメッセージを、出る場所・働き・観察で整理。先輩と後輩の会話で学ぼう。",
+  "poster": "anat05-v5-page-01.jpg",
+  "video": "anat05-v5-review.mp4",
+  "summary": [
+    "出る場所・働き・観察で整理する",
+    "すべてが下垂体の命令ではない",
+    "症状・検査・薬の影響を合わせて考える"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "title": "ホルモンは\n体内のメッセージ！",
+      "junior": "ホルモンって、名前が多くて混乱します。",
+      "senior": "どこから出て、何を調整するかで整理しよう。症状と検査を合わせて見るのが大切だよ。",
+      "summary": "出る場所・働き・観察で整理",
+      "art": "A large friendly sealed message envelope beside a simple observation clipboard. No anatomy, text labels, blood vessels or precise scientific diagrams."
+    },
+    {
+      "page": 2,
+      "title": "届くだけでは\n働かない！",
+      "junior": "血液に乗れば、どの細胞にも効くんですか？",
+      "senior": "受容体という受け取り口がある細胞に働くよ。鍵と鍵穴のような関係なんだ。",
+      "summary": "受容体＝メッセージの受け取り口",
+      "art": "A large key fitting one matching lock, a different lock nearby. Clearly a key-and-lock metaphor. No molecular diagram or extra text."
+    },
+    {
+      "page": 3,
+      "title": "多くのホルモンは\n指令のリレー！",
+      "junior": "全部、下垂体の命令で動くんですか？",
+      "senior": "多くは視床下部と下垂体が調整するよ。でも、血糖で調整されるインスリンなど例外もあるんだ。",
+      "summary": "「全部が同じ指令」ではない",
+      "art": "Three unlabelled friendly relay batons arranged loosely left to right, separate glucose parcel beside them. No arrows, brain anatomy, gland diagrams or extra labels."
+    },
+    {
+      "page": 4,
+      "title": "増えたら控える\n自動調節！",
+      "junior": "ホルモンは、出し続けるんですか？",
+      "senior": "増えたホルモンが上流の分泌を抑える仕組みがあるよ。負のフィードバックと呼ぶんだ。",
+      "summary": "負のフィードバック＝出しすぎを抑える",
+      "art": "A simple friendly room thermostat beside an unlabelled adjustable dial. Metaphor for feedback; no numerical readings, arrows or actual hormone pathway."
+    },
+    {
+      "page": 5,
+      "title": "血糖を下げる・上げる\n二つの役割！",
+      "junior": "血糖を調整するのは、インスリンだけですか？",
+      "senior": "膵臓のインスリンは血糖を下げ、グルカゴンは上げる方向に働くよ。二つの役割で覚えよう。",
+      "summary": "インスリンは下げる／グルカゴンは上げる",
+      "art": "Two unlabelled friendly controls beside glucose-sugar parcel mascots. No arrows or fake insulin signaling diagram; neutral conceptual glucose adjustment."
+    },
+    {
+      "page": 6,
+      "title": "甲状腺は\nエネルギーの調整係！",
+      "junior": "甲状腺ホルモンは、何をするんですか？",
+      "senior": "体のエネルギーの使い方に関わるよ。多いと動悸や暑がり、少ないと寒がりや疲れやすさが見られるんだ。",
+      "summary": "症状だけで診断はしない",
+      "art": "A friendly battery mascot and an adjustable energy dial. No thyroid anatomy, flame on body, numerical values or medical pathways."
+    },
+    {
+      "page": 7,
+      "title": "副腎は\n皮質と髄質！",
+      "junior": "副腎のホルモンは、全部同じですか？",
+      "senior": "外側の皮質からコルチゾール、内側の髄質からアドレナリンなどが出るよ。場所と働きを分けよう。",
+      "summary": "皮質と髄質は、別に整理",
+      "art": "Two large clearly separated unlabelled baskets with different envelope parcels. Metaphor for two production sites; NOT an adrenal cross section or kidney illustration."
+    },
+    {
+      "page": 8,
+      "title": "名前の丸暗記より\n患者さんとつなぐ！",
+      "junior": "ホルモンの量だけ見れば、わかりますか？",
+      "senior": "量だけでは決められないよ。受け取り方の問題もあるから、症状、検査、薬の影響を合わせて考えよう。",
+      "summary": "出る場所・働き・観察で整理",
+      "art": "Exactly the same two nurses with a simple observation clipboard bearing heart, thermometer and test-tube icons. No extra labels or third person.",
+      "closing": "フォローしていただけると励みになります。よろしくお願いします。"
+    }
+  ],
+  "explanations": [
+    {
+      "title": "内分泌と外分泌の違い",
+      "text": "内分泌では、ホルモンを血液中へ分泌し、受容体を持つ標的細胞に情報を伝えます。外分泌は、導管を通して汗や消化液などを出す仕組みです。膵臓は、ホルモンを出す内分泌と消化液を出す外分泌の両方の働きを持ちます。"
+    },
+    {
+      "title": "受容体はメッセージの受け取り口",
+      "text": "ホルモンが届いても、すべての細胞が同じように反応するわけではありません。対応する受容体がある標的細胞に働きます。受容体は細胞の表面や内部にあり、ホルモンの種類によって異なります。鍵と鍵穴のイラストは、この関係を理解するための比喩です。"
+    },
+    {
+      "title": "多くのホルモンは、視床下部・下垂体が調整",
+      "text": "たとえば甲状腺では、視床下部・下垂体・甲状腺のつながりで分泌を調整します。下垂体の甲状腺刺激ホルモン（TSH）が甲状腺に働きます。一方、膵臓のインスリンは血糖などに応じて調整されます。副腎髄質は交感神経の刺激を受けます。すべてを同じ指令系統として覚えないことが大切です。"
+    },
+    {
+      "title": "負のフィードバック",
+      "text": "上流の指令によって増えたホルモンが、上流の分泌を抑える調整を負のフィードバックといいます。甲状腺ホルモンとTSHの関係が一例です。検査値は一つだけで判断せず、関連するホルモンや症状も合わせて読みます。"
+    },
+    {
+      "title": "膵臓：インスリンとグルカゴン",
+      "text": "インスリンは、筋肉・脂肪などへのブドウ糖の取り込みや貯蔵を促し、血糖を下げる方向に働きます。すべての細胞の取り込みがインスリンに依存するわけではありません。グルカゴンは、主に肝臓から血液へブドウ糖を供給する方向に働きます。糖尿病では、インスリンの不足だけでなく、効きにくさ（インスリン抵抗性）も問題になります。"
+    },
+    {
+      "title": "甲状腺：エネルギーの使い方に関わる",
+      "text": "甲状腺ホルモンが多い状態では動悸、暑がり、体重減少など、少ない状態では寒がり、疲れやすさ、体重増加などが見られます。症状には個人差があり、他の病気でも起こります。症状だけで診断せず、診察と甲状腺機能検査を合わせます。"
+    },
+    {
+      "title": "副腎：皮質と髄質を分ける",
+      "text": "外側の副腎皮質からはコルチゾールやアルドステロンなど、内側の副腎髄質からはアドレナリンなどが分泌されます。コルチゾールはストレス時の対応に加え、血糖や血圧の維持などに関わります。アルドステロンはナトリウム・水分の保持とカリウムの排泄に関わります。副腎皮質のホルモンと交感神経に関連する髄質のホルモンを区別しましょう。"
+    },
+    {
+      "title": "水分・カルシウム・成長に関わるホルモン",
+      "text": "抗利尿ホルモン（ADH、バソプレシン）は、腎臓で水分を体内に保つ働きを促します。視床下部で作られ、下垂体後葉から放出されます。副甲状腺ホルモン（PTH）は血中カルシウムの調節に関わります。下垂体の成長ホルモンは成長や代謝に関わり、卵巣・精巣の性ホルモンは生殖機能などに関わります。"
+    },
+    {
+      "title": "看護では、症状と経過につなぐ",
+      "text": "脈拍、体重、暑がり・寒がり、口渇、尿量、疲れやすさなどを、検査値と経過に結びつけて観察します。薬もホルモンの働きや検査値に影響します。分泌量だけでなく受け取る側の問題も考え、気になる変化は指導者・担当者へ報告します。イラストの封筒・鍵・電池・操作盤は比喩で、正確な解剖構造やホルモン経路を示す図ではありません。"
+    }
+  ],
+  "sources": [
+    {
+      "title": "MSD／Merck Manual：Endocrine Glands",
+      "url": "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/biology-of-the-endocrine-system/endocrine-glands"
+    },
+    {
+      "title": "MSD／Merck Manual：Endocrine Function",
+      "url": "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/biology-of-the-endocrine-system/endocrine-function"
+    },
+    {
+      "title": "NIDDK：What Is Diabetes?",
+      "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes"
+    },
+    {
+      "title": "NIDDK：Hyperthyroidism",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/hyperthyroidism"
+    },
+    {
+      "title": "NIDDK：Hypothyroidism",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/hypothyroidism"
+    },
+    {
+      "title": "NIDDK：Adrenal Insufficiency & Addison’s Disease",
+      "url": "https://www.niddk.nih.gov/health-information/endocrine-diseases/adrenal-insufficiency-addisons-disease"
+    },
+    {
+      "title": "MSD／Merck Manual：Overview of the Adrenal Glands",
+      "url": "https://www.merckmanuals.com/home/hormonal-and-metabolic-disorders/adrenal-gland-disorders/overview-of-the-adrenal-glands"
+    },
+    {
+      "title": "MedlinePlus：Antidiuretic hormone blood test",
+      "url": "https://medlineplus.gov/ency/article/003702.htm"
+    }
+  ]
+};

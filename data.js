@@ -58,14 +58,14 @@ const PROGRAMS = [
   },
   {
     id: "anat03",
-    title: "呼吸のメカニズムとガス交換のしくみ",
+    title: "呼吸のメカニズムとガス交換｜V5イラストと会話で学ぶ",
     category: "解剖生理学",
     channel: PRESENTER,
-    durationSec: 540,
+    durationSec: 109,
     views: 71300,
     published: "2026-02-18",
     videoId: "",
-    description: "息を吸って吐く『外呼吸』と、細胞でおこなう『内呼吸』のちがいを解説するのだ。酸素解離曲線や、換気と血流の関係まで、SpO2やPaO2の読み方につながる知識をまとめるのだ。",
+    description: "換気、肺胞と血液の外呼吸、血液と組織の内呼吸、細胞呼吸のちがいを解説するのだ。酸素解離曲線や、換気と血流の関係まで、SpO2やPaO2の読み方につながる知識をまとめるのだ。",
     tags: ["呼吸器", "解剖"],
   },
   {

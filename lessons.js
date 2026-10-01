@@ -240,3 +240,143 @@ ENHANCED_LESSONS.anat02 = {
     }
   ]
 };
+
+ENHANCED_LESSONS.anat03 = {
+  "kind": "anatomy-v5",
+  "title": "呼吸のメカニズムとガス交換",
+  "intro": "空気を動かす・ガスを交換する。先輩と後輩の会話で、呼吸のしくみをひとつずつ。",
+  "poster": "anat03-v5-page-01.jpg",
+  "video": "anat03-v5-review.mp4",
+  "summary": [
+    "換気とガス交換は、呼吸の別々の働き",
+    "酸素は肺胞から血液へ、二酸化炭素は血液から肺胞へ",
+    "SpO₂だけで換気を判断せず、呼吸や意識も合わせて見る"
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "title": "呼吸は\n２つの仕事！",
+      "junior": "息をするって、空気を出し入れすることですか？",
+      "senior": "空気を動かす換気と、酸素・二酸化炭素を交換するガス交換。両方が大切だよ。",
+      "summary": "換気＋ガス交換",
+      "art": "A friendly lung mascot beside a gentle air breeze symbol and two small colored gas parcels. Concept only: no gas arrows, no anatomical section or gas labels."
+    },
+    {
+      "page": 2,
+      "title": "横隔膜が下がると\n空気が入る！",
+      "junior": "吸うとき、肺が自分で広がるんですか？",
+      "senior": "横隔膜が縮んで下がると、胸の中が広がる。肺の中の圧が下がり、空気が入るよ。",
+      "summary": "吸気＝筋肉が働く",
+      "art": "A simple wide expanded accordion bellows beside a friendly lung mascot. The accordion is a volume-expansion metaphor, not an anatomical diagram. No arrows, no fake muscle diagram or air flowing into chest cavity."
+    },
+    {
+      "page": 3,
+      "title": "安静時の呼気は\n戻る力！",
+      "junior": "吐くときも、筋肉で押し出すんですか？",
+      "senior": "安静時は、筋肉がゆるむと肺が元に戻る。その力で空気が出るよ。",
+      "summary": "呼気＝肺の戻る力",
+      "art": "A gently partly-deflated balloon with its open neck, a soft breeze beside it. Metaphor for recoil, not respiratory equipment. No hands squeezing balloon, no clinical diagram, no arrows."
+    },
+    {
+      "page": 4,
+      "title": "肺胞で\nガスを交換！",
+      "junior": "吸った酸素は、どこで血液に入るんですか？",
+      "senior": "肺胞の薄い壁を通って血液へ。二酸化炭素は血液から肺胞へ移るよ。",
+      "summary": "酸素は血液へ／二酸化炭素は肺胞へ",
+      "art": "Two friendly parcel carriers exchanging two differently colored parcels at a small trading window. Air-side character and red blood cell carrier. Metaphor only; no generated alveolus-capillary anatomical diagram, no arrows or extra labels."
+    },
+    {
+      "page": 5,
+      "title": "酸素の運び屋\nヘモグロビン",
+      "junior": "酸素は、どうやって全身へ届くんですか？",
+      "senior": "主に赤血球のヘモグロビンが運ぶよ。体で生まれた二酸化炭素は、血液で肺へ戻るんだ。",
+      "summary": "酸素を届ける／二酸化炭素を戻す",
+      "art": "A friendly red blood cell courier carrying oxygen-like colorful parcels beside a simple human silhouette. No extra text, labels, vascular routes or arrows. Concept of delivery, not molecular structure."
+    },
+    {
+      "page": 6,
+      "title": "空気と血液\n両方が大切！",
+      "junior": "空気が肺に入れば、酸素は十分ですか？",
+      "senior": "肺胞へ空気が届く換気と、血液が流れる血流。両方がそろって酸素を渡せるよ。",
+      "summary": "換気と血流をそろえる",
+      "art": "Two friendly helpers: a blue air-cloud character and a red blood cell character working together to hold one oxygen parcel. Concept of cooperation, no fake circulatory pipes or arrows."
+    },
+    {
+      "page": 7,
+      "title": "酸素は\n受け取って、放す！",
+      "junior": "ヘモグロビンは、酸素をずっと抱えているんですか？",
+      "senior": "肺で受け取り、組織で放すよ。その結びつきやすさを示すのが、酸素解離曲線なんだ。",
+      "summary": "酸素解離曲線＝結びつきの関係",
+      "art": "A red blood cell character gently giving an oxygen parcel to a friendly body-cell character. Metaphor only, NOT a graph or curve. No invented curve, scientific axes or arrows."
+    },
+    {
+      "page": 8,
+      "title": "SpO₂だけで\n安心しない！",
+      "junior": "SpO₂が正常なら、呼吸は大丈夫ですか？",
+      "senior": "酸素化の目安だよ。二酸化炭素の排出は別。呼吸の深さ、苦しさ、意識も見よう。",
+      "summary": "酸素化と換気は、別々に見る",
+      "art": "Exactly two nurses, junior on left and senior on right. Senior holds observation clipboard showing a small finger pulse oximeter, breath and awareness icons with NO extra text or monitor numbers. Warm serious observation scene, no duplicate nurses.",
+      "closing": "フォローしていただけると励みになります。よろしくお願いします。"
+    }
+  ],
+  "explanations": [
+    {
+      "title": "ガスの移動の向き",
+      "text": "酸素は肺胞から血液へ、二酸化炭素は血液から肺胞へ移ります。それぞれのガスの分圧差による拡散です。風船・蛇腹・荷物運びのイラストは、理解のための比喩です。"
+    },
+    {
+      "title": "吸うとき・吐くときのしくみ",
+      "text": "吸気では横隔膜が収縮して下がり、胸腔が広がります。肺が広がることで肺胞内の圧が外気より低くなり、気道を通って空気が入ります。空気が胸腔そのものに入るわけではありません。外肋間筋なども吸気に関わります。 安静時の呼気は主に受動的です。吸気筋がゆるみ、肺・胸郭の弾性による戻る力で肺胞内の圧が外気より高くなり、空気が出ます。運動時や努力して吐くとき、病状によっては呼気にも筋肉の働きが加わります。"
+    },
+    {
+      "title": "換気・ガス交換・血流の違い",
+      "text": "換気は空気の出入りです。そのうち肺胞に届く換気が、ガス交換と二酸化炭素の排出に関わります。肺胞と毛細血管の薄い壁を通るガス交換には、肺胞への空気と、肺の毛細血管を流れる血液の両方が必要です。どちらかが不足したり、釣り合いが崩れたりすると、十分に酸素を取り込めないことがあります。"
+    },
+    {
+      "title": "外呼吸・内呼吸・細胞呼吸",
+      "text": "外呼吸は肺胞と血液のガス交換、内呼吸は血液と体の組織のガス交換を指します。細胞が酸素を使ってエネルギーを得る過程は細胞呼吸です。内呼吸と細胞呼吸は区別して理解しましょう。"
+    },
+    {
+      "title": "ヘモグロビンと酸素解離曲線",
+      "text": "酸素は主に赤血球のヘモグロビンと結合して運ばれ、一部は血漿に溶けています。二酸化炭素は主に重炭酸イオンの形で運ばれます。酸素と二酸化炭素の運び方は同じではありません。 酸素解離曲線は、酸素分圧とヘモグロビンの酸素飽和度の関係を示すS字状の曲線です。肺で酸素を受け取り、組織で放すしくみを理解する手がかりになります。二酸化炭素の増加、pHの低下、温度の上昇などでは右に移動し、同じ酸素分圧で酸素を放しやすくなります。"
+    },
+    {
+      "title": "SpO₂と呼吸の観察",
+      "text": "SpO₂は、パルスオキシメータで推定する動脈血の酸素飽和度です。酸素化の目安になりますが、二酸化炭素の量は測定しません。酸素の値が保たれていても、換気が十分とは限りません。二酸化炭素の評価には、必要に応じて血液ガスなどを用います。 呼吸数だけでなく、深さ、努力呼吸、息苦しさ、意識状態、経過を合わせて観察します。体動や末梢の冷えなどで測定値に誤差が出ることもあります。急な呼吸困難や意識の変化は、数値だけで安心せず、速やかに指導者・担当者へ報告して評価につなげます。"
+    }
+  ],
+  "sources": [
+    {
+      "title": "NHLBI：How the Lungs Work — The Respiratory System",
+      "url": "https://www.nhlbi.nih.gov/health/lungs/respiratory-system"
+    },
+    {
+      "title": "NHLBI：What Breathing Does for the Body",
+      "url": "https://www.nhlbi.nih.gov/health/lungs/breathing-benefits"
+    },
+    {
+      "title": "NHLBI：How Your Body Controls Breathing",
+      "url": "https://www.nhlbi.nih.gov/health/lungs/body-controls-breathing"
+    },
+    {
+      "title": "OpenStax：Anatomy and Physiology 2e — Gas Exchange",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+    },
+    {
+      "title": "OpenStax：Anatomy and Physiology 2e — Transport of Gases",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-5-transport-of-gases"
+    },
+    {
+      "title": "American Thoracic Society：Pulse Oximetry",
+      "url": "https://www.thoracic.org/patients/patient-resources/resources/pulse-oximetry.pdf"
+    },
+    {
+      "title": "MedlinePlus：Pulse Oximetry",
+      "url": "https://medlineplus.gov/lab-tests/pulse-oximetry/"
+    },
+    {
+      "title": "NHLBI：Respiratory Failure — Symptoms",
+      "url": "https://www.nhlbi.nih.gov/health/respiratory-failure/symptoms"
+    }
+  ]
+};

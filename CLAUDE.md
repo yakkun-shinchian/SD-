@@ -2,6 +2,9 @@
 
 This file guides AI assistants (Claude Code) working in this repository.
 
+> **Handing off / picking this up?** See **`HANDOFF.md`** for the current status
+> snapshot, the V5/V6 video pipeline, the figures / CT-MRI system, and the TODO list.
+
 ## Project overview
 
 **NurseTube（ナースチューブ）** is a static, dependency-free web app: a
@@ -40,14 +43,19 @@ package.json. The NurseTube scripts are loaded as plain globals via
 `<script>` tags in this order (see `nurse.html`):
 
 ```
-data.js  → scenes.js → audio/manifest.js → app.js
+data.js → scenes.js → figures.js → audio/manifest.js → images/manifest.js
+       → lessons.js → legacy-views.js → app.js
 ```
 
 Each file exposes globals (not modules):
 
 - `data.js` — `CATEGORIES`, `PROGRAMS`, `EXAM_DATE`, `PRESENTER`
-- `scenes.js` — `SCENES` (script object keyed by program id)
+- `scenes.js` — `SCENES` (slideshow scripts keyed by program id)
+- `figures.js` — `FIGURES` (SVG diagrams incl. CT/MRI) + `SCENE_FIGURES` (scene→figure map)
 - `audio/manifest.js` — `AUDIO_FILES` (auto-generated; empty by default)
+- `images/manifest.js` — `IMAGES` (real photos e.g. CT/MRI; empty by default)
+- `lessons.js` — `ENHANCED_LESSONS` (richer V5/V6 lessons: dialogue, MP4, quiz, sources)
+- `legacy-views.js` — saved legacy view compatibility
 - `app.js` — the whole app, wrapped in an IIFE (`"use strict"`)
 
 ### Routing
@@ -57,7 +65,8 @@ Hash-based router in `app.js` (`router()` + `hashchange`):
 - `#/` — home (all programs)
 - `#/category/<カテゴリ>` — filter by category
 - `#/search/<キーワード>` — search title/channel/category/description/tags
-- `#/watch/<番組ID>` — watch page (YouTube embed or slideshow player)
+- `#/watch/<番組ID>` — watch page. Priority: `ENHANCED_LESSONS[id]` (V5/V6 video +
+  dialogue / quiz) → else YouTube embed (`videoId`) → else slideshow player + figures
 
 ### The slideshow player
 
@@ -78,12 +87,19 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 |------|---------|
 | `index.html` | **Site landing: VentSim ventilator monitor simulator** (standalone, self-contained; not part of NurseTube) |
 | `ventilator.html` | Legacy-URL redirect to `index.html` |
+| `satellite.html` | Satellite-tracking 3D globe app (standalone, Three.js) |
 | `nurse.html` | NurseTube page skeleton (header, sidebar, main); loads the scripts below |
+| `nurse-*-review.html` | Standalone "確認版" review pages for V5/V6 illustrated videos |
 | `styles.css` | YouTube-style UI, player, light/dark theme |
 | `app.js` | Rendering, routing, search, slideshow player (IIFE) |
 | `data.js` | Program catalog + categories + exam date (**add programs here**) |
-| `scenes.js` | Per-program slide scripts (**add scripts here**) |
+| `scenes.js` | Per-program slideshow scripts (`SCENES`) |
+| `figures.js` | SVG diagram library (`FIGURES`, incl. CT/MRI) + scene map (`SCENE_FIGURES`) |
+| `lessons.js` | Richer V5/V6 lessons (`ENHANCED_LESSONS`): dialogue, MP4 video, quiz, sources |
+| `legacy-views.js` | Saved legacy view compatibility |
 | `audio/manifest.js` | Auto-generated audio map (`AUDIO_FILES`) |
+| `images/manifest.js` | Real-photo map (`IMAGES`, e.g. CT/MRI); empty by default — see `images/README.md` |
+| `figures-preview.html` | Standalone gallery of all `FIGURES` |
 | `tools/build-voicevox.mjs` | Export scripts → `voicevox/narration.txt` + manifests |
 | `tools/link-audio.mjs` | Align VOICEVOX wavs → `audio/` + regenerate manifest |
 | `voicevox/` | VOICEVOX export data + detailed how-to (`voicevox/README.md`) |

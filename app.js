@@ -97,9 +97,9 @@
       `<div class="thumb__play"><span>▶</span></div>`;
     const lesson = cardLessonOf(p.id);
     if (lesson) return `
-      <div class="thumb thumb--v5"${p.category === "基礎看護学" ? ` style="background:${grad};color:#fff"` : ""}>
+      <div class="thumb thumb--v5" style="background:${grad};color:#fff">
         <img class="thumb__v5-image" src="${escapeHtml(lesson.poster)}" width="1080" height="1920" loading="lazy" alt="" />
-        <span class="thumb__cat"${p.category === "基礎看護学" ? ' style="background:rgba(0,0,0,.28)"' : ""}>${escapeHtml(lesson.version || "V5")}イラスト・会話動画</span>
+        <span class="thumb__cat">${escapeHtml(lesson.version || "V5")}イラスト・会話動画</span>
         <div class="thumb__title">${escapeHtml(lesson.title)}</div>
         <span class="thumb__dur">${formatDuration(lesson.durationSec || p.durationSec)}</span>${play}
       </div>`;

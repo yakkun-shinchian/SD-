@@ -372,14 +372,14 @@ const PROGRAMS = [
   },
   {
     id: "exam02",
-    title: "点滴の滴下数 計算問題の解き方【公式と練習】",
+    title: "点滴の滴下計算｜量・時間・セットの滴数を確認",
     category: "国家試験対策",
     channel: PRESENTER,
-    durationSec: 83,
+    durationSec: 85,
     views: 187500,
     published: "2026-04-15",
     videoId: "",
-    description: "点滴の滴下数の計算を、公式の使い方から解説するのだ。成人用(20滴=1mL)と小児用(60滴=1mL)の使い分けと、よく出る計算パターンを練習問題で攻略するのだ。",
+    description: "量・時間・セットの表示を確認して滴下計算を学ぶV6教材。20滴／mLと60滴／mLの比較、時間の換算、滴／分とmL／時の区別を音声付きの会話で整理します。",
     tags: ["計算", "必修", "国試"],
   },
   {

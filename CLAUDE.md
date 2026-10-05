@@ -89,6 +89,17 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `voicevox/` | VOICEVOX export data + detailed how-to (`voicevox/README.md`) |
 | `README.md` | User-facing docs (Japanese) |
 
+## AI Council side app
+
+`ai-council.html` is an independent scripted-debate player. It loads
+`ai-council-data.js`, then `ai-council-era-sengoku.js` and
+`ai-council-era-showa.js`. Keep it vanilla and build-free.
+
+The debate is scripted fiction, not actual ChatGPT/Claude/Gemini/Grok output.
+It calls no external APIs and stores no API keys. Preserve the disclaimer
+on the start screen, during playback, in exports, and in README. Scores
+are authored narrative values, not measured accuracy or evidence ratings.
+
 ## Common tasks
 
 ### Add or edit a program

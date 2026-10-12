@@ -81,7 +81,7 @@
 
   const anatomyV5Of = (id) => {
     const lesson = typeof ENHANCED_LESSONS !== "undefined" ? ENHANCED_LESSONS[id] : null;
-    return lesson && ["anatomy-v5", "illustrated-v6"].includes(lesson.kind) ? lesson : null;
+    return lesson && ["anatomy-v5", "illustrated-v6", "illustrated-static"].includes(lesson.kind) ? lesson : null;
   };
 
   // 表示用の情報。既存のバイタル動画プレーヤーはそのまま利用する。
@@ -99,9 +99,9 @@
     if (lesson) return `
       <div class="thumb thumb--v5" style="background:${grad};color:#fff">
         <img class="thumb__v5-image" src="${escapeHtml(lesson.poster)}" width="1080" height="1920" loading="lazy" alt="" />
-        <span class="thumb__cat">${escapeHtml(lesson.version || "V5")}イラスト・会話動画</span>
+        <span class="thumb__cat">${escapeHtml(lesson.version || "V5")}${lesson.kind === "illustrated-static" ? "図解教材" : "イラスト・会話動画"}</span>
         <div class="thumb__title">${escapeHtml(lesson.title)}</div>
-        <span class="thumb__dur">${formatDuration(lesson.durationSec || p.durationSec)}</span>${play}
+        <span class="thumb__dur">${lesson.kind === "illustrated-static" ? lesson.pages.length + "枚の図解" : formatDuration(lesson.durationSec || p.durationSec)}</span>${play}
       </div>`;
     return `
       <div class="thumb" style="background:${grad}">
@@ -136,7 +136,7 @@
             <h3 class="card__title">${escapeHtml(p.title)}</h3>
             <div class="card__sub">${escapeHtml(channel)}</div>${viewsHtml(p)}
             <div class="card__sub">
-              <span>${lesson ? lesson.pages.length + "枚のイラスト・音声付き" : (scenesOf(p.id) ? scenesOf(p.id).length + "場面で学ぶ" : "教材")}</span>
+              <span>${lesson ? lesson.pages.length + (lesson.kind === "illustrated-static" ? "枚の図解・個別保存可" : "枚のイラスト・音声付き") : (scenesOf(p.id) ? scenesOf(p.id).length + "場面で学ぶ" : "教材")}</span>
             </div>
           </div>
         </div>
@@ -275,6 +275,19 @@
     document.getElementById("bigPlay").addEventListener("click", stopDialogue, true);
     document.getElementById("btnReplay").addEventListener("click", stopDialogue, true);
     activeLesson = { destroy() { video?.pause(); stopDialogue(); slideshow?.destroy(); } };
+  }
+
+  function renderStaticIllustrations(p, lesson) {
+    main.classList.add("enhanced-main");
+    main.innerHTML = `<a class="back-link" href="#/">一覧にもどる</a>
+      <article class="v5-lesson">
+        <header class="v5-heading"><span class="lesson-status">${escapeHtml(p.category)} · V6図解教材</span><h1>${escapeHtml(lesson.title)}</h1>${viewsHtml(p)}<p>${escapeHtml(lesson.intro)}</p><p>画像をタップすると拡大できます。iPadでは拡大後に画像を長押しして保存できます。</p></header>
+        <section class="v5-section takeaway"><h2>今日、持ち帰る3つ</h2><ul>${lesson.summary.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul></section>
+        <section class="v5-section" aria-label="感染予防の4場面">${lesson.pages.map(d => `<figure style="margin:0 0 2rem"><h2>${d.page}. ${escapeHtml(d.title)}</h2><a href="${escapeHtml(d.image)}" target="_blank" rel="noopener" aria-label="${escapeHtml(d.title)}の画像を拡大"><img src="${escapeHtml(d.image)}" alt="${escapeHtml(d.alt)}" width="1080" height="1920" loading="${d.page === 1 ? "eager" : "lazy"}" style="display:block;width:100%;max-width:540px;height:auto;margin:auto;object-fit:contain"></a><figcaption><p>${escapeHtml(d.text)}</p><a href="${escapeHtml(d.image)}" download>この画像を保存（PNG）</a></figcaption></figure>`).join("")}</section>
+        <section class="v5-section references"><h2>参考資料</h2>${lesson.sources.map(d => `<p><a href="${escapeHtml(d.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(d.title)}</a></p>`).join("")}<p>内容照合：2026年10月12日</p></section>
+        <footer class="warm-footer"><p>今日はひとつ、わかれば大丈夫。</p><a href="#/">ほかの教材へ</a></footer>
+      </article>`;
+    document.title = `${lesson.title}｜NurseTube`;
   }
 
   function renderAnatomyV5(p, lesson) {
@@ -587,7 +600,7 @@
         <p>番組が見つからなかったのだ。</p><a class="btn-yt" href="#/">ホームにもどるのだ</a></div>`;
       return;
     }
-    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { const lesson = ENHANCED_LESSONS[id]; if (["anatomy-v5", "illustrated-v6"].includes(lesson.kind)) renderAnatomyV5(p, lesson); else renderEnhanced(p, lesson); return; }
+    if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { const lesson = ENHANCED_LESSONS[id]; if (lesson.kind === "illustrated-static") renderStaticIllustrations(p, lesson); else if (["anatomy-v5", "illustrated-v6"].includes(lesson.kind)) renderAnatomyV5(p, lesson); else renderEnhanced(p, lesson); return; }
     const tags = (p.tags || []).map((t) => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
     const hasLesson = !p.videoId && scenesOf(p.id);
     main.innerHTML = `
@@ -713,3 +726,4 @@
   window.addEventListener("hashchange", router);
   router();
 })();
+

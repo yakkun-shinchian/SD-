@@ -149,5 +149,64 @@
    682,
    24
   ]
+ },
+ "image_sha256": "2a34742aa8a1ddb26df3ea628143cc6554042655c93de4e441b7ad52480b3044",
+ "heading_anchors": [
+  "title",
+  "tips_title"
+ ],
+ "anchor_meta": {
+  "title": {
+   "role": "heading",
+   "text": "qSOFA（クイックソーファ）",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    59,
+    108,
+    768,
+    75
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  },
+  "c1_value": {
+   "role": "body",
+   "text": "22回/分 以上",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    98,
+    594,
+    364,
+    58
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  },
+  "c2_note": {
+   "role": "body",
+   "text": "「いつもと違う」も",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    600,
+    752,
+    230,
+    29
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  },
+  "c3_value": {
+   "role": "body",
+   "text": "100mmHg 以下",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    92,
+    1178,
+    377,
+    52
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  }
  }
 }

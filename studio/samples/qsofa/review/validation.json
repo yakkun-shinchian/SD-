@@ -1,0 +1,72 @@
+{
+  "profile": "M3",
+  "source_sha256": "2a34742aa8a1ddb26df3ea628143cc6554042655c93de4e441b7ad52480b3044",
+  "mode": "UNVERIFIED_TIMING_PREVIEW",
+  "actual_audio_sync_verified_by_this_tool": false,
+  "note": "Geometry and declared timing validated. Final audiovisual listening remains required.",
+  "frames_checked": 879,
+  "boundary_checks": 885,
+  "overlap_count": 0,
+  "cues": [
+    {
+      "cue": "qsofa",
+      "target": "title",
+      "rect": [
+        59,
+        108,
+        768,
+        75
+      ],
+      "color": "red",
+      "start": 2.7,
+      "draw_end": 3.0,
+      "speech_end": 4.5,
+      "clear_at": 4.7
+    },
+    {
+      "cue": "rr",
+      "target": "c1_value",
+      "rect": [
+        98,
+        594,
+        364,
+        58
+      ],
+      "color": "yellow",
+      "start": 7.6000000000000005,
+      "draw_end": 7.9,
+      "speech_end": 9.9,
+      "clear_at": 10.1
+    },
+    {
+      "cue": "mental",
+      "target": "c2_note",
+      "rect": [
+        600,
+        752,
+        230,
+        29
+      ],
+      "color": "yellow",
+      "start": 13.5,
+      "draw_end": 13.8,
+      "speech_end": 15.2,
+      "clear_at": 15.399999999999999
+    },
+    {
+      "cue": "sbp",
+      "target": "c3_value",
+      "rect": [
+        92,
+        1178,
+        377,
+        52
+      ],
+      "color": "yellow",
+      "start": 18.9,
+      "draw_end": 19.2,
+      "speech_end": 21.099999999999998,
+      "clear_at": 21.299999999999997
+    }
+  ]
+}

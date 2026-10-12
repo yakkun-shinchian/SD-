@@ -14,6 +14,8 @@
 """
 import argparse, json, math, os, random, re, shutil, subprocess, sys, tempfile, wave
 
+from emphasis import validate_source, prepare_emphasis, validate_frames, preview_segments, validate_audio
+
 import numpy as np
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
@@ -71,11 +73,15 @@ class Timeline:
         if d.get("layout"):
             with open(self.p(d["layout"]), encoding="utf-8") as fp:
                 lay = json.load(fp)
+        self.layout = lay
+        self.preview = False
         self.anchors = dict(lay.get("anchors", {}))
         self.anchors.update(d.get("anchors", {}))
         self.src_w, self.src_h = lay.get("size", d.get("source_size", self.img.size))
         self.k = self.img.size[0] / self.src_w  # 論理座標→画像ピクセル
         self.bg = color(d.get("background", "#") if d.get("background") else list(self.img.getpixel((2, self.img.size[1] - 3))))
+        if not math.isclose(self.k, self.img.size[1] / self.src_h, rel_tol=1e-9):
+            raise ValueError("Image/layout aspect mismatch: anchors would drift")
         self.seg = {}
         self.narr_wavs = []
 
@@ -368,11 +374,12 @@ def draw_overlay(o, t, pt, tl):
         return
     until = o.get("_until")
     alpha = 1.0
+    fade = o.get("_fade", 0.4)
     if until is not None:
-        if t > until + 0.4:
+        if t >= until + fade:
             return
         if t > until:
-            alpha = 1 - (t - until) / 0.4
+            alpha = 1 - (t - until) / fade
     p = ease_out((t - t0) / max(0.01, o["_dur"]))
     typ = o["type"]
     col = color(o.get("color"), {"highlight": "yellow", "circle": "green", "box": "blue",
@@ -383,6 +390,10 @@ def draw_overlay(o, t, pt, tl):
 
     if typ == "highlight":  # 蛍光ペン：左→右に伸び、乗算合成で文字を潰さない
         x, y, w, h = tl.rect(o["target"], o.get("pad", 6))
+        if o.get("_m3"):
+            y += h * (1 - o["thickness_ratio"])
+            h *= o["thickness_ratio"]
+            alpha *= o["opacity"]
         lin = (t - t0) / max(0.01, o["_dur"])  # 読み上げに合わせて一定速度
         md = pt.M()
         x0, y0 = pt.P(x, y)
@@ -575,7 +586,7 @@ def render_frame(tl, cam, overlays, t):
             bb = tuple(v // SS * SS for v in bb[:2]) + tuple(-(-v // SS) * SS for v in bb[2:])
             ov = pt.layer.crop(bb).resize(((bb[2] - bb[0]) // SS, (bb[3] - bb[1]) // SS), Image.BOX)
             frame.paste(ov, (bb[0] // SS, bb[1] // SS), ov)
-    for st, a, s in tl.narr_wavs:
+    for st, a, s in ([] if tl.d.get("subtitles") is False else tl.narr_wavs):
         en = st + len(a) / SR
         if st <= t <= en + 0.25 and s.get("subtitle"):
             frame = draw_subtitle(frame, s["subtitle"], t, st, en, tl, s)
@@ -596,6 +607,8 @@ def _render_bytes(i):
 
 
 def prepare_overlays(tl):
+    if tl.d.get("profile") in ("M3", "M4"):
+        return prepare_emphasis(tl)
     out = []
     for o in tl.d.get("overlays", []):
         o = dict(o)
@@ -606,7 +619,7 @@ def prepare_overlays(tl):
         else:
             o["_t0"] = tl.t(o["start"])
             o["_dur"] = float(o.get("dur", 0.8))
-        o["_until"] = tl.t(o["until"]) if "until" in o else None
+        o["_until"] = tl.t(o["until"]) if "until" in o else (e if "sync" in o else o["_t0"] + o["_dur"])
         out.append(o)
     return out
 
@@ -617,17 +630,39 @@ def main():
     ap.add_argument("-o", "--out")
     ap.add_argument("--size", help="出力サイズ上書き 例: 1080x1350（4:5）/ 1920x1080（16:9）")
     ap.add_argument("-j", "--jobs", type=int, help="並列プロセス数（既定: CPU数）")
+    ap.add_argument("--preview", action="store_true", help="Unverified timing; stills only, never production audio")
+    ap.add_argument("--validate-only", action="store_true", help="Validate without rendering video")
+    ap.add_argument("--report", help="Write per-frame validation results as JSON")
     ap.add_argument("--stills", help="カンマ区切り秒数。確認用PNGを書き出して終了")
     args = ap.parse_args()
 
     tl = Timeline(args.timeline)
     if args.size:
         tl.W, tl.H = (int(v) for v in args.size.lower().split("x"))
+    if args.preview and not (args.stills or args.validate_only):
+        ap.error("--preview requires --stills or --validate-only; video export is blocked")
+    tl.preview = args.preview
+    if tl.d.get("profile") in ("M3", "M4"):
+        validate_source(tl)
     work = tempfile.mkdtemp(prefix="yakubon_")
-    end = build_narration(tl, work)
+    if args.preview:
+        end = preview_segments(tl)
+    else:
+        if tl.d.get("profile") in ("M3", "M4"):
+            validate_audio(tl)
+        end = build_narration(tl, work)
     tl.duration = float(tl.d.get("duration", end + float(tl.d.get("tail", 1.2))))
     cam = Camera(tl)
     overlays = prepare_overlays(tl)
+    if tl.d.get("profile") in ("M3", "M4"):
+        report = validate_frames(tl, cam, overlays)
+        if args.report:
+            with open(args.report, "w", encoding="utf-8") as fp:
+                json.dump(report, fp, ensure_ascii=False, indent=2)
+        print(json.dumps(report, ensure_ascii=False))
+    if args.validate_only:
+        shutil.rmtree(work, ignore_errors=True)
+        return
     out = args.out or tl.p(tl.d.get("output", {}).get("file", "out.mp4"))
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
 
@@ -636,6 +671,7 @@ def main():
             p = os.path.splitext(out)[0] + f"_still_{float(s):05.1f}s.png"
             render_frame(tl, cam, overlays, float(s)).save(p)
             print(p)
+        shutil.rmtree(work, ignore_errors=True)
         return
 
     wav = os.path.join(work, "mix.wav")

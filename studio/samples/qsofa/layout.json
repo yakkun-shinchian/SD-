@@ -1,0 +1,212 @@
+{
+ "size": [
+  1080,
+  1920
+ ],
+ "scale": 2,
+ "anchors": {
+  "header": [
+   0,
+   0,
+   1080,
+   330
+  ],
+  "title": [
+   59,
+   108,
+   768,
+   75
+  ],
+  "c1": [
+   40,
+   380,
+   480,
+   540
+  ],
+  "c1_label": [
+   169,
+   424,
+   158,
+   50
+  ],
+  "c1_value": [
+   98,
+   594,
+   364,
+   58
+  ],
+  "c1_note": [
+   80,
+   752,
+   181,
+   29
+  ],
+  "c2": [
+   560,
+   380,
+   480,
+   540
+  ],
+  "c2_label": [
+   689,
+   424,
+   260,
+   50
+  ],
+  "c2_value": [
+   623,
+   592,
+   354,
+   56
+  ],
+  "c2_note": [
+   600,
+   752,
+   230,
+   29
+  ],
+  "c3": [
+   40,
+   960,
+   480,
+   540
+  ],
+  "c3_label": [
+   169,
+   1004,
+   262,
+   50
+  ],
+  "c3_value": [
+   92,
+   1178,
+   377,
+   52
+  ],
+  "c3_note": [
+   80,
+   1332,
+   216,
+   29
+  ],
+  "tips": [
+   560,
+   960,
+   480,
+   540
+  ],
+  "tips_title": [
+   589,
+   1001,
+   216,
+   44
+  ],
+  "tips_0": [
+   590,
+   1092,
+   348,
+   29
+  ],
+  "tips_1": [
+   590,
+   1172,
+   323,
+   32
+  ],
+  "tips_2": [
+   590,
+   1252,
+   272,
+   30
+  ],
+  "tips_3": [
+   590,
+   1332,
+   254,
+   32
+  ],
+  "concl": [
+   40,
+   1540,
+   1000,
+   250
+  ],
+  "concl_1": [
+   300,
+   1587,
+   482,
+   46
+  ],
+  "concl_2": [
+   166,
+   1672,
+   748,
+   59
+  ],
+  "source": [
+   40,
+   1832,
+   682,
+   24
+  ]
+ },
+ "image_sha256": "2a34742aa8a1ddb26df3ea628143cc6554042655c93de4e441b7ad52480b3044",
+ "heading_anchors": [
+  "title",
+  "tips_title"
+ ],
+ "anchor_meta": {
+  "title": {
+   "role": "heading",
+   "text": "qSOFA（クイックソーファ）",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    59,
+    108,
+    768,
+    75
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  },
+  "c1_value": {
+   "role": "body",
+   "text": "22回/分 以上",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    98,
+    594,
+    364,
+    58
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  },
+  "c2_note": {
+   "role": "body",
+   "text": "「いつもと違う」も",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    600,
+    752,
+    230,
+    29
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  },
+  "c3_value": {
+   "role": "body",
+   "text": "100mmHg 以下",
+   "important": true,
+   "existing_emphasis": false,
+   "reviewed_rect": [
+    92,
+    1178,
+    377,
+    52
+   ],
+   "review_method": "visual inspection of original PNG and generator textbbox"
+  }
+ }
+}

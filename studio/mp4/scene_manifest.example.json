@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "output": {"size": [1080, 1920], "fps": 30},
+  "subtitle_style": {"font": "Noto Serif CJK JP", "size": 80, "color": "#FFD166", "position": [540, 1500]},
+  "audio": [{"file": "coefont_narration.mp3", "at": 0, "volume": 1}],
+  "scenes": [
+    {"id": "overview", "file": "gemini_01.mp4", "in": 0, "out": 8,
+     "source": "Gemini (already exported)",
+     "subtitles": [{"text": "全体の流れ", "start": 0, "end": 8}]},
+    {"id": "detail", "file": "gemini_02.mp4", "in": 1, "out": 9,
+     "subtitles": [{"text": "ここがポイント\n大切な部分を確認", "start": 0, "end": 8,
+                    "style": {"size": 72, "position": [540, 1450]}}]}
+  ]
+}

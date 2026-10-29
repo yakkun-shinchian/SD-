@@ -1,0 +1,12 @@
+{
+  "before": {
+    "signal_end_seconds_threshold_0_005": 3.9,
+    "frequency_hz_zero_crossing": 440.0,
+    "decoded_samples": 192512
+  },
+  "after": {
+    "signal_end_seconds_threshold_0_005": 3.0028333333333332,
+    "frequency_hz_zero_crossing": 440.0,
+    "decoded_samples": 192512
+  }
+}

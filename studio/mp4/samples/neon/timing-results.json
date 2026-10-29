@@ -1,0 +1,52 @@
+{
+  "before": {
+    "audio_ends": [
+      3.9
+    ],
+    "subtitle_times": [
+      {
+        "start": 0.0,
+        "end": 1.95
+      },
+      {
+        "start": 1.95,
+        "end": 3.9
+      }
+    ],
+    "audio_stream_duration": 4.0,
+    "plan": "c93bd64de88fbce273b3f6fc3f7728058cf0ffc2fd80076c256846c8f1bc56ac",
+    "inputs": {
+      "/workspace/scratch/0500da36b6f2/sd/studio/mp4/samples/neon/scene.mp4": "a97fcba006c1b028d326b12974df128483360ee1e1c9fd418140214c881327e5",
+      "/workspace/scratch/0500da36b6f2/sd/studio/mp4/samples/neon/tone.wav": "c4d1005c98f0f2d4b4127192a91f5bb455fb23196750345d0285e2f64b711fa4"
+    },
+    "master_sha256": "c245cdff620e4962fb6553c6f3e06bfe3c899f741679bf2972fd802a3184e29d",
+    "duration": 4.0,
+    "master_reused": false,
+    "mode": "build"
+  },
+  "after": {
+    "audio_ends": [
+      3.0
+    ],
+    "subtitle_times": [
+      {
+        "start": 0.0,
+        "end": 1.5
+      },
+      {
+        "start": 1.5,
+        "end": 3.0
+      }
+    ],
+    "audio_stream_duration": 4.0,
+    "plan": "2614a5669ce527b71a646f0e8ed3beb724a400852f137fa95ddc91aef46e1487",
+    "inputs": {
+      "/workspace/scratch/0500da36b6f2/sd/studio/mp4/samples/neon/scene.mp4": "a97fcba006c1b028d326b12974df128483360ee1e1c9fd418140214c881327e5",
+      "/workspace/scratch/0500da36b6f2/sd/studio/mp4/samples/neon/tone.wav": "c4d1005c98f0f2d4b4127192a91f5bb455fb23196750345d0285e2f64b711fa4"
+    },
+    "master_sha256": "c38882b86d520070b17dc092ea77014853f3f1bbb855f99f759b889337802798",
+    "duration": 4.0,
+    "master_reused": false,
+    "mode": "build"
+  }
+}

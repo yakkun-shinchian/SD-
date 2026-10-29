@@ -1,0 +1,5 @@
+test_alias_sequential_emphasis_rejected (test_emphasis.EmphasisTests.test_alias_sequential_emphasis_rejected) ... ok
+test_camera_clipping_rejected (test_emphasis.EmphasisTests.test_camera_clipping_rejected) ... ok
+test_camera_moving_during_phrase_rejected (test_emphasis.EmphasisTests.test_camera_moving_during_phrase_rejected) ... ok
+test_changed_audio_rejected_and_real_wav_path (test_emphasis.EmphasisTests.test_changed_audio_rejected_and_real_wav_path) ... ok
+test_coordinate_change_rejected (test_emphasis.EmphasisTests.test_coordinate_change_rejected) ... 

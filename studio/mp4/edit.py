@@ -14,6 +14,16 @@ import tempfile
 
 VERSION = 1
 
+NEON_GREEN = {'font': 'Noto Sans CJK JP', 'size': 96, 'color': '#39FF14',
+              'glow': {'blur': 10, 'strength': 0.65}}
+
+
+def speed(a):
+    value = number(a.get('speed', 1), 'audio.speed', .5)
+    if value > 2:
+        raise ValueError('audio.speed must be between 0.5 and 2')
+    return value
+
 
 def run(args, cwd=None):
     p = subprocess.run([str(x) for x in args], cwd=cwd, capture_output=True)
@@ -83,20 +93,46 @@ def load(path):
         for c in s.get('subtitles', []):
             a = number(c.get('start', 0), 'subtitle.start')
             b = number(c.get('end', duration), 'subtitle.end')
+            if 'audio_index' in c:
+                index = c['audio_index']
+                tracks = d.get('audio', [])
+                if type(index) is not int or not 0 <= index < len(tracks):
+                    raise ValueError('Invalid subtitle audio_index')
+                track = tracks[index]
+                if 'start' not in c or 'end' not in c or track.get('out') is None:
+                    raise ValueError('Audio-linked subtitles require start, end and explicit audio.out')
+                trim = number(track.get('in', 0), 'audio.in')
+                stop = number(track['out'], 'audio.out')
+                if not trim <= a < b <= stop:
+                    raise ValueError('subtitle timing outside audio trim')
+                at = number(track.get('at', 0), 'audio.at')
+                a, b = (at+(a-trim)/speed(track)-offset,
+                        at+(b-trim)/speed(track)-offset)
             if not 0 <= a < b <= duration + 1e-6:
                 raise ValueError('subtitle timing outside scene')
-            style = dict(d.get('subtitle_style', {}))
+            preset = d.get('subtitle_preset')
+            if preset not in (None, 'neon_green'):
+                raise ValueError('Unknown subtitle_preset')
+            style = dict(NEON_GREEN if preset else {})
+            style.update(d.get('subtitle_style', {}))
+            if preset:
+                style.setdefault('position', [w/2, h*.18])
             style.update(c.get('style', {}))
             cues.append({'start': offset+a, 'end': offset+b, 'text': c['text'], 'style': style})
         offset += duration
     if not scenes:
         raise ValueError('at least one scene required')
+    if 'max_duration' in out and offset > number(out['max_duration'], 'max_duration', .01):
+        raise ValueError('Output exceeds max_duration')
     audio = []
     for a in d.get('audio', []):
         audio.append({'file': str((base/a['file']).resolve()),
                       'at': number(a.get('at', 0), 'audio.at'),
                       'in': number(a.get('in', 0), 'audio.in'),
                       'out': a.get('out'), 'volume': number(a.get('volume', 1), 'audio.volume')})
+        speed(a)  # Validate even when there are no linked subtitles.
+        if 'speed' in a:
+            audio[-1]['speed'] = a['speed']
     plan = {'version': VERSION, 'size': [w, h], 'fps': fps, 'scenes': scenes, 'audio': audio}
     return plan, cues, offset
 
@@ -123,7 +159,7 @@ def validate_inputs(plan, duration):
         end = length if a['out'] is None else number(a['out'], 'audio.out')
         if not a['in'] < end <= length + .001:
             raise ValueError(f'Invalid audio trim: {p}')
-        if a['at'] + end-a['in'] > duration + .001:
+        if a['at'] + (end-a['in'])/speed(a) > duration + .001:
             raise ValueError('Audio would be cut off; extend scene selection or explicitly trim audio')
         fingerprints[str(p)] = sha(p)
     return fingerprints
@@ -165,7 +201,23 @@ def ass(cues, w, h):
         text = text.replace('\n', r'\N')
         bgr = color[5:7]+color[3:5]+color[1:3]
         tag = '{'+f'\\an5\\pos({x},{y})\\fn{font}\\fs{size}\\c&H{bgr}&'+'}'
-        lines.append(f'Dialogue: 0,{timestamp(c["start"])},{timestamp(c["end"])},Default,,0,0,0,,{tag}{text}')
+        glow = s.get('glow', {})
+        if not isinstance(glow, dict):
+            raise ValueError('glow must be an object')
+        blur = number(glow.get('blur', 10), 'glow.blur')
+        strength = number(glow.get('strength', 0), 'glow.strength')
+        if blur > 50 or strength > 1:
+            raise ValueError('glow.blur must be <= 50 and glow.strength <= 1')
+        if timestamp(c['start']) == timestamp(c['end']):
+            raise ValueError('subtitle shorter than ASS centisecond resolution')
+        if strength:
+            # Two blurred colored outlines behind a sharp, readable foreground.
+            for layer, radius in ((0, blur), (1, blur/2)):
+                alpha = round(255*(1-strength))
+                halo = tag[:-1]+f'\\bord{max(1, radius/2)}\\blur{radius}\\3c&H{bgr}&\\alpha&H{alpha:02X}&'+'}'
+                lines.append(f'Dialogue: {layer},{timestamp(c["start"])},{timestamp(c["end"])},Default,,0,0,0,,{halo}{text}')
+            tag = tag[:-1]+r'\bord0\shad0\blur0'+'}'
+        lines.append(f'Dialogue: 2,{timestamp(c["start"])},{timestamp(c["end"])},Default,,0,0,0,,{tag}{text}')
     return '\n'.join(lines)+'\n'
 
 
@@ -193,9 +245,14 @@ def build_master(plan, duration, work):
         filters = []
         for i, a in enumerate(plan['audio'], 1):
             end = '' if a['out'] is None else f':end={a["out"]}'
-            filters.append(f'[{i}:a:0]atrim=start={a["in"]}{end},asetpts=PTS-STARTPTS,aresample=48000,volume={a["volume"]},adelay={round(a["at"]*1000)}:all=1[a{i}]')
+            tempo = f'atempo={speed(a)},asetpts=N/SR/TB,' if speed(a) != 1 else ''
+            filters.append(f'[{i}:a:0]atrim=start={a["in"]}{end},asetpts=PTS-STARTPTS,aresample=48000,{tempo}volume={a["volume"]},adelay={round(a["at"]*1000)}:all=1[a{i}]')
         labels = ''.join(f'[a{i}]' for i in range(1, len(plan['audio'])+1))
-        filters.append(f'{labels}amix=inputs={len(plan["audio"])}:normalize=0,apad,atrim=duration={duration}[audio]')
+        tail = f'apad,atrim=duration={duration}'
+        if any(speed(a) != 1 for a in plan['audio']):
+            samples = round(duration*48000)
+            tail = f'apad=whole_len={samples},atrim=end_sample={samples},asetpts=N/SR/TB'
+        filters.append(f'{labels}amix=inputs={len(plan["audio"])}:normalize=0,{tail}[audio]')
         args += ['-filter_complex', ';'.join(filters), '-map', '0:v:0', '-map', '[audio]', '-c:a', 'aac', '-b:a', '192k']
     else:
         args += ['-map', '0:v:0', '-an']
@@ -237,7 +294,23 @@ def edit(manifest, output, mode='build'):
             raise ValueError('Output frame count verification failed')
         if abs(float(result['format']['duration'])-duration) > max(.1, 2/plan['fps']):
             raise ValueError('Output duration verification failed')
-        info = {'plan': signature, 'inputs': fingerprints, 'master_sha256': sha(source),
+        audio_ends = old.get('audio_ends', []) if valid_master else []
+        if not valid_master:
+            for a in plan['audio']:
+                end = a['out']
+                if end is None:
+                    data = probe(a['file'])
+                    stream = next(s for s in data['streams'] if s['codec_type'] == 'audio')
+                    end = float(stream.get('duration', data['format']['duration']))
+                audio_ends.append(a['at']+(end-a['in'])/speed(a))
+        audio_stream = next((s for s in result['streams'] if s['codec_type'] == 'audio'), None)
+        if plan['audio'] and (audio_stream is None or
+                abs(float(audio_stream['duration'])-duration) > .1):
+            raise ValueError('Output audio duration verification failed')
+        info = {'audio_ends': audio_ends,
+                'subtitle_times': [{'start': c['start'], 'end': c['end']} for c in cues],
+                'audio_stream_duration': float(audio_stream['duration']) if audio_stream else None,
+                'plan': signature, 'inputs': fingerprints, 'master_sha256': sha(source),
                 'duration': duration, 'master_reused': valid_master, 'mode': mode}
         (work/'cache.json').write_text(json.dumps(info, indent=2)+'\n')
         for name in (['master.mp4'] if not valid_master else []) + ['captions.ass', 'final.mp4', 'cache.json']:

@@ -87,6 +87,12 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `tools/build-voicevox.mjs` | Export scripts → `voicevox/narration.txt` + manifests |
 | `tools/link-audio.mjs` | Align VOICEVOX wavs → `audio/` + regenerate manifest |
 | `voicevox/` | VOICEVOX export data + detailed how-to (`voicevox/README.md`) |
+| `labs.html` | **Lab assessment: integrated** (triage + cross-domain syndromes) |
+| `labs-cbc.html` · `labs-chem.html` · `labs-coag.html` · `labs-autoab.html` | Per-domain lab assessment apps |
+| `labs-core.js` | Lab engine: registry, reference ranges, flags, evaluation |
+| `labs-cbc.js` · `labs-chem.js` · `labs-coag.js` · `labs-autoab.js` | Domain definitions (analytes, findings, patterns, presets) |
+| `labs-integrate.js` | Cross-domain syndromes, triage, nursing actions |
+| `labs-ui.js` · `labs.css` | Shared UI and styling for the lab apps |
 | `README.md` | User-facing docs (Japanese) |
 
 ## Common tasks
@@ -121,6 +127,55 @@ Scenes are numbered program-order then scene-order; the positional order in
 `narration.txt`/`manifest.json` must match VOICEVOX's batch export order.
 Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
 ⚠ Using VOICEVOX ずんだもん audio requires the credit「VOICEVOX:ずんだもん」.
+
+## The lab assessment apps (`labs*.html`)
+
+A second standalone app family, separate from NurseTube. Target user is a
+**clinical nurse at the bedside** (not a student), so the copy is clinical
+Japanese — **not** ずんだもん tone. Wards assumed: general, ICU, and
+neurosurgery/neurology, plus rheumatology.
+
+Loaded as plain globals in this order:
+
+```
+labs-core.js → labs-<domain>.js … → labs-integrate.js → labs-ui.js
+```
+
+Each page then calls `LabsUI.mount({ domains: [...], integrate: true, ... })`.
+
+### Adding an analyte
+
+Add an entry to the domain file's `analytes` array:
+`{ key, label, unit, group, ref, panic?, decimals, placeholder, note?, facility? }`.
+`ref` is `[lo, hi]` or `{ m: [...], f: [...] }` for sex-specific ranges.
+Set `facility: true` for anything not in the JCCLS common reference intervals —
+the UI then shows a 「施設依存」 badge. `group` must be listed in the domain's
+`groups` array. For qualitative items use `type: "qual"`, or `type: "select"`
+with an `options` array and an optional `positiveWhen(value)` predicate.
+
+### Adding a judgment
+
+1. Set a flag in the domain's `findings(V, D, ctx)`.
+2. Add a `patterns` entry: `{ id, name, level: 'red'|'amber'|'info',
+   when(F, V, D, ctx), basis: [...], note, actions: [...] }`.
+   `V` is the **flat value map across all loaded domains**, so a pattern may
+   read another domain's value directly (it simply never fires when that
+   domain is absent). Add `dedupeKey` when two domains express the same
+   finding (e.g. severe thrombocytopenia in both `cbc` and `coag`).
+3. For a judgment that genuinely needs several domains, add it to
+   `syndromes` in `labs-integrate.js` instead — those carry a `story` field
+   explaining the pathophysiology.
+
+### Conventions specific to these apps
+
+- Reference ranges default to **JCCLS common reference intervals** (adults).
+- Units are conventional Japanese clinical units (Cr/Ca/BUN in mg/dL,
+  platelets in ×10⁴/µL).
+- Wording avoids assertion: 「〜を疑う／〜の可能性／確認すべきは」, never a
+  diagnosis. Every page carries the disclaimer footer and first-visit modal.
+- No patient name/ID fields — the apps deliberately hold no personal data.
+- Verify changes by opening `labs.html`, running the **症例プリセット**
+  buttons, and checking the judgments. That is this project's regression test.
 
 ## Conventions
 

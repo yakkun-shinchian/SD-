@@ -1,0 +1,268 @@
+/* labs.css — 血液検査アセスメント支援アプリ 共通スタイル
+   VentSim（index.html）のダーク臨床テーマに準拠。iPad / iPhone 最適化。 */
+
+:root{
+  --bg:#05080c; --panel:#0d141c; --panel2:#121b25; --panel3:#16212c;
+  --line:#1f2b38; --line2:#2b3a4a;
+  --txt:#e7eef5; --sub:#8aa0b4; --dim:#64788c;
+  --accent:#37d0a8;
+  --red:#ff5d5d; --redbg:#2a1216; --amber:#ffb340; --amberbg:#2a2010;
+  --green:#46e07a; --greenbg:#0f2318; --blue:#4fc3ff; --violet:#9b7fe0;
+  --shadow:0 2px 14px rgba(0,0,0,.45);
+  --radius:12px;
+}
+:root[data-theme="light"]{
+  --bg:#f3f6f9; --panel:#ffffff; --panel2:#f7fafc; --panel3:#eef3f8;
+  --line:#d9e2ea; --line2:#c3d0dc;
+  --txt:#15222e; --sub:#55697c; --dim:#7b8ea1;
+  --red:#c62828; --redbg:#fdeaea; --amber:#a66400; --amberbg:#fff6e5;
+  --green:#1b7f45; --greenbg:#e8f7ee; --blue:#1565c0; --violet:#6a4bbd;
+  --shadow:0 2px 12px rgba(20,40,60,.10);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--txt);
+  font-family:"Segoe UI",system-ui,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  line-height:1.7; font-size:15px;
+  touch-action:manipulation; -webkit-text-size-adjust:100%; overscroll-behavior-y:none;
+  padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+  padding-bottom:84px;
+}
+
+/* ===== ヘッダー ===== */
+.lab-header{
+  position:sticky; top:0; z-index:40;
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  padding:10px 16px; background:linear-gradient(var(--panel2),var(--panel));
+  border-bottom:1px solid var(--line); box-shadow:var(--shadow);
+  padding-top:calc(10px + env(safe-area-inset-top));
+}
+.lab-header .mark{font-size:24px; line-height:1}
+.lab-header h1{margin:0; font-size:18px; font-weight:800; letter-spacing:.3px}
+.lab-header .sub{color:var(--sub); font-size:12px; font-weight:600}
+.lab-header .spacer{flex:1}
+.lab-nav{display:flex; gap:6px; flex-wrap:wrap}
+.lab-nav a{
+  display:inline-block; padding:5px 11px; border-radius:999px; font-size:12px; font-weight:700;
+  text-decoration:none; color:var(--sub); background:var(--panel3); border:1px solid var(--line);
+}
+.lab-nav a:hover{color:var(--txt); border-color:var(--line2)}
+.lab-nav a[aria-current="page"]{color:#04120d; background:var(--accent); border-color:var(--accent)}
+:root[data-theme="light"] .lab-nav a[aria-current="page"]{color:#fff; background:#0d8f73; border-color:#0d8f73}
+
+.icon-btn{
+  background:var(--panel3); color:var(--sub); border:1px solid var(--line);
+  border-radius:999px; padding:6px 12px; font-size:12px; font-weight:700; cursor:pointer;
+  min-height:34px;
+}
+.icon-btn:hover{color:var(--txt)}
+
+/* ===== レイアウト ===== */
+.lab-wrap{max-width:1180px; margin:0 auto; padding:14px 16px 24px}
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  margin-bottom:14px; overflow:hidden;
+}
+.card > h2{
+  margin:0; padding:11px 14px; font-size:14px; font-weight:800; letter-spacing:.3px;
+  background:var(--panel2); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:8px;
+}
+.card > h2 .hint{margin-left:auto; font-size:11px; font-weight:600; color:var(--dim)}
+.card .body{padding:14px}
+
+details.card > summary{
+  list-style:none; cursor:pointer;
+  padding:11px 14px; font-size:14px; font-weight:800;
+  background:var(--panel2); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:8px;
+}
+details.card > summary::-webkit-details-marker{display:none}
+details.card > summary::after{content:"▾"; margin-left:auto; color:var(--sub)}
+details.card[open] > summary::after{content:"▴"}
+
+/* ===== 入力 ===== */
+.grp{margin-bottom:18px}
+.grp:last-child{margin-bottom:0}
+.grp-title{
+  font-size:12px; font-weight:800; color:var(--accent); letter-spacing:.6px;
+  padding-bottom:5px; margin-bottom:10px; border-bottom:1px solid var(--line);
+}
+.fields{display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:10px}
+.f{display:flex; flex-direction:column; gap:3px}
+.f label{font-size:12px; color:var(--sub); font-weight:600; line-height:1.4}
+.f .unit{color:var(--dim); font-weight:500}
+.f .fac{color:var(--amber); font-size:10px; font-weight:700}
+.f input, .f select{
+  background:var(--panel3); color:var(--txt); border:1px solid var(--line);
+  border-radius:8px; padding:9px 10px; font-size:16px; font-family:inherit;
+  min-height:42px; width:100%;
+}
+.f input:focus, .f select:focus{outline:none; border-color:var(--accent); background:var(--panel2)}
+.f input.v-high{border-color:var(--red); color:var(--red); font-weight:700}
+.f input.v-low{border-color:var(--blue); color:var(--blue); font-weight:700}
+.f input.v-panic{border-color:var(--red); background:var(--redbg); color:var(--red); font-weight:800}
+.f .note{font-size:11px; color:var(--dim); line-height:1.5}
+
+/* チップ（複数選択） */
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{
+  display:inline-flex; align-items:center; gap:5px; cursor:pointer;
+  padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600;
+  background:var(--panel3); color:var(--sub); border:1px solid var(--line);
+  min-height:36px; user-select:none;
+}
+.chip input{display:none}
+.chip.on{background:var(--accent); color:#04120d; border-color:var(--accent); font-weight:800}
+:root[data-theme="light"] .chip.on{background:#0d8f73; color:#fff; border-color:#0d8f73}
+
+/* ボタン */
+.btns{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+.btn{
+  background:var(--panel3); color:var(--txt); border:1px solid var(--line2);
+  border-radius:8px; padding:9px 16px; font-size:13px; font-weight:700; cursor:pointer;
+  font-family:inherit; min-height:42px;
+}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent); color:#04120d; border-color:var(--accent)}
+:root[data-theme="light"] .btn.primary{background:#0d8f73; color:#fff; border-color:#0d8f73}
+.btn.danger{color:var(--red); border-color:var(--red)}
+
+.preset-list{display:flex; flex-wrap:wrap; gap:7px}
+.preset{
+  background:var(--panel3); border:1px solid var(--line); border-radius:8px;
+  padding:7px 12px; cursor:pointer; font-family:inherit; text-align:left; min-height:40px;
+}
+.preset b{display:block; font-size:12.5px; color:var(--txt); font-weight:700}
+.preset span{display:block; font-size:10.5px; color:var(--dim)}
+.preset:hover{border-color:var(--accent)}
+
+/* ===== トリアージ ===== */
+.triage{
+  border-radius:var(--radius); padding:16px 18px; margin-bottom:14px;
+  border:2px solid var(--line); background:var(--panel);
+}
+.triage.red{border-color:var(--red); background:var(--redbg)}
+.triage.amber{border-color:var(--amber); background:var(--amberbg)}
+.triage.green{border-color:var(--green); background:var(--greenbg)}
+.triage .tag{
+  display:inline-block; padding:3px 13px; border-radius:999px;
+  font-size:12px; font-weight:800; letter-spacing:1px; margin-bottom:8px;
+}
+.triage.red .tag{background:var(--red); color:#fff}
+.triage.amber .tag{background:var(--amber); color:#241a06}
+.triage.green .tag{background:var(--green); color:#04210f}
+.triage.none .tag{background:var(--line2); color:var(--txt)}
+.triage .msg{font-size:16px; font-weight:800; line-height:1.6}
+.triage ul{margin:10px 0 0; padding-left:20px; font-size:13px; color:var(--sub)}
+.triage li{margin:2px 0}
+
+/* ===== 所見カード ===== */
+.finding{
+  border:1px solid var(--line); border-left-width:4px; border-radius:10px;
+  padding:12px 14px; margin-bottom:10px; background:var(--panel2);
+}
+.finding.red{border-left-color:var(--red)}
+.finding.amber{border-left-color:var(--amber)}
+.finding.info{border-left-color:var(--blue)}
+.finding h3{margin:0 0 6px; font-size:14.5px; font-weight:800; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+.finding .lv{font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:999px; white-space:nowrap}
+.finding.red .lv{background:var(--red); color:#fff}
+.finding.amber .lv{background:var(--amber); color:#241a06}
+.finding.info .lv{background:var(--blue); color:#04121c}
+.finding .basis{font-size:11.5px; color:var(--dim); margin-bottom:6px}
+.finding .basis b{color:var(--sub); font-weight:700}
+.finding .story{font-size:13.5px; color:var(--txt); margin:0 0 8px}
+.finding ul{margin:0; padding-left:19px; font-size:13px; color:var(--sub)}
+.finding li{margin:3px 0}
+
+/* ===== 結果テーブル ===== */
+.tbl{width:100%; border-collapse:collapse; font-size:13px}
+.tbl th, .tbl td{padding:7px 9px; border-bottom:1px solid var(--line); text-align:left}
+.tbl th{color:var(--sub); font-size:11px; font-weight:700; background:var(--panel2); white-space:nowrap}
+.tbl td.num{text-align:right; font-variant-numeric:tabular-nums; font-weight:700; white-space:nowrap}
+.tbl td.ref{color:var(--dim); font-size:11.5px; white-space:nowrap}
+.tbl tr.f-H td.num,.tbl tr.f-HH td.num{color:var(--red)}
+.tbl tr.f-L td.num,.tbl tr.f-LL td.num{color:var(--blue)}
+.tbl tr.f-HH,.tbl tr.f-LL{background:var(--redbg)}
+.badge{
+  display:inline-block; padding:1px 7px; border-radius:4px;
+  font-size:10.5px; font-weight:800; white-space:nowrap;
+}
+.badge.H,.badge.HH{background:var(--red); color:#fff}
+.badge.L,.badge.LL{background:var(--blue); color:#04121c}
+.badge.N{background:var(--line2); color:var(--sub)}
+
+/* 臓器マップ */
+.organs{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px}
+.organ{background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:11px 13px}
+.organ h4{margin:0 0 6px; font-size:13px; font-weight:800; display:flex; gap:7px; align-items:center}
+.organ .hits{display:flex; flex-wrap:wrap; gap:5px}
+.organ .hits span{
+  font-size:11.5px; padding:2px 8px; border-radius:999px;
+  background:var(--panel3); border:1px solid var(--line); color:var(--sub);
+}
+
+/* アクション一覧 */
+.actions{margin:0; padding:0; list-style:none; counter-reset:a}
+.actions li{
+  counter-increment:a; position:relative; padding:8px 10px 8px 38px;
+  border-bottom:1px solid var(--line); font-size:13.5px;
+}
+.actions li:last-child{border-bottom:none}
+.actions li::before{
+  content:counter(a); position:absolute; left:9px; top:9px;
+  width:21px; height:21px; border-radius:50%; background:var(--accent); color:#04120d;
+  font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center;
+}
+:root[data-theme="light"] .actions li::before{background:#0d8f73; color:#fff}
+.actions li .src{display:block; font-size:10.5px; color:var(--dim); margin-top:1px}
+
+.missing{margin:0; padding-left:20px; font-size:13px; color:var(--sub)}
+.missing li{margin:4px 0}
+
+/* DIC スコア表 */
+.score-tbl{width:100%; border-collapse:collapse; font-size:13px; margin-bottom:10px}
+.score-tbl th,.score-tbl td{padding:6px 9px; border-bottom:1px solid var(--line)}
+.score-tbl th{text-align:left; color:var(--sub); font-size:11px; background:var(--panel2)}
+.score-tbl td.pt{text-align:right; font-weight:800; font-variant-numeric:tabular-nums}
+.score-tbl tfoot td{border-top:2px solid var(--line2); font-weight:800}
+
+.empty{color:var(--dim); font-size:13px; text-align:center; padding:18px}
+
+/* ===== 免責 ===== */
+.disclaimer{
+  position:fixed; left:0; right:0; bottom:0; z-index:50;
+  background:var(--panel2); border-top:1px solid var(--line);
+  padding:8px 16px; font-size:11.5px; color:var(--sub); line-height:1.5;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
+}
+.disclaimer b{color:var(--amber)}
+.modal{
+  position:fixed; inset:0; z-index:100; background:rgba(0,0,0,.72);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+.modal .box{
+  background:var(--panel); border:1px solid var(--line2); border-radius:14px;
+  max-width:520px; padding:22px; box-shadow:var(--shadow);
+}
+.modal h2{margin:0 0 10px; font-size:17px}
+.modal p{font-size:13.5px; color:var(--sub); margin:0 0 10px}
+.modal ul{font-size:13px; color:var(--sub); padding-left:20px; margin:0 0 14px}
+
+@media (max-width:640px){
+  .lab-wrap{padding:12px 12px 20px}
+  .fields{grid-template-columns:1fr 1fr}
+  .organs{grid-template-columns:1fr}
+  .lab-header h1{font-size:16px}
+}
+@media (max-width:400px){ .fields{grid-template-columns:1fr} }
+
+@media print{
+  body{background:#fff; color:#000; padding-bottom:0}
+  .lab-header,.disclaimer,.btns,.preset-list,.modal,details.card:not([open]){display:none !important}
+  .card{break-inside:avoid; border-color:#999}
+  .triage{border-width:2px}
+}

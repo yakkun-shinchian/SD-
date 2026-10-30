@@ -329,7 +329,7 @@
   function lessonHtml(p) {
     const c = catOf(p.category) || { color: "#444", icon: "🎬" };
     const grad = `linear-gradient(135deg, ${c.color} 0%, ${shade(c.color, -45)} 100%)`;
-    return `<div class="player">
+    return `<div class="player player--lesson">
       <div class="lesson" id="lessonRoot" style="background:${grad}">
         <div class="lesson__stage">
           <span class="lesson__badge">${c.icon} ${escapeHtml(p.category)}</span>
@@ -499,11 +499,20 @@
         const u = new SpeechSynthesisUtterance(s.narration);
         if (jpVoice) u.voice = jpVoice;
         u.lang = "ja-JP"; u.rate = 1.02; u.pitch = 1.5;
-        u.onend = advance;
-        u.onerror = advance;
-        try { synth.speak(u); } catch (e) {}
+        // 読み上げがすぐ終わった・失敗した（日本語の音声が無い端末など）ときは、
+        // 一瞬で次へ飛ばさず、字幕を読める時間だけ待ってから進む
+        const t0 = Date.now();
+        const done = () => {
+          if (my !== token) return;
+          const elapsed = Date.now() - t0;
+          if (elapsed < 1500) { clearTimer(); timer = setTimeout(advance, Math.max(0, estDuration(s.narration) - elapsed)); }
+          else advance();
+        };
+        u.onend = done;
+        u.onerror = done;
         // onendが発火しないブラウザ対策の保険タイマー
         timer = setTimeout(advance, estDuration(s.narration) + 3000);
+        try { synth.speak(u); } catch (e) {}
       } else {
         timer = setTimeout(advance, estDuration(s.narration));
       }

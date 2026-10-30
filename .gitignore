@@ -4,3 +4,10 @@ voicevox/export/
 # OS / エディタ
 .DS_Store
 Thumbs.db
+
+# 動画制作の検証用スクラッチ（仮素材・書き出しは管理しない）
+t/
+立体で読むCT/ref/
+立体で読むCT/clips/
+立体で読むCT/narration/
+立体で読むCT/out/

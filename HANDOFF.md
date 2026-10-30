@@ -30,6 +30,7 @@ HTML + CSS + バニラ JS のみ。`python3 -m http.server` で開くだけで�
 | **`nurse.html`** | **NurseTube 本体**（学習ポータル）。下記スクリプト群を読み込む |
 | `figures-preview.html` | 図解(SVG)の一覧プレビュー（Claude 作） |
 | `nurse-*-review.html` | V5/V6 動画の「**確認版**」ページ（Codex 作、承認用の単体ページ） |
+| `nurse-classic/` | 黒背景の**クラシック版** NurseTube。V5/V6 改修前（`ce58e90`）の本体を丸ごと複製したもの（スライド＋図解のみ・黒が既定）。`app.js` などは**独立コピー**なので、現行版の修正は自動では反映されない |
 
 ---
 
@@ -116,6 +117,7 @@ Instagram 縦型（1080×1920）の「先輩と後輩の会話」教材。制作
 python3 -m http.server 8000
 #   /                     → VentSim（人工呼吸器）
 #   /nurse.html           → NurseTube 本体
+#   /nurse-classic/       → 黒背景のクラシック版 NurseTube
 #   /figures-preview.html → 図解一覧
 #   /satellite.html       → 衛星アプリ
 ```
@@ -135,12 +137,12 @@ python3 -m http.server 8000
 - **図解 10 種＋CT/MRI＋写真/動画スロット（42 シーン, `e49bbe2`）**
 - VentSim（人工呼吸器, トップページ）、衛星アプリ、`CLAUDE.md`、GitHub Pages ワークフロー
 - V5/V6 会話動画：`base01`, `anat01`〜`anat05`, `exam01` を**本編組込**。各種「確認版」ページ
+- 黒背景のクラシック版 `nurse-classic/` を復元。スライドの文字・図・字幕の重なり（特にスマホ）と、日本語の読み上げ音声が無い端末で一瞬でシーンが進む不具合を修正（現行版のスライド再生にも同じ修正を適用）
 
 ### 未対応・次の候補
 - [ ] **残り 22 本を `ENHANCED_LESSONS` 化**（V5/V6 動画化 or 会話/クイズ付きへ格上げ）
 - [ ] **本物の CT/MRI 写真の投入**（権利 OK 素材を `images/` へ、`IMAGES` に登録）
 - [ ] **図解を未カバー番組へ追加**（薬理・看護技術・母性/小児・精神・疾患の一部）
-- [ ] **`CLAUDE.md` の軽微な陳腐化を更新**：読み込み順に `figures.js / images/manifest.js / lessons.js / legacy-views.js` が未記載、Key files 表に図解・V5/V6 系が未記載
 - [ ] V5 動画・図解の**ブラウザでの見た目最終確認**（Playwright でスクリーンショットを撮って確認できる。§6 参照）
 - [ ] **PR 状況の確認**：本ブランチは統合先。`main` への PR 要確認（§8）
 

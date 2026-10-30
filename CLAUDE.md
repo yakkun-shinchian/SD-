@@ -90,6 +90,7 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `satellite.html` | Satellite-tracking 3D globe app (standalone, Three.js) |
 | `nurse.html` | NurseTube page skeleton (header, sidebar, main); loads the scripts below |
 | `nurse-*-review.html` | Standalone "確認版" review pages for V5/V6 illustrated videos |
+| `nurse-classic/` | Black-background "クラシック版" NurseTube: a self-contained copy of the pre-V5/V6 app (`ce58e90`), slideshow + figures only. Independent copies of `app.js`/`styles.css`/data — fixes to the root files do **not** propagate here |
 | `styles.css` | YouTube-style UI, player, light/dark theme |
 | `app.js` | Rendering, routing, search, slideshow player (IIFE) |
 | `data.js` | Program catalog + categories + exam date (**add programs here**) |

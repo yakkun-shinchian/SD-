@@ -19,12 +19,21 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-// 話者ごとの声。CoeFontの「お気に入り」から選ぶ正式名称なのだ。
-// 勝手に別の声へ置き換えないのだ（coefont-new-project/SKILL.md の原則）。
-const VOICES = {
-  junior: "汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft",
-  senior: "後藤邑子",
+// 声は固定しないのだ。ご本人がその回の映像を見てから決めるのだ。
+// ここにあるのは「前回こうだった」という既定値にすぎないのだ。
+// 変えるときは実行時に指定するのだ:
+//   node tools/build-coefont.mjs exam02-v6-script.json --junior ミリアル
+const KNOWN_VOICES = {
+  "汎用式概念": "汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft",
+  "後藤邑子": "後藤邑子",
+  "ミリアル": "ミリアル",
 };
+const DEFAULT_VOICES = {
+  junior: KNOWN_VOICES["汎用式概念"],
+  senior: KNOWN_VOICES["後藤邑子"],
+};
+// 略称でも正式名称でも受け取るのだ。知らない名前はそのまま通すのだ。
+const resolveVoice = (name) => KNOWN_VOICES[name] || name;
 
 // 既に作ってある音声を使い回せる定型句なのだ。再生成するとポイントが無駄なのだ。
 // 締めのCTAは全教材で同じ音声（md5 c40e954c…）を共有しているのだ。
@@ -52,7 +61,7 @@ function readScript(file) {
     // CTAは後輩が話すので、声は後輩と同じなのだ。
     // cta(V6) と closing(V5) は同じ締めの一言なのだ
     for (const [field, speaker] of [["junior", "junior"], ["senior", "senior"],
-                                    ["cta", "junior"], ["closing", "junior"]]) {
+                                    ["cta", "cta"], ["closing", "cta"]]) {
       const raw = page[field];
       if (!raw) continue;
       rows.push({
@@ -84,7 +93,22 @@ const csvEsc = (v) => {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 };
 
-const args = process.argv.slice(2);
+// --junior / --senior / --cta で、その回の声を指定するのだ
+const argv = process.argv.slice(2);
+const VOICES = { ...DEFAULT_VOICES };
+const args = [];
+for (let i = 0; i < argv.length; i++) {
+  const m = /^--(junior|senior|cta)$/.exec(argv[i]);
+  if (m) {
+    const value = argv[++i];
+    if (!value) { console.error(`${argv[i - 1]} に声の名前が要るのだ`); process.exit(1); }
+    VOICES[m[1]] = resolveVoice(value);
+  } else {
+    args.push(argv[i]);
+  }
+}
+if (!VOICES.cta) VOICES.cta = VOICES.junior;   // 締めは既定で後輩と同じ声なのだ
+
 const targets = args.length
   ? args
   : fs.readdirSync(root)
@@ -128,6 +152,13 @@ for (const target of targets) {
     + (reused ? ` ＋ 使い回し${reused}` : ""));
   total += toGenerate.length;
 }
+console.log(`\n今回の声（既定値なのだ。その回の映像を見て変えていいのだ）:`);
+for (const role of ["junior", "senior", "cta"]) {
+  const label = { junior: "後輩", senior: "先輩", cta: "締め" }[role];
+  console.log(`  ${label}: ${VOICES[role]}`);
+}
+console.log(`  他の候補: ${Object.keys(KNOWN_VOICES).join(" / ")}`);
+console.log(`  変えるとき: node tools/build-coefont.mjs <台本> --junior ミリアル --senior 後藤邑子`);
 console.log(`\n書き出し完了なのだ: 新規に作るのは合計 ${total} 発話 → coefont/`);
 console.log("narration.txt を上から順にCoeFontで生成して、manifest の target_mp3 の名前で戻してほしいのだ。");
 console.log("reuse_from が入っている行は、既にある音声をそのまま使うのだ（作らなくていいのだ）。");

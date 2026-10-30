@@ -148,9 +148,11 @@ Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
 
 | 目的 | ファイル |
 |------|----------|
-| スキル台帳・ChatGPT側呼称との対応表・未発見スキル一覧 | `.claude/skills/REGISTRY.md` |
+| スキル台帳・ChatGPT側呼称との対応表・未共有スキル一覧 | `.claude/skills/REGISTRY.md` |
 | 制作スキル定義（claude.ai同期スキルの改変なしミラー） | `.claude/skills/*/SKILL.md` |
 | Codex等との共通申し送り・動画検品手順 | `AGENTS.md` |
 
 - `.claude/skills/` の既存スキルは**削除・統合・無断上書きしない**。原本はclaude.ai同期側。
-- 実体のないスキルを**推測で新規作成しない**。未発見は `REGISTRY.md` に未発見として残す。
+- 実体のないスキルを**推測で新規作成しない**。この環境に無いものは `REGISTRY.md` に**未共有**として残す。
+- **「未共有」は「存在しない」ではない。** ChatGPT側に登録済みで原本が未着、という意味。原本を受け取ってから追加する。
+- CoeFontの**ホスト許可**と**スキル原本の共有**は別課題。ホスト許可だけで全スキルが使える扱いにしない（`REGISTRY.md` §5-1）。

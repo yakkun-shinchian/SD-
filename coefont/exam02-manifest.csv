@@ -1,0 +1,14 @@
+seq,gen_no,page,speaker,voice,target_mp3,reuse_from,speech
+1,1,1,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-01.mp3,,先輩、滴下計算は公式だけ暗記ですか？
+2,2,1,senior,後藤邑子,exam02-v6-voice-02.mp3,,量・時間・セットの滴数。まず三つを確認しよう。
+3,3,2,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-03.mp3,,20滴と60滴は、何が違うんですか？
+4,4,2,senior,後藤邑子,exam02-v6-voice-04.mp3,,１mLあたりの滴数だよ。年齢だけで決めず、セットの表示を確認しよう。
+5,5,3,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-05.mp3,,５時間なら、そのまま５で割りますか？
+6,6,3,senior,後藤邑子,exam02-v6-voice-06.mp3,,１分あたりを求めるから、５×60で300分に直すよ。
+7,7,4,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-07.mp3,,量500mL、時間300分、20滴／mLですね！
+8,8,4,senior,後藤邑子,exam02-v6-voice-08.mp3,,500×20÷300で約33滴／分だよ。丸め方は問題文を確認しよう。
+9,9,5,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-09.mp3,,セットが60滴／mLなら、答えは変わりますか？
+10,10,5,senior,後藤邑子,exam02-v6-voice-10.mp3,,500×60÷300で100滴／分だよ。液量は同じでも滴数は変わる。
+11,11,6,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-11.mp3,,ポンプの数字も、100滴／分ですか？
+12,12,6,senior,後藤邑子,exam02-v6-voice-12.mp3,,mL／時なら500÷５で100。単位を確認して、投与中の状態も観察しよう。
+13,,6,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,exam02-v6-voice-13.mp3,exam02-v6-voice-13.mp3,フォローしていただけると励みになります。よろしくお願いします。

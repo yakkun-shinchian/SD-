@@ -786,3 +786,111 @@ ENHANCED_LESSONS.exam01 = {
     }
   ]
 };
+
+
+ENHANCED_LESSONS.exam02 = {
+  "kind": "illustrated-v6",
+  "version": "V6",
+  "title": "点滴の滴下計算｜量・時間・セットの滴数を確認",
+  "intro": "公式の前に、量・時間・輸液セットの表示を確認。先輩と後輩の会話で20滴／mLと60滴／mLを比較します。",
+  "poster": "exam02-v6-page-01.jpg",
+  "video": "exam02-v6-review.mp4",
+  "durationSec": 85,
+  "summary": [
+    "総量 × 1mLあたりの滴数 ÷ 時間（分）",
+    "20滴／mL・60滴／mLは使用するセットの表示を確認",
+    "滴／分とmL／時を区別し、投与中の患者さんと滴下状態も観察"
+  ],
+  "pages": [
+    {
+      "title": "点滴の計算、\nどこから始める？",
+      "junior": "先輩、滴下計算は\n公式だけ暗記ですか？",
+      "senior": "量・時間・セットの滴数。\nまず三つを確認しよう。",
+      "bottom": "量・時間・滴数の三つ！",
+      "diagram": "看護学習ノートに３つの大きいラベル「量」「時間」「滴数」。輸液バッグ、時計、点滴筒の模式イメージ。機器設定や患者投与実演を描かない。",
+      "sourceImage": "exam02-v6-page-01.jpg",
+      "page": 1,
+      "image": "exam02-v6-page-01.jpg",
+      "closing": ""
+    },
+    {
+      "title": "１mLを\n何滴に分ける？",
+      "junior": "20滴と60滴は、\n何が違うんですか？",
+      "senior": "１mLあたりの滴数だよ。\n年齢だけで決めず、\nセットの表示を確認しよう。",
+      "bottom": "使うセットの表示を確認",
+      "diagram": "大きい２つの学習用ラベルを並べ「20滴／mL」「60滴／mL」。同じ1mLの水の模式コップ２個で同量、20/60の別分割の概念。20滴図を20個正確に生成しない。中央「同じ１mL」。児童や赤ちゃんを描かない。",
+      "sourceImage": "exam02-v6-page-02.jpg",
+      "page": 2,
+      "image": "exam02-v6-page-02.jpg",
+      "closing": ""
+    },
+    {
+      "title": "時間は\n「分」にそろえる！",
+      "junior": "５時間なら、\nそのまま５で割りますか？",
+      "senior": "１分あたりを求めるから、\n５×60で300分に直すよ。",
+      "bottom": "５時間＝300分",
+      "diagram": "大きい時計と学習ノート「５時間 × 60 ＝ 300分」。計算式１行のみ正確。下に「１時間＝60分」。背景不要な数字は足さない。",
+      "sourceImage": "exam02-v6-page-03.jpg",
+      "page": 3,
+      "image": "exam02-v6-page-03.jpg",
+      "closing": ""
+    },
+    {
+      "title": "500mLを５時間。\n20滴なら？",
+      "junior": "量500mL、時間300分、\n20滴／mLですね！",
+      "senior": "500×20÷300で\n約33滴／分だよ。\n丸め方は問題文を確認しよう。",
+      "bottom": "総量 × 滴数 ÷ 時間（分）",
+      "diagram": "大きい学習計算ボード「500 × 20 ÷ 300」「＝33.3…」「約33滴／分」。脇に３つの小ラベル「500mL」「300分」「20滴／mL」。ボードに実機表示風なし。",
+      "sourceImage": "exam02-v6-page-04.jpg",
+      "page": 4,
+      "image": "exam02-v6-page-04.jpg",
+      "closing": ""
+    },
+    {
+      "title": "同じ量・時間。\n60滴なら？",
+      "junior": "セットが60滴／mLなら、\n答えは変わりますか？",
+      "senior": "500×60÷300で\n100滴／分だよ。\n液量は同じでも滴数は変わる。",
+      "bottom": "同じ500mLを５時間で投与",
+      "diagram": "大きい学習計算ボード「500 × 60 ÷ 300」「＝100滴／分」。比較小ラベル「20滴／mL → 約33滴／分」「60滴／mL → 100滴／分」。総量の違いを誤解させず時計同じ。",
+      "sourceImage": "exam02-v6-page-05.jpg",
+      "page": 5,
+      "image": "exam02-v6-page-05.jpg",
+      "closing": ""
+    },
+    {
+      "title": "滴／分とmL／時。\n混ぜない！",
+      "junior": "ポンプの数字も、\n100滴／分ですか？",
+      "senior": "mL／時なら500÷５で100。\n単位を確認して、\n投与中の状態も観察しよう。",
+      "cta": "フォローしていただけると\n励みになります。\nよろしくお願いします。",
+      "bottom": "",
+      "diagram": "学習ノート中央「500mL ÷ ５時間」「＝100mL／時」。となりにラベル「滴／分 ≠ mL／時」。機種やボタン設定の具体実演は描かない。二人のみ。CTAは同じ左後輩の追加吹き出し。",
+      "sourceImage": "exam02-v6-page-06.jpg",
+      "page": 6,
+      "image": "exam02-v6-page-06.jpg",
+      "closing": "フォローしていただけると\n励みになります。\nよろしくお願いします。"
+    }
+  ],
+  "explanations": [
+    {
+      "title": "輸液セットの表示と投与指示を確認",
+      "text": "20滴／mL・60滴／mLは輸液セットの滴数規格です。患者さんの年齢だけでは決めません。旧本文の「成人20滴・小児60滴」は簡略化が過ぎるため、使用する製品の表示・添付文書を確認する説明に更新しました。"
+    },
+    {
+      "title": "計算の例と単位",
+      "text": "500mLを5時間で投与する例では、時間を300分に換算。20滴／mLなら500×20÷300＝33.3…滴／分、60滴／mLなら100滴／分です。丸め方は問題文や施設の指示を確認します。mL／時の計算は500÷5＝100mL／時であり、滴／分とは異なります。"
+    }
+  ],
+  "sources": [
+    {
+      "title": "PMDA：輸液ポンプ等の安全使用に関する注意",
+      "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0066.html"
+    },
+    {
+      "title": "テルモ：輸液セット添付文書",
+      "url": "https://medical.terumo.co.jp/sites/default/files/assets/tenbun/470034_16000BZZ01159000_C_04_08.pdf"
+    }
+  ]
+};
+
+
+ENHANCED_LESSONS.base02 = {"kind":"illustrated-static","version":"V6","title":"感染予防の基本｜標準予防策・手指衛生・PPE","intro":"先輩と後輩の会話と4枚の図解で学びます。静止画版を先行公開しています。","poster":"base02-v6-20261013-01.png","summary":["標準予防策はすべての患者さんに","手指衛生は前が2つ・後が3つ","防護具はリスクに合わせ、外すときも汚染を広げない"],"pages":[{"page":1,"title":"全員に標準予防策","image":"base02-v6-20261013-01.png","alt":"感染症の診断の有無を問わず、すべての患者さんに標準予防策を行います。血液・体液・分泌物・排泄物（汗を除く）、粘膜、傷のある皮膚への接触リスクを考えます。","text":"感染症の診断の有無を問わず、すべての患者さんに標準予防策を行います。血液・体液・分泌物・排泄物（汗を除く）、粘膜、傷のある皮膚への接触リスクを考えます。"},{"page":2,"title":"WHOの手指衛生5つの瞬間","image":"base02-v6-20261013-02.png","alt":"①患者接触前、②清潔・無菌操作前、③体液曝露リスク後、④患者接触後、⑤患者周辺環境接触後。手袋を外した後も手指衛生が必要です。","text":"①患者接触前、②清潔・無菌操作前、③体液曝露リスク後、④患者接触後、⑤患者周辺環境接触後。手袋を外した後も手指衛生が必要です。"},{"page":3,"title":"個人防護具（PPE）","image":"base02-v6-20261013-03.png","alt":"予測される曝露に応じて手袋・ガウン・マスク・眼の防護を選びます。着用順は一例で、着脱は防護具と施設の手順に従います。汚染面に触れず外し、途中で手が汚染した場合も手指衛生を行います。","text":"予測される曝露に応じて手袋・ガウン・マスク・眼の防護を選びます。着用順は一例で、着脱は防護具と施設の手順に従います。汚染面に触れず外し、途中で手が汚染した場合も手指衛生を行います。"},{"page":4,"title":"感染予防のまとめ","image":"base02-v6-20261013-04.png","alt":"全員に標準予防策、5つの瞬間に手指衛生、リスクに合う防護具。通常はアルコール手指消毒、目に見える汚れは石けんと流水。感染状況に応じて施設手順を確認します。","text":"全員に標準予防策、5つの瞬間に手指衛生、リスクに合う防護具。通常はアルコール手指消毒、目に見える汚れは石けんと流水。感染状況に応じて施設手順を確認します。"}],"sources":[{"title":"WHO：Five moments for hand hygiene","url":"https://www.who.int/publications/m/item/five-moments-for-hand-hygiene"},{"title":"CDC：Standard Precautions","url":"https://www.cdc.gov/infection-control/hcp/basics/standard-precautions.html"},{"title":"CDC：Clinical Safety—Hand Hygiene","url":"https://www.cdc.gov/clean-hands/hcp/clinical-safety/index.html"},{"title":"CDC：PPEの着脱","url":"https://www.cdc.gov/infection-control/media/pdfs/Toolkits-PPE-Sequence-P.pdf"}]};

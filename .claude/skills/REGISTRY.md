@@ -333,6 +333,7 @@ Network secrets に保管し、**チャットには貼らない**こと。
 | 14 | 同上（表紙に誤ったPDFを与える） | 異常検出の確認 | **FAIL を正しく返す**（寸法差・未埋込フォント・複数ページ） |
 | 15 | `kdp-paperback…/build_spread_preview.py` | 24ページ→右綴じ見開き | **動作**（13見開き生成） |
 | 16 | `nurse-manga…/build_language_notes.py` | LANGUAGE NOTES 組版＋QA | **PASS**（重なり・はみ出し・欠落すべて0／2ページ） |
+| 17 | `instagram-nursing-carousel-v3/render_natural_overlay.py` | Zen Kurenaido を導入し、1080×1350でレンダリング | **PASS**（4:5検品通過・下地比16.3%が描画／枠に収まらない文字は仕様どおり拒否） |
 
 #### 9・10 の「拒否」は不具合ではありません
 
@@ -347,17 +348,18 @@ SKILL.md 58行目に「参考10枚が4:5でも参照するのは絵柄・人物�
 9:16に再構成」と明記されています。`validate_carousel.py` の検品対象は**納品物（9:16）**であり、
 基準画像ではありません。正しい対象へ当てたところ 8/8 PASS しました。**仕様は一貫しています。**
 
-### 7-2. 実行できなかった5本と、その理由
+### 7-2. 実行できなかった4本と、その理由
 
 | スクリプト | 不足しているもの |
 |---|---|
 | `complete-kdp-book-details/validate_kdp_book_details.py` | 記入済み `KDP_BOOK_DETAILS.md` の実例（サンプル同梱なし） |
 | `instagram-video-m1/build_emoji_catalog.py` | `unicode.org` からの `emoji-test.txt`（ネットワーク遮断）。**ただし出力物は同梱済みで健全** |
-| `instagram-nursing-carousel-v3/render_natural_overlay.py` | **Zen Kurenaido / Yuji Syuku フォント**（未導入。スクリプトは標準ゴシックでの代替を明示的に禁止） |
 | `animate-pathogen-layer-reel/render_layer_reel.py` | 透過レイヤー画像一式とプロジェクトJSON |
 | `instagram-nursing-carousel-v3/make_pageflip_reel.sh` | `frame_*.png` 連番素材 |
 
 3本の合成スクリプト（`compose_*`）は**検証モードのみ**実行しました。実際の合成には作画素材が必要です。
+
+**補助プログラム21本中17本を実行検証済み**（2026-10-30時点）。
 
 ### 7-3. 実行環境の変更（この容器のみ・永続しません）
 
@@ -373,7 +375,7 @@ SKILL.md 58行目に「参考10枚が4:5でも参照するのは絵柄・人物�
 
 | # | 内容 | 影響 |
 |---|---|---|
-| 1 | **Zen Kurenaido / Yuji Syuku フォントが無い** | `instagram-nursing-carousel-v3` の手書き風組版ができない。スクリプトは代替フォントを拒否する設計 |
+| 1 | ~~Zen Kurenaido / Yuji Syuku が無い~~ | **解消**（2026-10-30 導入・レンダリング実測）。ただし**永続しない**（§7-3） |
 | 2 | **VOICEVOX書き出しが古い**（§7-5） | 音声制作前に再生成が必要 |
 | 3 | ~~CoeFont 未到達・未認証~~ | **解消**。API不採用により接続自体が不要（§5-1） |
 

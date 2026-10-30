@@ -158,9 +158,11 @@ Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
   **②が揃っても「動く」とは限らない。③は「走らせて成果物を確認した」まで。**
 - 全324ファイルが `MANIFEST.json` の sha256 と一致（`REGISTRY.md` §3-1）。
   `.claude/skills/` のファイルを変更したら、MANIFESTとの差が生じることを意識する。
-- 補助プログラム21本中16本は実行検証済み（`REGISTRY.md` §7-1）。
-- **既知の障害**（`REGISTRY.md` §7-4）：
-  Zen Kurenaido/Yuji Syukuフォント未導入 ／ VOICEVOX書き出しが8シーン古い ／ CoeFont未到達・未認証。
-- `fitz` を使う3本は **PyMuPDF** が必要。この容器にのみ導入済みで、**永続しない**（§7-3）。
+- **既知の障害**（`REGISTRY.md` §7-4）：**VOICEVOX書き出しが8シーン古い**（音声制作前に要再生成）。
+  CoeFontとフォントは解消済み。
+- **永続しない導入物**（§7-3）：`fitz` を使う3本に必要な **PyMuPDF**、
+  `render_natural_overlay.py` に必要な **Zen Kurenaido / Yuji Syuku**。
+  いずれもこの容器にのみ存在し、セッション終了で消える。
+- 補助プログラムは21本中**17本**を実行検証済み（§7-1）。
 - `.claude/skills/` の既存スキルは**削除・統合・無断上書きしない**。
 - 実体のないスキルを**推測で新規作成しない**。

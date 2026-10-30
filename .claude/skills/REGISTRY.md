@@ -1,165 +1,200 @@
 # YAKUBON STUDIO スキル台帳（正本の所在と対応表）
 
-最終調査日：**2026-10-30** ／ 調査環境：Claude Code クラウドセッション（リポジトリ `yakkun-shinchian/SD-`）
-
-この文書は **実際にファイルとして存在が確認できたもの** だけを「共有済み」として記載します。
-ChatGPT（チャッピー）側の呼称だけが判明していて、こちらの環境にファイルが無いものは
-**未共有（原本待ち）** と記載します。
-
-> **用語の定義（重要）**
-> **「未共有」は「存在しない」という意味ではありません。**
-> ChatGPT側には登録されているが、**この環境にはまだ原本が届いていない**、という意味です。
-> 原本を受け取るまで、推測で SKILL.md を作成することはしません。
+最終更新：**2026-10-30** ／ 調査環境：Claude Code クラウドセッション（`yakkun-shinchian/SD-`）
 
 ---
 
-## 1. 発見した「ご本人作成スキル」（SKILL.md 実体あり）
+## 0. 受領状態は3つに分けて記録します
 
-探索の結果、SKILL.md として存在するユーザー独自スキルは **2件** でした。
+混同すると「使えるはず」と思い込んだまま作業が止まります。本台帳は常に3段階で記録します。
 
-| # | 正式登録名 | ChatGPT側の呼称（推定対応） | 原本の保存場所 | 本リポジトリ内の共有先 |
-|---|---|---|---|---|
-| 1 | `yakubon-infographic-c1` | Clinical Infographic C1 | `~/.claude/skills/synced/<org>_<account>/yakubon-infographic-c1/SKILL.md` | `.claude/skills/yakubon-infographic-c1/SKILL.md` |
-| 2 | `medical-3d-orbit-opener` | 医療動画の冒頭3D回り込みカット | `~/.claude/skills/synced/<org>_<account>/medical-3d-orbit-opener/SKILL.md` | `.claude/skills/medical-3d-orbit-opener/SKILL.md` |
-
-- 登録元：claude.ai のアカウント同期スキル（`manifest.json` 上は `source: plugin`）
-  - `medical-3d-orbit-opener` … skillId `skill_01Uds6zjnY78v8LcC8grSzfX`（更新 2026-10-29）
-  - `yakubon-infographic-c1` … skillId `skill_01DU2cT95CaAJmB4teJeajY8`（更新 2026-10-29）
-- 本リポジトリへのコピーは **1バイトも改変していません**（sha256 一致を確認済み）。
-  原本は書き換えず、同期元をそのまま正本として残しています。
-
-### 読み込み可否
-
-| スキル | Claude Code | Codex |
+| 段階 | 意味 | 現在 |
 |---|---|---|
-| `yakubon-infographic-c1` | **可**（`anthropic-skills:yakubon-infographic-c1` / 本PR後は `.claude/skills/` からも） | **可**（本PRの `AGENTS.md` 経由。未検証） |
-| `medical-3d-orbit-opener` | **可**（実読み込みテスト済み・2026-10-30） | **可**（本PRの `AGENTS.md` 経由。未検証） |
+| ① **手順書原本 受領** | SKILL.md がこの環境にある | **64件 / 64件** |
+| ② **素材・プログラム 受領** | 参照画像・動画・Python等がこの環境にある | **46件 / 64件**（18件が待ち） |
+| ③ **動作確認済み** | 実際に走らせて成果物を検証した | **0件 / 64件** |
 
-> Codex側は本セッションから実行できないため、**読み込める配置にした**ところまでが確認済みです。
-> 実際の読み込み成功は、Codex側で一度お試しいただく必要があります。
+**①が済んでも②③は済んでいません。** ②③を「完了」として報告しません。
+
+---
+
+## 1. 共有済みスキル一覧（64件）
+
+| # | スキル名 | 手順書 | 素材・スクリプト | 動作確認 | 由来 |
+|---|---|---|---|---|---|
+| 1 | `animate-pathogen-layer-reel` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
+| 2 | `clinical-case-infographic-c1` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
+| 3 | `clinical-evidence-for-nurses` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 4 | `coefont-new-project` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 5 | `complete-kdp-book-details` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
+| 6 | `create-kawaii-bilingual-manga-pages` | ✅ 受領 | ⏳ 待ち（4件） | ⬜ 未実施 | 62件バンドル |
+| 7 | `create-kokushi-pathogen-character` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
+| 8 | `create-single-balloon-kindle-manga` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
+| 9 | `daihon-skill` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 10 | `ecg-mastery-coach` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 11 | `explain-drug-infographic` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 12 | `explain-nursing-purpose` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 13 | `huggingface-ai-research-readonly` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 14 | `info-v3` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 15 | `info2` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 16 | `infographic-c2` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 17 | `infographic-i1` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 18 | `infographic-m3` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 19 | `instagram-nursing-carousel-v3` | ✅ 受領 | ⏳ 待ち（6件） | ⬜ 未実施 | 62件バンドル |
+| 20 | `instagram-v5` | ✅ 受領 | ⏳ 待ち（11件） | ⬜ 未実施 | 62件バンドル |
+| 21 | `instagram-v5-voice-synced-motion-reel` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
+| 22 | `instagram-v6` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 23 | `instagram-v7` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 24 | `instagram-v8` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 25 | `instagram-video-m1` | ✅ 受領 | ⏳ 待ち（6件） | ⬜ 未実施 | 62件バンドル |
+| 26 | `kawaii-manga-balloon-studio` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
+| 27 | `kawaii-manga-balloon-studio-part2` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
+| 28 | `kdp-paperback-studio` | ✅ 受領 | ⏳ 待ち（4件） | ⬜ 未実施 | 62件バンドル |
+| 29 | `kindle-visual-book-studio` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
+| 30 | `longevity-claim-auditor` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 31 | `medical-3d-orbit-opener` | ✅ 受領 | — 不要 | ⬜ 未実施 | claude.ai同期 |
+| 32 | `medical-video-1` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
+| 33 | `medical-video-2` | ✅ 受領 | ⏳ 待ち（10件） | ⬜ 未実施 | 62件バンドル |
+| 34 | `nurse-archetype-field-guide-studio` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 35 | `nurse-manga-medical-english-studio` | ✅ 受領 | ⏳ 待ち（9件） | ⬜ 未実施 | 62件バンドル |
+| 36 | `obsidian-archive-architect` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 37 | `plan-local-ai-models` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 38 | `preserve-nursetube-colors` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 39 | `prompt-skill-1` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 40 | `rap-skill-1` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 41 | `review-agent-skill-safety` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 42 | `ship-daily-output-and-debt` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 43 | `universal-browser-assistant` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 44 | `universal-daily-prep` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 45 | `universal-data-analysis-report` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 46 | `universal-data-quality-check` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 47 | `universal-document-coauthoring` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 48 | `universal-document-to-markdown` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 49 | `universal-evidence-before-completion` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 50 | `universal-idea-to-plan` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 51 | `universal-meeting-minutes` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 52 | `universal-memory-curator` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 53 | `universal-missed-task-detector` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 54 | `universal-multi-source-synthesis` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 55 | `universal-primary-source-research` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 56 | `universal-privacy-redaction` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 57 | `universal-prompt-refiner` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 58 | `universal-session-handoff` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 59 | `universal-skill-discovery` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 60 | `universal-skill-safety-audit` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 61 | `universal-sop-builder` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 62 | `universal-systematic-troubleshooting` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
+| 63 | `yakubon-infographic-c1` | ✅ 受領 | — 不要 | ⬜ 未実施 | claude.ai同期 |
+| 64 | `yakubon-nursing-illustration-v4` | ✅ 受領 | ⏳ 待ち（11件） | ⬜ 未実施 | 62件バンドル |
+
+### 内訳
+
+- **62件** … 2026-10-30 にご本人からアップロードされた `YAKUBON_Claude_62_Skills_and_Guides.txt`（647KB）より取り込み
+- **2件** … claude.ai 同期スキルの改変なしミラー（`yakubon-infographic-c1` / `medical-3d-orbit-opener`）
+- 付随する参考資料 **63件**（`references/*.md`）、バンドル同梱の `SKILL_INDEX.md` / `README_CLAUDE_JA.md` も配置済み
+- 全64件で **frontmatter の `name` とディレクトリ名が一致**することを検証済み
+
+### 取り込み時の検証
+
+- 取り込み前に `.claude/skills` 全体をバックアップ
+- 既存2件は **書き込み対象から除外**し、取り込み後に sha256 で無改変を再確認（OK）
+- パス検証：`skills/` 配下以外・`..` を含むパスは拒否（ルート直下の2資料のみ個別に配置）
+- 区切り行（`FILE BEGIN` / `FILE END`）は復元先に書き込んでいない
+- **Claude Code のスキル一覧に64件すべてが表示されることを確認済み**（読み込み成功）
 
 ---
 
 ## 2. 「スキル」ではなく「コード」として正本が存在する制作方式
 
-SKILL.md はありませんが、**実行可能なコードと成果物** が正本として存在します。
-これは推測ではなく、リポジトリ内の実ファイルから読み取った実態です。
+SKILL.md とは別に、**実行可能なコードと成果物**がリポジトリ内に正本として存在します。
+`instagram-v6` の SKILL.md を受領したいま、両者を突き合わせて運用できます。
 
-### 2-1. Instagram V6（先輩・後輩対話カルーセル動画）
+### 2-1. Instagram V6 の実装（`exam0*-v6-render.py`）
 
-リポジトリ内で **「Instagram V6」と明示** されています（`nurse-exam-drip-v6-review.html`）。
-
-| 項目 | 確認できた実態 | 典拠ファイル |
+| 項目 | 実態 | 典拠 |
 |---|---|---|
 | 解像度 | 1080 × 1920（縦9:16） | `exam02-v6-manifest.json` の `probe` |
-| フレームレート | 24fps（exam01）／30fps（exam02） | `exam01-v6-render.py` / `exam02-v6-render.py` |
-| 台本形式 | `pages[]`：`title` / `junior` / `senior` / `cta` / `bottom` / `diagram` / `sourceImage` | `exam01-v6-script.json`, `exam02-v6-script.json` |
-| 話者 | 後輩＝`junior`、先輩＝`senior`（偶数/奇数で交互） | `*-v6-render.py` |
-| CoeFont音声 | 後輩「汎用式概念χ-soft-v2（CV：ろさちゃん）」／先輩「後藤邑子」 | `nurse-v6-review.html`, `nurse-exam-drip-v6-review.html` |
-| 冒頭無音 | 各ページ先頭 **0.35秒** のみ、発話間 **0.28秒** | `*-v6-render.py` |
-| 話者インジケータ | 後輩 x=35／先輩 x=1010、y=620、26×26px、`0xED5791@0.9` | `*-v6-render.py` |
-| 注目マーカー | 図の余白 x=24、`0x7566A8`。**文字・数字の上は通さない** | `*-v6-render.py` |
-| エンコード | h264 / crf26 / yuv420p ＋ aac 96k 48kHz ＋ `+faststart` | `*-v6-render.py` |
-| 検品 | ffprobe・全走査デコード・sha256・25MB上限・発話数assert | `*-v6-render.py` |
-| 出力尺 | exam02＝84.2秒（6ページ） | `exam02-v6-manifest.json` |
+| フレームレート | 24fps（exam01）／30fps（exam02） | `exam01/02-v6-render.py` |
+| 台本形式 | `pages[]`：`title`/`junior`/`senior`/`cta`/`bottom`/`diagram`/`sourceImage` | `exam0*-v6-script.json` |
+| CoeFont音声 | 後輩「汎用式概念χ-soft-v2（CV：ろさちゃん）」／先輩「後藤邑子」 | `nurse-v6-review.html` ほか |
+| 冒頭無音 | 各ページ先頭 **0.35秒**、発話間 **0.28秒** | `exam0*-v6-render.py` |
+| 話者インジケータ | 後輩 x=35／先輩 x=1010、y=620、26×26px、`0xED5791@0.9` | 同上 |
+| 注目マーカー | 図の余白 x=24、`0x7566A8`。**文字・数字の上は通さない** | 同上 |
+| エンコード | h264/crf26/yuv420p ＋ aac 96k 48kHz ＋ `+faststart` | 同上 |
+| 検品 | ffprobe・全走査デコード・sha256・25MB上限・発話数assert | 同上 |
 
-**原則**：イラストは生成済みの承認済み素材を固定で使い、動きは
-「話者インジケータ」と「図の余白のマーカー」だけで付けます（医学的な図と文字は動かしません）。
+### 2-2〜2-4
 
-### 2-2. V5（イラスト＋対話）
-
-| 項目 | 実態 | 典拠 |
-|---|---|---|
-| 台本形式 | `storyboard[]`：`title` / `junior` / `senior` / `summary` / `art`（英語画像プロンプト） | `anat05-v5-production.json` |
-| 付帯情報 | `sources` / `medical_review` / `technical_checks` | 同上 |
-| 成果物 | `anat01〜05-v5-page-*.jpg` ＋ `*-voice-*.mp3` ＋ `*-review.mp4` | リポジトリ直下 |
-
-### 2-3. VOICEVOX ずんだもんナレーション（NurseTube本体用）
-
-| 項目 | 実態 | 典拠 |
-|---|---|---|
-| 書き出し | `node tools/build-voicevox.mjs` → `voicevox/narration.txt`（118行）＋ `manifest.json/csv` | `tools/build-voicevox.mjs` |
-| 整列 | `node tools/link-audio.mjs` → `audio/<番組ID-シーン番号>.wav` ＋ `audio/manifest.js` | `tools/link-audio.mjs` |
-| 話者 | ずんだもん（ノーマル） | `voicevox/README.md` |
-| 必須表記 | **「VOICEVOX:ずんだもん」クレジット** | 同上 |
-
-### 2-4. 3D医療モデル教材（別リポジトリ）
-
-`yakkun-shinchian/yakubon-3d-heart` ＝ YAKUBON STUDIO｜3D HEART v2。
-BodyParts3D 4.0（DBCLS, CC BY 4.0）採用、18構造、血流アニメーション、Three.js + Vite。
-**医療動画2（立体解剖CG）系の資産**ですが、動画制作スキルではなくWeb教材です。
+- **V5** … `anat05-v5-production.json`（`storyboard[]` 形式）。SKILL.md は `instagram-v5` として受領済み
+- **VOICEVOX ずんだもん** … `tools/build-voicevox.mjs` → `tools/link-audio.mjs`。クレジット「VOICEVOX:ずんだもん」必須
+- **3D HEART v2** … 別リポジトリ `yakubon-3d-heart`（BodyParts3D 4.0 / CC BY 4.0・18構造・血流アニメーション）
 
 ---
 
-## 3. 未共有のスキル（原本がこの環境に届いていないもの）
+## 3. 未収録ファイル（元ZIP `YAKUBON_Claude_Skills_62.zip` 待ち）
 
-以下は **この環境にファイルが存在しない** ものです。
-**存在しないのではなく、まだ共有されていません。** 推測で SKILL.md を作成していません。
+今回のテキストは **手順書原本の共有用**です。以下は含まれていません（計 **200件**）。
 
-### 3-1. ChatGPT側に登録済みとご本人から申告のあるもの
-
-ご本人の申告（2026-10-30）により、ChatGPT側に登録されていることが分かっているものです。
-**原本をお送りいただき次第、そのまま SKILL.md 化して §1 に移します。**
-
-| ご指定の名称 | 状態 | 備考 |
+| 種別 | 件数 | 影響 |
 |---|---|---|
-| `medical-video-1`（医療動画1） | **未共有（原本待ち）** | §4 の所見を参照。冒頭オービット部分のみ共有済み |
-| `medical-video-2`（医療動画2） | **未共有（原本待ち）** | CT/MRI＋立体解剖CG。`yakubon-3d-heart` が近い資産 |
-| `instagram-v7` | **未共有（原本待ち）** | 仕様未確認 |
-| `instagram-v8` | **未共有（原本待ち）** | 仕様未確認 |
-| `coefont-new-project` | **未共有（原本待ち）** | CoeFontのホスト許可とは**別の課題**（§5-1 参照） |
-| Kindle書籍制作関連 | **未共有（原本待ち）** | 正式登録名未確認 |
-| 吹き出し漫画関連 | **未共有（原本待ち）** | 正式登録名未確認 |
+| 画像・動画 | 99 | うち `icon.svg` 62件は装飾のみ・**動作に不要**。残り37件は**画風の基準参照**で必須 |
+| `agents/openai.yaml` | 62 | **Codex用のスキル定義**。Codex側で使うには必要 |
+| 実行スクリプト（.py / .sh） | 21 | 検品・合成・レンダリングの自動化。**無いと手作業になる** |
+| テンプレ・データ（.json / .csv） | 17 | ページ定義・KDPメタデータ・QA台帳 |
+| `MANIFEST.json`（ルート） | 1 | 全体の対応表 |
 
-### 3-2. 呼称のみ判明しており、ChatGPT側の登録有無も未確認のもの
+### 3-1. 素材・スクリプト待ちの18スキル（手順書は受領済み）
 
-| ご指定の名称 | 状態 | 備考 |
-|---|---|---|
-| Infographics 3 | **未共有** | 正式名称・仕様とも不明 |
-| Infographic M3 | **未共有** | 9:16短尺・蛍光ペン同期の仕様は未確認 |
-| バルーン・血管内治療スキル | **未共有** | 独立スキルか医療動画1の一部か、判別不能 |
-| Instagram V6 Carousel（スキルとして） | **SKILL.mdは未共有** | ただし §2-1 にコードとしての正本あり |
-
-> **この一覧は網羅ではありません。** ChatGPT側の登録全体を本環境から列挙する手段がないため、
-> ここに載っていないスキルが存在する可能性があります。
-
-### 探索した場所（すべて確認済み・該当なし）
-
-```
-~/.claude/skills/                  → session-start-hook と synced のみ
-~/.claude/skills/synced/<account>/ → 全28スキル中、独自は上記2件のみ
-~/.claude/plugins/{data,synced}/   → 配布プラグインのみ（独自スキルなし）
-/home/user/SD-/.claude/            → 本PRで新規作成（既存なし）
-/home/user/SD-/.agents/            → 存在しない
-/home/user/SD-/AGENTS.md           → 存在しない（本PRで新規作成）
-~/.codex, ~/.config/codex          → 存在しない
-~/AGENTS.md, ~/.cursor             → 存在しない
-リポジトリ全体の SKILL.md 検索     → 0件
-アクセス可能なGitHubリポジトリ4件  → SD- / yakubon-3d-heart / nursing-exam-site / git-takasugi
-```
-
----
-
-## 4. 判別についての所見（確定ではなく仮説）
-
-**`medical-3d-orbit-opener` は「医療動画1」の一部である可能性が高い**と見ています。
-
-根拠：同スキル内で固定指定されている画風が、ご記載の医療動画1の特徴と一致します。
-
-| ご記載の医療動画1 | `medical-3d-orbit-opener` の固定語句 |
+| スキル | 欠けているもの |
 |---|---|
-| 半透明の血管 | `translucent glass-like vessel wall` |
-| 深いネイビー背景 | `deep navy background` |
-| 青い発光 | `cool blue rim light`, `soft inner glow` |
-| 赤血球 | `small biconcave blood cells floating inside` |
-| カテーテル・バルーン・ステント | 「伸びた実績：フローダイバーター治療動画」の記載 |
+| `animate-pathogen-layer-reel` | `scripts/render_layer_reel.py` |
+| `clinical-case-infographic-c1` | `assets/evidence-image-ledger.csv` |
+| `complete-kdp-book-details` | `scripts/validate_kdp_book_details.py` |
+| `create-kawaii-bilingual-manga-pages` | `assets/layout-presets.json`<br>`assets/page-manifest-template.json`<br>`scripts/validate_face_text_regions.py`<br>`scripts/validate_page_manifest.py` |
+| `create-kokushi-pathogen-character` | `assets/yellow-staph-reference.jpeg` |
+| `create-single-balloon-kindle-manga` | `assets/single-balloon-page-template.json`<br>`scripts/compose_single_balloon_page.py` |
+| `instagram-nursing-carousel-v3` | `assets/style-reference-cover.png`<br>`assets/style-reference-dialogue.png`<br>`assets/style-reference-medical-callout.png`<br>`assets/style-reference-summary.png`<br>`scripts/make_pageflip_reel.sh`<br>`scripts/render_natural_overlay.py` |
+| `instagram-v5` | `assets/visual-reference-lock/01-cover-hook.jpeg`<br>`assets/visual-reference-lock/02-question-board.jpeg`<br>`assets/visual-reference-lock/03-flora-definition.jpeg`<br>`assets/visual-reference-lock/04-cause-effect.jpeg`<br>`assets/visual-reference-lock/05-balance-change.jpeg`<br>`assets/visual-reference-lock/06-large-medical-diagram.jpeg`<br>`assets/visual-reference-lock/07-process-flow.jpeg`<br>`assets/visual-reference-lock/08-comparison.jpeg`<br>`assets/visual-reference-lock/09-clinical-observation.jpeg`<br>`assets/visual-reference-lock/10-summary.jpeg`<br>`scripts/validate_carousel.py` |
+| `instagram-v5-voice-synced-motion-reel` | `scripts/check_illustration_motion.py` |
+| `instagram-video-m1` | `assets/apple-emoji/manifest.json`<br>`assets/apple-emoji/needs-review.json`<br>`assets/apple-emoji/report.json`<br>`references/emoji-catalog.json`<br>`scripts/build_emoji_catalog.py`<br>`scripts/check_illustration_motion.py` |
+| `kawaii-manga-balloon-studio` | `assets/dialogue-page-template.json`<br>`scripts/compose_balloon_page.py` |
+| `kawaii-manga-balloon-studio-part2` | `assets/four-panel-page-template.json`<br>`scripts/compose_single_balloon_page.py` |
+| `kdp-paperback-studio` | `assets/paperback-project-template.json`<br>`scripts/build_spread_preview.py`<br>`scripts/cover_geometry.py`<br>`scripts/paperback_preflight.py` |
+| `kindle-visual-book-studio` | `scripts/kdp_preflight.py` |
+| `medical-video-1` | `assets/coiling-opening-5s.mp4`<br>`assets/coiling-reference-2s.png` |
+| `medical-video-2` | `assets/01-layered-anatomy.png`<br>`assets/02-kidney-nephron.png`<br>`assets/03-glomerular-filtration.png`<br>`assets/04-tubule-reabsorption.png`<br>`assets/05-descending-limb.png`<br>`assets/06-nkcc2.png`<br>`assets/07-medullary-gradient.png`<br>`assets/08-adh-cell.png`<br>`assets/09-sodium-potassium.png`<br>`assets/10-diuresis-comparison.png` |
+| `nurse-manga-medical-english-studio` | `assets/kdp-metadata.template.json`<br>`assets/lesson-duplication-check-50.csv`<br>`assets/lesson-pack.template.json`<br>`assets/medical-language-safety-register-50.csv`<br>`assets/qa-register-50.csv`<br>`assets/source-verification.template.csv`<br>`scripts/build_language_notes.py`<br>`scripts/init_project.py`<br>`scripts/validate_lesson_pack.py` |
+| `yakubon-nursing-illustration-v4` | `assets/style-references/01-cover-hook.jpeg`<br>`assets/style-references/02-dialogue-board.jpeg`<br>`assets/style-references/03-dialogue-organ.jpeg`<br>`assets/style-references/04-question-dialogue.jpeg`<br>`assets/style-references/05-concept-cutaway.jpeg`<br>`assets/style-references/06-balance-comparison.jpeg`<br>`assets/style-references/07-process-flow.jpeg`<br>`assets/style-references/08-contrast-paired-organs.jpeg`<br>`assets/style-references/09-clinical-observation.jpeg`<br>`assets/style-references/10-summary.jpeg`<br>`scripts/validate_carousel.py` |
 
-ただし同スキルは **冒頭0〜3.5秒の掴みカット専用** です。
-手技本編（バルーン拡張・ステント展開・血栓回収など）の指示文テンプレートは含まれていません。
+**この18件は「手順書どおりに人が作業する」ことはできますが、「自動で走らせる」ことはできません。**
+特に `instagram-v5` / `yakubon-nursing-illustration-v4` / `medical-video-2` は、
+**画風の基準となる参照画像**（10枚ずつ）が無いと、シリーズの絵柄を揃えられません。
 
-→ **医療動画1は「オービット冒頭（共有済み）＋手技本編（未共有）」の2段構成**だったと推測されます。
-手技本編側の正本は ChatGPT 側にあるものと思われます。その指示文をお送りいただければ、
-同じ書式で SKILL.md 化します（勝手には作りません）。
+### 3-2. 自動移行しないもの（ZIPが届いても解決しません）
+
+- **ChatGPT専用機能** … チャッピー側の画像生成等は、この環境からは呼べません
+- **認証状態** … CoeFont / KDP 等のログインは引き継がれません
+- **ネットワーク権限** … 環境のネットワークポリシーは別途設定が必要（§5-1）
+
+---
+
+## 4. 医療動画スキルの関係（確定）
+
+受領前の仮説は**訂正**します。両者は**別スキルで、補完関係**でした。
+
+| スキル | 役割 |
+|---|---|
+| `medical-video-1` | **質感の正本。** 透けるガラス状の血管壁／青く発光する半透明の血球／深紺背景／澄んだ水中空間。制作手順10ステップと納品前チェックを含む |
+| `medical-video-2` | **多色・透視系。** 暗い背景、多色の半透明組織、皮膚から臓器・細胞へ透ける奥行き |
+| `medical-3d-orbit-opener` | **冒頭0〜3.5秒のカメラワーク専用。** 正面→側面→背面のオービット |
+
+> 以前「医療動画1＝冒頭オービット＋手技本編の2段構成」と推測しましたが、誤りでした。
+> `medical-video-1` は手技本編まで含む完結した質感スキルで、`medical-3d-orbit-opener` は
+> その上に重ねる**別個の掴みカット技法**です。
+
+`medical-video-1` は参照素材 `assets/coiling-reference-2s.png` と
+`assets/coiling-opening-5s.mp4` を**開くことを手順1で要求**しています。
+この2点が未収録のため、**手順どおりの実行はまだできません。**
 
 ---
 
@@ -167,34 +202,33 @@ BodyParts3D 4.0（DBCLS, CC BY 4.0）採用、18構造、血流アニメーシ�
 
 | サービス | 状態 | 備考 |
 |---|---|---|
-| **CoeFont**（`coefont.cloud`） | **接続不可** | 環境のネットワークポリシーがホストを拒否（プロキシ 403）。§5-1 参照 |
+| **CoeFont**（`coefont.cloud`） | **接続不可** | ネットワークポリシーがホストを拒否（プロキシ403）。§5-1 参照 |
 | ffmpeg / ffprobe | **利用可** | 6.1.1。9:16合成・無音検査・デコード検証を実測成功 |
-| Node.js | **利用可** | v22.22.0（`tools/*.mjs` 実行可） |
-| Python / numpy / Pillow | **利用可** | 3.13.17 / numpy 2.5.3 / Pillow 12.3.0 |
+| Node.js | **利用可** | v22.22.0 |
+| Python / numpy / Pillow | **利用可** | 3.13.17 / 2.5.3 / 12.3.0 |
 | 日本語フォント | **一部のみ** | IPAGothic・Unifont-JP・WenQuanYi。ブランド指定書体なし |
-| Playwright + Chromium | **利用可** | ブラウザ自動操作可（ただしCoeFontはホスト拒否で到達不可） |
+| Playwright + Chromium | **利用可** | ただしCoeFontはホスト拒否で到達不可 |
 | 画像・動画生成 | **要確認** | creative-claw / Higgsfield / artlist / Canva / Descript 等が接続済み。未実行 |
 
+### 5-1. CoeFont について ― 課題は3つに増えました
 
-### 5-1. CoeFont について ― 2つの課題は別物です
-
-混同しやすいので明記します。**片方を解決しても、もう片方は解決しません。**
-
-| # | 課題 | 内容 | 解決方法 | 解決すると何ができるか |
+| # | 課題 | 内容 | 解決方法 | 状態 |
 |---|---|---|---|---|
-| A | **ホスト許可** | 環境のネットワークポリシーが `coefont.cloud` を拒否（プロキシ 403） | 環境設定の Network access に当該ホストを追加 | この環境から CoeFont に**到達**できるようになる |
-| B | **スキル原本の共有** | `coefont-new-project` 等の SKILL.md がこの環境に無い | ご本人から原本を送っていただく | その**手順どおりに**作業できるようになる |
+| A | **ホスト許可** | `coefont.cloud` をプロキシが拒否（403） | 環境設定の Network access にホスト追加 | **未解決** |
+| B | **スキル原本** | `coefont-new-project` の SKILL.md | ご本人から共有 | **解決済み（2026-10-30 受領）** |
+| C | **認証状態** | Googleログインは自動移行しない | ご本人による認証操作 | **未解決** |
 
-- **A だけ解決しても、B は未解決のままです。** 到達できても、どう使うかの定義がありません。
-- **B だけ解決しても、A は未解決のままです。** 手順が分かっても、到達できません。
-- したがって **「ホスト許可さえ通れば全スキルが使える」という扱いにはしません。**
+**A・B・Cは独立です。** Bが解決しても、AとCは残ります。
+したがって「原本が届いたからCoeFontが使える」という扱いにはしません。
 
 ---
 
 ## 6. 運用ルール（このフォルダの扱い）
 
-1. **既存スキルを勝手に書き換えない。** 原本は claude.ai 同期側。ここはミラー。
-2. **実体のないスキルを推測で作らない。** 未共有は未共有として §3 に残す。
-   **「未共有」＝「存在しない」ではない。** 原本を受け取ってから追加する。
-3. 変更時は必ず **バックアップ → diff 確認 → sha256 照合** の順で行う。
-4. Claude Code は `.claude/skills/` を、Codex は `AGENTS.md` 経由で同じ定義を読む。
+1. **既存スキルを勝手に書き換えない。** 原本はご本人／claude.ai同期側。ここはミラー。
+2. **実体のないスキルを推測で作らない。** 無いものは無いと書く。
+3. **受領状態は §0 の3段階で区別する。** ①手順書受領を②素材受領や③動作確認と混同しない。
+4. 変更時は必ず **バックアップ → パス検証 → diff / sha256 照合** の順で行う。
+5. Claude Code は `.claude/skills/` を、Codex は `AGENTS.md` 経由で同じ定義を読む。
+   ただし Codex用の `agents/openai.yaml` 62件は**未収録**（§3）。
+6. スキル間の役割分担は §4 のように**確定したものだけ**を書き、仮説は仮説と明記する。

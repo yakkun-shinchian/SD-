@@ -12,17 +12,24 @@ Claude Code 用のリポジトリ規約は `CLAUDE.md`、スキル定義は `.cl
 | リポジトリ構造・NurseTube仕様 | `CLAUDE.md` |
 | 利用者向けドキュメント | `README.md` |
 
-## 1. 共有スキル定義
+## 1. 共有スキル定義（64件）
 
 `.claude/skills/` 配下を **Codex でもそのまま読み込んでください**（Markdown なので追加ツール不要）。
+一覧は `.claude/skills/REGISTRY.md` §1、索引は `.claude/skills/SKILL_INDEX.md`。
 
-| スキル | 用途 |
+**受領状態は3段階（`REGISTRY.md` §0）。混同しないこと。**
+
+| 段階 | 現在 |
 |---|---|
-| `yakubon-infographic-c1` | 看護教育リール用 Clinical Infographic C1 指示文の生成 |
-| `medical-3d-orbit-opener` | 医療ショートの冒頭0〜3.5秒、3D回り込み（オービット）カットの指示文生成 |
+| ① 手順書原本 受領 | 64 / 64 |
+| ② 素材・プログラム 受領 | 46 / 64（18件が待ち） |
+| ③ 動作確認済み | 0 / 64 |
 
-> これらは claude.ai 同期スキルの **改変なしミラー**です（sha256照合済み）。
-> 内容を変更する場合は、必ず原本側と合わせてください。勝手な上書き・統合はしないこと。
+- 18スキルは参照画像・`.py`・テンプレJSONが**未収録**（`REGISTRY.md` §3-1）。
+  手順どおり人が作業はできるが、**自動実行はできない**。これを「使える」と報告しない。
+- **Codex用の `agents/openai.yaml` 62件は未収録。** 元ZIPから別途取得が必要。
+- 既存2件（`yakubon-infographic-c1` / `medical-3d-orbit-opener`）は claude.ai 同期スキルの
+  **改変なしミラー**（sha256照合済み）。勝手な上書き・統合はしないこと。
 
 ## 2. 役割分担
 

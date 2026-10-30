@@ -1,0 +1,13 @@
+interface:
+  display_name: インフォグラフィックM3
+  short_description: 大見出し・中見出しから順に読み、原図の文字へ蛍光ペンを音声同期する解説動画
+  default_prompt: $infographic-m3で、原図を保ち、大見出しと各中見出しを読んで赤く強調してから本文を黄色でたどる解説動画を作成してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,13 @@
+interface:
+  display_name: 何のため？看護教材
+  short_description: 病態と看護対応の理由を因果図で示す縦9：16の専門的なインフォグラフィック
+  default_prompt: $explain-nursing-purpose を使い、縦16：横9で、病態と対応の理由が図と短文で伝わるプロフェッショナルな看護インフォグラフィックを作ってください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

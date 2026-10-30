@@ -1,0 +1,14 @@
+interface:
+  display_name: Instagram V8
+  short_description: 華やかな四色と丸ゴシックで制作する看護教育カルーセルの完成画像
+  default_prompt: Use $instagram-v8 to create a colorful professional Japanese nursing
+    education carousel.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

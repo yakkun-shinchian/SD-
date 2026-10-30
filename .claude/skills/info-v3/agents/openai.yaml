@@ -1,0 +1,13 @@
+interface:
+  display_name: インフォグラフィックV3（略称：インフォV3）
+  short_description: 実測音声・太い蛍光ペン・ズームを同じ対応表で合わせる解説動画
+  default_prompt: $info-v3 を使い、原図を保持し、大見出し・中見出しだけ赤、読んでいる本文だけ太い黄色で追い、実際の発話と蛍光ペン・ズームを一致させた動画を作ってください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+interface:
+  display_name: 複数資料の統合分析
+  short_description: 複数資料の共通点、相違点、反対意見を出典付きで統合します
+  default_prompt: Use $universal-multi-source-synthesis to synthesize these sources
+    with traceable evidence.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

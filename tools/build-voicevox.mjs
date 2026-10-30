@@ -2,6 +2,7 @@
 // build-voicevox.mjs
 // data.js / scenes.js から、VOICEVOX用の台本テキストと対応表を書き出すのだ。
 // 依存なし。実行: node tools/build-voicevox.mjs
+// 検査のみ（書き込みなし）: node tools/build-voicevox.mjs --check
 //   出力:
 //     voicevox/narration.txt … 1行=1ナレーション（VOICEVOXのテキスト読み込み用）
 //     voicevox/manifest.json … seq/番組ID/シーン番号/ファイル名/本文の対応表
@@ -22,8 +23,13 @@ vm.runInContext(fs.readFileSync(path.join(root, "scenes.js"), "utf8"), sandbox);
 vm.runInContext("this.__P = PROGRAMS; this.__S = SCENES;", sandbox);
 const PROGRAMS = sandbox.__P, SCENES = sandbox.__S;
 
+const check = process.argv.includes("--check");
+if (process.argv.slice(2).some((arg) => arg !== "--check")) {
+  console.error("使い方: node tools/build-voicevox.mjs [--check]");
+  process.exit(1);
+}
 const outDir = path.join(root, "voicevox");
-fs.mkdirSync(outDir, { recursive: true });
+const outputs = new Map();
 
 // 番組順→シーン順で通し番号(seq)を振る。これがVOICEVOXの書き出し順と一致するのだ。
 const rows = [];
@@ -49,18 +55,10 @@ for (const p of PROGRAMS) {
 }
 
 // 1) narration.txt（VOICEVOXに読み込ませる本文。1行=1音声アイテム）
-fs.writeFileSync(
-  path.join(outDir, "narration.txt"),
-  rows.map((r) => r.narration).join("\n") + "\n",
-  "utf8"
-);
+outputs.set("narration.txt", rows.map((r) => r.narration).join("\n") + "\n");
 
 // 2) manifest.json
-fs.writeFileSync(
-  path.join(outDir, "manifest.json"),
-  JSON.stringify(rows, null, 2) + "\n",
-  "utf8"
-);
+outputs.set("manifest.json", JSON.stringify(rows, null, 2) + "\n");
 
 // 3) manifest.csv
 const csvEsc = (v) => {
@@ -72,9 +70,28 @@ const csv =
   [cols.join(",")]
     .concat(rows.map((r) => cols.map((c) => csvEsc(r[c])).join(",")))
     .join("\n") + "\n";
-fs.writeFileSync(path.join(outDir, "manifest.csv"), csv, "utf8");
+outputs.set("manifest.csv", csv);
 
-console.log(`書き出し完了なのだ: ${rows.length} シーン / ${PROGRAMS.length} 番組`);
-console.log("  - voicevox/narration.txt");
-console.log("  - voicevox/manifest.json");
-console.log("  - voicevox/manifest.csv");
+if (check) {
+  const stale = [];
+  for (const [name, expected] of outputs) {
+    const file = path.join(outDir, name);
+    if (!fs.existsSync(file) || fs.readFileSync(file, "utf8") !== expected) {
+      stale.push(`voicevox/${name}`);
+    }
+  }
+  if (stale.length) {
+    console.error(`書き出しが未同期なのだ: ${stale.join(", ")}`);
+    console.error("node tools/build-voicevox.mjs を実行して更新するのだ。");
+    process.exitCode = 1;
+  } else {
+    console.log(`整合性OKなのだ: ${rows.length} シーン / 3ファイル`);
+  }
+} else {
+  fs.mkdirSync(outDir, { recursive: true });
+  for (const [name, content] of outputs) {
+    fs.writeFileSync(path.join(outDir, name), content, "utf8");
+  }
+  console.log(`書き出し完了なのだ: ${rows.length} シーン / ${PROGRAMS.length} 番組`);
+  for (const name of outputs.keys()) console.log(`  - voicevox/${name}`);
+}

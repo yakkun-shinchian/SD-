@@ -1,0 +1,41 @@
+{
+  "book": {
+    "title": "",
+    "subtitle": "",
+    "author": "",
+    "language": "",
+    "marketplace": "Amazon.co.jp"
+  },
+  "print_options": {
+    "trim_width_in": 6.0,
+    "trim_height_in": 9.0,
+    "interior_bleed": "none",
+    "paper": "premium-color",
+    "binding_direction": "ltr",
+    "cover_finish": "matte"
+  },
+  "interior": {
+    "source_master": "",
+    "facing_pattern": "image-left-caption-right",
+    "final_page_count": null,
+    "effective_even_page_count": null,
+    "intentional_blank_pages": [],
+    "output_pdf": ""
+  },
+  "cover": {
+    "front_art": "",
+    "back_art": "",
+    "spine_text": "auto",
+    "barcode_owner": "kdp",
+    "spine_width_in": null,
+    "cover_width_in": null,
+    "cover_height_in": null,
+    "output_pdf": ""
+  },
+  "review": {
+    "spread_preview_pdf": "",
+    "preflight_status": "pending",
+    "kdp_preview_status": "pending",
+    "physical_proof_status": "recommended"
+  }
+}

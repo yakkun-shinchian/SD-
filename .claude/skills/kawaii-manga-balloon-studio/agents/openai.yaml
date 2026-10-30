@@ -1,0 +1,14 @@
+interface:
+  display_name: Kawaii Manga Balloon Studio
+  short_description: 日英併記・丸い吹き出し・顔との重なりゼロを全漫画ページに適用
+  default_prompt: Use $kawaii-manga-balloon-studio to typeset rounded Japanese-English
+    balloons that never overlap any visible face.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  allow_implicit_invocation: true
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas

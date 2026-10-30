@@ -1,0 +1,14 @@
+interface:
+  display_name: KDP本情報 完成パック
+  short_description: Kindle完成後のタイトル表記・紹介文・7キーワードを一括作成
+  default_prompt: Use $complete-kdp-book-details to create a complete, copy-ready
+    KDP book-details sheet for this finished Kindle book.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

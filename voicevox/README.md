@@ -62,3 +62,18 @@
 
 `scenes.js` を編集したら、`node tools/build-voicevox.mjs` を実行すると
 `narration.txt` と `manifest` が作り直されるのだ。変えたシーンだけ録り直せばいいのだ。
+
+### 書き出しの整合性検査
+
+`data.js`・`scenes.js` を更新したら、上の生成コマンドで3ファイルを同期するのだ。
+次の検査はファイルを書き換えず、本文・タイトル・順序・キー・WAV名を含む
+3ファイル全体を現在の生成結果と比較するのだ。不一致や欠落があれば終了コード1になるのだ。
+
+```bash
+node tools/build-voicevox.mjs --check
+node --test tools/build-voicevox.test.mjs
+```
+
+GitHub Actionsでも対象ファイルのpush・PR時に実行するのだ。
+テストは一時ディレクトリで本文の変更・生成ファイルの改変・欠落を意図的に作り、
+検査が失敗することを確かめるのだ。音声生成や動画の再制作は行わないのだ。

@@ -1,0 +1,14 @@
+interface:
+  display_name: ローカルAI設計
+  short_description: MacやPC向けのモデル選定と必要メモリ・同時実行数を安全に設計します
+  default_prompt: Use $plan-local-ai-models to design a safe local AI setup for this
+    hardware and workload.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

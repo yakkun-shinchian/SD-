@@ -1,0 +1,14 @@
+interface:
+  display_name: Kawaii Bilingual Manga Pages
+  short_description: 見本準拠の日英漫画、丸い吹き出し、顔との重なりゼロを標準化
+  default_prompt: Use $create-kawaii-bilingual-manga-pages to create a reference-style
+    Kindle manga page with rounded Japanese-English balloons and zero face overlap.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  allow_implicit_invocation: true
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas

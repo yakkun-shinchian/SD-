@@ -1,0 +1,13 @@
+interface:
+  display_name: インフォグラフィックC2
+  short_description: 黒基調と透明な医療3D、可愛い女性看護師で仕組みを伝える図解
+  default_prompt: $infographic-c2 を使って、黒基調の美しくわかりやすい看護教育インフォグラフィックを制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

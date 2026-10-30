@@ -1,0 +1,14 @@
+interface:
+  display_name: データ健康診断
+  short_description: 欠損、重複、外れ値、型の問題を見つけて影響を示します
+  default_prompt: Use $universal-data-quality-check to assess the quality and risks
+    of this dataset.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

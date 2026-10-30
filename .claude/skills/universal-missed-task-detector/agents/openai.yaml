@@ -1,0 +1,14 @@
+interface:
+  display_name: タスク取りこぼし検知
+  short_description: 会話や文書に埋もれた約束と未完了タスクを見つけます
+  default_prompt: Use $universal-missed-task-detector to find commitments and possible
+    missed tasks in these materials.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

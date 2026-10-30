@@ -90,3 +90,7 @@ python3 studio/mp4/samples/neon/make_sample.py
 ```
 
 同じ合成背景・440Hz音を用い、`comparison.mp4` に通常速度4秒→ネオン＋1.3倍速4秒を収録します。素材に焼き込んだ既存の説明文字を下部に残し、新しい字幕は上部に配置します。**実際の腎臓動画・CoeFont音声ではありません。実音声との同期は未検証です。** 有料APIは呼びません。
+
+## ナレーション無音チェック
+
+書き出し前の無音候補検査・CT/3D保持区間・BGM除外の設定と検証結果は [SILENCE_CHECK.md](SILENCE_CHECK.md) を参照してください。

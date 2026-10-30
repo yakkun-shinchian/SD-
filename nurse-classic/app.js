@@ -146,7 +146,8 @@
       ? `ずんだもんのおすすめ番組なのだ <span class="muted">全${PROGRAMS.length}本</span>`
       : `${cat ? cat.icon + " " : ""}${escapeHtml(cat ? cat.label : key)}の番組なのだ <span class="muted">${list.length}本</span>`;
     main.innerHTML = chipsHtml(key) +
-      `<h2 class="section-title">${heading}</h2>` + gridHtml(list);
+      `<h2 class="section-title">${heading}</h2>` + gridHtml(list) +
+      `<p class="sample-note">※ 視聴回数・公開日・再生時間はサンプル表示なのだ。</p>`;
   }
 
   function renderSearch(query) {
@@ -167,7 +168,7 @@
   function lessonHtml(p) {
     const c = catOf(p.category) || { color: "#444", icon: "🎬" };
     const grad = `linear-gradient(135deg, ${c.color} 0%, ${shade(c.color, -45)} 100%)`;
-    return `<div class="player">
+    return `<div class="player player--lesson">
       <div class="lesson" id="lessonRoot" style="background:${grad}">
         <div class="lesson__stage">
           <span class="lesson__badge">${c.icon} ${escapeHtml(p.category)}</span>
@@ -337,11 +338,20 @@
         const u = new SpeechSynthesisUtterance(s.narration);
         if (jpVoice) u.voice = jpVoice;
         u.lang = "ja-JP"; u.rate = 1.02; u.pitch = 1.5;
-        u.onend = advance;
-        u.onerror = advance;
-        try { synth.speak(u); } catch (e) {}
+        // 読み上げがすぐ終わった・失敗した（日本語の音声が無い端末など）ときは、
+        // 一瞬で次へ飛ばさず、字幕を読める時間だけ待ってから進む
+        const t0 = Date.now();
+        const done = () => {
+          if (my !== token) return;
+          const elapsed = Date.now() - t0;
+          if (elapsed < 1500) { clearTimer(); timer = setTimeout(advance, Math.max(0, estDuration(s.narration) - elapsed)); }
+          else advance();
+        };
+        u.onend = done;
+        u.onerror = done;
         // onendが発火しないブラウザ対策の保険タイマー
         timer = setTimeout(advance, estDuration(s.narration) + 3000);
+        try { synth.speak(u); } catch (e) {}
       } else {
         timer = setTimeout(advance, estDuration(s.narration));
       }
@@ -472,7 +482,7 @@
     closeSidebar();
     main.scrollTop = 0;
     window.scrollTo(0, 0);
-    document.title = "NurseTube ナースチューブ｜ずんだもんと学ぶ看護のYouTube";
+    document.title = "NurseTube クラシック｜ずんだもんと学ぶ看護のYouTube";
 
     const hash = location.hash.replace(/^#/, "") || "/";
     const parts = hash.split("/").filter(Boolean); // 例: ["watch","anat01"]
@@ -506,15 +516,19 @@
     location.hash = q ? `#/search/${encodeURIComponent(q)}` : "#/";
   });
 
-  // テーマ切替（localStorageに保存）
+  // テーマ切替（クラシック版は黒が既定。選んだ表示は端末に保存するのだ）
+  // 属性名と保存キーを現行版(nurse.html)と分け、同じサイト上で互いに影響しないようにする。
+  // 保存できない環境（プライベートモード等）でも表示は止めない。
+  const THEME_KEY = "nursetube-classic-theme";
   function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute("data-nt-theme", theme);
     themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
-    localStorage.setItem("nursetube-theme", theme);
+    themeToggle.setAttribute("aria-label", theme === "dark" ? "明るい表示にする" : "黒い表示にする");
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
   }
   themeToggle.addEventListener("click", () => {
-    const cur = document.documentElement.getAttribute("data-theme");
-    applyTheme(cur === "dark" ? "light" : "dark");
+    const cur = document.documentElement.getAttribute("data-nt-theme");
+    applyTheme(cur === "light" ? "dark" : "light");
   });
 
   // モバイル用サイドバー開閉
@@ -542,9 +556,9 @@
   });
 
   // ----------------------- 起動 -----------------------
-  const saved = localStorage.getItem("nursetube-theme");
-  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(saved || (prefersDark ? "dark" : "light"));
+  let saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
+  applyTheme(saved === "light" ? "light" : "dark");
   renderCountdown();
   window.addEventListener("hashchange", router);
   router();

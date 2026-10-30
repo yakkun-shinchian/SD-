@@ -158,8 +158,10 @@ Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
   **②が揃っても「動く」とは限らない。③は「走らせて成果物を確認した」まで。**
 - 全324ファイルが `MANIFEST.json` の sha256 と一致（`REGISTRY.md` §3-1）。
   `.claude/skills/` のファイルを変更したら、MANIFESTとの差が生じることを意識する。
-- **既知の障害**（`REGISTRY.md` §7-4）：**VOICEVOX書き出しが8シーン古い**（音声制作前に要再生成）。
-  CoeFontとフォントは解消済み。
+- **VOICEVOXは意図的な保留**（`REGISTRY.md` §7-5）。`audio/manifest.js` が0件で
+  まだ1つも使っていないため実害なし。**勝手に再生成しないこと。**
+  再開時は音声書き出し前に `node tools/build-voicevox.mjs` が必須（8シーンが古い）。
+- 既知の障害は上記1件のみ。CoeFontとフォントは解消済み。
 - **永続しない導入物**（§7-3）：`fitz` を使う3本に必要な **PyMuPDF**、
   `render_natural_overlay.py` に必要な **Zen Kurenaido / Yuji Syuku**。
   いずれもこの容器にのみ存在し、セッション終了で消える。

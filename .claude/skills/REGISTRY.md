@@ -1,6 +1,6 @@
 # YAKUBON STUDIO スキル台帳（正本の所在と対応表）
 
-最終更新：**2026-10-30** ／ 調査環境：Claude Code クラウドセッション（`yakkun-shinchian/SD-`）
+最終更新：**2026-10-31（日本時間）** ／ 台帳整合確認：PR #21 の `32fd3ad7bb2d07fe1f84ced84ec89e348fa5ed61` のGitツリー（`yakkun-shinchian/SD-`）。実行結果は各節に記載した当時の環境・日付に限ります。
 
 ---
 
@@ -26,76 +26,80 @@
 
 | # | スキル名 | 手順書 | 素材・スクリプト | 動作確認 | 由来 |
 |---|---|---|---|---|---|
-| 1 | `animate-pathogen-layer-reel` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
-| 2 | `clinical-case-infographic-c1` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
-| 3 | `clinical-evidence-for-nurses` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 4 | `coefont-new-project` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 5 | `complete-kdp-book-details` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
-| 6 | `create-kawaii-bilingual-manga-pages` | ✅ 受領 | ⏳ 待ち（4件） | ⬜ 未実施 | 62件バンドル |
-| 7 | `create-kokushi-pathogen-character` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
-| 8 | `create-single-balloon-kindle-manga` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
-| 9 | `daihon-skill` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 10 | `ecg-mastery-coach` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 11 | `explain-drug-infographic` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 12 | `explain-nursing-purpose` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 13 | `huggingface-ai-research-readonly` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 14 | `info-v3` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 15 | `info2` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 16 | `infographic-c2` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 17 | `infographic-i1` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 18 | `infographic-m3` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 19 | `instagram-nursing-carousel-v3` | ✅ 受領 | ⏳ 待ち（6件） | ⬜ 未実施 | 62件バンドル |
-| 20 | `instagram-v5` | ✅ 受領 | ⏳ 待ち（11件） | ⬜ 未実施 | 62件バンドル |
-| 21 | `instagram-v5-voice-synced-motion-reel` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
-| 22 | `instagram-v6` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 23 | `instagram-v7` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 24 | `instagram-v8` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 25 | `instagram-video-m1` | ✅ 受領 | ⏳ 待ち（6件） | ⬜ 未実施 | 62件バンドル |
-| 26 | `kawaii-manga-balloon-studio` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
-| 27 | `kawaii-manga-balloon-studio-part2` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
-| 28 | `kdp-paperback-studio` | ✅ 受領 | ⏳ 待ち（4件） | ⬜ 未実施 | 62件バンドル |
-| 29 | `kindle-visual-book-studio` | ✅ 受領 | ⏳ 待ち（1件） | ⬜ 未実施 | 62件バンドル |
-| 30 | `longevity-claim-auditor` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 31 | `medical-3d-orbit-opener` | ✅ 受領 | — 不要 | ⬜ 未実施 | claude.ai同期 |
-| 32 | `medical-video-1` | ✅ 受領 | ⏳ 待ち（2件） | ⬜ 未実施 | 62件バンドル |
-| 33 | `medical-video-2` | ✅ 受領 | ⏳ 待ち（10件） | ⬜ 未実施 | 62件バンドル |
-| 34 | `nurse-archetype-field-guide-studio` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 35 | `nurse-manga-medical-english-studio` | ✅ 受領 | ⏳ 待ち（9件） | ⬜ 未実施 | 62件バンドル |
-| 36 | `obsidian-archive-architect` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 37 | `plan-local-ai-models` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 38 | `preserve-nursetube-colors` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 39 | `prompt-skill-1` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 40 | `rap-skill-1` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 41 | `review-agent-skill-safety` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 42 | `ship-daily-output-and-debt` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 43 | `universal-browser-assistant` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 44 | `universal-daily-prep` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 45 | `universal-data-analysis-report` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 46 | `universal-data-quality-check` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 47 | `universal-document-coauthoring` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 48 | `universal-document-to-markdown` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 49 | `universal-evidence-before-completion` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 50 | `universal-idea-to-plan` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 51 | `universal-meeting-minutes` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 52 | `universal-memory-curator` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 53 | `universal-missed-task-detector` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 54 | `universal-multi-source-synthesis` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 55 | `universal-primary-source-research` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 56 | `universal-privacy-redaction` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 57 | `universal-prompt-refiner` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 58 | `universal-session-handoff` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 59 | `universal-skill-discovery` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 60 | `universal-skill-safety-audit` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 61 | `universal-sop-builder` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 62 | `universal-systematic-troubleshooting` | ✅ 受領 | — 不要 | ⬜ 未実施 | 62件バンドル |
-| 63 | `yakubon-infographic-c1` | ✅ 受領 | — 不要 | ⬜ 未実施 | claude.ai同期 |
-| 64 | `yakubon-nursing-illustration-v4` | ✅ 受領 | ⏳ 待ち（11件） | ⬜ 未実施 | 62件バンドル |
+| 1 | `animate-pathogen-layer-reel` | ✅ 受領 | ✅ 受領（2件） | ⬜ 未実施 | 62件バンドル |
+| 2 | `clinical-case-infographic-c1` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 3 | `clinical-evidence-for-nurses` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 4 | `coefont-new-project` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 5 | `complete-kdp-book-details` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 6 | `create-kawaii-bilingual-manga-pages` | ✅ 受領 | ✅ 受領（5件） | ⬜ 未実施 | 62件バンドル |
+| 7 | `create-kokushi-pathogen-character` | ✅ 受領 | ✅ 受領（2件） | ⬜ 未実施 | 62件バンドル |
+| 8 | `create-single-balloon-kindle-manga` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 9 | `daihon-skill` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 10 | `ecg-mastery-coach` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 11 | `explain-drug-infographic` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 12 | `explain-nursing-purpose` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 13 | `huggingface-ai-research-readonly` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 14 | `info-v3` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 15 | `info2` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 16 | `infographic-c2` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 17 | `infographic-i1` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 18 | `infographic-m3` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 19 | `instagram-nursing-carousel-v3` | ✅ 受領 | ✅ 受領（7件） | ⬜ 未実施 | 62件バンドル |
+| 20 | `instagram-v5` | ✅ 受領 | ✅ 受領（12件） | ⬜ 未実施 | 62件バンドル |
+| 21 | `instagram-v5-voice-synced-motion-reel` | ✅ 受領 | ✅ 受領（2件） | ⬜ 未実施 | 62件バンドル |
+| 22 | `instagram-v6` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 23 | `instagram-v7` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 24 | `instagram-v8` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 25 | `instagram-video-m1` | ✅ 受領 | ✅ 受領（6件） | ⬜ 未実施 | 62件バンドル |
+| 26 | `kawaii-manga-balloon-studio` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 27 | `kawaii-manga-balloon-studio-part2` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 28 | `kdp-paperback-studio` | ✅ 受領 | ✅ 受領（5件） | ⬜ 未実施 | 62件バンドル |
+| 29 | `kindle-visual-book-studio` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 30 | `longevity-claim-auditor` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 31 | `medical-3d-orbit-opener` | ✅ 受領 | — 同梱なし | ⬜ 未実施 | claude.ai同期 |
+| 32 | `medical-video-1` | ✅ 受領 | ✅ 受領（3件） | ⬜ 未実施 | 62件バンドル |
+| 33 | `medical-video-2` | ✅ 受領 | ✅ 受領（11件） | ⬜ 未実施 | 62件バンドル |
+| 34 | `nurse-archetype-field-guide-studio` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 35 | `nurse-manga-medical-english-studio` | ✅ 受領 | ✅ 受領（10件） | ⬜ 未実施 | 62件バンドル |
+| 36 | `obsidian-archive-architect` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 37 | `plan-local-ai-models` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 38 | `preserve-nursetube-colors` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 39 | `prompt-skill-1` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 40 | `rap-skill-1` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 41 | `review-agent-skill-safety` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 42 | `ship-daily-output-and-debt` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 43 | `universal-browser-assistant` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 44 | `universal-daily-prep` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 45 | `universal-data-analysis-report` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 46 | `universal-data-quality-check` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 47 | `universal-document-coauthoring` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 48 | `universal-document-to-markdown` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 49 | `universal-evidence-before-completion` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 50 | `universal-idea-to-plan` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 51 | `universal-meeting-minutes` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 52 | `universal-memory-curator` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 53 | `universal-missed-task-detector` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 54 | `universal-multi-source-synthesis` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 55 | `universal-primary-source-research` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 56 | `universal-privacy-redaction` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 57 | `universal-prompt-refiner` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 58 | `universal-session-handoff` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 59 | `universal-skill-discovery` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 60 | `universal-skill-safety-audit` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 61 | `universal-sop-builder` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 62 | `universal-systematic-troubleshooting` | ✅ 受領 | ✅ 受領（1件） | ⬜ 未実施 | 62件バンドル |
+| 63 | `yakubon-infographic-c1` | ✅ 受領 | — 同梱なし | ⬜ 未実施 | claude.ai同期 |
+| 64 | `yakubon-nursing-illustration-v4` | ✅ 受領 | ✅ 受領（12件） | ⬜ 未実施 | 62件バンドル |
+
+素材・スクリプト欄は各スキル配下の `assets/`（icon.svgを含む）と `scripts/` のプログラム原本数です（`__pycache__/` は除外）。
+`references/` と `agents/openai.yaml` は別集計（§3）。「同梱なし」は外部依存や制作時の入力素材が不要という意味ではありません。
+受領済み素材の再送は求めず、個別成果物の動作確認は別に記録します。V6など他スキルを参照する方式は、その参照先も確認します。
 
 ### 内訳
 
 - **62件** … 2026-10-30 にご本人からアップロードされた `YAKUBON_Claude_62_Skills_and_Guides.txt`（647KB）より取り込み
 - **2件** … claude.ai 同期スキルの改変なしミラー（`yakubon-infographic-c1` / `medical-3d-orbit-opener`）
-- 付随する参考資料 **63件**（`references/*.md`）、バンドル同梱の `SKILL_INDEX.md` / `README_CLAUDE_JA.md` も配置済み
+- 付随する参考資料 **61件**（`references/*.md`）、バンドル同梱の `SKILL_INDEX.md` / `README_CLAUDE_JA.md` も配置済み
 - 全64件で **frontmatter の `name` とディレクトリ名が一致**することを検証済み
 
 ### 取り込み時の検証
@@ -167,7 +171,21 @@ SKILL.md とは別に、**実行可能なコードと成果物**がリポジト�
 > 教訓として記録します。「内容は同じ」と「原本と同一」は違います。
 > MANIFEST の sha256 がなければ、この1バイトは見つかりませんでした。
 
-### 3-3. ZIPが届いても解決しないもの
+### 3-3. 今回の実ファイル確認（2026-10-31）
+
+PR #21 の上記コミットの再帰Gitツリー（省略なし）で確認：
+
+- `.claude/skills/*/SKILL.md`：64件
+- `.claude/skills/*/agents/openai.yaml`：62件
+- `.claude/skills/medical-video-1/assets/coiling-reference-2s.png`
+- `.claude/skills/medical-video-1/assets/coiling-opening-5s.mp4`
+- `.claude/skills/medical-video-2/assets/`：`01-layered-anatomy.png` から `10-diuresis-comparison.png` までのPNG10件
+- 各スキルの `assets/`・`scripts/`：§1の件数を実ファイル一覧から再集計
+
+§3-1の324件SHA256照合は取り込み時の検証記録です。今回の確認はGitツリー上の存在・件数確認であり、SHA256再計算や成果物の動作確認を実施したものではありません。
+`MANIFEST.json` 自体はこのGitツリーにはありません。329件は従来の受領集計であり、現在の `.claude/skills/` 配下は台帳・索引と `kdp-paperback-studio/scripts/__pycache__/cover_geometry.cpython-313.pyc` を含め330ファイルです。キャッシュは受領素材・プログラムの集計から除外し、今回変更しません。
+
+### 3-4. ZIPが届いても解決しないもの
 
 - **ChatGPT専用機能** … チャッピー側の画像生成等は、この環境からは呼べません
 - **認証状態** … CoeFont / KDP 等のログインは引き継がれません
@@ -191,7 +209,9 @@ SKILL.md とは別に、**実行可能なコードと成果物**がリポジト�
 
 `medical-video-1` は参照素材 `assets/coiling-reference-2s.png` と
 `assets/coiling-opening-5s.mp4` を**開くことを手順1で要求**しています。
-この2点が未収録のため、**手順どおりの実行はまだできません。**
+この2点は **受領済み**で、`.claude/skills/medical-video-1/assets/` に存在します。
+`medical-video-2/assets/` の参照PNG10枚も受領済みです。素材不足による停止・再送要求は不要です。
+ただし、スキル単位での成果物生成・検品は未実施（§0・§7）です。
 
 ---
 
@@ -203,7 +223,7 @@ SKILL.md とは別に、**実行可能なコードと成果物**がリポジト�
 | ffmpeg / ffprobe | **利用可** | 6.1.1。9:16合成・無音検査・デコード検証を実測成功 |
 | Node.js | **利用可** | v22.22.0 |
 | Python / numpy / Pillow | **利用可** | 3.13.17 / 2.5.3 / 12.3.0 |
-| 日本語フォント | **一部のみ** | IPAGothic・Unifont-JP・WenQuanYi。ブランド指定書体なし |
+| 日本語フォント | **環境ごとに確認** | 当初はIPAGothic等のみ。後にZen Kurenaidoの導入・レンダリングを確認（§7-1 #17）。Yuji Syuku等の必要書体は実行時に確認。導入は永続しない |
 | Playwright + Chromium | **利用可** | ただしCoeFontはホスト拒否で到達不可 |
 | 画像・動画生成 | **要確認** | creative-claw / Higgsfield / artlist / Canva / Descript 等が接続済み。未実行 |
 
@@ -305,7 +325,7 @@ Network secrets に保管し、**チャットには貼らない**こと。
 3. **受領状態は §0 の3段階で区別する。** ①手順書受領を②素材受領や③動作確認と混同しない。
 4. 変更時は必ず **バックアップ → パス検証 → diff / sha256 照合** の順で行う。
 5. Claude Code は `.claude/skills/` を、Codex は `AGENTS.md` 経由で同じ定義を読む。
-   ただし Codex用の `agents/openai.yaml` 62件は**未収録**（§3）。
+   Codex用の `agents/openai.yaml` 62件も**受領済み**（§3）。定義の存在確認とCodexでの成果物生成・検品は別です。
 6. スキル間の役割分担は §4 のように**確定したものだけ**を書き、仮説は仮説と明記する。
 
 
@@ -313,7 +333,7 @@ Network secrets に保管し、**チャットには貼らない**こと。
 
 ## 7. 動作確認の結果（2026-10-30・外部課金なしの範囲）
 
-### 7-1. 補助プログラム21本のうち16本を実行して検証
+### 7-1. 補助プログラムの部分検証記録（スキル単位の完了ではない）
 
 | # | スクリプト | 検証内容 | 結果 |
 |---|---|---|---|
@@ -375,11 +395,13 @@ SKILL.md 58行目に「参考10枚が4:5でも参照するのは絵柄・人物�
 
 | # | 内容 | 影響 |
 |---|---|---|
-| 1 | ~~Zen Kurenaido / Yuji Syuku が無い~~ | **解消**（2026-10-30 導入・レンダリング実測）。ただし**永続しない**（§7-3） |
-| 2 | **VOICEVOX書き出しが古い**（§7-5） | 音声制作前に再生成が必要 |
-| 3 | ~~CoeFont 未到達・未認証~~ | **解消**。API不採用により接続自体が不要（§5-1） |
+| 1 | **指定フォントの実行環境依存** | 2026-10-30にZen Kurenaidoでレンダリング成功（§7-1 #17）。導入は永続せず、Yuji Syukuを含め必要な書体は実行環境で再確認。欠落時は導入が必要 |
+| 2 | **VOICEVOX書き出しの同期**（§7-5） | 別コミット `32fd3ad` で書き出し更新・チェック追加。下記は更新前の調査記録。音声制作前に同期確認が必要 |
+| 3 | **CoeFont 接続不可・認証未確認** | ご本人の環境で音声生成する標準手順では阻害しない（§5-1）。この環境の接続・認証が成功した意味ではなく、自動生成へ変更する場合は再確認が必要 |
 
-### 7-5. VOICEVOX書き出しが古い（既報・未解決）
+### 7-5. VOICEVOX書き出しの旧調査記録
+
+**2026-10-31追記：** 台帳修正中に別コミット `32fd3ad7bb2d07fe1f84ced84ec89e348fa5ed61` が入り、`voicevox/manifest.json`・CSV・`narration.txt` が更新され、同期チェックとテストが追加されました。以下の「8シーンで相違」「意図的な保留」はその更新前の記録です。今回の文書修正では書き出し再生成・テスト実行はしていません。再開時は最新の `voicevox/README.md` を確認してください。
 
 `node tools/build-voicevox.mjs` を再実行すると、コミット済みの成果物と差分が出ます。
 

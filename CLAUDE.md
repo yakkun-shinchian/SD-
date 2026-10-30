@@ -141,3 +141,16 @@ Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
 - Commit with clear, descriptive messages (existing history is in Japanese).
 - Push with `git push -u origin <branch>` and open a draft PR.
 - This is a static site, deployable as-is via GitHub Pages (root folder).
+
+## YAKUBON STUDIO 制作スキル
+
+動画・インフォグラフィック等の制作タスクでは、先に以下を読むこと。
+
+| 目的 | ファイル |
+|------|----------|
+| スキル台帳・ChatGPT側呼称との対応表・未発見スキル一覧 | `.claude/skills/REGISTRY.md` |
+| 制作スキル定義（claude.ai同期スキルの改変なしミラー） | `.claude/skills/*/SKILL.md` |
+| Codex等との共通申し送り・動画検品手順 | `AGENTS.md` |
+
+- `.claude/skills/` の既存スキルは**削除・統合・無断上書きしない**。原本はclaude.ai同期側。
+- 実体のないスキルを**推測で新規作成しない**。未発見は `REGISTRY.md` に未発見として残す。

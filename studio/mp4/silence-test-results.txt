@@ -1,0 +1,44 @@
+/workspace/scratch/416c967759fd/SD-/studio/mp4/tests/test_silence.py:17: SyntaxWarning: invalid escape sequence '\,'
+  e.ff(['-f','lavfi','-i',"aevalsrc=if(between(t\,2\,4)+between(t\,6\,8)\,0.2*sin(2*PI*440*t)\,0):s=48000:d=10",self.root/'n.wav'])
+test_cache_reuse (test_edit.EditTests.test_cache_reuse) ... ok
+test_changed_timeline_rejected_in_subtitles_mode (test_edit.EditTests.test_changed_timeline_rejected_in_subtitles_mode) ... ok
+test_corrupt_master_rejected (test_edit.EditTests.test_corrupt_master_rejected) ... ok
+test_invalid_trim_and_audio_overrun (test_edit.EditTests.test_invalid_trim_and_audio_overrun) ... ok
+test_literal_subtitle_and_invalid_style (test_edit.EditTests.test_literal_subtitle_and_invalid_style) ... ok
+test_missing_font_rejected (test_edit.EditTests.test_missing_font_rejected) ... ok
+test_missing_input_cli_error_and_no_outputs (test_edit.EditTests.test_missing_input_cli_error_and_no_outputs) ... ok
+test_order_trim_size_fps_audio_duration (test_edit.EditTests.test_order_trim_size_fps_audio_duration) ... ok
+test_subtitle_only_reuses_master_without_sources (test_edit.EditTests.test_subtitle_only_reuses_master_without_sources) ... ok
+WARNING narration silence (leading): 0.000–0.500s
+WARNING narration silence (trailing): 2.998–4.000s
+test_bad_settings_and_overrun (test_neon.NeonTests.test_bad_settings_and_overrun) ... ok
+test_glow_layers_and_visible_timing (test_neon.NeonTests.test_glow_layers_and_visible_timing) ... ok
+test_linked_cue_rejects_outside_trim_and_scene (test_neon.NeonTests.test_linked_cue_rejects_outside_trim_and_scene) ... ok
+test_multiple_scenes_and_tracks (test_neon.NeonTests.test_multiple_scenes_and_tracks) ... WARNING narration silence (internal): 1.000–2.500s
+ok
+test_pitch_preserved (test_neon.NeonTests.test_pitch_preserved) ... ok
+test_source_time_conversion_and_audio_end (test_neon.NeonTests.test_source_time_conversion_and_audio_end) ... ok
+test_style_reuses_master_and_speed_invalidates (test_neon.NeonTests.test_style_reuses_master_and_speed_invalidates) ... WARNING narration silence (leading): 0.000–0.500s
+WARNING narration silence (trailing): 2.998–4.000s
+ok
+test_unlinked_timing_and_implicit_audio_end (test_neon.NeonTests.test_unlinked_timing_and_implicit_audio_end) ... WARNING narration silence (trailing): 3.003–4.000s
+ok
+test_invalid_settings (test_silence.SilenceTests.test_invalid_settings) ... ok
+test_overlap_and_check_does_not_change_media (test_silence.SilenceTests.test_overlap_and_check_does_not_change_media) ... ok
+test_rendered_times_bgm_and_partial_keep (test_silence.SilenceTests.test_rendered_times_bgm_and_partial_keep) ... WARNING narration silence (leading): 0.000–1.488s
+WARNING narration silence (internal): 2.506–2.600s
+WARNING narration silence (internal): 3.400–3.483s
+WARNING narration silence (trailing): 4.501–8.000s
+WARNING narration silence (leading): 0.000–1.488s
+WARNING narration silence (trailing): 4.501–8.000s
+WARNING narration silence (leading): 0.000–1.488s
+WARNING narration silence (trailing): 4.501–8.000s
+ok
+test_threshold_duration_and_no_narration (test_silence.SilenceTests.test_threshold_duration_and_no_narration) ... WARNING narration silence (trailing): 4.501–8.000s
+WARNING narration silence (entire): 0.000–8.000s
+ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 16.316s
+
+OK

@@ -229,6 +229,106 @@ def encode():
     return ['-c:v', 'libx264', '-preset', 'fast', '-crf', '18', '-pix_fmt', 'yuv420p', '-threads', '2']
 
 
+def audio_filter(a):
+    """Shared rendering/check path: source trim, tempo, gain, timeline placement."""
+    end = '' if a['out'] is None else f':end={a["out"]}'
+    tempo = f'atempo={speed(a)},asetpts=N/SR/TB,' if speed(a) != 1 else ''
+    return (f'atrim=start={a["in"]}{end},asetpts=PTS-STARTPTS,aresample=48000,'
+            f'{tempo}volume={a["volume"]},adelay={round(a["at"]*1000)}:all=1')
+
+
+def silence_settings(manifest, duration, count):
+    raw = json.loads(manifest.read_text()).get('silence_check', {})
+    if not isinstance(raw, dict):
+        raise ValueError('silence_check must be an object')
+    enabled = raw.get('enabled', True)
+    if not isinstance(enabled, bool):
+        raise ValueError('silence_check.enabled must be boolean')
+    noise = number(raw.get('noise_db', -40), 'silence_check.noise_db', -120)
+    minimum = number(raw.get('min_duration', .5), 'silence_check.min_duration', .001)
+    if noise > 0:
+        raise ValueError('silence_check.noise_db must be <= 0')
+    tracks = raw.get('narration_tracks', list(range(count)))
+    if not isinstance(tracks, list) or any(type(i) is not int or not 0 <= i < count for i in tracks):
+        raise ValueError('narration_tracks must contain valid zero-based audio indices')
+    if len(set(tracks)) != len(tracks):
+        raise ValueError('duplicate narration_tracks')
+    keep = raw.get('keep', [])
+    if not isinstance(keep, list):
+        raise ValueError('silence_check.keep must be an array')
+    for item in keep:
+        a = number(item['start'], 'keep.start')
+        b = number(item['end'], 'keep.end')
+        if not a < b <= duration or not isinstance(item.get('reason'), str) or not item['reason'].strip():
+            raise ValueError('keep requires start < end <= duration and a nonempty reason')
+    return dict(enabled=enabled, noise_db=noise, min_duration=minimum,
+                narration_tracks=tracks, keep=keep)
+
+
+def check_silence(plan, duration, config, old, fingerprints, mode):
+    """Detect the rendered narration bus, never the BGM or compressed master."""
+    if not config['enabled'] or not config['narration_tracks']:
+        return {'status': 'disabled' if not config['enabled'] else 'no_narration', 'warnings': []}
+    tracks = [plan['audio'][i] for i in config['narration_tracks']]
+    key = digest({'tracks': tracks, 'duration': duration,
+                  'inputs': {a['file']: fingerprints[a['file']] for a in tracks},
+                  'noise': config['noise_db'], 'minimum': config['min_duration'], 'version': 1})
+    cached = old.get('silence_report', {})
+    reused = cached.get('detection_key') == key
+    if reused:
+        candidates = cached['candidates']
+    else:
+        # In subtitles mode the master may outlive its sources. Never inspect a
+        # changed source and misrepresent it as the audio in that master.
+        for a in tracks:
+            if sha(existing(Path(a['file']))) != fingerprints[a['file']]:
+                raise ValueError('Narration source changed; run build before silence check')
+        args, filters = [], []
+        for i, a in enumerate(tracks):
+            args += ['-i', a['file']]
+            filters.append(f'[{i}:a:0]{audio_filter(a)}[n{i}]')
+        labels = ''.join(f'[n{i}]' for i in range(len(tracks)))
+        samples = round(duration*48000)
+        filters.append(f'{labels}amix=inputs={len(tracks)}:normalize=0,'
+                       f'apad=whole_len={samples},atrim=end_sample={samples},asetpts=N/SR/TB,'
+                       f'silencedetect=noise={config["noise_db"]}dB:d={config["min_duration"]}[check]')
+        result = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-loglevel', 'info',
+            *args, '-filter_complex', ';'.join(filters), '-map', '[check]', '-f', 'null', '-'], capture_output=True)
+        if result.returncode:
+            raise ValueError(result.stderr.decode(errors='replace')[-4000:])
+        candidates, start = [], None
+        for kind, value in re.findall(r'silence_(start|end):\s*([0-9.eE+\-]+)', result.stderr.decode()):
+            if kind == 'start':
+                start = max(0, float(value))
+            elif start is not None:
+                candidates.append({'start': start, 'end': min(duration, float(value))})
+                start = None
+        if start is not None:
+            candidates.append({'start': start, 'end': duration})
+    warnings, kept = [], []
+    for c in candidates:
+        a, b = c['start'], c['end']
+        kind = 'entire' if a <= .001 and b >= duration-.001 else ('leading' if a <= .001 else 'trailing' if b >= duration-.001 else 'internal')
+        pieces = [(a, b)]
+        for k in sorted(config['keep'], key=lambda x: x['start']):
+            remaining = []
+            for lo, hi in pieces:
+                left, right = max(lo, k['start']), min(hi, k['end'])
+                if left < right:
+                    kept.append(dict(start=left, end=right, reason=k['reason'], kind=kind))
+                    if lo < left: remaining.append((lo, left))
+                    if right < hi: remaining.append((right, hi))
+                else:
+                    remaining.append((lo, hi))
+            pieces = remaining
+        # Even short residuals are reported: a keep interval cannot conceal the
+        # rest of an already qualifying candidate.
+        warnings.extend(dict(start=lo, end=hi, duration=hi-lo, kind=kind) for lo, hi in pieces)
+    return dict(status='checked', detection_key=key, detection_reused=reused,
+                settings=config, candidates=candidates, warnings=warnings, kept=kept,
+                time_basis='final_video_seconds')
+
+
 def build_master(plan, duration, work):
     w, h = plan['size']; fps = plan['fps']
     for i, s in enumerate(plan['scenes']):
@@ -244,9 +344,7 @@ def build_master(plan, duration, work):
     if plan['audio']:
         filters = []
         for i, a in enumerate(plan['audio'], 1):
-            end = '' if a['out'] is None else f':end={a["out"]}'
-            tempo = f'atempo={speed(a)},asetpts=N/SR/TB,' if speed(a) != 1 else ''
-            filters.append(f'[{i}:a:0]atrim=start={a["in"]}{end},asetpts=PTS-STARTPTS,aresample=48000,{tempo}volume={a["volume"]},adelay={round(a["at"]*1000)}:all=1[a{i}]')
+            filters.append(f'[{i}:a:0]{audio_filter(a)}[a{i}]')
         labels = ''.join(f'[a{i}]' for i in range(1, len(plan['audio'])+1))
         tail = f'apad,atrim=duration={duration}'
         if any(speed(a) != 1 for a in plan['audio']):
@@ -261,9 +359,10 @@ def build_master(plan, duration, work):
 
 def edit(manifest, output, mode='build'):
     plan, cues, duration = load(manifest.resolve())
+    config = silence_settings(manifest, duration, len(plan['audio']))
     subtitle = ass(cues, *plan['size'])  # Validate before writing any deliverable.
     output = output.resolve()
-    reserved = {output/n for n in ('master.mp4', 'final.mp4', 'cache.json', 'captions.ass')}
+    reserved = {output/n for n in ('master.mp4', 'final.mp4', 'cache.json', 'captions.ass', 'silence_report.json')}
     if any(Path(a['file']) in reserved for a in plan['scenes']+plan['audio']):
         raise ValueError('Input/output collision')
     master, cache = output/'master.mp4', output/'cache.json'
@@ -277,6 +376,10 @@ def edit(manifest, output, mode='build'):
     else:
         fingerprints = validate_inputs(plan, duration)
         valid_master = valid_master and old.get('inputs') == fingerprints
+    silence_report = check_silence(plan, duration, config, old, fingerprints, mode)
+    for warning in silence_report['warnings']:
+        print(f"WARNING narration silence ({warning['kind']}): "
+              f"{warning['start']:.3f}–{warning['end']:.3f}s", file=sys.stderr)
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.edit-', dir=output) as temp:
         work = Path(temp)
@@ -307,13 +410,14 @@ def edit(manifest, output, mode='build'):
         if plan['audio'] and (audio_stream is None or
                 abs(float(audio_stream['duration'])-duration) > .1):
             raise ValueError('Output audio duration verification failed')
-        info = {'audio_ends': audio_ends,
+        info = {'silence_report': silence_report, 'audio_ends': audio_ends,
                 'subtitle_times': [{'start': c['start'], 'end': c['end']} for c in cues],
                 'audio_stream_duration': float(audio_stream['duration']) if audio_stream else None,
                 'plan': signature, 'inputs': fingerprints, 'master_sha256': sha(source),
                 'duration': duration, 'master_reused': valid_master, 'mode': mode}
+        (work/'silence_report.json').write_text(json.dumps(silence_report, ensure_ascii=False, indent=2)+'\n')
         (work/'cache.json').write_text(json.dumps(info, indent=2)+'\n')
-        for name in (['master.mp4'] if not valid_master else []) + ['captions.ass', 'final.mp4', 'cache.json']:
+        for name in (['master.mp4'] if not valid_master else []) + ['captions.ass', 'final.mp4', 'cache.json', 'silence_report.json']:
             os.replace(work/name, output/name)
     return info
 

@@ -1,0 +1,14 @@
+interface:
+  display_name: Kawaii Manga Balloon Studio Part 2
+  short_description: 1枚絵・丸い吹き出し1つ・顔を隠さないKindle漫画制作
+  default_prompt: Use $create-single-balloon-kindle-manga to create a face-safe one-panel
+    bilingual Kindle manga page.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

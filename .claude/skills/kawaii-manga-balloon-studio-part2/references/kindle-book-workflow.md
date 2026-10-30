@@ -71,4 +71,3 @@ Do not call the book ready until:
 - front matter, transitions, afterword, and copyright page are complete;
 - the final EPUB and PDF reopen successfully;
 - any remaining Kindle Previewer or KDP online-preview step is stated honestly.
-

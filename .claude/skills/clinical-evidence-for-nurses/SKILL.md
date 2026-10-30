@@ -55,4 +55,3 @@ Use the smallest format that remains safe:
 5. **Evidence and date**
 
 For education, add a simple analogy and a compact table. For a nursing note, provide objective chart wording and avoid diagnosing beyond the evidence. Remind the user that local protocols, prescriber orders, and pharmacist confirmation govern actual care.
-

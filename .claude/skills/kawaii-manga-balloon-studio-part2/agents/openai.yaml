@@ -1,0 +1,14 @@
+interface:
+  display_name: Kawaii Manga Balloon Studio Part 2
+  short_description: 四角いコマ・丸い日英吹き出し・顔非重複のKindle漫画制作
+  default_prompt: Use $kawaii-manga-balloon-studio-part2 to create a bilingual Kindle
+    manga page with rectangular panels, round balloons, and no face overlap.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

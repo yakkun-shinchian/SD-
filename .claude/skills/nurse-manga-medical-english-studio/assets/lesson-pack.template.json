@@ -1,0 +1,181 @@
+{
+  "project": {
+    "title_ja": "看護師あるある4コマで身につく やさしい医療英会話50",
+    "title_en": "Medical English Through Nurse Life Comics",
+    "volume": "1",
+    "specialty": "general ward",
+    "audience": "Japanese nurses and nursing students",
+    "cefr": "A2-B1",
+    "english_variety": "American English",
+    "conversation_partner": "English-speaking adult patient",
+    "lesson_count": 50,
+    "prototype_count": 10,
+    "author": "YAKUBON STUDIO",
+    "series": "KAWAII JAPAN COLLECTION",
+    "page_width": 1009,
+    "page_height": 1536,
+    "reading_direction": "ltr",
+    "clinical_reviewer": "pending",
+    "english_reviewer": "pending"
+  },
+  "lessons": [
+    {
+      "lesson_no": 1,
+      "part": 1,
+      "title_ja": "",
+      "title_en": "",
+      "scene_key": "",
+      "learning_goal": "",
+      "patient_task": "",
+      "character_signature": "",
+      "expression_signature": "",
+      "composition_signature": "",
+      "visual_signature": "",
+      "comic": {
+        "panels": [
+          {
+            "panel_no": 1,
+            "setting": "",
+            "visual_action": "",
+            "dialogue": [
+              {
+                "balloon_id": "L01-P1-B1",
+                "speaker": "nurse",
+                "english": "",
+                "japanese": ""
+              }
+            ]
+          },
+          {
+            "panel_no": 2,
+            "setting": "",
+            "visual_action": "",
+            "dialogue": [
+              {
+                "balloon_id": "L01-P2-B1",
+                "speaker": "patient",
+                "english": "",
+                "japanese": ""
+              }
+            ]
+          },
+          {
+            "panel_no": 3,
+            "setting": "",
+            "visual_action": "",
+            "dialogue": [
+              {
+                "balloon_id": "L01-P3-B1",
+                "speaker": "nurse",
+                "english": "",
+                "japanese": ""
+              }
+            ]
+          },
+          {
+            "panel_no": 4,
+            "setting": "",
+            "visual_action": "",
+            "dialogue": [
+              {
+                "balloon_id": "L01-P4-B1",
+                "speaker": "patient",
+                "english": "",
+                "japanese": ""
+              }
+            ]
+          }
+        ]
+      },
+      "explanation": {
+        "goal_ja": "",
+        "required_phrase_refs": [
+          "L01-P1-B1",
+          "L01-P3-B1"
+        ],
+        "vocabulary": [
+          {
+            "term": "",
+            "part_of_speech": "",
+            "general_meaning_ja": "",
+            "medical_meaning_ja": "",
+            "example_en": "",
+            "example_ja": "",
+            "nuance_ja": ""
+          },
+          {
+            "term": "",
+            "part_of_speech": "",
+            "general_meaning_ja": "",
+            "medical_meaning_ja": "",
+            "example_en": "",
+            "example_ja": "",
+            "nuance_ja": ""
+          },
+          {
+            "term": "",
+            "part_of_speech": "",
+            "general_meaning_ja": "",
+            "medical_meaning_ja": "",
+            "example_en": "",
+            "example_ja": "",
+            "nuance_ja": ""
+          }
+        ],
+        "grammar": {
+          "pattern": "",
+          "explanation_ja": "",
+          "example_ref": "L01-P1-B1"
+        },
+        "junior_high_bridge_ja": "",
+        "applications": [
+          {
+            "english": "",
+            "japanese": ""
+          },
+          {
+            "english": "",
+            "japanese": ""
+          }
+        ],
+        "common_error": {
+          "avoid": "",
+          "prefer": "",
+          "why_ja": ""
+        },
+        "safety_note_ja": "",
+        "mini_practice": {
+          "question_ja": "",
+          "answer_en": "",
+          "answer_ja": ""
+        }
+      },
+      "safety": {
+        "tier": "routine",
+        "escalation_required": false,
+        "interpreter_plan": "not_needed",
+        "handoff_phrase_en": "",
+        "handoff_phrase_ja": "",
+        "potential_harm_ja": "",
+        "local_policy_check_ja": "",
+        "human_medical_review": "pending",
+        "human_english_review": "pending"
+      },
+      "qa": {
+        "anatomy_and_clinical_action": "pending",
+        "dialogue_match": "pending",
+        "clinical_sequence": "pending",
+        "duplicate_check": "pending",
+        "image_quality": "pending",
+        "interpreter_or_handoff": "pending",
+        "ipad_readability": "pending",
+        "medical_safety": "pending",
+        "no_generated_text": "pending",
+        "scene_dialogue_visual_unique": "pending",
+        "text_and_linebreaks": "pending",
+        "translation_match": "pending",
+        "visual_overlap": "pending"
+      }
+    }
+  ]
+}

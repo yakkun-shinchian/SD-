@@ -1,0 +1,14 @@
+interface:
+  display_name: プロンプト磨き職人
+  short_description: 曖昧な依頼を、すぐ使える明確なプロンプトへ整えます
+  default_prompt: Use $universal-prompt-refiner to turn this request into a clear
+    reusable prompt.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

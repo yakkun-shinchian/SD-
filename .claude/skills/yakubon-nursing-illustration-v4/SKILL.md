@@ -84,4 +84,3 @@ python3 scripts/validate_carousel.py OUTPUT_DIR --expect-count 10
 3. 原稿と画像内文字が完全一致する。
 4. 医学的な因果関係と矢印が台本どおりである。
 5. 10枚を一覧で見たとき、同じシリーズ・同じ人物・同じ画材に見える。
-

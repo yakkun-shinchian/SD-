@@ -27,4 +27,3 @@ description: ソフトウェア、端末、ネットワーク、業務手順な�
 ## 由来
 
 Superpowers `systematic-debugging`の診断法を参考に、2026-08-09に独立して分野横断・診断優先へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md
-

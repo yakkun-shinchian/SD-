@@ -168,4 +168,3 @@ Reject or revise a page when any of the following is true:
 - the caption claims more than the image or sources can support.
 
 Review the sequence as a book, not only as isolated attractive images. The completed edition should feel like a quiet day opening into many lives: varied, contemporary, respectful, and unmistakably human.
-

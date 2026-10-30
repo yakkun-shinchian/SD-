@@ -83,4 +83,3 @@ Correct the manifest or regenerate the art, then revalidate and reinspect. Do no
 For a Kindle book, apply `references/kindle-book-workflow.md` and the applicable current Kindle/KDP and PDF skills. Keep the cover separate from the interior. Build a fixed-layout EPUB with one XHTML page per visual page, add meaningful alt text, and produce an iPad-readable PDF proof. Verify the complete sequence and perform the final converted-view check in Kindle Previewer or KDP’s online previewer.
 
 Before delivery, confirm unique page IDs, unique final images, complete front and back matter, current publishing-platform requirements, and any required AI-generated-content disclosure.
-

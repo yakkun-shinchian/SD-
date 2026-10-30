@@ -104,4 +104,3 @@ Do not call a page or collection ready until:
 - the final PDF/EPUB render has passed a second zero-collision review.
 
 Soft words belong close to the speaker. The face itself remains sacred space.
-

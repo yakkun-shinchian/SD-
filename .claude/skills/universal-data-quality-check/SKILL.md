@@ -27,4 +27,3 @@ description: CSV、Excel、表、データベース抽出などのデータを�
 ## 由来
 
 Anthropic Knowledge Work Plugins `explore-data`の発想を参考に、2026-08-09に独立して非破壊診断型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/anthropics/knowledge-work-plugins/blob/main/data/skills/explore-data/SKILL.md
-

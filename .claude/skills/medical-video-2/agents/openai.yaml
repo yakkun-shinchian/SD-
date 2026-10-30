@@ -1,0 +1,13 @@
+interface:
+  display_name: 医療動画2
+  short_description: 多色の半透明組織と透視する奥行きで描く、美しい医療3D画像・動画
+  default_prompt: $medical-video-2 を使って、暗い背景に多色の半透明組織を重ねた医療3D素材を制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

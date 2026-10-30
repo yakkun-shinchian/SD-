@@ -37,4 +37,3 @@
 Source documentation: https://huggingface.co/docs/hub/agents-skills
 Official skill repository: https://github.com/huggingface/skills
 
-

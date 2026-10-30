@@ -37,4 +37,3 @@ Use one shared inference server with batching when many agents take turns. Repli
 
 Verify current hardware specifications from the manufacturer before a purchase recommendation.
 
-

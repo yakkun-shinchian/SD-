@@ -33,4 +33,3 @@ Downgrade confidence for:
 - **Yellow:** uncertain or modest benefit; consider only after interaction review and a defined stop rule.
 - **Red:** no credible human benefit, material risk, deceptive marketing, illegal/unapproved use, or an invasive experimental intervention outside a legitimate trial.
 
-

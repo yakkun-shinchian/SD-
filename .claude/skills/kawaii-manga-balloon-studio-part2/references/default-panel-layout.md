@@ -39,4 +39,3 @@ Only the manga panels contain voice balloons. Explanation blocks, language tabs,
 ## Review checklist
 
 At full resolution, trace every balloon outline and tail. Confirm it remains inside one panel and outside every face/head clearance zone. At 25% scale, confirm the Japanese and English remain readable and no balloon visually appears to touch a face.
-

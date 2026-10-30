@@ -34,4 +34,3 @@ description: YAKUBON STUDIOの看護師国家試験対応「病原体擬人化�
 ## 納品
 
 完成画像、必要に応じて根拠一覧・投稿キャプションを保存する。Reelも依頼されたら `animate-pathogen-layer-reel` の手順で**完成画像を素材として**別レイヤーに分解し、指定音声で動画にする。
-

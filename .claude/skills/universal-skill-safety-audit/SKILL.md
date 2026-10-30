@@ -32,4 +32,3 @@ description: ChatGPT・Codexスキルを導入前に静的審査し、秘密情�
 ## 由来
 
 NVIDIA SkillSpectorの検査観点を参考に、2026-08-09に独立して静的審査用に再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/NVIDIA/SkillSpector
-

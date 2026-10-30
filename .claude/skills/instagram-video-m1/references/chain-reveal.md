@@ -23,4 +23,3 @@
 ## 必ず確認する止め画
 
 `line1 halfway`、`line1 complete / node1 absent`、`node1 present / line2 absent`、`line2 halfway`、`node2 present` を抽出する。続く段も同様。連続再生して声の内容とその瞬間の絵が一致するか検査し、図全体を最初から見せる動画を不合格にする。
-

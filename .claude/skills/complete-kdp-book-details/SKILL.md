@@ -53,4 +53,3 @@ Do not declare a Kindle project complete unless:
 - upload filenames identify the exact final EPUB and cover JPEG;
 - AI, accessibility, rights, price, royalty, and Select decisions are recorded;
 - the file is included in the final archive.
-

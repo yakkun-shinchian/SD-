@@ -26,4 +26,3 @@ description: 企画書、報告書、メール、記事、提案書、ガイド�
 ## 由来
 
 Anthropic `doc-coauthoring`の段階的協働を参考に、2026-08-09に独立して簡潔な日本語版へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md
-

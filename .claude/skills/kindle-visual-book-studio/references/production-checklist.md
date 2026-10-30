@@ -62,4 +62,3 @@ Re-check these pages at finalization because requirements can change.
 - No personal or licensed source files unintentionally included in the deliverable.
 - Every manga balloon remains rounded, contains Japanese followed by readable English, and stays completely clear of every face after export.
 - The iPad review PDF has been inspected as a contact sheet and at 100% zoom after the latest change.
-

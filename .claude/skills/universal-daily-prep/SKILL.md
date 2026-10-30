@@ -27,4 +27,3 @@ description: カレンダー、タスク、期限、会議資料など、ユー�
 ## 由来
 
 GitHub Awesome Copilot `daily-prep`の発想を参考に、2026-08-09に独立してサービス非依存・読み取り専用へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/github/awesome-copilot/blob/main/skills/daily-prep/SKILL.md
-

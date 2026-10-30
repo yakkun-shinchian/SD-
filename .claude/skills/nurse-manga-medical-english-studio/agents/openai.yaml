@@ -1,0 +1,14 @@
+interface:
+  display_name: 看護師4コマ医療英語スタジオ
+  short_description: 4コマ漫画と実践医療英語を安全なKindle教材へ
+  default_prompt: Use $nurse-manga-medical-english-studio to create a 10-lesson prototype
+    of bilingual nurse-life comics with practical medical English.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -88,4 +88,3 @@ Recur intentionally across different parts:
 - I want to make sure ... in clarification, Teach-Back, and interpreter use
 
 Keep the frame recognizable while changing the clinical task, vocabulary, response, and visual action.
-

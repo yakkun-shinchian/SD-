@@ -97,4 +97,3 @@ Reject the page if any answer is no:
 5. Does the Japanese read immediately at 25% scale?
 6. Are the English gloss and all four reflection lines present and natural?
 7. Is the artwork free of accidental lettering, logos, and repeated composition?
-

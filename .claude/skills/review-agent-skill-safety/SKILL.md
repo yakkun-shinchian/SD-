@@ -44,4 +44,3 @@ Return:
 7. **Decision** — install unchanged, install a reduced rewrite, or do not install.
 
 Prefer a small, transparent rewrite containing only necessary instructions over importing a broad third-party package with unnecessary executable code.
-

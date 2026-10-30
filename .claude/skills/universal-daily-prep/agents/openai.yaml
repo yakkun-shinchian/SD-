@@ -1,0 +1,13 @@
+interface:
+  display_name: 明日の準備
+  short_description: 予定とタスクをまとめ、優先順位と準備物を整理します
+  default_prompt: Use $universal-daily-prep to prepare a practical brief for tomorrow.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

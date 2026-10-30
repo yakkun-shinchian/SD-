@@ -31,4 +31,3 @@ Example negative families, to spell out in the final prompt:
 For deployment, describe catheter withdrawal and device expansion coherently; do not copy stationary-device restrictions. For catheter removal, keep the implanted device while removing only the delivery components. For delayed thrombosis/healing, represent time passage explicitly and avoid implying guaranteed outcomes. For before/after comparisons, allow an intentional comparison transition while locking anatomy and camera. For a requested zoom, specify path, focal target, duration, and endpoint instead of listing NO zoom.
 
 When source images disagree, avoid interpolating anatomy or mesh into impossible morphing. When a source is known wrong, choose a correct accepted anchor or obtain correction; do not pretend text guarantees repair. Do not force literal tracking of one reference cell to a different unrelated cell in another frame.
-

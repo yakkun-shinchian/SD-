@@ -68,4 +68,3 @@ Require all of the following:
 - [HHS guidance on family or friends as interpreters](https://www.hhs.gov/civil-rights/for-individuals/faqs/may-an-lep-person-use-a-family-member-as-an-interpreter/709/index.html): important medical decisions and consent call for competent interpretation; family or friends may be unable to ensure accurate understanding.
 
 Treat the US sources as transferable safety references for communication design, not as statements of Japanese law. Recheck every official page during production and record the access date; the links were last checked while authoring this skill on 2026-08-23.
-

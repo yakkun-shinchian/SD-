@@ -50,4 +50,3 @@ Choose the mode requested:
 - **Application memo:** relevance to nursing, education, publishing, local AI, or business workflow.
 
 Clearly distinguish the authors' claim, observed result, your inference, and speculation. Explain advanced terms in Japanese while retaining the original English term in parentheses when useful.
-

@@ -31,4 +31,3 @@ description: ユーザーが指定したメール、会話、会議メモ、文�
 ## 由来
 
 Anthropic Knowledge Work Plugins `productivity:update`の発想を参考に、2026-08-09に独立して提案専用へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/anthropics/knowledge-work-plugins/blob/main/productivity/skills/update/SKILL.md
-

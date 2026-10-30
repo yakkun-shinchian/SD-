@@ -43,4 +43,3 @@ YAKUBON STUDIO
 画像出典・使用条件・加工内容：
 最終確認：references/quality-check.md
 出力名：C1_CASE_{{2桁番号}}_{{topic}}.png
-

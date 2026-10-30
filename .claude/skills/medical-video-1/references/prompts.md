@@ -24,4 +24,3 @@ Attach the approved start image; preserve its anatomy and appearance.
 - コイル留置：Only when requested, show a continuous metallic coil entering through the catheter tip and forming loops inside the aneurysm sac without crossing its wall or blocking the parent vessel.
 
 実在するAI名・モデル・パラメータに置き換える際は、現在のツール仕様を確認する。これらは画風・動作のテンプレートであり、元動画の生成プロンプトの復元ではない。
-

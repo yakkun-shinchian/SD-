@@ -27,4 +27,3 @@ description: 作業完了を伝える前に、成果物、ファイル、計算�
 ## 由来
 
 Superpowers `verification-before-completion`の原則を参考に、2026-08-09に独立して汎用的な証拠対応型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md
-

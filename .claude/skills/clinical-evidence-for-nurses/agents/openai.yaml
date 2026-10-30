@@ -1,0 +1,14 @@
+interface:
+  display_name: 看護臨床エビデンス
+  short_description: 看護・薬剤・急性期の臨床疑問を最新の一次資料で丁寧に検証します
+  default_prompt: Use $clinical-evidence-for-nurses to answer this clinical nursing
+    question with current evidence.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

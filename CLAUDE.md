@@ -148,17 +148,19 @@ Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
 
 | 目的 | ファイル |
 |------|----------|
-| スキル台帳（64件の受領状態・未収録一覧・対応表） | `.claude/skills/REGISTRY.md` |
-| 制作スキル定義 64件 | `.claude/skills/*/SKILL.md` |
+| スキル台帳（受領状態・MANIFEST照合・動作確認結果） | `.claude/skills/REGISTRY.md` |
+| 制作スキル定義 64件（`SKILL.md` / `references/` / `assets/` / `scripts/` / `agents/`） | `.claude/skills/` |
 | バンドル同梱の索引 | `.claude/skills/SKILL_INDEX.md` |
 | Codex等との共通申し送り・動画検品手順 | `AGENTS.md` |
 
 - **受領状態は3段階で区別する**（`REGISTRY.md` §0）。
-  ①手順書原本 受領（64/64） ②素材・プログラム 受領（46/64） ③動作確認済み（0/64）。
-  **①を②③と混同して「使える」と報告しない。**
-- 18スキルは参照画像・Pythonスクリプト等が**未収録**（`REGISTRY.md` §3-1）。
-  手順どおり人が作業はできるが、**自動実行はできない**。
+  ①手順書原本 **64/64** ②素材・プログラム **64/64** ③動作確認 **0/64**。
+  **②が揃っても「動く」とは限らない。③は「走らせて成果物を確認した」まで。**
+- 全324ファイルが `MANIFEST.json` の sha256 と一致（`REGISTRY.md` §3-1）。
+  `.claude/skills/` のファイルを変更したら、MANIFESTとの差が生じることを意識する。
+- 補助プログラム21本中16本は実行検証済み（`REGISTRY.md` §7-1）。
+- **既知の障害**（`REGISTRY.md` §7-4）：
+  Zen Kurenaido/Yuji Syukuフォント未導入 ／ VOICEVOX書き出しが8シーン古い ／ CoeFont未到達・未認証。
+- `fitz` を使う3本は **PyMuPDF** が必要。この容器にのみ導入済みで、**永続しない**（§7-3）。
 - `.claude/skills/` の既存スキルは**削除・統合・無断上書きしない**。
 - 実体のないスキルを**推測で新規作成しない**。
-- CoeFontは **A:ホスト許可 / B:スキル原本 / C:認証状態** の3課題が独立
-  （`REGISTRY.md` §5-1）。Bのみ解決済み。

@@ -81,4 +81,3 @@ Store the model answer in canonical data and place it in the end answer key unle
 - Note American-British differences only when they could change comprehension, such as restroom/toilet, shot/injection, or discharge usage.
 - Use non-shaming Teach-Back language. Frame misunderstanding as the speaker's need to explain more clearly.
 - Avoid Japanese translations that sound natural but add clinical facts absent from the English.
-

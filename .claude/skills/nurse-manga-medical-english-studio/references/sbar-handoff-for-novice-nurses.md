@@ -43,4 +43,3 @@ Keep each item to one idea and two or three short lines. On the explanation page
 ## Official reference point
 
 - [AHRQ TeamSTEPPS 3.0 - Tool: SBAR](https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/sbar.html): defines SBAR as Situation, Background, Assessment, and Recommendation or Request and describes its use for concise team communication, including rapidly deteriorating patients. Recheck during production; last checked 2026-09-04.
-

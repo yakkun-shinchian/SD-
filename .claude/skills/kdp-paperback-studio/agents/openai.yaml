@@ -1,0 +1,13 @@
+interface:
+  display_name: KDPペーパーバック制作
+  short_description: 本文・見開き・背幅・全面表紙を一貫制作してKDP入稿前に検品
+  default_prompt: $kdp-paperback-studio を使って、既存のKindle画集からKDP入稿用の本文PDFと全面表紙PDFを作成してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

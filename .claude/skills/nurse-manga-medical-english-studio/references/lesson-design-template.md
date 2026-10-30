@@ -131,4 +131,3 @@ Do not use `approved` without a reviewer identity and review date. Keep automate
 6. Keep intentional pattern repetition visible in the curriculum matrix; do not misclassify it as accidental duplication.
 7. Keep character, expression, composition, and visual signatures concrete enough to compare across all lessons.
 8. Hash final page files after approval and package those exact files.
-

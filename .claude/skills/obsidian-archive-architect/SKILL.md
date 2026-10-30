@@ -68,4 +68,3 @@ For a proposed migration, return:
 7. the exact next action on the user's device.
 
 Use the official Obsidian Importer when it supports the source format. On iPad, account for operations that require macOS, such as the current Apple Notes import workflow.
-

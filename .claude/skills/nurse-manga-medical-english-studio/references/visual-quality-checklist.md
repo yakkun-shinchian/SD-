@@ -59,4 +59,3 @@ Record the reviewer, review date, and corrective note in the generated `visual-t
 ## Failure rule
 
 Repair and rerun the complete page gate after any change. A single overlap, truncated negative, wrong patient identifier, text mismatch, repeated page, or unresolved clinical-safety issue blocks release.
-

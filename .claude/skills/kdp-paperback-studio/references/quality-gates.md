@@ -41,4 +41,3 @@ Deliver individual upload files and label the spread preview as review-only. Rec
 - barcode responsibility;
 - remaining KDP warnings, if any;
 - proof-copy recommendation.
-

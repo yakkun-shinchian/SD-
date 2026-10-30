@@ -11,10 +11,11 @@
 | 段階 | 意味 | 現在 |
 |---|---|---|
 | ① **手順書原本 受領** | SKILL.md がこの環境にある | **64件 / 64件** |
-| ② **素材・プログラム 受領** | 参照画像・動画・Python等がこの環境にある | **46件 / 64件**（18件が待ち） |
+| ② **素材・プログラム 受領** | 参照画像・動画・Python等がこの環境にある | **64件 / 64件** |
 | ③ **動作確認済み** | そのスキルを走らせて成果物を検証した | **0件 / 64件**（§7参照） |
 
-**①が済んでも②③は済んでいません。** ②③を「完了」として報告しません。
+**①②は完了しました（2026-10-30）。③は別です。** ②が揃っても「動く」とは限らず、
+「走らせて成果物を確認した」までが③です。混同して報告しません。
 
 ③は**スキル単位の成果物検証**を指します。基盤（スキル読み込み・V6パイプライン・
 ツールチェーン）の検証は済んでおり、§7 に結果を記載しています。両者を混同しません。
@@ -134,46 +135,39 @@ SKILL.md とは別に、**実行可能なコードと成果物**がリポジト�
 
 ---
 
-## 3. 未収録ファイル（元ZIP `YAKUBON_Claude_Skills_62.zip` 待ち）
+## 3. 素材・補助プログラムの受領（完了）
 
-今回のテキストは **手順書原本の共有用**です。以下は含まれていません（計 **200件**）。
+2026-10-30、`Claude_Missing_Files_01〜04.zip`（4分割・計200ファイル）を受領し統合しました。
 
-| 種別 | 件数 | 影響 |
-|---|---|---|
-| 画像・動画 | 99 | うち `icon.svg` 62件は装飾のみ・**動作に不要**。残り37件は**画風の基準参照**で必須 |
-| `agents/openai.yaml` | 62 | **Codex用のスキル定義**。Codex側で使うには必要 |
-| 実行スクリプト（.py / .sh） | 21 | 検品・合成・レンダリングの自動化。**無いと手作業になる** |
-| テンプレ・データ（.json / .csv） | 17 | ページ定義・KDPメタデータ・QA台帳 |
-| `MANIFEST.json`（ルート） | 1 | 全体の対応表 |
-
-### 3-1. 素材・スクリプト待ちの18スキル（手順書は受領済み）
-
-| スキル | 欠けているもの |
+| 種別 | 件数 |
 |---|---|
-| `animate-pathogen-layer-reel` | `scripts/render_layer_reel.py` |
-| `clinical-case-infographic-c1` | `assets/evidence-image-ledger.csv` |
-| `complete-kdp-book-details` | `scripts/validate_kdp_book_details.py` |
-| `create-kawaii-bilingual-manga-pages` | `assets/layout-presets.json`<br>`assets/page-manifest-template.json`<br>`scripts/validate_face_text_regions.py`<br>`scripts/validate_page_manifest.py` |
-| `create-kokushi-pathogen-character` | `assets/yellow-staph-reference.jpeg` |
-| `create-single-balloon-kindle-manga` | `assets/single-balloon-page-template.json`<br>`scripts/compose_single_balloon_page.py` |
-| `instagram-nursing-carousel-v3` | `assets/style-reference-cover.png`<br>`assets/style-reference-dialogue.png`<br>`assets/style-reference-medical-callout.png`<br>`assets/style-reference-summary.png`<br>`scripts/make_pageflip_reel.sh`<br>`scripts/render_natural_overlay.py` |
-| `instagram-v5` | `assets/visual-reference-lock/01-cover-hook.jpeg`<br>`assets/visual-reference-lock/02-question-board.jpeg`<br>`assets/visual-reference-lock/03-flora-definition.jpeg`<br>`assets/visual-reference-lock/04-cause-effect.jpeg`<br>`assets/visual-reference-lock/05-balance-change.jpeg`<br>`assets/visual-reference-lock/06-large-medical-diagram.jpeg`<br>`assets/visual-reference-lock/07-process-flow.jpeg`<br>`assets/visual-reference-lock/08-comparison.jpeg`<br>`assets/visual-reference-lock/09-clinical-observation.jpeg`<br>`assets/visual-reference-lock/10-summary.jpeg`<br>`scripts/validate_carousel.py` |
-| `instagram-v5-voice-synced-motion-reel` | `scripts/check_illustration_motion.py` |
-| `instagram-video-m1` | `assets/apple-emoji/manifest.json`<br>`assets/apple-emoji/needs-review.json`<br>`assets/apple-emoji/report.json`<br>`references/emoji-catalog.json`<br>`scripts/build_emoji_catalog.py`<br>`scripts/check_illustration_motion.py` |
-| `kawaii-manga-balloon-studio` | `assets/dialogue-page-template.json`<br>`scripts/compose_balloon_page.py` |
-| `kawaii-manga-balloon-studio-part2` | `assets/four-panel-page-template.json`<br>`scripts/compose_single_balloon_page.py` |
-| `kdp-paperback-studio` | `assets/paperback-project-template.json`<br>`scripts/build_spread_preview.py`<br>`scripts/cover_geometry.py`<br>`scripts/paperback_preflight.py` |
-| `kindle-visual-book-studio` | `scripts/kdp_preflight.py` |
-| `medical-video-1` | `assets/coiling-opening-5s.mp4`<br>`assets/coiling-reference-2s.png` |
-| `medical-video-2` | `assets/01-layered-anatomy.png`<br>`assets/02-kidney-nephron.png`<br>`assets/03-glomerular-filtration.png`<br>`assets/04-tubule-reabsorption.png`<br>`assets/05-descending-limb.png`<br>`assets/06-nkcc2.png`<br>`assets/07-medullary-gradient.png`<br>`assets/08-adh-cell.png`<br>`assets/09-sodium-potassium.png`<br>`assets/10-diuresis-comparison.png` |
-| `nurse-manga-medical-english-studio` | `assets/kdp-metadata.template.json`<br>`assets/lesson-duplication-check-50.csv`<br>`assets/lesson-pack.template.json`<br>`assets/medical-language-safety-register-50.csv`<br>`assets/qa-register-50.csv`<br>`assets/source-verification.template.csv`<br>`scripts/build_language_notes.py`<br>`scripts/init_project.py`<br>`scripts/validate_lesson_pack.py` |
-| `yakubon-nursing-illustration-v4` | `assets/style-references/01-cover-hook.jpeg`<br>`assets/style-references/02-dialogue-board.jpeg`<br>`assets/style-references/03-dialogue-organ.jpeg`<br>`assets/style-references/04-question-dialogue.jpeg`<br>`assets/style-references/05-concept-cutaway.jpeg`<br>`assets/style-references/06-balance-comparison.jpeg`<br>`assets/style-references/07-process-flow.jpeg`<br>`assets/style-references/08-contrast-paired-organs.jpeg`<br>`assets/style-references/09-clinical-observation.jpeg`<br>`assets/style-references/10-summary.jpeg`<br>`scripts/validate_carousel.py` |
+| `assets/`（画像・動画・テンプレJSON/CSV・icon.svg） | 118 |
+| `agents/openai.yaml`（Codex用スキル定義） | 62 |
+| `scripts/`（Python 20・Shell 1） | 21 |
+| `references/`（Markdown） | 61 |
+| `SKILL.md` | 64 |
+| **合計** | **329** |
 
-**この18件は「手順書どおりに人が作業する」ことはできますが、「自動で走らせる」ことはできません。**
-特に `instagram-v5` / `yakubon-nursing-illustration-v4` / `medical-video-2` は、
-**画風の基準となる参照画像**（10枚ずつ）が無いと、シリーズの絵柄を揃えられません。
+### 3-1. MANIFEST.json による原本照合（完了）
 
-### 3-2. 自動移行しないもの（ZIPが届いても解決しません）
+`MANIFEST.json` は62スキル・**324ファイル**の `path` / `bytes` / `sha256` を保持しています。
+
+- **324 / 324 がバイト数・sha256 ともに一致**（不一致ゼロ・欠落ゼロ・MANIFEST外の余剰ゼロ）
+- ミラー2件（`yakubon-infographic-c1` / `medical-3d-orbit-opener`）は MANIFEST 対象外。
+  claude.ai 同期原本と一致することを別途確認済み
+- ZIP展開時に `skills/` 配下以外・`..` を含むパスを拒否する検証を実施（拒否ゼロ）
+
+### 3-2. 照合で判明した先行取り込みの不備（修正済み）
+
+テキスト版（`YAKUBON_Claude_62_Skills_and_Guides.txt`）から取り込んだ **125ファイルすべてが
+原本より1バイト大きい**状態でした。取り込みスクリプトが末尾に改行を1つ付加していたためです。
+
+**125件すべてから末尾改行を除去し、sha256 一致を回復しました。** 本文の内容に差はありません。
+
+> 教訓として記録します。「内容は同じ」と「原本と同一」は違います。
+> MANIFEST の sha256 がなければ、この1バイトは見つかりませんでした。
+
+### 3-3. ZIPが届いても解決しないもの
 
 - **ChatGPT専用機能** … チャッピー側の画像生成等は、この環境からは呼べません
 - **認証状態** … CoeFont / KDP 等のログインは引き継がれません
@@ -241,56 +235,87 @@ SKILL.md とは別に、**実行可能なコードと成果物**がリポジト�
 
 ## 7. 動作確認の結果（2026-10-30・外部課金なしの範囲）
 
-### 7-1. 実行して検証できたもの
+### 7-1. 補助プログラム21本のうち16本を実行して検証
 
-| # | 検証項目 | 方法 | 結果 |
+| # | スクリプト | 検証内容 | 結果 |
 |---|---|---|---|
-| 1 | 64件のスキル読み込み | Claude Code のスキル一覧に表示されるか | **PASS**（64/64） |
-| 2 | 64件の SKILL.md 健全性 | UTF-8読み込み・frontmatterのname一致 | **PASS**（破損・不一致ゼロ） |
-| 3 | **V6のタイミング計算** | `exam02-v6-render.py` と同一ロジックを実素材で再計算し、コミット済み `exam02-v6-manifest.json` と照合 | **PASS**（発話13件・チャプター6件・総尺84.2000s が完全一致） |
-| 4 | **V6のレンダリング** | `exam02-v6-page-01.jpg` ＋ 実音声2本を ffmpeg 合成 | **PASS**（1080×1920 / h264 / yuv420p / 30fps / aac 48kHz、尺11.8667s がchapter 1と一致、全走査デコードPASS） |
-| 5 | VOICEVOXツールチェーン | `node tools/build-voicevox.mjs` を実行 | **実行成功**（118シーン / 29番組）。ただし 7-3 の指摘あり |
-| 6 | `preserve-nursetube-colors` の前提 | `data.js` を実読み込み | **PASS**（CATEGORIES 9件すべてに `color`/`icon` あり、PROGRAMS 29件すべてのcategoryが有効） |
-| 7 | ミラー2件の同一性 | 同期原本と `diff` | **PASS**（無改変） |
+| 1 | `nurse-manga…/init_project.py` | 組込み `--self-test`（50課足場の生成・吹き出しID一意性・CSV整合） | **SELF-TEST PASSED** |
+| 2 | `kdp-paperback…/cover_geometry.py` | 6×9in・120p・premium-color の背表紙計算 | **動作**（背表紙0.281640in / 3759×2775px） |
+| 3 | `instagram-v5/validate_carousel.py` | 9:16納品物8枚（リポジトリ実素材） | **8/8 PASS** |
+| 4 | `yakubon-…-v4/validate_carousel.py` | 同梱の画風基準10枚（4:5） | **10/10 PASS** |
+| 5 | `nurse-manga…/validate_lesson_pack.py` | 50課テンプレを `--template` で構造検証 | **PASS**（エラー0・警告0） |
+| 6 | `kawaii-manga-balloon-studio/compose_balloon_page.py` | 同梱テンプレを `--validate-only` | **OK**（顔回避判定が通過） |
+| 7 | `create-single-balloon…/compose_single_balloon_page.py` | 同上 | **OK**（1吹き出し） |
+| 8 | `kawaii-…-part2/compose_single_balloon_page.py` | 同上 | **OK**（4コマ・丸吹き出し4） |
+| 9 | `create-kawaii-bilingual…/validate_page_manifest.py` | 未記入テンプレを検証 | **仕様どおり拒否**（下記参照） |
+| 10 | `create-kawaii-bilingual…/validate_face_text_regions.py` | 同上 | **仕様どおり拒否** |
+| 11 | `instagram-video-m1/check_illustration_motion.py` | 実動画のROI差分（0.5s→11.0s） | **動作**（changed_fraction 0.01582） |
+| 12 | `instagram-video-m1/references/emoji-catalog.json` | 同梱カタログの整合 | **PASS**（Unicode 18.0・3963件・宣言数と一致） |
+| 13 | `kdp-paperback…/paperback_preflight.py` | 24ページ6×9in内部PDFを検品 | **PASS**（240PPI警告を正しく検出） |
+| 14 | 同上（表紙に誤ったPDFを与える） | 異常検出の確認 | **FAIL を正しく返す**（寸法差・未埋込フォント・複数ページ） |
+| 15 | `kdp-paperback…/build_spread_preview.py` | 24ページ→右綴じ見開き | **動作**（13見開き生成） |
+| 16 | `nurse-manga…/build_language_notes.py` | LANGUAGE NOTES 組版＋QA | **PASS**（重なり・はみ出し・欠落すべて0／2ページ） |
 
-**V6の制作パイプラインは、この環境で実際に動きます。** 素材と台本さえ揃えば、
-コミット済みの成果物とビット単位で同じタイミングを再現できることを確認しました。
+#### 9・10 の「拒否」は不具合ではありません
 
-### 7-2. 実行できなかったもの（理由別）
+`page-manifest-template.json` は `action` / `text_ja` / `text_en` が空文字、`face_regions` が
+すべてゼロの**記入前テンプレート**です。検証器はこれを正しく拒否しました。
+`validate_lesson_pack.py` には `--template` 相当の緩和フラグがありますが、この2本にはありません。
 
-| 理由 | 対象 | 詳細 |
+#### 先に報告した「v5の検品失敗」は、私の当て先誤りでした
+
+`instagram-v5` の基準画像10枚は **4:5（1122×1402）が正しい仕様**です。
+SKILL.md 58行目に「参考10枚が4:5でも参照するのは絵柄・人物・文字の筆致。上下を描き足して
+9:16に再構成」と明記されています。`validate_carousel.py` の検品対象は**納品物（9:16）**であり、
+基準画像ではありません。正しい対象へ当てたところ 8/8 PASS しました。**仕様は一貫しています。**
+
+### 7-2. 実行できなかった5本と、その理由
+
+| スクリプト | 不足しているもの |
+|---|---|
+| `complete-kdp-book-details/validate_kdp_book_details.py` | 記入済み `KDP_BOOK_DETAILS.md` の実例（サンプル同梱なし） |
+| `instagram-video-m1/build_emoji_catalog.py` | `unicode.org` からの `emoji-test.txt`（ネットワーク遮断）。**ただし出力物は同梱済みで健全** |
+| `instagram-nursing-carousel-v3/render_natural_overlay.py` | **Zen Kurenaido / Yuji Syuku フォント**（未導入。スクリプトは標準ゴシックでの代替を明示的に禁止） |
+| `animate-pathogen-layer-reel/render_layer_reel.py` | 透過レイヤー画像一式とプロジェクトJSON |
+| `instagram-nursing-carousel-v3/make_pageflip_reel.sh` | `frame_*.png` 連番素材 |
+
+3本の合成スクリプト（`compose_*`）は**検証モードのみ**実行しました。実際の合成には作画素材が必要です。
+
+### 7-3. 実行環境の変更（この容器のみ・永続しません）
+
+`paperback_preflight.py` / `build_spread_preview.py` / `build_language_notes.py` は
+**PyMuPDF（`fitz`）** を必要とします。未導入だったため `pip install PyMuPDF`（2.0）を実行しました。
+
+- **この容器は一時的です。** セッションが終わると消えます
+- 恒久化するには環境のセットアップスクリプトへ追加が必要です
+- `fitz` という名前は非推奨になり `import pymupdf` が推奨です。3本は `import fitz` のため
+  将来のPyMuPDFで動かなくなる可能性があります（現時点では警告のみで動作）
+
+### 7-4. 判明している制作上の障害
+
+| # | 内容 | 影響 |
 |---|---|---|
-| **接続・認証待ち** | CoeFont音声生成 | `coefont.cloud` はプロキシ403。認証も未移行（§5-1 A・C） |
-| **接続待ち** | 元ZIPの取得 | `chatgpt.com` はプロキシ403、かつChatGPT認証が必要。URLからは取得できない |
-| **素材待ち** | 18スキル | 参照画像・`.py`・テンプレJSONが未収録（§3-1） |
-| **素材待ち（間接）** | `instagram-v6` | 自身の未収録は `icon.svg` のみだが、SKILL.md が `instagram-v5` の `references/visual-reference-lock.md` を参照し、その基準画像10枚が未収録 |
-| **外部課金** | 画像・動画生成 | creative-claw / Higgsfield / artlist 等は接続済みだが、生成には課金が伴うため未実行 |
+| 1 | **Zen Kurenaido / Yuji Syuku フォントが無い** | `instagram-nursing-carousel-v3` の手書き風組版ができない。スクリプトは代替フォントを拒否する設計 |
+| 2 | **VOICEVOX書き出しが古い**（§7-5） | 音声制作前に再生成が必要 |
+| 3 | **CoeFont 未到達・未認証**（§5-1 A・C） | ナレーション生成ができない |
 
-### 7-3. 動作確認で見つかった問題：VOICEVOX書き出しが古い
+### 7-5. VOICEVOX書き出しが古い（既報・未解決）
 
-`node tools/build-voicevox.mjs` を実行すると、**コミット済みの成果物と差分が出ます。**
+`node tools/build-voicevox.mjs` を再実行すると、コミット済みの成果物と差分が出ます。
 
 | 項目 | 状態 |
 |---|---|
-| キーの並び順（118件） | **一致**（`anat01-1` … 順序同一） |
-| `target_wav` の対応 | **一致** |
+| キーの並び順（118件）・`target_wav` | **一致**（整列が崩れる危険はない） |
 | **ナレーション本文** | **8シーンで相違**（`anat03-1` `anat04-1` `anat04-2` `anat04-4` `anat05-2` `anat05-4` `base01-2` `base01-3`） |
 | 番組タイトル | 8番組で相違 |
 
-**原因：** `scenes.js` 側で医学的な修正が入ったのに、`voicevox/narration.txt` を
-再生成していません。差分は改善方向の修正です。例：
+原因は `scenes.js` 側の医学的修正が書き出しに反映されていないこと。差分は改善方向：
 
-- 内呼吸の定義 — 「細胞が酸素を使うこと」→「血液と組織のガス交換」＋細胞呼吸との区別を追記
-- 自律神経 — 「シーソーのように」の比喩を削除し「すべての臓器が逆作用とは限らない」に修正
-- バイタル正常値 — 体温「36〜37度」→「36.5〜37.3度」、SpO2「96〜99%」→「95〜100%」＋測定条件の注記
-- ホルモン — 「全部が下垂体の指令」→「インスリンなど例外あり」
+- 内呼吸の定義 →「細胞が酸素を使うこと」から「血液と組織のガス交換」＋細胞呼吸との区別
+- 自律神経 →「シーソーのように」の比喩を削除し「すべての臓器が逆作用とは限らない」へ
+- バイタル正常値 → 体温「36〜37度」→「36.5〜37.3度」、SpO2「96〜99%」→「95〜100%」＋測定条件
+- ホルモン →「全部が下垂体の指令」→「インスリンなど例外あり」
 
-**現時点の実害はありません。** `audio/manifest.js` の登録数が **0件**のため、
-実際に再生される音声はまだ端末の読み上げです。
-
-**ただし、いま `voicevox/narration.txt` から音声を書き出すと、
-修正前の古い本文で収録してしまいます。** 音声制作を始める前に
-`node tools/build-voicevox.mjs` の再実行が必要です。
-
-> 本台帳の作成にあたり実行はしましたが、**リポジトリは元の状態に戻してあります**
-> （`git checkout -- voicevox/`）。再生成するかどうかはご判断ください。
+`audio/manifest.js` が **0件**のため現時点の実害はありません。ただし**いまの `narration.txt` から
+音声を書き出すと古い本文で収録してしまう**ため、音声制作前に再生成が必要です。
+リポジトリは `git checkout` で元の状態に戻してあります。

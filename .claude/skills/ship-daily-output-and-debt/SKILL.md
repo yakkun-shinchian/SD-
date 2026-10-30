@@ -61,4 +61,3 @@ Return:
 7. the next 15-minute action.
 
 Use calculations when balances and rates are supplied, and label assumptions clearly.
-

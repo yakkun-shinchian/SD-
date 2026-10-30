@@ -30,4 +30,3 @@ description: 長い会話や作業セッションを、別のChatGPT・Codexセ�
 ## 由来
 
 Matt Pocock `handoff`の発想を参考に、2026-08-09に独立してプライバシー保護型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md
-

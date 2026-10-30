@@ -161,4 +161,3 @@ Balance 40–60 pages across:
 Reject and regenerate art when a face, crown, chin, hand, or essential object is cropped or malformed; an adult looks child-coded; accidental text or a logo remains; continuity breaks; watercolor becomes flat; or a face, pose, room, and composition duplicate another page without purpose.
 
 Reject and recompose the page when a panel lacks a bilingual balloon; Japanese is not followed by English; the balloon is sharp or visually harsh; Japanese or English overflows; the English disappears at reading size; the lower bilingual section is missing; any balloon body, outline, glyph, tail, number, or label intersects a visible face; or the PDF/EPUB shifts, crops, substitutes fonts, or introduces blank pages.
-

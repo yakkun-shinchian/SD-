@@ -28,4 +28,3 @@ description: 頭の中や断片メモにある業務を、目的、担当、開�
 ## 由来
 
 Anthropic Knowledge Work Plugins `process-doc`の発想を参考に、2026-08-09に独立して検証・復旧重視へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/anthropics/knowledge-work-plugins/blob/main/operations/skills/process-doc/SKILL.md
-

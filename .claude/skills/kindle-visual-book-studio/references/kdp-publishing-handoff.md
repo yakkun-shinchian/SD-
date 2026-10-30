@@ -105,4 +105,3 @@ Do not say the submission is ready until:
 - language, metadata, AI, accessibility, pricing, royalty, and rights decisions agree;
 - the user has made the final publication decision.
 
-

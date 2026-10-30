@@ -57,4 +57,3 @@ For right-to-left binding, reverse the visible positions and validate with an RT
 6. Re-render the rebuilt PDF as spreads and inspect the entire sequence.
 
 Do not silently discard content to make page count even. Move or add an intentional blank and document it.
-

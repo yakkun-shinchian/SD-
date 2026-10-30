@@ -1,0 +1,14 @@
+interface:
+  display_name: 一次資料リサーチ
+  short_description: 公式文書や原著資料まで遡り、検証できる出典付きで整理します
+  default_prompt: Use $universal-primary-source-research to research this topic from
+    primary sources.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -28,4 +28,3 @@ description: データに基づく問いを定義し、集計、比較、傾向�
 ## 由来
 
 Anthropic Knowledge Work Plugins `analyze`の発想を参考に、2026-08-09に独立して再現性重視へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/anthropics/knowledge-work-plugins/blob/main/data/skills/analyze/SKILL.md
-

@@ -1,0 +1,14 @@
+interface:
+  display_name: 安全なスキル探索
+  short_description: 必要なスキル候補を比較し、導入リスクと安全性まで整理します
+  default_prompt: Use $universal-skill-discovery to find and compare safe skill candidates
+    for this task.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

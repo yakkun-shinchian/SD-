@@ -27,4 +27,3 @@ description: PDF、Word、PowerPoint、Excel、EPUB、HTML、画像OCRなどの�
 ## 由来
 
 Firecrawl anydocの変換発想を参考に、2026-08-09に独立してローカル優先・非実行型へ再設計。外部コードやバイナリは含めない。出典URLは由来記録のみ: https://github.com/firecrawl/anydoc/tree/main/skills/convert-documents-to-markdown
-

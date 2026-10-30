@@ -68,4 +68,3 @@ Do not call the book ready until:
 - cover and interior files meet the current platform requirements;
 - the final EPUB and PDF both reopen successfully;
 - the remaining Kindle Previewer or KDP online-preview step is stated honestly if it cannot be performed in the current environment.
-

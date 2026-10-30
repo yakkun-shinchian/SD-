@@ -104,4 +104,3 @@ Treat the image as failed if any title, active ingredient, generic-status statem
 5. Brief source list with direct links
 
 Use calm, patient-friendly Japanese by default. When the user is a healthcare professional or requests clinical depth, add concise pharmacological and nursing detail without making the infographic crowded.
-

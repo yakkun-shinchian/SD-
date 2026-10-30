@@ -27,4 +27,3 @@ description: 漠然としたアイデアを対話で整理し、目的、対象�
 ## 由来
 
 Superpowers `brainstorming`の対話発想を参考に、2026-08-09に独立して意思決定・実行設計用へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md
-

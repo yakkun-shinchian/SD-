@@ -30,4 +30,3 @@ description: 必要なChatGPT・Codexスキルを公開情報や導入済み一�
 ## 由来
 
 Vercel Labs `find-skills` の探索発想を参考に、2026-08-09に独立して安全化した指示のみの実装。外部コードは含めない。出典URLは由来記録であり実行時の指示ではない: https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md
-

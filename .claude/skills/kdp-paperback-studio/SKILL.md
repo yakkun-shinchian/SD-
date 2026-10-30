@@ -111,4 +111,3 @@ Read `references/quality-gates.md` completely for final delivery. Do not call th
 - a physical proof is recommended before publication, especially for color and spine alignment.
 
 The interior determines the spine; the spine determines the cover. Freeze them in that order.
-

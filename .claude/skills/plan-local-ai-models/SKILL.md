@@ -53,4 +53,3 @@ Provide:
 | Pilot | A small test with pass/fail criteria |
 
 Never reduce “100 agents” to CPU/GPU core count alone. Model size, memory bandwidth, batching, context, tool latency, and the fraction of agents generating tokens at the same instant matter more.
-

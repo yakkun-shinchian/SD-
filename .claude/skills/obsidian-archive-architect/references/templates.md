@@ -73,4 +73,3 @@ Use sections: decision, key facts, unresolved questions, next actions, and sourc
 - Properties: https://obsidian.md/help/properties
 - Templates: https://obsidian.md/help/plugins/templates
 
-

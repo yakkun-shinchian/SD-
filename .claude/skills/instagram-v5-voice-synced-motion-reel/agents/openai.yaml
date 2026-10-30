@@ -1,0 +1,14 @@
+interface:
+  display_name: Instagram V5 音声同期モーション
+  short_description: V5の絵柄、音声、文字と図解の動きを合わせる看護教育リール制作
+  default_prompt: Use $instagram-v5-voice-synced-motion-reel to create an illustrated
+    medical Instagram reel with voice synced motion.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

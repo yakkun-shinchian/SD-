@@ -27,4 +27,3 @@ description: 公式文書、法令、規格、原著論文、一次統計、製�
 ## 由来
 
 Matt Pocock `research`の一次資料重視を参考に、2026-08-09に独立して出典追跡型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/mattpocock/skills/blob/main/skills/engineering/research/SKILL.md
-

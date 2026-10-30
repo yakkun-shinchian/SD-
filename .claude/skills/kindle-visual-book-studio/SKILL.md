@@ -109,4 +109,3 @@ Do not declare the book ready until:
 - the iPad review PDF is created for every completed manga book and reviewed both as a full-page contact sheet and at 100% zoom so every text-to-face collision is found and corrected before delivery.
 
 Create the production manifest before generating dozens of images. A beautiful book is still a logistics project wearing silk gloves.
-

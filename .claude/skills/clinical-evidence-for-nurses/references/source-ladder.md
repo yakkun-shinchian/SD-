@@ -35,4 +35,3 @@ Useful search entry points:
 - Applicability to the current patient or Japanese practice
 - Major limitations and unresolved uncertainty
 
-

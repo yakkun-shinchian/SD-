@@ -102,4 +102,3 @@ Correct the manifest, move or shorten the balloon, or regenerate the art; then r
 ## Assemble a full book
 
 For a Kindle project, apply `references/kindle-book-workflow.md` plus the current applicable Kindle/KDP, PDF, and image skills. Keep the retail cover separate from the interior. Build a fixed-layout EPUB with meaningful alt text and an iPad-readable PDF proof. Verify the complete sequence and perform the final converted-view check in Kindle Previewer or KDP's online previewer.
-

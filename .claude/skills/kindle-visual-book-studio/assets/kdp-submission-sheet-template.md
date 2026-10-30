@@ -83,4 +83,3 @@
 - [ ] KDP Select/exclusivity decision verified
 - [ ] User explicitly approved final publication action
 
-

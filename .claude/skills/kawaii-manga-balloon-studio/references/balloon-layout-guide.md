@@ -81,4 +81,3 @@ Optional page field:
 5. View at 25% scale. Confirm every word remains legible.
 6. Inspect the assembled PDF/EPUB and repeat the face-collision check after export.
 7. Read the book in sequence. Remove repeated phrasing and emotional monotony.
-

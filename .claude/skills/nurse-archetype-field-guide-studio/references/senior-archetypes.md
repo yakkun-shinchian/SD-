@@ -41,4 +41,3 @@ End the edition with five shared tools:
 5. `安全`: urgent change, ambiguous direction, and procedural deviation override fear of another person's mood.
 
 Suggested closing line: `あなたの価値は、誰かの不機嫌では決まりません。`
-

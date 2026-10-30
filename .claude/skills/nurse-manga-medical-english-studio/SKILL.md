@@ -134,4 +134,3 @@ Never claim publication readiness while a required human review is pending, Kind
 - New-project data files: scripts/init_project.py and assets/*.template.*
 - Canonical data validation: scripts/validate_lesson_pack.py
 - Flow-layout explanation rendering and bounding-box QA: scripts/build_language_notes.py
-

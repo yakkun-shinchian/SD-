@@ -27,4 +27,3 @@ description: ユーザーが提示または許可したAIの記憶項目を整�
 ## 由来
 
 GitHub Awesome Copilot `memory-merger`の発想を参考に、2026-08-09に独立して差分承認型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/github/awesome-copilot/blob/main/skills/memory-merger/SKILL.md
-

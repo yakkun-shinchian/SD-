@@ -90,4 +90,3 @@ Reject the page if any answer is no:
 5. Are all faces, complete heads, and hair silhouettes unobstructed with visible breathing room?
 6. Are Japanese and English readable at 25% scale?
 7. Is the artwork free of accidental lettering, logos, and repeated composition?
-

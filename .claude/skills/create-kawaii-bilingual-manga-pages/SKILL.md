@@ -112,4 +112,3 @@ Do not approve a page or collection until all of the following are true:
 - the actual PDF and EPUB pass structural and visual inspection when the request includes a book.
 
 The face carries the feeling. Keep the words near the person, and never let them trespass on that expression.
-

@@ -41,4 +41,3 @@ Official Anki FSRS guidance: https://docs.ankiweb.net/deck-options.html#fsrs
 - Explain why every option is right or wrong.
 - Mark any criterion that varies across guidelines or editions.
 
-

@@ -26,4 +26,3 @@ description: 曖昧、散漫、長すぎる依頼を、目的、入力、制約�
 ## 由来
 
 GitHub Awesome Copilot `prompt-optimizer`の発想を参考に、2026-08-09に独立して簡潔化した指示のみの実装。外部コードは含めない。出典URLは由来記録のみ: https://github.com/github/awesome-copilot/blob/main/skills/prompt-optimizer/SKILL.md
-

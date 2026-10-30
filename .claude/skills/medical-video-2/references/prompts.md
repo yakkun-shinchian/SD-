@@ -13,4 +13,3 @@ Use the approved preceding frame as the exact structural reference. Preserve the
 
 ## 記録
 Record generation date, tool/service, available model identifier, reference filenames, complete resolved prompt, requested and actual dimensions, duration, available job identifier, and unresolved limitations. Never infer unavailable metadata.
-

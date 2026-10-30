@@ -50,4 +50,3 @@ Return a compact decision table:
 | Safer alternative | Highest-value next step |
 
 Then add a personalized monitoring plan only when enough medical context is available. Cite current sources near consequential claims.
-

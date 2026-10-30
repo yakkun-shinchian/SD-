@@ -62,4 +62,3 @@ Cover height is top bleed + trim height + bottom bleed. Extend every background 
 - page count and paper type match the frozen interior and KDP setup.
 
 After any page-count change, invalidate the old cover and rebuild its spine geometry.
-

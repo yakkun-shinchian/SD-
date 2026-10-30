@@ -29,4 +29,3 @@ description: ブラウザでの検索、閲覧、比較、画面取得、フォ�
 ## 由来
 
 Vercel Labs `agent-browser`の操作発想を参考に、2026-08-09に独立して副作用確認型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/vercel-labs/agent-browser/blob/main/skills/agent-browser/SKILL.md
-

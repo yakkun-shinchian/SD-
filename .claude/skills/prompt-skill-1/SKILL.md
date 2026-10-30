@@ -52,4 +52,3 @@ Start with PROJECT, SHOT, REFERENCE IMAGES IN EXACT ORDER, DURATION, FORMAT, STY
 Check reference order and corrected variants; anchor integrity; medical/physical consistency; camera requirements; moving versus fixed entities; continuous timeline totaling requested seconds; no missing nine sections; specific negatives; no contradictory stage instructions; no unverified tool promises; readable copy block without placeholders.
 
 For revisions, return the entire revised prompt, not a patch list. Keep the same depth and section order unless the user changes the specification.
-

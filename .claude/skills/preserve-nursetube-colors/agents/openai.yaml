@@ -1,0 +1,14 @@
+interface:
+  display_name: ナースチューブ背景色の維持
+  short_description: 教材や動画を更新してもナースチューブの既存背景色とカテゴリ配色を維持する
+  default_prompt: Use $preserve-nursetube-colors to update NurseTube while preserving
+    its existing background and category colors.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

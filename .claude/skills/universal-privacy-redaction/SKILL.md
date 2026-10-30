@@ -27,4 +27,3 @@ description: 文書、ログ、表、画像OCR、会話、公開前テキスト�
 ## 由来
 
 `privacy-redact`の発想を参考に、2026-08-09に独立して非破壊・確認型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/jajupmochi/agent-harness/blob/main/skills/general/privacy-redact/SKILL.md
-

@@ -70,4 +70,3 @@ Keep each flashcard atomic. Put one diagnostic decision or mechanism on the fron
 7. **Confidence and image limitation**
 
 Use current JHRS and professional guidance when the question depends on contemporary criteria, and cite the source and date.
-

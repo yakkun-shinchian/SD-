@@ -60,4 +60,3 @@ python3 scripts/render_natural_overlay.py background.png overlay.json slide_01.p
 - 1枚につきふきだしは原則2個までにする。
 - 見出しを複数色にする場合は、`direct_text` を行または語のまとまりごとに分ける。
 - 顔、目、口、指、患者、医療図へ `box` を重ねない。
-

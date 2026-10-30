@@ -12,24 +12,32 @@ Claude Code 用のリポジトリ規約は `CLAUDE.md`、スキル定義は `.cl
 | リポジトリ構造・NurseTube仕様 | `CLAUDE.md` |
 | 利用者向けドキュメント | `README.md` |
 
-## 1. 共有スキル定義（64件）
+## 1. 共有スキル定義（64スキル / 329ファイル）
 
-`.claude/skills/` 配下を **Codex でもそのまま読み込んでください**（Markdown なので追加ツール不要）。
+`.claude/skills/` 配下を **Codex でもそのまま読み込んでください**。
+Codex用の定義は各スキルの `agents/openai.yaml`（62件・受領済み）にあります。
 一覧は `.claude/skills/REGISTRY.md` §1、索引は `.claude/skills/SKILL_INDEX.md`。
 
-**受領状態は3段階（`REGISTRY.md` §0）。混同しないこと。**
-
-| 段階 | 現在 |
+| 段階（`REGISTRY.md` §0） | 現在 |
 |---|---|
-| ① 手順書原本 受領 | 64 / 64 |
-| ② 素材・プログラム 受領 | 46 / 64（18件が待ち） |
-| ③ 動作確認済み | 0 / 64 |
+| ① 手順書原本 受領 | **64 / 64** |
+| ② 素材・プログラム 受領 | **64 / 64** |
+| ③ 動作確認済み | **0 / 64** |
 
-- 18スキルは参照画像・`.py`・テンプレJSONが**未収録**（`REGISTRY.md` §3-1）。
-  手順どおり人が作業はできるが、**自動実行はできない**。これを「使える」と報告しない。
-- **Codex用の `agents/openai.yaml` 62件は未収録。** 元ZIPから別途取得が必要。
+**②が揃っても「動く」とは限りません。** ③は「走らせて成果物を確認した」までを指します。
+
+- 全324ファイルが `MANIFEST.json` の sha256 と一致（§3-1）。**改変すると照合が崩れます。**
 - 既存2件（`yakubon-infographic-c1` / `medical-3d-orbit-opener`）は claude.ai 同期スキルの
-  **改変なしミラー**（sha256照合済み）。勝手な上書き・統合はしないこと。
+  改変なしミラー。MANIFEST対象外。勝手な上書き・統合はしないこと。
+
+### 補助プログラムを動かす前に
+
+- **PyMuPDF（`fitz`）** が必要な3本：`paperback_preflight.py` / `build_spread_preview.py` /
+  `build_language_notes.py`。この容器にのみ導入済みで**永続しません**。
+- `paperback_preflight.py` は同階層の `cover_geometry.py` を読むため、
+  **`scripts/` ディレクトリから実行**すること（`python3 -I` では読めません）。
+- `render_natural_overlay.py` は **Zen Kurenaido / Yuji Syuku** を要求し、
+  標準ゴシックでの代替を明示的に拒否します。未導入のため現在は実行できません。
 
 ## 2. 役割分担
 

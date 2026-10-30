@@ -89,4 +89,3 @@ Before delivery, verify:
 - all pages pass a full-book contact-sheet review and representative 100% inspection, with every long title and long quotation checked at full size.
 
 Present the result as behavior literacy, not a blacklist of people. The joke should give the reader distance; the response should give the reader agency.
-

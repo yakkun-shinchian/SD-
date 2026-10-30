@@ -100,4 +100,3 @@ For `layout: "bilingual-portrait"`, provide:
 - optional `caption.accent_span_ja` for the short colored underline.
 
 Use normalized artwork coordinates for balloons and protected zones. The compositor creates the outer page, fits the raw image into the artwork frame, and renders all lettering afterward.
-

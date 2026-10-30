@@ -32,4 +32,3 @@ Create ONE Japanese nursing educational infographic, portrait 9:16, final target
 - 髄質勾配：腎断面と同方向のネフロン拡大、条件付き数値。
 - 近位尿細管：管腔→細胞→間質→血管を美しく明確に示す。
 この題材に限定せず、他の解剖生理・病態・薬理にも同じ視覚原則を適用する。
-

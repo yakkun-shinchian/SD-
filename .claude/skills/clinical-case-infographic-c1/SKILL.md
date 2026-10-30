@@ -34,4 +34,3 @@ description: YAKUBON STUDIOのClinical Case Infographic C1（インフォC1）�
 
 ## M3・M4への引き継ぎ
 依頼時のみ、確定PNG、読み順、全文ナレーション、見出しと本文の座標、出典記録を渡す。C1の黄色はカルテの重要所見の静的強調であり、M3/M4の読む場所を示す同期マーカーとは別に管理する。
-

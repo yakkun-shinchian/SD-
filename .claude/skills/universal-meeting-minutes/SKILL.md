@@ -30,4 +30,3 @@ description: 会議の文字起こし、録音メモ、チャット、箇条書�
 ## 由来
 
 GitHub Awesome Copilot `meeting-minutes`の発想を参考に、2026-08-09に独立して根拠追跡型へ再設計。外部コードは含めない。出典URLは由来記録のみ: https://github.com/github/awesome-copilot/blob/main/skills/meeting-minutes/SKILL.md
-

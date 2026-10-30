@@ -90,4 +90,3 @@ Apply these fit rules:
 ## Repair rule
 
 Edit the smallest defective region when style and anatomy are otherwise correct. Regenerate a full page when any face, hand, clinical action, panel order, or multiple balloon zones are wrong. After repair, rerun all page-level checks; a fixed overlap can create a new tail, crop, or text-size defect.
-

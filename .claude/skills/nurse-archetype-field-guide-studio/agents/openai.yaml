@@ -1,0 +1,15 @@
+interface:
+  display_name: 看護師類型図鑑スタジオ
+  short_description: 先輩・後輩の行動類型を図鑑風に楽しく安全に可視化します
+  brand_color: '#16324F'
+  default_prompt: Use $nurse-archetype-field-guide-studio to create a humorous 25-type
+    illustrated nursing workplace field guide.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  allow_implicit_invocation: true
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas

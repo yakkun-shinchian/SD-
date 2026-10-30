@@ -101,4 +101,3 @@ Do not place obsolete drafts in the upload folder. Generate the ZIP after all fi
 - [eBook cover image criteria](https://kdp.amazon.com/en_US/help/topic/G200645690)
 
 These links were last checked while authoring this skill on 2026-08-23. Recheck them and record a new access date for every production run.
-

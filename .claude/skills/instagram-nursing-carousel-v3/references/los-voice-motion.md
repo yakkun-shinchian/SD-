@@ -31,4 +31,3 @@
 - LOSと心不全は重なるが同義語ではない。心不全の定義まで一つの短尺動画へ詰め込まず、次回へ分ける。
 
 医学表現の根拠：Schoonen A, et al. *Definitions of low cardiac output syndrome after cardiac surgery and their effect on the incidence of intraoperative LCOS*. Front Cardiovasc Med. 2022;9:926957. https://pmc.ncbi.nlm.nih.gov/articles/PMC9558721/
-

@@ -46,4 +46,3 @@ Appleの絵柄はApple Color Emojiのある対応環境で実際に描画する�
 絵文字ごとに入場前・入場後・動作中・終端フレームを確認する。重要語と開始時刻を区間再生で確かめる。矢印の経路、汗の方向、医療図と記号の役割を確認する。絵文字の動作確認と医学図の動作確認を分けて記録する。素材をカタログ化したことを動画完成やApple全絵文字の対応実証と混同しない。
 
 参照: https://www.unicode.org/Public/emoji/latest/emoji-test.txt 、https://developer.apple.com/fonts/system-fonts/
-

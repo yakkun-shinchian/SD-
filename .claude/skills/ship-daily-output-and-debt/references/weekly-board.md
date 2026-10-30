@@ -47,4 +47,3 @@
 
 Use these as process evidence, not as a promise that a plan will work without adaptation.
 
-

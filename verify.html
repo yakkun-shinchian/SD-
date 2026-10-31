@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>照合チェックリスト｜内科診断支援</title>
+<meta name="description" content="内科診断支援アプリの判定・基準値・計算式・スコア・鑑別条件を、手元の成書やガイドラインと照合するためのチェックリスト。実装コードから自動生成しており、進捗はブラウザに保存されます。要修正項目だけを書き出せます。" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#05080c" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2305080c'/><text x='50' y='68' font-size='52' text-anchor='middle'>✅</text></svg>" />
+<link rel="stylesheet" href="labs.css" />
+<style>
+  .vwrap{max-width:1080px;margin:0 auto;padding:14px 16px 24px}
+  .vbar{position:sticky;top:0;z-index:30;background:var(--panel);border:1px solid var(--line);
+        border-radius:12px;padding:12px 14px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .vbar .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .prog{flex:1;min-width:200px;height:10px;border-radius:999px;background:var(--panel3);
+        border:1px solid var(--line);overflow:hidden;display:flex}
+  .prog i{display:block;height:100%}
+  .prog .ok{background:var(--green)} .prog .fix{background:var(--amber)} .prog .ng{background:var(--red)}
+  .pstat{font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .vsec{margin-bottom:12px}
+  .vsec > summary{cursor:pointer;list-style:none;padding:11px 14px;font-size:14px;font-weight:800;
+        background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+        display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .vsec > summary::-webkit-details-marker{display:none}
+  .vsec > summary .cnt{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--dim)}
+  .vsec .lead{font-size:12.5px;color:var(--sub);padding:10px 14px 0}
+  .vitem{border:1px solid var(--line);border-left-width:4px;border-left-color:var(--line2);
+         border-radius:9px;padding:10px 12px;margin:8px 0;background:var(--panel)}
+  .vitem.s-ok{border-left-color:var(--green)}
+  .vitem.s-fix{border-left-color:var(--amber);background:var(--amberbg)}
+  .vitem.s-ng{border-left-color:var(--red);background:var(--redbg)}
+  .vitem .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .vitem .nm{font-size:13.5px;font-weight:800;flex:1;min-width:160px}
+  .vitem .grp{font-size:10.5px;color:var(--dim);padding:1px 7px;border-radius:999px;
+              background:var(--panel3);border:1px solid var(--line);white-space:nowrap}
+  .vitem .star{color:var(--amber);font-weight:800}
+  .vitem .dt{font-size:12.5px;color:var(--sub);margin-top:5px;white-space:pre-wrap;
+             font-variant-numeric:tabular-nums;line-height:1.75}
+  .vitem .nt{font-size:12px;color:var(--dim);margin-top:5px;line-height:1.7}
+  .marks{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .marks button{font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;min-height:34px;
+                padding:5px 13px;border-radius:8px;border:1px solid var(--line2);
+                background:var(--panel3);color:var(--sub)}
+  .marks button[aria-pressed="true"][data-m="ok"]{background:var(--green);color:#04210f;border-color:var(--green)}
+  .marks button[aria-pressed="true"][data-m="fix"]{background:var(--amber);color:#241a06;border-color:var(--amber)}
+  .marks button[aria-pressed="true"][data-m="ng"]{background:var(--red);color:#fff;border-color:var(--red)}
+  .marks input{flex:1;min-width:180px;background:var(--panel3);color:var(--txt);
+               border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:13px;
+               font-family:inherit;min-height:34px}
+  .vout{width:100%;min-height:260px;background:var(--panel3);color:var(--txt);border:1px solid var(--line);
+        border-radius:9px;padding:11px;font-size:12.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+        line-height:1.7;white-space:pre}
+  @media print{
+    .vbar,.marks button,.btns{display:none!important}
+    .vsec{break-inside:auto} .vitem{break-inside:avoid}
+    .vsec:not([open]) > *:not(summary){display:block!important}
+    .marks input{border-bottom:1px solid #999;border-top:0;border-left:0;border-right:0}
+    .vitem::before{content:"□ 一致　□ 要修正　□ 違う　";font-size:12px;color:#000}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="labs-core.js"></script>
+<script src="labs-cbc.js"></script>
+<script src="labs-chem.js"></script>
+<script src="labs-coag.js"></script>
+<script src="labs-autoab.js"></script>
+<script src="dx-refs.js"></script>
+<script src="dx-abg.js"></script>
+<script src="dx-scores.js"></script>
+<script src="dx-core.js"></script>
+<script src="labs-integrate.js"></script>
+<script src="verify-data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var esc = LabsCore.esc, KEY = "nursetube-verify-v1", THEME = "nursetube-labs-theme";
+  var st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { st = {}; }
+  try { document.documentElement.setAttribute("data-theme", localStorage.getItem(THEME) || "dark"); } catch (e) {}
+  var starOnly = false, todoOnly = false, openSec = {};
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function mark(id) { return (st[id] && st[id].m) || ""; }
+  function memo(id) { return (st[id] && st[id].n) || ""; }
+
+  function counts() {
+    var c = { ok: 0, fix: 0, ng: 0, total: VERIFY_DATA.total };
+    Object.keys(st).forEach(function (k) { if (st[k] && c[st[k].m] != null) c[st[k].m]++; });
+    c.done = c.ok + c.fix + c.ng;
+    return c;
+  }
+
+  function refsOf(ids) {
+    if (!ids || !ids.length) return "";
+    return '<div class="refs">出典：' + DXRefs.entries(ids).map(function (r) {
+      return '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+    }).join("、") + "</div>";
+  }
+
+  function itemHtml(it) {
+    var m = mark(it.id);
+    return '<div class="vitem' + (m ? " s-" + m : "") + '" data-id="' + esc(it.id) + '"' +
+      (it.star ? ' data-star="1"' : "") + (m ? ' data-done="1"' : "") + ">" +
+      '<div class="top">' + (it.star ? '<span class="star">★</span>' : "") +
+      '<span class="nm">' + esc(it.label) + "</span>" +
+      (it.group ? '<span class="grp">' + esc(it.group) + "</span>" : "") +
+      (it.tag ? '<span class="grp">' + esc(it.tag) + "</span>" : "") + "</div>" +
+      '<div class="dt">' + esc(it.detail) + "</div>" +
+      (it.note ? '<div class="nt">' + esc(it.note) + "</div>" : "") +
+      refsOf(it.refs) +
+      '<div class="marks">' +
+        ['ok:一致', 'fix:要修正', 'ng:違う'].map(function (p) {
+          var k = p.split(":")[0];
+          return '<button type="button" data-m="' + k + '" aria-pressed="' + (m === k) + '">' +
+            esc(p.split(":")[1]) + "</button>";
+        }).join("") +
+        '<input type="text" placeholder="成書ではどうなっていたか（任意）" value="' + esc(memo(it.id)) + '">' +
+      "</div></div>";
+  }
+
+  function render() {
+    var c = counts(), pct = function (n) { return (n / c.total * 100).toFixed(2) + "%"; };
+    document.getElementById("app").innerHTML =
+      '<header class="lab-header"><span class="mark">✅</span>' +
+      '<div><h1>照合チェックリスト</h1><div class="sub">実装コードから自動生成（' +
+        esc(VERIFY_DATA.generated) + " 時点・" + c.total + " 項目）</div></div>" +
+      '<div class="spacer"></div>' +
+      '<nav class="lab-nav"><a href="dx.html">内科診断</a><a href="labs.html">統括</a>' +
+      '<a href="verify.html" aria-current="page">照合</a></nav>' +
+      '<button class="icon-btn" id="b-theme">表示切替</button></header>' +
+
+      '<div class="vwrap">' +
+      '<div class="vbar"><div class="row">' +
+        '<div class="prog"><i class="ok" style="width:' + pct(c.ok) + '"></i>' +
+        '<i class="fix" style="width:' + pct(c.fix) + '"></i>' +
+        '<i class="ng" style="width:' + pct(c.ng) + '"></i></div>' +
+        '<span class="pstat">' + c.done + " / " + c.total + " 済　一致 " + c.ok +
+        "　要修正 " + c.fix + "　違う " + c.ng + "</span>" +
+      "</div><div class=\"row\" style=\"margin-top:9px\">" +
+        '<button class="btn' + (starOnly ? " primary" : "") + '" id="b-star">★ 優先のみ（' + VERIFY_DATA.stars + "）</button>" +
+        '<button class="btn' + (todoOnly ? " primary" : "") + '" id="b-todo">未チェックのみ</button>' +
+        '<button class="btn" id="b-open">すべて開く</button>' +
+        '<button class="btn" id="b-print">印刷／PDF</button>' +
+        '<button class="btn primary" id="b-export">要修正を書き出す</button>' +
+        '<button class="btn danger" id="b-reset">進捗を消去</button>' +
+      "</div></div>" +
+
+      '<div class="card"><div class="body" style="padding:13px 15px">' +
+      '<p style="margin:0;font-size:13px;line-height:1.8">' +
+      'アプリが採用している<b>基準値・計算式・閾値・判定条件</b>を、お手元の成書やガイドラインと突き合わせるための一覧です。' +
+      '本をこちらに取り込む必要はありません。<b>★ は臨床判断に直結する優先項目</b>（' + VERIFY_DATA.stars + ' 件）です。' +
+      '進捗はこのブラウザに保存されます。終わったら<b>「要修正を書き出す」</b>で差分だけをテキスト化し、そのまま貼り戻してください。</p>' +
+      "</div></div>" +
+
+      VERIFY_DATA.sections.map(function (s) {
+        var items = s.items.filter(function (it) {
+          if (starOnly && !it.star) return false;
+          if (todoOnly && mark(it.id)) return false;
+          return true;
+        });
+        var done = s.items.filter(function (it) { return mark(it.id); }).length;
+        var isOpen = (openSec[s.id] !== undefined)
+          ? openSec[s.id]
+          : (items.length > 0 && items.length <= 40);
+        return '<details class="vsec" data-sec="' + esc(s.id) + '"' + (isOpen ? " open" : "") + ">" +
+          "<summary>" + esc(s.title) +
+          '<span class="cnt">' + done + " / " + s.items.length + " 済" +
+          (items.length !== s.items.length ? "（表示 " + items.length + "）" : "") + "</span></summary>" +
+          (s.lead ? '<div class="lead">' + esc(s.lead) + "</div>" : "") +
+          '<div style="padding:4px 14px 12px">' +
+          (items.length ? items.map(itemHtml).join("") :
+            '<div class="empty">表示する項目がありません。</div>') +
+          "</div></details>";
+      }).join("") +
+
+      '<div class="disclaimer"><b>⚠ 照合結果は先生の判断が正です。</b>' +
+      'このリストはアプリの実装内容を機械的に書き出したものであり、臨床的な正しさを保証しません。' +
+      '相違を見つけられた場合は「要修正」に印を付けて書き出してください。</div>' +
+      "</div>";
+  }
+
+  function exportFixes() {
+    var lines = ["# 照合結果（要修正・違う）", "", "生成: " + VERIFY_DATA.generated, ""];
+    var n = 0;
+    VERIFY_DATA.sections.forEach(function (s) {
+      var hits = s.items.filter(function (it) { return mark(it.id) === "fix" || mark(it.id) === "ng"; });
+      if (!hits.length) return;
+      lines.push("## " + s.title);
+      hits.forEach(function (it) {
+        n++;
+        lines.push("- [" + (mark(it.id) === "ng" ? "違う" : "要修正") + "] " + it.label +
+          (it.group ? "（" + it.group + "）" : ""));
+        lines.push("  現在の実装: " + String(it.detail).replace(/\n/g, " / "));
+        if (memo(it.id)) lines.push("  成書では: " + memo(it.id));
+      });
+      lines.push("");
+    });
+    var c = counts();
+    lines.push("---");
+    lines.push("確認済 " + c.done + " / " + c.total + "（一致 " + c.ok + "、要修正 " + c.fix + "、違う " + c.ng + "）");
+    if (!n) lines.splice(3, 0, "要修正の項目はありませんでした。", "");
+
+    var box = document.createElement("div");
+    box.className = "modal";
+    box.innerHTML = '<div class="box" style="max-width:760px;width:100%">' +
+      "<h2>要修正の書き出し（" + n + " 件）</h2>" +
+      '<p>この内容をそのまま貼り戻してください。該当箇所を修正します。</p>' +
+      '<textarea class="vout" id="v-out" readonly></textarea>' +
+      '<div class="btns"><button class="btn primary" id="v-copy">コピー</button>' +
+      '<button class="btn" id="v-close">閉じる</button></div></div>';
+    document.body.appendChild(box);
+    var ta = box.querySelector("#v-out");
+    ta.value = lines.join("\n");
+    ta.focus(); ta.select();
+    box.querySelector("#v-copy").addEventListener("click", function () {
+      ta.select();
+      try { document.execCommand("copy"); this.textContent = "コピーしました"; }
+      catch (e) { this.textContent = "手動で選択してコピーしてください"; }
+    });
+    box.querySelector("#v-close").addEventListener("click", function () { box.remove(); });
+  }
+
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (t.id === "b-theme") {
+      var cur = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", cur);
+      try { localStorage.setItem(THEME, cur); } catch (err) {}
+      return;
+    }
+    if (t.id === "b-star") { starOnly = !starOnly; render(); return; }
+    if (t.id === "b-todo") { todoOnly = !todoOnly; render(); return; }
+    if (t.id === "b-open") {
+      document.querySelectorAll("details.vsec").forEach(function (d) { d.open = true; });
+      return;
+    }
+    if (t.id === "b-print") { window.print(); return; }
+    if (t.id === "b-export") { exportFixes(); return; }
+    if (t.id === "b-reset") {
+      if (confirm("照合の進捗をすべて消去します。よろしいですか？")) { st = {}; save(); render(); }
+      return;
+    }
+    if (t.matches(".marks button[data-m]")) {
+      var card = t.closest(".vitem"), id = card.getAttribute("data-id"), m = t.getAttribute("data-m");
+      st[id] = st[id] || {};
+      st[id].m = (st[id].m === m) ? "" : m;
+      save();
+      updateCard(card, st[id].m);
+      updateBar();
+      return;
+    }
+  });
+
+  /* 全体を描き直すとセクションが畳まれて位置を見失うため、その場で差し替える */
+  function updateCard(card, m) {
+    card.classList.remove("s-ok", "s-fix", "s-ng");
+    if (m) { card.classList.add("s-" + m); card.setAttribute("data-done", "1"); }
+    else { card.removeAttribute("data-done"); }
+    card.querySelectorAll(".marks button[data-m]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-m") === m));
+    });
+  }
+
+  function updateBar() {
+    var c = counts(), pct = function (n) { return (n / c.total * 100).toFixed(2) + "%"; };
+    var bar = document.querySelector(".prog");
+    if (bar) {
+      bar.querySelector(".ok").style.width = pct(c.ok);
+      bar.querySelector(".fix").style.width = pct(c.fix);
+      bar.querySelector(".ng").style.width = pct(c.ng);
+    }
+    var ps = document.querySelector(".pstat");
+    if (ps) ps.textContent = c.done + " / " + c.total + " 済　一致 " + c.ok +
+      "　要修正 " + c.fix + "　違う " + c.ng;
+    VERIFY_DATA.sections.forEach(function (s) {
+      var d = document.querySelector('details.vsec[data-sec="' + s.id + '"] .cnt');
+      if (!d) return;
+      var done = s.items.filter(function (it) { return mark(it.id); }).length;
+      var shown = s.items.filter(function (it) {
+        if (starOnly && !it.star) return false;
+        if (todoOnly && mark(it.id)) return false;
+        return true;
+      }).length;
+      d.textContent = done + " / " + s.items.length + " 済" +
+        (shown !== s.items.length ? "（表示 " + shown + "）" : "");
+    });
+  }
+
+  /* 開閉を記憶 */
+  document.addEventListener("toggle", function (e) {
+    if (e.target.matches("details.vsec")) openSec[e.target.getAttribute("data-sec")] = e.target.open;
+  }, true);
+
+  document.addEventListener("click", function (e) {
+    if (e.target.id === "b-open") {
+      VERIFY_DATA.sections.forEach(function (s) { openSec[s.id] = true; });
+    }
+  });
+
+  document.addEventListener("input", function (e) {
+    if (!e.target.matches(".marks input")) return;
+    var id = e.target.closest(".vitem").getAttribute("data-id");
+    st[id] = st[id] || {};
+    st[id].n = e.target.value;
+    save();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

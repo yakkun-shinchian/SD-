@@ -42,7 +42,7 @@ var LabsUI = (function () {
 
   var PAGES = [
     ["dx.html", "内科診断"], ["labs.html", "統括"], ["labs-cbc.html", "血算"], ["labs-chem.html", "生化学"],
-    ["labs-coag.html", "凝固"], ["labs-autoab.html", "自己抗体"]
+    ["labs-coag.html", "凝固"], ["labs-autoab.html", "自己抗体"], ["verify.html", "照合"]
   ];
 
   var cfg, state, root;

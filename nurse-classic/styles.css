@@ -1,0 +1,481 @@
+/* =========================================================================
+ * NurseTube（ナースチューブ）クラシック版スタイル
+ * YouTube風の見た目をシンプルなCSSで再現。黒背景が既定で、☀️ボタンで明るい表示にもできる。
+ * テーマ属性は data-nt-theme（埋め込み先の data-theme と衝突しないよう独自名にしている）。
+ * ========================================================================= */
+
+:root {
+  color-scheme: dark;
+  --bg: #0f0f0f;
+  --bg-elev: #181818;
+  --bg-hover: #272727;
+  --text: #f1f1f1;
+  --text-sub: #aaaaaa;
+  --border: #303030;
+  --accent: #ef4444;
+  --accent-strong: #f87171; /* 黒地で読みやすい明るめの赤 */
+  --chip-bg: #272727;
+  --chip-active-bg: #f1f1f1;
+  --chip-active-text: #0f0f0f;
+  --shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  --topbar-h: 56px;
+  --sidebar-w: 232px;
+}
+
+:root[data-nt-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-elev: #f9f9f9;
+  --bg-hover: #f0f0f0;
+  --text: #0f0f0f;
+  --text-sub: #606060;
+  --border: #e5e5e5;
+  --accent-strong: #dc2626;
+  --chip-bg: #f2f2f2;
+  --chip-active-bg: #0f0f0f;
+  --chip-active-text: #ffffff;
+  --shadow: 0 1px 3px rgba(0, 0, 0, .12);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; /* 埋め込み先の既定(14px)に左右されないよう明示 */
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ============ ヘッダー ============ */
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px); /* iPhoneの切り欠き(ノッチ)に隠れないように */
+  z-index: 50;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.topbar__left { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+.topbar__right { display: flex; align-items: center; gap: 8px; margin-left: auto; flex: 0 0 auto; }
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+}
+.icon-btn:hover { background: var(--bg-hover); }
+
+.hamburger, .hamburger::before, .hamburger::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  position: relative;
+}
+.hamburger::before, .hamburger::after { content: ""; position: absolute; left: 0; }
+.hamburger::before { top: -6px; }
+.hamburger::after { top: 6px; }
+
+.logo { display: flex; align-items: baseline; gap: 6px; }
+.logo__play {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent); color: #fff;
+  width: 30px; height: 22px; border-radius: 6px;
+  font-size: 12px; transform: translateY(2px);
+}
+.logo__text { font-size: 20px; font-weight: 500; letter-spacing: -.5px; }
+.logo__text strong { font-weight: 800; }
+.logo__sub { font-size: 11px; color: var(--text-sub); }
+
+.search { display: flex; flex: 1 1 640px; max-width: 640px; margin: 0 auto; }
+.search__input {
+  flex: 1;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 20px 0 0 20px;
+  outline: none;
+}
+.search__input:focus { border-color: #1c62b9; }
+.search__btn {
+  width: 60px; height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 0 20px 20px 0;
+  background: var(--bg-elev);
+  color: var(--text);
+  font-size: 16px;
+}
+.search__btn:hover { background: var(--bg-hover); }
+
+.countdown {
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: right;
+  color: var(--text-sub);
+  white-space: nowrap;
+}
+.countdown strong { color: var(--accent); font-size: 16px; }
+
+/* ============ レイアウト ============ */
+.layout { display: flex; align-items: flex-start; }
+
+.sidebar {
+  position: sticky;
+  top: calc(var(--topbar-h) + env(safe-area-inset-top, 0px));
+  width: var(--sidebar-w);
+  height: calc(100vh - var(--topbar-h));
+  flex: 0 0 var(--sidebar-w);
+  padding: 12px 8px;
+  overflow-y: auto;
+  background: var(--bg);
+}
+.category-list { list-style: none; margin: 0; padding: 0; }
+.category-list li { margin: 2px 0; }
+.cat-link {
+  display: flex; align-items: center; gap: 16px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text);
+}
+.cat-link:hover { background: var(--bg-hover); }
+.cat-link.active { background: var(--bg-hover); font-weight: 700; }
+.cat-link__icon { font-size: 18px; width: 22px; text-align: center; }
+.sidebar__foot {
+  margin-top: 16px; padding: 16px 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text-sub); line-height: 1.6;
+}
+
+.backdrop {
+  position: fixed; inset: calc(var(--topbar-h) + env(safe-area-inset-top, 0px)) 0 0 0;
+  background: rgba(0, 0, 0, .4); z-index: 40;
+}
+
+.main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 20px 24px 60px;
+  outline: none;
+}
+
+/* ============ カテゴリチップ ============ */
+.chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 20px;
+}
+.chip {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 9px;
+  font-size: 14px;
+  background: var(--chip-bg);
+  color: var(--text);
+  white-space: nowrap;
+}
+.chip:hover { filter: brightness(.96); }
+.chip.active { background: var(--chip-active-bg); color: var(--chip-active-text); }
+
+.section-title { font-size: 18px; margin: 0 0 16px; }
+.section-title .muted { color: var(--text-sub); font-weight: 400; font-size: 14px; }
+.sample-note { margin: 20px 0 0; font-size: 12px; color: var(--text-sub); }
+
+/* ============ 動画グリッド ============ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px 16px;
+}
+
+.card { cursor: pointer; }
+.thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  color: #fff;
+}
+.thumb__icon {
+  position: absolute; right: 10px; top: 8px;
+  font-size: 26px; opacity: .35;
+}
+.thumb__title {
+  font-size: 16px; font-weight: 700; line-height: 1.35;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .35);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.thumb__dur {
+  position: absolute; right: 8px; bottom: 8px;
+  background: rgba(0, 0, 0, .8); color: #fff;
+  font-size: 12px; font-weight: 600;
+  padding: 1px 5px; border-radius: 4px;
+}
+.thumb__cat {
+  position: absolute; left: 8px; top: 8px;
+  background: rgba(0, 0, 0, .55); color: #fff;
+  font-size: 11px; padding: 2px 7px; border-radius: 20px;
+}
+.thumb__play {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .15s;
+}
+.thumb__play span {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(0, 0, 0, .6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.card:hover .thumb__play { opacity: 1; }
+
+.card__meta { display: flex; gap: 12px; padding: 10px 2px 0; }
+.avatar {
+  flex: 0 0 auto;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 15px;
+}
+.card__info { min-width: 0; }
+.card__title {
+  font-size: 15px; font-weight: 600; line-height: 1.4; margin: 0 0 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card__sub { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
+.card__sub span::after { content: "・"; margin: 0 2px; }
+.card__sub span:last-child::after { content: ""; }
+
+/* ============ 視聴ページ ============ */
+.watch { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 24px; }
+.player {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+.player iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.player-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; text-align: center; color: #fff; padding: 24px;
+}
+.player-placeholder h3 {
+  margin: 0; font-size: clamp(16px, 2.4vw, 24px); line-height: 1.4; max-width: 80%;
+}
+.btn-yt {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #ff0000; color: #fff;
+  padding: 10px 18px; border-radius: 24px; border: none;
+  font-size: 15px; font-weight: 700;
+}
+.btn-yt:hover { background: #cc0000; }
+.player-placeholder small { color: rgba(255, 255, 255, .8); }
+
+.watch__title { font-size: 20px; font-weight: 700; margin: 16px 0 8px; line-height: 1.4; }
+.watch__bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.watch__channel { display: flex; align-items: center; gap: 10px; }
+.watch__channel b { font-size: 15px; }
+.watch__channel small { color: var(--text-sub); display: block; }
+.watch__tags { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+.tag { background: var(--chip-bg); color: var(--text-sub); font-size: 12px; padding: 4px 10px; border-radius: 16px; }
+
+.desc-box {
+  margin-top: 14px; padding: 14px 16px;
+  background: var(--bg-elev); border-radius: 12px;
+  font-size: 14px; line-height: 1.7;
+}
+.desc-box .stat { color: var(--text-sub); font-weight: 600; margin-bottom: 8px; }
+
+.related h3 { font-size: 16px; margin: 0 0 12px; }
+.related-item { display: flex; gap: 10px; margin-bottom: 12px; cursor: pointer; }
+.related-item:hover { opacity: .85; }
+.related-item .thumb { flex: 0 0 168px; width: 168px; border-radius: 10px; padding: 8px; }
+.related-item .thumb__title { font-size: 12px; -webkit-line-clamp: 2; }
+.related-item__info { min-width: 0; }
+.related-item__title { font-size: 14px; font-weight: 600; line-height: 1.35; margin: 0 0 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.related-item__sub { font-size: 12px; color: var(--text-sub); }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--text-sub); font-size: 14px; margin-bottom: 14px; }
+.back-link:hover { color: var(--text); }
+
+.empty { text-align: center; color: var(--text-sub); padding: 60px 20px; }
+.empty__icon { font-size: 48px; }
+
+/* ============ 自動再生レッスン（番組プレーヤー） ============ */
+/* 字幕と操作バーは図や文字に重ねず、上から順に並べる（重なり対策）。
+ * スライド面は16:9を目安にし、中身が入りきらないとき（スマホなど）は縦に伸びる。 */
+.player.player--lesson { aspect-ratio: auto; background: none; }
+.lesson {
+  position: relative; display: flex; flex-direction: column; color: #fff;
+  container-type: inline-size;
+}
+.lesson__stage {
+  position: relative;
+  min-height: 56.25cqi; /* プレーヤー幅の9/16＝16:9 */
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 12px; padding: 46px 30px 16px;
+}
+.lesson__badge, .lesson__speaker {
+  position: absolute; top: 12px; background: rgba(0, 0, 0, .42);
+  padding: 3px 12px; border-radius: 20px; font-size: 12px;
+}
+.lesson__badge { left: 14px; }
+.lesson__speaker { right: 14px; }
+.lesson__scene h2 {
+  margin: 0 0 10px; line-height: 1.35; text-wrap: balance;
+  font-size: 22px; font-size: clamp(17px, 4.2cqi, 28px);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .45);
+}
+.lesson__scene ul {
+  margin: 0; padding-left: 1.25em; display: flex; flex-direction: column;
+  gap: 7px; line-height: 1.5;
+  font-size: 16px; font-size: clamp(13px, 2.6cqi, 18px);
+}
+.lesson__scene li { text-shadow: 0 1px 8px rgba(0, 0, 0, .5); }
+.lesson__caption {
+  width: 100%; max-width: 760px; margin: 0 auto;
+  text-align: center; line-height: 1.55;
+  font-size: 14px; font-size: clamp(12.5px, 2.3cqi, 15px);
+  background: rgba(0, 0, 0, .5); padding: 8px 12px; border-radius: 8px;
+}
+.lesson__big {
+  position: absolute; inset: 0; margin: auto; width: 76px; height: 76px;
+  border-radius: 50%; border: none; background: rgba(0, 0, 0, .55); color: #fff;
+  font-size: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform .1s, background .15s;
+}
+.lesson__big:hover { background: rgba(0, 0, 0, .7); transform: scale(1.06); }
+.lesson__big[hidden] { display: none; }
+.lesson button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lesson__bar { padding: 8px 10px 10px; background: rgba(0, 0, 0, .35); }
+.lesson__progress {
+  height: 4px; background: rgba(255, 255, 255, .3); border-radius: 2px;
+  overflow: hidden; margin-bottom: 6px;
+}
+.lesson__progress span { display: block; height: 100%; width: 0; background: #fff; transition: width .35s ease; }
+.lesson__btns { display: flex; align-items: center; gap: 4px; }
+.lesson__btns button {
+  background: transparent; border: none; color: #fff; font-size: 16px;
+  cursor: pointer; padding: 4px 7px; border-radius: 6px; line-height: 1;
+}
+.lesson__btns button:hover { background: rgba(255, 255, 255, .18); }
+.lesson__btns .spacer { flex: 1; }
+.lesson__counter { font-size: 12px; opacity: .92; margin-left: 4px; }
+
+.play-hint { font-size: 13px; color: var(--text-sub); margin: 10px 0 0; }
+.yt-more { margin: 12px 0 0; }
+.yt-more a { color: var(--accent-strong); font-weight: 600; font-size: 13px; }
+.yt-more a:hover { text-decoration: underline; }
+
+/* 図解／写真／動画クリップのレイアウト */
+.lesson__body { flex: 1 1 auto; display: flex; align-items: center; gap: 22px; min-height: 0; }
+.lesson__scene { flex: 1 1 auto; min-width: 0; }
+.lesson__figure { display: none; }
+.lesson__body.has-figure .lesson__figure {
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 48%; max-width: 48%; min-width: 0;
+}
+.lesson__figure svg,
+.lesson__figure .fig-media,
+.lesson__figure .fig-photo { width: 100%; height: auto; max-height: 250px; border-radius: 12px; display: block; }
+.lesson__figure .fig-photo { position: relative; }
+.lesson__figure img.fig-media { object-fit: contain; background: #000; max-height: 250px; }
+.lesson__figure iframe.fig-media { aspect-ratio: 16 / 9; height: auto; border: 0; }
+.fig-credit {
+  position: absolute; right: 4px; bottom: 4px; max-width: 92%; text-align: right;
+  font-size: 9px; line-height: 1.25; color: #fff;
+  background: rgba(0, 0, 0, .55); padding: 1px 5px; border-radius: 4px;
+}
+.fig__bg { fill: rgba(255, 255, 255, .94); }
+
+/* 図解アニメ（“動画”らしい動き） */
+.lesson__figure .fig-pulse { transform-box: fill-box; transform-origin: center; animation: figPulse 1.15s ease-in-out infinite; }
+.lesson__figure .fig-flow { animation: figFlow 1.6s ease-in-out infinite; }
+.lesson__figure .fig-breathe { transform-box: fill-box; transform-origin: center; animation: figBreathe 3s ease-in-out infinite; }
+.lesson__figure .fig-dia { animation: figDia 3s ease-in-out infinite; }
+.lesson__figure .ecg-line { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: ecgDraw 3.4s linear infinite; }
+@keyframes figPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes figFlow { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+@keyframes figBreathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.07); } }
+@keyframes figDia { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+@keyframes ecgDraw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .lesson__figure .fig-pulse, .lesson__figure .fig-flow, .lesson__figure .fig-breathe,
+  .lesson__figure .fig-dia, .lesson__figure .ecg-line { animation: none; }
+  .lesson__figure .ecg-line { stroke-dashoffset: 0; }
+}
+
+/* プレーヤーの幅が狭いとき（スマホなど）は、図→文字の縦並びにする */
+@container (max-width: 560px) {
+  .lesson__body.has-figure { flex-direction: column; align-items: stretch; justify-content: center; gap: 12px; }
+  .lesson__body.has-figure .lesson__figure { flex: none; width: 100%; max-width: 100%; }
+  .lesson__figure svg, .lesson__figure img.fig-media { max-height: 170px; }
+  .lesson__stage { padding: 44px 16px 14px; }
+  .lesson__scene ul { gap: 5px; }
+}
+/* コンテナクエリ非対応の古いブラウザでは、画面幅で同じ判定をする */
+@supports not (container-type: inline-size) {
+  @media (max-width: 600px) {
+    .lesson__body.has-figure { flex-direction: column; align-items: stretch; justify-content: center; gap: 12px; }
+    .lesson__body.has-figure .lesson__figure { flex: none; width: 100%; max-width: 100%; }
+    .lesson__figure svg, .lesson__figure img.fig-media { max-height: 170px; }
+    .lesson__stage { padding: 44px 16px 14px; }
+    .lesson__scene ul { gap: 5px; }
+  }
+}
+
+/* ============ レスポンシブ ============ */
+@media (max-width: 1000px) {
+  .watch { grid-template-columns: 1fr; }
+}
+@media (max-width: 820px) {
+  .sidebar {
+    position: fixed;
+    top: calc(var(--topbar-h) + env(safe-area-inset-top, 0px)); left: 0; z-index: 45;
+    box-shadow: var(--shadow);
+    transform: translateX(-100%);
+    transition: transform .2s ease;
+    border-right: 1px solid var(--border);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .logo__sub { display: none; }
+  .countdown { display: none; }
+  .main { padding: 16px 14px 60px; }
+}
+/* スマホ：検索欄を2段目に下ろして、ヘッダーが画面幅からはみ出さないようにする */
+@media (max-width: 520px) {
+  :root { --topbar-h: 104px; }
+  .topbar { flex-wrap: wrap; align-content: center; row-gap: 8px; padding: 0 12px; }
+  .search { order: 3; flex: 1 1 100%; max-width: none; min-width: 0; margin: 0; }
+  .search__input { min-width: 0; font-size: 16px; } /* 16px未満だとiPhoneで入力時に拡大されるため */
+  .logo__text { font-size: 17px; }
+}

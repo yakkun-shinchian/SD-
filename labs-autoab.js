@@ -90,6 +90,7 @@
     q("mog", "抗 MOG 抗体", "神経・筋", "MOG抗体関連疾患（MOGAD）"),
     q("gm1", "抗 GM1 抗体", "神経・筋", "ギラン・バレー症候群（軸索型 AMAN）"),
     q("gq1b", "抗 GQ1b 抗体", "神経・筋", "Fisher症候群（外眼筋麻痺・失調・腱反射消失）"),
+    q("gt1a", "抗 GT1a 抗体", "神経・筋", "咽頭頸部上腕型ギラン・バレー症候群。球麻痺が前面に出る。抗GQ1b と交差反応することがある"),
     q("nmdar", "抗 NMDA受容体抗体", "神経・筋", "自己免疫性脳炎。精神症状・痙攣・不随意運動・自律神経不安定。卵巣奇形腫の合併"),
     q("lgi1", "抗 LGI1 抗体", "神経・筋", "辺縁系脳炎。faciobrachial dystonic seizure・低Na血症を伴いやすい"),
     q("caspr2", "抗 CASPR2 抗体", "神経・筋", "Morvan症候群・辺縁系脳炎・神経筋過剰興奮"),
@@ -177,6 +178,7 @@
     if (isPos(V, "mog")) F.mog_pos = true;
     if (isPos(V, "gm1")) F.gm1_pos = true;
     if (isPos(V, "gq1b")) F.gq1b_pos = true;
+    if (isPos(V, "gt1a")) F.gt1a_pos = true;
     if (isPos(V, "nmdar")) F.nmdar_pos = true;
     if (isPos(V, "lgi1")) F.lgi1_pos = true;
     if (isPos(V, "caspr2")) F.caspr2_pos = true;
@@ -301,11 +303,11 @@
       note: "視神経炎・急性散在性脳脊髄炎（ADEM）・脊髄炎を起こします。ステロイド反応性が良好な一方、減量時の再発が多いのが特徴です。",
       actions: ["視力・意識・麻痺の経過観察", "ステロイド減量期の再発に注意"] },
 
-    { id: "ab-gbs", name: "ギラン・バレー症候群／Fisher症候群を示唆", level: "red",
-      when: function (F) { return F.gm1_pos || F.gq1b_pos; },
-      basis: ["抗GM1抗体 または 抗GQ1b抗体陽性"],
-      note: "上行性の弛緩性麻痺が進行し、呼吸筋麻痺と自律神経障害（不整脈・血圧変動）が命に関わります。抗GQ1b抗体陽性は外眼筋麻痺・失調・腱反射消失を呈するFisher症候群を示唆します。",
-      actions: ["呼吸機能の頻回評価（%肺活量・単一呼吸での発語数・努力呼吸）", "嚥下・construction 咳嗽力の評価と誤嚥予防", "自律神経症状（血圧変動・不整脈）のモニタリング", "麻痺の上行速度を経時記録", "深部静脈血栓予防"] },
+    { id: "ab-gbs", name: "ギラン・バレー症候群スペクトラムを示唆", level: "red",
+      when: function (F) { return F.gm1_pos || F.gq1b_pos || F.gt1a_pos; },
+      basis: ["抗GM1抗体・抗GQ1b抗体・抗GT1a抗体のいずれか陽性"],
+      note: "上行性の弛緩性麻痺が進行し、呼吸筋麻痺と自律神経障害（不整脈・血圧変動）が命に関わります。抗体により表現型が分かれます。抗GM1は軸索型（AMAN）、抗GQ1bは外眼筋麻痺・失調・腱反射消失を呈するFisher症候群、抗GT1aは咽頭頸部上腕型で球麻痺が前面に出ます。抗GT1aと抗GQ1bは交差反応することがあります。",
+      actions: ["呼吸機能の頻回評価（%肺活量・単一呼吸での発語数・努力呼吸）", "嚥下機能と咳嗽力の評価、誤嚥予防（抗GT1a陽性では球麻痺が先行しうる）", "自律神経症状（血圧変動・不整脈）のモニタリング", "麻痺の上行速度を経時記録", "深部静脈血栓予防"] },
 
     { id: "ab-encephalitis", name: "自己免疫性脳炎を示唆", level: "red",
       when: function (F) { return F.nmdar_pos || F.lgi1_pos || F.caspr2_pos; },
@@ -404,9 +406,12 @@
     { name: "視神経脊髄炎（NMOSD）", note: "抗AQP4抗体陽性",
       values: { aqp4: "陽性", mog: "陰性", ana: "160倍", ssa: "陽性" },
       context: { age: 38, sex: "f", complaints: ["numbness", "paralysis"] } },
-    { name: "ギラン・バレー症候群", note: "抗GM1抗体陽性",
-      values: { gm1: "陽性", gq1b: "陰性", ana: "陰性（40倍未満）" },
+    { name: "ギラン・バレー症候群（軸索型）", note: "抗GM1抗体陽性",
+      values: { gm1: "陽性", gq1b: "陰性", gt1a: "陰性", ana: "陰性（40倍未満）" },
       context: { age: 52, sex: "m", complaints: ["paralysis", "numbness"] } },
+    { name: "咽頭頸部上腕型 GBS", note: "抗GT1a陽性・球麻痺が前面",
+      values: { gt1a: "陽性", gq1b: "陰性", gm1: "陰性", achr: 0.05, ana: "陰性（40倍未満）" },
+      context: { age: 46, sex: "m", complaints: ["paralysis", "dyspnea"] } },
     { name: "抗NMDA受容体脳炎", note: "若年女性の精神症状＋痙攣",
       values: { nmdar: "陽性", lgi1: "陰性", ana: "陰性（40倍未満）" },
       context: { age: 23, sex: "f", complaints: ["consciousness", "convulsion"] } },

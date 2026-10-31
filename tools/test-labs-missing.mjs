@@ -158,4 +158,40 @@ test('全鑑別の出典が登録済み', () => {
     assert.ok(c.DXRefs.get(id), d.id+' の出典 '+id+' が未登録')));
 });
 
+
+/* ---- 臨床家の照合による修正（固定） ---- */
+
+test('代謝性アルカローシスの代償係数は 0.6', () => {
+  // HCO3 38 → 0.6 × 14 + 40 = 48.4（± 5）。0.7 なら 49.8 になる
+  const a = abg({ph:7.52,paco2:48,hco3:38,na:138,cl:88,alb:4.0});
+  assert.equal(a.primary,'MAlk');
+  assert.ok(Math.abs((a.compensation.expected[0]+a.compensation.expected[1])/2 - 48.4) < 0.01,
+    '期待値の中心が 48.4 でない: ' + a.compensation.expected);
+  assert.ok(a.compensation.formula.includes('0.6'));
+  assert.ok(a.compensation.formula.includes('0.6〜0.7'), '出典差の注記がない');
+});
+
+test('SIADH は尿中Na 40 以上を要求する', () => {
+  const v = (una) => ({na:122,k:4.0,cl:88,bun:8.2,cr:0.62,alb:3.8,sosm:254,uosm:620,una,usg:1.020});
+  const fires = (una) => run(v(una),domains,{sex:'f',age:58,history:['stroke']})
+    .result.patterns.some(p=>p.id==='ch-siadh');
+  assert.equal(fires(35), false, '尿中Na 35 で SIADH を立ててはいけない');
+  assert.ok(fires(45), '尿中Na 45 で SIADH が立たない');
+  // 30以上は腎性Na喪失として CSWS 側では依然拾う
+  const r = run(v(35),domains,{sex:'f',age:58,history:['stroke','neurosurg']});
+  assert.ok(r.result.patterns.some(p=>p.id==='ch-csws'), 'CSWS 側の閾値まで上げてはいけない');
+});
+
+test('抗GT1a 抗体でギラン・バレーを拾う', () => {
+  const v = {gt1a:'陽性',gq1b:'陰性',gm1:'陰性'};
+  const ctx = {sex:'m',age:46,complaints:['paralysis','dyspnea'],history:[],meds:[],vitals:{}};
+  assert.ok(has(v,'ab-gbs'), '抗GT1a 単独で ab-gbs が立たない');
+  const r = run(v,domains,ctx);
+  assert.ok(r.syndromes.some(s=>s.id==='sx-gbs-resp'), '呼吸筋麻痺リスクの症候群が立たない');
+  assert.ok(ddx(v,ctx).includes('gbs'), '鑑別に gbs が出ない');
+  // 球麻痺への言及があること（抗GT1a 型の臨床的な肝）
+  const p = r.result.patterns.find(x=>x.id==='ab-gbs');
+  assert.ok(/球麻痺/.test(p.note) && /嚥下/.test(p.actions.join('')), '球麻痺・嚥下への言及がない');
+});
+
 console.log(`${checks} checks passed; ${presets} presets evaluated in standalone and integrated modes.`);

@@ -126,9 +126,11 @@
       comp = { target: "PaCO₂", expected: [ePco2 - 2, ePco2 + 2], actual: pco2,
                formula: "Winter 式：期待 PaCO₂ = 1.5 × HCO₃⁻ + 8 ± 2", ref: "WINTER" };
     } else if (primary === "MAlk") {
-      var ePco2b = 0.7 * (hco3 - 24) + 40;
+      // 係数は出典により 0.6〜0.7 と割れる。国内の成書で広く使われる 0.6 を既定とし、
+      // 0.7 を採る文献との差（HCO₃⁻ が 10 上振れして約 1 mmHg）は ±5 の幅に収まる。
+      var ePco2b = 0.6 * (hco3 - 24) + 40;
       comp = { target: "PaCO₂", expected: [ePco2b - 5, ePco2b + 5], actual: pco2,
-               formula: "期待 PaCO₂ = 0.7 × (HCO₃⁻ − 24) + 40 ± 5" };
+               formula: "期待 PaCO₂ = 0.6 × (HCO₃⁻ − 24) + 40 ± 5（係数は出典により 0.6〜0.7）" };
     } else if (primary === "RA") {
       var k = chronic ? 3.5 : 1.0;
       var eH = 24 + (pco2 - 40) / 10 * k;

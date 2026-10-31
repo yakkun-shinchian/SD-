@@ -72,7 +72,7 @@
     { key: "uosm", label: "尿浸透圧", unit: "mOsm/kg", group: "神経・体液", ref: [50, 1300], decimals: 0, placeholder: "500", facility: true,
       note: "低Na血症の鑑別の要。100以下なら水分過剰、300以上ならADH作用あり" },
     { key: "una", label: "尿中ナトリウム（随時尿）", unit: "mmol/L", group: "神経・体液", ref: [20, 220], decimals: 0, placeholder: "60", facility: true,
-      note: "30以上なら腎からのNa喪失（SIADH・CSWS・利尿薬）を示唆" },
+      note: "30以上で腎からのNa喪失（SIADH・CSWS・利尿薬）を示唆。SIADH の診断には 40以上がより特異的（20以上を採る基準もある）" },
     { key: "usg", label: "尿比重", unit: "", group: "神経・体液", ref: [1.005, 1.030], decimals: 3, placeholder: "1.015", facility: true }
   ];
 
@@ -197,6 +197,7 @@
     }
     if (n(V.una) != null) {
       if (n(V.una) >= 30) F.una_high = true;
+      if (n(V.una) >= 40) F.una_veryhigh = true; // SIADH により特異的な水準
       if (n(V.una) < 20) F.una_low = true;
     }
     return F;
@@ -223,9 +224,9 @@
       actions: ["ただちに医師へ報告", "意識レベル・痙攣の観察", "補正速度の指示を確認し、Na の再検タイミングを守る", "水分出納・尿量の厳密測定"] },
 
     { id: "ch-siadh", name: "SIADH（抗利尿ホルモン不適合分泌）を疑う", level: "amber",
-      when: function (F, V, D, ctx) { return F.hypona && F.uosm_high && F.una_high; },
-      basis: ["低Na血症", "尿浸透圧 > 300 mOsm/kg", "尿中Na ≧ 30 mmol/L"],
-      note: "体液量が正常〜やや過剰なのが特徴。中枢神経疾患（くも膜下出血・髄膜炎・脳外傷）、肺疾患、薬剤（カルバマゼピン・SSRI）が原因になります。治療は水制限が基本で、CSWSとは逆向きです。",
+      when: function (F, V, D, ctx) { return F.hypona && F.uosm_high && F.una_veryhigh; },
+      basis: ["低Na血症", "尿浸透圧 > 300 mOsm/kg", "尿中Na ≧ 40 mmol/L"],
+      note: "体液量が正常〜やや過剰なのが特徴。中枢神経疾患（くも膜下出血・髄膜炎・脳外傷）、肺疾患、薬剤（カルバマゼピン・SSRI）が原因になります。治療は水制限が基本で、CSWSとは逆向きです。なお尿中Naの閾値は基準により 20 以上とするものと 40 以上とするものがあり、本アプリは特異度を優先して 40 以上を採っています。",
       actions: ["体重・水分出納・浮腫・ツルゴールで体液量を評価（CSWSとの切り分けの要）", "水分制限の指示を確認", "カルバマゼピン等の被疑薬を確認", "意識レベルの経時観察"] },
 
     { id: "ch-csws", name: "中枢性塩類喪失症候群（CSWS）との鑑別を", level: "amber",

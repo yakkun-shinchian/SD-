@@ -238,10 +238,10 @@ var LabsIntegrate = (function () {
     {
       id: "sx-gbs-resp", name: "ギラン・バレー症候群の呼吸筋麻痺リスク", level: "red",
       when: function (F, V, D, ctx) {
-        return (F.gm1_pos || F.gq1b_pos) &&
+        return (F.gm1_pos || F.gq1b_pos || F.gt1a_pos) &&
           (C.has(ctx, "complaints", "paralysis") || C.has(ctx, "complaints", "dyspnea"));
       },
-      basis: ["抗ガングリオシド抗体陽性", "麻痺または呼吸症状"],
+      basis: ["抗ガングリオシド抗体陽性（GM1／GQ1b／GT1a）", "麻痺または呼吸症状"],
       story: "麻痺が上行し、横隔膜に達すると呼吸が止まります。自律神経障害による血圧変動・不整脈も命に関わります。",
       actions: ["ただちに医師へ報告", "%肺活量の経時測定", "麻痺の上行レベルを経時記録",
                 "血圧・心拍の変動を連続監視", "嚥下評価と誤嚥予防", "深部静脈血栓予防"]

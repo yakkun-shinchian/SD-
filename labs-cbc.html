@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>血算アセスメント｜CBCから患者の状態を読む</title>
+<meta name="description" content="WBC・Hb・血小板・白血球分画・赤血球指数から、貧血の分類、好中球減少、血小板減少、汎血球減少などの病態を判定する看護師向け判断支援ツール。基準値は JCCLS 共用基準範囲。" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="血算" />
+<meta name="theme-color" content="#05080c" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2305080c'/><text x='50' y='68' font-size='52' text-anchor='middle'>🩸</text></svg>" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2305080c'/><text x='50' y='68' font-size='52' text-anchor='middle'>🩸</text></svg>" />
+<link rel="stylesheet" href="labs.css" />
+</head>
+<body>
+<div id="app"></div>
+
+<script src="labs-core.js"></script>
+<script src="labs-cbc.js"></script>
+<script src="labs-integrate.js"></script>
+<script src="labs-ui.js"></script>
+<script>
+  LabsUI.mount({
+    domains: ["cbc"],
+    integrate: true,
+    icon: "🩸",
+    title: "血算アセスメント",
+    subtitle: "Complete Blood Count",
+    scopeNote: "この画面は血算のみで判定しています。他の検査と組み合わせた病態（DIC・溶血・敗血症など）は〈統括〉で評価してください。"
+  });
+</script>
+</body>
+</html>

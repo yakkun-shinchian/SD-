@@ -158,3 +158,17 @@ Re-run `build-voicevox.mjs` whenever `data.js`/`scenes.js` change.
 - Commit with clear, descriptive messages (existing history is in Japanese).
 - Push with `git push -u origin <branch>` and open a draft PR.
 - This is a static site, deployable as-is via GitHub Pages (root folder).
+
+### Classic medical content sync
+
+After editing medical copy, run `node tools/check-classic-content.mjs`.
+All root/classic scene IDs, order, headings, points and narration must match.
+Keep classic titles, durationSec, styles and playback independent. Catalog
+ descriptions can differ to describe each format; review medical meaning on
+both sides before updating the paired SHA-256 values in
+`tools/classic-description-review.json`. Do not refresh this file blindly.
+The `Classic medical content consistency` workflow runs this check on PRs.
+For mobile regression checks, serve the repository on port 8000 and run
+`node tools/check-classic-mobile.cjs` with Playwright available (optional
+`CODEX_PRIMARY_RUNTIME_NODE_MODULES` and `CHROMIUM_PATH` for the test runtime).
+This content-only sync does not regenerate VOICEVOX exports or audio.

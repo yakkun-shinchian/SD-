@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RadioDeck｜放射線科 読影アトラス by YAKUBON STUDIO</title>
+  <meta name="description" content="頭部CT・胸部X線／CT・腹部CT／MRIの所見を「なぜそう見えるのか」から学ぶ、放射線科の読影アトラス。所見の逆引き、機序の解説、系統的読影手順が学べる学習用アプリです。" />
+  <link rel="stylesheet" href="radiology.css?v=20261031-1" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231f2937'/><circle cx='50' cy='50' r='26' fill='none' stroke='%2360a5fa' stroke-width='7'/><circle cx='50' cy='50' r='7' fill='%2360a5fa'/></svg>" />
+</head>
+<body>
+
+  <!-- ============ ヘッダー ============ -->
+  <header class="rtop">
+    <a class="rtop__logo" href="#/" aria-label="RadioDeck ホームへ">
+      <span class="rtop__mark" aria-hidden="true"></span>
+      <span class="rtop__name">Radio<strong>Deck</strong></span>
+      <span class="rtop__sub">放射線科 読影アトラス</span>
+    </a>
+
+    <form id="searchForm" class="rsearch" role="search">
+      <input id="searchInput" class="rsearch__input" type="search" autocomplete="off"
+             aria-label="所見を検索"
+             placeholder="所見を探す（ケーリーB、三日月、washout など）" />
+      <button class="rsearch__btn" type="submit" aria-label="検索">🔍</button>
+    </form>
+
+    <div class="rtop__tools">
+      <div class="rlevel" role="group" aria-label="解説のレベル">
+        <button type="button" class="rlevel__btn" data-level="easy">やさしく</button>
+        <button type="button" class="rlevel__btn" data-level="deep">しっかり</button>
+      </div>
+      <button id="themeToggle" class="ricon" type="button" aria-label="テーマ切り替え">🌙</button>
+      <a class="rtop__back" href="nurse.html">NurseTube</a>
+    </div>
+  </header>
+
+  <!-- ============ 免責 ============ -->
+  <div class="rdisclaimer" role="note">
+    <strong>学習用アプリです。</strong>
+    実際の診断・治療には使用できません。図はすべて自作の<strong>模式図</strong>で、実際の患者画像ではありません。
+    <button type="button" class="rdisclaimer__more" id="disclaimerMore">くわしく</button>
+  </div>
+
+  <!-- ============ タブ ============ -->
+  <nav class="rtabs" aria-label="メインメニュー">
+    <a class="rtab" href="#/navigate" data-tab="navigate"><span aria-hidden="true">🔎</span>所見の逆引き</a>
+    <a class="rtab" href="#/dict" data-tab="dict"><span aria-hidden="true">📖</span>所見辞典</a>
+    <a class="rtab" href="#/protocol" data-tab="protocol"><span aria-hidden="true">🧭</span>読影手順</a>
+    <a class="rtab" href="#/assist" data-tab="assist"><span aria-hidden="true">🤖</span>AI読影</a>
+  </nav>
+
+  <!-- ============ メイン ============ -->
+  <main id="main" class="rmain" tabindex="-1">
+    <!-- radiology-app.js が描画します -->
+  </main>
+
+  <footer class="rfoot">
+    <p>RadioDeck — YAKUBON STUDIO ／ 学習用の放射線科読影アトラスです。</p>
+    <p class="rfoot__note">
+      掲載している図はすべて自作の模式図です。本アプリは教科書・ガイドライン・文献を参照して作成していますが、
+      診療の判断は必ず最新の一次情報と指導医の判断に拠ってください。
+    </p>
+  </footer>
+
+  <script src="radiology-atlas.js?v=20261031-1"></script>
+  <script src="radiology-figures.js?v=20261031-1"></script>
+  <script src="radiology-signs.js?v=20261031-1"></script>
+  <script src="radiology-app.js?v=20261031-1"></script>
+</body>
+</html>

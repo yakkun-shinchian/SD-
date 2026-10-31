@@ -22,8 +22,9 @@ tone and language when editing content.
 ## How to run
 
 No build step, no dependencies. The site root `index.html` is the
-**VentSim ventilator monitor** (a standalone single-file app). The NurseTube
-app lives at `nurse.html` — open it directly, or serve the folder
+**VentSim ventilator monitor** (a standalone single-file app). **RadioDeck**, a
+radiology reading atlas, lives at `radiology.html` (also standalone, data-driven).
+The NurseTube app lives at `nurse.html` — open it directly, or serve the folder
 (recommended so search/theme persistence work reliably):
 
 ```bash
@@ -79,6 +80,12 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `index.html` | **Site landing: VentSim ventilator monitor simulator** (standalone, self-contained; not part of NurseTube) |
 | `ventilator.html` | Legacy-URL redirect to `index.html` |
 | `nurse.html` | NurseTube page skeleton (header, sidebar, main); loads the scripts below |
+| `radiology.html` | **RadioDeck: standalone radiology reading atlas** (head/chest/abdomen); loads the four `radiology-*` files below |
+| `radiology.css` | RadioDeck styles (dark by default) + SVG figure palette |
+| `radiology-atlas.js` | Regions, reverse-lookup axes, reading protocols, HU table |
+| `radiology-figures.js` | Hand-drawn SVG schematics (`RAD_FIGURES`) — never real patient images |
+| `radiology-signs.js` | The sign dictionary (**add findings here**) |
+| `radiology-app.js` | RadioDeck routing, reverse lookup, rendering, BYOK AI tab (IIFE) |
 | `styles.css` | YouTube-style UI, player, light/dark theme |
 | `app.js` | Rendering, routing, search, slideshow player (IIFE) |
 | `data.js` | Program catalog + categories + exam date (**add programs here**) |

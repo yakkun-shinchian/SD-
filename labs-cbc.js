@@ -163,7 +163,7 @@
     { id: "cbc-acd", name: "慢性疾患に伴う貧血（ACD）も鑑別に", level: "info",
       when: function (F, V, D, ctx) {
         return F.anemia && (F.normocytic || F.microcytic) &&
-               C.num(V.rdw) != null && !F.rdw_high && !F.retic_high && !F.retic_pct_high;
+               C.num(V.rdw) != null && !F.rdw_high && C.num(V.retic) != null && !F.retic_high && !F.retic_pct_high;
       },
       basis: ["貧血", "RDW 上昇を伴わない", "網赤血球の増加もない"],
       note: "炎症・感染・悪性腫瘍・腎性貧血などの慢性病態に伴う貧血。鉄欠乏と紛らわしいので、フェリチンで切り分けます（ACD ではフェリチンは正常〜高値）。",

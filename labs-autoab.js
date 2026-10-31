@@ -206,14 +206,14 @@
       actions: ["医師へ報告", "尿量・尿蛋白・浮腫・血圧の評価", "意識・精神症状・痙攣（NPSLE）の観察", "免疫抑制療法の強化に伴う感染リスクの管理"] },
 
     { id: "ab-druglupus", name: "薬剤性ループスの可能性", level: "info",
-      when: function (F) { return F.histone_pos && F.ana_pos && !F.dsdna_pos; },
+      when: function (F, V) { return F.histone_pos && F.ana_pos && C.num(V.dsdna) != null && !F.dsdna_pos; },
       basis: ["抗ヒストン抗体陽性", "抗核抗体陽性", "抗dsDNA抗体陰性"],
       note: "被疑薬の中止で改善します。腎・中枢神経病変は稀です。",
       actions: ["被疑薬（ヒドララジン・プロカインアミド・抗TNF製剤・抗てんかん薬など）の確認"] },
 
     { id: "ab-mctd", name: "混合性結合組織病（MCTD）を示唆", level: "info",
-      when: function (F) { return F.rnp_pos && !F.sm_pos && !F.dsdna_pos; },
-      basis: ["抗U1-RNP抗体陽性（単独）"],
+      when: function (F, V) { return F.rnp_pos && V.sm === "陰性" && C.num(V.dsdna) != null && !F.dsdna_pos; },
+      basis: ["抗U1-RNP抗体陽性・抗Sm／抗dsDNA抗体陰性"],
       note: "SLE・強皮症・多発性筋炎の所見が混在します。レイノー現象と手指の腫脹が特徴。肺高血圧症が予後を左右します。",
       actions: ["レイノー現象・手指腫脹の観察", "労作時呼吸困難（肺高血圧）の確認"] },
 
@@ -254,7 +254,7 @@
       actions: ["ただちに医師と共有", "SpO₂・呼吸数・労作時の低下を頻回に評価", "フェリチン値の推移を確認（上昇が増悪の指標）"] },
 
     { id: "ab-ra", name: "関節リウマチを示唆", level: "info",
-      when: function (F) { return F.ccp_pos || (F.rf_pos && F.ana_pos === undefined); },
+      when: function (F, V) { return F.ccp_pos || (F.rf_pos && V.ana === "陰性（40倍未満）"); },
       basis: ["抗CCP抗体陽性（またはRF陽性）"],
       note: "抗CCP抗体は特異度が高く、骨びらん進行のリスク指標にもなります。RF単独陽性は感染・加齢・他疾患でも起こるため慎重に解釈します。",
       actions: ["朝のこわばりの持続時間・罹患関節の分布（対称性・小関節）を確認", "MMP-3・CRPで活動性を評価", "生物学的製剤使用時は結核・肺炎の感染リスクを管理"] },
@@ -320,7 +320,7 @@
       actions: ["医師へ報告（悪性腫瘍スクリーニングの状況を確認）", "神経症状（失調・感覚性ニューロパチー・不随意運動）の経時記録", "誤嚥・転倒の予防"] },
 
     { id: "ab-hashimoto", name: "橋本病（慢性甲状腺炎）を示唆", level: "info",
-      when: function (F) { return F.thyroid_ab_pos && !F.trab_pos; },
+      when: function (F, V) { return F.thyroid_ab_pos && C.num(V.trab) != null && !F.trab_pos; },
       basis: ["抗TPO抗体 または 抗サイログロブリン抗体陽性"],
       note: "機能低下に傾けば、徐脈・低体温・便秘・浮腫・うつ・認知機能低下が出ます。高齢者では認知症と誤られることがあります。重症では粘液水腫性昏睡。",
       actions: ["甲状腺機能（TSH・FT4）の確認", "徐脈・低体温・活動性低下・便秘の観察", "低Na血症の有無を確認"] },
@@ -375,7 +375,7 @@
 
     { id: "ab-screening-neg", name: "スクリーニング陰性 — 膠原病の可能性は低い", level: "info",
       when: function (F, V, D) {
-        return V.ana && !F.ana_pos && D && D.positiveCount === 0;
+        return V.ana === "陰性（40倍未満）" && ["mpo", "pr3", "ccp"].every(function (k) { return C.num(V[k]) != null; }) && D && D.positiveCount === 0;
       },
       basis: ["抗核抗体陰性", "ANCA・抗CCP抗体も陰性"],
       note: "抗核抗体陰性は多くの膠原病を否定する方向に働きます。ただし、ANCA関連血管炎や抗リン脂質抗体症候群はANA陰性でも起こります。",

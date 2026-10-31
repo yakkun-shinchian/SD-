@@ -38,15 +38,21 @@ var LabsIntegrate = (function () {
     {
       id: "sx-tma", name: "血栓性微小血管症（TTP／HUS）— DICとの鑑別が必要", level: "red",
       when: function (F, V, D) {
-        var coagNormal = !F.pt_prolonged && !F.fib_low;
-        return F.anemia && F.plt_low && F.ld_high && coagNormal;
+        return F.anemia && F.plt_low && F.ld_high;
       },
-      basis: ["貧血", "血小板減少", "LD上昇", "凝固機能は保たれている（PT・フィブリノゲン正常）"],
-      story: "DICと見た目が似ていますが、凝固系が正常なのが決定的な違いです。TTPは血漿交換を急がないと致死的で、血小板輸血はむしろ病態を悪化させます。この鑑別は治療方針を正反対にします。",
-      actions: ["ただちに医師へ報告（DICとの鑑別が必要であることを明示）",
-                "破砕赤血球の有無を血液像で確認", "ハプトグロビン・網赤血球・ビリルビン分画の確認",
-                "神経症状・腎機能・発熱の評価（TTPの五徴）", "血小板輸血は禁忌となりうる点を共有",
-                "血漿交換の準備状況を確認"]
+      basis: function (F, V, D, ctx) {
+        var labels = { normal: "基準範囲内（測定済み）", abnormal: "基準範囲外", unmeasured: "未測定・未評価" };
+        return ["貧血", "血小板減少", "LD上昇（溶血の確定所見ではない）",
+          "PT：" + labels[C.measurementState(V, ["inr", "ptsec", "ptpct"], ctx)],
+          "フィブリノゲン：" + labels[C.measurementState(V, ["fib"], ctx)]];
+      },
+      story: "TMA（TTP／HUSを含む）やDICなどの緊急鑑別が必要です。この3所見だけでは溶血やTMAを確定できません。凝固検査が未測定なら正常とは判断できず、基準範囲内でもDICを除外できません。凝固異常があってもTMAの合併を除外しません。追加検査の結果を待たず医師へ報告してください。",
+      actions: ["ただちに医師へ報告（TMA・DICなどの緊急鑑別）",
+                "PT・フィブリノゲン・FDP／D-ダイマーの測定状況と結果を確認",
+                "破砕赤血球・ハプトグロビン・網赤血球・ビリルビン分画・直接クームス試験を確認",
+                "神経症状・腎機能・発熱を評価（五徴が揃うのを待たない）",
+                "TTPが疑われる場合は血液専門医への相談・ADAMTS13検査・治療準備を医師と確認",
+                "血小板輸血の適応は出血状況を含め医師に確認"]
     },
     {
       id: "sx-sepsis", name: "敗血症／敗血症性ショック", level: "red",
@@ -252,10 +258,10 @@ var LabsIntegrate = (function () {
       id: "sx-dehydration", name: "脱水・循環血液量減少", level: "amber",
       when: function (F, V, D, ctx) {
         var hr = ctx.vitals && C.num(ctx.vitals.hr);
-        return F.buncr_high && !F.anemia && (F.hyperna || (hr != null && hr > 100));
+        return F.buncr_high && (F.hyperna || (hr != null && hr > 100));
       },
       basis: ["BUN/Cr比 > 20", "高Na血症または頻脈"],
-      story: "血管内の水が足りていません。高齢者・意識障害・発熱・下痢・利尿薬使用で進行します。",
+      story: "脱水・循環血液量減少の可能性があります。BUN優位上昇は消化管出血などでも起こるため、Hb・出血徴候も確認してください。高齢者・意識障害・発熱・下痢・利尿薬使用で進行します。",
       actions: ["水分出納・体重・皮膚ツルゴール・口腔乾燥の評価", "起立性の血圧変化を確認",
                 "輸液・経口補水の指示を確認", "尿量の記録"]
     },
@@ -333,7 +339,7 @@ var LabsIntegrate = (function () {
     syndromes.forEach(function (s) {
       var hit = false;
       try { hit = !!s.when(F, V, D, ctx); } catch (e) { hit = false; }
-      if (hit) sx.push({ id: s.id, name: s.name, level: s.level, basis: s.basis, story: s.story, actions: s.actions });
+      if (hit) sx.push({ id: s.id, name: s.name, level: s.level, basis: typeof s.basis === "function" ? s.basis(F, V, D, ctx) : s.basis, story: s.story, actions: s.actions });
     });
 
     /* パニック値 */
@@ -405,6 +411,12 @@ var LabsIntegrate = (function () {
     /* 不足している検査（次の一手） */
     var missing = [];
     function want(cond, text) { if (cond) missing.push(text); }
+    want(F.anemia && F.plt_low && F.ld_high && C.measurementState(V, ["inr", "ptsec", "ptpct"], ctx) === "unmeasured", "PTが未測定：PT-INR等を確認（報告を遅らせない）");
+    want(F.anemia && F.plt_low && F.ld_high && C.num(V.fib) == null, "フィブリノゲンが未測定：追加確認（報告を遅らせない）");
+    want(F.histone_pos && F.ana_pos && C.num(V.dsdna) == null, "抗dsDNA抗体が未測定：薬剤性ループスの鑑別に追加確認");
+    want(F.rnp_pos && (C.num(V.dsdna) == null || !V.sm), "抗Sm・抗dsDNA抗体の測定状況を確認（抗RNP単独陽性とは判断できない）");
+    want(F.thyroid_ab_pos && C.num(V.trab) == null, "TRAbが未測定：甲状腺機能と併せて追加確認");
+    want(V.ana === "陰性（40倍未満）" && ["mpo", "pr3", "ccp"].some(function (k) { return C.num(V[k]) == null; }), "ANA以外の未測定抗体を陰性とは判断できません。症状に応じて追加検査の必要性を確認");
     want(F.hypona && C.num(V.uosm) == null, "尿浸透圧・尿中Na（低Na血症の鑑別に必須）");
     want(F.anemia && C.num(V.retic) == null, "網赤血球（造血反応の有無で貧血を二分できる）");
     want(F.anemia && F.microcytic && true, "フェリチン・血清鉄・TIBC（鉄欠乏と慢性炎症の切り分け）");

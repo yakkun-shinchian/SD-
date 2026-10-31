@@ -118,8 +118,8 @@
     if (ptProlonged) F.pt_prolonged = true;
     if (apttProlonged) F.aptt_prolonged = true;
     if (ptMeasured && apttMeasured) {
-      if (ptProlonged && !apttProlonged) F.pt_only = true;
-      if (!ptProlonged && apttProlonged) F.aptt_only = true;
+      if (ptProlonged && C.measurementState(V, ["aptt"], ctx) === "normal") F.pt_only = true;
+      if (C.measurementState(V, ["inr", "ptpct", "ptsec"], ctx) === "normal" && apttProlonged) F.aptt_only = true;
       if (ptProlonged && apttProlonged) F.both_prolonged = true;
     }
     if (inr != null) {
@@ -253,9 +253,9 @@
       actions: ["ただちに医師へ報告", "頭痛・意識変容・視野異常（頭蓋内出血）の観察", "採血後の圧迫延長、筋注・坐薬・剃刀の回避", "転倒予防"] },
 
     { id: "cg-fib-high", name: "フィブリノゲン高値（急性期反応）", level: "info",
-      when: function (F) { return F.fib_high && !F.fdp_veryhigh; },
+      when: function (F) { return F.fib_high; },
       basis: ["フィブリノゲン > 400 mg/dL"],
-      note: "炎症の急性期反応蛋白として上昇します。感染・手術後・妊娠で見られ、それ自体は異常事態ではありません。",
+      note: "炎症の急性期反応蛋白として上昇します。感染・手術後・妊娠で見られ、これだけではDICを否定できません。FDP・血小板・PTと臨床経過を確認してください。",
       actions: ["CRP・炎症の経過と合わせて評価"] },
 
     { id: "cg-pregnancy", name: "妊娠による生理的変動を考慮", level: "info",

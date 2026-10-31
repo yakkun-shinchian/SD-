@@ -18,7 +18,7 @@ var LabsCore = (function () {
   }
 
   function num(v) {
-    if (v === "" || v == null) return null;
+    if (v == null || (typeof v === "string" && v.trim() === "")) return null;
     var n = Number(v);
     return isFinite(n) ? n : null;
   }
@@ -105,6 +105,18 @@ var LabsCore = (function () {
       if (a) return a;
     }
     return null;
+  }
+
+  // Absence of an abnormal finding is not evidence of a measured normal result.
+  function measurementState(V, keys, ctx) {
+    var measured = false, abnormal = false;
+    keys.forEach(function (key) {
+      var a = findAnalyte(key), value = num(V[key]);
+      if (!a || value == null) return;
+      measured = true;
+      if (flagOf(value, a, ctx) !== "N") abnormal = true;
+    });
+    return abnormal ? "abnormal" : (measured ? "normal" : "unmeasured");
   }
 
   /* ---------- 共通の派生値 ---------- */
@@ -224,7 +236,7 @@ var LabsCore = (function () {
   }
 
   return {
-    esc: esc, num: num, fmt: fmt, has: has,
+    esc: esc, num: num, fmt: fmt, has: has, measurementState: measurementState,
     register: register, get: get, domains: domains,
     analyteOf: analyteOf, findAnalyte: findAnalyte,
     resolveRef: resolveRef, refText: refText, flagOf: flagOf, deviation: deviation,

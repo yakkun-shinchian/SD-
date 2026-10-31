@@ -292,9 +292,9 @@
       actions: ["過去のCr値との比較", "尿量の測定（0.5 mL/kg/hr 未満が6時間続けばAKI）", "腎排泄性薬剤（抗菌薬・造影剤・NSAIDs）の確認", "尿閉の確認（膀胱エコー・導尿）"] },
 
     { id: "ch-prerenal", name: "腎前性（脱水・循環血液量減少）を疑う", level: "info",
-      when: function (F, V, D) { return F.buncr_high && !F.anemia; },
+      when: function (F, V, D) { return F.buncr_high; },
       basis: ["BUN/Cr比 > 20"],
-      note: "脱水・心拍出量低下・ステロイド・高蛋白負荷でBUNが優位に上がります。",
+      note: "脱水・心拍出量低下・ステロイド・高蛋白負荷のほか、消化管出血でもBUNが優位に上がります。Hb・出血徴候を追加確認してください。",
       actions: ["水分出納・体重・皮膚ツルゴール・口腔乾燥の評価", "血圧・脈拍（起立性変化）の確認"] },
 
     { id: "ch-gib", name: "消化管出血の可能性 — BUN優位上昇＋貧血", level: "amber",
@@ -308,10 +308,10 @@
       actions: ["黒色便・吐血・下血の確認", "バイタル（頻脈・血圧低下・起立性低血圧）", "医師へ報告、内視鏡の準備の可能性", "抗血栓薬の内服確認"] },
 
     /* ---- 肝 ---- */
-    { id: "ch-hepatocellular", name: "肝細胞障害型の肝機能異常", level: "amber",
-      when: function (F, V, D) { return F.transaminase_high && !F.cholestasis; },
-      basis: ["AST／ALT 上昇", "胆道系酵素の優位な上昇なし"],
-      note: "ウイルス性肝炎・薬剤性肝障害・虚血性肝炎・アルコールを鑑別します。AST/ALT比（De Ritis比）が2以上ならアルコール性や肝硬変、1未満なら慢性肝炎を示唆します。",
+    { id: "ch-hepatocellular", name: "肝逸脱酵素上昇 — 障害型の追加評価が必要", level: "amber",
+      when: function (F, V, D) { return F.transaminase_high; },
+      basis: ["AST／ALT 上昇"],
+      note: "ALP・γ-GTの測定状況と結果を確認し、胆汁うっ滞・混合型を含めて評価してください。ウイルス性肝炎・薬剤性肝障害・虚血性肝炎・アルコールを鑑別します。AST/ALT比（De Ritis比）が2以上ならアルコール性や肝硬変、1未満なら慢性肝炎を示唆します。",
       actions: ["新規開始薬・サプリメント・市販薬の確認", "飲酒歴の聴取", "黄疸・倦怠感・食思不振の観察"] },
 
     { id: "ch-cholestasis", name: "胆汁うっ滞型の肝機能異常", level: "amber",
@@ -374,10 +374,10 @@
       note: "インスリン作用の絶対的不足による代謝性アシドーシスです。脱水・電解質異常を伴い、見かけのKが正常でも体内総Kは枯渇しています。",
       actions: ["ただちに医師へ報告", "意識レベル・呼吸（Kussmaul大呼吸）・アセトン臭の確認", "尿／血中ケトンの確認", "K値の頻回測定（インスリン投与で急落する）", "大量輸液の準備"] },
 
-    { id: "ch-hhs", name: "高浸透圧高血糖状態（HHS）を疑う", level: "red",
-      when: function (F, V, D) { return F.hyperglycemia_extreme && !F.ag_high; },
-      basis: ["血糖 > 600 mg/dL", "アニオンギャップ開大なし"],
-      note: "高齢2型糖尿病に多く、著明な脱水と高浸透圧で意識障害を来します。死亡率はDKAより高いです。",
+    { id: "ch-hhs", name: "著明な高血糖 — HHS／DKAの緊急鑑別", level: "red",
+      when: function (F, V, D) { return F.hyperglycemia_extreme; },
+      basis: ["血糖 > 600 mg/dL"],
+      note: "血清浸透圧・血中ケトン・血液ガス（pH／HCO3）・Na／Clを追加確認してください。未測定のAGを正常とは扱えません。HHS・DKAおよび混合病態を鑑別し、追加結果を待たず報告してください。",
       actions: ["ただちに医師へ報告", "意識レベル・脱水所見の評価", "血清浸透圧の確認", "輸液の準備"] },
 
     /* ---- 心・筋 ---- */

@@ -266,3 +266,58 @@ details.card[open] > summary::after{content:"▴"}
   .card{break-inside:avoid; border-color:#999}
   .triage{border-width:2px}
 }
+
+/* ===== 出典表示 ===== */
+.refs{
+  margin-top:9px; padding-top:7px; border-top:1px dashed var(--line);
+  font-size:11px; color:var(--dim); line-height:1.6;
+}
+.refs span{
+  display:inline-block; padding:1px 7px; margin:1px 2px 1px 0; border-radius:4px;
+  background:var(--panel3); border:1px solid var(--line); cursor:help;
+}
+
+/* ===== 体系的読影のステップ ===== */
+.steps{counter-reset:s; margin:0; padding:0; list-style:none}
+.steps li{
+  position:relative; padding:11px 12px 11px 44px; margin-bottom:8px;
+  background:var(--panel2); border:1px solid var(--line); border-radius:10px;
+}
+.steps li .no{
+  position:absolute; left:11px; top:12px; width:24px; height:24px; border-radius:50%;
+  background:var(--accent); color:#04120d; font-size:12px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+:root[data-theme="light"] .steps li .no{background:#0d8f73; color:#fff}
+.steps li h4{margin:0 0 4px; font-size:13.5px; font-weight:800}
+.steps li .d{font-size:13px; color:var(--sub); font-variant-numeric:tabular-nums}
+.steps li .v{margin-top:5px; font-size:13px; font-weight:600}
+.steps li.ok .v{color:var(--green)}
+.steps li.ng .v{color:var(--amber)}
+.steps li .caution{
+  margin-top:6px; font-size:12px; color:var(--amber);
+  background:var(--amberbg); border-radius:6px; padding:6px 9px;
+}
+.abg-summary{
+  font-size:16px; font-weight:800; padding:12px 14px; margin-bottom:12px;
+  background:var(--panel3); border:1px solid var(--line2); border-radius:10px;
+}
+.abg-summary small{display:block; font-size:11.5px; font-weight:600; color:var(--dim); margin-bottom:3px}
+
+/* ===== 臨床スコア ===== */
+.score-card{
+  background:var(--panel2); border:1px solid var(--line); border-radius:10px;
+  padding:12px 14px; margin-bottom:10px;
+}
+.score-card h4{margin:0 0 3px; font-size:14px; font-weight:800; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+.score-card .cat{font-size:10.5px; font-weight:700; color:var(--dim); padding:1px 7px; border-radius:999px; background:var(--panel3); border:1px solid var(--line)}
+.score-card .result{display:flex; align-items:baseline; gap:10px; margin:8px 0; flex-wrap:wrap}
+.score-card .val{font-size:26px; font-weight:800; font-variant-numeric:tabular-nums}
+.score-card .band{font-size:12px; font-weight:800; padding:3px 11px; border-radius:999px}
+.score-card .band.red{background:var(--red); color:#fff}
+.score-card .band.amber{background:var(--amber); color:#241a06}
+.score-card .band.green{background:var(--green); color:#04210f}
+.score-card .band.info{background:var(--line2); color:var(--txt)}
+.score-card .interp{font-size:13px; margin:0 0 6px}
+.score-card .auto{font-size:11px; color:var(--accent); font-weight:700}
+.score-items{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; margin-top:8px}

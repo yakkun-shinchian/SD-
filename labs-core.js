@@ -199,7 +199,8 @@ var LabsCore = (function () {
           if (p.dedupeKey) out.__dedupe[p.dedupeKey] = true;
           pats.push({
             domain: id, id: p.id, name: p.name, level: p.level || "info",
-            basis: p.basis || [], note: p.note || "", actions: p.actions || []
+            basis: p.basis || [], note: p.note || "", actions: p.actions || [],
+            refs: p.refs || []
           });
         }
       });

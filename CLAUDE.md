@@ -93,6 +93,12 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `labs-cbc.js` · `labs-chem.js` · `labs-coag.js` · `labs-autoab.js` | Domain definitions (analytes, findings, patterns, presets) |
 | `labs-integrate.js` | Cross-domain syndromes, triage, nursing actions |
 | `labs-ui.js` · `labs.css` | Shared UI and styling for the lab apps |
+| `dx.html` | **Internal-medicine diagnostic support** (acid-base, differentials, scores) |
+| `dx-refs.js` | Citation registry (guidelines / primary sources) |
+| `dx-abg.js` | Blood gas & acid-base domain (systematic 6-step reading) |
+| `dx-scores.js` | 24 clinical scores & severity classifications |
+| `dx-core.js` | Differential-diagnosis engine (findings → ranked candidates) |
+| `dx-ui.js` | UI extensions injected into `LabsUI` hooks |
 | `README.md` | User-facing docs (Japanese) |
 
 ## Common tasks
@@ -166,7 +172,56 @@ with an `options` array and an optional `positiveWhen(value)` predicate.
    `syndromes` in `labs-integrate.js` instead — those carry a `story` field
    explaining the pathophysiology.
 
-### Conventions specific to these apps
+### The internal-medicine diagnostic app (`dx.html`)
+
+Target user is an **internist**, not a nurse — clinical register, differential
+reasoning, and a citation on every judgement. It reuses the whole `labs-*`
+engine and adds four things on top.
+
+Load order (globals, no modules):
+
+```
+labs-core.js → labs-<domain>.js … → dx-refs.js → dx-abg.js → dx-scores.js
+→ dx-core.js → labs-integrate.js → labs-ui.js → dx-ui.js
+```
+
+### The four additions
+
+- **`dx-abg.js`** — a blood-gas domain that performs the systematic reading:
+  ① pH ② primary disorder ③ adequacy of compensation (Winter's formula; acute
+  vs chronic coefficients for respiratory disorders) ④ anion gap with albumin
+  correction ⑤ delta-delta ratio ⑥ oxygenation (A-aDO₂, P/F). `derive()` puts
+  the whole structured analysis on `D.abg`, and `dx-ui.js` renders its `steps`.
+- **`dx-scores.js`** — scores come in two shapes. `direct(V, ctx)` computes
+  straight from entered values (MELD-Na, CKD, ISTH DIC). `items` + `compute`
+  takes clinical answers, and `autofill(V, ctx)` pre-fills what the labs and
+  vitals already say. Returning `null` from `direct` means "not enough data".
+- **`dx-core.js`** — the differential engine. Each entry has `trigger` flags
+  (with optional `minTrigger` and `requireMed`), weighted `supports` and
+  `opposes`, `next` steps, `refs` and a `pearl`. Output is a **fit percentage,
+  never a probability** — keep that wording.
+- **`dx-refs.js`** — every score, criterion and formula carries a `refs` array
+  of IDs resolved here. Add the source before adding the judgement.
+
+### Extending the UI
+
+`labs-ui.js` exposes `LabsUI.addInputPanel(fn)`, `addSection(fn)` and
+`addBinder(fn)`. `dx-ui.js` uses them so no page needs its own renderer. A
+section receives `{result, input, state}` and returns an HTML string; a thrown
+error in one section is swallowed so it cannot break the page.
+
+### Rules for this app
+
+- Never present output as a diagnosis or a probability. 「合致度」 and
+  「〜を疑う」 only. The disclaimer footer and modal stay on every page.
+- A new judgement without a citation is incomplete — add it to `dx-refs.js`.
+- Guard against over-firing: a differential that triggers on one non-specific
+  flag will fire on every patient. Use `minTrigger`, `requireMed`, or a more
+  specific flag. Verify with the case presets before committing.
+- Verify by opening `dx.html`, running the 症例プリセット, and reading the
+  acid-base steps and differential ranking. That is this app's regression test.
+
+## Conventions specific to these apps
 
 - Reference ranges default to **JCCLS common reference intervals** (adults).
 - Units are conventional Japanese clinical units (Cr/Ca/BUN in mg/dL,

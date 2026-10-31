@@ -41,11 +41,19 @@ var LabsUI = (function () {
   ];
 
   var PAGES = [
-    ["labs.html", "統括"], ["labs-cbc.html", "血算"], ["labs-chem.html", "生化学"],
+    ["dx.html", "内科診断"], ["labs.html", "統括"], ["labs-cbc.html", "血算"], ["labs-chem.html", "生化学"],
     ["labs-coag.html", "凝固"], ["labs-autoab.html", "自己抗体"]
   ];
 
   var cfg, state, root;
+  /* 他モジュール（dx-ui.js 等）が入力パネル・結果セクションを差し込むためのフック */
+  var extraInputs = [], extraSections = [], extraBinders = [];
+  function addInputPanel(fn) { extraInputs.push(fn); }
+  function addSection(fn) { extraSections.push(fn); }
+  function addBinder(fn) { extraBinders.push(fn); }
+  function api() {
+    return { state: state, cfg: cfg, root: root, esc: esc, rerender: schedule, redraw: draw };
+  }
 
   /* ---------- 保存 ---------- */
 
@@ -66,7 +74,7 @@ var LabsUI = (function () {
   function blankState() {
     return {
       context: { age: "", sex: "m", pregnant: false, vitals: {}, complaints: [], history: [], meds: [] },
-      values: {}
+      values: {}, scores: {}
     };
   }
 
@@ -281,7 +289,18 @@ var LabsUI = (function () {
       (p.basis && p.basis.length ? '<div class="basis"><b>根拠：</b>' + p.basis.map(esc).join(" ／ ") + "</div>" : "") +
       (p.story || p.note ? '<p class="story">' + esc(p.story || p.note) + "</p>" : "") +
       (p.actions && p.actions.length ? "<ul>" + p.actions.map(function (a) { return "<li>" + esc(a) + "</li>"; }).join("") + "</ul>" : "") +
+      refsHtml(p.refs) +
       "</div>";
+  }
+
+  /** 判定根拠となったガイドライン・原典を所見カードの末尾に出す。 */
+  function refsHtml(ids) {
+    if (!ids || !ids.length || typeof DXRefs === "undefined") return "";
+    var e = DXRefs.entries(ids);
+    if (!e.length) return "";
+    return '<div class="refs">出典：' + e.map(function (r) {
+      return '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+    }).join("、") + "</div>";
   }
 
   var LEVEL_ORDER = { red: 0, amber: 1, info: 2 };
@@ -372,6 +391,11 @@ var LabsUI = (function () {
       '<span class="hint">' + result.items.length + " 項目</span></h2>" +
       '<div class="body" style="padding:0">' + itemsTable(result.items) + "</div></div>";
 
+    var ext = { result: result, input: input, state: state, assess: null };
+    extraSections.forEach(function (f) {
+      try { html += (f(ext) || ""); } catch (e) { /* 一つの拡張の失敗で全体を壊さない */ }
+    });
+
     out.innerHTML = html;
     paintInputs(result);
   }
@@ -442,6 +466,8 @@ var LabsUI = (function () {
       if (e.target.id === "btn-print") { window.print(); return; }
       if (e.target.id === "btn-theme") { toggleTheme(); return; }
     });
+
+    extraBinders.forEach(function (f) { try { f(root, api()); } catch (e) { /* noop */ } });
   }
 
   function applyPreset(domainId, idx) {
@@ -471,7 +497,9 @@ var LabsUI = (function () {
   function draw() {
     root.innerHTML = headerHtml() +
       '<div class="lab-wrap">' +
-      contextHtml() + inputsHtml() + presetsHtml() + toolbarHtml() +
+      contextHtml() + inputsHtml() +
+      extraInputs.map(function (f) { try { return f(api()) || ""; } catch (e) { return ""; } }).join("") +
+      presetsHtml() + toolbarHtml() +
       '<div id="lab-result"></div>' +
       "</div>" +
       '<div class="disclaimer"><b>⚠ 本ツールは教育・判断補助が目的です。</b>' +
@@ -492,11 +520,13 @@ var LabsUI = (function () {
     state.context.history = state.context.history || [];
     state.context.meds = state.context.meds || [];
     state.values = state.values || {};
+    state.scores = state.scores || {};
     root = document.getElementById("app") || document.body;
     draw();
     bind();
     maybeShowDisclaimer();
   }
 
-  return { mount: mount };
+  return { mount: mount, addInputPanel: addInputPanel, addSection: addSection,
+           addBinder: addBinder, save: save, esc: esc };
 })();

@@ -113,8 +113,24 @@
       detail: "HCO₃⁻ " + hco3.toFixed(1) + " mmol/L、PaCO₂ " + pco2.toFixed(1) + " mmHg → " + primaryLabel
     });
     if (A.phState === "normal" && primary !== "NORMAL") {
-      A.steps[A.steps.length - 1].caution =
-        "pH が正常域にもかかわらず HCO₃⁻・PaCO₂ が偏位しています。完全代償は稀であり、相殺し合う混合性障害を第一に考えます。";
+      // pH が正常で両者が打ち消し合う向きに偏位している場合、どちらが一次性かは
+      // 血液ガスだけでは決まらない。断定せず両方を提示する。
+      if (metAcid && respAlk) {
+        A.ambiguous = true;
+        A.steps[A.steps.length - 1].caution =
+          "pH が正常域のため、一次性障害は血液ガスだけでは決まりません。" +
+          "「代謝性アシドーシス＋呼吸性代償」と「慢性呼吸性アルカローシス＋代謝性代償」は同じ所見になります。" +
+          "臨床経過（慢性の過換気か、酸の蓄積か）で判断してください。本アプリは前者として以降の解析を進めます。";
+      } else if (metAlk && respAcid) {
+        A.ambiguous = true;
+        A.steps[A.steps.length - 1].caution =
+          "pH が正常域のため、一次性障害は血液ガスだけでは決まりません。" +
+          "「代謝性アルカローシス＋呼吸性代償」と「慢性呼吸性アシドーシス＋代謝性代償」は同じ所見になります。" +
+          "慢性II型呼吸不全の既往と臨床経過で判断してください。本アプリは前者として以降の解析を進めます。";
+      } else {
+        A.steps[A.steps.length - 1].caution =
+          "pH が正常域にもかかわらず HCO₃⁻・PaCO₂ が偏位しています。完全代償は稀であり、相殺し合う混合性障害を第一に考えます。";
+      }
     }
 
     /* ③ 代償の妥当性 */

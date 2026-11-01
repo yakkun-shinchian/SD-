@@ -52,6 +52,13 @@
   .vout{width:100%;min-height:260px;background:var(--panel3);color:var(--txt);border:1px solid var(--line);
         border-radius:9px;padding:11px;font-size:12.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
         line-height:1.7;white-space:pre}
+  .cf{font-size:10px;font-weight:800;padding:1px 7px;border-radius:999px;white-space:nowrap}
+  .cf-varies{background:var(--amber);color:#241a06}
+  .cf-facility{background:var(--blue);color:#04121c}
+  .cf-design{background:var(--violet);color:#fff}
+  .cf-solid{background:var(--panel3);color:var(--dim);border:1px solid var(--line)}
+  .vitem .cn{font-size:11.5px;color:var(--amber);background:var(--amberbg);
+             border-radius:6px;padding:6px 9px;margin-top:6px;line-height:1.7}
   @media print{
     .vbar,.marks button,.btns{display:none!important}
     .vsec{break-inside:auto} .vitem{break-inside:avoid}
@@ -82,7 +89,9 @@
   var st = {};
   try { st = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { st = {}; }
   try { document.documentElement.setAttribute("data-theme", localStorage.getItem(THEME) || "dark"); } catch (e) {}
-  var starOnly = false, todoOnly = false, openSec = {};
+  var CONF_LABEL = { varies: "出典により割れる", facility: "施設依存",
+                     design: "本アプリの設計", solid: "原典で確定" };
+  var starOnly = false, todoOnly = false, variesOnly = false, openSec = {};
 
   function save() { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
   function mark(id) { return (st[id] && st[id].m) || ""; }
@@ -108,9 +117,11 @@
       (it.star ? ' data-star="1"' : "") + (m ? ' data-done="1"' : "") + ">" +
       '<div class="top">' + (it.star ? '<span class="star">★</span>' : "") +
       '<span class="nm">' + esc(it.label) + "</span>" +
+      (it.conf ? '<span class="cf cf-' + esc(it.conf) + '">' + esc(CONF_LABEL[it.conf] || it.conf) + "</span>" : "") +
       (it.group ? '<span class="grp">' + esc(it.group) + "</span>" : "") +
       (it.tag ? '<span class="grp">' + esc(it.tag) + "</span>" : "") + "</div>" +
       '<div class="dt">' + esc(it.detail) + "</div>" +
+      (it.confNote ? '<div class="cn">⚖ ' + esc(it.confNote) + "</div>" : "") +
       (it.note ? '<div class="nt">' + esc(it.note) + "</div>" : "") +
       refsOf(it.refs) +
       '<div class="marks">' +
@@ -142,6 +153,8 @@
         '<span class="pstat">' + c.done + " / " + c.total + " 済　一致 " + c.ok +
         "　要修正 " + c.fix + "　違う " + c.ng + "</span>" +
       "</div><div class=\"row\" style=\"margin-top:9px\">" +
+        '<button class="btn' + (variesOnly ? " primary" : "") + '" id="b-varies">⚖ 出典により割れる（' +
+          ((VERIFY_DATA.byConf && VERIFY_DATA.byConf.varies) || 0) + "）</button>" +
         '<button class="btn' + (starOnly ? " primary" : "") + '" id="b-star">★ 優先のみ（' + VERIFY_DATA.stars + "）</button>" +
         '<button class="btn' + (todoOnly ? " primary" : "") + '" id="b-todo">未チェックのみ</button>' +
         '<button class="btn" id="b-open">すべて開く</button>' +
@@ -155,10 +168,16 @@
       'アプリが採用している<b>基準値・計算式・閾値・判定条件</b>を、お手元の成書やガイドラインと突き合わせるための一覧です。' +
       '本をこちらに取り込む必要はありません。<b>★ は臨床判断に直結する優先項目</b>（' + VERIFY_DATA.stars + ' 件）です。' +
       '進捗はこのブラウザに保存されます。終わったら<b>「要修正を書き出す」</b>で差分だけをテキスト化し、そのまま貼り戻してください。</p>' +
+      '<p style="margin:10px 0 0;font-size:12.5px;line-height:1.9">各項目には確信度の仕分けが付いています。' +
+      '<span class="cf cf-varies">出典により割れる</span> が最優先です（' +
+      ((VERIFY_DATA.byConf && VERIFY_DATA.byConf.varies) || 0) + ' 件）。値が文献間で一致しておらず、先生の成書を引く価値が最も高い項目です。' +
+      '<span class="cf cf-facility">施設依存</span> は自施設の検査室・規定で、' +
+      '<span class="cf cf-design">本アプリの設計</span> は原典が存在せず、抜けている所見のご指摘が有益な項目です。</p>' +
       "</div></div>" +
 
       VERIFY_DATA.sections.map(function (s) {
         var items = s.items.filter(function (it) {
+          if (variesOnly && it.conf !== "varies") return false;
           if (starOnly && !it.star) return false;
           if (todoOnly && mark(it.id)) return false;
           return true;
@@ -196,6 +215,7 @@
         lines.push("- [" + (mark(it.id) === "ng" ? "違う" : "要修正") + "] " + it.label +
           (it.group ? "（" + it.group + "）" : ""));
         lines.push("  現在の実装: " + String(it.detail).replace(/\n/g, " / "));
+        if (it.confNote) lines.push("  仕分け: " + it.confNote);
         if (memo(it.id)) lines.push("  成書では: " + memo(it.id));
       });
       lines.push("");
@@ -233,6 +253,7 @@
       try { localStorage.setItem(THEME, cur); } catch (err) {}
       return;
     }
+    if (t.id === "b-varies") { variesOnly = !variesOnly; render(); return; }
     if (t.id === "b-star") { starOnly = !starOnly; render(); return; }
     if (t.id === "b-todo") { todoOnly = !todoOnly; render(); return; }
     if (t.id === "b-open") {
@@ -282,6 +303,7 @@
       if (!d) return;
       var done = s.items.filter(function (it) { return mark(it.id); }).length;
       var shown = s.items.filter(function (it) {
+        if (variesOnly && it.conf !== "varies") return false;
         if (starOnly && !it.star) return false;
         if (todoOnly && mark(it.id)) return false;
         return true;

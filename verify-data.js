@@ -1,8 +1,14 @@
 /*! verify-data.js — tools/build-verify-checklist.mjs が自動生成。直接編集しないこと。 */
 var VERIFY_DATA = {
- "generated": "2026-10-31",
+ "generated": "2026-11-01",
  "total": 337,
  "stars": 158,
+ "byConf": {
+  "solid": 73,
+  "facility": 73,
+  "varies": 18,
+  "design": 173
+ },
  "sections": [
   {
    "id": "ref",
@@ -15,7 +21,9 @@ var VERIFY_DATA = {
      "detail": "3300〜8600 /µL",
      "tag": "JCCLS",
      "group": "血算／白血球系",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.neut",
@@ -23,7 +31,9 @@ var VERIFY_DATA = {
      "detail": "38.0〜74.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.lymph",
@@ -31,7 +41,9 @@ var VERIFY_DATA = {
      "detail": "16.0〜49.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.mono",
@@ -39,7 +51,9 @@ var VERIFY_DATA = {
      "detail": "2.0〜10.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.eo",
@@ -47,7 +61,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜7.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.baso",
@@ -55,7 +71,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜2.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.blast",
@@ -63,7 +81,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜0.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.atyp",
@@ -71,7 +91,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜0.0 %",
      "tag": "JCCLS",
      "group": "血算／白血球分画",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.rbc",
@@ -79,7 +101,9 @@ var VERIFY_DATA = {
      "detail": "男 4.35〜5.55／女 3.86〜4.92 ×10⁶/µL",
      "tag": "JCCLS",
      "group": "血算／赤血球系",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.hb",
@@ -87,7 +111,9 @@ var VERIFY_DATA = {
      "detail": "男 13.7〜16.8／女 11.6〜14.8 g/dL",
      "tag": "JCCLS",
      "group": "血算／赤血球系",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.ht",
@@ -95,7 +121,9 @@ var VERIFY_DATA = {
      "detail": "男 40.7〜50.1／女 35.1〜44.4 %",
      "tag": "JCCLS",
      "group": "血算／赤血球系",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "cbc.rdw",
@@ -103,7 +131,9 @@ var VERIFY_DATA = {
      "detail": "11.5〜14.5 %",
      "tag": "施設依存",
      "group": "血算／赤血球系",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "cbc.retic",
@@ -111,7 +141,9 @@ var VERIFY_DATA = {
      "detail": "0.50〜2.00 %",
      "tag": "施設依存",
      "group": "血算／赤血球系",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "cbc.plt",
@@ -119,7 +151,9 @@ var VERIFY_DATA = {
      "detail": "15.8〜34.8 ×10⁴/µL（万）",
      "tag": "JCCLS",
      "group": "血算／血小板",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ast",
@@ -127,7 +161,9 @@ var VERIFY_DATA = {
      "detail": "13〜30 U/L",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.alt",
@@ -135,7 +171,9 @@ var VERIFY_DATA = {
      "detail": "男 10〜42／女 7〜23 U/L",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ld",
@@ -143,7 +181,9 @@ var VERIFY_DATA = {
      "detail": "124〜222 U/L",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.alp",
@@ -151,7 +191,9 @@ var VERIFY_DATA = {
      "detail": "38〜113 U/L",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ggt",
@@ -159,7 +201,9 @@ var VERIFY_DATA = {
      "detail": "男 13〜64／女 9〜32 U/L",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.tbil",
@@ -167,7 +211,9 @@ var VERIFY_DATA = {
      "detail": "0.4〜1.5 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.dbil",
@@ -175,7 +221,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜0.4 mg/dL",
      "tag": "施設依存",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.che",
@@ -183,7 +231,9 @@ var VERIFY_DATA = {
      "detail": "男 240〜486／女 201〜421 U/L",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.tp",
@@ -191,7 +241,9 @@ var VERIFY_DATA = {
      "detail": "6.6〜8.1 g/dL",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.alb",
@@ -199,7 +251,9 @@ var VERIFY_DATA = {
      "detail": "4.1〜5.1 g/dL",
      "tag": "JCCLS",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.nh3",
@@ -207,7 +261,9 @@ var VERIFY_DATA = {
      "detail": "12〜66 µg/dL",
      "tag": "施設依存",
      "group": "生化学／肝・胆道",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.bun",
@@ -215,7 +271,9 @@ var VERIFY_DATA = {
      "detail": "8.0〜20.0 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／腎・尿酸",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.cr",
@@ -223,7 +281,9 @@ var VERIFY_DATA = {
      "detail": "男 0.65〜1.07／女 0.46〜0.79 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／腎・尿酸",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ua",
@@ -231,7 +291,9 @@ var VERIFY_DATA = {
      "detail": "男 3.7〜7.8／女 2.6〜5.5 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／腎・尿酸",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.na",
@@ -239,7 +301,9 @@ var VERIFY_DATA = {
      "detail": "138〜145 mmol/L",
      "tag": "JCCLS",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.k",
@@ -247,7 +311,9 @@ var VERIFY_DATA = {
      "detail": "3.6〜4.8 mmol/L",
      "tag": "JCCLS",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.cl",
@@ -255,7 +321,9 @@ var VERIFY_DATA = {
      "detail": "101〜108 mmol/L",
      "tag": "JCCLS",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ca",
@@ -263,7 +331,9 @@ var VERIFY_DATA = {
      "detail": "8.8〜10.1 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ip",
@@ -271,7 +341,9 @@ var VERIFY_DATA = {
      "detail": "2.7〜4.6 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.mg",
@@ -279,7 +351,9 @@ var VERIFY_DATA = {
      "detail": "1.8〜2.4 mg/dL",
      "tag": "施設依存",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.hco3",
@@ -287,7 +361,9 @@ var VERIFY_DATA = {
      "detail": "22.0〜26.0 mmol/L",
      "tag": "施設依存",
      "group": "生化学／電解質・ミネラル",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.glu",
@@ -295,7 +371,9 @@ var VERIFY_DATA = {
      "detail": "73〜109 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／代謝・栄養",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.hba1c",
@@ -303,7 +381,9 @@ var VERIFY_DATA = {
      "detail": "4.9〜6.0 %",
      "tag": "JCCLS",
      "group": "生化学／代謝・栄養",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.tcho",
@@ -311,7 +391,9 @@ var VERIFY_DATA = {
      "detail": "142〜248 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／代謝・栄養",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ldl",
@@ -319,7 +401,9 @@ var VERIFY_DATA = {
      "detail": "65〜163 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／代謝・栄養",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.hdl",
@@ -327,7 +411,9 @@ var VERIFY_DATA = {
      "detail": "男 38〜90／女 48〜103 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／代謝・栄養",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.tg",
@@ -335,7 +421,9 @@ var VERIFY_DATA = {
      "detail": "男 40〜234／女 30〜117 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／代謝・栄養",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ck",
@@ -343,7 +431,9 @@ var VERIFY_DATA = {
      "detail": "男 59〜248／女 41〜153 U/L",
      "tag": "JCCLS",
      "group": "生化学／心・筋",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.ckmb",
@@ -351,7 +441,9 @@ var VERIFY_DATA = {
      "detail": "0〜25 U/L",
      "tag": "施設依存",
      "group": "生化学／心・筋",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.tnt",
@@ -359,7 +451,9 @@ var VERIFY_DATA = {
      "detail": "0.000〜0.014 ng/mL",
      "tag": "施設依存",
      "group": "生化学／心・筋",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.bnp",
@@ -367,7 +461,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜18.4 pg/mL",
      "tag": "施設依存",
      "group": "生化学／心・筋",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.ntprobnp",
@@ -375,7 +471,9 @@ var VERIFY_DATA = {
      "detail": "0〜125 pg/mL",
      "tag": "施設依存",
      "group": "生化学／心・筋",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.amy",
@@ -383,7 +481,9 @@ var VERIFY_DATA = {
      "detail": "44〜132 U/L",
      "tag": "JCCLS",
      "group": "生化学／膵",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.lip",
@@ -391,7 +491,9 @@ var VERIFY_DATA = {
      "detail": "13〜55 U/L",
      "tag": "施設依存",
      "group": "生化学／膵",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.crp",
@@ -399,7 +501,9 @@ var VERIFY_DATA = {
      "detail": "0.00〜0.14 mg/dL",
      "tag": "JCCLS",
      "group": "生化学／炎症・感染",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "chem.pct",
@@ -407,7 +511,9 @@ var VERIFY_DATA = {
      "detail": "0.00〜0.05 ng/mL",
      "tag": "施設依存",
      "group": "生化学／炎症・感染",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.lac",
@@ -415,7 +521,9 @@ var VERIFY_DATA = {
      "detail": "0.5〜1.6 mmol/L",
      "tag": "施設依存",
      "group": "生化学／炎症・感染",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.sosm",
@@ -423,7 +531,9 @@ var VERIFY_DATA = {
      "detail": "275〜290 mOsm/kg",
      "tag": "施設依存",
      "group": "生化学／神経・体液",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.uosm",
@@ -431,7 +541,9 @@ var VERIFY_DATA = {
      "detail": "50〜1300 mOsm/kg",
      "tag": "施設依存",
      "group": "生化学／神経・体液",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.una",
@@ -439,7 +551,9 @@ var VERIFY_DATA = {
      "detail": "20〜220 mmol/L",
      "tag": "施設依存",
      "group": "生化学／神経・体液",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "chem.usg",
@@ -447,7 +561,9 @@ var VERIFY_DATA = {
      "detail": "1.005〜1.030",
      "tag": "施設依存",
      "group": "生化学／神経・体液",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.plt",
@@ -455,7 +571,9 @@ var VERIFY_DATA = {
      "detail": "15.8〜34.8 ×10⁴/µL（万）",
      "tag": "JCCLS",
      "group": "凝固・線溶／血小板",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "coag.ptsec",
@@ -463,7 +581,9 @@ var VERIFY_DATA = {
      "detail": "10.0〜13.0 秒",
      "tag": "施設依存",
      "group": "凝固・線溶／外因系（PT）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.ptpct",
@@ -471,7 +591,9 @@ var VERIFY_DATA = {
      "detail": "70〜130 %",
      "tag": "施設依存",
      "group": "凝固・線溶／外因系（PT）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.inr",
@@ -479,7 +601,9 @@ var VERIFY_DATA = {
      "detail": "0.90〜1.10",
      "tag": "施設依存",
      "group": "凝固・線溶／外因系（PT）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.aptt",
@@ -487,7 +611,9 @@ var VERIFY_DATA = {
      "detail": "25.0〜40.0 秒",
      "tag": "施設依存",
      "group": "凝固・線溶／内因系（APTT）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.fib",
@@ -495,7 +621,9 @@ var VERIFY_DATA = {
      "detail": "200〜400 mg/dL",
      "tag": "施設依存",
      "group": "凝固・線溶／線溶・凝固因子",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.fdp",
@@ -503,7 +631,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜5.0 µg/mL",
      "tag": "施設依存",
      "group": "凝固・線溶／線溶・凝固因子",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.ddimer",
@@ -511,7 +641,9 @@ var VERIFY_DATA = {
      "detail": "0.00〜1.00 µg/mL",
      "tag": "施設依存",
      "group": "凝固・線溶／線溶・凝固因子",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.at3",
@@ -519,7 +651,9 @@ var VERIFY_DATA = {
      "detail": "80〜130 %",
      "tag": "施設依存",
      "group": "凝固・線溶／線溶・凝固因子",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "coag.tat",
@@ -527,7 +661,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜4.0 ng/mL",
      "tag": "施設依存",
      "group": "凝固・線溶／線溶・凝固因子",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.c3",
@@ -535,7 +671,9 @@ var VERIFY_DATA = {
      "detail": "73〜138 mg/dL",
      "tag": "施設依存",
      "group": "自己抗体／スクリーニング",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.c4",
@@ -543,7 +681,9 @@ var VERIFY_DATA = {
      "detail": "11〜31 mg/dL",
      "tag": "施設依存",
      "group": "自己抗体／スクリーニング",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.ch50",
@@ -551,7 +691,9 @@ var VERIFY_DATA = {
      "detail": "30〜50 U/mL",
      "tag": "施設依存",
      "group": "自己抗体／スクリーニング",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.igg",
@@ -559,7 +701,9 @@ var VERIFY_DATA = {
      "detail": "861〜1747 mg/dL",
      "tag": "施設依存",
      "group": "自己抗体／スクリーニング",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.igg4",
@@ -567,7 +711,9 @@ var VERIFY_DATA = {
      "detail": "11〜121 mg/dL",
      "tag": "施設依存",
      "group": "自己抗体／スクリーニング",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.sil2r",
@@ -575,7 +721,9 @@ var VERIFY_DATA = {
      "detail": "122〜496 U/mL",
      "tag": "施設依存",
      "group": "自己抗体／スクリーニング",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.dsdna",
@@ -583,7 +731,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜12.0 IU/mL",
      "tag": "施設依存",
      "group": "自己抗体／膠原病特異抗体",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.mpo",
@@ -591,7 +741,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜3.5 U/mL",
      "tag": "施設依存",
      "group": "自己抗体／血管炎・抗リン脂質",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.pr3",
@@ -599,7 +751,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜3.5 U/mL",
      "tag": "施設依存",
      "group": "自己抗体／血管炎・抗リン脂質",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.rf",
@@ -607,7 +761,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜15.0 IU/mL",
      "tag": "施設依存",
      "group": "自己抗体／関節リウマチ",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.ccp",
@@ -615,7 +771,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜4.5 U/mL",
      "tag": "施設依存",
      "group": "自己抗体／関節リウマチ",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.mmp3",
@@ -623,7 +781,9 @@ var VERIFY_DATA = {
      "detail": "男 36.9〜121.0／女 17.3〜59.7 ng/mL",
      "tag": "施設依存",
      "group": "自己抗体／関節リウマチ",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.trab",
@@ -631,7 +791,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜2.0 IU/L",
      "tag": "施設依存",
      "group": "自己抗体／甲状腺",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.achr",
@@ -639,7 +801,9 @@ var VERIFY_DATA = {
      "detail": "0.00〜0.20 nmol/L",
      "tag": "施設依存",
      "group": "自己抗体／神経・筋",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "autoab.gad",
@@ -647,7 +811,9 @@ var VERIFY_DATA = {
      "detail": "0.0〜5.0 U/mL",
      "tag": "施設依存",
      "group": "自己抗体／内分泌・皮膚",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.ph",
@@ -655,7 +821,9 @@ var VERIFY_DATA = {
      "detail": "7.350〜7.450",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／動脈血ガス",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.paco2",
@@ -663,7 +831,9 @@ var VERIFY_DATA = {
      "detail": "35.0〜45.0 mmHg",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／動脈血ガス",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.hco3",
@@ -671,7 +841,9 @@ var VERIFY_DATA = {
      "detail": "22.0〜26.0 mmol/L",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／動脈血ガス",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.be",
@@ -679,7 +851,9 @@ var VERIFY_DATA = {
      "detail": "-2.0〜2.0 mmol/L",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／動脈血ガス",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.pao2",
@@ -687,7 +861,9 @@ var VERIFY_DATA = {
      "detail": "80.0〜100.0 mmHg",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／動脈血ガス",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.fio2",
@@ -695,7 +871,9 @@ var VERIFY_DATA = {
      "detail": "0.21〜1.00 （0.21〜1.0）",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／動脈血ガス",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.na",
@@ -703,7 +881,9 @@ var VERIFY_DATA = {
      "detail": "138〜145 mmol/L",
      "tag": "JCCLS",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.cl",
@@ -711,7 +891,9 @@ var VERIFY_DATA = {
      "detail": "101〜108 mmol/L",
      "tag": "JCCLS",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.alb",
@@ -719,7 +901,9 @@ var VERIFY_DATA = {
      "detail": "4.1〜5.1 g/dL",
      "tag": "JCCLS",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.lac",
@@ -727,7 +911,9 @@ var VERIFY_DATA = {
      "detail": "0.5〜1.6 mmol/L",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.glu",
@@ -735,7 +921,9 @@ var VERIFY_DATA = {
      "detail": "73〜109 mg/dL",
      "tag": "JCCLS",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.bun",
@@ -743,7 +931,9 @@ var VERIFY_DATA = {
      "detail": "8.0〜20.0 mg/dL",
      "tag": "JCCLS",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.sosm",
@@ -751,7 +941,9 @@ var VERIFY_DATA = {
      "detail": "275〜290 mOsm/kg",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／電解質（AG計算用）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.una",
@@ -759,7 +951,9 @@ var VERIFY_DATA = {
      "detail": "20〜220 mmol/L",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／尿電解質（尿AG用）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.uk",
@@ -767,7 +961,9 @@ var VERIFY_DATA = {
      "detail": "20〜80 mmol/L",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／尿電解質（尿AG用）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     },
     {
      "id": "abg.ucl",
@@ -775,7 +971,9 @@ var VERIFY_DATA = {
      "detail": "20〜250 mmol/L",
      "tag": "施設依存",
      "group": "血液ガス・酸塩基平衡／尿電解質（尿AG用）",
-     "star": false
+     "star": false,
+     "conf": "facility",
+     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
     }
    ]
   },
@@ -790,7 +988,9 @@ var VERIFY_DATA = {
      "detail": "下限 1000／上限 30000 /µL",
      "tag": "要確認",
      "group": "血算",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.hb",
@@ -798,7 +998,9 @@ var VERIFY_DATA = {
      "detail": "下限 6／上限 20 g/dL",
      "tag": "要確認",
      "group": "血算",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.plt",
@@ -806,7 +1008,9 @@ var VERIFY_DATA = {
      "detail": "下限 2／上限 100 ×10⁴/µL（万）",
      "tag": "要確認",
      "group": "血算",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.tbil",
@@ -814,7 +1018,9 @@ var VERIFY_DATA = {
      "detail": "上限 15 mg/dL",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.nh3",
@@ -822,7 +1028,9 @@ var VERIFY_DATA = {
      "detail": "上限 150 µg/dL",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.cr",
@@ -830,7 +1038,9 @@ var VERIFY_DATA = {
      "detail": "上限 5 mg/dL",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.na",
@@ -838,7 +1048,9 @@ var VERIFY_DATA = {
      "detail": "下限 120／上限 160 mmol/L",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.k",
@@ -846,7 +1058,9 @@ var VERIFY_DATA = {
      "detail": "下限 2.5／上限 6.5 mmol/L",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.glu",
@@ -854,7 +1068,9 @@ var VERIFY_DATA = {
      "detail": "下限 50／上限 500 mg/dL",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.ck",
@@ -862,7 +1078,9 @@ var VERIFY_DATA = {
      "detail": "上限 5000 U/L",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.lac",
@@ -870,7 +1088,9 @@ var VERIFY_DATA = {
      "detail": "上限 4 mmol/L",
      "tag": "要確認",
      "group": "生化学",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.plt",
@@ -878,7 +1098,9 @@ var VERIFY_DATA = {
      "detail": "下限 2／上限 100 ×10⁴/µL（万）",
      "tag": "要確認",
      "group": "凝固・線溶",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.inr",
@@ -886,7 +1108,9 @@ var VERIFY_DATA = {
      "detail": "上限 5",
      "tag": "要確認",
      "group": "凝固・線溶",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.aptt",
@@ -894,7 +1118,9 @@ var VERIFY_DATA = {
      "detail": "上限 100 秒",
      "tag": "要確認",
      "group": "凝固・線溶",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.fib",
@@ -902,7 +1128,9 @@ var VERIFY_DATA = {
      "detail": "下限 100 mg/dL",
      "tag": "要確認",
      "group": "凝固・線溶",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.ph",
@@ -910,7 +1138,9 @@ var VERIFY_DATA = {
      "detail": "下限 7.2／上限 7.6",
      "tag": "要確認",
      "group": "血液ガス・酸塩基平衡",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.paco2",
@@ -918,7 +1148,9 @@ var VERIFY_DATA = {
      "detail": "下限 20／上限 70 mmHg",
      "tag": "要確認",
      "group": "血液ガス・酸塩基平衡",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.pao2",
@@ -926,7 +1158,9 @@ var VERIFY_DATA = {
      "detail": "下限 50 mmHg",
      "tag": "要確認",
      "group": "血液ガス・酸塩基平衡",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.na",
@@ -934,7 +1168,9 @@ var VERIFY_DATA = {
      "detail": "下限 120／上限 160 mmol/L",
      "tag": "要確認",
      "group": "血液ガス・酸塩基平衡",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.lac",
@@ -942,7 +1178,9 @@ var VERIFY_DATA = {
      "detail": "上限 4 mmol/L",
      "tag": "要確認",
      "group": "血液ガス・酸塩基平衡",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     },
     {
      "id": "panic.glu",
@@ -950,65 +1188,81 @@ var VERIFY_DATA = {
      "detail": "下限 50／上限 500 mg/dL",
      "tag": "要確認",
      "group": "血液ガス・酸塩基平衡",
-     "star": true
+     "star": true,
+     "conf": "facility",
+     "confNote": "パニック値は施設規定が最優先。自施設の規定で上書きしてください。"
     }
    ]
   },
   {
    "id": "abg",
    "title": "酸塩基平衡の計算式・閾値",
-   "lead": "血液ガス読影の中核。式そのものの妥当性を照合してください。",
+   "lead": "血液ガス読影の中核。代償式は実装から読み出しています。式そのものの妥当性を照合してください。",
    "items": [
     {
      "id": "abg.ph",
      "label": "pH 判定域",
      "detail": "アシデミア <7.35／正常 7.35〜7.45／アルカレミア >7.45",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.primary",
      "label": "一次性障害の境界",
      "detail": "HCO₃⁻ <22 / >26 mmol/L、PaCO₂ <35 / >45 mmHg",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.winter",
      "label": "代謝性アシドーシスの代償（Winter 式）",
-     "detail": "期待 PaCO₂ = 1.5 × HCO₃⁻ + 8 ± 2",
+     "detail": "Winter 式：期待 PaCO₂ = 1.5 × HCO₃⁻ + 8 ± 2",
      "star": true,
      "refs": [
       "WINTER"
-     ]
+     ],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.metalk",
      "label": "代謝性アルカローシスの代償",
-     "detail": "期待 PaCO₂ = 0.7 × (HCO₃⁻ − 24) + 40 ± 5",
+     "detail": "期待 PaCO₂ = 0.6 × (HCO₃⁻ − 24) + 40 ± 5（係数は出典により 0.6〜0.7）",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "係数 0.6 と 0.7 の二系統がある。本アプリは国内の成書に合わせて 0.6 を採用（2026-10-31 に 0.7 から変更）。"
     },
     {
      "id": "abg.ra",
      "label": "呼吸性アシドーシスの代償",
-     "detail": "急性 PaCO₂ 10 mmHg 上昇につき HCO₃⁻ +1.0／慢性 +3.5（± 2）",
+     "detail": "急性：急性呼吸性アシドーシス：PaCO₂ 10 mmHg 上昇につき HCO₃⁻ 1.0 mmol/L 上昇 ± 2\n慢性：慢性呼吸性アシドーシス：PaCO₂ 10 mmHg 上昇につき HCO₃⁻ 3.5 mmol/L 上昇 ± 2",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "慢性呼吸性アシドーシスの代償係数は 3.5 と 4.0 の二系統がある。本アプリは 3.5。"
     },
     {
      "id": "abg.ralk",
      "label": "呼吸性アルカローシスの代償",
-     "detail": "急性 PaCO₂ 10 mmHg 低下につき HCO₃⁻ −2.0／慢性 −4.0（± 2）",
+     "detail": "急性：急性呼吸性アルカローシス：PaCO₂ 10 mmHg 低下につき HCO₃⁻ 2.0 mmol/L 低下 ± 2\n慢性：慢性呼吸性アルカローシス：PaCO₂ 10 mmHg 低下につき HCO₃⁻ 4.0 mmol/L 低下 ± 2",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "慢性呼吸性アルカローシスの代償係数は 4.0 と 5.0 の二系統がある。本アプリは 4.0。"
     },
     {
      "id": "abg.ag",
      "label": "アニオンギャップ",
      "detail": "AG = Na − (Cl + HCO₃⁻)、基準 12 ± 2、開大の判定は補正後 >14",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "AG の基準は測定法により異なり、12 ± 2 とする文献と 8〜12 とする文献がある。本アプリは 12 ± 2、開大の判定は補正後 >14。"
     },
     {
      "id": "abg.agcorr",
@@ -1017,14 +1271,18 @@ var VERIFY_DATA = {
      "star": true,
      "refs": [
       "FIGGE"
-     ]
+     ],
+     "conf": "varies",
+     "confNote": "アルブミン補正の係数は 2.5 が主流だが 2.0 を採る文献もある。本アプリは 2.5。"
     },
     {
      "id": "abg.delta",
      "label": "Δ比（デルタ比）",
      "detail": "(補正AG − 12) ÷ (24 − HCO₃⁻)。<0.4 高Cl性主体／0.4〜0.8 混合／0.8〜2.0 純粋なAG開大／>2.0 代謝性アルカローシス合併",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "Δ比で純粋な AG開大性とみなす下限が 0.8 と 1.0 で割れる。本アプリは 0.8。"
     },
     {
      "id": "abg.goldmark",
@@ -1033,7 +1291,9 @@ var VERIFY_DATA = {
      "star": false,
      "refs": [
       "GOLDMARK"
-     ]
+     ],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.uag",
@@ -1042,14 +1302,18 @@ var VERIFY_DATA = {
      "star": true,
      "refs": [
       "UAG"
-     ]
+     ],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.aado2",
      "label": "A-aDO₂",
      "detail": "FiO₂ × (760 − 47) − PaCO₂/0.8 − PaO₂、正常上限の目安 = 年齢/4 + 4",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "年齢補正式は「年齢/4 + 4」と「2.5 + 0.21 × 年齢」の二系統がある。本アプリは前者。"
     },
     {
      "id": "abg.pf",
@@ -1058,21 +1322,27 @@ var VERIFY_DATA = {
      "star": true,
      "refs": [
       "BERLIN"
-     ]
+     ],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "abg.osm",
      "label": "推算血清浸透圧と浸透圧ギャップ",
      "detail": "2×Na + 血糖/18 + BUN/2.8、ギャップ >10 mOsm/kg で開大",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "推算式は 2×Na + 血糖/18 + BUN/2.8 を採用。1.86×Na を使う式もある。"
     },
     {
      "id": "abg.respfail",
      "label": "呼吸不全の定義",
      "detail": "PaO₂ ≦60 mmHg。PaCO₂ ≦45 で I 型、>45 で II 型",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "solid",
+     "confNote": ""
     }
    ]
   },
@@ -1088,7 +1358,9 @@ var VERIFY_DATA = {
      "star": true,
      "refs": [
       "EGFR_JP"
-     ]
+     ],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "calc.cca",
@@ -1097,42 +1369,54 @@ var VERIFY_DATA = {
      "star": true,
      "refs": [
       "PAYNE"
-     ]
+     ],
+     "conf": "varies",
+     "confNote": "Payne 式の補正基準アルブミンは 4.0 g/dL を採用。4.5 を採る文献もある。"
     },
     {
      "id": "calc.mcv",
      "label": "赤血球指数",
      "detail": "MCV = Ht×10/RBC、MCH = Hb×10/RBC、MCHC = Hb/Ht×100",
      "star": false,
-     "refs": []
+     "refs": [],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "calc.anc",
      "label": "好中球絶対数",
      "detail": "WBC × 好中球% ÷ 100。<1500 好中球減少、<500 高度",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "calc.retic",
      "label": "網赤血球絶対数",
      "detail": "RBC(×10⁶/µL) × 10000 × 網赤血球(%)。>10万 増加、<2.5万 低値",
      "star": true,
-     "refs": []
+     "refs": [],
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "calc.buncr",
      "label": "BUN／Cr 比",
      "detail": ">20 で腎前性・消化管出血を示唆",
      "star": false,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "20 という閾値は目安であり、明確な原典上のカットオフではない。"
     },
     {
      "id": "calc.deritis",
      "label": "De Ritis 比（AST/ALT）",
      "detail": "≧2 でアルコール性・肝硬変、<1 で慢性肝炎を示唆",
      "star": false,
-     "refs": []
+     "refs": [],
+     "conf": "varies",
+     "confNote": "2 という閾値は目安。"
     }
    ]
   },
@@ -1150,7 +1434,9 @@ var VERIFY_DATA = {
      "refs": [
       "SEPSIS3"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.sofa",
@@ -1162,7 +1448,9 @@ var VERIFY_DATA = {
       "SOFA",
       "SEPSIS3"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.curb65",
@@ -1173,7 +1461,9 @@ var VERIFY_DATA = {
      "refs": [
       "CURB65"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.adrop",
@@ -1184,7 +1474,9 @@ var VERIFY_DATA = {
      "refs": [
       "ADROP"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.mcisaac",
@@ -1195,7 +1487,9 @@ var VERIFY_DATA = {
      "refs": [
       "CENTOR"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.news2",
@@ -1206,7 +1500,9 @@ var VERIFY_DATA = {
      "refs": [
       "NEWS2"
      ],
-     "star": true
+     "star": true,
+     "conf": "varies",
+     "confNote": "SpO₂ はスケール1のみ実装。慢性II型呼吸不全に用いるスケール2は未実装。"
     },
     {
      "id": "score.chadsvasc",
@@ -1217,7 +1513,9 @@ var VERIFY_DATA = {
      "refs": [
       "CHADSVASC"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.hasbled",
@@ -1228,7 +1526,9 @@ var VERIFY_DATA = {
      "refs": [
       "HASBLED"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.wellsdvt",
@@ -1239,7 +1539,9 @@ var VERIFY_DATA = {
      "refs": [
       "WELLS_DVT"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.wellspe",
@@ -1250,7 +1552,9 @@ var VERIFY_DATA = {
      "refs": [
       "WELLS_PE"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.spesi",
@@ -1261,7 +1565,9 @@ var VERIFY_DATA = {
      "refs": [
       "SPESI"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.abcd2",
@@ -1272,7 +1578,9 @@ var VERIFY_DATA = {
      "refs": [
       "ABCD2"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.kdigo",
@@ -1283,7 +1591,9 @@ var VERIFY_DATA = {
      "refs": [
       "KDIGO_AKI"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.ckd",
@@ -1294,7 +1604,9 @@ var VERIFY_DATA = {
      "refs": [
       "KDIGO_CKD"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.childpugh",
@@ -1305,7 +1617,9 @@ var VERIFY_DATA = {
      "refs": [
       "CHILDPUGH"
      ],
-     "star": true
+     "star": true,
+     "conf": "varies",
+     "confNote": "PT の区分を活性（%）と INR の両方から判定している。読み替えの境界は施設差がある。"
     },
     {
      "id": "score.meldna",
@@ -1317,7 +1631,9 @@ var VERIFY_DATA = {
       "MELD",
       "MELDNA"
      ],
-     "star": true
+     "star": true,
+     "conf": "varies",
+     "confNote": "MELD の上下限（6〜40）と Cr の上限 4.0、透析時の扱いは版により異なる。"
     },
     {
      "id": "score.westhaven",
@@ -1328,7 +1644,9 @@ var VERIFY_DATA = {
      "refs": [
       "WESTHAVEN"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.gbs",
@@ -1339,7 +1657,9 @@ var VERIFY_DATA = {
      "refs": [
       "GBS"
      ],
-     "star": true
+     "star": true,
+     "conf": "varies",
+     "confNote": "Glasgow-Blatchford は配点の版差がある。本アプリは原著の配点。"
     },
     {
      "id": "score.jss_ap",
@@ -1350,7 +1670,9 @@ var VERIFY_DATA = {
      "refs": [
       "JSS_AP"
      ],
-     "star": true
+     "star": true,
+     "conf": "varies",
+     "confNote": "LDH の「基準値上限の2倍」を 444 U/L（222 × 2）として自動入力している。自施設の LDH 基準値上限で変わる。"
     },
     {
      "id": "score.light",
@@ -1361,7 +1683,9 @@ var VERIFY_DATA = {
      "refs": [
       "LIGHT"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.isth_dic",
@@ -1372,7 +1696,9 @@ var VERIFY_DATA = {
      "refs": [
       "ISTH_DIC"
      ],
-     "star": true
+     "star": true,
+     "conf": "varies",
+     "confNote": "PT 延長（秒）を PT活性または INR から換算している。本来は対照値との秒差であり、施設の対照値により変わる。"
     },
     {
      "id": "score.fourts",
@@ -1383,7 +1709,9 @@ var VERIFY_DATA = {
      "refs": [
       "FOURTS"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.hscore",
@@ -1394,7 +1722,9 @@ var VERIFY_DATA = {
      "refs": [
       "HSCORE"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     },
     {
      "id": "score.burch",
@@ -1406,7 +1736,9 @@ var VERIFY_DATA = {
       "BURCH",
       "JTA_STORM"
      ],
-     "star": true
+     "star": true,
+     "conf": "solid",
+     "confNote": ""
     }
    ]
   },
@@ -1425,7 +1757,9 @@ var VERIFY_DATA = {
       "SEPSIS3",
       "SOFA"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.fn",
@@ -1434,7 +1768,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】neutropenia_severe\n【支持】好中球絶対数 <500/µL（重み 3）　|　発熱（重み 3）　|　貧血（重み 1）　|　血小板減少（重み 1）",
      "note": "好中球がいないため膿も発赤も出ません。局所所見の乏しさは「感染がない」ことを意味しません。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.acs",
@@ -1443,7 +1779,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】troponin_high\n【支持】トロポニン上昇（重み 3）　|　CK 上昇（重み 1）　|　BNP 上昇（重み 1）\n【否定】高度腎機能低下（トロポニン偽陽性の要因）（−2）　|　明らかな感染（2型心筋傷害の可能性）（−1）",
      "note": "トロポニン上昇は「心筋が傷んだ」という事実にすぎません。冠動脈閉塞か、需給不均衡（2型）か、心筋炎・肺塞栓・腎不全かは経時変化と文脈で決まります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.hf",
@@ -1452,7 +1790,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】bnp_high\n【支持】BNP／NT-proBNP 上昇（重み 3）　|　低Na血症（希釈性）（重み 1）　|　腎機能低下（心腎連関）（重み 1）　|　肝うっ血（重み 1）　|　低酸素血症（重み 1）",
      "note": "BNP は腎機能低下・高齢・心房細動でも上がり、肥満では低く出ます。数値だけでなく体重と浮腫の推移で読んでください。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.pe",
@@ -1464,7 +1804,9 @@ var VERIFY_DATA = {
       "WELLS_PE",
       "SPESI"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.ards",
@@ -1475,7 +1817,9 @@ var VERIFY_DATA = {
      "refs": [
       "BERLIN"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.copd_exac",
@@ -1484,7 +1828,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】respiratory_acidosis\n【支持】PaCO₂ 上昇（実測）（重み 3）　|　低酸素血症（重み 2）　|　慢性代償による HCO₃⁻ 高値（重み 2）　|　代償の破綻（急性の上乗せ）（重み 2）",
      "note": "慢性代償のある患者で pH が落ちていれば、それは「急性の上乗せ」です。PaCO₂ の絶対値ではなく pH の変化を見ます。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.aki",
@@ -1495,7 +1841,9 @@ var VERIFY_DATA = {
      "refs": [
       "KDIGO_AKI"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.siadh",
@@ -1504,7 +1852,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】hypona_mod\n【支持】中等度以上の低Na血症（重み 3）　|　尿浸透圧 >300（重み 3）　|　尿中Na ≧40（SIADH により特異的）（重み 3）　|　尿中Na ≧30（重み 1）\n【否定】高Na血症（−3）　|　脱水所見（体液量減少を示唆）（−2）",
      "note": "SIADH は除外診断です。甲状腺機能低下症と副腎不全を外さないと診断してはいけません。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.csws",
@@ -1513,7 +1863,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】hypona_mod\n【支持】中等度以上の低Na血症（重み 3）　|　尿中Na 高値（重み 3）　|　BUN/Cr 比 >20（体液量減少）（重み 3）　|　尿浸透圧 高値（重み 1）",
      "note": "SIADH と検査値が同じで治療が正反対です。分けるのは検査値ではなく体液量。看護記録の体重と尿量が診断を決めます。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.di",
@@ -1522,7 +1874,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】hyperna\n【支持】高Na血症（重み 3）　|　尿浸透圧 低値（重み 3）\n【否定】低Na血症（−3）",
      "note": "高Naで薄い尿が大量に出ていれば尿崩症です。下垂体術後は数時間で進むので、尿量を時間単位で追います。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.rta",
@@ -1533,7 +1887,9 @@ var VERIFY_DATA = {
      "refs": [
       "UAG"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.dka",
@@ -1544,7 +1900,9 @@ var VERIFY_DATA = {
      "refs": [
       "GOLDMARK"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.hhs",
@@ -1553,7 +1911,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】hyperglycemia_extreme\n【支持】血糖 >600 mg/dL（重み 3）　|　高Na血症（重み 2）　|　著明な脱水（重み 2）\n【否定】AG 開大（DKA を示唆）（−2）",
      "note": "DKA より死亡率が高い病態です。高齢で脱水が強く、意識障害で発見されます。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.storm",
@@ -1565,7 +1925,9 @@ var VERIFY_DATA = {
       "BURCH",
       "JTA_STORM"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.adrenal",
@@ -1574,7 +1936,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】hypona・hyperk・hypoglycemia・eosinophilia（2件以上）\n【支持】低Na血症（重み 3）　|　高K血症（重み 3）　|　低血糖（重み 2）　|　好酸球増多（重み 2）　|　抗副腎皮質抗体陽性（重み 3）　|　高Ca血症（重み 1）",
      "note": "「低Na＋高K＋低血糖＋好酸球増多」は副腎不全の指紋です。ステロイドを長期内服していた患者の急な中断が典型的な引き金。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.tls",
@@ -1583,7 +1947,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】hyperk・hyperp・ua_high（3件以上）\n【支持】高K血症（重み 3）　|　高P血症（重み 3）　|　高尿酸血症（重み 3）　|　低Ca血症（重み 2）　|　腎機能低下（重み 2）　|　LD 上昇（重み 2）　|　芽球出現（重み 2）",
      "note": "横紋筋融解症がまったく同じ電解質パターンを作ります。背景（化学療法か、長時間臥床か）で分けてください。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.cirrhosis",
@@ -1595,7 +1961,9 @@ var VERIFY_DATA = {
       "CHILDPUGH",
       "MELD"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.cholangitis",
@@ -1604,7 +1972,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】cholestasis\n【支持】胆汁うっ滞（ALP・γ-GT 上昇）（重み 3）　|　黄疸（重み 3）　|　発熱（重み 3）　|　強い炎症（重み 2）　|　PCT 高値（重み 2）",
      "note": "Charcot 三徴に意識障害とショックが加われば Reynolds 五徴。閉鎖腔の感染なので、抗菌薬だけでは治りません。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.gib",
@@ -1615,7 +1985,9 @@ var VERIFY_DATA = {
      "refs": [
       "GBS"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.pancreatitis",
@@ -1626,7 +1998,9 @@ var VERIFY_DATA = {
      "refs": [
       "JSS_AP"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.dic",
@@ -1638,7 +2012,9 @@ var VERIFY_DATA = {
       "JAAM_DIC",
       "ISTH_DIC"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.tma",
@@ -1647,7 +2023,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】anemia・plt_low・ld_high（3件以上）\n【支持】貧血（重み 3）　|　血小板減少（重み 3）　|　LD 上昇（重み 3）　|　間接ビリルビン上昇（重み 2）　|　網赤血球増加（重み 2）　|　腎機能低下（重み 2）\n【否定】PT 延長（DIC を示唆）（−3）　|　フィブリノゲン低下（DIC を示唆）（−3）",
      "note": "DIC と見た目が同じで凝固系だけが正常——これが TTP の指紋です。血小板輸血が禁忌になりうる点で、取り違えが致命的になります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.hlh",
@@ -1658,7 +2036,9 @@ var VERIFY_DATA = {
      "refs": [
       "HSCORE"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.hit",
@@ -1669,7 +2049,9 @@ var VERIFY_DATA = {
      "refs": [
       "FOURTS"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.mds",
@@ -1678,7 +2060,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】pancytopenia・retic_low\n【支持】汎血球減少（重み 3）　|　大球性（重み 2）　|　網赤血球低値（重み 3）　|　芽球出現（重み 2）\n【否定】網赤血球増加（末梢での破壊・喪失を示唆）（−3）",
      "note": "汎血球減少を見たら、まず網赤血球です。作れていないのか、作っているが壊されているのか——方向が真逆になります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.sle",
@@ -1689,7 +2073,9 @@ var VERIFY_DATA = {
      "refs": [
       "SLE2019"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.aav",
@@ -1698,7 +2084,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】mpo_pos・pr3_pos\n【支持】MPO-ANCA 陽性（重み 3）　|　PR3-ANCA 陽性（重み 3）　|　腎機能低下（重み 3）　|　強い炎症（重み 2）　|　貧血（重み 1）　|　好酸球増多（EGPA）（重み 2）",
      "note": "急速進行性糸球体腎炎は週単位で不可逆になります。ANCA 陽性＋尿潜血＋Cr 上昇は、待てない組み合わせです。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.aps",
@@ -1709,7 +2097,9 @@ var VERIFY_DATA = {
      "refs": [
       "APS_SYD"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.mg",
@@ -1718,7 +2108,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】achr_pos・musk_pos\n【支持】抗AChR 抗体陽性（重み 3）　|　抗MuSK 抗体陽性（重み 3）　|　呼吸性アシドーシス（クリーゼ）（重み 3）　|　甲状腺自己抗体陽性（合併）（重み 1）",
      "note": "SpO₂ は最後まで保たれます。呼吸筋疲労は「努力」の指標（呼吸数・咳の強さ・話せる語数）で捉えてください。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.gbs",
@@ -1727,7 +2119,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】gm1_pos・gq1b_pos・gt1a_pos\n【支持】抗GM1 抗体陽性（軸索型）（重み 3）　|　抗GQ1b 抗体陽性（Fisher症候群）（重み 3）　|　抗GT1a 抗体陽性（咽頭頸部上腕型）（重み 3）　|　呼吸性アシドーシス（重み 3）",
      "note": "麻痺の進行は上行性です。横隔膜に届く前に呼吸機能を測り始めるかどうかが予後を分けます。抗GT1a型は嚥下障害で発症するため、脳幹梗塞や重症筋無力症と取り違えられやすい点に注意します。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.ae",
@@ -1736,7 +2130,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】nmdar_pos・lgi1_pos・caspr2_pos\n【支持】抗NMDA受容体 抗体陽性（重み 3）　|　抗LGI1 抗体陽性（重み 3）　|　抗CASPR2 抗体陽性（重み 3）　|　低Na血症（抗LGI1 に多い）（重み 2）",
      "note": "若年者の急な精神症状を精神疾患と決める前に、一度は自己免疫性脳炎を考えてください。治せる認知症・治せる精神症状です。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.hepatic_enceph",
@@ -1747,7 +2143,9 @@ var VERIFY_DATA = {
      "refs": [
       "WESTHAVEN"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.toxalcohol",
@@ -1758,7 +2156,9 @@ var VERIFY_DATA = {
      "refs": [
       "GOLDMARK"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     },
     {
      "id": "ddx.rhabdo",
@@ -1767,7 +2167,9 @@ var VERIFY_DATA = {
      "detail": "【トリガー】rhabdo_range・ck_veryhigh\n【支持】CK >5000 U/L（重み 3）　|　高K血症（重み 2）　|　高P血症（重み 2）　|　低Ca血症（重み 2）　|　高尿酸血症（重み 1）　|　腎機能低下（重み 2）　|　LD 上昇（重み 1）　|　AST 優位の上昇（重み 1）",
      "note": "尿試験紙で潜血陽性なのに沈渣に赤血球がない——これがミオグロビン尿の見分け方です。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
     }
    ]
   },
@@ -1782,7 +2184,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】好中球絶対数 < 500/µL・発熱 37.5℃以上",
      "note": "感染症が急速に重症化しうる状態。血液培養2セット採取と広域抗菌薬の速やかな投与が原則です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-neutropenia",
@@ -1790,7 +2194,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】好中球絶対数 < 1500/µL",
      "note": "感染防御能が落ちています。化学療法歴・薬剤性（抗甲状腺薬・抗てんかん薬ほか）を確認してください。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-plt-critical",
@@ -1798,7 +2204,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】血小板 < 2万/µL",
      "note": "自然出血（頭蓋内出血を含む）の危険域です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-plt-low",
@@ -1806,7 +2214,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】血小板 < 15.8万/µL",
      "note": "DIC・ITP・薬剤性（ヘパリン起因性＝HIT を含む）・肝硬変・敗血症・偽性血小板減少を鑑別します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-hit",
@@ -1814,7 +2224,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】ヘパリン投与中・血小板減少",
      "note": "HIT は血小板が減るのに血栓ができる逆説的な病態です。投与開始5〜10日目の50%以上の減少が典型。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-blast",
@@ -1822,7 +2234,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】末梢血に芽球を認める",
      "note": "急性白血病をはじめとする造血器腫瘍を示唆します。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-iron",
@@ -1830,7 +2244,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】貧血・MCV < 83.6 fL（小球性）",
      "note": "慢性出血（消化管・月経）が背景にあることが多く、原因検索が本体です。フェリチン・血清鉄・TIBC で確認します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-acd",
@@ -1838,7 +2254,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】貧血・RDW 上昇を伴わない・網赤血球の増加もない",
      "note": "炎症・感染・悪性腫瘍・腎性貧血などの慢性病態に伴う貧血。鉄欠乏と紛らわしいので、フェリチンで切り分けます（ACD ではフェリチンは正常〜高値）。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-megalo",
@@ -1846,7 +2264,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】貧血・MCV > 98.2 fL（大球性）",
      "note": "ビタミンB12・葉酸欠乏、骨髄異形成症候群、肝疾患、アルコール、甲状腺機能低下症を鑑別します。B12欠乏は亜急性連合性脊髄変性症など神経症状を伴うことがあります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-hemolysis",
@@ -1854,7 +2274,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】貧血・網赤血球増加",
      "note": "骨髄が造血で応答している状態。溶血性貧血か、急性出血後の回復期かを切り分けます。溶血なら LD上昇・間接ビリルビン上昇・ハプトグロビン低下が揃います。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-hypoprolif",
@@ -1862,7 +2284,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】貧血・網赤血球が増えていない",
      "note": "骨髄の産生低下（骨髄抑制・腎性貧血・造血原料不足・慢性炎症）を示唆します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-anemia-severe",
@@ -1870,7 +2294,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】Hb < 6.0 g/dL",
      "note": "輸血の適応が検討される水準です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-bacterial",
@@ -1878,7 +2304,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】白血球増加・好中球／リンパ球比（NLR）> 5",
      "note": "細菌感染や急性炎症で典型的な像です。NLR はストレス反応や重症度の指標にもなります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-viral",
@@ -1886,7 +2314,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】異型リンパ球の出現",
      "note": "EBV・CMV・HIV 急性期・薬剤性過敏症症候群（DIHS）などで出現します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-eo",
@@ -1894,7 +2324,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】好酸球 > 7%",
      "note": "アレルギー・薬剤性・寄生虫・好酸球性多発血管炎性肉芽腫症（EGPA）・副腎不全を鑑別します。新規薬剤の開始時期との関連を確認してください。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-steroid",
@@ -1902,7 +2334,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】白血球増加・ステロイド投与中",
      "note": "ステロイドは好中球を血管壁から遊離させ、感染がなくても白血球が上がります。一方でリンパ球は減ります。感染の有無を白血球数だけで判断しないでください。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cbc-polycythemia",
@@ -1910,7 +2344,9 @@ var VERIFY_DATA = {
      "group": "血算",
      "detail": "【根拠】ヘモグロビン高値",
      "note": "脱水による見かけ上の濃縮か、真性多血症・二次性多血（慢性低酸素・喫煙・睡眠時無呼吸）かを切り分けます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hyperk",
@@ -1918,7 +2354,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】K > 6.0 mmol/L",
      "note": "心室細動・心停止に直結します。溶血による偽性高K血症（採血時の駆血が強い・細い針）も必ず鑑別してください。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypok",
@@ -1926,7 +2364,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】K < 3.0 mmol/L",
      "note": "不整脈・筋力低下・腸管麻痺を起こします。Mgが低いとKは補正されにくいので、Mgも同時に確認してください。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypona-severe",
@@ -1934,7 +2374,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】Na < 125 mmol/L",
      "note": "意識障害・痙攣を起こしえます。補正が速すぎると浸透圧性脱髄症候群（ODS）を招くため、補正速度の管理が決定的に重要です（目安 24時間で 8〜10 mmol/L 以内）。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-siadh",
@@ -1942,7 +2384,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】低Na血症・尿浸透圧 > 300 mOsm/kg・尿中Na ≧ 40 mmol/L",
      "note": "体液量が正常〜やや過剰なのが特徴。中枢神経疾患（くも膜下出血・髄膜炎・脳外傷）、肺疾患、薬剤（カルバマゼピン・SSRI）が原因になります。治療は水制限が基本で、CSWSとは逆向きです。なお尿中Naの閾値は基準により 20 以上とするものと 40 以上とするものがあり、本アプリは特異度を優先して 40 以上を採っています。",
-     "star": false
+     "star": false,
+     "conf": "varies",
+     "confNote": "尿中Na の閾値は 20 以上とする基準と 40 以上とする基準がある。本アプリは特異度を優先して 40 以上（2026-10-31 に 30 から変更）。"
     },
     {
      "id": "pat.ch-csws",
@@ -1950,7 +2394,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】低Na血症・尿中Na高値・中枢神経疾患の背景",
      "note": "SIADH と検査所見がほぼ同じでありながら、治療が正反対になる重要な鑑別です。CSWS は体液量が減少（多尿・体重減少・脱水所見）し、治療は生理食塩水による補充。SIADH に水制限をかけるつもりで CSWS を絞れば、脳血流が落ちて致命的になりえます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypona-dilut",
@@ -1958,7 +2404,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】低Na血症・尿浸透圧 ≦ 100 mOsm/kg",
      "note": "腎は正しく水を捨てようとしています。多飲・低張輸液の過剰が原因のことが多いです。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypona-workup",
@@ -1966,7 +2414,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】低Na血症・尿浸透圧・尿中Na が未測定",
      "note": "低Na血症は原因によって治療が正反対になります。尿浸透圧と尿中Naがないと鑑別できません。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-di",
@@ -1974,7 +2424,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】高Na血症・尿が希釈されている（尿浸透圧低値／尿比重低値）",
      "note": "下垂体・視床下部の術後、頭部外傷、脳死に近い病態で起こります。大量の希釈尿が出続け、急速に高Na血症が進みます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hyperna",
@@ -1982,7 +2434,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】Na > 155 mmol/L",
      "note": "ほぼ常に「水が足りない」状態です。自由に水を飲めない患者（意識障害・挿管・高齢）で進行します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-mannitol",
@@ -1990,7 +2444,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】マンニトール／グリセオール投与中",
      "note": "浸透圧利尿により自由水が失われ高Na血症に傾き、浸透圧ギャップが開きます。腎機能低下例では蓄積して急性腎障害を起こすことがあります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hyperca",
@@ -1998,7 +2454,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】補正Ca > 12 mg/dL",
      "note": "意識障害・多尿・脱水・不整脈を起こします。悪性腫瘍（骨転移・PTHrP）と原発性副甲状腺機能亢進症が二大原因です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypoca",
@@ -2006,7 +2464,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】補正Ca < 7.0 mg/dL",
      "note": "テタニー・痙攣・喉頭痙攣を起こしえます。甲状腺／副甲状腺術後、大量輸血、急性膵炎、腫瘍崩壊症候群で生じます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypomg",
@@ -2014,7 +2474,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】Mg < 1.8 mg/dL",
      "note": "低K・低Caを「治らなくさせる」隠れた原因です。Mgを補正しないとKもCaも上がりません。PPI長期内服・利尿薬・アルコール・下痢が原因。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-aki",
@@ -2022,7 +2484,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】eGFR < 30 mL/min/1.73m²",
      "note": "過去のCr値との比較が決定的です。急性なら原因（腎前性・腎性・腎後性）の検索、慢性なら薬剤の腎排泄調整が焦点になります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-prerenal",
@@ -2030,7 +2494,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】BUN/Cr比 > 20",
      "note": "脱水・心拍出量低下・ステロイド・高蛋白負荷のほか、消化管出血でもBUNが優位に上がります。Hb・出血徴候を追加確認してください。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-gib",
@@ -2038,7 +2504,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】BUN/Cr比 > 20・貧血",
      "note": "腸管内の血液が蛋白として吸収されBUNが上がります。貧血と組み合わさると消化管出血を強く示唆します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hepatocellular",
@@ -2046,7 +2514,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】AST／ALT 上昇",
      "note": "ALP・γ-GTの測定状況と結果を確認し、胆汁うっ滞・混合型を含めて評価してください。ウイルス性肝炎・薬剤性肝障害・虚血性肝炎・アルコールを鑑別します。AST/ALT比（De Ritis比）が2以上ならアルコール性や肝硬変、1未満なら慢性肝炎を示唆します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-cholestasis",
@@ -2054,7 +2524,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】ALP 上昇・γ-GT 上昇",
      "note": "胆道閉塞（総胆管結石・腫瘍）、薬剤性、原発性胆汁性胆管炎を鑑別します。発熱＋右季肋部痛＋黄疸（Charcot三徴）があれば急性胆管炎で緊急です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-cholangitis",
@@ -2062,7 +2534,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】胆汁うっ滞（ALP・γ-GT上昇）・黄疸・発熱・腹痛または黄疸の自覚",
      "note": "発熱・右季肋部痛・黄疸の三徴がそろう緊急病態です。胆道は閉鎖腔のため、胆汁がうっ滞すると細菌が一気に血中へ押し出され、短時間で敗血症性ショックに至ります。意識障害とショックが加われば Reynolds 五徴で、緊急ドレナージの適応です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-liverfailure",
@@ -2070,7 +2544,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】アルブミン低下・ChE低下・PT延長・アンモニア上昇のいずれか・黄疸または肝逸脱酵素上昇",
      "note": "蛋白合成能の低下を示します。凝固能（PT-INR）と血小板を必ず併せて評価してください。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-nh3",
@@ -2078,7 +2554,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】アンモニア > 150 µg/dL",
      "note": "肝性脳症を起こします。採血後に時間が経つと偽高値になるため、氷冷・速やかな提出が必要です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-vpa-nh3",
@@ -2086,7 +2564,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】アンモニア高値・バルプロ酸内服中",
      "note": "バルプロ酸は肝障害がなくてもアンモニアを上げ、意識障害・傾眠を起こします（VPA誘発性高アンモニア血症性脳症）。肝性脳症と取り違えやすい重要な鑑別です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-cbz-na",
@@ -2094,7 +2574,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】低Na血症・カルバマゼピン内服中",
      "note": "カルバマゼピンは SIADH 様の機序で低Na血症を起こします。高齢者・長期内服で頻度が上がります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hypoglycemia",
@@ -2102,7 +2584,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】血糖 < 50 mg/dL",
      "note": "不可逆的な脳障害を起こしえます。発汗・頻脈・振戦などの交感神経症状は、β遮断薬内服中や無自覚性低血糖では出ません。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-dka",
@@ -2110,7 +2594,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】著明な高血糖・アニオンギャップ開大",
      "note": "インスリン作用の絶対的不足による代謝性アシドーシスです。脱水・電解質異常を伴い、見かけのKが正常でも体内総Kは枯渇しています。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-hhs",
@@ -2118,7 +2604,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】血糖 > 600 mg/dL",
      "note": "血清浸透圧・血中ケトン・血液ガス（pH／HCO3）・Na／Clを追加確認してください。未測定のAGを正常とは扱えません。HHS・DKAおよび混合病態を鑑別し、追加結果を待たず報告してください。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-troponin",
@@ -2126,7 +2614,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】トロポニン上昇",
      "note": "急性冠症候群だけでなく、心筋炎・肺塞栓・敗血症・腎不全・頻脈でも上昇します。経時変化（上昇／下降パターン）が鑑別の鍵です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-rhabdo",
@@ -2134,7 +2624,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】CK > 5000 U/L",
      "note": "ミオグロビンによる急性腎障害と高K血症が最大の脅威です。長時間の臥床・痙攣・外傷・スタチン・熱中症が原因になります。K・P・尿酸の上昇とCa低下という腫瘍崩壊症候群と同じ電解質パターンを示すため、背景での鑑別が要ります。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-statin-ck",
@@ -2142,7 +2634,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】CK上昇・スタチン内服中",
      "note": "筋痛・脱力を伴う場合は中止を検討する水準です。フィブラート併用で危険が増します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-bnp",
@@ -2150,7 +2644,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】BNP または NT-proBNP 高値",
      "note": "心不全の可能性を示します。腎機能低下・高齢・心房細動でも上昇するため、症状・体重・浮腫と合わせて評価します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-pancreatitis",
@@ -2158,7 +2654,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】アミラーゼまたはリパーゼが基準上限の3倍以上",
      "note": "上腹部痛・背部への放散痛を伴えば急性膵炎の可能性が高いです。重症化すると低Ca血症・腎障害・呼吸不全を来します。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-lactate",
@@ -2166,7 +2664,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】乳酸 ≧ 4.0 mmol/L",
      "note": "敗血症性ショックの診断基準に含まれる値です。血圧が保たれていても組織レベルでは酸素が足りていない可能性があります（潜在性ショック）。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-bacterial-inf",
@@ -2174,7 +2674,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】プロカルシトニン ≧ 0.5 ng/mL",
      "note": "ウイルス感染では上がりにくく、細菌感染・敗血症で上昇します。腎不全でも上がる点に注意。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-inflammation",
@@ -2182,7 +2684,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】CRP > 5 mg/dL",
      "note": "CRPは発症から上昇までに半日〜1日の遅れがあります。発症直後は低くても感染を否定できません。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-malnutrition",
@@ -2190,7 +2694,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】アルブミン < 3.0 g/dL",
      "note": "低栄養のほか、炎症・肝不全・ネフローゼ・蛋白漏出性胃腸症でも低下します。創傷治癒遅延・浮腫・薬物の蛋白結合率変化（ワルファリン等で効果増強）に影響します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ch-tls",
@@ -2198,7 +2704,9 @@ var VERIFY_DATA = {
      "group": "生化学",
      "detail": "【根拠】K上昇・P上昇・尿酸上昇・Ca低下・悪性腫瘍・化学療法の背景",
      "note": "化学療法開始後24〜72時間に多く、急性腎障害と致死性不整脈を起こします。横紋筋融解症も同じ電解質パターンを示すため、背景で切り分けます。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-dic",
@@ -2206,7 +2714,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】日本救急医学会 急性期DIC診断基準 4点以上",
      "note": "全身の微小血管で凝固が起こり、消費性に凝固因子と血小板が枯渇して出血に転じる病態です。基礎疾患（敗血症・外傷・産科疾患・悪性腫瘍）の治療が本体になります。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-dic-watch",
@@ -2214,7 +2724,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】TAT 上昇・AT-III 低下または FDP 上昇",
      "note": "スコアは満たさないものの、凝固の活性化が始まっています。基礎疾患が進行すればDICに移行しえます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-liver-mimic",
@@ -2222,7 +2734,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】急性期DIC基準を満たす・肝疾患の背景",
      "note": "肝硬変は凝固因子の産生低下と脾機能亢進による血小板減少を同時に起こすため、DIC基準を満たしやすい病態です。真のDICか肝不全による凝固障害かで治療が変わります。切り分けの手がかりは、第VIII因子（肝で作られないためDICでのみ低下）と、経時的な増悪の有無です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-pt-only",
@@ -2230,7 +2744,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】PT 延長・APTT は正常",
      "note": "外因系（第VII因子）の問題です。第VII因子は半減期が最も短いため、ビタミンK欠乏・肝障害・ワルファリンで最初に影響が出ます。これが「PTだけ先に延びる」理由です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-aptt-only",
@@ -2238,7 +2754,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】APTT 延長・PT は正常",
      "note": "内因系の問題です。ヘパリン投与中が最も多い原因。薬剤がなければ血友病A/B、von Willebrand病、ループスアンチコアグラント、第XII因子欠乏を鑑別します。ループスアンチコアグラントは出血ではなく血栓に傾く点が逆説的で重要です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-both",
@@ -2246,7 +2764,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】PT 延長・APTT 延長",
      "note": "DIC、肝不全、ビタミンK高度欠乏、大量輸血による希釈性凝固障害、抗凝固薬過量を鑑別します。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-inr-critical",
@@ -2254,7 +2774,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】PT-INR > 5.0",
      "note": "頭蓋内出血・消化管出血の危険域です。ワルファリン内服中なら中和（ビタミンK・プロトロンビン複合体製剤）の適応を検討する水準。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-warfarin",
@@ -2262,7 +2784,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】PT-INR > 3.0・ワルファリン内服中",
      "note": "ビタミンK摂取量の変化、抗菌薬併用、肝機能低下、低アルブミン血症で効果が強まります。納豆・青汁の中止も逆に効きすぎの原因になりえます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-heparin",
@@ -2270,7 +2794,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】ヘパリン投与中・APTT 測定あり",
      "note": "治療域の目安は対照値の1.5〜2.5倍（概ね45〜75秒）。延びすぎは出血、足りなければ血栓です。AT-IIIが70%未満だとヘパリンは効きにくくなります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-fib-critical",
@@ -2278,7 +2804,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】フィブリノゲン < 100 mg/dL",
      "note": "止血の最終段階の材料が枯渇しています。DIC、大量出血、L-アスパラギナーゼ、産科危機的出血で起こります。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-hyperfibrinolysis",
@@ -2286,7 +2814,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】FDP ≧ 25 µg/mL・フィブリノゲン低下",
      "note": "できた血栓が急速に溶かされており、出血に傾きます。線溶亢進型DIC（急性前骨髄球性白血病・大動脈瘤・前立腺癌・産科領域）で典型的です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-ddimer-high",
@@ -2294,7 +2824,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】D-ダイマー > 5.0 µg/mL",
      "note": "深部静脈血栓症・肺塞栓・大動脈解離・DIC・悪性腫瘍（Trousseau症候群）を示唆します。一方、高齢・炎症・術後・妊娠でも上がるため、これ単独では診断できません。脳梗塞では心原性塞栓や悪性腫瘍関連を示唆する所見になります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-ddimer-neg",
@@ -2302,7 +2834,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】D-ダイマー ≦ 1.0 µg/mL",
      "note": "陰性的中率が高い検査です。臨床的な事前確率が低〜中等度であれば、静脈血栓塞栓症はかなり否定的です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-at3",
@@ -2310,7 +2844,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】AT-III < 70%",
      "note": "DIC・肝不全・ネフローゼ症候群・大量出血で低下します。この水準ではヘパリンの効果が著しく落ちます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-plt-bleed",
@@ -2318,7 +2854,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】血小板 < 2万/µL",
      "note": "一次止血が成立しません。自然出血の危険域です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-fib-high",
@@ -2326,7 +2864,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】フィブリノゲン > 400 mg/dL",
      "note": "炎症の急性期反応蛋白として上昇します。感染・手術後・妊娠で見られ、これだけではDICを否定できません。FDP・血小板・PTと臨床経過を確認してください。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.cg-pregnancy",
@@ -2334,7 +2874,9 @@ var VERIFY_DATA = {
      "group": "凝固・線溶",
      "detail": "【根拠】妊娠中・D-ダイマーまたはフィブリノゲン高値",
      "note": "妊娠中はフィブリノゲン・D-ダイマーが生理的に上昇し、通常の基準値では判定できません。一方で妊娠は血栓症そのもののリスクも高めるため、症状との照合が重要です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-sle",
@@ -2342,7 +2884,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗核抗体陽性・抗dsDNA抗体または抗Sm抗体陽性",
      "note": "抗Sm抗体は特異度が高く、抗dsDNA抗体は腎炎の活動性と相関します。補体低下を伴えば活動期を示唆します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-sle-active",
@@ -2350,7 +2894,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗dsDNA抗体陽性・補体低下",
      "note": "免疫複合体の形成で補体が消費されている状態。ループス腎炎・中枢神経ループスの活動期に対応します。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-druglupus",
@@ -2358,7 +2904,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗ヒストン抗体陽性・抗核抗体陽性・抗dsDNA抗体陰性",
      "note": "被疑薬の中止で改善します。腎・中枢神経病変は稀です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-mctd",
@@ -2366,7 +2914,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗U1-RNP抗体陽性・抗Sm／抗dsDNA抗体陰性",
      "note": "SLE・強皮症・多発性筋炎の所見が混在します。レイノー現象と手指の腫脹が特徴。肺高血圧症が予後を左右します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-sjogren",
@@ -2374,7 +2924,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗SS-A/Ro 抗体または抗SS-B/La 抗体陽性",
      "note": "乾燥症状が中心ですが、間質性腎炎による尿細管性アシドーシス（低K血症）、間質性肺炎を合併します。妊娠例では胎児の先天性房室ブロックに注意が必要です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-ssc-diffuse",
@@ -2382,7 +2934,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗Scl-70（トポイソメラーゼI）抗体陽性",
      "note": "間質性肺疾患の合併が多く、予後を決めます。皮膚硬化は体幹に及びます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-ssc-limited",
@@ -2390,7 +2944,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗セントロメア抗体陽性",
      "note": "経過は緩徐ですが、肺動脈性肺高血圧症が晩期に出現し予後を左右します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-renalcrisis",
@@ -2398,7 +2954,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗RNAポリメラーゼIII抗体陽性",
      "note": "急激な高血圧と急性腎障害を起こす緊急病態です。ステロイド高用量が誘因になりえます。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-myositis",
@@ -2406,7 +2964,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗ARS（Jo-1）／抗MDA5／抗TIF1-γ 抗体のいずれか陽性",
      "note": "抗体により表現型が大きく異なります。抗Jo-1は間質性肺疾患、抗MDA5は急速進行性間質性肺炎で予後不良、抗TIF1-γは悪性腫瘍の合併を強く示唆します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-mda5",
@@ -2414,7 +2974,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗MDA5抗体陽性",
      "note": "筋症状が軽くても肺病変が数週で急速に進行し、致死的になりえます。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-ra",
@@ -2422,7 +2984,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗CCP抗体陽性（またはRF陽性）",
      "note": "抗CCP抗体は特異度が高く、骨びらん進行のリスク指標にもなります。RF単独陽性は感染・加齢・他疾患でも起こるため慎重に解釈します。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-mpa",
@@ -2430,7 +2994,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】MPO-ANCA 陽性",
      "note": "顕微鏡的多発血管炎が代表。急速進行性糸球体腎炎と肺胞出血が二大緊急病態です。好酸球増多を伴えば好酸球性多発血管炎性肉芽腫症（EGPA）を考えます。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-gpa",
@@ -2438,7 +3004,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】PR3-ANCA 陽性",
      "note": "上気道（副鼻腔炎・鞍鼻）・肺（結節・空洞）・腎（糸球体腎炎）の三徴が特徴です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-goodpasture",
@@ -2446,7 +3014,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗GBM（糸球体基底膜）抗体陽性",
      "note": "肺胞出血と急速進行性糸球体腎炎を同時に起こします。血漿交換を含む治療開始の遅れが予後を直接悪化させます。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-aps",
@@ -2454,7 +3024,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗カルジオリピン抗体／抗β2GPI抗体／ループスアンチコアグラントのいずれか陽性",
      "note": "動静脈血栓症と習慣流産を起こします。ループスアンチコアグラントは APTT を延長させますが、出血ではなく血栓に傾くという逆説が臨床上の落とし穴です。APTT 延長を見て抗凝固を控えると、かえって血栓を招きます。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-mg",
@@ -2462,7 +3034,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗AChR抗体陽性 または 抗MuSK抗体陽性",
      "note": "日内変動する筋力低下が特徴（夕方に悪化）。最大の脅威は筋無力性クリーゼによる呼吸筋麻痺です。抗MuSK抗体型は球症状・呼吸筋障害が前面に出やすく、より注意が要ります。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-nmosd",
@@ -2470,7 +3044,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗AQP4抗体陽性",
      "note": "多発性硬化症と鑑別が必要です。MSの一部の治療薬はNMOSDを増悪させるため、この抗体の有無が治療方針を分けます。視神経炎と長大な脊髄炎が特徴で、重度の後遺症を残しやすい疾患です。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-mogad",
@@ -2478,7 +3054,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗MOG抗体陽性",
      "note": "視神経炎・急性散在性脳脊髄炎（ADEM）・脊髄炎を起こします。ステロイド反応性が良好な一方、減量時の再発が多いのが特徴です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-gbs",
@@ -2486,7 +3064,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗GM1抗体・抗GQ1b抗体・抗GT1a抗体のいずれか陽性",
      "note": "上行性の弛緩性麻痺が進行し、呼吸筋麻痺と自律神経障害（不整脈・血圧変動）が命に関わります。抗体により表現型が分かれます。抗GM1は軸索型（AMAN）、抗GQ1bは外眼筋麻痺・失調・腱反射消失を呈するFisher症候群、抗GT1aは咽頭頸部上腕型で球麻痺が前面に出ます。抗GT1aと抗GQ1bは交差反応することがあります。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-encephalitis",
@@ -2494,7 +3074,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗NMDA受容体抗体／抗LGI1抗体／抗CASPR2抗体のいずれか陽性",
      "note": "精神症状で発症し精神疾患と誤られることがあります。抗NMDA受容体脳炎は若年女性に多く卵巣奇形腫を合併、痙攣・不随意運動・自律神経不安定・中枢性低換気へ進行します。抗LGI1脳炎は特徴的な短い発作（faciobrachial dystonic seizure）と低Na血症を伴います。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-paraneoplastic",
@@ -2502,7 +3084,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗Hu／抗Yo／抗Ri 抗体のいずれか陽性",
      "note": "神経症状が腫瘍の発見に先行することが多く、抗体の種類が原発巣を示唆します（抗Hu→小細胞肺癌、抗Yo→卵巣癌・乳癌）。",
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-hashimoto",
@@ -2510,7 +3094,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗TPO抗体 または 抗サイログロブリン抗体陽性",
      "note": "機能低下に傾けば、徐脈・低体温・便秘・浮腫・うつ・認知機能低下が出ます。高齢者では認知症と誤られることがあります。重症では粘液水腫性昏睡。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-graves",
@@ -2518,7 +3104,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】TRAb（TSH受容体抗体）陽性",
      "note": "甲状腺クリーゼ（発熱・頻脈・心不全・意識障害）が最大の緊急病態で、感染・手術・ヨード造影剤が誘因になります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-pbc",
@@ -2526,7 +3114,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗ミトコンドリア抗体（M2）陽性",
      "note": "中年女性に多く、ALP・γ-GTの上昇と掻痒感が初発症状になります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-aih",
@@ -2534,7 +3124,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗平滑筋抗体 または 抗LKM-1抗体陽性",
      "note": "IgG高値・ANA陽性を伴うことが多く、急性肝炎様に発症して劇症化することがあります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-pernicious",
@@ -2542,7 +3134,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗胃壁細胞抗体 または 抗内因子抗体陽性",
      "note": "ビタミンB12欠乏による大球性貧血と神経症状（亜急性連合性脊髄変性症：深部感覚障害・歩行失調）を起こします。神経症状は貧血に先行することがあります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-t1dm",
@@ -2550,7 +3144,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗GAD抗体 または 抗IA-2抗体陽性",
      "note": "インスリン分泌が枯渇するためケトアシドーシスのリスクがあります。抗GAD抗体が著明高値の場合は、スティッフパーソン症候群・自己免疫性小脳失調といった神経疾患も鑑別に入ります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-pemphigus",
@@ -2558,7 +3154,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗デスモグレイン1 または 3 抗体陽性",
      "note": "表皮内水疱・びらんを生じ、広範囲では熱傷に準じた体液喪失と感染リスクを伴います。抗Dsg3は口腔内びらんが主体で摂食困難になります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-bp",
@@ -2566,7 +3164,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗BP180抗体陽性",
      "note": "高齢者に多い緊満性水疱。DPP-4阻害薬による薬剤性の報告があり、内服歴の確認が重要です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-igg4",
@@ -2574,7 +3174,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】IgG4 > 135 mg/dL",
      "note": "膵・胆管・涙腺唾液腺・後腹膜など多臓器の腫大を起こします。悪性腫瘍との鑑別が重要です。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.ab-screening-neg",
@@ -2582,7 +3184,9 @@ var VERIFY_DATA = {
      "group": "自己抗体",
      "detail": "【根拠】抗核抗体陰性・ANCA・抗CCP抗体も陰性",
      "note": "抗核抗体陰性は多くの膠原病を否定する方向に働きます。ただし、ANCA関連血管炎や抗リン脂質抗体症候群はANA陰性でも起こります。",
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-severe-acidemia",
@@ -2591,7 +3195,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】pH < 7.20",
      "note": "心収縮力低下・カテコラミン反応性の低下・不整脈を来します。原因検索と並行した循環管理が要ります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-mixed",
@@ -2602,7 +3208,9 @@ var VERIFY_DATA = {
      "refs": [
       "WINTER"
      ],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-triple",
@@ -2613,7 +3221,9 @@ var VERIFY_DATA = {
      "refs": [
       "WINTER"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-ag-high",
@@ -2625,7 +3235,9 @@ var VERIFY_DATA = {
       "GOLDMARK",
       "FIGGE"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-osmgap",
@@ -2636,7 +3248,9 @@ var VERIFY_DATA = {
      "refs": [
       "GOLDMARK"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-hyperchloremic",
@@ -2647,7 +3261,9 @@ var VERIFY_DATA = {
      "refs": [
       "UAG"
      ],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-uag-pos",
@@ -2658,7 +3274,9 @@ var VERIFY_DATA = {
      "refs": [
       "UAG"
      ],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-uag-neg",
@@ -2669,7 +3287,9 @@ var VERIFY_DATA = {
      "refs": [
       "UAG"
      ],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-metalk",
@@ -2678,7 +3298,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】HCO₃⁻ 上昇",
      "note": "尿Cl で二分します。20 mmol/L 未満なら生理食塩水反応性（嘔吐・経鼻胃管吸引・利尿薬中止後・体液量減少）、20 以上なら生理食塩水抵抗性（原発性アルドステロン症・Cushing・Bartter/Gitelman・重度低K）。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-chronic-resp",
@@ -2687,7 +3309,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】PaCO₂ 上昇・HCO₃⁻ が慢性代償の予測範囲内",
      "note": "慢性II型呼吸不全の安定した状態です。この患者で酸素を過剰投与すると CO₂ ナルコーシスを招きえます（低酸素性呼吸ドライブの抑制・換気血流不均等の増悪・Haldane効果）。SpO₂ の目標値は通常より低く設定します。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-acute-resp-acid",
@@ -2696,7 +3320,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】PaCO₂ 上昇・代償が急性パターン",
      "note": "分時換気量が不足しています。中枢抑制（薬剤・脳幹病変）、神経筋疾患（重症筋無力症・ギラン・バレー）、気道閉塞、胸郭・肺病変を鑑別します。進行すれば CO₂ ナルコーシスから呼吸停止に至ります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-resp-alk",
@@ -2705,7 +3331,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】PaCO₂ 低下",
      "note": "過換気は「不安」で片づけてはいけない所見です。低酸素血症、肺塞栓、敗血症、代謝性アシドーシスの代償、肝不全、中枢神経病変、サリチル酸中毒が背景にありえます。過換気症候群は除外診断です。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-aado2",
@@ -2714,7 +3342,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】A-aDO₂ が年齢相当の目安を超えている",
      "note": "換気血流不均等・シャント・拡散障害を示します。純粋な肺胞低換気（麻薬性鎮痛薬・神経筋疾患）では A-aDO₂ は開大しないため、この一点で鑑別が大きく絞れます。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-ards",
@@ -2725,7 +3355,9 @@ var VERIFY_DATA = {
      "refs": [
       "BERLIN"
      ],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-resp-failure",
@@ -2734,7 +3366,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】PaO₂ ≦ 60 mmHg",
      "note": "PaCO₂ 45 mmHg 以下なら I 型（酸素化障害）、45 超なら II 型（換気障害）です。II 型では酸素投与の目標値を下げ、換気補助を検討します。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "pat.abg-ag-low",
@@ -2745,7 +3379,9 @@ var VERIFY_DATA = {
      "refs": [
       "FIGGE"
      ],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-dic",
@@ -2754,7 +3390,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】血小板減少・FDP／D-ダイマー上昇・フィブリノゲン低下・PT延長",
      "note": "全身の微小血管で凝固が起こり、凝固因子と血小板を使い果たして出血に転じています。出血と血栓が同時に進む病態です。なお肝硬変は凝固因子産生低下と脾機能亢進により同じ所見を呈しうるため、肝疾患の背景がある場合は下の「肝疾患によるDIC類似所見」も併せて読んでください。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-tma",
@@ -2763,7 +3401,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】（入力の測定状態に応じて動的に生成されます）",
      "note": "TMA（TTP／HUSを含む）やDICなどの緊急鑑別が必要です。この3所見だけでは溶血やTMAを確定できません。凝固検査が未測定なら正常とは判断できず、基準範囲内でもDICを除外できません。凝固異常があってもTMAの合併を除外しません。追加検査の結果を待たず医師へ報告してください。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-sepsis",
@@ -2772,7 +3412,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】感染を示唆する所見（PCT高値・CRP高度上昇・著明な白血球異常・発熱＋炎症）・qSOFA 2点以上または乳酸 ≧4 mmol/L",
      "note": "感染に対する調節不全の宿主反応で臓器障害が起きている状態です。乳酸は組織が酸素不足に陥っているサインで、血圧が保たれていても安心できません。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-liverfailure",
@@ -2781,7 +3423,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】アルブミン低下・PT延長・黄疸またはアンモニア上昇・血小板減少またはChE低下",
      "note": "肝臓の蛋白合成能（アルブミン・凝固因子）と解毒能（アンモニア・ビリルビン）が同時に落ちています。門脈圧亢進による脾機能亢進が血小板減少を加えます。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-gib",
@@ -2790,7 +3434,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】貧血・BUN/Cr比 > 20",
      "note": "腸管内に出た血液が蛋白として吸収され、BUNだけが選択的に上がります。貧血と組み合わさったときの意味は重いです。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-hemolysis",
@@ -2799,7 +3445,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】貧血・網赤血球増加（骨髄の反応あり）・LD上昇または間接ビリルビン上昇",
      "note": "赤血球が血管内外で壊されています。自己免疫性・薬剤性・機械的（人工弁・TMA）・感染を鑑別します。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-pancytopenia",
@@ -2808,7 +3456,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】白血球・ヘモグロビン・血小板のすべてが低下・いずれかが高度（好中球減少・血小板5万未満・Hb 6未満）",
      "note": "造血そのものが止まっています。薬剤性・再生不良性貧血・骨髄異形成症候群・白血病・血球貪食症候群・巨赤芽球性貧血を鑑別します。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-pancytopenia-mild",
@@ -2817,7 +3467,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】白血球・ヘモグロビン・血小板のすべてが低下（いずれも高度ではない）",
      "note": "三系統がそろって下がっていること自体が、骨髄という共通の上流に原因があることを示唆します。薬剤性・巨赤芽球性貧血・骨髄異形成症候群・脾機能亢進・膠原病を鑑別します。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-hlh",
@@ -2826,7 +3478,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】汎血球減少・可溶性IL-2レセプター高値・38.5℃以上の発熱・肝障害またはLD上昇",
      "note": "マクロファージが自分の血球を食べてしまう過剰炎症状態です。感染・悪性リンパ腫・膠原病が引き金になり、急速に進行します。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-tls",
@@ -2835,7 +3489,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】K上昇・P上昇・尿酸上昇・Ca低下・悪性腫瘍・化学療法の背景",
      "note": "腫瘍細胞が一気に壊れ、細胞内の中身が血中に流れ出しています。高K血症による不整脈と、尿酸・リン酸による急性腎障害が二大脅威です。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-rhabdo",
@@ -2844,7 +3500,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】CK > 5000 U/L・腎機能低下または高K血症",
      "note": "壊れた筋細胞のミオグロビンが尿細管を詰まらせ、同時に細胞内のカリウムが血中に出ます。長時間の転倒臥床・痙攣・熱中症・スタチンが原因になります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-hyponatremia-neuro",
@@ -2853,7 +3511,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】中等度以上の低Na血症・中枢神経疾患の背景",
      "note": "SIADH と中枢性塩類喪失症候群（CSWS）は検査所見がほぼ同じでありながら、治療が正反対です。SIADH は水制限、CSWS は生理食塩水による補充。切り分けるのは検査値ではなく「体液量」です。CSWS に水制限をかければ脳血流が落ち、脳梗塞を招きます。ここは看護師の観察が診断を決める場面です。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-di-neuro",
@@ -2862,7 +3522,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】高Na血症・希釈尿（尿浸透圧低値／尿比重低値）",
      "note": "抗利尿ホルモンが出ない、または効かず、水が止めどなく失われています。下垂体術後・頭部外傷・脳死に近い病態で起こり、数時間で高Na血症が進行します。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-hyperk-cardiac",
@@ -2871,7 +3533,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】K > 6.0 mmol/L",
      "note": "心筋の電気的安定性が失われます。心電図変化（テント状T波→P波消失→QRS幅延長→サインカーブ）は進行の順序そのものです。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-fn",
@@ -2880,7 +3544,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】好中球絶対数 < 500/µL・発熱",
      "note": "感染を抑える細胞がいない状態での発熱です。数時間で敗血症性ショックに至りうるため、時間との勝負になります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-aki-uremia",
@@ -2889,7 +3555,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】eGFR < 15・高K血症または代謝性アシドーシス",
      "note": "腎代替療法の適応が近づいています。高K血症・アシドーシス・溢水・尿毒症症状が透析導入の指標になります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-autoimmune-organ",
@@ -2898,7 +3566,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】自己抗体陽性・臓器障害を示す検査値異常",
      "note": "自己抗体が陽性で、かつ臓器の数値が動いています。疾患そのものの活動性か、免疫抑制療法による副作用・感染かの切り分けが臨床上の分かれ目です。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-mg-crisis",
@@ -2907,7 +3577,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】抗AChR抗体または抗MuSK抗体陽性・呼吸関連の症状または頻呼吸",
      "note": "重症筋無力症で最も恐れるのは呼吸筋麻痺です。SpO₂は最後まで保たれることがあり、低下した時にはすでに手遅れになりえます。呼吸数・咳の強さ・一息で話せる語数といった「努力」の指標で捉えてください。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-gbs-resp",
@@ -2916,7 +3588,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】抗ガングリオシド抗体陽性（GM1／GQ1b／GT1a）・麻痺または呼吸症状",
      "note": "麻痺が上行し、横隔膜に達すると呼吸が止まります。自律神経障害による血圧変動・不整脈も命に関わります。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-hypoglycemia",
@@ -2925,7 +3599,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】血糖 < 50 mg/dL",
      "note": "脳はブドウ糖しか使えません。遷延すれば不可逆的な障害を残します。β遮断薬内服中や無自覚性低血糖では警告症状が出ません。",
      "refs": [],
-     "star": true
+     "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-dehydration",
@@ -2934,7 +3610,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】BUN/Cr比 > 20・高Na血症または頻脈",
      "note": "脱水・循環血液量減少の可能性があります。BUN優位上昇は消化管出血などでも起こるため、Hb・出血徴候も確認してください。高齢者・意識障害・発熱・下痢・利尿薬使用で進行します。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },
     {
      "id": "sx.sx-malnutrition",
@@ -2943,7 +3621,9 @@ var VERIFY_DATA = {
      "detail": "【根拠】アルブミン < 3.0 g/dL・ChE低下または貧血",
      "note": "創傷治癒の遅延、褥瘡、易感染、薬物動態の変化（蛋白結合率の高い薬の効果増強）につながります。",
      "refs": [],
-     "star": false
+     "star": false,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     }
    ]
   }

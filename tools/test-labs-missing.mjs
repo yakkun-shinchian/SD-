@@ -194,4 +194,40 @@ test('抗GT1a 抗体でギラン・バレーを拾う', () => {
   assert.ok(/球麻痺/.test(p.note) && /嚥下/.test(p.actions.join('')), '球麻痺・嚥下への言及がない');
 });
 
+
+test('pH 正常域では一次性障害を断定しない', () => {
+  const a = abg({ph:7.42,paco2:28,hco3:18,na:140,cl:110,alb:4.0});
+  assert.equal(a.ambiguous, true, '非決定であることが立っていない');
+  const st = a.steps.find(x=>x.no===2);
+  assert.ok(/決まりません/.test(st.caution), '断定を避ける注記がない');
+  assert.ok(/慢性呼吸性アルカローシス/.test(st.caution), '対立候補が示されていない');
+  // pH が明らかに偏っていれば断定してよい
+  assert.ok(!abg({ph:7.21,paco2:26,hco3:10,na:138,cl:104,alb:2.4}).ambiguous);
+});
+
+test('照合チェックリストが実装からずれていない', () => {
+  // verify-data.js は生成物。代償式が実装と一致しているかを突き合わせる
+  let data;
+  try {
+    const vc = vm.createContext({});
+    vm.runInContext(fs.readFileSync(new URL('../verify-data.js', import.meta.url),'utf8'), vc);
+    data = vc.VERIFY_DATA;
+  } catch (e) { assert.fail('verify-data.js を読めない。node tools/build-verify-checklist.mjs を実行してください'); }
+  const sec = data.sections.find(s=>s.id==='abg');
+  const live = (v) => {
+    const a = abg(v);
+    return a.compensation ? a.compensation.formula : '';
+  };
+  const pairs = [
+    ['abg.winter', {ph:7.20,paco2:30,hco3:12,na:140,cl:110}],
+    ['abg.metalk', {ph:7.52,paco2:48,hco3:38,na:140,cl:95}]
+  ];
+  pairs.forEach(([id, v]) => {
+    const item = sec.items.find(i=>i.id===id);
+    assert.ok(item.detail.includes(live(v)),
+      id + ' の一覧が実装とずれている。node tools/build-verify-checklist.mjs で再生成してください\n  一覧: ' +
+      item.detail + '\n  実装: ' + live(v));
+  });
+});
+
 console.log(`${checks} checks passed; ${presets} presets evaluated in standalone and integrated modes.`);

@@ -666,6 +666,13 @@
           </div>
           <input type="file" id="fileInput" accept="image/*" hidden />
           <div class="rpreview" id="preview"><img id="previewImg" alt="選択した画像のプレビュー" /></div>
+          <div id="imageSafety" hidden>
+            <label class="rcheck" style="margin-top:8px">
+              <input type="checkbox" id="imageConfirmed" aria-describedby="imageSafetyHint" disabled />
+              <span>この画像は教材画像・自作模式図などで、実際の患者画像ではなく、氏名・IDなどの患者情報を含まないことを確認しました。</span>
+            </label>
+            <div class="rfield__hint" id="imageSafetyHint">確認後に送信すると、画像が Anthropic の外部APIへ送られます。この確認は利用者自身が行うものです。アプリが患者画像や個人情報を自動判別・除去するものではありません。</div>
+          </div>
         </div>
 
         <div class="rfield">
@@ -691,7 +698,22 @@
     const status = $("#status");
     const answerWrap = $("#answerWrap");
 
+    const imageSafety = $("#imageSafety");
+    const imageConfirmed = $("#imageConfirmed");
     let imageData = null; // { media_type, data }
+    let imageLoading = false;
+    let imageVersion = 0;
+
+    function resetImage() {
+      imageVersion += 1; // Ignore stale FileReader callbacks after replacement/clear.
+      imageData = null;
+      imageLoading = false;
+      imageConfirmed.checked = false;
+      imageConfirmed.disabled = true;
+      imageSafety.hidden = true;
+      preview.style.display = "none";
+      previewImg.removeAttribute("src");
+    }
 
     function setStatus(msg, isError) {
       status.textContent = msg || "";
@@ -700,6 +722,7 @@
 
     function loadFile(file) {
       if (!file) return;
+      resetImage();
       if (!/^image\//.test(file.type)) {
         setStatus("画像ファイルを選んでください。", true);
         return;
@@ -708,17 +731,32 @@
         setStatus("画像が大きすぎます（5MBまで）。縮小してから貼ってください。", true);
         return;
       }
+      const version = imageVersion;
+      imageLoading = true;
+      setStatus("画像を読み込んでいます…");
       const reader = new FileReader();
+      const readFailed = () => {
+        if (version !== imageVersion) return;
+        resetImage();
+        setStatus("画像を読み込めませんでした。選び直してください。", true);
+      };
+      reader.onerror = readFailed;
+      reader.onabort = readFailed;
       reader.onload = () => {
+        if (version !== imageVersion) return;
+        imageLoading = false;
         const url = String(reader.result);
         const m = /^data:([^;]+);base64,(.*)$/.exec(url);
         if (!m) { setStatus("画像を読み込めませんでした。", true); return; }
         imageData = { media_type: m[1], data: m[2] };
+        imageConfirmed.checked = false;
+        imageConfirmed.disabled = false;
+        imageSafety.hidden = false;
         previewImg.src = url;
         preview.style.display = "block";
-        setStatus("画像を読み込みました。質問を入力して「放射線科医に聞く」を押してください。");
+        setStatus("画像を読み込みました。プレビューを見て、患者画像・患者情報を含まないことを確認欄で確認してください。");
       };
-      reader.readAsDataURL(file);
+      try { reader.readAsDataURL(file); } catch (e) { readFailed(); }
     }
 
     drop.addEventListener("click", () => fileInput.click());
@@ -749,9 +787,7 @@
     });
 
     $("#clearBtn").addEventListener("click", () => {
-      imageData = null;
-      preview.style.display = "none";
-      previewImg.removeAttribute("src");
+      resetImage();
       fileInput.value = "";
       $("#question").value = "";
       answerWrap.innerHTML = "";
@@ -764,6 +800,13 @@
       const question = $("#question").value.trim();
       const saveKey = $("#saveKey").checked;
 
+      // Guard the actual send path, not only the visual button state.
+      if (imageLoading) { setStatus("画像の読み込みが終わってから確認してください。", true); return; }
+      if (imageData && !imageConfirmed.checked) {
+        setStatus("送信前に、患者画像・患者情報を含まないことを確認欄で確認してください。", true);
+        imageConfirmed.focus();
+        return;
+      }
       if (!key) { setStatus("APIキーを入力してください。", true); return; }
       if (!question && !imageData) { setStatus("画像か質問、どちらかは入れてください。", true); return; }
 
@@ -995,3 +1038,4 @@
     init();
   }
 })();
+

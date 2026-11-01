@@ -67,7 +67,7 @@
   /* ---------- ③ 臨床スコア ---------- */
   function scoreAnswers(state, def, V, ctx) {
     state.scores = state.scores || {};
-    if (state.scores[def.id] === undefined) {
+    if (state.scores[def.id] === undefined || state.scores[def.id].__auto) {
       state.scores[def.id] = def.autofill ? (def.autofill(V, ctx) || {}) : {};
       state.scores[def.id].__auto = true;
     }
@@ -81,7 +81,7 @@
       (ans && ans.__auto && Object.keys(ans).length > 1 ? '<span class="auto">検査値から自動入力</span>' : "") + "</h4>";
     if (!r) {
       return '<div class="score-card">' + head +
-        '<p class="interp" style="color:var(--dim)">算出に必要な検査値が未入力です。</p>' +
+        '<p class="interp" style="color:var(--dim)">未評価：算出に必要な検査値・患者情報が不足しています。</p>' +
         '<p style="font-size:12px;color:var(--dim);margin:0">' + esc(def.note) + "</p>" + refs(def.refs) + "</div>";
     }
     var items = "";
@@ -89,8 +89,11 @@
       items = '<div class="score-items">' + def.items.map(function (it) {
         var v = ans[it.key];
         if (it.type === "bool") {
-          return '<label class="chip' + (v ? " on" : "") + '" data-score="' + esc(def.id) + '" data-item="' + esc(it.key) + '" data-kind="bool">' +
-            '<input type="checkbox"' + (v ? " checked" : "") + "> " + esc(it.label) + "</label>";
+          return '<div class="f"><label>' + esc(it.label) + "</label>" +
+            '<select data-score="' + esc(def.id) + '" data-item="' + esc(it.key) + '" data-kind="bool">' +
+            '<option value="">未評価</option>' +
+            '<option value="false"' + (v === false ? " selected" : "") + '>該当なし（0点）</option>' +
+            '<option value="true"' + (v === true ? " selected" : "") + '>該当あり</option></select></div>';
         }
         return '<div class="f"><label>' + esc(it.label) + "</label>" +
           '<select data-score="' + esc(def.id) + '" data-item="' + esc(it.key) + '" data-kind="select">' +
@@ -107,6 +110,7 @@
       (r.answered != null ? '<span style="font-size:11px;color:var(--dim)">入力 ' + r.answered + "／" + r.itemCount + " 項目</span>" : "") +
       "</div>" +
       '<p class="interp">' + esc(r.interp) + "</p>" +
+      (r.missing && r.missing.length ? '<p class="interp"><b>未評価の項目：</b>' + r.missing.map(esc).join(' ／ ') + '</p>' : '') +
       (r.actions && r.actions.length ? "<ul style=\"margin:0 0 8px;padding-left:19px;font-size:13px;color:var(--sub)\">" +
         r.actions.map(function (a) { return "<li>" + esc(a) + "</li>"; }).join("") + "</ul>" : "") +
       (def.items ? '<details><summary style="cursor:pointer;font-size:12px;color:var(--accent);font-weight:700">項目を編集</summary>' +
@@ -141,8 +145,7 @@
       st.scores = st.scores || {};
       st.scores[sid] = st.scores[sid] || {};
       if (kind === "bool") {
-        st.scores[sid][item] = t.checked;
-        holder.classList.toggle("on", t.checked);
+        st.scores[sid][item] = t.value === "" ? undefined : t.value === "true";
       } else {
         st.scores[sid][item] = t.value === "" ? undefined : Number(t.value);
       }

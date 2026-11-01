@@ -67,10 +67,12 @@ var DXScores = (function () {
     ],
     autofill: function (V, ctx) {
       var a = {}, plt = n(V.plt), bil = n(V.tbil), cr = n(V.cr), pf = n(V.pao2) && n(V.fio2) ? n(V.pao2) / n(V.fio2) : null;
-      if (pf != null) a.resp = pf >= 400 ? 0 : pf >= 300 ? 1 : pf >= 200 ? 2 : pf >= 100 ? 3 : 4;
+      // P/F <200 requires respiratory-support information; confirm manually.
+      if (pf != null && pf >= 200) a.resp = pf >= 400 ? 0 : pf >= 300 ? 1 : 2;
       if (plt != null) { var p3 = plt * 10; a.coag = p3 >= 150 ? 0 : p3 >= 100 ? 1 : p3 >= 50 ? 2 : p3 >= 20 ? 3 : 4; }
       if (bil != null) a.liver = bil < 1.2 ? 0 : bil < 2 ? 1 : bil < 6 ? 2 : bil < 12 ? 3 : 4;
-      if (cr != null) a.renal = cr < 1.2 ? 0 : cr < 2 ? 1 : cr < 3.5 ? 2 : cr < 5 ? 3 : 4;
+      // Cr alone cannot exclude a higher urine-output grade.
+      if (cr != null && cr >= 5) a.renal = 4;
       return a;
     },
     compute: function (s) {
@@ -94,7 +96,8 @@ var DXScores = (function () {
       var a = {};
       if (n(V.bun) != null) a.u = n(V.bun) > 19;
       if (vit(ctx, "rr") != null) a.r = vit(ctx, "rr") >= 30;
-      if (vit(ctx, "sbp") != null || vit(ctx, "dbp") != null)
+      if ((vit(ctx, "sbp") != null && vit(ctx, "dbp") != null) ||
+          (vit(ctx, "sbp") != null && vit(ctx, "sbp") < 90) || (vit(ctx, "dbp") != null && vit(ctx, "dbp") <= 60))
         a.b = (vit(ctx, "sbp") != null && vit(ctx, "sbp") < 90) || (vit(ctx, "dbp") != null && vit(ctx, "dbp") <= 60);
       if (n(ctx.age) != null) a.age = n(ctx.age) >= 65;
       if (C.has(ctx, "complaints", "consciousness")) a.c = true;
@@ -120,7 +123,7 @@ var DXScores = (function () {
     ],
     autofill: function (V, ctx) {
       var a = {}, age = n(ctx.age);
-      if (age != null) a.a = ctx.sex === "f" ? age >= 75 : age >= 70;
+      if (age != null && (ctx.sex === "m" || ctx.sex === "f")) a.a = ctx.sex === "f" ? age >= 75 : age >= 70;
       if (n(V.bun) != null) a.d = n(V.bun) >= 21;
       if (vit(ctx, "spo2") != null || n(V.pao2) != null)
         a.r = (vit(ctx, "spo2") != null && vit(ctx, "spo2") <= 90) || (n(V.pao2) != null && n(V.pao2) <= 60);
@@ -218,7 +221,7 @@ var DXScores = (function () {
     autofill: function (V, ctx) {
       var a = {}, age = n(ctx.age);
       if (age != null) { a.age75 = age >= 75; a.age65 = age >= 65 && age < 75; }
-      a.female = ctx.sex === "f";
+      if (ctx.sex === "m" || ctx.sex === "f") a.female = ctx.sex === "f";
       if (hasH(ctx, "hf")) a.chf = true;
       if (hasH(ctx, "htn")) a.htn = true;
       if (hasH(ctx, "dm")) a.dm = true;
@@ -250,7 +253,7 @@ var DXScores = (function () {
     autofill: function (V, ctx) {
       var a = {}, age = n(ctx.age), cr = n(V.cr), sbp = vit(ctx, "sbp");
       if (age != null) a.e = age > 65;
-      if (cr != null) a.a1 = cr > 2.26;
+      if (cr != null && cr > 2.26) a.a1 = true;
       if (sbp != null) a.h = sbp > 160;
       if (hasH(ctx, "cirrhosis")) a.a2 = true;
       if (hasH(ctx, "stroke")) a.s = true;
@@ -363,7 +366,7 @@ var DXScores = (function () {
     autofill: function (V, ctx) {
       var a = {}, age = n(ctx.age), sbp = vit(ctx, "sbp"), dbp = vit(ctx, "dbp");
       if (age != null) a.a = age >= 60;
-      if (sbp != null || dbp != null) a.b = (sbp != null && sbp >= 140) || (dbp != null && dbp >= 90);
+      if ((sbp != null && dbp != null) || (sbp != null && sbp >= 140) || (dbp != null && dbp >= 90)) a.b = (sbp != null && sbp >= 140) || (dbp != null && dbp >= 90);
       if (hasH(ctx, "dm")) a.d2 = true;
       return a;
     },
@@ -408,14 +411,15 @@ var DXScores = (function () {
     direct: function (V, ctx) {
       var cr = n(V.cr), age = n(ctx.age);
       var e = C.egfr(cr, age, ctx.sex);
-      if (e == null) return null;
+      if (e == null || (ctx.sex !== "m" && ctx.sex !== "f")) return null;
       var g = e >= 90 ? "G1" : e >= 60 ? "G2" : e >= 45 ? "G3a" : e >= 30 ? "G3b" : e >= 15 ? "G4" : "G5";
       var gl = { G1: "正常または高値", G2: "正常または軽度低下", G3a: "軽度〜中等度低下",
                  G3b: "中等度〜高度低下", G4: "高度低下", G5: "末期腎不全" }[g];
       var bd = (g === "G5" || g === "G4") ? "red" : (g === "G3a" || g === "G3b") ? "amber" : "green";
       return {
         score: e, scoreLabel: e.toFixed(1) + " mL/min/1.73m²",
-        band: bd, bandLabel: g + "（" + gl + "）",
+        band: bd === "green" ? "info" : bd, bandLabel: "暫定評価：" + g + "（GFR区分のみ）",
+        complete: false, status: "provisional",
         interp: "eGFR " + e.toFixed(1) + " → " + g + "。蛋白尿区分（A1 正常／A2 微量アルブミン尿／A3 顕性蛋白尿）と組み合わせて重症度を決定します。蛋白尿の有無でリスクは大きく変わるため、尿検査の併用が必須です。",
         actions: bd !== "green"
           ? ["尿蛋白／尿中アルブミン・Cr 比の測定", "腎排泄性薬剤の用量調整", "造影剤使用時の対策を確認",
@@ -460,7 +464,7 @@ var DXScores = (function () {
     note: "末期肝疾患の短期予後予測。肝移植の優先順位決定に用いられます。総ビリルビン・INR・Cr・Na から自動計算します。",
     direct: function (V, ctx) {
       var bil = n(V.tbil), inr = n(V.inr), cr = n(V.cr), na = n(V.na);
-      if (bil == null || inr == null || cr == null) return null;
+      if (bil == null || inr == null || cr == null || na == null) return null;
       var b = Math.max(bil, 1), i = Math.max(inr, 1), c = Math.min(Math.max(cr, 1), 4);
       if (C.has(ctx, "history", "dialysis")) c = 4;
       var meld = 3.78 * Math.log(b) + 11.2 * Math.log(i) + 9.57 * Math.log(c) + 6.43;
@@ -528,7 +532,7 @@ var DXScores = (function () {
     autofill: function (V, ctx) {
       var a = {}, bun = n(V.bun), hb = n(V.hb), sbp = vit(ctx, "sbp"), hr = vit(ctx, "hr");
       if (bun != null) a.bun = bun < 18.2 ? 0 : bun <= 22.3 ? 1 : bun <= 27.9 ? 2 : bun < 70 ? 3 : 4;
-      if (hb != null) {
+      if (hb != null && (ctx.sex === "m" || ctx.sex === "f")) {
         var male = ctx.sex !== "f";
         a.hb = hb < 10 ? 3 : (male ? (hb >= 13 ? 0 : hb >= 12 ? 1 : 2) : (hb >= 12 ? 0 : 2));
       }
@@ -563,10 +567,9 @@ var DXScores = (function () {
     autofill: function (V, ctx) {
       var a = {}, age = n(ctx.age);
       if (age != null) a.age = age >= 70;
-      if (n(V.be) != null) a.be = n(V.be) <= -3;
-      if (n(V.pao2) != null) a.po2 = n(V.pao2) <= 60;
-      if (n(V.bun) != null || n(V.cr) != null)
-        a.bun = (n(V.bun) != null && n(V.bun) >= 40) || (n(V.cr) != null && n(V.cr) >= 2.0);
+      if (n(V.be) != null && n(V.be) <= -3) a.be = true;
+      if (n(V.pao2) != null && n(V.pao2) <= 60 && n(V.fio2) === 0.21) a.po2 = true;
+      if ((n(V.bun) != null && n(V.bun) >= 40) || (n(V.cr) != null && n(V.cr) >= 2.0)) a.bun = true;
       if (n(V.ld) != null) a.ldh = n(V.ld) >= 444;
       if (n(V.plt) != null) a.plt = n(V.plt) <= 10;
       if (n(V.ca) != null) a.ca = n(V.ca) <= 7.5;
@@ -606,7 +609,8 @@ var DXScores = (function () {
     note: "国際血栓止血学会の顕性DIC 基準。5点以上で overt DIC と判定します。急性期DIC基準（日本救急医学会）より特異度が高い一方、検出は遅れます。",
     direct: function (V, ctx) {
       var plt = n(V.plt), fdp = n(V.fdp), dd = n(V.ddimer), inr = n(V.inr), ptp = n(V.ptpct), fib = n(V.fib);
-      if (plt == null && fdp == null && fib == null) return null;
+      if (plt == null || (fdp == null && dd == null) ||
+          (inr == null && ptp == null) || fib == null) return null;
       var s = 0, rows = [];
       if (plt != null) { var p = plt < 5 ? 2 : plt < 10 ? 1 : 0; s += p; rows.push(["血小板数", plt.toFixed(1) + " 万/µL", p]); }
       if (fdp != null || dd != null) {
@@ -696,7 +700,7 @@ var DXScores = (function () {
       if (n(V.hb) != null && n(V.hb) < 9.2) cy++;
       if (n(V.plt) != null && n(V.plt) < 11) cy++;
       if (n(V.wbc) != null && n(V.wbc) < 5000) cy++;
-      if (cy >= 1) a.cyto = Math.min(cy, 3) - 1;
+      if (n(V.hb) != null && n(V.plt) != null && n(V.wbc) != null && cy >= 1) a.cyto = Math.min(cy, 3) - 1;
       if (C.has(ctx, "meds", "immunosuppressant") || C.has(ctx, "meds", "chemo")) a.immuno = 1;
       return a;
     },
@@ -763,26 +767,38 @@ var DXScores = (function () {
   /** スコアを算出する。answers は {itemKey: boolean|optionIndex}。 */
   function run(def, answers, V, ctx) {
     if (def.direct) return def.direct(V, ctx);
-    var total = 0, max = 0, answered = 0;
+    var total = 0, max = 0, answered = 0, missing = [];
     (def.items || []).forEach(function (it) {
       var a = answers ? answers[it.key] : undefined;
-      if (a === undefined || a === null || a === "") return;
-      answered++;
-      var p = 0;
-      if (it.type === "bool") p = a ? (it.points || 1) : 0;
-      else if (it.type === "select") {
+      var p;
+      if (it.type === "bool" && typeof a === "boolean") p = a ? it.points : 0;
+      else if (it.type === "select" &&
+               (typeof a === "number" || (typeof a === "string" && /^\d+$/.test(a)))) {
         var idx = Number(a);
-        if (it.options[idx]) p = it.options[idx].points;
+        if (Number.isInteger(idx) && it.options[idx]) p = it.options[idx].points;
       }
+      if (!Number.isFinite(p)) { missing.push(it.label); return; }
+      answered++;
       total += p;
       if (p > max) max = p;
     });
     var score = def.computeMax ? max : total;
-    var r = def.compute(score);
-    r.score = score;
+    var complete = missing.length === 0;
+    // Never interpret a subtotal as the complete score (some items subtract points).
+    var r = complete ? def.compute(score) : {
+      band: "info", bandLabel: answered ? "暫定評価" : "未評価",
+      interp: "必要項目が不足しているため、総点・リスク区分は判定できません。未回答は0点ではありません。" +
+        "不足項目を確認し、症状・バイタルに懸念があれば入力完了を待たずに評価してください。",
+      actions: [], scoreLabel: answered ? "入力済み分 " + score + " 点（暫定）" : "—"
+    };
+    r.score = complete ? score : null;
+    r.partialScore = answered ? score : null;
     r.scoreLabel = (r.scoreLabel != null) ? r.scoreLabel : (score + " 点");
     r.answered = answered;
     r.itemCount = (def.items || []).length;
+    r.complete = complete;
+    r.status = complete ? "complete" : answered ? "provisional" : "unevaluated";
+    r.missing = missing;
     return r;
   }
 

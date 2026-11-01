@@ -357,12 +357,80 @@ def build_master(plan, duration, work):
     ff([*args, '-c:v', 'copy', '-movflags', '+faststart', 'master.mp4'], work)
 
 
+def black_settings(manifest):
+    raw = json.loads(manifest.read_text()).get('leading_black', {})
+    if not isinstance(raw, dict) or set(raw) - {'auto_cut'}:
+        raise ValueError('leading_black accepts only auto_cut')
+    auto = raw.get('auto_cut', False)
+    if type(auto) is not bool:
+        raise ValueError('leading_black.auto_cut must be boolean')
+    return auto
+
+
+def leading_black(source, plan, auto):
+    """Strict full-resolution RGB inspection. Never seek past the first content.
+
+    Thresholds are deliberately fixed: every channel <= 4, channel spread <= 2.
+    No percentage allowance: even a small bright CT mark protects the frame.
+    Inspect at most 3 seconds plus one frame; retain one black guard frame.
+    """
+    w, h = plan['size']; fps = plan['fps']
+    limit = 3 * fps + 1
+    frame_bytes = w * h * 3
+    count, boundary = 0, False
+    with tempfile.TemporaryFile() as errors:
+        proc = subprocess.Popen(['ffmpeg', '-v', 'error', '-i', str(source),
+            '-map', '0:v:0', '-frames:v', str(limit), '-pix_fmt', 'rgb24',
+            '-threads', '1', '-f', 'rawvideo', '-'], stdout=subprocess.PIPE, stderr=errors)
+        try:
+            for _ in range(limit):
+                frame = proc.stdout.read(frame_bytes)
+                if not frame:
+                    break
+                if len(frame) != frame_bytes:
+                    raise ValueError('Incomplete frame during black detection')
+                peak = max(frame)
+                neutral = peak <= 2 or (peak <= 4 and all(
+                    max(frame[i:i+3])-min(frame[i:i+3]) <= 2
+                    for i in range(0, len(frame), 3)))
+                if not neutral:
+                    boundary = True
+                    break
+                count += 1
+            # Drain bounded output so decoder errors are not hidden by SIGPIPE.
+            while proc.stdout.read(frame_bytes):
+                pass
+            if proc.wait():
+                errors.seek(0)
+                raise ValueError(errors.read().decode(errors='replace')[-4000:])
+        finally:
+            proc.stdout.close()
+            if proc.poll() is None:
+                proc.kill(); proc.wait()
+    eligible = boundary and count / fps >= .2
+    proposed = max(0, count - 1) if eligible else 0
+    applied = proposed if auto else 0
+    return dict(time_basis='uncut_master_seconds', detected_start=0 if count else None,
+                detected_end=count/fps if count else None, boundary_found=boundary,
+                status='candidate' if eligible else 'no_leading_black' if not count else 'protected',
+                auto_cut=auto, proposed_cut_seconds=proposed/fps,
+                cut_seconds=applied/fps, cut_frames=applied,
+                guard_frames=1, max_scan_seconds=3,
+                rule='all RGB channels <= 4 and channel spread <= 2; no scaling')
+
+
+def shifted_cues(cues, cut):
+    return [dict(c, start=max(0, c['start']-cut), end=c['end']-cut)
+            for c in cues if c['end'] > cut]
+
+
 def edit(manifest, output, mode='build'):
     plan, cues, duration = load(manifest.resolve())
+    auto_cut = black_settings(manifest)
     config = silence_settings(manifest, duration, len(plan['audio']))
     subtitle = ass(cues, *plan['size'])  # Validate before writing any deliverable.
     output = output.resolve()
-    reserved = {output/n for n in ('master.mp4', 'final.mp4', 'cache.json', 'captions.ass', 'silence_report.json')}
+    reserved = {output/n for n in ('master.mp4', 'final.mp4', 'cache.json', 'captions.ass', 'silence_report.json', 'black_report.json')}
     if any(Path(a['file']) in reserved for a in plan['scenes']+plan['audio']):
         raise ValueError('Input/output collision')
     master, cache = output/'master.mp4', output/'cache.json'
@@ -377,25 +445,34 @@ def edit(manifest, output, mode='build'):
         fingerprints = validate_inputs(plan, duration)
         valid_master = valid_master and old.get('inputs') == fingerprints
     silence_report = check_silence(plan, duration, config, old, fingerprints, mode)
-    for warning in silence_report['warnings']:
-        print(f"WARNING narration silence ({warning['kind']}): "
-              f"{warning['start']:.3f}–{warning['end']:.3f}s", file=sys.stderr)
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.edit-', dir=output) as temp:
         work = Path(temp)
         if not valid_master:
             build_master(plan, duration, work)
         source = master if valid_master else work/'master.mp4'
+        black_report = leading_black(source, plan, auto_cut)
+        cut = black_report['cut_seconds']
+        final_duration = duration - cut
+        final_cues = shifted_cues(cues, cut)
+        if cut:
+            filters = f'trim=start_frame={black_report["cut_frames"]},setpts=PTS-STARTPTS'
+            args = ['-i', source, '-vf', filters, '-map', '0:v:0', '-map', '0:a?']
+            if plan['audio']:
+                args += ['-af', f'atrim=start={cut},asetpts=PTS-STARTPTS', '-c:a', 'aac', '-b:a', '192k']
+            ff([*args, *encode(), '-movflags', '+faststart', work/'trimmed.mp4'])
+        render_source = work/'trimmed.mp4' if cut else source
+        subtitle = ass(final_cues, *plan['size'])
         (work/'captions.ass').write_text(subtitle, encoding='utf-8')
-        if cues:
-            ff(['-i', source, '-vf', 'ass=captions.ass', '-map', '0:v:0', '-map', '0:a?', *encode(), '-c:a', 'copy', '-movflags', '+faststart', 'final.mp4'], work)
+        if final_cues:
+            ff(['-i', render_source, '-vf', 'ass=captions.ass', '-map', '0:v:0', '-map', '0:a?', *encode(), '-c:a', 'copy', '-movflags', '+faststart', 'final.mp4'], work)
         else:
-            shutil.copyfile(source, work/'final.mp4')
+            shutil.copyfile(render_source, work/'final.mp4')
         result = probe(work/'final.mp4')
         video = next(s for s in result['streams'] if s['codec_type'] == 'video')
-        if int(video.get('nb_frames', -1)) != sum(s['frames'] for s in plan['scenes']):
+        if int(video.get('nb_frames', -1)) != sum(s['frames'] for s in plan['scenes']) - black_report['cut_frames']:
             raise ValueError('Output frame count verification failed')
-        if abs(float(result['format']['duration'])-duration) > max(.1, 2/plan['fps']):
+        if abs(float(result['format']['duration'])-final_duration) > max(.1, 2/plan['fps']):
             raise ValueError('Output duration verification failed')
         audio_ends = old.get('audio_ends', []) if valid_master else []
         if not valid_master:
@@ -408,16 +485,32 @@ def edit(manifest, output, mode='build'):
                 audio_ends.append(a['at']+(end-a['in'])/speed(a))
         audio_stream = next((s for s in result['streams'] if s['codec_type'] == 'audio'), None)
         if plan['audio'] and (audio_stream is None or
-                abs(float(audio_stream['duration'])-duration) > .1):
+                abs(float(audio_stream['duration'])-final_duration) > .1):
             raise ValueError('Output audio duration verification failed')
-        info = {'silence_report': silence_report, 'audio_ends': audio_ends,
-                'subtitle_times': [{'start': c['start'], 'end': c['end']} for c in cues],
+        info = {'black_report': black_report, 'uncut_duration': duration, 'silence_report': silence_report, 'audio_ends': audio_ends,
+                'subtitle_times': [{'start': c['start'], 'end': c['end']} for c in final_cues],
                 'audio_stream_duration': float(audio_stream['duration']) if audio_stream else None,
                 'plan': signature, 'inputs': fingerprints, 'master_sha256': sha(source),
-                'duration': duration, 'master_reused': valid_master, 'mode': mode}
-        (work/'silence_report.json').write_text(json.dumps(silence_report, ensure_ascii=False, indent=2)+'\n')
+                'duration': final_duration, 'master_reused': valid_master, 'mode': mode}
+        # Keep cached detection in original coordinates, expose final coordinates separately.
+        final_silence = dict(silence_report, time_basis='final_video_seconds')
+        for key in ('candidates', 'warnings', 'kept'):
+            if key in silence_report:
+                final_silence[key] = shifted_cues(silence_report[key], cut)
+                for item in final_silence[key]:
+                    if 'duration' in item:
+                        item['duration'] = item['end'] - item['start']
+        final_silence['settings_time_basis'] = 'uncut_master_seconds'
+        for warning in final_silence['warnings']:
+            print(f"WARNING narration silence (final video): "
+                  f"{warning['start']:.3f}–{warning['end']:.3f}s", file=sys.stderr)
+        info['final_silence_report'] = final_silence
+        info['final_audio_ends'] = [max(0, t-cut) for t in audio_ends]
+        info['silence_report'] = dict(silence_report, time_basis='uncut_master_seconds')
+        (work/'black_report.json').write_text(json.dumps(black_report, indent=2)+'\n')
+        (work/'silence_report.json').write_text(json.dumps(final_silence, ensure_ascii=False, indent=2)+'\n')
         (work/'cache.json').write_text(json.dumps(info, indent=2)+'\n')
-        for name in (['master.mp4'] if not valid_master else []) + ['captions.ass', 'final.mp4', 'cache.json', 'silence_report.json']:
+        for name in (['master.mp4'] if not valid_master else []) + ['captions.ass', 'final.mp4', 'cache.json', 'silence_report.json', 'black_report.json']:
             os.replace(work/name, output/name)
     return info
 

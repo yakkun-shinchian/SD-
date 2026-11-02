@@ -129,6 +129,33 @@ check('点灯件数が主訴カードの見出しにも出る',
 check('問診・身体所見が入力値一覧表に混ざらない',
   !/血圧の左右差/.test(await page.locator('.card:has-text("入力値の一覧と判定")').first().textContent()));
 
+/* 安全性の条件が実際のカードに表示され、長文化しても横にはみ出さないこと */
+for (const width of [390, 1200]) {
+  await page.setViewportSize({ width, height: 900 });
+  for (const key of await page.evaluate(() => DXCC.covered())) {
+    await page.locator('#btn-clear').click();
+    await page.waitForTimeout(400);
+    await openAll();
+    await page.locator('.chip[data-group="complaints"][data-key="' + key + '"]').click();
+    await page.waitForTimeout(400);
+    const card = page.locator('details.cc').first();
+    await card.waitFor();
+    await openAll();
+    const body = await card.textContent();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+    check(width + 'px ' + key + ' のカード・条件文・表示幅',
+      (await page.locator('details.cc').count()) === 1 && !overflow &&
+      !/頭部CT → 腰椎穿刺|気胸を疑えば画像前に胸腔穿刺/.test(body));
+    if (['fever', 'headache', 'consciousness', 'convulsion'].includes(key))
+      check(width + 'px ' + key + ' に腰椎穿刺の条件を表示',
+        /CTは一律には行わない/.test(body) && /GCS 9以下/.test(body) && /抗菌薬.*画像より先/.test(body));
+    if (['dyspnea', 'chest_pain'].includes(key))
+      check(width + 'px ' + key + ' に減圧の適応と安定例を表示',
+        /循環不安定または重度の呼吸障害/.test(body) && /安定した気胸疑い/.test(body));
+  }
+}
+await page.setViewportSize({ width: 1200, height: 1000 });
+
 /* 照合チェックリストの記録と書き出し */
 await page.goto(base + '/verify.html', { waitUntil: 'networkidle' });
 await page.locator('#b-open').click();

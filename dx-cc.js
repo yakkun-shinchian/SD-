@@ -155,6 +155,16 @@ var DXCC = (function () {
     newDrug: "hx_after_drug"
   };
 
+  // 同じ緊急条件を関連主訴で共有する。所見の該当数だけで処置適応を決めない。
+  var PNEUMOTHORAX_ACTION = "緊張性気胸を臨床的に疑い、循環不安定または重度の呼吸障害があれば、画像を待たず熟練した医療者が緊急胸腔減圧・ドレナージを行う。安定した気胸疑いでは胸部X線・肺エコー等で評価し、適応を判断する";
+  var MENINGITIS_TESTS = [
+    "腰椎穿刺前の頭部CTは一律には行わない。安全に実施でき、抗菌薬開始を有意に遅らせない場合は、採血・血液培養と腰椎穿刺を抗菌薬前に行う",
+    "占拠性病変のリスク、新規局在神経徴候（痙攣・異常肢位を含む）、瞳孔反応異常、GCS 9以下、進行性・持続性または急速な意識低下があれば画像を先行し、危険因子が解消するまで腰椎穿刺を行わない",
+    "気道未確保・呼吸障害・ショック・制御されていない痙攣・出血リスクは腰椎穿刺前に治療・安定化する。広範または急速に拡大する紫斑、穿刺部感染でも実施しない。CT正常だけで安全とは判断しない",
+    "細菌性髄膜炎を疑えば静注抗菌薬を速やかに開始（来院1時間以内を目安）。画像・腰椎穿刺が必要でも投与を遅らせず、採血・血液培養、抗菌薬、全身安定化を画像より先に行う。先に抗菌薬を開始した場合は、安全になり次第速やかに腰椎穿刺",
+    "細菌性髄膜炎を強く疑う成人ではデキサメタゾンを初回抗菌薬と同時または直前に検討するが、その準備で抗菌薬を遅らせない"
+  ];
+
   /* ---------- 主訴別アプローチ ---------- */
 
   var CC = [
@@ -169,28 +179,27 @@ var DXCC = (function () {
           why: "感染に対する制御不能な宿主反応が血管内皮を傷害し、組織低灌流に至る。抗菌薬投与の遅れが死亡率に直結する。",
           pointers: ["hx_consciousness_impaired", S.tachypnea, S.hypotension, "hx_cold_clammy", "hx_crt_delay",
                      "lactate_high", "pct_high", S.hypothermia],
-          tests: ["qSOFA（意識・呼吸数22以上・収縮期血圧100以下）と SOFA の算出",
-                  "血液培養2セットを採取したうえで、認識から1時間以内の経験的抗菌薬",
+          tests: ["臓器障害を評価しSOFA等で整理する。qSOFAだけでスクリーニング・除外・治療開始を判断しない",
+                  "血液培養は投与を有意に遅らせない範囲で先に採取。ショックまたは敗血症の可能性が高ければ直ちに抗菌薬（認識から1時間以内を目安）。ショックのない疑い例は迅速評価し、感染の懸念が残れば認識から3時間以内を目安に開始",
                   "乳酸値（初期値と2〜4時間後の再検）", "感染巣の同定（尿・胸部画像・腹部エコー／CT・皮膚軟部組織）"],
-          refs: ["SEPSIS3", "SOFA"]
+          refs: ["SEPSIS3", "SOFA", "SSC2021"]
         },
         {
           name: "細菌性髄膜炎",
           why: "髄液腔の化膿性炎症。発症から数時間で脳浮腫・脳血管炎に進む。発熱・意識障害・項部硬直の三徴は全てそろう例が半数に満たない。",
           pointers: ["hx_neck_stiff", "hx_consciousness_impaired", "hx_petechiae", S.highFever,
                      { f: "hx_sudden_onset", t: "急激な発症" }],
-          tests: ["頭部CT（脳圧亢進の除外）に続く腰椎穿刺 — ただし抗菌薬を待たせない",
-                  "血液培養2セット", "経験的抗菌薬（＋デキサメタゾンの併用を検討）"],
-          refs: ["MENINGITIS"]
+          tests: MENINGITIS_TESTS.slice(),
+          refs: ["MENINGITIS", "NG240"]
         },
         {
           name: "感染性心内膜炎",
           why: "弁上の感染巣から菌が持続的に血流へ出続け、塞栓と免疫学的機序で全身の臓器を侵す。不明熱のまま見逃されやすい。",
           pointers: ["hx_murmur_new", "hx_murmur_systolic", "hx_petechiae", "hx_purpura_palpable",
                      "hx_focal_deficit", "crp_high"],
-          tests: ["血液培養を時間をずらして3セット", "経胸壁心エコー（陰性でも疑いが強ければ経食道）",
+          tests: ["抗菌薬前に血液培養3セットを原則とするが、ショック・重症感染では採取間隔を待って抗菌薬を遅らせない", "経胸壁心エコー（陰性でも疑いが強ければ経食道）",
                   "修正 Duke 基準での整理", "塞栓巣の検索（頭部MRI・脾・腎）"],
-          refs: ["DUKE"]
+          refs: ["DUKE", "SSC2021"]
         },
         {
           name: "発熱性好中球減少症",
@@ -222,7 +231,7 @@ var DXCC = (function () {
             { name: "尿路感染・腎盂腎炎", sup: ["hx_tender_back", S.highFever, "crp_high", "wbc_high"],
               note: "側腹部の叩打痛と尿所見。男性・再発例は閉塞起点を探す。" },
             { name: "胆道感染（胆嚢炎・胆管炎）", sup: ["hx_tender_ruq", "hx_murphy", "cholestasis", "bil_high", "hx_jaundice_skin"],
-              note: "発熱＋右上腹部痛＋黄疸は Charcot 三徴。胆管炎ならドレナージが治療。" },
+              note: "発熱＋右上腹部痛＋黄疸は Charcot 三徴。胆管炎は抗菌薬と重症度評価を行い、中等症は早期、重症は全身管理と並行して速やかな胆道ドレナージを検討。" },
             { name: "皮膚軟部組織感染・壊死性筋膜炎", sup: ["hx_rash_diffuse", S.hypotension, "crp_veryhigh", "ck_veryhigh", S.dm],
               note: "痛みが所見に不釣り合いに強い、皮膚所見を越えて進む、ガス像 — 外科的デブリドマンが治療。" },
             { name: "カテーテル関連血流感染", sup: [S.immunosupp, "crp_high", "wbc_high"],
@@ -254,7 +263,7 @@ var DXCC = (function () {
              "皮膚を全部見る（点状出血・palpable purpura・末梢の塞栓・デバイス刺入部）",
              "心音（新規雑音）・項部硬直・CVA 叩打痛・前立腺・口腔内",
              "全身のリンパ節と脾の触診"],
-      refs: ["SEPSIS3", "SOFA", "CURB65", "ADROP"]
+      refs: ["SEPSIS3", "SOFA", "CURB65", "ADROP", "TG18_INITIAL", "IDSA_SSTI"]
     },
 
     /* ============== 呼吸困難 ============== */
@@ -282,17 +291,17 @@ var DXCC = (function () {
         },
         {
           name: "緊張性気胸",
-          why: "胸腔内圧の上昇が静脈還流を止める。画像を待つ前に、片側呼吸音減弱＋頸静脈怒張＋血圧低下で穿刺を決める所見診断。",
+          why: "胸腔内圧の上昇が静脈還流を止める。循環不安定・重度呼吸障害を伴う疑い例では臨床判断で緊急減圧する。典型所見が全てそろうのを待たない。",
           pointers: ["hx_breath_down_unilat", "hx_jvd", S.shockBp, "hx_sudden_onset", S.copd],
-          tests: ["身体所見で疑えばその場で胸腔穿刺・ドレナージ（画像を待たない）",
-                  "ベッドサイド肺エコー（lung sliding の消失）"],
-          refs: []
+          tests: [PNEUMOTHORAX_ACTION,
+                  "肺エコーは即時に可能で処置を遅らせない場合に補助として使用（lung sliding消失だけでは確定しない）"],
+          refs: ["NG39"]
         },
         {
           name: "上気道閉塞・アナフィラキシー",
           why: "気道そのものが細くなる。進行すれば分単位で換気できなくなる。アドレナリン筋注の遅れが致死的。",
           pointers: ["hx_wheeze", "hx_rash_diffuse", S.newDrug, S.hypotension, S.tachycardia],
-          tests: ["アドレナリン 0.3〜0.5mg を大腿前外側に筋注（静注ではない）",
+          tests: ["アナフィラキシーを疑う場合は成人アドレナリン0.3〜0.5mgを大腿前外側に筋注（上気道閉塞全般への一律投与ではない）",
                   "気道確保の準備を同時並行で", "WAO の診断基準で整理"],
           refs: ["ANAPHYLAXIS"]
         },
@@ -384,23 +393,23 @@ var DXCC = (function () {
           pointers: ["hx_pain_max_at_onset", "hx_sudden_onset", "hx_bp_lr_diff", "hx_murmur_diastolic",
                      "hx_tender_back", "hx_focal_deficit", "ddimer_veryhigh"],
           tests: ["血圧の左右差と上下肢差の実測", "造影CT（上行〜腸骨まで）",
-                  "D-ダイマー陰性は否定の補助になるが、確定診断は画像", "降圧・心拍数管理を並行して開始"],
+                  "D-ダイマー陰性だけでは解離を除外しない。臨床的疑いが強ければ結果を待たず画像・専門科評価", "高血圧・頻脈を伴う解離では臓器灌流を保ちながら降圧・心拍数管理。低血圧・ショックでは一律に降圧せず緊急外科評価・蘇生を優先"],
           refs: ["AORTA_ACC"]
         },
         {
           name: "肺血栓塞栓症",
           why: "胸痛と呼吸困難が同居し、聴診は正常。頻呼吸と低酸素だけが訴える。",
           pointers: ["hx_sudden_onset", S.tachypnea, S.hypoxia, "ddimer_veryhigh", "hx_edema_unilat", "primary_resp_alkalosis"],
-          tests: ["Wells スコア → D-ダイマー or 造影CT", "心エコー（右心負荷）", "下肢静脈エコー"],
-          refs: ["WELLS_PE"]
+          tests: ["循環が安定していればWellsで事前確率を評価。PE likelyならD-ダイマーを待たずCTPA、unlikelyならD-ダイマーから判断。ショックでは救急対応とベッドサイド評価を優先", "心エコー（右心負荷）", "下肢静脈エコー"],
+          refs: ["WELLS_PE", "NG158"]
         },
         {
           name: "緊張性気胸・食道破裂",
           why: "どちらも胸腔内に圧や消化液が漏れ出す病態。気胸は循環を止め、食道破裂は縦隔を融かす。",
           pointers: ["hx_breath_down_unilat", "hx_jvd", S.shockBp, { f: "hx_progressive", t: "痛みが進行している" },
                      { fn: function (F, V, D, ctx) { return cplt(ctx, "vomiting"); }, t: "激しい嘔吐のあとの胸痛（Boerhaave）" }],
-          tests: ["気胸を疑えば画像前に胸腔穿刺", "嘔吐後の胸痛なら造影CT／食道造影で縦隔気腫を探す"],
-          refs: []
+          tests: [PNEUMOTHORAX_ACTION, "嘔吐後の胸痛なら造影CT／食道造影で縦隔気腫を探す"],
+          refs: ["NG39"]
         }
       ],
       redflags: [
@@ -488,21 +497,21 @@ var DXCC = (function () {
         },
         {
           name: "急性胆管炎",
-          why: "閉塞した胆道内で胆汁が感染し、圧で菌が血中へ押し出される。ドレナージなしに抗菌薬だけでは止まらない。",
+          why: "閉塞した胆道内で胆汁が感染し、圧で菌が血中へ押し出される。抗菌薬・全身管理に加え、重症度と初期治療への反応で胆道ドレナージの時機を決める。",
           pointers: ["hx_tender_ruq", "hx_jaundice_skin", S.highFever, "cholestasis", "bil_high",
                      S.hypotension, "hx_consciousness_impaired", "plt_low"],
           tests: ["Tokyo Guidelines 2018 の診断・重症度基準で照合",
-                  "腹部エコー／MRCP／CT", "血液培養", "重症なら緊急胆道ドレナージ"],
-          refs: ["TG18"]
+                  "腹部エコー／MRCP／CT", "血液培養", "抗菌薬・循環呼吸管理を開始し、中等症は早期、重症は初期安定化後できるだけ速やかに胆道ドレナージ。軽症も初期治療に反応しなければ検討"],
+          refs: ["TG18", "TG18_INITIAL"]
         },
         {
           name: "重症急性膵炎",
           why: "活性化した膵酵素が自己消化を起こし、全身の血管透過性が破れる。初期48時間の輸液管理が予後を決める。",
           pointers: ["hx_tender_epigastric", "hx_tender_back", "amy_veryhigh", "lip_veryhigh",
                      "hypoca", S.tachypnea, "lactate_high"],
-          tests: ["リパーゼ（アミラーゼより特異的）", "造影CT（発症48〜72時間後が評価に適する）",
+          tests: ["リパーゼ（アミラーゼより特異的）", "膵炎のCTは診断不確実・悪化時など適応を判断。壊死評価の時期と緊急鑑別の画像を区別し、他の急性腹症が疑わしければ48〜72時間を待たない",
                   "厚生労働省 重症度判定基準（予後因子＋CT grade）", "胆石性かアルコール性かで治療方針が分かれる"],
-          refs: ["JSS_AP"]
+          refs: ["JSS_AP", "ACG_AP2024"]
         }
       ],
       redflags: [
@@ -570,11 +579,11 @@ var DXCC = (function () {
       killers: [
         {
           name: "低血糖",
-          why: "脳はブドウ糖しか使えない。放置すれば不可逆の神経障害になる。最初に測り、迷えば投与する。",
+          why: "低血糖は脳のエネルギー供給を障害し、遷延すれば不可逆の神経障害になりうる。直ちに血糖を測定して対応する。",
           pointers: ["hypoglycemia", "hypoglycemia_severe", "hx_cold_clammy", { fn: function (F, V, D, ctx) { return med(ctx, "insulin") || med(ctx, "su"); }, t: "インスリン・SU薬の使用" }],
-          tests: ["血糖を最初に測る（指尖で足りる）", "50%ブドウ糖の投与とその後の再検",
+          tests: ["血糖を最初に測る（指尖で足りる）", "低血糖による意識障害では静注ブドウ糖等で直ちに補正し再検（意識障害時は経口投与しない）。濃度・量は施設手順と静脈路に応じる",
                   "SU薬なら再発するので入院で経過を見る"],
-          refs: []
+          refs: ["NG128", "ASAM_THIAMINE"]
         },
         {
           name: "脳血管障害（出血・梗塞・SAH）",
@@ -587,11 +596,11 @@ var DXCC = (function () {
         },
         {
           name: "細菌性髄膜炎・脳炎",
-          why: "中枢の感染は時間単位で進む。発熱と意識障害があれば、画像が正常でも髄液を見る。",
+          why: "中枢の感染は時間単位で進む。発熱と意識障害があれば、画像が正常でも感染は否定できず、腰椎穿刺の安全性を別途評価する。",
           pointers: ["hx_neck_stiff", "fever", S.highFever, "hx_petechiae", "crp_high",
                      { fn: function (F, V, D, ctx) { return cplt(ctx, "convulsion"); }, t: "痙攣を伴う" }],
-          tests: ["頭部CT → 腰椎穿刺（抗菌薬を待たせない）", "血液培養", "単純ヘルペス脳炎を想定したアシクロビルの早期投与を検討"],
-          refs: ["MENINGITIS"]
+          tests: MENINGITIS_TESTS.concat(["脳炎を疑えばアシクロビルを検査結果待ちで遅らせず開始し、腎機能に応じ調整する"]),
+          refs: ["MENINGITIS", "NG240", "ENCEPH_IDSA"]
         },
         {
           name: "非痙攣性てんかん重積",
@@ -599,7 +608,7 @@ var DXCC = (function () {
           pointers: ["hx_consciousness_impaired", { fn: function (F, V, D, ctx) { return hist(ctx, "epilepsy") || cplt(ctx, "convulsion"); }, t: "てんかんの既往・痙攣の目撃" },
                      { fn: function (F, V, D, ctx) { return med(ctx, "vpa") || med(ctx, "cbz") || med(ctx, "phenytoin"); }, t: "抗てんかん薬の使用" }],
           tests: ["脳波（可能なら持続モニタリング）", "抗てんかん薬の血中濃度",
-                  "ILAE の重積の定義（5分以上、または発作後に意識が戻らない）で判断"],
+                  "痙攣性重積の5分基準を非痙攣性に一律適用しない。持続する意識障害では緊急脳波・専門科評価で判断"],
           refs: ["SE_ILAE"]
         },
         {
@@ -608,8 +617,8 @@ var DXCC = (function () {
           pointers: ["nh3_high", "hypona_severe", "hyperna_severe", "respiratory_acidosis",
                      "severe_acidemia", "hx_asterixis", S.cirrhosis, "hyperca_severe"],
           tests: ["アンモニア・Na・血糖・Ca・血液ガス・肝腎機能を一度に",
-                  "Na 補正は 24時間で 8〜10mEq/L 以内に留める", "West-Haven 分類で肝性脳症の段階を記録"],
-          refs: ["WESTHAVEN"]
+                  "低Naと高Naを区別し、発症時期・症状で補正計画を決める。低Naによる痙攣・昏睡では監視下で高張食塩水を緊急使用し、Naを頻回測定して過補正を防ぐ。慢性低Na・ODS高リスク例は特に厳格な上限を設定", "West-Haven 分類で肝性脳症の段階を記録"],
+          refs: ["WESTHAVEN", "HYPONA_EMERG"]
         }
       ],
       redflags: [
@@ -624,7 +633,7 @@ var DXCC = (function () {
             { name: "低血糖", sup: ["hypoglycemia", "hypoglycemia_severe", "hx_cold_clammy"], note: "" },
             { name: "低酸素・CO₂ ナルコーシス", sup: [S.hypoxiaSevere, "respiratory_acidosis", "primary_resp_acidosis", S.copd], note: "" },
             { name: "オピオイド・ベンゾジアゼピン中毒", sup: ["hx_pupil_pinpoint", { f: "hx_after_drug", t: "薬剤開始後" }, "respiratory_acidosis"],
-              note: "pinpoint pupil ＋呼吸抑制。拮抗薬で診断と治療が同時に進む。" },
+              note: "気道・換気を優先。オピオイドによる呼吸抑制にはナロキソンを検討。フルマゼニルは混合中毒・依存・痙攣リスクがあり一律に投与しない。" },
             { name: "ショック（脳灌流の不足）", sup: [S.shockBp, "hx_cold_clammy", "hx_crt_delay", "lactate_high"], note: "" }
           ]
         },
@@ -649,7 +658,7 @@ var DXCC = (function () {
             { name: "内分泌（甲状腺・副腎）", sup: ["hx_goiter", "trab_pos", "hypona", "hyperk", "hx_hyperpigment"],
               note: "甲状腺クリーゼと低体温の粘液浮腫、副腎不全。どれも意識障害で来る。" },
             { name: "ビタミンB1欠乏（Wernicke）", sup: ["hx_cerebellar", { fn: function (F, V, D, ctx) { return cplt(ctx, "fatigue"); }, t: "倦怠・食事摂取不良" }],
-              note: "眼球運動障害・小脳症状・意識障害。ブドウ糖の前にチアミンを。" }
+              note: "眼球運動障害・小脳症状・意識障害。チアミンを速やかに併用するが、低血糖のブドウ糖投与をチアミン待ちで遅らせない。" }
           ]
         }
       ],
@@ -663,7 +672,7 @@ var DXCC = (function () {
              "項部硬直と髄膜刺激徴候",
              "呼吸様式（Cheyne-Stokes・Kussmaul・下顎呼吸）",
              "皮膚（黄染・点状出血・注射痕）と体温"],
-      refs: ["GCS", "JCS", "WESTHAVEN", "SE_ILAE", "STROKE_JP"]
+      refs: ["GCS", "JCS", "WESTHAVEN", "SE_ILAE", "STROKE_JP", "AHA_POISON", "ASAM_THIAMINE"]
     },
 
     /* ============== 頭痛 ============== */
@@ -676,16 +685,16 @@ var DXCC = (function () {
           why: "動脈瘤が破れた瞬間に痛みが最大になる。再破裂すれば致死率が跳ね上がるため、疑った時点で画像。",
           pointers: ["hx_pain_max_at_onset", "hx_sudden_onset", "hx_neck_stiff", "hx_consciousness_impaired",
                      { fn: function (F, V, D, ctx) { return cplt(ctx, "vomiting"); }, t: "嘔吐を伴う" }, S.elderly],
-          tests: ["頭部単純CT（発症6時間以内なら感度は高い）", "CT 陰性でも疑いが残れば腰椎穿刺（キサントクロミー）",
-                  "Ottawa SAH ルールは「除外」のための道具として使う", "CTA／MRA で動脈瘤の検索"],
-          refs: ["OTTAWA_SAH"]
+          tests: ["頭部単純CT（発症6時間以内なら感度は高い）", "CT陰性でも疑いが残れば発症からの時間・読影条件と腰椎穿刺の禁忌を評価し専門科と追加検査を判断。キサントクロミー検査は発症12時間以降を目安",
+                  "Ottawa SAHルールは適用条件を確認して使用し、陰性を全患者の除外根拠にしない", "CTA／MRA で動脈瘤の検索"],
+          refs: ["OTTAWA_SAH", "NG228"]
         },
         {
           name: "細菌性髄膜炎",
           why: "発熱＋頭痛＋項部硬直。抗菌薬の1時間が転帰を変える。",
           pointers: ["fever", S.highFever, "hx_neck_stiff", "hx_consciousness_impaired", "hx_petechiae", "crp_high"],
-          tests: ["頭部CT → 腰椎穿刺", "血液培養2セット", "経験的抗菌薬＋デキサメタゾン"],
-          refs: ["MENINGITIS"]
+          tests: MENINGITIS_TESTS.slice(),
+          refs: ["MENINGITIS", "NG240"]
         },
         {
           name: "脳静脈血栓症・高血圧性緊急症",
@@ -693,8 +702,8 @@ var DXCC = (function () {
           pointers: ["hx_progressive", { fn: function (F, V, D, ctx) { var s = vit(ctx, "sbp"); return s != null && s >= 180; }, t: "収縮期血圧 180mmHg 以上" },
                      { fn: function (F, V, D, ctx) { return cplt(ctx, "convulsion"); }, t: "痙攣" }, "hx_hemianopia", "apl_pos"],
           tests: ["MRI／MRV（静脈相を必ず含める）", "眼底（うっ血乳頭）", "凝固・抗リン脂質抗体",
-                  "降圧は緩やかに（最初の1時間で25%以内）"],
-          refs: []
+                  "急性臓器障害を伴う高血圧性緊急症でのみ監視下の降圧を検討。脳卒中・解離など病態別の目標に従い、脳静脈血栓症や血圧値だけで一律に降圧しない"],
+          refs: ["ESC_HTN2024"]
         },
         {
           name: "巨細胞性動脈炎",
@@ -781,9 +790,9 @@ var DXCC = (function () {
           name: "脊髄圧迫（硬膜外腫瘍・膿瘍・椎体骨折）",
           why: "脊髄は圧迫が続くと戻らない。膀胱直腸障害が出てからでは遅い。",
           pointers: ["hx_sens_level", "hx_dtr_hyper", "hx_tender_back", S.malignancy, "fever", S.immunosupp],
-          tests: ["緊急MRI（全脊髄）", "悪性腫瘍ならステロイドと放射線・手術の検討",
+          tests: ["緊急MRI（全脊髄）", "神経症状を伴う悪性脊髄圧迫を疑う場合は速やかにデキサメタゾンと放射線・手術を専門科と検討（悪性腫瘍の既往だけでは一律投与しない）",
                   "膿瘍なら血液培養と排膿", "膀胱直腸機能と感覚レベルを時間ごとに記録"],
-          refs: []
+          refs: ["NG234"]
         },
         {
           name: "ギラン・バレー症候群",
@@ -809,7 +818,7 @@ var DXCC = (function () {
             { name: "TIA", sup: ["hx_recurrent", { f: "hx_course", t: "症状が消えた" }, S.af, S.dm],
               note: "消えても危険は消えない。ABCD² で早期再発リスクを評価する。" },
             { name: "てんかん後の麻痺（Todd 麻痺）", sup: [{ fn: function (F, V, D, ctx) { return cplt(ctx, "convulsion") || hist(ctx, "epilepsy"); }, t: "痙攣・てんかんの既往" }, "lactate_high", "ck_veryhigh"],
-              note: "数時間で改善する。改善しなければ画像へ。" },
+              note: "発作後麻痺でも急性脳卒中を除外できない。突然の局在症状は改善待ちにせず脳卒中経路で緊急評価・適応に応じ画像へ。" },
             { name: "低血糖・代謝性の偽性麻痺", sup: ["hypoglycemia", "hypona_severe", "hyperna_severe"],
               note: "血糖を測らずに脳梗塞と決めてはいけない。" }
           ]
@@ -844,7 +853,7 @@ var DXCC = (function () {
              "感覚のレベル（髄節が特定できるか）",
              "呼吸筋（%肺活量・咳の強さ）と嚥下",
              "血糖と血圧の実測"],
-      refs: ["STROKE_JP", "NIHSS", "ABCD2", "GBS_CRIT"]
+      refs: ["STROKE_JP", "NIHSS", "ABCD2", "GBS_CRIT", "NG128"]
     },
 
     /* ============== 痙攣 ============== */
@@ -857,8 +866,8 @@ var DXCC = (function () {
           why: "発作が続くほど神経細胞が傷み、薬が効きにくくなる。5分を境に治療のアルゴリズムが始まる。",
           pointers: ["hx_progressive", "hx_consciousness_impaired", "lactate_high", "ck_veryhigh", "metabolic_acidosis",
                      { fn: function (F, V, D, ctx) { return hist(ctx, "epilepsy"); }, t: "てんかんの既往" }],
-          tests: ["ILAE の定義（5分以上、または発作間に意識が戻らない）で重積と判断",
-                  "ベンゾジアゼピンを十分量 → 第二選択薬", "血糖・Na・Ca・Mg・血液ガスを同時に",
+          tests: ["全身性痙攣が5分以上持続、または意識回復なく反復する場合は痙攣性重積として直ちに治療",
+                  "痙攣性重積では気道・換気・循環を支えながらベンゾジアゼピン、持続すれば第二選択薬（検査結果を待たない）", "血糖・Na・Ca・Mg・血液ガスを同時に",
                   "発作が止まっても覚醒しなければ脳波（非痙攣性重積）"],
           refs: ["SE_ILAE"]
         },
@@ -867,15 +876,15 @@ var DXCC = (function () {
           why: "薬では止まらない痙攣。原因を補正しなければ再発し続ける。",
           pointers: ["hypoglycemia", "hypoglycemia_severe", "hypona_severe", "hypona_mod", "hypoca_severe", "hypomg"],
           tests: ["血糖・Na・Ca・Mg・P を最初のセットに入れる",
-                  "低Naの補正速度は 24時間で 8〜10mEq/L 以内", "原因薬（サイアザイド・SSRI）の確認"],
-          refs: []
+                  "低Naによる痙攣・昏睡では監視下で高張食塩水を緊急使用。初期の症状改善目標と24時間の補正上限を区別し、Naを頻回測定。慢性低Na・ODS高リスク例では上限を厳格に設定", "原因薬（サイアザイド・SSRI）の確認"],
+          refs: ["HYPONA_EMERG"]
         },
         {
           name: "中枢神経感染・脳炎",
           why: "ヘルペス脳炎は治療可能だが遅れると後遺症が残る。発熱＋痙攣＋意識障害で想定する。",
           pointers: ["fever", "hx_neck_stiff", "hx_consciousness_impaired", "crp_high", "hx_focal_deficit"],
-          tests: ["頭部CT → 腰椎穿刺（HSV-PCR を含める）", "アシクロビルの早期投与を検討", "MRI（側頭葉）"],
-          refs: ["MENINGITIS"]
+          tests: MENINGITIS_TESTS.concat(["脳炎を疑えばアシクロビルを検査結果待ちで遅らせず開始し、腎機能に応じ調整する", "安全に腰椎穿刺できる時点でHSV-PCR、必要に応じMRI"]),
+          refs: ["MENINGITIS", "NG240", "ENCEPH_IDSA"]
         },
         {
           name: "脳構造病変（出血・腫瘍・外傷）",
@@ -948,16 +957,16 @@ var DXCC = (function () {
           pointers: [S.tachycardia, S.hypotension, "hx_cold_clammy", "hx_crt_delay", "lactate_high",
                      "anemia_severe", "buncr_high"],
           tests: ["輸液と輸血の準備、血液型・交差試験", "乳酸と塩基過剰", "出血源の同定（内視鏡・CT・血管造影）",
-                  "抗凝固薬の中和"],
-          refs: []
+                  "抗凝固薬服用中の生命を脅かす出血では、薬剤・最終投与時刻に応じ中和を検討（蘇生・止血を遅らせない）"],
+          refs: ["ACC_BLEED"]
         },
         {
           name: "上部消化管出血",
           why: "食道・胃・十二指腸からの出血は大量になりうる。黒色便とBUN/Cr比の上昇が手がかり。",
           pointers: ["hx_stool_melena", "anemia", "buncr_high", S.nsaid, S.cirrhosis, S.anticoag, "hx_tender_epigastric"],
-          tests: ["Glasgow-Blatchford スコアで介入の必要性を判定", "上部内視鏡（肝硬変なら変動する）",
-                  "PPI 静注、肝硬変なら血管収縮薬と抗菌薬", "Rockall スコアで予後"],
-          refs: ["GBS", "ROCKALL"]
+          tests: ["Glasgow-Blatchford スコアで介入の必要性を判定", "蘇生後に上部内視鏡。重症・不安定例は蘇生直後、その他は原則24時間以内を目安に専門科と調整",
+                  "非静脈瘤性出血のPPIは内視鏡所見・施設手順に応じる。静脈瘤出血を疑う場合は血管作動薬と予防的抗菌薬を早期検討", "Rockall スコアで予後"],
+          refs: ["GBS", "ROCKALL", "CG141"]
         },
         {
           name: "DIC",
@@ -972,9 +981,9 @@ var DXCC = (function () {
           name: "抗凝固薬・抗血小板薬による出血",
           why: "薬が効きすぎている状態。中和薬と半減期を知っているかどうかで初動が変わる。",
           pointers: [S.anticoag, S.antiplt, "inr_high", "inr_veryhigh", "aptt_prolonged", "pt_prolonged", S.ckd],
-          tests: ["PT-INR・APTT と最終服薬時刻", "ワルファリンならビタミンK＋凝固因子製剤、DOACなら特異的中和薬",
+          tests: ["PT-INR・APTT と最終服薬時刻", "生命を脅かす出血・初期対応で止まらない大出血では薬剤別の中和を検討。軽微な出血に中和薬を一律使用しない。最終服薬・腎機能・国内適応を確認",
                   "腎機能（DOAC の排泄）", "HAS-BLED で出血リスクを記録"],
-          refs: ["HASBLED"]
+          refs: ["HASBLED", "ACC_BLEED"]
         },
         {
           name: "血小板減少の緊急（TTP・HIT）",
@@ -982,9 +991,9 @@ var DXCC = (function () {
           pointers: ["plt_verylow", "plt_low", "anemia", "ld_high", "renal_impair",
                      { fn: function (F, V, D, ctx) { return med(ctx, "heparin"); }, t: "ヘパリンの使用" }, "hx_focal_deficit"],
           tests: ["破砕赤血球の確認と ADAMTS13 活性（TTP）",
-                  "4Ts スコアと HIT 抗体（HIT ではヘパリンを直ちに中止し代替抗凝固へ）",
-                  "TTP を疑えば血漿交換を急ぐ"],
-          refs: ["FOURTS"]
+                  "4Tsで事前確率を評価。中〜高確率のHIT疑いではヘパリンを中止し出血リスクに応じ非ヘパリン抗凝固を検討。低確率に一律の検査・経験的治療を行わない",
+                  "TTPの臨床的疑いが強ければ血漿交換前にADAMTS13用採血を行い、結果を待たず血液内科と緊急治療"],
+          refs: ["FOURTS", "ASH_HIT", "ISTH_TTP"]
         }
       ],
       redflags: [
@@ -1042,9 +1051,9 @@ var DXCC = (function () {
           why: "片側の下腿腫脹は肺塞栓の予備軍。歩いた瞬間に肺へ飛ぶ。",
           pointers: ["hx_edema_unilat", "ddimer_high", "ddimer_veryhigh", S.malignancy, S.tachypnea, S.hypoxia,
                      { fn: function (F, V, D, ctx) { return cplt(ctx, "dyspnea") || cplt(ctx, "chest_pain"); }, t: "呼吸困難・胸痛を伴う" }],
-          tests: ["Wells スコア（DVT）→ D-ダイマーまたは下肢静脈エコー",
-                  "呼吸器症状があれば肺塞栓として Wells（PE）と造影CT", "抗凝固の開始判断"],
-          refs: ["WELLS_DVT", "WELLS_PE"]
+          tests: ["安定例はWells（DVT）で事前確率を評価し、likelyなら下肢静脈エコー、unlikelyならD-ダイマーから判断",
+                  "呼吸器症状があればPEを評価。安定例はWells（PE）で画像・D-ダイマーを選び、ショックでは救急対応を優先", "抗凝固の開始判断"],
+          refs: ["WELLS_DVT", "WELLS_PE", "NG158"]
         },
         {
           name: "急性心不全",
@@ -1058,8 +1067,8 @@ var DXCC = (function () {
           why: "片側の熱感を伴う腫脹。所見に不釣り合いな激痛と全身状態の悪化は、筋膜炎の警告。",
           pointers: ["hx_edema_unilat", "fever", "hx_rash_diffuse", "crp_veryhigh", S.dm, S.hypotension, "ck_veryhigh"],
           tests: ["皮膚所見の境界をマークして経時変化を見る", "CRP・CK・血液培養",
-                  "画像（ガス・筋膜の液体貯留）", "疑えば外科的検索を遅らせない"],
-          refs: []
+                  "画像は補助であり、強く疑えば画像待ちで外科的探索・治療を遅らせない", "外科へ即連絡し、広域抗菌薬と全身管理を並行"],
+          refs: ["IDSA_SSTI"]
         }
       ],
       redflags: [
@@ -1110,7 +1119,7 @@ var DXCC = (function () {
       killers: [
         {
           name: "腎後性閉塞（尿閉・両側水腎症）",
-          why: "出口が詰まっているだけなら、カテーテル一本で解決する。放置すれば不可逆の腎障害になる。",
+          why: "尿閉は導尿で改善しうるが、上部尿路閉塞は尿管ステント・腎瘻等が必要な場合がある。感染・無尿を伴う閉塞は緊急泌尿器科評価。",
           pointers: ["hx_abd_distension", "hx_tender_periumbilical", "renal_impair", "cr_high", "hyperk",
                      { fn: function (F, V, D, ctx) { return hist(ctx, "malignancy"); }, t: "骨盤内腫瘍の既往" }],
           tests: ["膀胱エコーで残尿を確認し、必要なら導尿", "腎エコーで水腎症",
@@ -1122,23 +1131,23 @@ var DXCC = (function () {
           why: "腎は灌流圧の変化を最初に受ける臓器。低血圧・脱水・出血・心不全のサインとして乏尿が出る。",
           pointers: ["hx_hypovolemia", S.hypotension, S.tachycardia, "buncr_high", "uosm_high", "una_low",
                      "lactate_high", "hx_crt_delay"],
-          tests: ["輸液負荷への反応（尿量・血圧・乳酸）", "BUN/Cr 比・尿中Na・尿浸透圧",
-                  "腎毒性薬（NSAIDs・ACE阻害薬／ARB・造影剤）の中止", "KDIGO の AKI 病期分類で記録"],
-          refs: ["KDIGO_AKI"]
+          tests: ["循環血液量減少が疑われる場合に輸液を検討し、尿量・血圧・乳酸・肺うっ血を再評価。心不全・体液過剰では一律に輸液負荷しない", "BUN/Cr 比・尿中Na・尿浸透圧",
+                  "NSAIDs等とACE阻害薬／ARBの一時休薬は脱水・低血圧・高K等を踏まえ判断。必要な緊急造影検査を腎障害だけで一律に延期しない", "KDIGO の AKI 病期分類で記録"],
+          refs: ["KDIGO_AKI", "NG148"]
         },
         {
           name: "高カリウム血症による心停止",
           why: "乏尿が続けばカリウムは必ず上がる。心電図変化が出てからでは時間がない。",
           pointers: ["hyperk", "hyperk_severe", "renal_severe", "metabolic_acidosis", S.bradycardia, "rhabdo_range"],
-          tests: ["心電図（テント状T波・QRS 幅）", "カルシウム製剤・グルコース＋インスリン・β刺激薬",
+          tests: ["心電図（テント状T波・QRS 幅）", "高Kに伴う心電図変化では静注カルシウムを検討。重度高Kでは心電図が正常でもインスリン・グルコース等の緊急治療を検討し、血糖・Kを反復監視。β刺激薬だけに依存しない",
                   "透析の適応判断（K・アシドーシス・体液過剰・尿毒症）"],
-          refs: []
+          refs: ["RCUK_K"]
         },
         {
           name: "急性腎障害の原因としての横紋筋融解・腫瘍崩壊",
           why: "筋や腫瘍の崩壊産物が尿細管を詰める。原因を知っていれば輸液で防げる。",
           pointers: ["ck_veryhigh", "rhabdo_range", "hyperk", "hyperp", "hypoca", "ua_high", "ld_high", S.malignancy],
-          tests: ["CK・K・P・Ca・尿酸・LD", "大量輸液と尿量の維持", "腫瘍崩壊なら尿酸降下薬と透析の準備"],
+          tests: ["CK・K・P・Ca・尿酸・LD", "循環・尿量・心腎機能に応じて輸液量を調整。無尿・肺うっ血では大量輸液を継続せず腎臓専門医へ相談", "腫瘍崩壊なら尿酸降下薬と透析の準備"],
           refs: ["KDIGO_AKI"]
         }
       ],
@@ -1200,8 +1209,8 @@ var DXCC = (function () {
           why: "水と電解質が腸から失われ続ける。高齢者と小児では短時間で循環が破れる。",
           pointers: ["hx_hypovolemia", S.tachycardia, S.hypotension, "buncr_high", "hyperna", "hypok",
                      "metabolic_acidosis", "lactate_high", S.elderly],
-          tests: ["体重・尿量・起立性変化の実測", "Na・K・Cl・HCO₃⁻・血液ガス", "補液（経口が可能なら経口を優先）"],
-          refs: []
+          tests: ["体重・尿量・起立性変化の実測", "Na・K・Cl・HCO₃⁻・血液ガス", "ショック・重度脱水では等張液による静脈内蘇生を優先。軽〜中等度で意識・嚥下が保たれ、イレウスがなければ経口補水"],
+          refs: ["IDSA_DIAR"]
         },
         {
           name: "Clostridioides difficile 感染・偽膜性腸炎",
@@ -1296,17 +1305,17 @@ var DXCC = (function () {
           why: "嘔吐と腹痛で来る代謝性救急。胃腸炎として帰すと数時間で崩れる。",
           pointers: ["hyperglycemia_severe", "hyperglycemia_extreme", "ag_high", "metabolic_acidosis",
                      "hx_kussmaul", S.dm, "hx_hypovolemia", "hyperk"],
-          tests: ["血糖・血液ガス・ケトン体", "AG とアルブミン補正 AG", "輸液・インスリン・K の補充計画"],
-          refs: ["FIGGE"]
+          tests: ["血糖・血液ガス・ケトン体", "AG とアルブミン補正 AG", "循環状態に応じ輸液し、インスリン前にKを確認。K 3.5mEq/L未満なら補充を優先し、3.5を超えるまでインスリンを延期。腎機能・血糖・Kを反復監視"],
+          refs: ["FIGGE", "DKA2024"]
         },
         {
           name: "副腎不全・高カルシウム血症",
           why: "嘔吐・脱力・低血圧の組み合わせ。ステロイド中断歴や悪性腫瘍が背景にある。",
           pointers: ["hypona", "hyperk", "hx_hyperpigment", S.hypotension, "hyperca", "hyperca_severe",
                      { fn: function (F, V, D, ctx) { return med(ctx, "steroid"); }, t: "ステロイドの使用・中断" }, S.malignancy],
-          tests: ["Na・K・血糖・Ca（補正Ca）・コルチゾール・ACTH", "疑えばヒドロコルチゾンを先に投与",
-                  "高Caなら輸液とビスホスホネート"],
-          refs: ["PAYNE"]
+          tests: ["Na・K・血糖・Ca（補正Ca）・コルチゾール・ACTH", "副腎クリーゼ（ショック・急性重症化）を疑えば採血・結果待ちで遅らせずヒドロコルチゾンと補液。安定した副腎不全疑いはコルチゾール・ACTH等で評価",
+                  "高Caの程度・症状・原因に応じ治療。脱水には心腎機能をみながら補液し、必要時に腎機能等を考慮してビスホスホネート等を検討"],
+          refs: ["PAYNE", "ADRENAL_CRISIS", "HYPERCA_EMERG"]
         },
         {
           name: "食道破裂（Boerhaave）",
@@ -1384,8 +1393,8 @@ var DXCC = (function () {
           why: "低Na・高K・低血圧・色素沈着。診断されるまで何か月もかかることがあり、感染などで一気にクリーゼへ移る。",
           pointers: ["hypona", "hyperk", "hx_hyperpigment", S.hypotension, "hypoglycemia", "hx_weight_loss",
                      { fn: function (F, V, D, ctx) { return med(ctx, "steroid"); }, t: "ステロイドの使用・中断" }],
-          tests: ["朝のコルチゾール・ACTH", "Na・K・血糖", "疑えば負荷試験の前にヒドロコルチゾンを"],
-          refs: []
+          tests: ["朝のコルチゾール・ACTH", "Na・K・血糖", "副腎クリーゼを疑うショック・急性重症化では翌朝や負荷試験を待たずヒドロコルチゾンと補液。安定例は先にコルチゾール・ACTH等を評価"],
+          refs: ["ADRENAL_CRISIS"]
         },
         {
           name: "造血器悪性腫瘍・重度貧血",
@@ -1399,8 +1408,8 @@ var DXCC = (function () {
           name: "高カルシウム血症・腫瘍崩壊",
           why: "倦怠感・多尿・便秘・意識障害。悪性腫瘍の背景で進む。",
           pointers: ["hyperca", "hyperca_severe", S.malignancy, "renal_impair", "hx_consciousness_impaired", "ua_high"],
-          tests: ["補正Ca（Payne 式）とイオン化Ca", "PTH・PTHrP・ビタミンD", "輸液とビスホスホネート"],
-          refs: ["PAYNE"]
+          tests: ["補正Ca（Payne 式）とイオン化Ca", "PTH・PTHrP・ビタミンD", "高Caの程度・症状・原因に応じ治療。脱水には心腎機能をみながら補液し、必要時に腎機能等を考慮してビスホスホネート等を検討（腫瘍崩壊に一律使用しない）"],
+          refs: ["PAYNE", "HYPERCA_EMERG"]
         }
       ],
       redflags: [
@@ -1472,8 +1481,8 @@ var DXCC = (function () {
           pointers: ["fever", S.highFever, "hx_tender_ruq", "cholestasis", "bil_high", S.hypotension,
                      "hx_consciousness_impaired", "plt_low", "crp_high"],
           tests: ["Tokyo Guidelines 2018 の診断基準と重症度", "腹部エコー／CT／MRCP",
-                  "血液培養", "重症・中等症なら緊急胆道ドレナージ"],
-          refs: ["TG18"]
+                  "血液培養", "抗菌薬・循環呼吸管理を開始し、中等症は早期、重症は初期安定化後できるだけ速やかに胆道ドレナージ。軽症も初期治療に反応しなければ検討"],
+          refs: ["TG18", "TG18_INITIAL"]
         },
         {
           name: "急性肝不全",
@@ -1489,8 +1498,8 @@ var DXCC = (function () {
           why: "赤血球が壊れている。貧血の進行が速く、腎と中枢を同時に巻き込むことがある。",
           pointers: ["ibil_high", "ld_high", "anemia", "anemia_severe", "retic_high", "plt_low", "cr_high", "fdp_veryhigh"],
           tests: ["間接ビリルビン・LD・ハプトグロビン・網赤血球", "塗抹（破砕赤血球・球状赤血球）",
-                  "直接クームス試験", "TTP を疑えば ADAMTS13 と血漿交換"],
-          refs: []
+                  "直接クームス試験", "TTPの臨床的疑いが強ければ血漿交換前にADAMTS13用採血を行い、結果を待たず血液内科と緊急治療"],
+          refs: ["ISTH_TTP"]
         }
       ],
       redflags: [
@@ -1550,7 +1559,7 @@ var DXCC = (function () {
           why: "皮膚症状＋呼吸・循環・消化器のいずれかが同時に来る。アドレナリン筋注の遅れが死因になる。",
           pointers: ["hx_rash_diffuse", S.newDrug, "hx_wheeze", S.hypotension, S.tachycardia,
                      { fn: function (F, V, D, ctx) { return cplt(ctx, "dyspnea") || cplt(ctx, "vomiting"); }, t: "呼吸困難・嘔吐を伴う" }],
-          tests: ["アドレナリン 0.3〜0.5mg 大腿前外側に筋注", "仰臥位（立たせない）", "WAO の診断基準で確認", "遅発反応に備えて経過観察"],
+          tests: ["アナフィラキシーを疑えば成人アドレナリン0.3〜0.5mgを大腿前外側に筋注（皮疹だけで一律投与しない）", "原則仰臥位で急に立たせない。呼吸困難では呼吸しやすい体位、妊婦は左側、意識不良では気道保護を優先", "WAO の診断基準で確認", "遅発反応に備えて経過観察"],
           refs: ["ANAPHYLAXIS"]
         },
         {
@@ -1567,16 +1576,16 @@ var DXCC = (function () {
           why: "点状出血から紫斑が広がり、数時間でDICとショックに至る。発熱＋点状出血は抗菌薬を待たせない所見。",
           pointers: ["hx_petechiae", "fever", S.highFever, "hx_neck_stiff", "plt_low", "dic_jaam",
                      S.hypotension, "lactate_high"],
-          tests: ["血液培養を取り、直ちに抗菌薬", "髄液検査（遅らせない範囲で）", "凝固とDICの評価"],
-          refs: ["MENINGITIS", "JAAM_DIC"]
+          tests: ["血液培養は投与を遅らせない範囲で採取し直ちに抗菌薬・全身安定化", "広範・急速に拡大する紫斑では腰椎穿刺を行わない。ショック・出血リスクなども評価し、安全になるまで延期", "凝固とDICの評価"],
+          refs: ["MENINGITIS", "JAAM_DIC", "NG240"]
         },
         {
           name: "壊死性軟部組織感染",
-          why: "皮膚所見より痛みが強く、境界が時間単位で進む。外科的デブリドマンだけが治療。",
+          why: "皮膚所見より痛みが強く、境界が時間単位で進む。外科的デブリドマンと広域抗菌薬・全身管理を急ぐ。",
           pointers: ["hx_rash_diffuse", "fever", "crp_veryhigh", "ck_veryhigh", S.dm, S.hypotension, "lactate_high"],
           tests: ["皮膚所見の境界をマークして時間ごとに比較", "CK・CRP・乳酸・血液培養",
-                  "画像でガス・筋膜液体", "外科へ即連絡"],
-          refs: []
+                  "画像は補助であり、強く疑えば画像待ちで外科的探索・治療を遅らせない", "外科へ即連絡し、広域抗菌薬と全身管理を並行"],
+          refs: ["IDSA_SSTI"]
         }
       ],
       redflags: [
@@ -1721,8 +1730,8 @@ var DXCC = (function () {
           why: "感覚レベルと膀胱直腸障害が出たら、時間単位で不可逆になる。",
           pointers: ["hx_sens_level", "hx_dtr_hyper", "hx_tender_back", S.malignancy, "fever", S.immunosupp],
           tests: ["緊急MRI（全脊髄）", "膀胱直腸機能と感覚レベルの時間記録",
-                  "悪性腫瘍ならステロイド、感染なら排膿"],
-          refs: []
+                  "神経症状を伴う悪性脊髄圧迫を疑う場合は速やかにデキサメタゾンと専門科評価。感染性圧迫では抗菌薬・排膿を緊急検討（悪性腫瘍の既往だけで一律投与しない）"],
+          refs: ["NG234"]
         },
         {
           name: "脳血管障害",

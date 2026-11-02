@@ -224,12 +224,21 @@
       }
     }
 
-    /* 浸透圧ギャップ */
+    /* 浸透圧ギャップ。推算に必要な Na・血糖・BUN が揃うまで評価しない。 */
     var sosm = n(V.sosm);
-    if (sosm != null && na != null) {
-      var calc = 2 * na + (n(V.glu) == null ? 0 : n(V.glu) / 18) + (n(V.bun) == null ? 0 : n(V.bun) / 2.8);
-      A.osmGap = sosm - calc;
+    var osmCalc = C.calcOsm(na, n(V.glu), n(V.bun));
+    if (sosm != null && osmCalc != null) {
+      A.osmCalc = osmCalc;
+      A.osmGap = sosm - osmCalc;
       A.osmGapHigh = A.osmGap > 10;
+    } else if (sosm != null) {
+      // 実測浸透圧だけでは判定できないことを明示する（黙って正常扱いにしない）
+      A.osmGapUnavailable = true;
+      A.osmGapMissing = [
+        na == null ? "Na" : null,
+        n(V.glu) == null ? "血糖" : null,
+        n(V.bun) == null ? "BUN" : null
+      ].filter(Boolean);
     }
 
     /* 尿アニオンギャップ */
@@ -302,6 +311,7 @@
     if (A.agLow) F.ag_low = true;
     if (A.deltaRatio != null && A.deltaRatio < 0.8) F.hyperchloremic = true;
     if (A.osmGapHigh) F.osmgap_high = true;
+    if (A.osmGapUnavailable) F.osmgap_unavailable = true;
     if (A.uag != null) { if (A.uagPositive) F.uag_positive = true; else F.uag_negative = true; }
     if (A.aado2High) F.aado2_high = true;
     if (A.ards) F.ards_range = true;
@@ -434,6 +444,13 @@
       refs: [],
       note: "PaCO₂ 45 mmHg 以下なら I 型（酸素化障害）、45 超なら II 型（換気障害）です。II 型では酸素投与の目標値を下げ、換気補助を検討します。",
       actions: ["PaCO₂ による I 型／II 型の判別", "酸素投与量と目標 SpO₂ の確認", "換気補助の適応を検討"] },
+
+    { id: "abg-osmgap-missing", name: "浸透圧ギャップが評価できていません", level: "amber",
+      when: function (F) { return F.osmgap_unavailable && F.ag_high; },
+      basis: ["実測血清浸透圧は入力済み", "推算に必要な項目が不足"],
+      refs: [],
+      note: "推算血清浸透圧は Na・血糖・BUN の3つで計算します。いずれかが未測定のままだと推算値が過小となり、浸透圧ギャップが実際より大きく出ます。AG が開大している状況では、中毒性アルコールの判断に直結するため、不足項目を測定してから評価してください。",
+      actions: ["不足している項目（血糖・BUN・Na）を測定", "そろってから浸透圧ギャップを再評価"] },
 
     { id: "abg-ag-low", name: "AG 低値", level: "info",
       when: function (F) { return F.ag_low; },

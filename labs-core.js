@@ -141,10 +141,12 @@ var LabsCore = (function () {
     return na - (cl + hco3);
   }
 
-  /** 血清浸透圧の推算値。測定値との差（浸透圧ギャップ）の評価に使う。 */
+  /** 血清浸透圧の推算値。測定値との差（浸透圧ギャップ）の評価に使う。
+   *  未測定の項目をゼロとして計算すると推算値が過小になり、浸透圧ギャップが
+   *  偽陽性になる（中毒性アルコールの誤判定を招く）。3項目そろうまで算出しない。 */
   function calcOsm(na, glu, bun) {
-    if (na == null) return null;
-    return 2 * na + (glu == null ? 0 : glu / 18) + (bun == null ? 0 : bun / 2.8);
+    if (na == null || glu == null || bun == null) return null;
+    return 2 * na + glu / 18 + bun / 2.8;
   }
 
   function ratio(a, b) {

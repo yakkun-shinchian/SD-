@@ -52,7 +52,11 @@ var LabsUI = (function () {
   function addSection(fn) { extraSections.push(fn); }
   function addBinder(fn) { extraBinders.push(fn); }
   function api() {
-    return { state: state, cfg: cfg, root: root, esc: esc, rerender: schedule, redraw: draw };
+    // state はプリセット適用やクリアで差し替わる。mount 時の参照を握ると、
+    // 差し替え後の入力が捨てられたオブジェクトへ書き込まれてしまう。
+    var o = { cfg: cfg, root: root, esc: esc, rerender: schedule, redraw: draw };
+    Object.defineProperty(o, "state", { enumerable: true, get: function () { return state; } });
+    return o;
   }
 
   /* ---------- 保存 ---------- */
@@ -528,5 +532,6 @@ var LabsUI = (function () {
   }
 
   return { mount: mount, addInputPanel: addInputPanel, addSection: addSection,
-           addBinder: addBinder, save: save, esc: esc };
+           addBinder: addBinder, save: save, esc: esc,
+           getState: function () { return state; } };
 })();

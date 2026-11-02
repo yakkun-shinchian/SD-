@@ -426,6 +426,7 @@ var LabsIntegrate = (function () {
     want(F.transaminase_high && C.num(V.inr) == null, "PT-INR（肝の合成能評価）");
     want((F.crp_high || F.pct_high) && C.num(V.lac) == null, "乳酸（組織低灌流の評価）");
     want(F.ana_pos && C.num(V.c3) == null, "補体 C3・C4・CH50（膠原病の活動性評価）");
+    want(F.osmgap_unavailable, "浸透圧ギャップの算出に必要な項目（Na・血糖・BUN）— 実測浸透圧だけでは評価できません");
     want(F.hyperk, "12誘導心電図（高K血症による変化の確認）");
     want(F.rhabdo_range && C.num(V.k) == null, "カリウム・腎機能（横紋筋融解に伴う二次障害）");
     want(!ctx.vitals || C.num(ctx.vitals.sbp) == null, "バイタルサイン（qSOFA 判定に必要）");

@@ -1,13 +1,13 @@
 /*! verify-data.js — tools/build-verify-checklist.mjs が自動生成。直接編集しないこと。 */
 var VERIFY_DATA = {
- "generated": "2026-11-01",
- "total": 337,
+ "generated": "2026-11-02",
+ "total": 338,
  "stars": 158,
  "byConf": {
   "solid": 73,
   "facility": 73,
   "varies": 18,
-  "design": 173
+  "design": 174
  },
  "sections": [
   {
@@ -3367,6 +3367,17 @@ var VERIFY_DATA = {
      "note": "PaCO₂ 45 mmHg 以下なら I 型（酸素化障害）、45 超なら II 型（換気障害）です。II 型では酸素投与の目標値を下げ、換気補助を検討します。",
      "refs": [],
      "star": true,
+     "conf": "design",
+     "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
+    },
+    {
+     "id": "pat.abg-osmgap-missing",
+     "label": "浸透圧ギャップが評価できていません",
+     "group": "血液ガス・酸塩基平衡",
+     "detail": "【根拠】実測血清浸透圧は入力済み・推算に必要な項目が不足",
+     "note": "推算血清浸透圧は Na・血糖・BUN の3つで計算します。いずれかが未測定のままだと推算値が過小となり、浸透圧ギャップが実際より大きく出ます。AG が開大している状況では、中毒性アルコールの判断に直結するため、不足項目を測定してから評価してください。",
+     "refs": [],
+     "star": false,
      "conf": "design",
      "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
     },

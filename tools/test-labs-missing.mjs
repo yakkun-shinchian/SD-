@@ -230,4 +230,39 @@ test('照合チェックリストが実装からずれていない', () => {
   });
 });
 
+
+test('浸透圧ギャップは Na・血糖・BUN が揃うまで評価しない', () => {
+  // 未測定をゼロ扱いすると推算値が過小になり、ギャップが偽陽性になる。
+  // 以前はこれだけで「中毒性アルコール 89%」という赤判定が出ていた。
+  const partial = {ph:7.12,paco2:22,hco3:7,na:140,cl:102,alb:4.2,sosm:295};
+  const a = abg(partial);
+  assert.equal(a.osmGap, undefined, '不足のまま浸透圧ギャップを算出している');
+  assert.equal(a.osmGapUnavailable, true);
+  assert.deepEqual([...a.osmGapMissing], ['血糖','BUN']);
+  assert.equal(ddx(partial, {sex:'m',age:47,vitals:{},complaints:[],history:[],meds:[]}).includes('toxalcohol'),
+    false, '不足のまま中毒性アルコールを立てている');
+  // 不足していることを「次の一手」で伝える
+  const r = run(partial);
+  assert.ok(r.missing.some(m=>/浸透圧ギャップの算出に必要/.test(m)));
+
+  // 揃えば従来どおり検出する
+  const full = {...partial, glu:102, bun:14, sosm:338};
+  const b2 = abg(full);
+  assert.ok(Math.abs(b2.osmGap - 47.3) < 0.5, '揃ったときの値が合わない: ' + b2.osmGap);
+  assert.equal(b2.osmGapHigh, true);
+  assert.ok(ddx(full, {sex:'m',age:47,vitals:{},complaints:[],history:[],meds:[]}).includes('toxalcohol'));
+});
+
+test('LabsCore.calcOsm も3項目を要求する', () => {
+  assert.equal(c.LabsCore.calcOsm(140, null, 14), null);
+  assert.equal(c.LabsCore.calcOsm(140, 102, null), null);
+  assert.equal(c.LabsCore.calcOsm(null, 102, 14), null);
+  assert.ok(Math.abs(c.LabsCore.calcOsm(140, 180, 14) - 295) < 1);
+  // 生化学ドメインの表示側にも波及していること
+  const d = c.LabsCore.evaluate(['chem'],
+    {values:{na:140,cl:104,sosm:295},context:{sex:'m',age:60}}).derived;
+  assert.equal(d.osmCalc, null);
+  assert.equal(d.osmGap, undefined);
+});
+
 console.log(`${checks} checks passed; ${presets} presets evaluated in standalone and integrated modes.`);

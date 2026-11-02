@@ -7,20 +7,38 @@
 `scenes.js` の全ナレーション（118本）を、**CoeFont（声フォント）のお気に入りの声**で
 音声ファイル化し、`audio/` に整列させて `audio/manifest.js` を生成する道具を作ります。
 
-既存の VOICEVOX パイプラインと**同じ契約**に乗ります。つまり NurseTube 本体のコードは
-1行も変わりません。アプリは `audio/manifest.js` の `AUDIO_FILES` だけを見ており、
-その音声を誰が作ったかを知りません。CoeFont は「もう一つの声の供給元」として並びます。
+### ⚠ PR #30 との分担（2026-11-02 に判明）
+
+別のセッションが **PR #30**（`feature/coefont-reading-pipeline`）で、同じ CoeFont 案件の
+**別の半分**を作っていました。重複ではなく、ちょうど噛み合います。
+
+| 担当 | 範囲 | 成果物 |
+| --- | --- | --- |
+| **PR #30** | 読み（かな化）と**取り込み** | `tools/build-coefont.mjs`・`tools/import-coefont.mjs`・`coefont/` |
+| **本PR #29** | CoeFont の**画面操作**（音声を得る部分） | `tools/coefont/` |
+
+つなぎ目を踏み外さないことが決定的です。**`audio/manifest.js` を書くのは #30 だけ**にします。
+二つの道具が同じ対応表を書き換える構造は、競合と取りこぼしの温床です。
 
 ```
-scenes.js ──(build-voicevox.mjs)──> voicevox/manifest.json ─┬─> VOICEVOX 経路（既存）
-                                    （通し番号・キー・本文）   └─> CoeFont 経路（新規）
-                                                                      ↓
-                                                        audio/<番組ID-シーン番号>.<ext>
-                                                        audio/manifest.js
+scenes.js
+  ├─(build-voicevox.mjs)─> voicevox/manifest.json ──> VOICEVOX 経路（既存）
+  └─(build-coefont.mjs #30)─> coefont/manifest.json
+                              coefont/scripts/NNN_<key>.txt   ← 読み（かな）台本
+                                        │
+                                        ↓  ★ ここが本PRの担当
+                              CoeFont の画面を機械が操作して音声化
+                              → tools/coefont/export/<key>.<ext>
+                              → coefont/import.json を書き出す
+                                        │
+                                        ↓
+                              (import-coefont.mjs #30)
+                              ffmpeg で1.3倍速 → audio/<batch>/<key>.wav
+                              audio/manifest.js を更新（**#30 の責務**）
 ```
 
-`voicevox/manifest.json` を共通の入力とするのが要点です。「どのシーンが何番で、
-本文は何か」という対応表は既にそこにあります。作り直しません。
+つまり本PRは、**読み台本を受け取り、音声ファイルと `import.json` を置くところまで**で
+手を離します。アプリ本体のコードは、どちらの経路でも1行も変わりません。
 
 ## 2. なぜブラウザ自動化なのか（そして、その弱点）
 
@@ -59,6 +77,18 @@ tools/coefont/
 
 実装順序は ① → ② → **採寸** → ③ → ④ です。②で実物を測るまで③は書けません。
 推測で書いた選択子は初回で外れるため、採寸を先に置きます。
+
+④ の入出力は PR #30 のつなぎ目に合わせます。
+
+- **入力**：`coefont/manifest.json`（#30 が生成。`key`・`speech_text`・`source_sha256` を持つ）
+  と `coefont/scripts/NNN_<key>.txt`。※ `voicevox/manifest.json` は読みません
+  （読み（かな）変換済みの本文を使う必要があるため）
+- **声**：`--voice` の既定値は **後藤さん**（#30 が音声ラベルとして要求する値）
+- **出力**：`tools/coefont/export/<key>.<ext>` と、
+  #30 の `coefont/import-template.json` と同じ形の `coefont/import.json`
+  （`key`・`file`・`input_speed`・`voice`・`source_sha256`・`speech_sha256`）
+- **その先**：`node tools/import-coefont.mjs coefont/import.json` に引き渡す。
+  **本PRは `audio/` にも `audio/manifest.js` にも触りません**
 
 ## 4. 設計上の判断
 
@@ -105,10 +135,14 @@ CoeFont の声は数百あり、UUID を人間が管理するのは現実的で�
 `--voice "<名前の一部>"` で一覧を検索し、候補が複数あれば**一覧を提示して止まる**
 （勝手に1つ選ばない）方針とします。
 
-### 4-5. 出力は既存の契約に合わせる
+### 4-5. 出力は #30 の取り込み口に合わせる（対応表は書かない）
 
-`audio/<番組ID-シーン番号>.<拡張子>` に置き、`audio/manifest.js` を再生成します。
-既存の `tools/link-audio.mjs` と同じ出力形式です。アプリ側は無改修。
+`audio/manifest.js` を書き換える道具が二つあると、競合と取りこぼしが必ず起きます。
+#30 の `import-coefont.mjs` は、ハッシュ照合・キー指定の取り込み・staging と
+ロールバック・既存キーの保持まで備えています。これを置き換える理由はありません。
+
+本PRは `tools/coefont/export/` に音声を置き、`coefont/import.json` を書くだけにします。
+#30 がそれを受け取って、1.3倍速に揃えて `audio/` に収め、対応表を更新します。
 
 ## 5. 検証方法
 
@@ -129,6 +163,10 @@ CoeFont の声は数百あり、UUID を人間が管理するのは現実的で�
 - **VOICEVOX パイプラインの削除** — 動作する機能として維持します
 - **CoeFont 側のプロジェクト管理機能** — 音声を得ることが目的で、
   編集画面の全機能を操作する道具は作りません
+- **`audio/` と `audio/manifest.js` への書き込み** — PR #30 の
+  `tools/import-coefont.mjs` の責務です（§4-5）
+- **読み（かな）変換** — PR #30 の `tools/build-coefont.mjs` の責務です
+- **1.3倍速化** — PR #30 が ffmpeg で行います
 
 ## 7. 未解決事項
 
@@ -139,3 +177,10 @@ CoeFont の声は数百あり、UUID を人間が管理するのは現実的で�
   ブラウザ自動化が唯一の道であることを前提に設計します。
 - **この環境のネットワーク制限。** クラウド実行環境からは `coefont.cloud` に
   到達できません。本道具は利用者のパソコン上で実行する前提です。
+- **マージ順序。** #30 は #28 を土台にしています（base が
+  `feature/plain-japanese-narration`）。したがって **#28 → #30 → #29** の順に
+  取り込むのが安全です。本PRは `main` から分岐しているため、#30 がマージされたあとに
+  `main` を取り込み、④ を #30 のつなぎ目に合わせて実装します。
+- **読み（かな）の人による確認。** #30 は118シーン分のかな台本を自動生成し、
+  「人による確認欄は未確認」と明記しています。医学用語の読みは耳で確かめる必要があり、
+  これは本PRの範囲外ですが、**音声を量産する前に済ませるべき**項目です。

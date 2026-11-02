@@ -98,6 +98,22 @@ node tools/coefont/coefont-batch.mjs --voice "<声の名前の一部>" --limit 3
 まず `--limit 3` で3本だけ作り、`audio/` に正しい名前で並ぶか、
 `nurse.html` で実際に声が鳴るかを確かめてから、全118本に進みます。
 
+## PR #30 との分担（重要）
+
+別セッションの **PR #30** が、同じ CoeFont 案件の別の半分を作っています。
+
+| 担当 | 範囲 |
+| --- | --- |
+| **PR #30** | 読み（かな化）と取り込み（`tools/build-coefont.mjs`・`tools/import-coefont.mjs`） |
+| **この道具（PR #29）** | CoeFont の画面操作（音声を得る部分） |
+
+**`audio/manifest.js` を書くのは #30 だけです。** この道具は音声ファイルと
+`coefont/import.json` を置くところまでで手を離し、その先は
+`node tools/import-coefont.mjs coefont/import.json` に引き渡します。
+二つの道具が同じ対応表を書き換える構造は、事故の種です。
+
+声の既定値は **後藤さん**（#30 が音声ラベルとして要求する値）です。
+
 ## 仕組み
 
 既存の VOICEVOX パイプラインと**同じ契約**に乗ります。アプリ本体は無改修です。

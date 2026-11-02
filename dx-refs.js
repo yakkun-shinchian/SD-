@@ -107,7 +107,53 @@ var DXRefs = (function () {
 
     /* ---- 全身 ---- */
     NEWS2:      { label: "NEWS2",
-                  cite: "Royal College of Physicians. National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. 2017." }
+                  cite: "Royal College of Physicians. National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. 2017." },
+
+    /* ---- 意識・神経の評価尺度 ---- */
+    GCS:        { label: "Glasgow Coma Scale",
+                  cite: "Teasdale G, Jennett B. Assessment of coma and impaired consciousness. A practical scale. Lancet. 1974;2(7872):81-84." },
+    JCS:        { label: "Japan Coma Scale（3-3-9度方式）",
+                  cite: "太田富雄, 他. 急性期意識障害の新しいgrading とその表現法（いわゆる3-3-9度方式）. 脳神経外科学会（第3回脳卒中の外科研究会）講演集. 1975:61-69." },
+    NIHSS:      { label: "NIHSS",
+                  cite: "Brott T, et al. Measurements of acute cerebral infarction: a clinical examination scale. Stroke. 1989;20(7):864-870." },
+    STROKE_JP:  { label: "脳卒中治療ガイドライン",
+                  cite: "日本脳卒中学会 脳卒中ガイドライン委員会. 脳卒中治療ガイドライン 2021." },
+    OTTAWA_SAH: { label: "Ottawa SAH ルール",
+                  cite: "Perry JJ, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA. 2013;310(12):1248-1255." },
+    SE_ILAE:    { label: "てんかん重積の定義（ILAE）",
+                  cite: "Trinka E, et al. A definition and classification of status epilepticus - Report of the ILAE Task Force on Classification of Status Epilepticus. Epilepsia. 2015;56(10):1515-1523." },
+    GBS_CRIT:   { label: "ギラン・バレー症候群 診断基準",
+                  cite: "Asbury AK, Cornblath DR. Assessment of current diagnostic criteria for Guillain-Barre syndrome. Ann Neurol. 1990;27(Suppl):S21-S24." },
+    DUKE:       { label: "修正 Duke 基準（感染性心内膜炎）",
+                  cite: "Li JS, et al. Proposed modifications to the Duke criteria for the diagnosis of infective endocarditis. Clin Infect Dis. 2000;30(4):633-638." },
+    GOUT2015:   { label: "痛風 分類基準（ACR/EULAR 2015）",
+                  cite: "Neogi T, et al. 2015 Gout Classification Criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative. Arthritis Rheumatol. 2015;67(10):2557-2568." },
+    MENINGITIS: { label: "成人細菌性髄膜炎の臨床所見",
+                  cite: "van de Beek D, et al. Clinical features and prognostic factors in adults with bacterial meningitis. N Engl J Med. 2004;351(18):1849-1859." },
+
+    /* ---- 循環・呼吸の主訴別アプローチ ---- */
+    ACS_JCS:    { label: "急性冠症候群ガイドライン（日本循環器学会）",
+                  cite: "日本循環器学会. 急性冠症候群ガイドライン（2018年改訂版）." },
+    AORTA_ACC:  { label: "大動脈疾患ガイドライン（ACC/AHA 2022）",
+                  cite: "Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482." },
+    HF_JCS:     { label: "急性・慢性心不全診療ガイドライン",
+                  cite: "日本循環器学会／日本心不全学会. 急性・慢性心不全診療ガイドライン（2017年改訂版）および2021年フォーカスアップデート." },
+    PE_HF:      { label: "心不全の身体所見の診断精度",
+                  cite: "Wang CS, et al. Does this dyspneic patient in the emergency department have congestive heart failure? JAMA. 2005;294(15):1944-1956." },
+
+    /* ---- 腹部・消化器 ---- */
+    TG18:       { label: "Tokyo Guidelines 2018（急性胆嚢炎・胆管炎）",
+                  cite: "Yokoe M, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholecystitis. J Hepatobiliary Pancreat Sci. 2018;25(1):41-54." },
+    ALVARADO:   { label: "Alvarado スコア（急性虫垂炎）",
+                  cite: "Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15(5):557-564." },
+    IDSA_DIAR:  { label: "感染性腸炎 診療ガイドライン（IDSA）",
+                  cite: "Shane AL, et al. 2017 Infectious Diseases Society of America Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80." },
+
+    /* ---- 皮膚・アレルギー ---- */
+    ANAPHYLAXIS:{ label: "アナフィラキシー診断基準（WAO）",
+                  cite: "Cardona V, et al. World Allergy Organization Anaphylaxis Guidance 2020. World Allergy Organ J. 2020;13(10):100472." },
+    REGISCAR:   { label: "RegiSCAR（重症薬疹・DRESS）",
+                  cite: "Kardaun SH, et al. Variability in the clinical pattern of cutaneous side-effects of drugs with systemic symptoms: does a DRESS syndrome really exist? Br J Dermatol. 2007;156(3):609-611." }
   };
 
   /** 出典IDの配列から、画面表示用の短縮ラベル配列を返す。 */

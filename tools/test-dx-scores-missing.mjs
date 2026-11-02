@@ -68,7 +68,15 @@ test('compound autofill does not infer normal from missing components',()=>{
  assert.equal(c.DXScores.get('hscore').autofill({hb:8}, {}).cyto,undefined);
  assert.equal(c.DXScores.get('jss_ap').autofill({bun:10,cr:1,be:0,pao2:100}, {}).bun,undefined);
 });
-const render=(state={},values={},context={})=>sections[2]({state,input:{values,context}});
+// 臨床スコアのセクションを「登録順の番号」ではなく中身で特定する。
+// dx-ui.js にセクションが増えても、この検査が静かに別のセクションを見にいかないようにする。
+const scoreSection = (()=>{
+ const probe = {state:{},input:{values:{},context:{}},result:{findings:{},derived:{}}};
+ const hits = sections.filter(f=>{ try { return /臨床スコア/.test(f(probe)||''); } catch { return false; } });
+ assert.equal(hits.length,1,'臨床スコアのセクションが一意に特定できない');
+ return hits[0];
+})();
+const render=(state={},values={},context={})=>scoreSection({state,input:{values,context}});
 const card=(html,name)=>html.split('<div class="score-card">').find(s=>s.startsWith('<h4>'+name+'<'));
 test('rendered UI hides reassuring results and offers explicit false / reset',()=>{
  const html=render();

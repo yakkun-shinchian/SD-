@@ -94,6 +94,41 @@ await page.locator('#btn-clear').click();
 await page.waitForTimeout(500);
 check('スコア編集が反映される（入力をすべてクリア後）', await editCns('true'));
 
+/* 主訴からの診断アプローチ（dx-cc.js）が主訴の選択と身体所見に追従すること */
+await page.goto(base + '/dx.html', { waitUntil: 'networkidle' });
+if (await page.locator('#dlg-ok').count()) await page.locator('#dlg-ok').click();
+await page.locator('#btn-clear').click();
+await page.waitForTimeout(400);
+const ccCard = () => page.locator('details.cc', { has: page.locator('summary:has-text("胸痛")') }).first();
+const dissection = () => ccCard().locator('.cc-killer', { has: page.locator('h4:has-text("急性大動脈解離")') }).first();
+
+check('主訴を選ぶ前は主訴カードの代わりに案内が出る',
+  (await ccCard().count()) === 0 &&
+  /主訴・症状/.test(await page.locator('.card:has-text("主訴からの診断アプローチ") .empty').first().textContent()));
+
+await openAll();
+await page.locator('.chip[data-group="complaints"][data-key="chest_pain"]').click();
+await page.waitForTimeout(400);
+check('主訴「胸痛」を選ぶと主訴カードが出る', (await ccCard().count()) === 1);
+check('胸痛カードが急性大動脈解離を「まず外す疾患」に挙げる', (await dissection().count()) === 1);
+
+const litBefore = await ccCard().locator('.cc-sig.on').count();
+const cntBefore = (await dissection().locator('.cnt').textContent()).trim();
+await openAll();
+await page.locator('select[data-lab="hx_bp_lr"]').first().selectOption('あり（20mmHg 以上）');
+await page.waitForTimeout(400);
+const litAfter = await ccCard().locator('.cc-sig.on').count();
+const cntAfter = (await dissection().locator('.cnt').textContent()).trim();
+check('身体所見「血圧の左右差あり」で red flag が点灯する', litAfter > litBefore,
+  litBefore + ' → ' + litAfter);
+check('同じ所見で大動脈解離の該当数が増える', cntBefore !== cntAfter, cntBefore + ' → ' + cntAfter);
+check('点灯件数が主訴カードの見出しにも出る',
+  /red flag \d+ 件 点灯/.test(await ccCard().locator('summary').textContent()));
+
+/* 問診・身体所見は「検査値の一覧」には出さない（hideItems） */
+check('問診・身体所見が入力値一覧表に混ざらない',
+  !/血圧の左右差/.test(await page.locator('.card:has-text("入力値の一覧と判定")').first().textContent()));
+
 /* 照合チェックリストの記録と書き出し */
 await page.goto(base + '/verify.html', { waitUntil: 'networkidle' });
 await page.locator('#b-open').click();

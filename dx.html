@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>内科診断支援｜酸塩基平衡・鑑別診断・臨床スコア</title>
-<meta name="description" content="内科医向けの診断支援ツール。血液ガスの体系的読影（一次性障害・代償の妥当性・アニオンギャップのアルブミン補正・Δ-Δ解析・A-aDO₂・P/F比）、血算・生化学・凝固・自己抗体の統合解釈、所見からの鑑別診断の順位づけ、臨床スコア24種を、すべて原典の出典付きで提示します。教育・判断補助が目的であり、診断は医師が行います。" />
+<title>内科診断支援｜主訴からの診断推論・酸塩基平衡・鑑別診断・臨床スコア</title>
+<meta name="description" content="内科医向けの診断支援ツール。主訴からの診断推論（まず外すべき致死的疾患・red flag の確認表・鑑別の地図・次に聞くこと／診ること）、問診・身体所見の構造化入力、血液ガスの体系的読影（一次性障害・代償の妥当性・アニオンギャップのアルブミン補正・Δ-Δ解析・A-aDO₂・P/F比）、血算・生化学・凝固・自己抗体の統合解釈、所見からの鑑別診断の順位づけ、臨床スコア24種を、すべて原典の出典付きで提示します。教育・判断補助が目的であり、診断は医師が行います。" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -24,18 +24,20 @@
 <script src="labs-autoab.js"></script>
 <script src="dx-refs.js"></script>
 <script src="dx-abg.js"></script>
+<script src="dx-hx.js"></script>
 <script src="dx-scores.js"></script>
 <script src="dx-core.js"></script>
+<script src="dx-cc.js"></script>
 <script src="labs-integrate.js"></script>
 <script src="labs-ui.js"></script>
 <script src="dx-ui.js"></script>
 <script>
   LabsUI.mount({
-    domains: ["abg", "cbc", "chem", "coag", "autoab"],
+    domains: ["hx", "abg", "cbc", "chem", "coag", "autoab"],
     integrate: true,
     icon: "🩺",
     title: "内科診断支援",
-    subtitle: "酸塩基平衡・統合解釈・鑑別診断・臨床スコア（全判定に出典）"
+    subtitle: "主訴からの診断推論・問診／身体所見・酸塩基平衡・鑑別診断・臨床スコア（全判定に出典）"
   });
 </script>
 </body>

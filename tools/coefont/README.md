@@ -1,0 +1,122 @@
+# CoeFont（声フォント）で音声ナレーションを量産する 🔊
+
+`scenes.js` の全ナレーション（118本）を、CoeFont のお気に入りの声で音声化し、
+`audio/` に整列させるための道具です。設計の全体像は
+[`docs/superpowers/specs/2026-11-02-coefont-batch-design.md`](../../docs/superpowers/specs/2026-11-02-coefont-batch-design.md)
+にあります。
+
+## いまの進行状況
+
+| 段階 | ファイル | 状態 |
+| --- | --- | --- |
+| ① 初回ログイン | `coefont-login.mjs` | ✅ 使えます |
+| ② 画面の採寸 | `coefont-probe.mjs` | ✅ 使えます |
+| ③ 選択子の記入 | `selectors.js` | ⏳ **未記入**（②の結果待ち） |
+| ④ 音声の量産 | `coefont-batch.mjs` | ⏳ 未着手（③のあと） |
+
+③④ は、②で実物の画面を測ってから作ります。推測で書いた選択子は初回で外れるため、
+「測ってから作る」順序を崩しません。
+
+## 必要なもの
+
+- **Node.js**（Node 22 で確認）
+- **Playwright**（この道具だけが使います。NurseTube 本体は依存ゼロのままです）
+
+  ```bash
+  npm install -g playwright && npx playwright install chromium
+  ```
+
+- **CoeFont のアカウント**（Google ログイン可）
+- **インターネットに出られる環境** — クラウド実行環境からは `coefont.cloud` に
+  到達できないため、**ご自分のパソコンで実行してください**
+
+## 手順
+
+### ① 初回だけ：ログイン
+
+```bash
+node tools/coefont/coefont-login.mjs
+```
+
+ブラウザが開きます。**ご自分の手で** Google ログインを済ませ、
+読み上げの編集画面まで進んでから、ターミナルで Enter を押してください。
+セッションは `tools/coefont/.profile/` に保存され、次回からログインは不要です。
+
+> 🔒 **パスワードは扱いません。** このスクリプトはパスワードを受け取らず、
+> 保存もせず、見てもいません。残るのはブラウザのプロファイルだけで、
+> これは `.gitignore` に入っているためリポジトリには一切入りません。
+
+### ② 画面の採寸
+
+```bash
+node tools/coefont/coefont-probe.mjs
+```
+
+開いたブラウザで操作を1手すすめるたびに、ターミナルで Enter を押してください。
+押すたびに `ui-map/ui-map-01.json` と `.png` が連番で記録されます。
+
+測っていただきたい段階は5つです。
+
+1. 編集画面（ログイン直後）
+2. 新規プロジェクトを作ったところ
+3. 声の一覧／検索を開いたところ
+4. 台本を入力する欄が見えているところ
+5. 書き出し（ダウンロード）のボタンが見えているところ
+
+終わるときは `q` + Enter。`ui-map/` の中身を共有していただければ、
+画面に合った選択子を `selectors.js` に書き込みます。
+
+### ③ 選択子の記入（採寸後）
+
+`selectors.js` の `null` を埋めます。ここだけが画面の知識を持つため、
+CoeFont が模様替えしたときに直すのもこの1枚だけです。
+
+### ④ 音声の量産（③のあと）
+
+```bash
+node tools/coefont/coefont-batch.mjs --voice "<声の名前の一部>" --limit 3
+```
+
+まず `--limit 3` で3本だけ作り、`audio/` に正しい名前で並ぶか、
+`nurse.html` で実際に声が鳴るかを確かめてから、全118本に進みます。
+
+## 仕組み
+
+既存の VOICEVOX パイプラインと**同じ契約**に乗ります。アプリ本体は無改修です。
+
+```
+scenes.js ──(build-voicevox.mjs)──> voicevox/manifest.json ─┬─> VOICEVOX（既存）
+                                    （通し番号・キー・本文）   └─> CoeFont（この道具）
+                                                                      ↓
+                                                        audio/<番組ID-シーン番号>.<ext>
+                                                        audio/manifest.js
+```
+
+アプリは `audio/manifest.js` の `AUDIO_FILES` だけを見ており、その音声を誰が
+作ったかを知りません。CoeFont は「もう一つの声の供給元」として並ぶだけです。
+
+## 管理しないファイル（`.gitignore`）
+
+| パス | 理由 |
+| --- | --- |
+| `.profile/` | **認証情報を含みます。** 絶対にコミットしないでください |
+| `export/` | ダウンロードした音声の一時置き場 |
+| `ui-map/` | 採寸結果（画面写真を含む） |
+| `login-state.json` · `progress.json` | 実行時の記録 |
+
+## ⚠️ 利用規約について
+
+CoeFont で生成した音声の利用範囲とクレジット表記の要否は、**ご契約のプランの
+規約でご確認ください**。VOICEVOX の「VOICEVOX:ずんだもん」表記義務とは条件が
+異なります。
+
+## 補足：API という別の道
+
+CoeFont には公式 REST API（`POST https://api.coefont.cloud/v2/text2speech`、
+HMAC-SHA256 署名）があります。有料プラン限定の可能性がありますが、使えるなら
+**ログイン画面を一度も見ずに**音声を生成でき、ブラウザ自動化よりはるかに
+壊れにくくなります。
+
+アカウント設定 → API情報 のページでアクセスキーが発行できるかご確認ください。
+入口（manifest の読み込み）と出口（`audio/` への整列）は共通設計なので、
+あとからでも乗り換えられます。

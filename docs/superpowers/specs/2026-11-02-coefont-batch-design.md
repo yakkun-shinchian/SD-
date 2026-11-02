@@ -28,7 +28,7 @@ scenes.js
                                         │
                                         ↓  ★ ここが本PRの担当
                               CoeFont の画面を機械が操作して音声化
-                              → tools/coefont/export/<key>.<ext>
+                              → coefont/export/<key>.<ext>
                               → coefont/import.json を書き出す
                                         │
                                         ↓
@@ -68,7 +68,8 @@ tools/coefont/
                          → プロファイルを .profile/ に保存（gitignore）
   coefont-probe.mjs   ② 画面を「採寸」し、ui-map-NN.json と画面写真を出力
   selectors.js        ③ 画面の知識を閉じ込める唯一のファイル
-  coefont-batch.mjs   ④ 本番。台本を流し込み、音声を書き出して audio/ へ整列
+  coefont-batch.mjs   ④ 本番。台本を流し込み、音声と import.json を書き出す
+  coefont-batch.test.mjs  ④の検証（ブラウザ不要の部分を全部）
   README.md           手順書（日本語）
   .profile/           ブラウザプロファイル（gitignore・認証情報を含む）
   export/             ダウンロードした音声の一時置き場（gitignore）
@@ -83,10 +84,18 @@ tools/coefont/
 - **入力**：`coefont/manifest.json`（#30 が生成。`key`・`speech_text`・`source_sha256` を持つ）
   と `coefont/scripts/NNN_<key>.txt`。※ `voicevox/manifest.json` は読みません
   （読み（かな）変換済みの本文を使う必要があるため）
-- **声**：`--voice` の既定値は **後藤さん**（#30 が音声ラベルとして要求する値）
-- **出力**：`tools/coefont/export/<key>.<ext>` と、
-  #30 の `coefont/import-template.json` と同じ形の `coefont/import.json`
+- **声**：**検索語とラベルは別物**として扱います（#30 の実物を読んで判明）
+  - `--voice`（既定 `後藤`）… CoeFont の画面で声を探す語。一意に絞れないときは
+    候補を並べて停止し、勝手には選びません
+  - `--voice-label`（既定 `後藤さん`）… `import.json` に書く値。#30 の
+    `import-coefont.mjs` はこの文字列と完全一致しないと取り込みを拒否します。
+    画面上の名前が違っても、ラベルは #30 の要求に合わせる必要があります
+- **出力**：`coefont/export/<key>.<ext>` と `coefont/import.json`
   （`key`・`file`・`input_speed`・`voice`・`source_sha256`・`speech_sha256`）
+  - `file` は `export/<key>.<ext>`。#30 は `import.json` のあるフォルダから
+    相対解決するため、置き場所は `tools/coefont/export/` ではなく
+    **`coefont/export/`** です（#30 の `import-template.json` の実物で確認）
+  - `speech_sha256` は読み本文の **改行なし** SHA-256（#30 の実データで検証済み）
 - **その先**：`node tools/import-coefont.mjs coefont/import.json` に引き渡す。
   **本PRは `audio/` にも `audio/manifest.js` にも触りません**
 
@@ -141,7 +150,7 @@ CoeFont の声は数百あり、UUID を人間が管理するのは現実的で�
 #30 の `import-coefont.mjs` は、ハッシュ照合・キー指定の取り込み・staging と
 ロールバック・既存キーの保持まで備えています。これを置き換える理由はありません。
 
-本PRは `tools/coefont/export/` に音声を置き、`coefont/import.json` を書くだけにします。
+本PRは `coefont/export/` に音声を置き、`coefont/import.json` を書くだけにします。
 #30 がそれを受け取って、1.3倍速に揃えて `audio/` に収め、対応表を更新します。
 
 ## 5. 検証方法

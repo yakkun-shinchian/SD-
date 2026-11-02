@@ -12,7 +12,7 @@
 | ① 初回ログイン | `coefont-login.mjs` | ✅ 使えます |
 | ② 画面の採寸 | `coefont-probe.mjs` | ✅ 使えます |
 | ③ 選択子の記入 | `selectors.js` | ⏳ 仕組みは完成・**中身は未記入15項目**（②の結果待ち） |
-| ④ 音声の量産 | `coefont-batch.mjs` | ⏳ 未着手（③のあと） |
+| ④ 音声の量産 | `coefont-batch.mjs` | ✅ 実装済み（③の記入後に動きます） |
 
 ③④ は、②で実物の画面を測ってから作ります。推測で書いた選択子は初回で外れるため、
 「測ってから作る」順序を崩しません。
@@ -92,11 +92,41 @@ project: {
 ### ④ 音声の量産（③のあと）
 
 ```bash
-node tools/coefont/coefont-batch.mjs --voice "<声の名前の一部>" --limit 3
+# まず形だけ確認（ブラウザを開きません）
+node tools/coefont/coefont-batch.mjs --dry-run --limit 3
+
+# 3本だけ本番
+node tools/coefont/coefont-batch.mjs --limit 3
+
+# PR #30 の道具に引き渡す
+node tools/import-coefont.mjs coefont/import.json --partial
 ```
 
-まず `--limit 3` で3本だけ作り、`audio/` に正しい名前で並ぶか、
-`nurse.html` で実際に声が鳴るかを確かめてから、全118本に進みます。
+`--limit 3` で3本だけ作り、`nurse.html` で実際に声が鳴るかを耳で確かめてから
+全118本に進みます。`--limit` なしで初回から全量は走らせません。
+
+| オプション | 既定 | 意味 |
+| --- | --- | --- |
+| `--voice` | `後藤` | **画面で声を探す語。** 一意に絞れなければ候補を並べて停止します |
+| `--voice-label` | `後藤さん` | **`import.json` に書く値。** #30 がこの文字列と完全一致を要求します |
+| `--input-speed` | `1` | 書き出した音声の速度（`1` か `1.3` のみ） |
+| `--limit` / `--only` / `--redo` / `--dry-run` | — | 件数・キー指定・やり直し・下見 |
+
+**検索語とラベルは別物です。** 画面上の声の名前が「後藤 真希」でも、
+`import.json` に書くラベルは #30 が要求する `後藤さん` でなければ取り込みが拒否されます。
+
+進捗は `tools/coefont/progress.json` に1本ごとに記録します。90本目で落ちても、
+再実行すれば残りだけを処理します（有料サービスで全量やり直しは避けます）。
+
+### 検証
+
+```bash
+node --test tools/coefont/coefont-batch.test.mjs
+```
+
+ブラウザ不要の部分（対応表の読み込み・件数選択・進捗・声の選択・
+`import.json` の形）を10項目で確認します。先頭2つは**契約テスト**で、
+PR #30 の実データを埋め込んであるため、#30 が形式を変えたらここで落ちます。
 
 ## PR #30 との分担（重要）
 

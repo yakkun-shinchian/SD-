@@ -1,12 +1,12 @@
 /* =========================================================================
- * NurseTube 図解ライブラリ（FIGURES）なのだ
- * 各番組のスライドに表示する模式図(SVG)を定義しているのだ。
- *  - 解剖図・断層像(CT/MRI風)などをコードで描いているので、軽くて拡大に強いのだ。
- *  - CT/MRI風の図は「学習用イメージ(模式図)」で、実際の患者画像ではないのだ。
- *  - 本物のCT/MRI写真を使いたい場合は images/ に置いて images/manifest.js に登録するのだ
- *    （その番組のシーンでは写真が図解より優先表示されるのだ。手順は images/README.md）。
+ * NurseTube 図解ライブラリ（FIGURES）
+ * 各番組のスライドに表示する模式図(SVG)を定義しています。
+ *  - 解剖図・断層像(CT/MRI風)などをコードで描いているため、軽量で拡大に強い構成です。
+ *  - CT/MRI風の図は「学習用イメージ(模式図)」であり、実際の患者画像ではありません。
+ *  - 実際のCT/MRI写真を使う場合は images/ に置き、images/manifest.js に登録します
+ *    （その番組のシーンでは写真が図解より優先表示されます。手順は images/README.md）。
  *
- * SCENE_FIGURES で「番組ID-シーン番号」→図解名 を割り当てているのだ。
+ * SCENE_FIGURES で「番組ID-シーン番号」→図解名 を割り当てています。
  * ========================================================================= */
 
 const FIGURES = {
@@ -230,8 +230,8 @@ const FIGURES = {
   },
 };
 
-/* 「番組ID-シーン番号」→ 図解名 の割り当てなのだ。
- * ここに無いシーンは図解なし（文字中心）で表示されるのだ。 */
+/* 「番組ID-シーン番号」→ 図解名 の割り当てです。
+ * ここに無いシーンは図解なし（文字中心）で表示されます。 */
 const SCENE_FIGURES = {
   // 心臓
   "anat01-1": "heart", "anat01-2": "heart", "anat01-3": "heart", "anat01-4": "heart", "anat01-5": "heart",
@@ -247,7 +247,7 @@ const SCENE_FIGURES = {
   "base01-1": "vitals", "base01-2": "vitals", "base01-3": "vitals", "base01-4": "vitals",
   // 心不全
   "dis01-1": "heart", "dis01-2": "heart", "dis01-3": "heart", "dis01-4": "heart",
-  // 脳梗塞（CTとMRIを両方つかうのだ）
+  // 脳梗塞（CTとMRIを両方つかう）
   "dis03-1": "brainCT", "dis03-2": "brainCT", "dis03-3": "brainMRI", "dis03-4": "brainMRI",
   // COPD
   "dis04-1": "chestCT", "dis04-2": "chestCT", "dis04-3": "chestCT", "dis04-4": "chestCT",

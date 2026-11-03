@@ -1,0 +1,946 @@
+[
+  {
+    "key": "anat01-1",
+    "file": "export/anat01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5163e5a3bd9b4b07e9b6a8ec3524322776c940ca3ad8a2c0f168b0ea5827d232",
+    "speech_sha256": "41ee4069267700b70bc0b8ebd37f378a9fcc43a3ba7063e94fbda2fdf031e50b"
+  },
+  {
+    "key": "anat01-2",
+    "file": "export/anat01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "33254ddb4b5a4be4a160488e24484f882ef846310f8b23f3e0b251eb2aa4cfc1",
+    "speech_sha256": "24cb4c749a9a426a2b404406a93cda483b99ca18302df309598fbbe446ab8fc9"
+  },
+  {
+    "key": "anat01-3",
+    "file": "export/anat01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "aec67eb44762be7cfb295f36c887daf30b3ea98d89729fe698288afa530618b0",
+    "speech_sha256": "965cc283881a05aa184ac5b6ee6d7fc0168d2b772abf282c19007a42d3346c90"
+  },
+  {
+    "key": "anat01-4",
+    "file": "export/anat01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "a0defb2495410f941ee0091c3b8a3bb385e194485ebd4c7d260e19a84e4be25a",
+    "speech_sha256": "a615f5d783942c0d10d3a1cf2e7fdef2866dc97a85b7319c80e5b5dd666d2ece"
+  },
+  {
+    "key": "anat01-5",
+    "file": "export/anat01-5.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "8b98b628f95dc904c099931c2e7a1bf81a690c8630367911b40e37b889cb3e7c",
+    "speech_sha256": "4d5fb4a638901131d3fb4898f532c7d6d1f2d619239adc67aa6cbad6ce0d56bd"
+  },
+  {
+    "key": "anat02-1",
+    "file": "export/anat02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "056fd95b54613e6fe773a12a0a95595b61de56aae0cf2be83b8503be0ef5ac79",
+    "speech_sha256": "80b5004a2e8940f9761d3e31fd245e4d62a8bdb2e104ea531a680c86aaad3f38"
+  },
+  {
+    "key": "anat02-2",
+    "file": "export/anat02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ff243c469344ae7ffe648f6cf1e0d3da7d417d6f1f5520c902619fdeed57ec36",
+    "speech_sha256": "d923c585bb5afda9587fa39000e48782d370f9253622ddee38403872dafc28f0"
+  },
+  {
+    "key": "anat02-3",
+    "file": "export/anat02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "2c8db73951bac2b9496563c7789246b7b60f6a0b876d89829cae5a21f211d26a",
+    "speech_sha256": "7a984fab65a3379f95dae04692a6619abe48a900f8730753c8fd972c1f82d2a9"
+  },
+  {
+    "key": "anat02-4",
+    "file": "export/anat02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "2475052beb1c402f4654bb20582f7a613fbaabf7d8b63a472d8f29db1918630e",
+    "speech_sha256": "0562a8f73274f88c732c21a8b073ca8855b146a95a0d3a18ae27c5b233b9ecd2"
+  },
+  {
+    "key": "anat02-5",
+    "file": "export/anat02-5.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "3eb6f30ebe84abd62ed26e7a787c98b150f06730d6c04308c8982fa600cd2a8f",
+    "speech_sha256": "2f2baf11ebdb4356bd2ef22e6dca237b43908734a838274cf029348d4d2e366a"
+  },
+  {
+    "key": "anat03-1",
+    "file": "export/anat03-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "9385d374baecc30fd59f85839cfdbc642698c44ead5f6c6c4c26a06f6dd8d953",
+    "speech_sha256": "2c4b9d5e1d48dbfb29c90209832adc6a16853240f278d1c7d313ce99ef438adb"
+  },
+  {
+    "key": "anat03-2",
+    "file": "export/anat03-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "63bf3e4771597b6e2ad122fa8cdae244b6c6eb6e1b889812a5c4de2fba7e4d8a",
+    "speech_sha256": "f0266148d88c2e79d86391aae5abb9b2cb2fdab797d95caff18abaa0a8537b3a"
+  },
+  {
+    "key": "anat03-3",
+    "file": "export/anat03-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "9ac9fa56888af3f66dcac9444ff7515568456f8355c8cdc8ee3776c561d36b36",
+    "speech_sha256": "ef26de64495de30f41f02e77ce3c471f8b75f65bc5c02bf3c47d7e0d5452ed93"
+  },
+  {
+    "key": "anat03-4",
+    "file": "export/anat03-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5500b381321271372f5cb06f340d102809c997aa3ea8c6b1483b168808add7ed",
+    "speech_sha256": "75a148277ddf981bc169e0ea5d4cb06e679e5efa6ebf583ea3cbbec42558effb"
+  },
+  {
+    "key": "anat04-1",
+    "file": "export/anat04-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "e317655636cc3c3d0a29c5608e0bd3bf6eff077c9f4c8afdd76e1d686bf2c5d8",
+    "speech_sha256": "d283e771a5d753a385b3aee59475827e5815ad90314a9e1fc686a693d335206c"
+  },
+  {
+    "key": "anat04-2",
+    "file": "export/anat04-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "feb7f84b5cc5cfb46e8858fab798a28fa2329341e54d64ba8d1bcfea64a1cbfb",
+    "speech_sha256": "a3fd29acdc3ab2ea409cd846cc23cdbc7a30c7cd0dadbdca9c62e22f4d2e9981"
+  },
+  {
+    "key": "anat04-3",
+    "file": "export/anat04-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "48003b7c7024aad65ca38176536c1e37cdbc3824af0c8027fc7ab8d3ba054b36",
+    "speech_sha256": "95934c1e2d39cb79e46a788cd5ff3a3065c81453685d70968df6cc810adf6dcc"
+  },
+  {
+    "key": "anat04-4",
+    "file": "export/anat04-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "baf9514f8fdc5ee8c0351ba18cc433e2ceaf98cd66d0d1dcb0e85a199bfda729",
+    "speech_sha256": "348d6e0f4f1bd2f744ac7ef941844c651bb2b230cdd6283d855d839bda9e529d"
+  },
+  {
+    "key": "anat05-1",
+    "file": "export/anat05-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "1ea8a0832d4e630b93d8c0be9180f542ba4ae9055130898df1cb827b886be986",
+    "speech_sha256": "05cec59d89b7e718e678c258ecb5d335e802995a0f473447b695ea44de8dcfcd"
+  },
+  {
+    "key": "anat05-2",
+    "file": "export/anat05-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "662cf1da278159b955bc1938d7a397743fec510a18c5c8c1cfbb09157015dfb8",
+    "speech_sha256": "1c505ea8b34ae717aa18106f13bd54779d08af4f63ac3c2ccf775401b35f952b"
+  },
+  {
+    "key": "anat05-3",
+    "file": "export/anat05-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "fe6ad9967cdfd6fce7ef981029b61e2f16b6c2462356905aff74cc0d05db1b10",
+    "speech_sha256": "79670d7021311d84e90ac3845679e2b7bc130b3edd51c6d26383386df3d284d2"
+  },
+  {
+    "key": "anat05-4",
+    "file": "export/anat05-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "333beffc41085b9f523efefda10dfe18dad1879997a9798b134280e934036b94",
+    "speech_sha256": "15f4a867d13e8581e7f2ff02e5367023115fffeae84f7c0dcec040de44739544"
+  },
+  {
+    "key": "base01-1",
+    "file": "export/base01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "d4b72019143b74ad87fe3282b15de4a92a5f82215a52e25fe69fce64d57270cd",
+    "speech_sha256": "01aa53690d45df307ea7c746565fce9d7b510ffb410e5f35d2eac4d5f1a9639d"
+  },
+  {
+    "key": "base01-2",
+    "file": "export/base01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "34aa8d7b57bd8ca3f39c249bbcd1213f24801adb5533de23f15f73fa200e6dc8",
+    "speech_sha256": "1726bd4430c63061a218763fad7ed1da99d0bbea3a3b9fd9c11422953670844e"
+  },
+  {
+    "key": "base01-3",
+    "file": "export/base01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5e65450244e2004cc2dc002194be3ea8ed3720a39f29dce067b6af1ccd93ad4a",
+    "speech_sha256": "a4abe46bbc000c579790b2b7eb93277f9f9fda7bbf4882820d9bba57e8792666"
+  },
+  {
+    "key": "base01-4",
+    "file": "export/base01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "c4743db4bee6aaa442294583b0b04a022aaa264753ad97627691cf9dfd88d7f1",
+    "speech_sha256": "45cd31efc7a054299859d6a56f2361ccb0065699c48feccdb3dc045aed2985ad"
+  },
+  {
+    "key": "base02-1",
+    "file": "export/base02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "4dc62d3444e5ee8ad8c6a2866a4f0d9bf91f6548803f1ba4a81407f10487447a",
+    "speech_sha256": "6ae4f28aa136084922d39c9edaf5478f00fd0a75b43c06401bbecfb68ce1e571"
+  },
+  {
+    "key": "base02-2",
+    "file": "export/base02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ac294dc3a88267fd7d5a9e160fbcc056104e2180096cfbf1b52e14eccc17630f",
+    "speech_sha256": "fdce7dcfb24f3b1d16dd918192c356b4bd6a0e01f0afbcf2c0ad1a4539fd8733"
+  },
+  {
+    "key": "base02-3",
+    "file": "export/base02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "4bc7a5d4322347790156e1fa271c12ed70021a6acdf14ffc4c982e7c7e03ddc4",
+    "speech_sha256": "d9362d3e43afaa9b6552908f855dae9deda66df5ff52f1b59232f8b6e911d5dc"
+  },
+  {
+    "key": "base02-4",
+    "file": "export/base02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "f0f26e3a22c71db8c8d30f5f3611a7f0067ceee4c823c6ff9d06bd51fb76ec92",
+    "speech_sha256": "cef2bf982ecda1e19a8d98b329c49d4967cce8737ad89fa781f3598f9ea583c7"
+  },
+  {
+    "key": "base03-1",
+    "file": "export/base03-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ebaf0f6013efc78b6a58d1af8dbd16d6e6cc73e20512b783ec53f810e80a6bf3",
+    "speech_sha256": "5852981aa1a6c1174ff43b6f6f5552fe892a706418026c94b040dcfabdac626f"
+  },
+  {
+    "key": "base03-2",
+    "file": "export/base03-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "56b9e9e63515ea8679d495f16744be88a7b7d9c471057e1eb12c077af823732b",
+    "speech_sha256": "c270eab23c429609eef9b67d6d7f8dd7c8f81f2215510f70805e70afda903d24"
+  },
+  {
+    "key": "base03-3",
+    "file": "export/base03-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "1049e556f27c7c9a942c27e7b920a4b2e06714d4ab5fcac2d91a3210a0f98cd6",
+    "speech_sha256": "657f2d2ce65487af79e652174a0f84de3e79f560268d1d52bdbb7d1ed3638cfa"
+  },
+  {
+    "key": "base03-4",
+    "file": "export/base03-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ae833b15dac7825e77474c4faba10dbac262cdc237705b85a8801334671d5e4a",
+    "speech_sha256": "bb17c68328801ed91ba1a3f816c77dfafab80a783e5d028cc5c817eb5d40c0ee"
+  },
+  {
+    "key": "base04-1",
+    "file": "export/base04-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "14eb548e6e96e78299fd2912a4031fe0cf594375124edf64e984e5f01350dadf",
+    "speech_sha256": "547399d35e0c2dcce53c0a9153281eba255d62776af0307f397a1639e424a5ac"
+  },
+  {
+    "key": "base04-2",
+    "file": "export/base04-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "02742f2756f99a1081765b095a90d5bbf3c9aa461a957db205cb9b901334d1a2",
+    "speech_sha256": "9e17c9f9fa4ebad1a01e9b72297f7e630f6d3afd5e9c33883de48b1da4e67c95"
+  },
+  {
+    "key": "base04-3",
+    "file": "export/base04-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5d6e2747001ca7d31cadd08b72c2bc60a9e7c643a2b32ad39aedc932b40ce506",
+    "speech_sha256": "1ae1be395209d67c43440aa57842742222abfbce56db312cf0dd05cd10532480"
+  },
+  {
+    "key": "base04-4",
+    "file": "export/base04-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "597933d78e90fdd3378fe2b34df303c338eb8de7107db2c1c1be8f77f403832d",
+    "speech_sha256": "afb25731d235b6261d036229daf85835fe4e41cf2144844e5a7082b28fe4fc41"
+  },
+  {
+    "key": "skill01-1",
+    "file": "export/skill01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "57deb11909eeaec993d31fd01a00cee1514af902c1f325880714d6302450fb82",
+    "speech_sha256": "3a904770f53daffcdae008d7a475e1eb3f75a857f4b2f56469826201b09b4b51"
+  },
+  {
+    "key": "skill01-2",
+    "file": "export/skill01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "72cd3f00b0d4b07e2c6cef82e5abb29385c9e3b09e16438717ce67c03e5b0330",
+    "speech_sha256": "51d5951662f5f1218fe60d66f6970f1768edc520124e059d43a7ecbba773773c"
+  },
+  {
+    "key": "skill01-3",
+    "file": "export/skill01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "f186150b2f5c07be0c16c41982708ca75565170c35bbe53f10da6681ff8f7866",
+    "speech_sha256": "7a6b3f5f2121d21961aace94d8f28fe9b79ec570ad1326af8d9bf526c1f761cd"
+  },
+  {
+    "key": "skill01-4",
+    "file": "export/skill01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "9dfd0bfdb89a2e71a7f3b5900094f0e2d0be418d98ed9691b14b50ce41fb115b",
+    "speech_sha256": "d1c6875d2203672a401f79c0a77d7c4b28aaa6ac8b8dcfe8f04f5c02422c8c16"
+  },
+  {
+    "key": "skill02-1",
+    "file": "export/skill02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "e77af828644f96bc3693e889010128c096e26397ea8d0590328fe220fab81a1a",
+    "speech_sha256": "bd3ce258f92de2aa18e89e23b3e5f9eb61c1939f0b34dea975d675ef0cc1e1fe"
+  },
+  {
+    "key": "skill02-2",
+    "file": "export/skill02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "4d9b35aa6eecbe98775cc6e58709183c37b52694dda699395b272dcd99edfe32",
+    "speech_sha256": "8382f605db41b3b62faca1ca182c69e7ada5ebf594cd19ad7dc8a14b741b29f7"
+  },
+  {
+    "key": "skill02-3",
+    "file": "export/skill02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "1262562d9b1c0579ccfb139d62707806e0a3ee7837d2a843474c6b5a042c6c30",
+    "speech_sha256": "1ac3b42777d688189f29812a7bfcc82005f659acefaa8447c02cb66804c00497"
+  },
+  {
+    "key": "skill02-4",
+    "file": "export/skill02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "c3c8d5c5ef7248e446559e822d09c7071ec72a4b03b9b07da5075bd61b2e32cd",
+    "speech_sha256": "3abe78c7906d8b01329b9916487d28f9f41ea0ca10242bf1f0f1f20e6514c673"
+  },
+  {
+    "key": "skill03-1",
+    "file": "export/skill03-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "e9256642ef7ed7a2e6d6faac0667f8c930f0e50d0576b9930a621c8f3f83f20f",
+    "speech_sha256": "27b35920884526505e88ffe0a1fa0b96c481a3b8c168388c754a48b5cdd4f249"
+  },
+  {
+    "key": "skill03-2",
+    "file": "export/skill03-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "0e98759cf8b13304ba81beabba9a1cf61a05e2311e4a104a94305a6ce761e218",
+    "speech_sha256": "6b12ba162d7632df3250828d93aaab1ddd063fd642dbdc8f5456c96b97c808b4"
+  },
+  {
+    "key": "skill03-3",
+    "file": "export/skill03-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "512b28e5c8696bab89ed88a614c9e393fc742a3d5ac1d72b464100cb1856853a",
+    "speech_sha256": "db83a02421363d407242cdef17b50e8c8fd9ae867f03d3722040147222c928bb"
+  },
+  {
+    "key": "skill03-4",
+    "file": "export/skill03-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "0cd8fef719503bc3b9a5b023be76187df5c3f6e55bdfbcd21bb9a1bca81cd750",
+    "speech_sha256": "8bedbc69d31a1d73a5d22f1f1f9efdb28696d7c2acb15cbdb21a88946f19692b"
+  },
+  {
+    "key": "skill04-1",
+    "file": "export/skill04-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "f8b85b42a73b3db840211d16021eeb9aa56f08aa5c398a3832792ccd4955f05e",
+    "speech_sha256": "d4283c6eb2c466511473fbb61a4f363f8cfba1aefe2756b84f1f942418d4bd87"
+  },
+  {
+    "key": "skill04-2",
+    "file": "export/skill04-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "68b1e20c2106954369c9cd5ae4273f3d307484b72f6d4cff4c2f3120c855d11c",
+    "speech_sha256": "0e820017e80365ea60f772b918292465c2f9a6a52d24a1fb4ea932f3237683dc"
+  },
+  {
+    "key": "skill04-3",
+    "file": "export/skill04-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "6a80a9c59c67e02b2efc308c4a300e26ec262ecd86af4fe4cbf79bbbd512331f",
+    "speech_sha256": "0c6718449f54936c319168a7f6be1af32093fca04215d75fee7940bbf6abbf0a"
+  },
+  {
+    "key": "skill04-4",
+    "file": "export/skill04-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "632dd975f5074a1d01d2a3ec34661f0a7ac13ea8f42df10bd0ba54ad1e5ebc86",
+    "speech_sha256": "bf86a707b99127134ac6c096af3718fe61f1066140ee4ec96d10f2c5d4970d71"
+  },
+  {
+    "key": "skill05-1",
+    "file": "export/skill05-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "f08d868cfa2dc16231660244d203e76845f3069961e31496b17543e32cdd0104",
+    "speech_sha256": "795d01fec53cf04a631ce583765f80c1a3038912df301d0a4190f5ec0d31996d"
+  },
+  {
+    "key": "skill05-2",
+    "file": "export/skill05-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "6642d7c27f53a5b7e992a45c9493be9396ea07288e6d6a832de48e4e4c7ce798",
+    "speech_sha256": "e38c7ee01bca47ea1aef357eb6d0229831472b027be10e4068b5dd4f0282f259"
+  },
+  {
+    "key": "skill05-3",
+    "file": "export/skill05-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ac467c301f6932886c7f35054b05b5a6d2c47a9a9b577530fc4c2b866eaf7bd1",
+    "speech_sha256": "aeab8475bb7b7926e8b339c06dcffe66573959c278296b58e537508c18e9d504"
+  },
+  {
+    "key": "skill05-4",
+    "file": "export/skill05-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "25ae439f0219201223e4a896c2602fff5db773f30ffd4cfe0d37d2bde7a9a571",
+    "speech_sha256": "f99d2b52345a56a04c81297e84e16fa1b3099fb29ac039416d71992e389e91ef"
+  },
+  {
+    "key": "pharm01-1",
+    "file": "export/pharm01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "bd7eaf9cbc59d1e3eb358fde7f8deb5f38646753494b1e295218817a103af827",
+    "speech_sha256": "0dbf1f962a365972e4cb3482187a19d11c4f22a974fc2f1cbab5ba68ea48ac1c"
+  },
+  {
+    "key": "pharm01-2",
+    "file": "export/pharm01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "0dc04daf32f19d9d4e524096732dff49c01d30ccf447d48e2883259e037e23ec",
+    "speech_sha256": "72798920f6288f67c53ee7834affb8be16b4ba8237aa0c5b8cae9c5b61d94344"
+  },
+  {
+    "key": "pharm01-3",
+    "file": "export/pharm01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "8f66395df2f13e9fb20c113f4b4bbba1c75a18fe6178a2014532612cb9b05d7f",
+    "speech_sha256": "29100d48e581c42c4639833757d7e4fbf9d52b51ac7bde9db28d0af6005b4b9d"
+  },
+  {
+    "key": "pharm01-4",
+    "file": "export/pharm01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ac6aef0f44be573c35f73cba515615b4909cb552a47481c36f07bdd36cd14535",
+    "speech_sha256": "da55025f85bce4182fc03b5b13d1c7350e268deb8a821160ceee8052c53c84e8"
+  },
+  {
+    "key": "pharm02-1",
+    "file": "export/pharm02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "94e0d41d866fc9a29fa70c09cc08b51849b33318a852cb3313540f514eb5eaf5",
+    "speech_sha256": "48ed0ba6fe837e1ae2914ee8d885887ed472a59dd65eaade51bd3bbbdc30b9ac"
+  },
+  {
+    "key": "pharm02-2",
+    "file": "export/pharm02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "4a7e0208a6a2b8f5753ececb2fefd09169c033df4d81017934fb56356769ee33",
+    "speech_sha256": "af992261f58fda1ce6b4e754032a9aa39f1aa14ada55477123e013f77a1fc825"
+  },
+  {
+    "key": "pharm02-3",
+    "file": "export/pharm02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5c52470b0ea7529d2b7c50f647c839a31b1ab3b9a8e1e973c061392ff4262a21",
+    "speech_sha256": "0737ad9c30482692fb2648e28e8f9e7f865c26268d0499d9d6d6d3610db9bb84"
+  },
+  {
+    "key": "pharm02-4",
+    "file": "export/pharm02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "4a3e0c3c3e7c8a709c7dc3970503f243176acabf9a49955c8c815af1da27149f",
+    "speech_sha256": "d0bae10fd9a97680af0b9bb172ae23f3be786e6b6fc054c5fa028f1b582ade13"
+  },
+  {
+    "key": "pharm03-1",
+    "file": "export/pharm03-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "2ea189e1115252bd17133a567ef92b31cf02ecd3518a817c52bc72d5d70db460",
+    "speech_sha256": "d82e8bbda484dd21e9b1669dd230a6226bc41cf7a2659fb9499b0e7701727e20"
+  },
+  {
+    "key": "pharm03-2",
+    "file": "export/pharm03-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ff2b24b540289d9c407ebf1f6a7f7edcdbe04ee92259b4b3d8fdf49e6f8aea5c",
+    "speech_sha256": "7a721b2435f9719b9fd2b7848138bda9363f31a870d0b8e906bfa8545598c396"
+  },
+  {
+    "key": "pharm03-3",
+    "file": "export/pharm03-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "d85a3a03644433abb66043d9f50a6a7c91ea5763f4401e2d90a00b7f470b2565",
+    "speech_sha256": "c66813b6d9a05b0be8cfa05818c5f107dc5150e3ae6bb612fa3587e65e38eb89"
+  },
+  {
+    "key": "pharm03-4",
+    "file": "export/pharm03-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5e0558031ef2393b9d47826229c235e726771b05cd0e2b6993b7d0cedf6ce168",
+    "speech_sha256": "2cabef432cce9bc6e5821d86ea543d6900b92c247d3d92719ea7f13077a6e54d"
+  },
+  {
+    "key": "pharm04-1",
+    "file": "export/pharm04-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "02edcdd00e543654de9a6eb4879e30d78ee0e035a97f97484faf173cd46cb511",
+    "speech_sha256": "d74858f4c8cd8fbd9f97f07da6d5fbc2a5ea712a5623a94ee7e108bb23ea0c33"
+  },
+  {
+    "key": "pharm04-2",
+    "file": "export/pharm04-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "3d0ad38305b49878c976efa1a5db132613449286d771a3a41914e7d14630246b",
+    "speech_sha256": "1448e1162c0a26790229856610accfb2061e4084cbd5a6c83e7d9a4bf44b5c8c"
+  },
+  {
+    "key": "pharm04-3",
+    "file": "export/pharm04-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "6691ee50b1c0383176b28646fb34b03f0ae8505f1c3f524a5e9709a22e2208e8",
+    "speech_sha256": "f009da3c53ca5c56a5a891d34f928960c4766828b1f8e04ecc46914854038e03"
+  },
+  {
+    "key": "pharm04-4",
+    "file": "export/pharm04-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "f021d40e041680bf64864aab9e7ac13ae433f8ca5c2b495c0fff736ed1024d22",
+    "speech_sha256": "13b8c4c9e4f9cba60750eb7a80ddc70d80ad7fc81f956a7f86b3e18c22e8eb16"
+  },
+  {
+    "key": "dis01-1",
+    "file": "export/dis01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "1cbd9150b211b5dde022230422f5f7885d2cd0e79504d7328a3dc8a2a51f32dc",
+    "speech_sha256": "5bc6c88ccd59bf2b0f6fdda99779f38d0ebfe7297b7614bb20a088a3672f2380"
+  },
+  {
+    "key": "dis01-2",
+    "file": "export/dis01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ddc6445939c6e32b4fa85ddfd38ba073b51c3d13805129aa9112e1445eaaadde",
+    "speech_sha256": "868c12a50981c400801d230fccec94ccdce36aafdeaac1cf8ca6915a1355c9f0"
+  },
+  {
+    "key": "dis01-3",
+    "file": "export/dis01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "582d6b5a225e8c84d78109a3ae14d7005f303c807df40d2d6f66ed9e510377a7",
+    "speech_sha256": "13789b6bfc44f1ec8f351aa62b8c7b8ff1909f987a10a0f640eb31e5103a46d9"
+  },
+  {
+    "key": "dis01-4",
+    "file": "export/dis01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "d1fb7c2016f081a063be8c5e85e3d6939a8d22578702a3669b336662ecaf687b",
+    "speech_sha256": "382ae6d07d544eecaf36a82a1af5051c9fd80add936757170c48ff6b387033f5"
+  },
+  {
+    "key": "dis02-1",
+    "file": "export/dis02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "99914e6547558732fdec31c9eb998978501827ba0ee07f63c3116b7d860cb498",
+    "speech_sha256": "552dd51203bdb77d3a93d66b2abb90da469522f5b2cf092c4925fee78c638418"
+  },
+  {
+    "key": "dis02-2",
+    "file": "export/dis02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "dd5f5c2b9ae6c02b44424337c6e45ad9d32071d308fa8278760e010b4ef8dc59",
+    "speech_sha256": "b17026e1e089e6170e3b2bbd0b4cc348fc2c9d896f9e25cb627f89840f9aeee4"
+  },
+  {
+    "key": "dis02-3",
+    "file": "export/dis02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "60f974de3e615d3b9f780062226cb38aa5afc0bef4bb8723ef39e38f19405a1c",
+    "speech_sha256": "a1e13297dc3cd3258ef89bbbf416c41497aba5e6edcd3f6899613d9690b8224c"
+  },
+  {
+    "key": "dis02-4",
+    "file": "export/dis02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "084f5d0e159b84f285efdaac32be16385f61d0712ec9718b09a3b6023352849b",
+    "speech_sha256": "097d978fa2514a8c3af99f25c3c74a33c719187a5c626994bcb5bf68061574ca"
+  },
+  {
+    "key": "dis03-1",
+    "file": "export/dis03-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "a47f15549e1cc617341c16faedbd10e170f66d49d71f043d364e940efe282796",
+    "speech_sha256": "a96a337e6e8d4588485c9756175a268185096483776309b9d3bb3170baa27a52"
+  },
+  {
+    "key": "dis03-2",
+    "file": "export/dis03-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "c13d400c58aa46f49e7fcdc22add6d110c040c377ba490cc0991bf9cf299c3ff",
+    "speech_sha256": "8b03518fbfacb7b2da75db9e61fa47c715c4340088e4ffdf6307e47584f1d9c3"
+  },
+  {
+    "key": "dis03-3",
+    "file": "export/dis03-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "bba04094042442bd1c4b4488bc309b11b1acd91c9ac403ea26de7ff32a77f072",
+    "speech_sha256": "94c94861b5751dc954c57cfb8eac82a444ea9d33791f5a2c022e9d2f57f4646f"
+  },
+  {
+    "key": "dis03-4",
+    "file": "export/dis03-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "72441ba867ca62c6a299fd659a992f743a759d867feb6add2f2dd8602a676960",
+    "speech_sha256": "0588c5b3465808407cfabdf945eb0075153ecaaae41441a34f03507e66a2997f"
+  },
+  {
+    "key": "dis04-1",
+    "file": "export/dis04-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "46ab13f44ec5069dbd5db68c892e4e5f31cc9141e638bf5c139558e736635474",
+    "speech_sha256": "09b3d7043f7e8014fe6bc233c24646df5eb8ead34c77bbc18c3be7d4b49f4269"
+  },
+  {
+    "key": "dis04-2",
+    "file": "export/dis04-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "915c2420389f8523ee64896e43a13cc2c392bbc8cfa7f8563267ee289e4e7033",
+    "speech_sha256": "d721c8f36ec4d03dd74c8449a60d69f5d42ad32579728727372ef6b73e7802b4"
+  },
+  {
+    "key": "dis04-3",
+    "file": "export/dis04-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "0179a5d0de243eb1ce1bdb8d0440b25bdd1f4932ff9ff7377953b84eeaa5665a",
+    "speech_sha256": "b1fbc24b21405de92a160ba766ae2a07df9abf6d00785949ab827020fe88a58c"
+  },
+  {
+    "key": "dis04-4",
+    "file": "export/dis04-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "4ca39d29f5facb882883e9c385570927f3161fb1c2941fb15b5a9560cad4f330",
+    "speech_sha256": "da08ada26a8f09e855798906be388a3a43b43c4e600ef67e7ae85507117ac1f7"
+  },
+  {
+    "key": "mat01-1",
+    "file": "export/mat01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "a597a0ab33189c1dfad7f415f50ad08ff4fad94fa0b0d5c9365aae2ca0babd51",
+    "speech_sha256": "8f370a5730bd3ba42579f0368bb999f9eac08045cc8fbd5789ec4d9743b84ba6"
+  },
+  {
+    "key": "mat01-2",
+    "file": "export/mat01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "5ab82e509f89b76c840ed99284d89d35d6cfee0d4dd356298f1f7cc36535bc58",
+    "speech_sha256": "8c874e27fd0a83e0c1f30201da9a24af640bfeb2133d650176a637507477ca6a"
+  },
+  {
+    "key": "mat01-3",
+    "file": "export/mat01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "d7290aa97dc9543ac76f6d4e4e54eba4ad94e5b445734401e2b19538ba83f268",
+    "speech_sha256": "f863698ba945058a86964cfa29a31d3722b98387c2a9fc588dfa369ed6c019a3"
+  },
+  {
+    "key": "mat01-4",
+    "file": "export/mat01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "efbf24eda5423b49d4abc352c82d0f62786a468a9e57515cdd9732f563ea5a8e",
+    "speech_sha256": "a21aa6898548370460a0df3ef7d506a8ac2fe81440cce4bbd88ff305558e55ae"
+  },
+  {
+    "key": "ped01-1",
+    "file": "export/ped01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "673b613e6f1b481e031a5c77873497a5f4bbed7d2f0a1263a0587274ef72cf42",
+    "speech_sha256": "a582efc39a6fed638341b64ab5a4e3d3e6f0d7e4a1a918aa93ac154cc247df8f"
+  },
+  {
+    "key": "ped01-2",
+    "file": "export/ped01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "e9383b290ef58f8d95e2fa89d8b50c257247752c6926e3c4dca15b137a4973a6",
+    "speech_sha256": "b634be0757e96e4e889beef0812a59a1ef4e9e245061e0045a9a372ab18d5c02"
+  },
+  {
+    "key": "ped01-3",
+    "file": "export/ped01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "21dbf8959a2caef5685d257ff7f2adc537428532207637e91d32fbfa0007a88d",
+    "speech_sha256": "6f337af53148dbc180bc88836bc02033b5ab46cfefba4dc149c4006af0e2f75b"
+  },
+  {
+    "key": "ped01-4",
+    "file": "export/ped01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ba24f79ebc6d173462623e23d94bbb2d9276eacff2644d05733097f13acc60db",
+    "speech_sha256": "e42368fb434c79fcf5e81350299fee39eca1d0218a5b88d49a249257fc584838"
+  },
+  {
+    "key": "psy01-1",
+    "file": "export/psy01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "d285a753efed2e6c315c2d441d69f74603d9768f889bbafbb5230cde52678211",
+    "speech_sha256": "bbc104801b1160ef6cbb15199f0bc0fe9ce0b21c8de0453ccb119dc57a224aaf"
+  },
+  {
+    "key": "psy01-2",
+    "file": "export/psy01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "02591465dcb7f1258d67fc0d1728a4020248f178ebef250914759a77311551b0",
+    "speech_sha256": "e140233f2d61dc15022429ce5f30bf5fecedfd25e3d74b2184c639777f4bfc33"
+  },
+  {
+    "key": "psy01-3",
+    "file": "export/psy01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "ced2f05fe986b68b9773e312f137fd66cd77d395b236d95ece2327f8ad0ed918",
+    "speech_sha256": "49a0bd822e88ae91394fa5c1165af6ff3104b489e48dc8b2821cc0f700ac5f6a"
+  },
+  {
+    "key": "psy01-4",
+    "file": "export/psy01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "e99ba4a4f67cbb62a23787f8caf86c7ba84577498a7fc59d961507f3d0c732cf",
+    "speech_sha256": "925f144990e22de62a70902fd3e3164acb2e8f008491f4403442388cb6e21d32"
+  },
+  {
+    "key": "psy02-1",
+    "file": "export/psy02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "2edda16c2b951177aba5d55ea3030a85193aa8e3250b48346a859fede9f868ce",
+    "speech_sha256": "fe47796814576e32fc8ea25d69636830d63542c57e7a60ddd588545a3d643738"
+  },
+  {
+    "key": "psy02-2",
+    "file": "export/psy02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "08e0ad47914a4cd4b57526ab643ac5c9bbfd2cee0bbb2b29d5d8d4dc7e69d5e5",
+    "speech_sha256": "ba62f66046adb13e1982a8cdc15385da60559f35447096bd7787a24b7ac817cf"
+  },
+  {
+    "key": "psy02-3",
+    "file": "export/psy02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "91e02fc0f7f7ad7148e09a193b5e70c2c0fd8efaed4239370373fe28cf8969d9",
+    "speech_sha256": "0b86979e1968312680c1f8feb010b3518dffb5bc67e51c22cb9dc47f0c70d268"
+  },
+  {
+    "key": "psy02-4",
+    "file": "export/psy02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "c00bcbef3341dcb6f9d0722a505545d14ffaaf52e76d2d2703945140fc8dcf98",
+    "speech_sha256": "36e8765ea33e4564b62f8673f41d75b90c740b6ccd0fbe67a34e4690b6438ba8"
+  },
+  {
+    "key": "exam01-1",
+    "file": "export/exam01-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "8f0cc6619d19b8d9f4094189fc45e81c3935898ecb3a5a56769d26d4afa02bc4",
+    "speech_sha256": "edbf6c340d8840b76b23e70f43b87a1e16089a629909151561384bf8ff84aa1a"
+  },
+  {
+    "key": "exam01-2",
+    "file": "export/exam01-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "b5e8cc22b2c163a12458996c8f316b3bdee06755707648d3db131158a986ec82",
+    "speech_sha256": "5fdb47e88540c4c574572ba1ff645ba39460b2968b2568bc5746db9c35cb7464"
+  },
+  {
+    "key": "exam01-3",
+    "file": "export/exam01-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "f1e9f6f494a4eb52631f24f4f4d3bfec7ad4ec6d5dd275281e4d3049303f7bcb",
+    "speech_sha256": "1f8d156b35fb70e34f042c9a241080cf4d9291c694a20c6e83fb55326998e5eb"
+  },
+  {
+    "key": "exam01-4",
+    "file": "export/exam01-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "98edb4db705e3b6f55eec3d38ecfa5aed00db4c98d271b57dbeaf4d8e26604e8",
+    "speech_sha256": "5e4ed627504885f53bc8d863b79a1cd6d6f9da4b7746f829df46d86878d8ec71"
+  },
+  {
+    "key": "exam02-1",
+    "file": "export/exam02-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "3a31bf76dba760ed3e922d9428167d824e4dfb5db6873dc44693317a340d9d4f",
+    "speech_sha256": "1ef70fcb05ca5c454939f494b83d961eb6d177dcdad8223239a5a0c68d4a9f71"
+  },
+  {
+    "key": "exam02-2",
+    "file": "export/exam02-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "272a3052618c1a249993e8ed83452ccd3145a48c793143a71ab972b4ac508a92",
+    "speech_sha256": "63b57807c12040ec36e7d97c967357c16d942ebe22c472482cdc62eb0ba4d313"
+  },
+  {
+    "key": "exam02-3",
+    "file": "export/exam02-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "a732d8b19229ffe0c826ff3767acc1ac5a2f2c07e49e0610e759e3fb42b6a29c",
+    "speech_sha256": "8fb52bece39a55877a27560f1f68aa82fcd0d844d2b73b36d050278044986aa4"
+  },
+  {
+    "key": "exam02-4",
+    "file": "export/exam02-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "b107fe9cab7b7907a71c902a6ea6ee58348511f268bef8d49d89dd16a4a953c5",
+    "speech_sha256": "3f849ec763dbb30f3eb5c6c36761d4cc0b02910a1bc27b538ba7bdeda6afa26b"
+  },
+  {
+    "key": "exam03-1",
+    "file": "export/exam03-1.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "d857f88efd4b05e4a4d551f76308f1d3a2610175fe9b8a5d9c8a67b39f483555",
+    "speech_sha256": "3afb24f34c029c11a046476cfa594497a1a462a2122780e6faac16671fbeae61"
+  },
+  {
+    "key": "exam03-2",
+    "file": "export/exam03-2.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "0ecb44a17be586b276bf24ec97539effa05581cbf00b71005fdd1c0469efe74c",
+    "speech_sha256": "62b6140d3042408c72f8618a60dfc55700376e1b50efe4cc981f2d50190f4bc8"
+  },
+  {
+    "key": "exam03-3",
+    "file": "export/exam03-3.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "a6edb222a01f2b11a6d1e66ac250e5db2f6d1565edd8bb1f580ec6f6537ab084",
+    "speech_sha256": "2529a39474c3e54acdd3ced7232db35072cc4ed8d7e0685875fe2f8870b48203"
+  },
+  {
+    "key": "exam03-4",
+    "file": "export/exam03-4.mp3",
+    "input_speed": 1,
+    "voice": "後藤さん",
+    "source_sha256": "0adddfe6ca4faa7916ed6b3d09aac162b560f5332dff460e98f05f84ba63942d",
+    "speech_sha256": "45fdc542cf0cf11c666190ad2899b1d2b1d39f39e87001e21902a97317210a3b"
+  }
+]

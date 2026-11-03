@@ -1,7 +1,7 @@
 name: Deploy to GitHub Pages
 
 # リポジトリ全体（NurseTube の index.html と 3D衛星追跡の satellite.html）を
-# GitHub Pages へ公開するワークフローなのだ。
+# GitHub Pages へ公開するワークフローです。
 # - デフォルトブランチへ push されるたびに自動デプロイ
 # - 手動実行（workflow_dispatch）も可能
 

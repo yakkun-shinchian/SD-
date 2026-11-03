@@ -1,6 +1,6 @@
 // =========================================================================
 // build-voicevox.mjs
-// data.js / scenes.js から、VOICEVOX用の台本テキストと対応表を書き出すのだ。
+// data.js / scenes.js から、VOICEVOX用の台本テキストと対応表を書き出します。
 // 依存なし。実行: node tools/build-voicevox.mjs
 //   出力:
 //     voicevox/narration.txt … 1行=1ナレーション（VOICEVOXのテキスト読み込み用）
@@ -25,7 +25,7 @@ const PROGRAMS = sandbox.__P, SCENES = sandbox.__S;
 const outDir = path.join(root, "voicevox");
 fs.mkdirSync(outDir, { recursive: true });
 
-// 番組順→シーン順で通し番号(seq)を振る。これがVOICEVOXの書き出し順と一致するのだ。
+// 番組順→シーン順で通し番号(seq)を振る。これがVOICEVOXの書き出し順と一致します。
 const rows = [];
 let seq = 0;
 for (const p of PROGRAMS) {
@@ -74,7 +74,7 @@ const csv =
     .join("\n") + "\n";
 fs.writeFileSync(path.join(outDir, "manifest.csv"), csv, "utf8");
 
-console.log(`書き出し完了なのだ: ${rows.length} シーン / ${PROGRAMS.length} 番組`);
+console.log(`書き出し完了: ${rows.length} シーン / ${PROGRAMS.length} 番組`);
 console.log("  - voicevox/narration.txt");
 console.log("  - voicevox/manifest.json");
 console.log("  - voicevox/manifest.csv");

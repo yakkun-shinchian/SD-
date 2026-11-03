@@ -1,6 +1,6 @@
 /* =========================================================================
  * NurseTube（ナースチューブ）アプリ本体
- * 〜 ずんだもんが看護を解説してくれる勉強用YouTubeなのだ 〜
+ * 〜 看護を解説する勉強用YouTube 〜
  * 依存：data.js（CATEGORIES, PROGRAMS, EXAM_DATE, PRESENTER）, scenes.js（SCENES）
  * ルーティングはURLハッシュで管理：
  *   #/                       … ホーム（すべて）
@@ -11,7 +11,7 @@
 (function () {
   "use strict";
 
-  // ずんだもんカラー（アバター用の枝豆グリーンなのだ）
+  // アバター用のカラー（枝豆グリーン）
   const ZUNDA_GREEN = "#5cb96b";
 
   // ----------------------- DOM参照 -----------------------
@@ -146,7 +146,7 @@
   function gridHtml(list) {
     if (!list.length) {
       return `<div class="empty"><div class="empty__icon">🔍</div>
-        <p>その番組は見つからなかったのだ…。<br />べつのキーワードやカテゴリで探してほしいのだ。</p></div>`;
+        <p>その番組は見つかりませんでした。<br />別のキーワードやカテゴリで探してみてください。</p></div>`;
     }
     return `<div class="grid">${list.map(cardHtml).join("")}</div>`;
   }
@@ -176,8 +176,8 @@
     const list = key === "all" ? PROGRAMS : PROGRAMS.filter((p) => p.category === key);
     const cat = catOf(key);
     const heading = key === "all"
-      ? `ずんだもんのおすすめ番組なのだ <span class="muted">全${PROGRAMS.length}本</span>`
-      : `${cat ? cat.icon + " " : ""}${escapeHtml(cat ? cat.label : key)}の番組なのだ <span class="muted">${list.length}本</span>`;
+      ? `おすすめ番組 <span class="muted">全${PROGRAMS.length}本</span>`
+      : `${cat ? cat.icon + " " : ""}${escapeHtml(cat ? cat.label : key)}の番組 <span class="muted">${list.length}本</span>`;
     if (key === "all") { renderWarmHome(); return; }
     main.innerHTML = chipsHtml(key) +
       `<h2 class="section-title">${heading}</h2>` + gridHtml(list);
@@ -321,7 +321,7 @@
       return hay.includes(lower);
     });
     main.innerHTML =
-      `<h2 class="section-title">「${escapeHtml(q)}」の検索結果なのだ <span class="muted">${list.length}件</span></h2>` +
+      `<h2 class="section-title">「${escapeHtml(q)}」の検索結果 <span class="muted">${list.length}件</span></h2>` +
       gridHtml(list);
   }
 
@@ -378,8 +378,8 @@
     return `<div class="player" style="background:${grad}">
       <div class="player-placeholder">
         <h3>${escapeHtml(p.title)}</h3>
-        <a class="btn-yt" href="${ytSearchUrl(p)}" target="_blank" rel="noopener">▶ YouTubeで見るのだ</a>
-        <small>（data.js の videoId に動画IDを入れると、ここで埋め込み再生できるのだ）</small>
+        <a class="btn-yt" href="${ytSearchUrl(p)}" target="_blank" rel="noopener">▶ YouTubeで見る</a>
+        <small>（data.js の videoId に動画IDを入れると、ここで埋め込み再生できます）</small>
       </div>
     </div>`;
   }
@@ -581,7 +581,7 @@
       .filter((p) => p.id !== current.id)
       .sort((a, b) => (b.category === current.category) - (a.category === current.category))
       .slice(0, 8);
-    return `<aside class="related"><h3>関連する番組なのだ</h3>${related.map((p) => `
+    return `<aside class="related"><h3>関連する番組</h3>${related.map((p) => `
       <div class="related-item" data-goto="#/watch/${p.id}">
         ${thumbHtml(p, { noPlay: true })}
         <div class="related-item__info">
@@ -597,30 +597,30 @@
     renderSidebar(null);
     if (!p) {
       main.innerHTML = `<div class="empty"><div class="empty__icon">📺</div>
-        <p>番組が見つからなかったのだ。</p><a class="btn-yt" href="#/">ホームにもどるのだ</a></div>`;
+        <p>番組が見つかりませんでした。</p><a class="btn-yt" href="#/">ホームにもどる</a></div>`;
       return;
     }
     if (typeof ENHANCED_LESSONS !== "undefined" && ENHANCED_LESSONS[id]) { const lesson = ENHANCED_LESSONS[id]; if (lesson.kind === "illustrated-static") renderStaticIllustrations(p, lesson); else if (["anatomy-v5", "illustrated-v6"].includes(lesson.kind)) renderAnatomyV5(p, lesson); else renderEnhanced(p, lesson); return; }
     const tags = (p.tags || []).map((t) => `<span class="tag">#${escapeHtml(t)}</span>`).join("");
     const hasLesson = !p.videoId && scenesOf(p.id);
     main.innerHTML = `
-      <a class="back-link" href="#/">← 一覧にもどるのだ</a>
+      <a class="back-link" href="#/">← 一覧にもどる</a>
       <div class="watch">
         <div class="watch__primary">
           ${playerHtml(p)}
-          ${hasLesson ? `<p class="play-hint">▶ 再生ボタンを押すと、ずんだもんがスライドで解説してくれるのだ（音声ファイルがあれば本物の声、無ければ端末の読み上げを使うのだ）</p>` : ""}
+          ${hasLesson ? `<p class="play-hint">▶ 再生ボタンを押すと、スライドで解説が始まります（音声ファイルがあればそれを再生し、無ければ端末の読み上げを使います）</p>` : ""}
           <h1 class="watch__title">${escapeHtml(p.title)}</h1>${viewsHtml(p)}
           <div class="watch__bar">
             <div class="watch__channel">
               <span class="avatar" style="background:${ZUNDA_GREEN}">${escapeHtml(p.channel.charAt(0))}</span>
-              <div><b>${escapeHtml(p.channel)}</b><small>${escapeHtml(p.category)}の解説なのだ</small></div>
+              <div><b>${escapeHtml(p.channel)}</b><small>${escapeHtml(p.category)}の解説</small></div>
             </div>
             <div class="watch__tags">${tags}</div>
           </div>
           <div class="desc-box">
             <div class="stat">${escapeHtml(p.category)}・${formatDuration(p.durationSec)}</div>
             ${escapeHtml(p.description)}
-            <p class="yt-more"><a href="${ytSearchUrl(p)}" target="_blank" rel="noopener">▶ もっと詳しくはYouTubeでも探せるのだ</a></p>
+            <p class="yt-more"><a href="${ytSearchUrl(p)}" target="_blank" rel="noopener">▶ もっと詳しくはYouTubeでも探せます</a></p>
           </div>
         </div>
         ${relatedHtml(p)}

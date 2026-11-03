@@ -1,7 +1,7 @@
 // =========================================================================
 // link-audio.mjs
 // VOICEVOXで書き出した音声(wav等)を、アプリ用の <番組ID>-<シーン番号> に整列し、
-// audio/ にコピーして audio/manifest.js を生成するのだ。依存なし。
+// audio/ にコピーして audio/manifest.js を生成します。依存なし。
 //
 // 使い方:
 //   1) VOICEVOXで voicevox/narration.txt を読み込み、話者を「ずんだもん(ノーマル)」にする
@@ -22,11 +22,11 @@ const exportDir = path.join(root, "voicevox", "export");
 const audioDir = path.join(root, "audio");
 
 if (!fs.existsSync(manifestPath)) {
-  console.error("voicevox/manifest.json が無いのだ。先に `node tools/build-voicevox.mjs` を実行してほしいのだ。");
+  console.error("voicevox/manifest.json がありません。先に `node tools/build-voicevox.mjs` を実行してください。");
   process.exit(1);
 }
 if (!fs.existsSync(exportDir)) {
-  console.error(`書き出しフォルダが無いのだ: ${exportDir}\nVOICEVOXのwavをここに入れてほしいのだ。`);
+  console.error(`書き出しフォルダがありません: ${exportDir}\nVOICEVOXのwavをここに入れてください。`);
   process.exit(1);
 }
 
@@ -41,12 +41,12 @@ const files = fs
   .sort(collator.compare);
 
 if (files.length === 0) {
-  console.error("音声ファイルが見つからないのだ（wav/mp3/ogg/m4a）。");
+  console.error("音声ファイルが見つかりません（wav/mp3/ogg/m4a）。");
   process.exit(1);
 }
 if (files.length !== manifest.length) {
-  console.warn(`⚠ ファイル数(${files.length}) と シーン数(${manifest.length}) が不一致なのだ。`);
-  console.warn("  順番のズレや書き出し漏れがないか確認してほしいのだ。少ない方の数だけ対応づけるのだ。");
+  console.warn(`⚠ ファイル数(${files.length}) と シーン数(${manifest.length}) が一致しません。`);
+  console.warn("  順番のズレや書き出し漏れがないか確認してください。少ない方の数だけ対応づけます。");
 }
 
 const map = {};
@@ -59,9 +59,9 @@ for (let i = 0; i < n; i++) {
 }
 
 const js =
-  "/* 自動生成: tools/link-audio.mjs。アプリが使う音声ファイルの対応表なのだ。 */\n" +
-  "/* { \"番組ID-シーン番号\": \"音声ファイルのパス\" }。空なら端末の読み上げを使うのだ。 */\n" +
+  "/* 自動生成: tools/link-audio.mjs。アプリが使う音声ファイルの対応表です。 */\n" +
+  "/* { \"番組ID-シーン番号\": \"音声ファイルのパス\" }。空なら端末の読み上げを使います。 */\n" +
   "const AUDIO_FILES = " + JSON.stringify(map, null, 2) + ";\n";
 fs.writeFileSync(path.join(audioDir, "manifest.js"), js, "utf8");
 
-console.log(`整列完了なのだ: ${n} 件を audio/ にコピーし、audio/manifest.js を更新したのだ。`);
+console.log(`整列完了: ${n} 件を audio/ にコピーし、audio/manifest.js を更新しました。`);

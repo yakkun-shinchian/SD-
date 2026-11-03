@@ -15,9 +15,10 @@ set, it embeds the actual video; otherwise the app auto-plays a slideshow
 device's speech synthesis (Web Speech API) or by pre-rendered VOICEVOX
 ずんだもん audio.
 
-The entire UI and all content are in **Japanese**, and program/script copy
-uses ずんだもん's signature 「〜なのだ／〜のだ」 speech style. Preserve this
-tone and language when editing content.
+The entire UI and all content are in **Japanese**, written in plain, standard
+polite Japanese (です・ます). The ずんだもん 「〜なのだ／〜のだ」 speech style was
+deliberately removed from all content copy — do **not** reintroduce it. Preserve
+this register and language when editing content.
 
 ## How to run
 
@@ -262,8 +263,9 @@ loses the reader's place.
 
 ## Conventions
 
-- **Language & tone:** Japanese throughout; ずんだもん 「〜なのだ」 style for
-  all user-facing and content copy. Match the existing voice.
+- **Language & tone:** Japanese throughout; plain, standard polite Japanese
+  (です・ます) for all user-facing and content copy. The 「〜なのだ」 style is
+  retired — never reintroduce it. Match the existing register.
 - **No dependencies / no build:** keep it vanilla. Don't introduce npm
   packages, frameworks, or a bundler without explicit need. Use globals, not
   ES modules, in the browser code (`tools/*.mjs` do use `node:` ESM imports).

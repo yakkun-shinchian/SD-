@@ -4,3 +4,12 @@ voicevox/export/
 # OS / エディタ
 .DS_Store
 Thumbs.db
+
+# CoeFont 自動化の中間物（認証情報とダウンロードを含むため管理しない）
+tools/coefont/.profile/
+tools/coefont/ui-map/
+tools/coefont/login-state.json
+tools/coefont/progress.json
+# ダウンロードした音声と取り込み指示（PR #30 の import.json からの相対で export/）
+coefont/export/
+coefont/import.json

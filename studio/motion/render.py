@@ -14,6 +14,7 @@
 """
 import argparse, json, math, os, random, re, shutil, subprocess, sys, tempfile, wave
 
+from ct_annotations import prepare_ct, draw_ct
 from emphasis import validate_source, prepare_emphasis, validate_frames, preview_segments, validate_audio
 
 import numpy as np
@@ -369,6 +370,9 @@ def partial(pts, p):
 
 
 def draw_overlay(o, t, pt, tl):
+    if o["type"] == "ct_group":
+        draw_ct(o, t, pt, tl, color, SS)
+        return
     t0, t1 = o["_t0"], o["_t0"] + o["_dur"]
     if t < t0:
         return
@@ -590,7 +594,7 @@ def render_frame(tl, cam, overlays, t):
         en = st + len(a) / SR
         if st <= t <= en + 0.25 and s.get("subtitle"):
             frame = draw_subtitle(frame, s["subtitle"], t, st, en, tl, s)
-    fo = tl.d.get("fade", {})
+    fo = tl.d.get("fade", {"in": 0, "out": 0} if tl.d.get("profile") == "CT" else {})
     dur = tl.duration
     g = min(1, t / fo.get("in", 0.4) if fo.get("in", 0.4) else 1, (dur - t) / fo.get("out", 0.6) if fo.get("out", 0.6) else 1)
     if g < 1:
@@ -607,6 +611,10 @@ def _render_bytes(i):
 
 
 def prepare_overlays(tl):
+    if tl.d.get("ct_annotations") and tl.d.get("profile") != "CT":
+        raise ValueError("ct_annotations requires profile CT")
+    if tl.d.get("profile") == "CT":
+        return prepare_ct(tl)
     if tl.d.get("profile") in ("M3", "M4"):
         return prepare_emphasis(tl)
     out = []
@@ -660,6 +668,9 @@ def main():
             with open(args.report, "w", encoding="utf-8") as fp:
                 json.dump(report, fp, ensure_ascii=False, indent=2)
         print(json.dumps(report, ensure_ascii=False))
+    if tl.d.get("profile") == "CT":
+        for i in range(round(tl.duration * tl.fps)):
+            render_frame(tl, cam, overlays, i / tl.fps)
     if args.validate_only:
         shutil.rmtree(work, ignore_errors=True)
         return

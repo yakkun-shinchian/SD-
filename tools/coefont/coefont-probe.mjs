@@ -19,6 +19,7 @@ import fs from "node:fs";
 import readline from "node:readline";
 import { fileURLToPath } from "node:url";
 import { loadChromium, launchOptions } from "./playwright-resolve.mjs";
+import { summarize } from "./ui-summary.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const profileDir = path.join(here, ".profile");
@@ -137,6 +138,7 @@ console.log(`
 `.trim());
 
 let n = 0;
+const captured = [];
 for (;;) {
   const a = await ask(`\n[${String(n + 1).padStart(2, "0")}] 採寸する段階の画面にしたら Enter（q で終了）> `);
   if (a.toLowerCase() === "q") break;
@@ -147,20 +149,40 @@ for (;;) {
     data.capturedAt = new Date().toISOString();
     data.step = n;
     fs.writeFileSync(path.join(outDir, `ui-map-${tag}.json`), JSON.stringify(data, null, 2) + "\n", "utf8");
+    fs.writeFileSync(path.join(outDir, `ui-map-${tag}.txt`), summarize(data), "utf8");
     await page.screenshot({ path: path.join(outDir, `ui-map-${tag}.png`), fullPage: true });
+    captured.push(data);
     console.log(`  ✓ ${data.title || "(無題)"} — 操作できる要素 ${data.elementCount} 個`);
     console.log(`    ${data.url}`);
-    console.log(`    → ui-map/ui-map-${tag}.json + .png`);
+    console.log(`    → ui-map/ui-map-${tag}.json + .txt + .png`);
   } catch (e) {
     console.log(`  ✗ 採寸に失敗しました: ${e.message}`);
   }
 }
 
 await context.close();
+
+/* 全段階を1枚にまとめる。これだけチャットに貼れば選択子が書けます。 */
+let summaryPath = "";
+if (captured.length) {
+  const all =
+    `# CoeFont 画面の採寸結果（${captured.length} 段階 / ${new Date().toISOString()}）\n` +
+    `# このファイルをそのまま貼っていただければ、selectors.js を書けます。\n` +
+    `# 個人情報は含みません（文言・aria・id・CSS経路のみ）。念のため目を通してください。\n\n` +
+    captured.map(summarize).join("\n");
+  summaryPath = path.join(outDir, "summary.txt");
+  fs.writeFileSync(summaryPath, all, "utf8");
+}
+
+const size = summaryPath ? (fs.statSync(summaryPath).size / 1024).toFixed(1) : "0";
 console.log(`
 ──────────────────────────────────────────────
  採寸おわり（${n} 段階）
 ──────────────────────────────────────────────
-${outDir} の中身を見せていただければ、
-画面に合った選択子を selectors.js に書き込みます。
+貼り付け用の1枚（${size} KB）:
+  ${summaryPath || "（採寸なし）"}
+
+これをそのままチャットに貼っていただければ、選択子を書き込みます。
+大きすぎる場合は ui-map/ui-map-NN.txt を段階ごとに貼ってください。
+画面写真（.png）は貼れないので、文字で足りなければそのとき仰ってください。
 `.trim());

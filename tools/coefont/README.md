@@ -63,8 +63,21 @@ node tools/coefont/coefont-probe.mjs
 4. 台本を入力する欄が見えているところ
 5. 書き出し（ダウンロード）のボタンが見えているところ
 
-終わるときは `q` + Enter。`ui-map/` の中身を共有していただければ、
-画面に合った選択子を `selectors.js` に書き込みます。
+終わるときは `q` + Enter。
+
+**出来上がるもの**
+
+| ファイル | 中身 |
+| --- | --- |
+| `ui-map/summary.txt` | **全段階をまとめた1枚。これをそのままチャットに貼ってください**（目安10〜20KB） |
+| `ui-map/ui-map-NN.txt` | 段階ごとの要約（summary.txt が大きすぎるとき用） |
+| `ui-map/ui-map-NN.json` | 全情報（手元の確認用。貼る必要はありません） |
+| `ui-map/ui-map-NN.png` | 画面写真（貼れないので、文字で足りないときに仰ってください） |
+
+要約には**選択子を書くのに要る情報だけ**を残しています——役割・文言・`aria-label`・
+`data-testid`・`id`、そして**それらで当てられない要素にだけ** CSS 経路。
+CSS は最も模様替えに弱いので、最後の手段に回しています。
+個人情報は含みませんが、念のため目を通してから貼ってください。
 
 ### ③ 選択子の記入（採寸後）
 
@@ -121,12 +134,14 @@ node tools/import-coefont.mjs coefont/import.json --partial
 ### 検証
 
 ```bash
-node --test tools/coefont/coefont-batch.test.mjs
+node --test tools/coefont/coefont-batch.test.mjs   # 10項目
+node --test tools/coefont/ui-summary.test.mjs      # 6項目
 ```
 
-ブラウザ不要の部分（対応表の読み込み・件数選択・進捗・声の選択・
-`import.json` の形）を10項目で確認します。先頭2つは**契約テスト**で、
-PR #30 の実データを埋め込んであるため、#30 が形式を変えたらここで落ちます。
+どちらもブラウザ不要です。`coefont-batch` 側は対応表の読み込み・件数選択・進捗・
+声の選択・`import.json` の形を確認し、**先頭2つは契約テスト**——PR #30 の実データを
+埋め込んであるため、#30 が形式を変えたらここで落ちます。
+`ui-summary` 側は貼り付け用要約の中身と大きさを確認します。
 
 ## PR #30 との分担（重要）
 

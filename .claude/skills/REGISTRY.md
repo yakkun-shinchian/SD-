@@ -328,11 +328,20 @@ PR #21 の上記コミットの再帰Gitツリー（省略なし）で確認：
 
 #### 実装への反映
 
-`tools/build-coefont.mjs` は声を決め打ちせず、実行時に指定します。
+`tools/build-coefont-reel.mjs` は声を決め打ちせず、実行時に指定します。
 
 ```bash
-node tools/build-coefont.mjs exam02-v6-script.json --junior ミリアル
+node tools/build-coefont-reel.mjs exam02-v6-script.json --junior ミリアル
 ```
+
+> **2026-11-03 改名。** main側に別系統の `tools/build-coefont.mjs`
+> （PR #29・#30。NurseTube 29番組・118シーンの読み上げ。読み辞書 `coefont/readings.tsv`・
+> 原文ロック・回帰テスト付き）がマージされ、同名で衝突しました。
+> **main側を正本として残し、こちら（Instagramリール V5/V6用）を `-reel` 付きへ改名**しました。
+> どちらの機能も失っていません。出力名でも区別されます
+> （リール＝`coefont/<id>-narration.txt` / NurseTube＝`coefont/narration.txt`）。
+> 手順は [coefont/REEL_HANDOFF.md](../../coefont/REEL_HANDOFF.md)、
+> NurseTube側は [coefont/README.md](../../coefont/README.md)。
 
 既定値は「前回こうだった」という目安にすぎません。`manifest.csv` の `voice` 列に
 **その回の決定が記録**されるので、過去の教材で誰の声を使ったかは後から辿れます。

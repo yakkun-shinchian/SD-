@@ -1,164 +1,93 @@
-// =========================================================================
-// build-coefont.mjs
-// 先輩・後輩の対話台本から、CoeFont手入力用の読み上げテキストと対応表を
-// 書き出すのだ。CoeFontのAPIは使わないのだ（プラン制約のため）。
-// ご本人がCoeFont画面で音声を作って、出来たMP3を所定の名前で戻す流れなのだ。
-//
-// 依存なし。実行:
-//   node tools/build-coefont.mjs                  … 台本を自動で探すのだ
-//   node tools/build-coefont.mjs exam02-v6-script.json
-//
-// 出力（coefont/ 配下）:
-//   <id>-narration.txt … 1行=1発話。CoeFontに上から順に貼るのだ
-//   <id>-manifest.csv  … 連番・ページ・話者・使う声・戻すファイル名・本文
-//   <id>-manifest.json … 同上（プログラム用）
-// =========================================================================
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-
-// 声は固定しないのだ。ご本人がその回の映像を見てから決めるのだ。
-// ここにあるのは「前回こうだった」という既定値にすぎないのだ。
-// 変えるときは実行時に指定するのだ:
-//   node tools/build-coefont.mjs exam02-v6-script.json --junior ミリアル
-const KNOWN_VOICES = {
-  "汎用式概念": "汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft",
-  "後藤邑子": "後藤邑子",
-  "ミリアル": "ミリアル",
-};
-const DEFAULT_VOICES = {
-  junior: KNOWN_VOICES["汎用式概念"],
-  senior: KNOWN_VOICES["後藤邑子"],
-};
-// 略称でも正式名称でも受け取るのだ。知らない名前はそのまま通すのだ。
-const resolveVoice = (name) => KNOWN_VOICES[name] || name;
-
-// 既に作ってある音声を使い回せる定型句なのだ。再生成するとポイントが無駄なのだ。
-// 締めのCTAは全教材で同じ音声（md5 c40e954c…）を共有しているのだ。
-const REUSE = [
-  { speech: "フォローしていただけると励みになります。よろしくお願いします。",
-    source: "exam02-v6-voice-13.mp3" },
-];
-
-// 台本の形ごとに、発話の並びを取り出すのだ。
-// V6: { lessonId, pages:[{ junior, senior, cta? }] }
-// V5: { storyboard:[{ page, junior, senior }] }
-function readScript(file) {
-  const data = JSON.parse(fs.readFileSync(file, "utf8"));
-  const pages = data.pages || data.storyboard;
-  if (!Array.isArray(pages)) return null;
-
-  const base = path.basename(file);
-  const id = data.lessonId || base.replace(/-(script|production|dialogue)\.json$/, "");
-  const version = /-v5-/.test(base) ? "v5" : "v6";
-
+// Display/caption content remains in scenes.js. No external conversion service.
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const sha = text => crypto.createHash('sha256').update(text).digest('hex');
+export function sourceRows(dir = root) {
+  const ctx = vm.createContext({});
+  for (const f of ['data.js', 'scenes.js']) vm.runInContext(fs.readFileSync(path.join(dir, f), 'utf8'), ctx);
+  const {programs, scenes} = vm.runInContext('({programs: PROGRAMS, scenes: SCENES})', ctx);
   const rows = [];
-  pages.forEach((page, i) => {
-    const pageNo = page.page || i + 1;
-    // 1ページ内は 後輩 → 先輩 → (最終ページのみ)CTA の順なのだ。
-    // CTAは後輩が話すので、声は後輩と同じなのだ。
-    // cta(V6) と closing(V5) は同じ締めの一言なのだ
-    for (const [field, speaker] of [["junior", "junior"], ["senior", "senior"],
-                                    ["cta", "cta"], ["closing", "cta"]]) {
-      const raw = page[field];
-      if (!raw) continue;
-      rows.push({
-        seq: rows.length + 1,
-        page: pageNo,
-        field,
-        speaker,
-        voice: VOICES[speaker],
-        // 台本の改行はスライド上の見た目用なので、読み上げ文からは外すのだ
-        speech: String(raw).replace(/\n/g, ""),
-        script_text: raw,
-      });
+  for (const p of programs) {
+    if (!scenes[p.id]?.length) throw Error(`Missing scenes: ${p.id}`);
+    scenes[p.id].forEach((s, i) => rows.push({seq: rows.length + 1, program_id: p.id, scene_no: i + 1,
+      key: `${p.id}-${i + 1}`, target_wav: `${p.id}-${i + 1}.wav`, heading: s.heading, display_text: s.narration}));
+  }
+  if (new Set(rows.map(r => r.key)).size !== rows.length) throw Error('Duplicate scene key');
+  return rows;
+}
+export function dictionary(dir = root) {
+  const entries = fs.readFileSync(path.join(dir, 'coefont/readings.tsv'), 'utf8').trim().split('\n').map(l => {
+    const [surface, reading] = l.split('\t');
+    if (!surface || !reading || !/^[ぁ-ゖー、。・ ]+$/.test(reading)) throw Error(`Invalid reading: ${l}`);
+    return {surface, reading};
+  });
+  if (new Set(entries.map(e => e.surface)).size !== entries.length) throw Error('Duplicate reading');
+  return entries.sort((a,b) => b.surface.length - a.surface.length);
+}
+export function convert(text, entries) {
+  let speech = '', offset = 0; const tokens = [];
+  while (offset < text.length) {
+    const entry = entries.find(e => text.startsWith(e.surface, offset));
+    if (entry) {
+      tokens.push({...entry, offset}); speech += entry.reading; offset += entry.surface.length;
+    } else {
+      const ch = text[offset++];
+      if (/[ァ-ヶ]/.test(ch)) speech += String.fromCharCode(ch.charCodeAt(0) - 0x60);
+      else if (/^[ぁ-ゖー、。・「」『』！？!?（）()\s]$/.test(ch)) speech += ch;
+      else throw Error(`Unreviewed character at ${offset-1}: ${text.slice(offset-8,offset+12)}`);
     }
-  });
-  // id が既に版を含む場合（anat05-v5 など）は二重に付けないのだ
-  const stem = id.endsWith(`-${version}`) ? id : `${id}-${version}`;
-  let genNo = 0;
-  rows.forEach((r) => {
-    r.target_mp3 = `${stem}-voice-${String(r.seq).padStart(2, "0")}.mp3`;
-    const hit = REUSE.find((x) => x.speech === r.speech);
-    r.reuse_from = hit ? hit.source : "";
-    r.gen_no = hit ? "" : ++genNo;   // narration.txt の何行目に当たるかなのだ
-  });
-  return { id, version, stem, file: base, rows };
-}
-
-const csvEsc = (v) => {
-  const s = String(v);
-  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-};
-
-// --junior / --senior / --cta で、その回の声を指定するのだ
-const argv = process.argv.slice(2);
-const VOICES = { ...DEFAULT_VOICES };
-const args = [];
-for (let i = 0; i < argv.length; i++) {
-  const m = /^--(junior|senior|cta)$/.exec(argv[i]);
-  if (m) {
-    const value = argv[++i];
-    if (!value) { console.error(`${argv[i - 1]} に声の名前が要るのだ`); process.exit(1); }
-    VOICES[m[1]] = resolveVoice(value);
-  } else {
-    args.push(argv[i]);
   }
+  return {speech_text: speech, tokens};
 }
-if (!VOICES.cta) VOICES.cta = VOICES.junior;   // 締めは既定で後輩と同じ声なのだ
-
-const targets = args.length
-  ? args
-  : fs.readdirSync(root)
-      .filter((f) => /-(v5-production|v6-script)\.json$/.test(f))
-      .sort()
-      .map((f) => path.join(root, f));
-
-if (!targets.length) {
-  console.error("台本が見つからないのだ（*-v6-script.json / *-v5-production.json）");
-  process.exit(1);
+export const csv = (rows, columns) => '\uFEFF' + [columns, ...rows.map(r => columns.map(c => r[c] ?? ''))]
+  .map(row => row.map(v => '"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n')+'\n';
+// Review is evidence for an exact original/kana pair, never a blanket approval
+// of future dictionary output. Human approval and audio listening stay separate.
+export function reviewFor(row, reviews) {
+  const saved = reviews.get(row.key);
+  if (!saved || saved.source_sha256 !== row.source_sha256 || saved.speech_sha256 !== sha(row.speech_text))
+    return {text_review:'要再校正', human_review:'未確認', audio_review:'未試聴',
+      note:'原文または読みが校正記録と一致しません。全文を再照合してください。', audio_check:'文字校正後に実音声で確認。'};
+  return saved;
 }
-
-const outDir = path.join(root, "coefont");
-fs.mkdirSync(outDir, { recursive: true });
-
-const cols = ["seq", "gen_no", "page", "speaker", "voice", "target_mp3", "reuse_from", "speech"];
-let total = 0;
-for (const target of targets) {
-  const file = path.isAbsolute(target) ? target : path.join(root, target);
-  const parsed = readScript(file);
-  if (!parsed) {
-    console.error(`  飛ばしたのだ（対応していない形）: ${path.basename(file)}`);
-    continue;
-  }
-  const { id, rows } = parsed;
-  // narration.txt には「新規に作る分だけ」を入れるのだ。使い回す分は入れないのだ。
-  const toGenerate = rows.filter((r) => !r.reuse_from);
-  fs.writeFileSync(path.join(outDir, `${id}-narration.txt`),
-    toGenerate.map((r) => r.speech).join("\n") + "\n", "utf8");
-  fs.writeFileSync(path.join(outDir, `${id}-manifest.json`),
-    JSON.stringify(parsed, null, 2) + "\n", "utf8");
-  fs.writeFileSync(path.join(outDir, `${id}-manifest.csv`),
-    [cols.join(",")].concat(rows.map((r) => cols.map((c) => csvEsc(r[c])).join(","))).join("\n") + "\n",
-    "utf8");
-
-  const byVoice = {};
-  for (const r of toGenerate) byVoice[r.speaker] = (byVoice[r.speaker] || 0) + 1;
-  const reused = rows.length - toGenerate.length;
-  console.log(`${id}: 全${rows.length}発話 → 新規${toGenerate.length}`
-    + `（後輩 ${byVoice.junior || 0} / 先輩 ${byVoice.senior || 0}）`
-    + (reused ? ` ＋ 使い回し${reused}` : ""));
-  total += toGenerate.length;
+export function build(dir = root) {
+  const entries = dictionary(dir), sources = sourceRows(dir);
+  const reviewRows = JSON.parse(fs.readFileSync(path.join(dir, 'coefont/text-review.json'), 'utf8'));
+  const reviews = new Map(reviewRows.map(r => [r.key, r]));
+  if (reviews.size !== reviewRows.length || reviewRows.some(r => !sources.some(s => s.key === r.key)))
+    throw Error('Duplicate/unknown text review key');
+  const lock = JSON.parse(fs.readFileSync(path.join(dir, 'coefont/source-lock.json'), 'utf8'));
+  if (JSON.stringify(sources.map(r => [r.key, sha(r.display_text)])) !== JSON.stringify(lock))
+    throw Error('Source changed: review scene wording/readings and update source-lock.json deliberately.');
+  const rows = sources.map(r => {
+    const row = {...r, ...convert(r.display_text, entries), source_sha256: sha(r.display_text),
+      voice:'後藤さん', target_speed:1.3};
+    const review = reviewFor(row, reviews);
+    return {...row, reading_review:`${review.text_review}・人による確認:${review.human_review}・実音声:${review.audio_review}`};
+  });
+  const out = path.join(dir, 'coefont'); fs.mkdirSync(path.join(out, 'scripts'), {recursive:true});
+  const write = (f, data) => fs.writeFileSync(path.join(out, f), data);
+  write('narration.txt', rows.map(r => r.speech_text).join('\n')+'\n');
+  write('manifest.json', JSON.stringify(rows, null, 2)+'\n');
+  write('manifest.csv', csv(rows, ['seq','key','program_id','scene_no','target_wav','heading','display_text','speech_text','source_sha256','voice','target_speed','reading_review']));
+  write('review.csv', csv(rows.flatMap(r => r.tokens.map(t => ({key:r.key, ...t,
+    kind: /[0-9]/.test(t.surface) ? '数値・単位または略語' : /[A-Za-zβ]/.test(t.surface) ? '略語・記号' : /[ァ-ヶ]/.test(t.surface) ? '片仮名・医学用語' : '漢字・医学用語・文脈読み',
+    context:r.display_text.slice(Math.max(0,t.offset-10),t.offset+t.surface.length+10),
+    human_review:reviewFor(r,reviews).human_review, note:t.surface==='尿'?'単独の尿は利用者指定の「にょ」。複合語は標準読み。':'',
+    ai_text_review:reviewFor(r,reviews).text_review, audio_review:reviewFor(r,reviews).audio_review,
+    scene_review_note:reviewFor(r,reviews).note}))),
+    ['key','offset','surface','reading','kind','context','human_review','note','ai_text_review','audio_review','scene_review_note']));
+  write('scene-review.csv', csv(rows.map(r => ({...r, speech_sha256:sha(r.speech_text), ...reviewFor(r,reviews)})),
+    ['seq','key','heading','display_text','speech_text','source_sha256','speech_sha256','reviewer','reviewed_on',
+      'text_review','human_review','audio_review','note','audio_check']));
+  write('import-template.json', JSON.stringify(rows.map(r=>({key:r.key,file:`export/${r.key}.mp3`,input_speed:1,voice:'後藤さん',source_sha256:r.source_sha256,speech_sha256:sha(r.speech_text)})),null,2)+'\n');
+  for (const r of rows) write(`scripts/${String(r.seq).padStart(3,'0')}_${r.key}.txt`, r.speech_text+'\n');
+  return rows;
 }
-console.log(`\n今回の声（既定値なのだ。その回の映像を見て変えていいのだ）:`);
-for (const role of ["junior", "senior", "cta"]) {
-  const label = { junior: "後輩", senior: "先輩", cta: "締め" }[role];
-  console.log(`  ${label}: ${VOICES[role]}`);
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try { console.log(`CoeFont: ${build().length} scenes exported`); } catch(e) {console.error(e.message); process.exitCode=1;}
 }
-console.log(`  他の候補: ${Object.keys(KNOWN_VOICES).join(" / ")}`);
-console.log(`  変えるとき: node tools/build-coefont.mjs <台本> --junior ミリアル --senior 後藤邑子`);
-console.log(`\n書き出し完了なのだ: 新規に作るのは合計 ${total} 発話 → coefont/`);
-console.log("narration.txt を上から順にCoeFontで生成して、manifest の target_mp3 の名前で戻してほしいのだ。");
-console.log("reuse_from が入っている行は、既にある音声をそのまま使うのだ（作らなくていいのだ）。");

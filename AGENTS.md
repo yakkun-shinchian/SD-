@@ -40,6 +40,13 @@ Codex用の定義は各スキルの `agents/openai.yaml`（62件・受領済み�
   標準ゴシックでの代替を明示的に拒否します。前セッションではZen Kurenaidoで検証済みですが、
   導入は永続しません。必要な書体が現在の実行環境にあるか確認し、不足時は導入してください。
 - CoeFontはご本人の環境で音声生成する標準手順（`REGISTRY.md` §5-1）。
+  **CoeFont系は2系統ある。同名で取り違えないこと。**
+  - `tools/build-coefont.mjs` … NurseTube 29番組・118シーンの読み上げ。
+    読み辞書 `coefont/readings.tsv`・原文ロック・回帰テスト付き。出力は `coefont/narration.txt` ほか。
+    手順は `coefont/README.md`。
+  - `tools/build-coefont-reel.mjs` … Instagramリール（V5/V6会話イラスト）の手動受け渡し。
+    `--junior` / `--senior` / `--cta` で声を実行時指定。出力は `coefont/<id>-narration.txt` ほか。
+    手順は `coefont/REEL_HANDOFF.md`。
   この環境での接続・認証成功は未確認です。自動生成へ変更する場合は別途確認が必要です。
 - 受領済み素材の再送は求めません。制作時に必要な入力素材・外部サービス・フォントの条件と、
   スキル単位の成果物検証は、素材の受領状態から分けて扱います。

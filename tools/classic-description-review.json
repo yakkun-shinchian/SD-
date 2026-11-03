@@ -1,0 +1,22 @@
+{
+  "anat04": {
+    "current": "bf17507a4a40063fa432ba283227a1c344ae2a0de688db58f8773855a5f0b3af",
+    "classic": "d0ab7aad193d4dcbfa363dad2782506d659789dba337a617de2f5dbf822243f8",
+    "reason": "医学的な注意点を反映済み。クラシック版のスライド形式・口調を維持し、V5/V6会話動画の説明は含めない。"
+  },
+  "anat05": {
+    "current": "cc6c4b8a358eb64c7a277776ba23f74358556c7f3644a999ff2649350bfb4b99",
+    "classic": "7be4b93a44b717d11d4bab72c5e7f4881f9128ccd9cc4801dccb0b4e2a5a6489",
+    "reason": "医学的な注意点を反映済み。クラシック版のスライド形式・口調を維持し、V5/V6会話動画の説明は含めない。"
+  },
+  "exam01": {
+    "current": "0cacde66c1bcac92a30876da349009bb23eef70fff06d32774b33360175607d1",
+    "classic": "ca60e9bb1b3893d95a862bab23bab83cbb1420ad232e249fcad346ed8d6a6723",
+    "reason": "医学的な注意点を反映済み。クラシック版のスライド形式・口調を維持し、V5/V6会話動画の説明は含めない。"
+  },
+  "exam02": {
+    "current": "e1e0646048bad2ce1f063fabaa7ad0ab44362b488b135c25f3431418f7450a2e",
+    "classic": "95605b7ad09c5e92020995d7fd469bc1b390049122ed78d257b092ae27e56a61",
+    "reason": "医学的な注意点を反映済み。クラシック版のスライド形式・口調を維持し、V5/V6会話動画の説明は含めない。"
+  }
+}

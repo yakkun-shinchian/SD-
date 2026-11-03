@@ -98,7 +98,7 @@
     "source_sha256": "5163e5a3bd9b4b07e9b6a8ec3524322776c940ca3ad8a2c0f168b0ea5827d232",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 2,
@@ -179,7 +179,7 @@
     "source_sha256": "33254ddb4b5a4be4a160488e24484f882ef846310f8b23f3e0b251eb2aa4cfc1",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 3,
@@ -290,7 +290,7 @@
     "source_sha256": "aec67eb44762be7cfb295f36c887daf30b3ea98d89729fe698288afa530618b0",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 4,
@@ -381,7 +381,7 @@
     "source_sha256": "a0defb2495410f941ee0091c3b8a3bb385e194485ebd4c7d260e19a84e4be25a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 5,
@@ -447,7 +447,7 @@
     "source_sha256": "8b98b628f95dc904c099931c2e7a1bf81a690c8630367911b40e37b889cb3e7c",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 6,
@@ -528,7 +528,7 @@
     "source_sha256": "056fd95b54613e6fe773a12a0a95595b61de56aae0cf2be83b8503be0ef5ac79",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 7,
@@ -559,6 +559,11 @@
         "surface": "単位",
         "reading": "たんい",
         "offset": 7
+      },
+      {
+        "surface": "ネフロン",
+        "reading": "ねふろん",
+        "offset": 10
       },
       {
         "surface": "糸球体",
@@ -609,7 +614,7 @@
     "source_sha256": "ff243c469344ae7ffe648f6cf1e0d3da7d417d6f1f5520c902619fdeed57ec36",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 8,
@@ -662,9 +667,9 @@
         "offset": 28
       },
       {
-        "surface": "糖",
-        "reading": "とう",
-        "offset": 34
+        "surface": "ブドウ糖",
+        "reading": "ぶどうとう",
+        "offset": 31
       },
       {
         "surface": "必要",
@@ -700,7 +705,7 @@
     "source_sha256": "2c8db73951bac2b9496563c7789246b7b60f6a0b876d89829cae5a21f211d26a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 9,
@@ -758,19 +763,24 @@
         "offset": 34
       },
       {
-        "surface": "RAA",
-        "reading": "あーるえーえー",
+        "surface": "RAA系",
+        "reading": "あーるえーえーけい",
         "offset": 40
       },
       {
-        "surface": "系",
-        "reading": "けい",
-        "offset": 43
+        "surface": "アルドステロン",
+        "reading": "あるどすてろん",
+        "offset": 45
       },
       {
         "surface": "血圧",
         "reading": "けつあつ",
         "offset": 53
+      },
+      {
+        "surface": "ナトリウム",
+        "reading": "なとりうむ",
+        "offset": 56
       },
       {
         "surface": "調整",
@@ -781,7 +791,7 @@
     "source_sha256": "2475052beb1c402f4654bb20582f7a613fbaabf7d8b63a472d8f29db1918630e",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 10,
@@ -797,6 +807,11 @@
         "surface": "腎臓",
         "reading": "じんぞう",
         "offset": 6
+      },
+      {
+        "surface": "ネフロン",
+        "reading": "ねふろん",
+        "offset": 9
       },
       {
         "surface": "尿",
@@ -829,14 +844,9 @@
         "offset": 33
       },
       {
-        "surface": "RAA",
-        "reading": "あーるえーえー",
+        "surface": "RAA系",
+        "reading": "あーるえーえーけい",
         "offset": 37
-      },
-      {
-        "surface": "系",
-        "reading": "けい",
-        "offset": 40
       },
       {
         "surface": "水分",
@@ -862,7 +872,7 @@
     "source_sha256": "3eb6f30ebe84abd62ed26e7a787c98b150f06730d6c04308c8982fa600cd2a8f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 11,
@@ -988,7 +998,7 @@
     "source_sha256": "9385d374baecc30fd59f85839cfdbc642698c44ead5f6c6c4c26a06f6dd8d953",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 12,
@@ -1094,7 +1104,7 @@
     "source_sha256": "63bf3e4771597b6e2ad122fa8cdae244b6c6eb6e1b889812a5c4de2fba7e4d8a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 13,
@@ -1115,6 +1125,11 @@
         "surface": "赤血球",
         "reading": "せっけっきゅう",
         "offset": 3
+      },
+      {
+        "surface": "ヘモグロビン",
+        "reading": "へもぐろびん",
+        "offset": 7
       },
       {
         "surface": "結合",
@@ -1180,7 +1195,7 @@
     "source_sha256": "9ac9fa56888af3f66dcac9444ff7515568456f8355c8cdc8ee3776c561d36b36",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 14,
@@ -1261,7 +1276,7 @@
     "source_sha256": "5500b381321271372f5cb06f340d102809c997aa3ea8c6b1483b168808add7ed",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 15,
@@ -1367,7 +1382,7 @@
     "source_sha256": "e317655636cc3c3d0a29c5608e0bd3bf6eff077c9f4c8afdd76e1d686bf2c5d8",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 16,
@@ -1483,7 +1498,7 @@
     "source_sha256": "feb7f84b5cc5cfb46e8858fab798a28fa2329341e54d64ba8d1bcfea64a1cbfb",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 17,
@@ -1549,7 +1564,7 @@
     "source_sha256": "48003b7c7024aad65ca38176536c1e37cdbc3824af0c8027fc7ab8d3ba054b36",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 18,
@@ -1650,7 +1665,7 @@
     "source_sha256": "baf9514f8fdc5ee8c0351ba18cc433e2ceaf98cd66d0d1dcb0e85a199bfda729",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 19,
@@ -1731,7 +1746,7 @@
     "source_sha256": "1ea8a0832d4e630b93d8c0be9180f542ba4ae9055130898df1cb827b886be986",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 20,
@@ -1822,7 +1837,7 @@
     "source_sha256": "662cf1da278159b955bc1938d7a397743fec510a18c5c8c1cfbb09157015dfb8",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 21,
@@ -1865,6 +1880,11 @@
         "offset": 27
       },
       {
+        "surface": "コルチゾール",
+        "reading": "こるちぞーる",
+        "offset": 32
+      },
+      {
         "surface": "対応",
         "reading": "たいおう",
         "offset": 44
@@ -1873,7 +1893,7 @@
     "source_sha256": "fe6ad9967cdfd6fce7ef981029b61e2f16b6c2462356905aff74cc0d05db1b10",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 22,
@@ -1954,7 +1974,7 @@
     "source_sha256": "333beffc41085b9f523efefda10dfe18dad1879997a9798b134280e934036b94",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 23,
@@ -2040,7 +2060,7 @@
     "source_sha256": "d4b72019143b74ad87fe3282b15de4a92a5f82215a52e25fe69fce64d57270cd",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 24,
@@ -2131,7 +2151,7 @@
     "source_sha256": "34aa8d7b57bd8ca3f39c249bbcd1213f24801adb5533de23f15f73fa200e6dc8",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 25,
@@ -2272,7 +2292,7 @@
     "source_sha256": "5e65450244e2004cc2dc002194be3ea8ed3720a39f29dce067b6af1ccd93ad4a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 26,
@@ -2333,7 +2353,7 @@
     "source_sha256": "c4743db4bee6aaa442294583b0b04a022aaa264753ad97627691cf9dfd88d7f1",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 27,
@@ -2394,7 +2414,7 @@
     "source_sha256": "4dc62d3444e5ee8ad8c6a2866a4f0d9bf91f6548803f1ba4a81407f10487447a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 28,
@@ -2485,7 +2505,7 @@
     "source_sha256": "ac294dc3a88267fd7d5a9e160fbcc056104e2180096cfbf1b52e14eccc17630f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 29,
@@ -2556,7 +2576,7 @@
     "source_sha256": "4bc7a5d4322347790156e1fa271c12ed70021a6acdf14ffc4c982e7c7e03ddc4",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 30,
@@ -2617,7 +2637,7 @@
     "source_sha256": "f0f26e3a22c71db8c8d30f5f3611a7f0067ceee4c823c6ff9d06bd51fb76ec92",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 31,
@@ -2688,7 +2708,7 @@
     "source_sha256": "ebaf0f6013efc78b6a58d1af8dbd16d6e6cc73e20512b783ec53f810e80a6bf3",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 32,
@@ -2769,7 +2789,7 @@
     "source_sha256": "56b9e9e63515ea8679d495f16744be88a7b7d9c471057e1eb12c077af823732b",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 33,
@@ -2850,7 +2870,7 @@
     "source_sha256": "1049e556f27c7c9a942c27e7b920a4b2e06714d4ab5fcac2d91a3210a0f98cd6",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 34,
@@ -2906,7 +2926,7 @@
     "source_sha256": "ae833b15dac7825e77474c4faba10dbac262cdc237705b85a8801334671d5e4a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 35,
@@ -2992,7 +3012,7 @@
     "source_sha256": "14eb548e6e96e78299fd2912a4031fe0cf594375124edf64e984e5f01350dadf",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 36,
@@ -3078,7 +3098,7 @@
     "source_sha256": "02742f2756f99a1081765b095a90d5bbf3c9aa461a957db205cb9b901334d1a2",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 37,
@@ -3164,7 +3184,7 @@
     "source_sha256": "5d6e2747001ca7d31cadd08b72c2bc60a9e7c643a2b32ad39aedc932b40ce506",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 38,
@@ -3235,7 +3255,7 @@
     "source_sha256": "597933d78e90fdd3378fe2b34df303c338eb8de7107db2c1c1be8f77f403832d",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 39,
@@ -3311,7 +3331,7 @@
     "source_sha256": "57deb11909eeaec993d31fd01a00cee1514af902c1f325880714d6302450fb82",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 40,
@@ -3387,7 +3407,7 @@
     "source_sha256": "72cd3f00b0d4b07e2c6cef82e5abb29385c9e3b09e16438717ce67c03e5b0330",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 41,
@@ -3453,7 +3473,7 @@
     "source_sha256": "f186150b2f5c07be0c16c41982708ca75565170c35bbe53f10da6681ff8f7866",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 42,
@@ -3504,7 +3524,7 @@
     "source_sha256": "9dfd0bfdb89a2e71a7f3b5900094f0e2d0be418d98ed9691b14b50ce41fb115b",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 43,
@@ -3575,7 +3595,7 @@
     "source_sha256": "e77af828644f96bc3693e889010128c096e26397ea8d0590328fe220fab81a1a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 44,
@@ -3651,7 +3671,7 @@
     "source_sha256": "4d9b35aa6eecbe98775cc6e58709183c37b52694dda699395b272dcd99edfe32",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 45,
@@ -3707,7 +3727,7 @@
     "source_sha256": "1262562d9b1c0579ccfb139d62707806e0a3ee7837d2a843474c6b5a042c6c30",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 46,
@@ -3778,7 +3798,7 @@
     "source_sha256": "c3c8d5c5ef7248e446559e822d09c7071ec72a4b03b9b07da5075bd61b2e32cd",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 47,
@@ -3854,7 +3874,7 @@
     "source_sha256": "e9256642ef7ed7a2e6d6faac0667f8c930f0e50d0576b9930a621c8f3f83f20f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 48,
@@ -3925,7 +3945,7 @@
     "source_sha256": "0e98759cf8b13304ba81beabba9a1cf61a05e2311e4a104a94305a6ce761e218",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 49,
@@ -4001,7 +4021,7 @@
     "source_sha256": "512b28e5c8696bab89ed88a614c9e393fc742a3d5ac1d72b464100cb1856853a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 50,
@@ -4062,7 +4082,7 @@
     "source_sha256": "0cd8fef719503bc3b9a5b023be76187df5c3f6e55bdfbcd21bb9a1bca81cd750",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 51,
@@ -4138,7 +4158,7 @@
     "source_sha256": "f8b85b42a73b3db840211d16021eeb9aa56f08aa5c398a3832792ccd4955f05e",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 52,
@@ -4194,7 +4214,7 @@
     "source_sha256": "68b1e20c2106954369c9cd5ae4273f3d307484b72f6d4cff4c2f3120c855d11c",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 53,
@@ -4295,7 +4315,7 @@
     "source_sha256": "6a80a9c59c67e02b2efc308c4a300e26ec262ecd86af4fe4cbf79bbbd512331f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 54,
@@ -4361,7 +4381,7 @@
     "source_sha256": "632dd975f5074a1d01d2a3ec34661f0a7ac13ea8f42df10bd0ba54ad1e5ebc86",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 55,
@@ -4462,7 +4482,7 @@
     "source_sha256": "f08d868cfa2dc16231660244d203e76845f3069961e31496b17543e32cdd0104",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 56,
@@ -4538,7 +4558,7 @@
     "source_sha256": "6642d7c27f53a5b7e992a45c9493be9396ea07288e6d6a832de48e4e4c7ce798",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 57,
@@ -4609,7 +4629,7 @@
     "source_sha256": "ac467c301f6932886c7f35054b05b5a6d2c47a9a9b577530fc4c2b866eaf7bd1",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 58,
@@ -4685,7 +4705,7 @@
     "source_sha256": "25ae439f0219201223e4a896c2602fff5db773f30ffd4cfe0d37d2bde7a9a571",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 59,
@@ -4761,7 +4781,7 @@
     "source_sha256": "bd7eaf9cbc59d1e3eb358fde7f8deb5f38646753494b1e295218817a103af827",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 60,
@@ -4809,14 +4829,9 @@
         "offset": 24
       },
       {
-        "surface": "RAA",
-        "reading": "あーるえーえー",
+        "surface": "RAA系",
+        "reading": "あーるえーえーけい",
         "offset": 31
-      },
-      {
-        "surface": "系",
-        "reading": "けい",
-        "offset": 34
       },
       {
         "surface": "抑",
@@ -4857,7 +4872,7 @@
     "source_sha256": "0dc04daf32f19d9d4e524096732dff49c01d30ccf447d48e2883259e037e23ec",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 61,
@@ -4948,7 +4963,7 @@
     "source_sha256": "8f66395df2f13e9fb20c113f4b4bbba1c75a18fe6178a2014532612cb9b05d7f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 62,
@@ -5019,7 +5034,7 @@
     "source_sha256": "ac6aef0f44be573c35f73cba515615b4909cb552a47481c36f07bdd36cd14535",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 63,
@@ -5095,7 +5110,7 @@
     "source_sha256": "94e0d41d866fc9a29fa70c09cc08b51849b33318a852cb3313540f514eb5eaf5",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 64,
@@ -5171,7 +5186,7 @@
     "source_sha256": "4a7e0208a6a2b8f5753ececb2fefd09169c033df4d81017934fb56356769ee33",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 65,
@@ -5247,7 +5262,7 @@
     "source_sha256": "5c52470b0ea7529d2b7c50f647c839a31b1ab3b9a8e1e973c061392ff4262a21",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 66,
@@ -5313,7 +5328,7 @@
     "source_sha256": "4a3e0c3c3e7c8a709c7dc3970503f243176acabf9a49955c8c815af1da27149f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 67,
@@ -5369,7 +5384,7 @@
     "source_sha256": "2ea189e1115252bd17133a567ef92b31cf02ecd3518a817c52bc72d5d70db460",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 68,
@@ -5407,9 +5422,9 @@
         "offset": 19
       },
       {
-        "surface": "質",
-        "reading": "しつ",
-        "offset": 31
+        "surface": "タンパク質",
+        "reading": "たんぱくしつ",
+        "offset": 27
       },
       {
         "surface": "合成",
@@ -5445,7 +5460,7 @@
     "source_sha256": "ff2b24b540289d9c407ebf1f6a7f7edcdbe04ee92259b4b3d8fdf49e6f8aea5c",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 69,
@@ -5526,7 +5541,7 @@
     "source_sha256": "d85a3a03644433abb66043d9f50a6a7c91ea5763f4401e2d90a00b7f470b2565",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 70,
@@ -5597,7 +5612,7 @@
     "source_sha256": "5e0558031ef2393b9d47826229c235e726771b05cd0e2b6993b7d0cedf6ce168",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 71,
@@ -5688,7 +5703,7 @@
     "source_sha256": "02edcdd00e543654de9a6eb4879e30d78ee0e035a97f97484faf173cd46cb511",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 72,
@@ -5731,14 +5746,9 @@
         "offset": 37
       },
       {
-        "surface": "低",
-        "reading": "てい",
+        "surface": "低カリウム血症",
+        "reading": "ていかりうむけっしょう",
         "offset": 51
-      },
-      {
-        "surface": "血症",
-        "reading": "けっしょう",
-        "offset": 56
       },
       {
         "surface": "注意",
@@ -5749,7 +5759,7 @@
     "source_sha256": "3d0ad38305b49878c976efa1a5db132613449286d771a3a41914e7d14630246b",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 73,
@@ -5810,7 +5820,7 @@
     "source_sha256": "6691ee50b1c0383176b28646fb34b03f0ae8505f1c3f524a5e9709a22e2208e8",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 74,
@@ -5861,7 +5871,7 @@
     "source_sha256": "f021d40e041680bf64864aab9e7ac13ae433f8ca5c2b495c0fff736ed1024d22",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 75,
@@ -5942,7 +5952,7 @@
     "source_sha256": "1cbd9150b211b5dde022230422f5f7885d2cd0e79504d7328a3dc8a2a51f32dc",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 76,
@@ -5970,14 +5980,9 @@
         "offset": 9
       },
       {
-        "surface": "肺",
-        "reading": "はい",
+        "surface": "肺うっ血",
+        "reading": "はいうっけつ",
         "offset": 15
-      },
-      {
-        "surface": "うっ血",
-        "reading": "うっけつ",
-        "offset": 16
       },
       {
         "surface": "起",
@@ -6023,7 +6028,7 @@
     "source_sha256": "ddc6445939c6e32b4fa85ddfd38ba073b51c3d13805129aa9112e1445eaaadde",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 77,
@@ -6061,14 +6066,9 @@
         "offset": 22
       },
       {
-        "surface": "頸静脈",
-        "reading": "けいじょうみゃく",
+        "surface": "頸静脈の怒張",
+        "reading": "けいじょうみゃくのどちょう",
         "offset": 25
-      },
-      {
-        "surface": "怒張",
-        "reading": "どちょう",
-        "offset": 29
       },
       {
         "surface": "体重",
@@ -6089,7 +6089,7 @@
     "source_sha256": "582d6b5a225e8c84d78109a3ae14d7005f303c807df40d2d6f66ed9e510377a7",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 78,
@@ -6122,14 +6122,9 @@
         "offset": 22
       },
       {
-        "surface": "肺",
-        "reading": "はい",
+        "surface": "肺うっ血",
+        "reading": "はいうっけつ",
         "offset": 27
-      },
-      {
-        "surface": "うっ血",
-        "reading": "うっけつ",
-        "offset": 28
       },
       {
         "surface": "右心不全",
@@ -6175,7 +6170,7 @@
     "source_sha256": "d1fb7c2016f081a063be8c5e85e3d6939a8d22578702a3669b336662ecaf687b",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 79,
@@ -6256,7 +6251,7 @@
     "source_sha256": "99914e6547558732fdec31c9eb998978501827ba0ee07f63c3116b7d860cb498",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 80,
@@ -6337,7 +6332,7 @@
     "source_sha256": "dd5f5c2b9ae6c02b44424337c6e45ad9d32071d308fa8278760e010b4ef8dc59",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 81,
@@ -6398,7 +6393,7 @@
     "source_sha256": "60f974de3e615d3b9f780062226cb38aa5afc0bef4bb8723ef39e38f19405a1c",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 82,
@@ -6469,7 +6464,7 @@
     "source_sha256": "084f5d0e159b84f285efdaac32be16385f61d0712ec9718b09a3b6023352849b",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 83,
@@ -6550,7 +6545,7 @@
     "source_sha256": "a47f15549e1cc617341c16faedbd10e170f66d49d71f043d364e940efe282796",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 84,
@@ -6583,9 +6578,9 @@
         "offset": 11
       },
       {
-        "surface": "血栓性",
-        "reading": "けっせんせい",
-        "offset": 23
+        "surface": "アテローム血栓性",
+        "reading": "あてろーむけっせんせい",
+        "offset": 18
       },
       {
         "surface": "心臓",
@@ -6618,9 +6613,9 @@
         "offset": 41
       },
       {
-        "surface": "梗塞",
-        "reading": "こうそく",
-        "offset": 50
+        "surface": "ラクナ梗塞",
+        "reading": "らくなこうそく",
+        "offset": 47
       },
       {
         "surface": "3つ",
@@ -6631,7 +6626,7 @@
     "source_sha256": "c13d400c58aa46f49e7fcdc22add6d110c040c377ba490cc0991bf9cf299c3ff",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 85,
@@ -6717,7 +6712,7 @@
     "source_sha256": "bba04094042442bd1c4b4488bc309b11b1acd91c9ac403ea26de7ff32a77f072",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 86,
@@ -6783,7 +6778,7 @@
     "source_sha256": "72441ba867ca62c6a299fd659a992f743a759d867feb6add2f2dd8602a676960",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 87,
@@ -6859,7 +6854,7 @@
     "source_sha256": "46ab13f44ec5069dbd5db68c892e4e5f31cc9141e638bf5c139558e736635474",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 88,
@@ -6940,7 +6935,7 @@
     "source_sha256": "915c2420389f8523ee64896e43a13cc2c392bbc8cfa7f8563267ee289e4e7033",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 89,
@@ -6958,8 +6953,8 @@
         "offset": 0
       },
       {
-        "surface": "CO2",
-        "reading": "しーおーつー",
+        "surface": "CO2ナルコーシス",
+        "reading": "しーおーつーなるこーしす",
         "offset": 7
       },
       {
@@ -7016,7 +7011,7 @@
     "source_sha256": "0179a5d0de243eb1ce1bdb8d0440b25bdd1f4932ff9ff7377953b84eeaa5665a",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 90,
@@ -7092,7 +7087,7 @@
     "source_sha256": "4ca39d29f5facb882883e9c385570927f3161fb1c2941fb15b5a9560cad4f330",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 91,
@@ -7188,7 +7183,7 @@
     "source_sha256": "a597a0ab33189c1dfad7f415f50ad08ff4fad94fa0b0d5c9365aae2ca0babd51",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 92,
@@ -7274,7 +7269,7 @@
     "source_sha256": "5ab82e509f89b76c840ed99284d89d35d6cfee0d4dd356298f1f7cc36535bc58",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 93,
@@ -7355,7 +7350,7 @@
     "source_sha256": "d7290aa97dc9543ac76f6d4e4e54eba4ad94e5b445734401e2b19538ba83f268",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 94,
@@ -7426,7 +7421,7 @@
     "source_sha256": "efbf24eda5423b49d4abc352c82d0f62786a468a9e57515cdd9732f563ea5a8e",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 95,
@@ -7447,6 +7442,11 @@
         "surface": "新生児",
         "reading": "しんせいじ",
         "offset": 5
+      },
+      {
+        "surface": "アプガースコア",
+        "reading": "あぷがーすこあ",
+        "offset": 9
       },
       {
         "surface": "評価",
@@ -7482,7 +7482,7 @@
     "source_sha256": "673b613e6f1b481e031a5c77873497a5f4bbed7d2f0a1263a0587274ef72cf42",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 96,
@@ -7568,7 +7568,7 @@
     "source_sha256": "e9383b290ef58f8d95e2fa89d8b50c257247752c6926e3c4dca15b137a4973a6",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 97,
@@ -7631,9 +7631,9 @@
         "offset": 42
       },
       {
-        "surface": "反射",
-        "reading": "はんしゃ",
-        "offset": 51
+        "surface": "モロー反射",
+        "reading": "もろーはんしゃ",
+        "offset": 48
       },
       {
         "surface": "原始反射",
@@ -7649,7 +7649,7 @@
     "source_sha256": "21dbf8959a2caef5685d257ff7f2adc537428532207637e91d32fbfa0007a88d",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 98,
@@ -7665,6 +7665,11 @@
         "surface": "新生児",
         "reading": "しんせいじ",
         "offset": 6
+      },
+      {
+        "surface": "アプガースコア",
+        "reading": "あぷがーすこあ",
+        "offset": 10
       },
       {
         "surface": "5項目",
@@ -7710,7 +7715,7 @@
     "source_sha256": "ba24f79ebc6d173462623e23d94bbb2d9276eacff2644d05733097f13acc60db",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 99,
@@ -7781,7 +7786,7 @@
     "source_sha256": "d285a753efed2e6c315c2d441d69f74603d9768f889bbafbb5230cde52678211",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 100,
@@ -7852,7 +7857,7 @@
     "source_sha256": "02591465dcb7f1258d67fc0d1728a4020248f178ebef250914759a77311551b0",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 101,
@@ -7913,7 +7918,7 @@
     "source_sha256": "ced2f05fe986b68b9773e312f137fd66cd77d395b236d95ece2327f8ad0ed918",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 102,
@@ -7984,7 +7989,7 @@
     "source_sha256": "e99ba4a4f67cbb62a23787f8caf86c7ba84577498a7fc59d961507f3d0c732cf",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 103,
@@ -8070,7 +8075,7 @@
     "source_sha256": "2edda16c2b951177aba5d55ea3030a85193aa8e3250b48346a859fede9f868ce",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 104,
@@ -8136,7 +8141,7 @@
     "source_sha256": "08e0ad47914a4cd4b57526ab643ac5c9bbfd2cee0bbb2b29d5d8d4dc7e69d5e5",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 105,
@@ -8222,7 +8227,7 @@
     "source_sha256": "91e02fc0f7f7ad7148e09a193b5e70c2c0fd8efaed4239370373fe28cf8969d9",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 106,
@@ -8298,7 +8303,7 @@
     "source_sha256": "c00bcbef3341dcb6f9d0722a505545d14ffaaf52e76d2d2703945140fc8dcf98",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 107,
@@ -8359,7 +8364,7 @@
     "source_sha256": "8f0cc6619d19b8d9f4094189fc45e81c3935898ecb3a5a56769d26d4afa02bc4",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 108,
@@ -8430,7 +8435,7 @@
     "source_sha256": "b5e8cc22b2c163a12458996c8f316b3bdee06755707648d3db131158a986ec82",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 109,
@@ -8506,7 +8511,7 @@
     "source_sha256": "f1e9f6f494a4eb52631f24f4f4d3bfec7ad4ec6d5dd275281e4d3049303f7bcb",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 110,
@@ -8572,7 +8577,7 @@
     "source_sha256": "98edb4db705e3b6f55eec3d38ecfa5aed00db4c98d271b57dbeaf4d8e26604e8",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 111,
@@ -8643,7 +8648,7 @@
     "source_sha256": "3a31bf76dba760ed3e922d9428167d824e4dfb5db6873dc44693317a340d9d4f",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 112,
@@ -8719,7 +8724,7 @@
     "source_sha256": "272a3052618c1a249993e8ed83452ccd3145a48c793143a71ab972b4ac508a92",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 113,
@@ -8815,7 +8820,7 @@
     "source_sha256": "a732d8b19229ffe0c826ff3767acc1ac5a2f2c07e49e0610e759e3fb42b6a29c",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 114,
@@ -8886,7 +8891,7 @@
     "source_sha256": "b107fe9cab7b7907a71c902a6ea6ee58348511f268bef8d49d89dd16a4a953c5",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 115,
@@ -8972,7 +8977,7 @@
     "source_sha256": "d857f88efd4b05e4a4d551f76308f1d3a2610175fe9b8a5d9c8a67b39f483555",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 116,
@@ -9000,34 +9005,19 @@
         "offset": 7
       },
       {
-        "surface": "P",
-        "reading": "ぴー",
+        "surface": "P波",
+        "reading": "ぴーは",
         "offset": 14
       },
       {
-        "surface": "波",
-        "reading": "は",
-        "offset": 15
-      },
-      {
-        "surface": "QRS",
-        "reading": "きゅーあーるえす",
+        "surface": "QRS波",
+        "reading": "きゅーあーるえすは",
         "offset": 17
       },
       {
-        "surface": "波",
-        "reading": "は",
-        "offset": 20
-      },
-      {
-        "surface": "T",
-        "reading": "てぃー",
+        "surface": "T波",
+        "reading": "てぃーは",
         "offset": 22
-      },
-      {
-        "surface": "波",
-        "reading": "は",
-        "offset": 23
       },
       {
         "surface": "順番",
@@ -9068,7 +9058,7 @@
     "source_sha256": "0ecb44a17be586b276bf24ec97539effa05581cbf00b71005fdd1c0469efe74c",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 117,
@@ -9139,7 +9129,7 @@
     "source_sha256": "a6edb222a01f2b11a6d1e66ac250e5db2f6d1565edd8bb1f580ec6f6537ab084",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   },
   {
     "seq": 118,
@@ -9205,6 +9195,6 @@
     "source_sha256": "0adddfe6ca4faa7916ed6b3d09aac162b560f5332dff460e98f05f84ba63942d",
     "voice": "後藤さん",
     "target_speed": 1.3,
-    "reading_review": "AIによる原文照合済み・人による試聴待ち"
+    "reading_review": "AI文字校正済み・人による確認:未確認・実音声:未試聴"
   }
 ]

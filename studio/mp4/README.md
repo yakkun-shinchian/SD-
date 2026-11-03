@@ -94,3 +94,6 @@ python3 studio/mp4/samples/neon/make_sample.py
 ## ナレーション無音チェック
 
 書き出し前の無音候補検査・CT/3D保持区間・BGM除外の設定と検証結果は [SILENCE_CHECK.md](SILENCE_CHECK.md) を参照してください。
+
+冒頭黒画面の検出・明示的カットは [LEADING_BLACK.md](LEADING_BLACK.md) を参照。
+既定は検出のみで、`leading_black.auto_cut: true` の場合だけ完成動画をカットします。

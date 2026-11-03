@@ -102,3 +102,11 @@ ffmpeg -v error -i OUT.mp4 -f null -
 - コミットメッセージは日本語（既存履歴に合わせる）
 - `git push -u origin <branch>` → ドラフトPR作成
 - 本リポジトリは静的サイト。GitHub Pages（rootフォルダ）でそのまま公開される
+
+
+## 2026-11-03 新規スキルの追加
+
+共有スキルは既存64件に `medical-video-3` を追加した65件。
+`.claude/skills/ADDITIONS.md` と `REGISTRY.md` の追加分を参照する。
+既存64件・329ファイルの記述は旧受領集計。旧索引・MANIFEST・既存スキル原本は維持する。
+医療動画3の参照画像は取得・目視済み（非同梱）だが、実生成・連続画像・動画・4K出力は未検証。

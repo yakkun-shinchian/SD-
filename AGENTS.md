@@ -106,7 +106,15 @@ ffmpeg -v error -i OUT.mp4 -f null -
 
 ## 2026-11-03 新規スキルの追加
 
-共有スキルは既存64件に `medical-video-3` を追加した65件。
-`.claude/skills/ADDITIONS.md` と `REGISTRY.md` の追加分を参照する。
+共有スキルは **71件**（原本バンドル64件 ＋ `medical-video-3` ＋ claude.ai同期原本のミラー6件）。
+索引は `.claude/skills/ADDITIONS.md`、状態は `REGISTRY.md` の「2026-11-03 追加分」。
 既存64件・329ファイルの記述は旧受領集計。旧索引・MANIFEST・既存スキル原本は維持する。
-医療動画3の参照画像は取得・目視済み（非同梱）だが、実生成・連続画像・動画・4K出力は未検証。
+
+- 医療動画3の参照画像は取得・目視済み（非同梱）だが、実生成・連続画像・動画・4K出力は**未検証**。
+- ミラー6件（`ct-skill-1` / `ct-skill-2` / `ct-mri-slice-video` /
+  `medical-video-motion-budget` / `yakubon-infographic-2` / `yakubon-sns-caption`）は
+  **ご本人の指示によりチャッピー・Codex・Claude Code・Claude Cowork の全環境で使う**。
+  `SKILL.md` は同期原本とバイト単位で一致させ、**内容の判断・要約・改善は行わない**。
+  原本が更新されたらミラーも更新して台帳に記録する。**動作確認は未実施**。
+- ミラー8件（上記6件＋`yakubon-infographic-c1`／`medical-3d-orbit-opener`）は
+  **MANIFEST（原本324件）の照合対象外**。母数・余剰判定に混ぜない。

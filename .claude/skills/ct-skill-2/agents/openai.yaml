@@ -1,0 +1,11 @@
+interface:
+  display_name: "CTスキル2｜スクロール×考える1.5秒"
+  short_description: "0秒からなめらかにスクロールし、各高さで1.5秒置いて色分けを一斉表示する"
+  default_prompt: "$ct-skill-2 を使って、スクロールと「考える1.5秒」入りのCT断面動画を作ってください。"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

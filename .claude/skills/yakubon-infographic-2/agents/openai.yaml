@@ -1,0 +1,11 @@
+interface:
+  display_name: "インフォグラフィック2｜擬人化キャスト版"
+  short_description: "薬・ホルモン・細胞を男女キャラへ擬人化し、役割と色で描き分ける指示文を作る"
+  default_prompt: "$yakubon-infographic-2 で擬人化キャスト版の指示文を作ってください。"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

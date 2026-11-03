@@ -6,15 +6,38 @@
 
 ## 2026-11-03 追加分（既存原本とは別管理）
 
-現在のスキル総数は **65件（既存64件＋医療動画3）**。以下の旧64件の受領集計・検証履歴は変更しない。
+現在のスキル総数は **71件（原本バンドル64件＋追加7件）**。以下の旧64件の受領集計・検証履歴は変更しない。
 新規索引は [ADDITIONS.md](ADDITIONS.md)。原本由来の `SKILL_INDEX.md` は維持する。
+
+### 制作基準を新規に起草したもの（1件）
 
 | 追加スキル | 手順書 | 素材 | 動作確認 |
 |---|---|---|---|
 | [medical-video-3](medical-video-3/SKILL.md) | 原本を基礎に制作基準を補強 | 画風参照PNG1件を取得・確認（非同梱） | 既存サンプルの目視・寸法のみ。実生成・連続画像・動画・4Kは未検証 |
 
-旧MANIFESTは変更しない。新規分は原本照合の母数・余剰判定から分離する。
 詳細は [検証記録](medical-video-3/references/validation.md)。
+
+### claude.ai 同期原本のミラー（6件）
+
+**ご本人の指示**：「チャッピーのワークとCodex、Claude CodeとClaude Cowork、両方で使う」。
+claude.ai 側だけにあったスキルは Codex から参照できないため、`SKILL.md` をバイト単位で
+ミラーし、Codex用の入口を付けた。
+
+| 追加スキル | 手順書 | 素材 | 動作確認 |
+|---|---|---|---|
+| [ct-skill-1](ct-skill-1/SKILL.md) | 同期原本と一致（`ced56de08d3d`） | 同梱素材なし | **未実施** |
+| [ct-skill-2](ct-skill-2/SKILL.md) | 同期原本と一致（`dd1d13702577`） | 同梱素材なし | **未実施** |
+| [ct-mri-slice-video](ct-mri-slice-video/SKILL.md) | 同期原本と一致（`775a23c50e54`） | 同梱素材なし | **未実施** |
+| [medical-video-motion-budget](medical-video-motion-budget/SKILL.md) | 同期原本と一致（`e9d5e7c6c5a3`） | 同梱素材なし | **未実施** |
+| [yakubon-infographic-2](yakubon-infographic-2/SKILL.md) | 同期原本と一致（`b71dacf57e02`） | 同梱素材なし | **未実施** |
+| [yakubon-sns-caption](yakubon-sns-caption/SKILL.md) | 同期原本と一致（`31ebb3bdd700`） | 同梱素材なし | **未実施** |
+
+- ミラーの運用規則（バイト一致・内容判断をしない・MANIFEST対象外）は [ADDITIONS.md](ADDITIONS.md)。
+- `agents/openai.yaml` 6件は **この環境で起草したCodex入口**で、受領原本ではない。
+  各 `SKILL.md` の `name` と `description` から表示名・短い説明・呼び出し文のみを起こした。
+- 原本側に `assets/` や `references/` がないため、**同梱素材なし**。制作時の入力素材は別扱い。
+
+旧MANIFESTは変更しない。追加7件は原本照合の母数・余剰判定から分離する。
 
 ## 0. 受領状態は3つに分けて記録します
 

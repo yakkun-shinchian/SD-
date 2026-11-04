@@ -34,11 +34,16 @@ function fallbackNodeModules() {
     if (process.env.APPDATA) list.push(path.join(process.env.APPDATA, "npm", "node_modules"));
     if (process.env.ProgramFiles) list.push(path.join(process.env.ProgramFiles, "nodejs", "node_modules"));
   } else {
+    // macOS（Homebrew）
+    list.push("/opt/homebrew/lib/node_modules");          // Apple Silicon
+    list.push("/usr/local/lib/node_modules");             // Intel Mac / 一般的な Linux
+    // Linux
     list.push("/opt/node-tools/node_modules");
     list.push("/opt/node22/lib/node_modules");
     list.push("/usr/lib/node_modules");
-    list.push("/usr/local/lib/node_modules");
+    // 利用者ごとの置き場所
     list.push(path.join(os.homedir(), ".npm-global", "lib", "node_modules"));
+    list.push(path.join(os.homedir(), ".nvm", "versions", "node"));  // nvm は下で展開します
   }
   return list;
 }
@@ -64,12 +69,16 @@ export async function loadChromium() {
     if (c) return c;
   } catch { /* 次へ */ }
 
-  // ③ グローバル npm の場所を聞いてから解決（Windows でここが効きます）
+  // ③ グローバル npm の場所を聞いてから解決
+  const tried = [];
   for (const dir of [...globalNodeModules(), ...fallbackNodeModules()]) {
     try {
       const c = tryFrom(dir);
       if (c) return c;
-    } catch { /* 次の候補へ */ }
+      tried.push(`${dir}（playwright はあるが chromium を持たない）`);
+    } catch (e) {
+      tried.push(`${dir}（${e.code === "MODULE_NOT_FOUND" ? "見つからず" : e.code || "失敗"}）`);
+    }
   }
 
   const win = process.platform === "win32";
@@ -88,6 +97,16 @@ ${win ? `Node.js がまだ入っていない場合は、先にこちらを。
 （または https://nodejs.org/ja から LTS 版を入れてください）
 入れたあとは、ターミナルを一度閉じて開き直してください。PATH が通ります。
 ` : ""}
+それでも見つからない場合は、**このフォルダに直接入れる**のが最も確実です。
+
+  npm install playwright
+
+── 探した場所（${tried.length} 件）──
+${tried.map((t) => "  - " + t).join("\n") || "  （候補なし。npm が PATH にありますか？）"}
+
+OS: ${process.platform} / Node: ${process.version}
+この一覧をそのまま貼っていただければ、原因を特定できます。
+
 NurseTube 本体は依存ゼロのままです。この道具だけが Playwright を使います。
 `.trim());
   process.exit(1);

@@ -81,9 +81,27 @@ npx playwright install chromium
 
 ### macOS / Linux で動かす
 
+**いちばん確実なのは、このフォルダに直接入れることです。**
+
 ```bash
-npm install -g playwright && npx playwright install chromium
+npm install playwright
+npx playwright install chromium
 ```
+
+`node_modules/` と `package.json` は `.gitignore` 済みなので、
+リポジトリには入りません（本体は依存ゼロの方針のままです）。
+
+グローバルに入れたい場合は次のとおりですが、**入れた場所が Node の探索経路に
+入らず見つからないことがあります**（macOS の Homebrew、Linux の各種配置）。
+
+```bash
+npm install -g playwright
+npx playwright install chromium
+```
+
+`playwright-resolve.mjs` が `npm root -g` に場所を聞いて解決を試みます。
+それでも見つからない場合は、**探した場所の一覧を表示して止まる**ので、
+その一覧をそのまま共有してください。原因が特定できます。
 
 ## 手順
 

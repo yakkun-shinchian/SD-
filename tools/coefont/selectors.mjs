@@ -116,7 +116,8 @@ export default SELECTORS;
 
 /* ───────────────────────────────────────────────────────────────────────
    候補の配列から、実際に画面にあるものを1つ選びます。
-   上から順に試し、見つかったものを返します。全部外れたら、
+   上から順に試し、見つかったものを返します（{ locator, all, how }。
+   locator は1つに絞ったもの、all は絞る前の全部）。全部外れたら、
    「何をどの順で試して、どう外れたか」を添えて例外にします。
    （黙って null を返すと、原因を追うのに何時間もかかります）
    ─────────────────────────────────────────────────────────────────────── */
@@ -158,11 +159,14 @@ export async function resolve(page, candidates, opts = {}) {
         continue;
       }
 
+      // 絞る前のものも返します。検索結果の一覧のように
+      // 「並んでいる全部」を読みたい場面があるためです。
+      const all = locator;
       if (c.nth !== undefined) locator = locator.nth(c.nth);
       else locator = locator.first();
 
       await locator.waitFor({ state: requireVisible ? "visible" : "attached", timeout });
-      return { locator, how };
+      return { locator, all, how };
     } catch (e) {
       tried.push(`${how} → ${String(e.message || e).split("\n")[0].slice(0, 80)}`);
     }

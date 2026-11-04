@@ -16,7 +16,7 @@ import {
   importEntry, writeImportJson, parseArgs, exportDir, assertSelectorsReady,
   DEFAULT_VOICE_LABEL, ALLOWED_INPUT_SPEEDS,
 } from "./coefont-batch.mjs";
-import { missingTargets, missingRequired, applyLocal } from "./selectors.mjs";
+import { missingTargets, missingRequired, applyLocal, resolve } from "./selectors.mjs";
 
 /* PR #30 の feature/coefont-reading-pipeline から取った実物の値 */
 const REAL = {
@@ -188,4 +188,46 @@ test("selectors.local.json が無ければ何もしない", () => {
   const r = applyLocal(target, path.join(os.tmpdir(), "absent-sel-local.json"));
   assert.deepEqual(r, { applied: 0, file: null });
   assert.deepEqual(target.voice.openPicker, []);
+});
+
+/* ───────── 声の一覧は「絞る前の全部」から読む ─────────
+   以前ここは locator.toString() を選択子として使い回していて、
+   実行すれば必ず落ちる形でした。偽の page で契約を固定します。 */
+function fakePage(texts) {
+  // 本物の Playwright と同じく、first() は「別の locator」を返します（元を変えません）。
+  // 絞った1件には allTextContents がありません。
+  const list = {
+    _kind: "list",
+    first() { return leaf; },
+    nth() { return leaf; },
+    async allTextContents() { return texts; },
+    filter({ hasText }) {
+      const n = texts.filter((t) => t.includes(hasText)).length;
+      return { async count() { return n; }, async click() { clicks.push(hasText); } };
+    },
+  };
+  const leaf = { _kind: "one", async waitFor() {}, async click() { clicks.push("(絞った1件)"); } };
+  const clicks = [];
+  return { page: { getByRole: () => list }, clicks };
+}
+
+test("声の一覧は絞る前の locator から全名称を読む", async () => {
+  const { page } = fakePage(["後藤さん", "ミリアル", "アベレージさん"]);
+  const r = await resolve(page, [{ role: "option" }], { label: "voice.resultItem" });
+  assert.equal(r.all._kind, "list", "all が絞ったあとのものになっています");
+  assert.equal(r.locator._kind, "one", "locator が絞られていません");
+  assert.equal(typeof r.locator.allTextContents, "undefined");  // 絞った1件からは読めない
+  assert.deepEqual(await r.all.allTextContents(), ["後藤さん", "ミリアル", "アベレージさん"]);
+});
+
+test("選ぶのは一覧の中から（画面の他の場所と取り違えない）", async () => {
+  const { page, clicks } = fakePage(["後藤さん", "ミリアル"]);
+  const r = await resolve(page, [{ role: "option" }], { label: "voice.resultItem" });
+  const names = await r.all.allTextContents();
+  const chosen = pickVoice(names, "後藤");
+  assert.equal(chosen, "後藤さん");
+  const hit = r.all.filter({ hasText: chosen });
+  assert.equal(await hit.count(), 1);
+  await hit.click();
+  assert.deepEqual(clicks, ["後藤さん"]);
 });

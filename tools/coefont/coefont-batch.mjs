@@ -233,9 +233,13 @@ async function runBrowser(work, opts) {
     await si.locator.fill(opts.voice);
     await page.waitForTimeout(SELECTORS.timing.settle);
     const items = await resolve(page, SELECTORS.voice.resultItem, { label: "voice.resultItem" });
-    const names = (await items.locator.page().locator(items.locator.toString()).allTextContents?.()) || [];
+    // 一覧は「並んでいる全部」を読みます（1つに絞った locator ではありません）
+    const names = await items.all.allTextContents();
     const chosen = pickVoice(names.map((s) => s.trim()).filter(Boolean), opts.voice);
-    await page.getByText(chosen, { exact: true }).first().click();
+    // 選ぶのも一覧の中から。画面の他の場所に同じ名前があっても取り違えません
+    const hit = items.all.filter({ hasText: chosen }).first();
+    if (await hit.count()) await hit.click();
+    else await page.getByText(chosen, { exact: true }).first().click();
     if (SELECTORS.voice.confirm.length) {
       const cf = await resolve(page, SELECTORS.voice.confirm, { label: "voice.confirm" });
       await cf.locator.click();

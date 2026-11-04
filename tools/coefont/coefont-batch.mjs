@@ -27,7 +27,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
-import SELECTORS, { resolve, missingTargets } from "./selectors.js";
+import SELECTORS, { resolve, missingRequired, localStatus } from "./selectors.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const root = path.resolve(here, "..", "..");
@@ -172,15 +172,20 @@ export function parseArgs(argv) {
 
 /* ───────── 本番：ブラウザで CoeFont を操作する ───────── */
 export function assertSelectorsReady() {
-  const missing = missingTargets();
+  const missing = missingRequired();
   if (missing.length) {
     throw new Error(
-      `選択子が未記入です（${missing.length} 件）。先に画面を採寸してください。\n` +
-      `    node tools/coefont/coefont-login.mjs   # 初回のみ\n` +
-      `    node tools/coefont/coefont-probe.mjs   # 採寸\n` +
-      `  そのうえで tools/coefont/selectors.js を埋めます。未記入の項目:\n` +
+      `選択子が未記入です（必ず使うもののうち ${missing.length} 件）。先に画面を採寸してください。\n` +
+      `    node tools/coefont/coefont-login.mjs      # 初回のみ\n` +
+      `    node tools/coefont/coefont-probe.mjs      # 採寸\n` +
+      `    node tools/coefont/derive-selectors.mjs   # 採寸結果から選択子を起こす\n` +
+      `  それでも埋まらない項目は、採寸の報告（ui-map/derive-report.txt）を見て\n` +
+      `  tools/coefont/selectors.mjs を手で埋めます。未記入の項目:\n` +
       missing.map((m) => `    - ${m}`).join("\n")
     );
+  }
+  if (localStatus.file) {
+    console.log(`選択子: selectors.local.json から ${localStatus.applied} 項目を適用しました`);
   }
   return true;
 }

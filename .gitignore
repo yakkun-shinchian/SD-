@@ -10,6 +10,7 @@ tools/coefont/.profile/
 tools/coefont/ui-map/
 tools/coefont/login-state.json
 tools/coefont/progress.json
+tools/coefont/selectors.local.json
 # ダウンロードした音声と取り込み指示（PR #30 の import.json からの相対で export/）
 coefont/export/
 coefont/import.json

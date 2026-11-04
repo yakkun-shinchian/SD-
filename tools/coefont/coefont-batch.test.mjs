@@ -16,7 +16,7 @@ import {
   importEntry, writeImportJson, parseArgs, exportDir, assertSelectorsReady,
   DEFAULT_VOICE_LABEL, ALLOWED_INPUT_SPEEDS,
 } from "./coefont-batch.mjs";
-import { missingTargets } from "./selectors.js";
+import { missingTargets, missingRequired, applyLocal } from "./selectors.mjs";
 
 /* PR #30 の feature/coefont-reading-pipeline から取った実物の値 */
 const REAL = {
@@ -156,10 +156,36 @@ test("進捗: 保存して読み戻せる。壊れていたら空から始める
   } finally { clean(dir); }
 });
 
-test("選択子が未記入のままブラウザを開かない（15件を文面に並べて止まる）", () => {
-  assert.equal(missingTargets().length, 15);
+test("選択子が未記入のままブラウザを開かない（必ず使う項目を文面に並べて止まる）", () => {
+  assert.equal(missingTargets().length, 15);   // 既定はすべて未記入
+  assert.equal(missingRequired().length, 8);   // うち本番を止めるのは8項目
   const err = caught(() => assertSelectorsReady());
   assert.match(err.message, /未記入/);
-  assert.match(err.message, /coefont-probe\.mjs/);
+  assert.match(err.message, /derive-selectors\.mjs/);
   assert.match(err.message, /voice\.openPicker/);
+  // 任意の項目は文面に並べません（埋めなくても本番は回ります）
+  assert.ok(!/voice\.confirm/.test(err.message));
+});
+
+test("selectors.local.json は既定の表に重なる（名前が違えば黙らず警告）", () => {
+  const target = { voice: { openPicker: [] }, export: { download: [] } };
+  const f = path.join(os.tmpdir(), `sel-local-${process.pid}.json`);
+  fs.writeFileSync(f, JSON.stringify({ candidates: {
+    "voice.openPicker": [{ role: "button", name: "声を選ぶ" }],
+    "export.download": [],                 // 空は無視
+    "nonexistent.target": [{ css: ".x" }], // 知らない名前は無視
+  } }), "utf8");
+  try {
+    const r = applyLocal(target, f);
+    assert.equal(r.applied, 1);
+    assert.deepEqual(target.voice.openPicker, [{ role: "button", name: "声を選ぶ" }]);
+    assert.deepEqual(target.export.download, []);
+  } finally { fs.rmSync(f, { force: true }); }
+});
+
+test("selectors.local.json が無ければ何もしない", () => {
+  const target = { voice: { openPicker: [] } };
+  const r = applyLocal(target, path.join(os.tmpdir(), "absent-sel-local.json"));
+  assert.deepEqual(r, { applied: 0, file: null });
+  assert.deepEqual(target.voice.openPicker, []);
 });

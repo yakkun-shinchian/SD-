@@ -67,7 +67,9 @@ tools/coefont/
   coefont-login.mjs   ① 初回のみ。ブラウザを開き、利用者が手でGoogleログイン
                          → プロファイルを .profile/ に保存（gitignore）
   coefont-probe.mjs   ② 画面を「採寸」し、ui-map-NN.json と画面写真を出力
-  selectors.js        ③ 画面の知識を閉じ込める唯一のファイル
+  derive-selectors.mjs ③ 採寸結果から選択子を起こす（お手元で走る）
+  selectors.mjs        ③' 画面の知識を閉じ込める唯一のファイル
+                          （実測は selectors.local.json から重ねる・git管理外）
   coefont-batch.mjs   ④ 本番。台本を流し込み、音声と import.json を書き出す
   coefont-batch.test.mjs  ④の検証（ブラウザ不要の部分を全部）
   README.md           手順書（日本語）
@@ -103,7 +105,7 @@ tools/coefont/
 
 ### 4-1. 画面の知識を1ファイルに閉じ込め、かつ候補を複数持たせる
 
-CSS選択子・ボタンの文言・待機条件を、すべて `selectors.js` に集約します。
+CSS選択子・ボタンの文言・待機条件を、すべて `selectors.mjs` に集約します。
 CoeFont が改装したとき、直すのはこの1枚だけで、他のファイルは無傷です。
 
 さらに、**1つの目標に対して当て方を複数（候補の配列）持たせます**。
@@ -193,3 +195,21 @@ CoeFont の声は数百あり、UUID を人間が管理するのは現実的で�
 - **読み（かな）の人による確認。** #30 は118シーン分のかな台本を自動生成し、
   「人による確認欄は未確認」と明記しています。医学用語の読みは耳で確かめる必要があり、
   これは本PRの範囲外ですが、**音声を量産する前に済ませるべき**項目です。
+
+## 追記 2026-11-04 — 選択子を「貼らずに」埋める
+
+採寸結果（`ui-map/*.json`）は先生のパソコンの中にあり、こちらからは読めません。
+Remote Control も繋がっていないため、当初は `summary.txt` を貼っていただく前提で
+設計していました。
+
+読む側をこちらに運ぶのではなく、**書き起こす側をお手元へ運ぶ**ことにしました。
+`derive-selectors.mjs` が採寸結果を読み、目標ごとに要素を採点して
+`selectors.local.json` を書きます。推測ではなく実測から起こすので、
+「測ってから作る」原則は崩れていません。
+
+- 貼るものは「1目標1行の報告」だけ（✗ が残ったときのみ）
+- 起動時の門（`assertSelectorsReady`）は**必ず使う8項目**だけを要求します。
+  任意の6項目（`voice.confirm` `script.addLine` `script.busy`
+  `export.downloadAll` `export.format` `project.nameInput`）は空でも本番が回ります
+- `selectors.js` → `selectors.mjs` に改名しました。`package.json` の有無や
+  Node のバージョンで ESM/CJS の判定が変わるため、拡張子で確定させます

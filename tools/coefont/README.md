@@ -21,14 +21,42 @@
 
 - **Node.js**（Node 22 で確認）
 - **Playwright**（この道具だけが使います。NurseTube 本体は依存ゼロのままです）
-
-  ```bash
-  npm install -g playwright && npx playwright install chromium
-  ```
-
 - **CoeFont のアカウント**（Google ログイン可）
-- **インターネットに出られる環境** — クラウド実行環境からは `coefont.cloud` に
-  到達できないため、**ご自分のパソコンで実行してください**
+- **画面のあるパソコン** — ブラウザを実際に開くため、デスクトップ環境が必要です。
+  クラウド実行環境からは `coefont.cloud` に到達できないので、**ご自分のパソコンで**
+  実行してください
+
+### Windows で動かす
+
+**Windows Terminal（PowerShell）でも、VS Code のターミナルでも、どちらでも動きます。**
+VS Code のターミナルは PowerShell と同じものなので、違いはありません。
+
+```powershell
+# Node.js がまだ無ければ
+winget install OpenJS.NodeJS.LTS
+# （または https://nodejs.org/ja から LTS 版）
+# 入れたらターミナルを閉じて開き直してください（PATH が通ります）
+
+node -v                                   # 確認。v22 以上が出れば大丈夫
+
+npm install -g playwright
+npx playwright install chromium
+```
+
+> **補足**：`npm install -g` で入れた場所は Node の既定の探索経路に入らないため、
+> プロジェクト内のスクリプトから見つからないことがあります
+> （Windows では `%APPDATA%\npm\node_modules`）。
+> `playwright-resolve.mjs` が `npm root -g` に場所を聞いて解決するので、
+> グローバル導入のままで動きます。
+>
+> それでも見つからない場合は、プロジェクトのフォルダで `npm install playwright`
+> として、その場に入れてしまうのが確実です。
+
+### macOS / Linux で動かす
+
+```bash
+npm install -g playwright && npx playwright install chromium
+```
 
 ## 手順
 

@@ -31,17 +31,44 @@
 **Windows Terminal（PowerShell）でも、VS Code のターミナルでも、どちらでも動きます。**
 VS Code のターミナルは PowerShell と同じものなので、違いはありません。
 
+**1行ずつ実行してください。** `&&` でつなぐ書き方は避けます（理由は下記）。
+
 ```powershell
-# Node.js がまだ無ければ
 winget install OpenJS.NodeJS.LTS
-# （または https://nodejs.org/ja から LTS 版）
-# 入れたらターミナルを閉じて開き直してください（PATH が通ります）
+```
 
-node -v                                   # 確認。v22 以上が出れば大丈夫
+Node.js を入れたら、**ターミナルを一度閉じて開き直してください。** PATH が通ります。
+ここを飛ばすと「`node` は認識されません」と言われます。
+（winget を使わない場合は https://nodejs.org/ja から LTS 版を入れてください）
 
+```powershell
+node -v
+```
+
+`v22` 以上が出れば大丈夫です。続けて：
+
+```powershell
 npm install -g playwright
+```
+
+```powershell
 npx playwright install chromium
 ```
+
+> ### ⚠ `&&` でつながないこと
+>
+> Windows には PowerShell が2種類あります。
+>
+> | | `&&` |
+> | --- | --- |
+> | **Windows PowerShell 5.1**（Windows 標準） | ❌ 構文エラーになります |
+> | **PowerShell 7 以降**（`pwsh`） | ✅ 使えます |
+>
+> どちらが開いているか分かりにくいので、**1行ずつ**実行するのが確実です。
+> 自分のバージョンは `$PSVersionTable.PSVersion` で確認できます。
+>
+> また、**コマンドプロンプト（cmd）では `#` のコメントを付けないでください。**
+> コマンドの一部として解釈され、失敗します。
 
 > **補足**：`npm install -g` で入れた場所は Node の既定の探索経路に入らないため、
 > プロジェクト内のスクリプトから見つからないことがあります

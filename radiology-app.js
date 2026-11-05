@@ -159,7 +159,7 @@
         <a class="rbtn rbtn--primary" href="#/navigate">🔎 見えたものから引く</a>
         <a class="rbtn" href="#/dict">📖 所見辞典（${RAD_SIGNS.length}件）</a>
         <a class="rbtn" href="#/protocol">🧭 読影手順で練習する</a>
-        <a class="rbtn" href="#/assist">🤖 AIに読影してもらう</a>
+        <a class="rbtn" href="#/assist">🤖 AIで学習する</a>
       </div>
 
       <section class="rsection">
@@ -592,49 +592,34 @@
     { id: "claude-opus-5-5", label: "Claude Opus 5.5（最も丁寧だが高価）" },
   ];
 
+  // Public build: text-only. No upload, FileReader, image payload, or enable flag.
   const ASSIST_SYSTEM = [
-    "あなたは、看護学生と新人看護師に放射線画像の読み方を教える、経験豊富な放射線科医です。",
-    "日本語で、予備校の名物講師のように、噛み砕いて、しかし正確に教えてください。",
-    "",
-    "【絶対に守ること】",
-    "1. これは学習用の教材です。診断を下してはいけません。「〜の可能性が考えられます」「〜を疑う所見です」という表現を使い、断定を避けてください。",
-    "2. 回答の冒頭で、画像の種類（モダリティ・撮影体位・造影の有無）が判別できるかを述べてください。判別できない場合は正直にそう言ってください。",
-    "3. 画像が不鮮明、画面の再撮影、トリミング過多などで判断できない場合は、無理に答えず「この画質では判断できません」と伝えてください。",
-    "4. もし実際の患者さんの画像だと思われる場合（氏名・ID・撮影日などが写っている場合を含む）は、解析せずに、個人情報を含む画像はアップロードしないよう注意を促してください。",
-    "5. 回答の最後に必ず「これは学習用の解説であり、実際の診断は医師の判断によります」と添えてください。",
-    "",
-    "【回答の型】",
-    "① 画像の種類：何を撮った、どんな画像か",
-    "② 系統的な観察：決まった順番（胸部X線ならABCDE、頭部CTならBlood/Cisterns/Brain/Ventricles/Bone）で、正常所見も含めて述べる",
-    "③ 気づいた所見：どこに、どんな形・濃度で見えるか。所見名がつけられるなら日本語名と英語名を併記する",
-    "④ なぜそう見えるのか：物理と病態生理から機序を説明する。ここが最も大事な部分です",
-    "⑤ 鑑別：同じ見た目になる他の病態と、見分け方",
-    "⑥ 次に確かめること：追加の画像、臨床情報、検査",
-    "",
-    "質問が画像なしのテキストだけの場合は、②を省いて④を中心に、その所見の機序を丁寧に解説してください。",
+    "あなたは読影の基礎を教える学習アシスタントです。医師ではありません。",
+    "一般的な所見の機序・物理・病態生理を説明してください。個別患者の診断は行いません。",
+    "個人情報を求めず、入力に含まれていても再掲しないでください。",
+    "これは学習用の解説であり、実際の診断は医師の判断によります、と付記してください。",
   ].join("\n");
 
   function viewAssist() {
-    const savedKey = store("radiodeck-apikey") || "";
+
     const savedModel = store("radiodeck-model") || MODELS[0].id;
 
     return `
       <div class="rhead">
-        <h1>🤖 AI読影アシスタント</h1>
+        <h1>🤖 AI学習アシスタント</h1>
         <p>
-          画像を貼って「これは何？」と聞いたり、「ケーリーBラインはどうしてできるの？」と質問したりできます。
-          放射線科医として答えるよう設定してあります。
+          「ケーリーBラインはどうしてできるの？」など、一般的な知識をテキストで学べます。
         </p>
       </div>
 
       <div class="rassist__warn">
         <h3>⚠️ 使う前に、必ずお読みください</h3>
         <ul>
-          <li><strong>実際の患者さんの画像は絶対にアップロードしないでください。</strong>個人情報が外部のAPIに送信されます。教科書・問題集・自作の図のみにしてください。</li>
-          <li>AIの回答は<strong>学習の補助</strong>です。診断ではありません。誤った内容を自信ありげに述べることがあります。</li>
-          <li>この機能は<strong>あなた自身のAPIキー</strong>を使います。利用料はあなたのアカウントに課金されます。</li>
-          <li>APIキーはこのブラウザ内（localStorage）にのみ保存され、YAKUBON STUDIO のサーバーには送信されません。共用端末では「保存しない」を選んでください。</li>
-          <li>画像とテキストは、あなたのブラウザから Anthropic の API へ直接送信されます。</li>
+          <li><strong>公開版では画像の取り込み・送信はできません。</strong>患者画像や個人情報を自動判別・除去する機能はありません。</li>
+          <li>質問は Anthropic の外部APIへ送信されます。氏名・ID・診療記録などを入力せず、一般的な学習質問だけを送ってください。</li>
+          <li>AIの回答は学習の補助であり、診断ではありません。誤りが含まれる場合があります。</li>
+          <li>あなた自身のAPIキーを使い、利用料はあなたのアカウントに課金されます。</li>
+          <li>APIキーは保存しません。この画面を離れるかクリアすると消えます。送信時のみ認証用に Anthropic へ送ります。</li>
         </ul>
       </div>
 
@@ -644,11 +629,7 @@
           <div class="rfield__hint">
             console.anthropic.com で発行できます（sk-ant- で始まる文字列）。
           </div>
-          <input class="rinput" type="password" id="apiKey" placeholder="sk-ant-..." value="${escapeHtml(savedKey)}" autocomplete="off" />
-          <label class="rcheck" style="margin-top:8px">
-            <input type="checkbox" id="saveKey" ${savedKey ? "checked" : ""} />
-            <span>このブラウザに保存する（共用端末ではオフにしてください）</span>
-          </label>
+          <input class="rinput" type="password" id="apiKey" placeholder="sk-ant-..." value="" autocomplete="off" />
         </div>
 
         <div class="rfield">
@@ -659,29 +640,16 @@
         </div>
 
         <div class="rfield">
-          <label>画像（任意）</label>
-          <div class="rfield__hint">教科書・問題集の画像や、自作の図を貼ってください。患者画像は不可です。</div>
-          <div class="rdrop" id="drop" tabindex="0" role="button">
-            クリックして画像を選ぶ／ここにドラッグ＆ドロップ／貼り付け（⌘V・Ctrl+V）
-          </div>
-          <input type="file" id="fileInput" accept="image/*" hidden />
-          <div class="rpreview" id="preview"><img id="previewImg" alt="選択した画像のプレビュー" /></div>
-          <div id="imageSafety" hidden>
-            <label class="rcheck" style="margin-top:8px">
-              <input type="checkbox" id="imageConfirmed" aria-describedby="imageSafetyHint" disabled />
-              <span>この画像は教材画像・自作模式図などで、実際の患者画像ではなく、氏名・IDなどの患者情報を含まないことを確認しました。</span>
-            </label>
-            <div class="rfield__hint" id="imageSafetyHint">確認後に送信すると、画像が Anthropic の外部APIへ送られます。この確認は利用者自身が行うものです。アプリが患者画像や個人情報を自動判別・除去するものではありません。</div>
-          </div>
-        </div>
-
-        <div class="rfield">
           <label for="question">質問</label>
-          <textarea class="rtextarea" id="question" placeholder="例）この画像は何が写っていますか？／ケーリーBラインはどうやってできるのですか？／この所見の鑑別を教えてください"></textarea>
+          <textarea class="rtextarea" id="question" placeholder="例）ケーリーBラインができる仕組みを教えてください（患者情報は入力しないでください）"></textarea>
         </div>
 
+        <label class="rcheck">
+          <input type="checkbox" id="textConfirmed" />
+          <span>この質問に患者情報が含まれないことを確認し、Anthropic へのテキスト送信に同意します。</span>
+        </label>
         <div class="rtoolbar">
-          <button type="button" class="rbtn rbtn--primary" id="askBtn">放射線科医に聞く</button>
+          <button type="button" class="rbtn rbtn--primary" id="askBtn">学習質問を送信する</button>
           <button type="button" class="rbtn" id="clearBtn">入力をクリア</button>
         </div>
         <div class="rstatus" id="status"></div>
@@ -691,105 +659,40 @@
   }
 
   function bindAssist() {
-    const fileInput = $("#fileInput");
-    const drop = $("#drop");
-    const preview = $("#preview");
-    const previewImg = $("#previewImg");
     const status = $("#status");
     const answerWrap = $("#answerWrap");
-
-    const imageSafety = $("#imageSafety");
-    const imageConfirmed = $("#imageConfirmed");
-    let imageData = null; // { media_type, data }
-    let imageLoading = false;
-    let imageVersion = 0;
-
-    function resetImage() {
-      imageVersion += 1; // Ignore stale FileReader callbacks after replacement/clear.
-      imageData = null;
-      imageLoading = false;
-      imageConfirmed.checked = false;
-      imageConfirmed.disabled = true;
-      imageSafety.hidden = true;
-      preview.style.display = "none";
-      previewImg.removeAttribute("src");
-    }
-
+    const questionInput = $("#question");
+    const confirmed = $("#textConfirmed");
+    let confirmedText = null;
+    let sending = false;
     function setStatus(msg, isError) {
       status.textContent = msg || "";
       status.className = "rstatus" + (isError ? " rstatus--error" : "");
     }
-
-    function loadFile(file) {
-      if (!file) return;
-      resetImage();
-      if (!/^image\//.test(file.type)) {
-        setStatus("画像ファイルを選んでください。", true);
-        return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        setStatus("画像が大きすぎます（5MBまで）。縮小してから貼ってください。", true);
-        return;
-      }
-      const version = imageVersion;
-      imageLoading = true;
-      setStatus("画像を読み込んでいます…");
-      const reader = new FileReader();
-      const readFailed = () => {
-        if (version !== imageVersion) return;
-        resetImage();
-        setStatus("画像を読み込めませんでした。選び直してください。", true);
-      };
-      reader.onerror = readFailed;
-      reader.onabort = readFailed;
-      reader.onload = () => {
-        if (version !== imageVersion) return;
-        imageLoading = false;
-        const url = String(reader.result);
-        const m = /^data:([^;]+);base64,(.*)$/.exec(url);
-        if (!m) { setStatus("画像を読み込めませんでした。", true); return; }
-        imageData = { media_type: m[1], data: m[2] };
-        imageConfirmed.checked = false;
-        imageConfirmed.disabled = false;
-        imageSafety.hidden = false;
-        previewImg.src = url;
-        preview.style.display = "block";
-        setStatus("画像を読み込みました。プレビューを見て、患者画像・患者情報を含まないことを確認欄で確認してください。");
-      };
-      try { reader.readAsDataURL(file); } catch (e) { readFailed(); }
-    }
-
-    drop.addEventListener("click", () => fileInput.click());
-    drop.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileInput.click(); }
+    function revoke() { confirmed.checked = false; confirmedText = null; }
+    questionInput.addEventListener("input", revoke);
+    confirmed.addEventListener("change", () => {
+      confirmedText = confirmed.checked ? questionInput.value.trim() : null;
     });
-    fileInput.addEventListener("change", () => loadFile(fileInput.files[0]));
-
-    ["dragenter", "dragover"].forEach((ev) =>
-      drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("is-over"); })
-    );
-    ["dragleave", "drop"].forEach((ev) =>
-      drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("is-over"); })
-    );
-    drop.addEventListener("drop", (e) => {
-      if (e.dataTransfer && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
-    });
-
-    document.addEventListener("paste", (e) => {
-      if (!document.body.contains(drop)) return;
-      const items = (e.clipboardData && e.clipboardData.items) || [];
-      for (let i = 0; i < items.length; i += 1) {
-        if (items[i].type.indexOf("image") === 0) {
-          loadFile(items[i].getAsFile());
-          break;
-        }
+    // Scoped to the current view: no document listeners accumulate on navigation.
+    main.onpaste = (e) => {
+      revoke();
+      const data = e.clipboardData;
+      if (data && ((data.files || []).length || Array.from(data.items || []).some(i => i.kind === "file" || /^image\//.test(i.type)))) {
+        e.preventDefault();
+        setStatus("公開版では画像を取り込めません。学習質問をテキストで入力してください。", true);
       }
-    });
-
+    };
+    main.ondragover = e => e.preventDefault();
+    main.ondrop = e => {
+      e.preventDefault();
+      revoke();
+      setStatus("公開版ではドラッグ＆ドロップを受け付けません。", true);
+    };
     $("#clearBtn").addEventListener("click", () => {
-      resetImage();
-      fileInput.value = "";
-      $("#question").value = "";
+      revoke();
+      $("#apiKey").value = "";
+      questionInput.value = "";
       answerWrap.innerHTML = "";
       setStatus("");
     });
@@ -798,36 +701,23 @@
       const key = $("#apiKey").value.trim();
       const model = $("#modelSel").value;
       const question = $("#question").value.trim();
-      const saveKey = $("#saveKey").checked;
-
-      // Guard the actual send path, not only the visual button state.
-      if (imageLoading) { setStatus("画像の読み込みが終わってから確認してください。", true); return; }
-      if (imageData && !imageConfirmed.checked) {
-        setStatus("送信前に、患者画像・患者情報を含まないことを確認欄で確認してください。", true);
-        imageConfirmed.focus();
+      if (sending) return;
+      if (!key) { setStatus("APIキーを入力してください。", true); return; }
+      if (!question) { setStatus("学習質問を入力してください。", true); return; }
+      if (!confirmed.checked || confirmedText !== question) {
+        revoke();
+        setStatus("質問に患者情報が含まれないことを送信前に確認してください。", true);
         return;
       }
-      if (!key) { setStatus("APIキーを入力してください。", true); return; }
-      if (!question && !imageData) { setStatus("画像か質問、どちらかは入れてください。", true); return; }
-
-      store("radiodeck-apikey", saveKey ? key : null);
+      // Construct a fresh text-only request. Never serialize DOM/clipboard/file state.
+      const content = [{ type: "text", text: question }];
+      revoke();
       store("radiodeck-model", model);
-
-      const content = [];
-      if (imageData) {
-        content.push({
-          type: "image",
-          source: { type: "base64", media_type: imageData.media_type, data: imageData.data },
-        });
-      }
-      content.push({
-        type: "text",
-        text: question || "この画像には何が写っていますか。系統的に読影して、所見とその機序を教えてください。",
-      });
+      sending = true;
 
       const btn = $("#askBtn");
       btn.disabled = true;
-      setStatus("放射線科医が画像を見ています…（10〜30秒ほどかかります）");
+      setStatus("AIが学習質問への回答を作成しています…");
       answerWrap.innerHTML = "";
 
       try {
@@ -873,6 +763,7 @@
           true
         );
       } finally {
+        sending = false;
         btn.disabled = false;
       }
     });
@@ -886,7 +777,7 @@
 
       answerWrap.innerHTML = `
         <div class="ranswer">
-          <h3>🩻 放射線科医の回答</h3>
+          <h3>🩻 AIの学習用回答</h3>
           ${nl2br(escapeHtml(text))}
         </div>
         ${mentioned.length ? `
@@ -912,7 +803,7 @@
           <li><strong>図はすべて自作の模式図です。</strong>実際の患者画像ではなく、他者の画像を転載したものでもありません。所見の「見え方」の要点だけを抜き出して描いています。</li>
           <li><strong>本物の画像は情報量が多すぎて初学者には読めません。</strong>だからあえて模式図にしています。実例は Radiopaedia などの症例データベースへのリンクから確認してください。</li>
           <li><strong>内容は教科書・ガイドライン・文献を参照して作成していますが、</strong>医学は更新されます。診療の判断は必ず最新の一次情報と指導医の判断に拠ってください。</li>
-          <li><strong>AI読影タブ</strong>は、あなた自身のAPIキーでAnthropicのAPIを呼び出します。患者画像のアップロードは絶対にしないでください。</li>
+          <li><strong>AI学習タブ</strong>は、一般的な学習質問のテキストのみをAnthropicへ送信します。画像入力はできません。患者情報を入力しないでください。</li>
           <li>CT値などの数値は装置・撮影条件で変動します。目安としてお使いください。</li>
         </ul>
       </div>`;
@@ -923,6 +814,7 @@
    * ===================================================================== */
 
   function render(html) {
+    main.onpaste = main.ondrop = main.ondragover = null;
     main.innerHTML = disclaimerFullHtml() + html;
     const full = $("#disclaimerFull");
     if (full && disclaimerOpen) full.hidden = false;
@@ -1000,6 +892,9 @@
    * ===================================================================== */
 
   function init() {
+    // Remove legacy persisted credentials even when opening a non-AI route.
+    store("radiodeck-apikey", null);
+    try { sessionStorage.removeItem("radiodeck-apikey"); } catch (e) {}
     // テーマ
     const savedTheme = store("radiodeck-theme");
     applyTheme(savedTheme === "light" ? "light" : "dark");

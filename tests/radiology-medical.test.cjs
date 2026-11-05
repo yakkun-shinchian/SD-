@@ -16,8 +16,8 @@ test('32 entries / nine head entries; identifiers, tags, modality and figure bin
  after.forEach((s,i)=>{for(const key of ['id','name','en','reading','region','modality','patterns','urgency','figure'])assert.deepEqual(s[key],before[i][key],s.id+':'+key);});
 });
 test('chest and abdomen entries are identical',()=>assert.deepEqual(after.filter(s=>s.region!=='head'),before.filter(s=>s.region!=='head')));
-test('SVG, application, reverse lookup, atlas and NurseTube source unchanged',()=>{
- for(const f of ['radiology-figures.js','radiology-app.js','radiology-atlas.js','radiology.html','radiology.css','nurse.html','app.js','data.js','scenes.js','styles.css','index.html']) assert.equal(read(f),oldFile(f),f);
+test('SVG, atlas and NurseTube source unchanged',()=>{
+ for(const f of ['radiology-figures.js','radiology-atlas.js','radiology.css','nurse.html','app.js','data.js','scenes.js','styles.css','index.html']) assert.equal(read(f),oldFile(f),f);
 });
 test('EDH: lucid interval absent does not exclude; initial loss/recovery is distinguished',()=>{
  assert.match(by('edh-acute').easy,/意識消失からいったん回復/);assert.match(text('edh-acute'),/全例にはなく/);
@@ -53,4 +53,9 @@ test('remaining head pitfalls: collateral anatomy, no pressure inference, no abs
  assert.match(by('midline-shift').oneLine,/頭蓋内圧や血腫量そのものを測る指標ではない/);
  assert.match(by('ring-enhancement').easy,/腫瘍でも拡散制限/);
  assert.match(text('putaminal-hemorrhage'),/発症早期の血腫増大/);
+});
+
+test('dictionary, reverse lookup and protocol implementations remain unchanged',()=>{
+ const section=s=>s.slice(s.indexOf('  const navState'),s.indexOf('  const MODELS'));
+ assert.equal(section(read('radiology-app.js')),section(oldFile('radiology-app.js')));
 });

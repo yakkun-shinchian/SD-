@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "output": {
+    "size": [
+      540,
+      960
+    ],
+    "fps": 30,
+    "max_duration": 60
+  },
+  "subtitle_style": {
+    "size": 34,
+    "position": [
+      270,
+      250
+    ],
+    "glow": {
+      "strength": 0
+    },
+    "font": "Noto Sans CJK JP",
+    "color": "#FFD166"
+  },
+  "audio": [
+    {
+      "file": "tone.wav",
+      "in": 0,
+      "out": 3.9,
+      "speed": 1
+    }
+  ],
+  "scenes": [
+    {
+      "id": "sample",
+      "file": "scene.mp4",
+      "in": 0,
+      "out": 4,
+      "subtitles": [
+        {
+          "audio_index": 0,
+          "start": 0,
+          "end": 1.95,
+          "text": "緑ネオン字幕\n検証用サンプル"
+        },
+        {
+          "audio_index": 0,
+          "start": 1.95,
+          "end": 3.9,
+          "text": "通常速度\n１．０倍速"
+        }
+      ]
+    }
+  ]
+}

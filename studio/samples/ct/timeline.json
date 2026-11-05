@@ -1,0 +1,10 @@
+{
+  "profile":"CT", "image":"fixture.png", "duration":2,
+  "output":{"size":[1080,1920],"fps":30,"file":"preview.mp4"},
+  "subtitles":false, "camera":[{"at":0,"focus":"full","pad":0,"move":0}],
+  "ct_annotations":[{"start":0.5,"duration":1,"items":[
+    {"text":"前頭葉","at_point":[220,340],"points":[[220,380],[300,480],[400,650]]},
+    {"text":"側脳室","at_point":[850,550],"points":[[850,590],[770,680],[680,800]],"color":"#fada50"},
+    {"text":"頭蓋骨","at_point":[210,1400],"points":[[210,1360],[350,1250],[500,1100]],"color":"#ff80ba"}
+  ]}]
+}

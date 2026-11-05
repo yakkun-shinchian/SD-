@@ -1,0 +1,98 @@
+[
+  {
+    "file": "00_title_before.png",
+    "preview_time": 2.666666666666667,
+    "stage": "before",
+    "target": "title"
+  },
+  {
+    "file": "00_title_marked.png",
+    "preview_time": 3.0,
+    "stage": "marked",
+    "target": "title"
+  },
+  {
+    "file": "00_title_fading.png",
+    "preview_time": 4.6,
+    "stage": "fading",
+    "target": "title"
+  },
+  {
+    "file": "00_title_cleared.png",
+    "preview_time": 4.7,
+    "stage": "cleared",
+    "target": "title"
+  },
+  {
+    "file": "01_c1_value_before.png",
+    "preview_time": 7.566666666666667,
+    "stage": "before",
+    "target": "c1_value"
+  },
+  {
+    "file": "01_c1_value_marked.png",
+    "preview_time": 7.9,
+    "stage": "marked",
+    "target": "c1_value"
+  },
+  {
+    "file": "01_c1_value_fading.png",
+    "preview_time": 10.0,
+    "stage": "fading",
+    "target": "c1_value"
+  },
+  {
+    "file": "01_c1_value_cleared.png",
+    "preview_time": 10.1,
+    "stage": "cleared",
+    "target": "c1_value"
+  },
+  {
+    "file": "02_c2_note_before.png",
+    "preview_time": 13.466666666666667,
+    "stage": "before",
+    "target": "c2_note"
+  },
+  {
+    "file": "02_c2_note_marked.png",
+    "preview_time": 13.8,
+    "stage": "marked",
+    "target": "c2_note"
+  },
+  {
+    "file": "02_c2_note_fading.png",
+    "preview_time": 15.299999999999999,
+    "stage": "fading",
+    "target": "c2_note"
+  },
+  {
+    "file": "02_c2_note_cleared.png",
+    "preview_time": 15.399999999999999,
+    "stage": "cleared",
+    "target": "c2_note"
+  },
+  {
+    "file": "03_c3_value_before.png",
+    "preview_time": 18.866666666666664,
+    "stage": "before",
+    "target": "c3_value"
+  },
+  {
+    "file": "03_c3_value_marked.png",
+    "preview_time": 19.2,
+    "stage": "marked",
+    "target": "c3_value"
+  },
+  {
+    "file": "03_c3_value_fading.png",
+    "preview_time": 21.2,
+    "stage": "fading",
+    "target": "c3_value"
+  },
+  {
+    "file": "03_c3_value_cleared.png",
+    "preview_time": 21.299999999999997,
+    "stage": "cleared",
+    "target": "c3_value"
+  }
+]

@@ -1,0 +1,14 @@
+test_cache_reuse (test_edit.EditTests.test_cache_reuse) ... ok
+test_changed_timeline_rejected_in_subtitles_mode (test_edit.EditTests.test_changed_timeline_rejected_in_subtitles_mode) ... ok
+test_corrupt_master_rejected (test_edit.EditTests.test_corrupt_master_rejected) ... ok
+test_invalid_trim_and_audio_overrun (test_edit.EditTests.test_invalid_trim_and_audio_overrun) ... ok
+test_literal_subtitle_and_invalid_style (test_edit.EditTests.test_literal_subtitle_and_invalid_style) ... ok
+test_missing_font_rejected (test_edit.EditTests.test_missing_font_rejected) ... ok
+test_missing_input_cli_error_and_no_outputs (test_edit.EditTests.test_missing_input_cli_error_and_no_outputs) ... ok
+test_order_trim_size_fps_audio_duration (test_edit.EditTests.test_order_trim_size_fps_audio_duration) ... ok
+test_subtitle_only_reuses_master_without_sources (test_edit.EditTests.test_subtitle_only_reuses_master_without_sources) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 2.390s
+
+OK

@@ -1,0 +1,53 @@
+[
+  {
+    "time_basis": "uncut_master_seconds",
+    "detected_start": null,
+    "detected_end": null,
+    "boundary_found": true,
+    "status": "no_leading_black",
+    "auto_cut": false,
+    "proposed_cut_seconds": 0.0,
+    "cut_seconds": 0.0,
+    "cut_frames": 0,
+    "guard_frames": 1,
+    "max_scan_seconds": 3,
+    "fps": 30,
+    "rule": "all RGB channels <= 4 and channel spread <= 2; no scaling",
+    "file": "anat01-v5-review.mp4",
+    "sha256": "8efd3aca8b3a82d43075d47ac6b65c5b8fff3e6033944d6adcd13c73aef20d66"
+  },
+  {
+    "time_basis": "uncut_master_seconds",
+    "detected_start": null,
+    "detected_end": null,
+    "boundary_found": true,
+    "status": "no_leading_black",
+    "auto_cut": false,
+    "proposed_cut_seconds": 0.0,
+    "cut_seconds": 0.0,
+    "cut_frames": 0,
+    "guard_frames": 1,
+    "max_scan_seconds": 3,
+    "fps": 30,
+    "rule": "all RGB channels <= 4 and channel spread <= 2; no scaling",
+    "file": "anat02-v5-review.mp4",
+    "sha256": "6ab3361cae16c67116bafcabe9093f876cc6bcb1437077961f273a7f9cef9dc4"
+  },
+  {
+    "time_basis": "uncut_master_seconds",
+    "detected_start": null,
+    "detected_end": null,
+    "boundary_found": true,
+    "status": "no_leading_black",
+    "auto_cut": false,
+    "proposed_cut_seconds": 0.0,
+    "cut_seconds": 0.0,
+    "cut_frames": 0,
+    "guard_frames": 1,
+    "max_scan_seconds": 3,
+    "fps": 30,
+    "rule": "all RGB channels <= 4 and channel spread <= 2; no scaling",
+    "file": "anat03-v5-review.mp4",
+    "sha256": "93f1f6ac75207993930532762dc9be038542fb83bfb2219e0d43671aa229b96e"
+  }
+]

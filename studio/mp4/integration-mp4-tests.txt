@@ -1,0 +1,54 @@
+test_audio_subtitle_and_silence_times_shift_together (test_black.BlackTests.test_audio_subtitle_and_silence_times_shift_together) ... WARNING narration silence (final video): 0.000–1.000s
+WARNING narration silence (final video): 0.000–0.100s
+ok
+test_boolean_required (test_black.BlackTests.test_boolean_required) ... ok
+test_cut_with_audio_and_subtitles_at_production_frame_rates (test_black.BlackTests.test_cut_with_audio_and_subtitles_at_production_frame_rates) ... ok
+test_dark_navy_black_without_boundary_and_no_black (test_black.BlackTests.test_dark_navy_black_without_boundary_and_no_black) ... ok
+test_detect_default_and_explicit_cut (test_black.BlackTests.test_detect_default_and_explicit_cut) ... ok
+test_invalid_review_and_keep (test_black.BlackTests.test_invalid_review_and_keep) ... ok
+test_keep_protects_ct_hook_and_intentional_darkness (test_black.BlackTests.test_keep_protects_ct_hook_and_intentional_darkness) ... ok
+test_scan_limit_preserves_long_black (test_black.BlackTests.test_scan_limit_preserves_long_black) ... ok
+test_small_ct_feature_protects_frame (test_black.BlackTests.test_small_ct_feature_protects_frame) ... ok
+test_unreviewed_and_changed_master_are_not_cut (test_black.BlackTests.test_unreviewed_and_changed_master_are_not_cut) ... ok
+test_cache_reuse (test_edit.EditTests.test_cache_reuse) ... ok
+test_changed_timeline_rejected_in_subtitles_mode (test_edit.EditTests.test_changed_timeline_rejected_in_subtitles_mode) ... ok
+test_corrupt_master_rejected (test_edit.EditTests.test_corrupt_master_rejected) ... ok
+test_invalid_trim_and_audio_overrun (test_edit.EditTests.test_invalid_trim_and_audio_overrun) ... ok
+test_literal_subtitle_and_invalid_style (test_edit.EditTests.test_literal_subtitle_and_invalid_style) ... ok
+test_missing_font_rejected (test_edit.EditTests.test_missing_font_rejected) ... ok
+test_missing_input_cli_error_and_no_outputs (test_edit.EditTests.test_missing_input_cli_error_and_no_outputs) ... ok
+test_order_trim_size_fps_audio_duration (test_edit.EditTests.test_order_trim_size_fps_audio_duration) ... ok
+test_subtitle_only_reuses_master_without_sources (test_edit.EditTests.test_subtitle_only_reuses_master_without_sources) ... ok
+WARNING narration silence (final video): 0.000–0.500s
+WARNING narration silence (final video): 2.998–4.000s
+test_bad_settings_and_overrun (test_neon.NeonTests.test_bad_settings_and_overrun) ... ok
+test_glow_layers_and_visible_timing (test_neon.NeonTests.test_glow_layers_and_visible_timing) ... ok
+test_linked_cue_rejects_outside_trim_and_scene (test_neon.NeonTests.test_linked_cue_rejects_outside_trim_and_scene) ... ok
+test_multiple_scenes_and_tracks (test_neon.NeonTests.test_multiple_scenes_and_tracks) ... WARNING narration silence (final video): 1.000–2.500s
+ok
+test_pitch_preserved (test_neon.NeonTests.test_pitch_preserved) ... ok
+test_source_time_conversion_and_audio_end (test_neon.NeonTests.test_source_time_conversion_and_audio_end) ... ok
+test_style_reuses_master_and_speed_invalidates (test_neon.NeonTests.test_style_reuses_master_and_speed_invalidates) ... WARNING narration silence (final video): 0.000–0.500s
+WARNING narration silence (final video): 2.998–4.000s
+ok
+test_unlinked_timing_and_implicit_audio_end (test_neon.NeonTests.test_unlinked_timing_and_implicit_audio_end) ... WARNING narration silence (final video): 3.003–4.000s
+ok
+test_invalid_settings (test_silence.SilenceTests.test_invalid_settings) ... ok
+test_overlap_and_check_does_not_change_media (test_silence.SilenceTests.test_overlap_and_check_does_not_change_media) ... ok
+test_rendered_times_bgm_and_partial_keep (test_silence.SilenceTests.test_rendered_times_bgm_and_partial_keep) ... WARNING narration silence (final video): 0.000–1.488s
+WARNING narration silence (final video): 2.506–2.600s
+WARNING narration silence (final video): 3.400–3.483s
+WARNING narration silence (final video): 4.501–8.000s
+WARNING narration silence (final video): 0.000–1.488s
+WARNING narration silence (final video): 4.501–8.000s
+WARNING narration silence (final video): 0.000–1.488s
+WARNING narration silence (final video): 4.501–8.000s
+ok
+test_threshold_duration_and_no_narration (test_silence.SilenceTests.test_threshold_duration_and_no_narration) ... WARNING narration silence (final video): 4.501–8.000s
+WARNING narration silence (final video): 0.000–8.000s
+ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 31.808s
+
+OK

@@ -1,0 +1,26 @@
+test_alias_sequential_emphasis_rejected (test_emphasis.EmphasisTests.test_alias_sequential_emphasis_rejected) ... ok
+test_camera_clipping_rejected (test_emphasis.EmphasisTests.test_camera_clipping_rejected) ... ok
+test_camera_moving_during_phrase_rejected (test_emphasis.EmphasisTests.test_camera_moving_during_phrase_rejected) ... ok
+test_changed_audio_rejected_and_real_wav_path (test_emphasis.EmphasisTests.test_changed_audio_rejected_and_real_wav_path) ... ok
+test_coordinate_change_rejected (test_emphasis.EmphasisTests.test_coordinate_change_rejected) ... ok
+test_duplicate_rejected (test_emphasis.EmphasisTests.test_duplicate_rejected) ... ok
+test_existing_underline_or_unknown_rejected (test_emphasis.EmphasisTests.test_existing_underline_or_unknown_rejected) ... ok
+test_fade_and_pixel_geometry (test_emphasis.EmphasisTests.test_fade_and_pixel_geometry) ... ok
+test_fade_overlap_rejected (test_emphasis.EmphasisTests.test_fade_overlap_rejected) ... ok
+test_fractional_sync_rejected (test_emphasis.EmphasisTests.test_fractional_sync_rejected) ... ok
+test_invalid_timing_rejected (test_emphasis.EmphasisTests.test_invalid_timing_rejected) ... ok
+test_legacy_omitted_until_expires (test_emphasis.EmphasisTests.test_legacy_omitted_until_expires) ... ok
+test_other_aspects_contain_anchors (test_emphasis.EmphasisTests.test_other_aspects_contain_anchors) ... ok
+test_out_of_bounds_rejected (test_emphasis.EmphasisTests.test_out_of_bounds_rejected) ... ok
+test_red_body_rejected (test_emphasis.EmphasisTests.test_red_body_rejected) ... ok
+test_sample_and_m4_common_contract (test_emphasis.EmphasisTests.test_sample_and_m4_common_contract) ... ok
+test_source_replacement_rejected (test_emphasis.EmphasisTests.test_source_replacement_rejected) ... ok
+test_subtitles_rejected (test_emphasis.EmphasisTests.test_subtitles_rejected) ... ok
+test_underline_rejected (test_emphasis.EmphasisTests.test_underline_rejected) ... ok
+test_unverified_production_rejected (test_emphasis.EmphasisTests.test_unverified_production_rejected) ... ok
+test_yellow_heading_rejected (test_emphasis.EmphasisTests.test_yellow_heading_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 3.635s
+
+OK

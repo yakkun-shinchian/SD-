@@ -26,6 +26,10 @@ FONT_CANDIDATES = [
     "/usr/share/fonts/truetype/fonts-japanese-gothic.ttf",
     "/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc",
     "C:/Windows/Fonts/meiryob.ttc",
+    "C:/Windows/Fonts/meiryo.ttc",
+    "C:/Windows/Fonts/YuGothM.ttc",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+    "/usr/local/share/fonts/NotoSansCJKjp-Regular.otf",
 ]
 COLORS = {
     "yellow": (255, 235, 59), "red": (229, 57, 53), "green": (46, 160, 67),
@@ -46,7 +50,11 @@ def color(c, default="red"):
 def font(px):
     for p in FONT_CANDIDATES:
         if os.path.exists(p):
-            return ImageFont.truetype(p, int(px))
+            try:
+                return ImageFont.truetype(p, int(px))
+            except OSError:
+                # A broken/unreadable installation must not hide later candidates.
+                continue
     return ImageFont.load_default()
 
 

@@ -76,6 +76,7 @@ const MEASURE = (limit) => {
       id: el.id || undefined,
       placeholder: el.getAttribute("placeholder") || undefined,
       title: el.getAttribute("title") || undefined,
+      editable: el.isContentEditable || undefined,
       href: el.tagName === "A" ? trim(el.getAttribute("href"), 80) : undefined,
       cls: trim(el.getAttribute("class"), 90) || undefined,
       attrs: Object.keys(dataAttrs(el)).length ? dataAttrs(el) : undefined,
@@ -167,7 +168,8 @@ let summaryPath = "";
 if (captured.length) {
   const all =
     `# CoeFont 画面の採寸結果（${captured.length} 段階 / ${new Date().toISOString()}）\n` +
-    `# このファイルをそのまま貼っていただければ、selectors.js を書けます。\n` +
+    `# 次は \`node tools/coefont/derive-selectors.mjs\` で選択子を起こします。\n` +
+    `# （このファイルをそのまま貼っていただいても構いません）\n` +
     `# 個人情報は含みません（文言・aria・id・CSS経路のみ）。念のため目を通してください。\n\n` +
     captured.map(summarize).join("\n");
   summaryPath = path.join(outDir, "summary.txt");
@@ -182,7 +184,9 @@ console.log(`
 貼り付け用の1枚（${size} KB）:
   ${summaryPath || "（採寸なし）"}
 
-これをそのままチャットに貼っていただければ、選択子を書き込みます。
-大きすぎる場合は ui-map/ui-map-NN.txt を段階ごとに貼ってください。
-画面写真（.png）は貼れないので、文字で足りなければそのとき仰ってください。
+次はこれを使って選択子を起こします（貼っていただく必要はありません）。
+
+    node tools/coefont/derive-selectors.mjs
+
+1目標1行の短い報告が出ます。✗ が残ったときだけ、その報告を貼ってください。
 `.trim());

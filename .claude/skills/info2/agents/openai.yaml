@@ -1,0 +1,13 @@
+interface:
+  display_name: インフォグラフィック2（Info2）
+  short_description: 赤・青・黄・緑の太い蛍光ペン・丸囲み・矢印を多用する解説動画
+  default_prompt: $info2 を使い、このインフォグラフィックを4色の蛍光ペン・丸・矢印とズームでテンポよく説明する動画にしてください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

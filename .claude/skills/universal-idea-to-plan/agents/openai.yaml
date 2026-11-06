@@ -1,0 +1,14 @@
+interface:
+  display_name: アイデアから実行設計
+  short_description: 曖昧なアイデアを選択肢、仕様、検証可能な実行計画へ変えます
+  default_prompt: Use $universal-idea-to-plan to turn this idea into a decision-ready
+    execution plan.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+interface:
+  display_name: データ分析レポート
+  short_description: 問いに沿って数字、グラフ、注意点付きの分析を作ります
+  default_prompt: Use $universal-data-analysis-report to answer this question with
+    a rigorous data report.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

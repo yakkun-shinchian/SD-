@@ -1,0 +1,14 @@
+interface:
+  display_name: Obsidian知識設計
+  short_description: ChatGPT履歴や資料を壊さずMarkdownの知識庫へ体系的に整理します
+  default_prompt: Use $obsidian-archive-architect to organize this export into a durable
+    Obsidian archive.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

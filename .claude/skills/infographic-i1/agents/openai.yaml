@@ -1,0 +1,13 @@
+interface:
+  display_name: インフォスキル I1
+  short_description: 既存インフォグラフィックを保持し、4色の蛍光ペンと丸囲みで音声同期解説
+  default_prompt: $infographic-i1 で、このインフォグラフィックを改変せず、4色の蛍光ペンと丸囲みを音声に同期させて解説動画にしてください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

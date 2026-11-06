@@ -1,0 +1,13 @@
+interface:
+  display_name: YAKUBON看護イラスト V4
+  short_description: 参考10枚の画面文法で看護Instagram教材を統一制作
+  default_prompt: $yakubon-nursing-illustration-v4 を使い、YAKUBON V4の固定画面文法で看護Instagramカルーセルを制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

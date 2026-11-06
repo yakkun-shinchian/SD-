@@ -1,0 +1,14 @@
+interface:
+  display_name: 系統的トラブル診断
+  short_description: 再現、証拠、仮説、最小テストの順で不具合原因を絞ります
+  default_prompt: Use $universal-systematic-troubleshooting to diagnose this issue
+    methodically.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

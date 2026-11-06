@@ -1,0 +1,163 @@
+{
+  "scene_id": "scene-001",
+  "series": "KAWAII JAPAN COLLECTION",
+  "author": "YAKUBON STUDIO",
+  "volume_number": 1,
+  "volume_title_ja": "",
+  "volume_title_en": "",
+  "scene_title_ja": "",
+  "scene_title_en": "",
+  "page_mode": "reflective",
+  "style_contract": {
+    "panel_frame": "bordered-rectangle",
+    "balloon_shape": "soft-oval",
+    "balloon_language_order": "ja-then-en",
+    "face_overlap_policy": "zero-intersection",
+    "collision_action": "reject-and-recompose"
+  },
+  "panel_count": 4,
+  "layout_preset": "hero-plus-three",
+  "panels": [
+    {
+      "panel_id": "panel-1",
+      "role": "lead",
+      "frame": {"x": 0.04, "y": 0.12, "w": 0.92, "h": 0.36},
+      "action": "",
+      "art_prompt": "",
+      "art_asset": "",
+      "balloons": [
+        {
+          "balloon_id": "p1-b1",
+          "shape": "soft-oval",
+          "speaker": "",
+          "text_ja": "",
+          "text_en": "",
+          "language_order": "ja-then-en",
+          "x": 0.58,
+          "y": 0.15,
+          "w": 0.33,
+          "h": 0.17,
+          "tail_x": 0.69,
+          "tail_y": 0.36
+        }
+      ]
+    },
+    {
+      "panel_id": "panel-2",
+      "role": "support",
+      "frame": {"x": 0.04, "y": 0.50, "w": 0.293, "h": 0.22},
+      "action": "",
+      "art_prompt": "",
+      "art_asset": "",
+      "balloons": [
+        {
+          "balloon_id": "p2-b1",
+          "shape": "soft-oval",
+          "speaker": "",
+          "text_ja": "",
+          "text_en": "",
+          "language_order": "ja-then-en",
+          "x": 0.055,
+          "y": 0.515,
+          "w": 0.25,
+          "h": 0.13,
+          "tail_x": 0.25,
+          "tail_y": 0.68
+        }
+      ]
+    },
+    {
+      "panel_id": "panel-3",
+      "role": "support",
+      "frame": {"x": 0.354, "y": 0.50, "w": 0.292, "h": 0.22},
+      "action": "",
+      "art_prompt": "",
+      "art_asset": "",
+      "balloons": [
+        {
+          "balloon_id": "p3-b1",
+          "shape": "soft-oval",
+          "speaker": "",
+          "text_ja": "",
+          "text_en": "",
+          "language_order": "ja-then-en",
+          "x": 0.375,
+          "y": 0.515,
+          "w": 0.25,
+          "h": 0.13,
+          "tail_x": 0.43,
+          "tail_y": 0.68
+        }
+      ]
+    },
+    {
+      "panel_id": "panel-4",
+      "role": "support",
+      "frame": {"x": 0.667, "y": 0.50, "w": 0.293, "h": 0.22},
+      "action": "",
+      "art_prompt": "",
+      "art_asset": "",
+      "balloons": [
+        {
+          "balloon_id": "p4-b1",
+          "shape": "soft-oval",
+          "speaker": "",
+          "text_ja": "",
+          "text_en": "",
+          "language_order": "ja-then-en",
+          "x": 0.69,
+          "y": 0.515,
+          "w": 0.25,
+          "h": 0.13,
+          "tail_x": 0.72,
+          "tail_y": 0.68
+        }
+      ]
+    }
+  ],
+  "reflection_ja_lines": ["", ""],
+  "reflection_en": "",
+  "point_card": {
+    "enabled": false,
+    "label_ja": "ポイント",
+    "label_en": "Point",
+    "items_ja": [],
+    "items_en": []
+  },
+  "useful_phrases_card": {
+    "enabled": false,
+    "label_ja": "使えるフレーズ",
+    "label_en": "Useful phrases",
+    "items": []
+  },
+  "alt_text_ja": "",
+  "alt_text_en": "",
+  "face_safety": {
+    "contains_faces": true,
+    "contains_text": true,
+    "protected_padding": 0.012,
+    "face_regions": [
+      {"id": "face-01", "x": 0.0, "y": 0.0, "w": 0.0, "h": 0.0}
+    ],
+    "text_regions": [],
+    "manual_100_percent_check_passed": false,
+    "pdf_epub_render_check_passed": false
+  },
+  "review": {
+    "panel_count_matches_story": false,
+    "every_panel_has_bilingual_balloon": false,
+    "every_balloon_ja_then_en": false,
+    "soft_round_balloons": false,
+    "faces_complete_and_unobstructed": false,
+    "zero_face_balloon_overlap": false,
+    "hands_props_valid": false,
+    "no_generated_text_or_logo": false,
+    "watercolor_style_consistent": false,
+    "dialogue_proofread": false,
+    "lower_bilingual_section_complete": false,
+    "english_readable_at_thumbnail": false,
+    "face_text_geometry_passed": false,
+    "final_render_zero_face_overlap": false,
+    "approved": false
+  }
+}

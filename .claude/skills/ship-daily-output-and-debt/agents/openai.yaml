@@ -1,0 +1,14 @@
+interface:
+  display_name: 成果物・借金実行コーチ
+  short_description: 夜勤生活でも成果物の公開と借金返済を毎週前進させる仕組みを作ります
+  default_prompt: Use $ship-daily-output-and-debt to turn my goals into a realistic
+    weekly output and debt-paydown system.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

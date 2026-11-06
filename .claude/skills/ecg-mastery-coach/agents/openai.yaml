@@ -1,0 +1,13 @@
+interface:
+  display_name: 心電図検定1級コーチ
+  short_description: 心電図の判読手順・演習問題・復習計画を個人に合わせて指導します
+  default_prompt: Use $ecg-mastery-coach to teach me this ECG at Level 1 exam depth.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

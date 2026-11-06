@@ -1,0 +1,13 @@
+interface:
+  display_name: インフォC1｜Clinical Case Infographic C1
+  short_description: 架空カルテから画像・病態・看護観察をつなぐ縦長の臨床症例教材
+  default_prompt: $clinical-case-infographic-c1 を使って、架空カルテと正常・異常画像の比較を中心に臨床症例インフォグラフィックを制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+interface:
+  display_name: 会話と作業の引継ぎ
+  short_description: 長い会話を、次回すぐ再開できる安全で簡潔な引継書にします
+  default_prompt: Use $universal-session-handoff to create a concise handoff for the
+    next session.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

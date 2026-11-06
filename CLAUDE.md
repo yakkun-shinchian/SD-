@@ -281,3 +281,50 @@ loses the reader's place.
 - Commit with clear, descriptive messages (existing history is in Japanese).
 - Push with `git push -u origin <branch>` and open a draft PR.
 - This is a static site, deployable as-is via GitHub Pages (root folder).
+
+## YAKUBON STUDIO 制作スキル
+
+制作タスクでは、先に以下を読むこと。
+
+| 目的 | ファイル |
+|------|----------|
+| スキル台帳（受領状態・MANIFEST照合・動作確認結果） | `.claude/skills/REGISTRY.md` |
+| 制作スキル定義 64件（`SKILL.md` / `references/` / `assets/` / `scripts/` / `agents/`） | `.claude/skills/` |
+| バンドル同梱の索引 | `.claude/skills/SKILL_INDEX.md` |
+| Codex等との共通申し送り・動画検品手順 | `AGENTS.md` |
+
+- **受領状態は3段階で区別する**（`REGISTRY.md` §0）。
+  ①手順書原本 **64/64** ②素材・プログラム **64/64** ③動作確認 **0/64**。
+  **②が揃っても「動く」とは限らない。③は「走らせて成果物を確認した」まで。**
+- 全324ファイルが `MANIFEST.json` の sha256 と一致（`REGISTRY.md` §3-1）。
+  `.claude/skills/` のファイルを変更したら、MANIFESTとの差が生じることを意識する。
+- VOICEVOXの旧調査・保留判断は `REGISTRY.md` §7-5。別コミット `32fd3ad` で
+  書き出し同期とチェックが追加されたため、再開時は最新の `voicevox/README.md` を確認する。
+  文書整合の修正だけを理由に音声生成・書き出し再生成は行わない。
+- 受領済み素材の再送は求めない。制作時の入力素材・外部依存とスキル単位の成果物検証は別扱い。
+- CoeFontはご本人の環境で音声生成する標準手順（§5-1）。この環境の接続・認証成功を意味しない。
+  自動生成へ変更する場合は接続・認証を再確認する。
+- フォントは前セッションでZen Kurenaidoによるレンダリングを検証済み（§7-1 #17）。
+  Yuji Syukuを含む必要書体の存在は現在の実行環境で確認し、不足時は導入する。
+- **永続しない導入物**（§7-3）：`fitz` を使う3本に必要な **PyMuPDF**、
+  `render_natural_overlay.py` に必要な **Zen Kurenaido / Yuji Syuku**。
+  前セッションの導入状態は引き継がれないため、実行前に依存関係を確認する。
+- 補助プログラムは21本中**17本**を実行検証済み（§7-1）。
+- `.claude/skills/` の既存スキルは**削除・統合・無断上書きしない**。
+- 実体のないスキルを**推測で新規作成しない**。
+
+
+## 2026-11-03 新規スキルの追加
+
+共有スキルは **71件**（原本バンドル64件 ＋ `medical-video-3` ＋ claude.ai同期原本のミラー6件）。
+索引は `.claude/skills/ADDITIONS.md`、状態は `REGISTRY.md` の「2026-11-03 追加分」。
+既存64件・329ファイルの記述は旧受領集計。旧索引・MANIFEST・既存スキル原本は維持する。
+
+- 医療動画3の参照画像は取得・目視済み（非同梱）だが、実生成・連続画像・動画・4K出力は**未検証**。
+- ミラー6件（`ct-skill-1` / `ct-skill-2` / `ct-mri-slice-video` /
+  `medical-video-motion-budget` / `yakubon-infographic-2` / `yakubon-sns-caption`）は
+  **ご本人の指示によりチャッピー・Codex・Claude Code・Claude Cowork の全環境で使う**。
+  `SKILL.md` は同期原本とバイト単位で一致させ、**内容の判断・要約・改善は行わない**。
+  原本が更新されたらミラーも更新して台帳に記録する。**動作確認は未実施**。
+- ミラー8件（上記6件＋`yakubon-infographic-c1`／`medical-3d-orbit-opener`）は
+  **MANIFEST（原本324件）の照合対象外**。母数・余剰判定に混ぜない。

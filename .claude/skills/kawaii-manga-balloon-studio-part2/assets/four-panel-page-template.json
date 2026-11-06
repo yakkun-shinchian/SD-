@@ -1,0 +1,134 @@
+{
+  "page_id": "manga-page-001",
+  "layout": "bilingual-panel-page",
+  "scene": "A fictional cabin attendant calmly guides a passenger.",
+  "alt_text": "客室乗務員がお客様をご案内する、丸い日英吹き出し付きの四コマ漫画。",
+  "review_status": "draft",
+  "canvas": {
+    "width": 1009,
+    "height": 1536,
+    "background": [248, 245, 238],
+    "frame": [20, 28, 38]
+  },
+  "header": {
+    "category_ja": "搭乗前の準備",
+    "category_color": [8, 47, 89],
+    "series_label": "CA ARUARU",
+    "number": "01",
+    "title_ja": "お座席までご案内",
+    "title_en": "Finding Your Seat"
+  },
+  "artwork": {
+    "fit": "cover",
+    "panels": [
+      {"id": "main", "x": 0.00, "y": 0.00, "w": 1.00, "h": 0.64},
+      {"id": "step-1", "x": 0.00, "y": 0.64, "w": 0.333, "h": 0.36},
+      {"id": "step-2", "x": 0.333, "y": 0.64, "w": 0.334, "h": 0.36},
+      {"id": "step-3", "x": 0.667, "y": 0.64, "w": 0.333, "h": 0.36}
+    ],
+    "protected_zones": [
+      {"id": "main-ca-head", "kind": "head", "x": 0.12, "y": 0.14, "w": 0.22, "h": 0.24},
+      {"id": "main-passenger-head", "kind": "head", "x": 0.72, "y": 0.18, "w": 0.20, "h": 0.25},
+      {"id": "step-1-head", "kind": "head", "x": 0.02, "y": 0.70, "w": 0.13, "h": 0.17},
+      {"id": "step-2-head", "kind": "head", "x": 0.35, "y": 0.70, "w": 0.12, "h": 0.17},
+      {"id": "step-3-head", "kind": "head", "x": 0.68, "y": 0.70, "w": 0.12, "h": 0.17}
+    ]
+  },
+  "balloons": [
+    {
+      "id": "main-b1",
+      "panel_id": "main",
+      "speaker": "cabin attendant",
+      "kind": "speech",
+      "shape": "ellipse",
+      "text": "こちらへどうぞ。",
+      "translation": "This way, please.",
+      "translation_position": "bottom-right",
+      "x": 0.40,
+      "y": 0.08,
+      "w": 0.26,
+      "h": 0.22,
+      "tail_x": 0.38,
+      "tail_y": 0.32,
+      "font_size": 0.040,
+      "translation_font_size": 0.022
+    },
+    {
+      "id": "step-1-b1",
+      "panel_id": "step-1",
+      "speaker": "cabin attendant",
+      "kind": "speech",
+      "shape": "ellipse",
+      "text": "お席を確認します。",
+      "translation": "Let me check your seat.",
+      "translation_position": "bottom-right",
+      "x": 0.17,
+      "y": 0.66,
+      "w": 0.15,
+      "h": 0.16,
+      "tail_x": 0.18,
+      "tail_y": 0.85,
+      "font_size": 0.026,
+      "translation_font_size": 0.016
+    },
+    {
+      "id": "step-2-b1",
+      "panel_id": "step-2",
+      "speaker": "cabin attendant",
+      "kind": "speech",
+      "shape": "ellipse",
+      "text": "まっすぐお進みください。",
+      "translation": "Please go straight ahead.",
+      "translation_position": "bottom-right",
+      "x": 0.505,
+      "y": 0.66,
+      "w": 0.15,
+      "h": 0.16,
+      "tail_x": 0.50,
+      "tail_y": 0.85,
+      "font_size": 0.026,
+      "translation_font_size": 0.016
+    },
+    {
+      "id": "step-3-b1",
+      "panel_id": "step-3",
+      "speaker": "passenger",
+      "kind": "speech",
+      "shape": "ellipse",
+      "text": "ありがとうございます。",
+      "translation": "Thank you.",
+      "translation_position": "bottom-right",
+      "x": 0.835,
+      "y": 0.66,
+      "w": 0.15,
+      "h": 0.15,
+      "tail_x": 0.83,
+      "tail_y": 0.85,
+      "font_size": 0.026,
+      "translation_font_size": 0.016
+    }
+  ],
+  "caption": {
+    "headline_ja": "短く、やさしく、分かりやすく",
+    "accent_span_ja": "やさしく",
+    "body_ja": [
+      "四角いコマで流れを整えます。",
+      "丸い吹き出しで声をやわらかく届けます。"
+    ],
+    "body_en": [
+      "Rectangular panels keep the story clear.",
+      "Round balloons carry each voice gently."
+    ],
+    "points": [
+      "吹き出しは顔と髪から十分に離します。",
+      "短い返事にも必ず丸い吹き出しを使います。",
+      "文字は画像生成後に正確に組版します。"
+    ],
+    "phrases": [
+      ["こちらへどうぞ。", "This way, please."],
+      ["お席を確認します。", "Let me check your seat."],
+      ["ありがとうございます。", "Thank you."]
+    ],
+    "footer": "KAWAII JAPAN COLLECTION — YAKUBON STUDIO"
+  }
+}

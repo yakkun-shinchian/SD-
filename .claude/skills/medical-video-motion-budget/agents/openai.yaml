@@ -1,0 +1,11 @@
+interface:
+  display_name: "医療動画の動かす予算の配分"
+  short_description: "どのカットを動画生成AIで動かすか決める。動かすのは臓器だけ、女の子は動かさない"
+  default_prompt: "$medical-video-motion-budget を使って、どのカットを動かすか配分してください。"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

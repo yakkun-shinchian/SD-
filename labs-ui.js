@@ -220,10 +220,14 @@ var LabsUI = (function () {
       ctl = '<input type="number" inputmode="decimal" step="any" data-lab="' + esc(a.key) + '" ' +
             'placeholder="' + esc(a.placeholder || "") + '" value="' + esc(v) + '">';
     }
-    var ref = (a.type === "qual" || a.type === "select")
-      ? (a.refText || "陰性") : C.refText(a, state.context);
-    return '<div class="f"><label>' + esc(a.label) + unit + fac + "</label>" + ctl +
-      '<div class="note">基準 ' + esc(ref) + (a.note ? "／" + esc(a.note) : "") + "</div></div>";
+    var ref = a.refText || ((a.type === "qual" || a.type === "select")
+      ? "陰性" : C.refText(a, state.context));
+    // 問診・身体所見のように基準値の概念がない項目（refText が "—"）では
+    // 「基準 —」という無意味な行を出さず、注釈だけを残す。
+    var noteHtml = ref === "—"
+      ? (a.note ? '<div class="note">' + esc(a.note) + "</div>" : "")
+      : '<div class="note">基準 ' + esc(ref) + (a.note ? "／" + esc(a.note) : "") + "</div>";
+    return '<div class="f"><label>' + esc(a.label) + unit + fac + "</label>" + ctl + noteHtml + "</div>";
   }
 
   function presetsHtml() {

@@ -220,7 +220,9 @@ var LabsCore = (function () {
       });
 
       out.byDomain[id] = { title: d.title, items: items, derived: D, findings: F, patterns: pats };
-      out.items = out.items.concat(items);
+      // 問診・身体所見のように「検査値」ではないドメインは、入力値一覧表には載せない。
+      // 判定に使う値（V）と所見フラグ（F）は通常どおり下流へ渡る。
+      if (!d.hideItems) out.items = out.items.concat(items);
       out.patterns = out.patterns.concat(pats);
       Object.keys(D).forEach(function (k) { out.derived[k] = D[k]; });
       Object.keys(F).forEach(function (k) { if (F[k]) out.findings[k] = true; });

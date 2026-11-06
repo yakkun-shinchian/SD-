@@ -321,3 +321,56 @@ details.card[open] > summary::after{content:"▴"}
 .score-card .interp{font-size:13px; margin:0 0 6px}
 .score-card .auto{font-size:11px; color:var(--accent); font-weight:700}
 .score-items{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; margin-top:8px}
+
+/* ---------- 主訴からの診断アプローチ（dx-cc.js） ---------- */
+details.cc{border:1px solid var(--line); border-radius:var(--radius); background:var(--panel2); margin-bottom:12px; overflow:hidden}
+details.cc>summary{cursor:pointer; padding:11px 14px; font-weight:800; font-size:15px;
+  background:var(--panel3); display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+details.cc>summary::-webkit-details-marker{display:none}
+details.cc>summary::before{content:"▸"; color:var(--accent); font-weight:700}
+details.cc[open]>summary::before{content:"▾"}
+.cc-lit{margin-left:auto; font-size:11px; font-weight:800; color:#2a1216;
+  background:var(--red); border-radius:999px; padding:2px 9px}
+[data-theme="light"] .cc-lit{color:#fff}
+.cc-body{padding:12px 14px 14px}
+.cc-frame{font-size:13px; line-height:1.75; color:var(--sub); margin:0 0 14px;
+  border-left:3px solid var(--accent); padding-left:11px}
+.cc-h{font-size:12px; font-weight:800; letter-spacing:.04em; color:var(--accent);
+  margin:16px 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line)}
+.cc-h:first-of-type{margin-top:0}
+
+.cc-killer{border:1px solid var(--line); border-left:3px solid var(--line2);
+  border-radius:9px; padding:10px 12px; margin-bottom:9px; background:var(--panel)}
+.cc-killer.lit{border-left-color:var(--red); background:var(--redbg)}
+.cc-killer h4{margin:0 0 5px; font-size:14px; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.cc-killer .cnt, .cc-dd .cnt{margin-left:auto; font-size:11px; font-weight:800; color:var(--dim); white-space:nowrap}
+.cc-killer.lit .cnt{color:var(--red)}
+.cc-killer .why{font-size:12.5px; line-height:1.7; color:var(--sub); margin:0 0 8px}
+.cc-tests{margin-top:8px}
+.cc-tests b{font-size:11.5px; color:var(--accent); display:block; margin-bottom:3px}
+.cc-tests ul{margin:0; padding-left:19px; font-size:12.5px; line-height:1.7; color:var(--sub)}
+
+.cc-sigs{display:flex; flex-wrap:wrap; gap:5px}
+.cc-sigs.block{margin-bottom:8px}
+.cc-sig{font-size:11.5px; padding:3px 9px; border-radius:999px;
+  border:1px solid var(--line2); color:var(--dim); background:var(--panel2); white-space:nowrap}
+.cc-sig.on{border-color:var(--red); color:var(--red); background:var(--redbg); font-weight:700}
+
+.cc-grp{margin-bottom:12px}
+.cc-grp>h4{font-size:12.5px; margin:0 0 7px; color:var(--txt)}
+.cc-dd{border:1px solid var(--line); border-radius:8px; padding:8px 11px; margin-bottom:6px; background:var(--panel)}
+.cc-dd.hit{border-color:var(--accent)}
+.cc-dd h5{margin:0; font-size:13px; font-weight:700; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.cc-dd.hit .cnt{color:var(--accent)}
+.cc-hits{display:flex; flex-wrap:wrap; gap:4px; margin-top:5px}
+.cc-hits span{font-size:11px; padding:2px 7px; border-radius:6px;
+  background:var(--panel3); color:var(--sub); border:1px solid var(--line)}
+.cc-dd .note{font-size:12px; line-height:1.65; color:var(--dim); margin:5px 0 0}
+
+.cc-next{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-top:14px}
+.cc-next h4{font-size:12.5px; margin:0 0 6px; color:var(--txt)}
+.cc-next ul{margin:0; padding-left:19px; font-size:12.5px; line-height:1.75; color:var(--sub)}
+@media (max-width:640px){
+  .cc-body{padding:10px 11px 12px}
+  .cc-killer{padding:9px 10px}
+}

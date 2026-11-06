@@ -7,6 +7,33 @@ var DXRefs = (function () {
   "use strict";
 
   var R = {
+    NG158: {"label": "VTE：事前確率に応じた検査（NICE NG158）", "cite": "NICE NG158, 1.1. https://www.nice.org.uk/guidance/ng158/chapter/Recommendations"},
+    NG148: {"label": "AKI：緊急造影と薬剤の判断（NICE NG148）", "cite": "NICE NG148, 1.1.7, 1.2. https://www.nice.org.uk/guidance/ng148/chapter/Recommendations"},
+    ESC_HTN2024: {"label": "高血圧性緊急症：臓器障害と病態別対応（ESC 2024）", "cite": "2024 ESC hypertension guidelines, section 10. https://academic.oup.com/eurheartj/article/45/38/3912/7741010"},
+
+    /* 初期対応の条件分岐・検査順序（2026-11-02照合） */
+    NG240: {"label": "細菌性髄膜炎・髄膜炎菌感染症：検査と初期対応（NICE NG240）", "cite": "NICE NG240 (2024), 1.4.6–1.4.13, 1.6, 1.9. https://www.nice.org.uk/guidance/ng240/chapter/Recommendations"},
+    NG39: {"label": "緊張性気胸の画像前減圧（NICE NG39）", "cite": "NICE NG39, 1.4.1–1.4.2（外傷診療の指針。循環不安定・重度呼吸障害の条件を参照）. https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"},
+    SSC2021: {"label": "敗血症：抗菌薬開始と培養（SSC 2021）", "cite": "Evans L, et al. Surviving Sepsis Campaign 2021. https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/"},
+    ENCEPH_IDSA: {"label": "脳炎：経験的抗ウイルス治療（IDSA）", "cite": "Tunkel AR, et al. Clin Infect Dis. 2008;47:303–327, recommendation 21. https://academic.oup.com/cid/article/47/3/303/313455"},
+    NG228: {"label": "SAH：CT陰性後の検査（NICE NG228）", "cite": "NICE NG228, 1.1.11–1.1.14. https://www.nice.org.uk/guidance/ng228/chapter/Recommendations"},
+    NG128: {"label": "脳卒中・TIAの初期対応（NICE NG128）", "cite": "NICE NG128, 1.1–1.3. https://www.nice.org.uk/guidance/NG128/chapter/recommendations"},
+    NG234: {"label": "悪性脊髄圧迫のステロイド適応（NICE NG234）", "cite": "NICE NG234, 1.8.1–1.8.2. https://www.nice.org.uk/guidance/ng234/chapter/recommendations"},
+    ADRENAL_CRISIS: {"label": "副腎クリーゼ：検査を待たない治療（Society for Endocrinology）", "cite": "Society for Endocrinology, Adrenal crisis guidance. https://www.endocrinology.org/clinical-practice/clinical-guidance/adrenal-crisis/"},
+    HYPERCA_EMERG: {"label": "高Ca血症：重症度別治療", "cite": "Society for Endocrinology (2016), Emergency management of acute hypercalcaemia. https://www.endocrinology.org/media/4277/emergency-guidance_acute-hypercalcaemia-in-adults.pdf"},
+    HYPONA_EMERG: {"label": "症候性低Na血症：緊急補正と過補正防止", "cite": "Society for Endocrinology (2016). https://pmc.ncbi.nlm.nih.gov/articles/PMC5314809/"},
+    ASAM_THIAMINE: {"label": "チアミンとブドウ糖の投与順序（ASAM）", "cite": "ASAM Clinical Practice Guideline on Alcohol Withdrawal Management (2020), V.7. https://doi.org/10.1097/ADM.0000000000000668"},
+    AHA_POISON: {"label": "中毒の拮抗薬：適応と禁忌（AHA）", "cite": "AHA CPR & ECC Guidelines, Special Circumstances: Benzodiazepine and opioid poisoning. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation/"},
+    ACC_BLEED: {"label": "抗凝固薬関連出血：中和適応（ACC）", "cite": "ACC Expert Consensus Decision Pathway (2020). https://www.jacc.org/doi/10.1016/j.jacc.2020.04.053"},
+    CG141: {"label": "上部消化管出血：蘇生・内視鏡・薬物（NICE）", "cite": "NICE CG141, 1.3–1.5. https://www.nice.org.uk/guidance/CG141/Chapter/Recommendations"},
+    IDSA_SSTI: {"label": "壊死性軟部組織感染：外科対応を遅らせない（IDSA）", "cite": "IDSA SSTI guideline (2014), section VIII. https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/"},
+    RCUK_K: {"label": "高K血症の緊急治療（RCUK 2025）", "cite": "Resuscitation Council UK 2025, Special circumstances: Hyperkalaemia. https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"},
+    DKA2024: {"label": "成人DKA：インスリン開始前のK評価", "cite": "Umpierrez GE, et al. Hyperglycemic Crises in Adults With Diabetes. Diabetes Care. 2024;47:1257–1275. https://doi.org/10.2337/dci24-0032"},
+    TG18_INITIAL: {"label": "胆管炎の初期管理とドレナージ時機（TG18）", "cite": "Miura F, et al. Tokyo Guidelines 2018: initial management. https://doi.org/10.1002/jhbp.509"},
+    ACG_AP2024: {"label": "急性膵炎：CTの適応（ACG 2024）", "cite": "Tenner S, et al. ACG Guidelines: Management of Acute Pancreatitis (2024). https://pmc.ncbi.nlm.nih.gov/articles/PMC13221274/"},
+    ASH_HIT: {"label": "HIT：4Tsに応じた初期対応（ASH 2018）", "cite": "ASH 2018 HIT guideline, recommendations 2.2–2.6. https://pmc.ncbi.nlm.nih.gov/articles/PMC6258919/"},
+    ISTH_TTP: {"label": "TTP：ADAMTS13採血と治療開始（ISTH）", "cite": "ISTH guidelines for diagnosis of TTP (2020). https://pmc.ncbi.nlm.nih.gov/articles/PMC8146131/"},
+
     /* ---- 基準値・計算式 ---- */
     JCCLS:      { label: "JCCLS 共用基準範囲",
                   cite: "日本臨床検査標準協議会（JCCLS）基準範囲共用化委員会. 共用基準範囲に基づく医学的判断値." },
@@ -107,7 +134,53 @@ var DXRefs = (function () {
 
     /* ---- 全身 ---- */
     NEWS2:      { label: "NEWS2",
-                  cite: "Royal College of Physicians. National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. 2017." }
+                  cite: "Royal College of Physicians. National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. 2017." },
+
+    /* ---- 意識・神経の評価尺度 ---- */
+    GCS:        { label: "Glasgow Coma Scale",
+                  cite: "Teasdale G, Jennett B. Assessment of coma and impaired consciousness. A practical scale. Lancet. 1974;2(7872):81-84." },
+    JCS:        { label: "Japan Coma Scale（3-3-9度方式）",
+                  cite: "太田富雄, 他. 急性期意識障害の新しいgrading とその表現法（いわゆる3-3-9度方式）. 脳神経外科学会（第3回脳卒中の外科研究会）講演集. 1975:61-69." },
+    NIHSS:      { label: "NIHSS",
+                  cite: "Brott T, et al. Measurements of acute cerebral infarction: a clinical examination scale. Stroke. 1989;20(7):864-870." },
+    STROKE_JP:  { label: "脳卒中治療ガイドライン",
+                  cite: "日本脳卒中学会 脳卒中ガイドライン委員会. 脳卒中治療ガイドライン 2021." },
+    OTTAWA_SAH: { label: "Ottawa SAH ルール",
+                  cite: "Perry JJ, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA. 2013;310(12):1248-1255." },
+    SE_ILAE:    { label: "てんかん重積の定義（ILAE）",
+                  cite: "Trinka E, et al. A definition and classification of status epilepticus - Report of the ILAE Task Force on Classification of Status Epilepticus. Epilepsia. 2015;56(10):1515-1523." },
+    GBS_CRIT:   { label: "ギラン・バレー症候群 診断基準",
+                  cite: "Asbury AK, Cornblath DR. Assessment of current diagnostic criteria for Guillain-Barre syndrome. Ann Neurol. 1990;27(Suppl):S21-S24." },
+    DUKE:       { label: "修正 Duke 基準（感染性心内膜炎）",
+                  cite: "Li JS, et al. Proposed modifications to the Duke criteria for the diagnosis of infective endocarditis. Clin Infect Dis. 2000;30(4):633-638." },
+    GOUT2015:   { label: "痛風 分類基準（ACR/EULAR 2015）",
+                  cite: "Neogi T, et al. 2015 Gout Classification Criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative. Arthritis Rheumatol. 2015;67(10):2557-2568." },
+    MENINGITIS: { label: "成人細菌性髄膜炎の臨床所見",
+                  cite: "van de Beek D, et al. Clinical features and prognostic factors in adults with bacterial meningitis. N Engl J Med. 2004;351(18):1849-1859." },
+
+    /* ---- 循環・呼吸の主訴別アプローチ ---- */
+    ACS_JCS:    { label: "急性冠症候群ガイドライン（日本循環器学会）",
+                  cite: "日本循環器学会. 急性冠症候群ガイドライン（2018年改訂版）." },
+    AORTA_ACC:  { label: "大動脈疾患ガイドライン（ACC/AHA 2022）",
+                  cite: "Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482." },
+    HF_JCS:     { label: "急性・慢性心不全診療ガイドライン",
+                  cite: "日本循環器学会／日本心不全学会. 急性・慢性心不全診療ガイドライン（2017年改訂版）および2021年フォーカスアップデート." },
+    PE_HF:      { label: "心不全の身体所見の診断精度",
+                  cite: "Wang CS, et al. Does this dyspneic patient in the emergency department have congestive heart failure? JAMA. 2005;294(15):1944-1956." },
+
+    /* ---- 腹部・消化器 ---- */
+    TG18:       { label: "Tokyo Guidelines 2018（急性胆嚢炎・胆管炎）",
+                  cite: "Yokoe M, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholecystitis. J Hepatobiliary Pancreat Sci. 2018;25(1):41-54." },
+    ALVARADO:   { label: "Alvarado スコア（急性虫垂炎）",
+                  cite: "Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15(5):557-564." },
+    IDSA_DIAR:  { label: "感染性腸炎 診療ガイドライン（IDSA）",
+                  cite: "Shane AL, et al. 2017 Infectious Diseases Society of America Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80." },
+
+    /* ---- 皮膚・アレルギー ---- */
+    ANAPHYLAXIS:{ label: "アナフィラキシー診断基準（WAO）",
+                  cite: "Cardona V, et al. World Allergy Organization Anaphylaxis Guidance 2020. World Allergy Organ J. 2020;13(10):100472." },
+    REGISCAR:   { label: "RegiSCAR（重症薬疹・DRESS）",
+                  cite: "Kardaun SH, et al. Variability in the clinical pattern of cutaneous side-effects of drugs with systemic symptoms: does a DRESS syndrome really exist? Br J Dermatol. 2007;156(3):609-611." }
   };
 
   /** 出典IDの配列から、画面表示用の短縮ラベル配列を返す。 */

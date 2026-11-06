@@ -6,6 +6,97 @@
   if (typeof LabsUI === "undefined") return;
   var esc = LabsCore.esc, C = LabsCore;
 
+  /* ---------- ⓪ 主訴からの診断アプローチ ---------- */
+
+  /** 所見チップ。点灯しているものと、まだ確認されていないものを同じ列に並べる。
+   *  未入力を陰性として隠さないことが、このツールの約束。 */
+  function chip(x) {
+    return '<span class="cc-sig' + (x.on ? " on" : "") + '">' +
+      (x.on ? "●" : "○") + " " + esc(x.t) + "</span>";
+  }
+
+  function killerHtml(k) {
+    return '<div class="cc-killer' + (k.litCount ? " lit" : "") + '">' +
+      "<h4>🚨 " + esc(k.name) +
+      '<span class="cnt">該当 ' + k.litCount + "／" + k.total + "</span></h4>" +
+      '<p class="why">' + esc(k.why) + "</p>" +
+      '<div class="cc-sigs">' + k.pointers.map(chip).join("") + "</div>" +
+      (k.tests.length ? '<div class="cc-tests"><b>外すためにすること</b><ul>' +
+        k.tests.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div>" : "") +
+      refs(k.refs) + "</div>";
+  }
+
+  function ddHtml(d) {
+    return '<div class="cc-dd' + (d.hitCount ? " hit" : "") + '">' +
+      '<h5>' + esc(d.name) + '<span class="cnt">該当 ' + d.hitCount + "／" + d.total + "</span></h5>" +
+      (d.hits.length ? '<div class="cc-hits">' + d.hits.map(function (t) {
+        return "<span>" + esc(t) + "</span>";
+      }).join("") + "</div>" : "") +
+      (d.note ? '<p class="note">' + esc(d.note) + "</p>" : "") +
+      "</div>";
+  }
+
+  function ccCardHtml(c) {
+    var litN = c.litFlags.length;
+    return '<details class="cc" open><summary>' + esc(c.icon + " " + c.label) +
+      (litN ? '<span class="cc-lit">red flag ' + litN + " 件 点灯</span>" : "") + "</summary>" +
+      '<div class="cc-body">' +
+      '<p class="cc-frame">' + esc(c.frame) + "</p>" +
+
+      '<h3 class="cc-h">まず外す — 時間が命を決める疾患</h3>' +
+      c.killers.map(killerHtml).join("") +
+
+      '<h3 class="cc-h">red flag — 点灯しているか、まだ確認していないか</h3>' +
+      '<div class="cc-sigs block">' + c.redflags.map(chip).join("") + "</div>" +
+      '<p class="note">○ は「所見なし」ではなく「まだ入力・確認されていない」ことを表します。' +
+      "患者背景・バイタル・検査値・身体所見を入れるほど、この列は埋まります。</p>" +
+
+      '<h3 class="cc-h">鑑別の地図</h3>' +
+      c.groups.map(function (g) {
+        return '<div class="cc-grp"><h4>' + esc(g.cat) + "</h4>" +
+          g.dds.map(ddHtml).join("") + "</div>";
+      }).join("") +
+
+      '<div class="cc-next">' +
+      '<div><h4>❓ 次に聞くこと</h4><ul>' +
+        c.ask.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div>" +
+      '<div><h4>🔍 次に診ること</h4><ul>' +
+        c.exam.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div>" +
+      "</div>" +
+      refs(c.refs) +
+      "</div></details>";
+  }
+
+  LabsUI.addSection(function (x) {
+    if (typeof DXCC === "undefined") return "";
+    var ctx = x.input.context || {};
+    var sel = ctx.complaints || [];
+    var cards = DXCC.assess(x.result.findings, x.input.values, x.result.derived, ctx);
+    var covered = DXCC.covered();
+    var uncovered = sel.filter(function (k) { return covered.indexOf(k) < 0; });
+
+    var head = '<div class="card"><h2>🧭 主訴からの診断アプローチ' +
+      '<span class="hint">' + (cards.length ? cards.length + " 件の主訴" : "主訴を選ぶと表示されます") +
+      "</span></h2><div class=\"body\">";
+
+    if (!cards.length) {
+      return head + '<div class="empty">患者背景の「主訴・症状」を選ぶと、' +
+        "その主訴で<b>まず外すべき致死的疾患</b>・<b>red flag の確認表</b>・" +
+        "<b>鑑別の地図</b>・<b>次に聞くこと／診ること</b>を提示します。" +
+        "問診・身体所見を入力すると、該当する所見が点灯します。</div></div></div>";
+    }
+
+    return head +
+      '<p style="font-size:12px;color:var(--dim);margin:0 0 12px">' +
+      "ここに並ぶのは確率ではありません。<b>その主訴で外してはいけない疾患</b>と、" +
+      "<b>現在入力されている所見がそのうちいくつを満たすか</b>を示しています。" +
+      "事前確率と、ここに現れない病歴・画像・経過は臨床医が与えてください。</p>" +
+      cards.map(ccCardHtml).join("") +
+      (uncovered.length ? '<p class="note">※ 選択された主訴のうち、' +
+        esc(uncovered.join("・")) + " は主訴別カードを未収載です。</p>" : "") +
+      "</div></div>";
+  });
+
   /* ---------- ① 酸塩基平衡：体系的読影のステップ ---------- */
   LabsUI.addSection(function (x) {
     var A = x.result.derived && x.result.derived.abg;

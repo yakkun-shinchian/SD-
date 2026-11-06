@@ -12,9 +12,10 @@ const root = new URL('../', import.meta.url);
 const c = vm.createContext({ console, Math, Date, JSON, isFinite, Number, String, Array, Object, parseFloat, parseInt });
 const load = (f) => vm.runInContext(fs.readFileSync(new URL(f, root), 'utf8'), c, { filename: f });
 ['labs-core.js', 'labs-cbc.js', 'labs-chem.js', 'labs-coag.js', 'labs-autoab.js',
- 'dx-refs.js', 'dx-abg.js', 'dx-scores.js', 'dx-core.js', 'labs-integrate.js'].forEach(load);
+ 'dx-refs.js', 'dx-abg.js', 'dx-hx.js', 'dx-scores.js', 'dx-core.js', 'dx-cc.js',
+ 'labs-integrate.js'].forEach(load);
 
-const { LabsCore, DXScores, DXCore, DXRefs, LabsIntegrate } = c;
+const { LabsCore, DXScores, DXCore, DXRefs, LabsIntegrate, DXCC, DXHx } = c;
 const sections = [];
 /* ---- 確信度の仕分け ----
  * solid    … 原典で値が確定しており、照合しても動く見込みが薄い
@@ -51,6 +52,10 @@ function confidenceOf(sec, it) {
     : { conf: 'solid', confNote: '' };
   if (sec === 'ddx') return { conf: 'design',
     confNote: '支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。' };
+  if (sec === 'hx') return { conf: 'design',
+    confNote: '問診・身体所見の選択肢の立て方は本アプリの設計判断です。臨床で実際に使う区分が抜けていないかをご覧ください。' };
+  if (sec === 'cc') return { conf: 'design',
+    confNote: '主訴ごとに「まず外す疾患」「red flag」「鑑別の並べ方」を選んだのは本アプリの設計判断です。抜けている疾患・所見のご指摘が最も有益です。' };
   if (sec === 'pat') return { conf: 'design',
     confNote: '判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。' };
   return { conf: 'solid', confNote: '' };
@@ -61,6 +66,7 @@ const refLabel = (ids) => (ids || []).map((id) => (DXRefs.get(id) ? DXRefs.get(i
 /* ---- 1. 基準値 ---- */
 const refItems = [];
 LabsCore.domains.forEach((d) => {
+  if (d.hideItems) return; // 問診・身体所見は「検査値」ではないため基準値の照合対象にしない
   d.analytes.forEach((a) => {
     if (a.type === 'qual' || a.type === 'select') return;
     const m = LabsCore.refText(a, { sex: 'm' });
@@ -83,6 +89,7 @@ sections.push({ id: 'ref', title: '基準値', lead:
 /* ---- 2. パニック値 ---- */
 const panicItems = [];
 LabsCore.domains.forEach((d) => {
+  if (d.hideItems) return;
   d.analytes.forEach((a) => {
     if (!a.panic) return;
     const p = [];
@@ -192,6 +199,65 @@ LabsIntegrate.syndromes.forEach((s) => {
 });
 sections.push({ id: 'pat', title: '所見パターン・横断症候群の判定根拠', lead:
   '★は赤判定（ただちに報告）です。閾値と根拠の妥当性を優先的にご確認ください。', items: patItems });
+
+/* ---- 8. 問診・身体所見の選択肢 ---- */
+const hxItems = [];
+(() => {
+  const hx = LabsCore.get('hx');
+  if (!hx) return;
+  const byGroup = {};
+  hx.analytes.forEach((a) => { (byGroup[a.group] = byGroup[a.group] || []).push(a); });
+  (hx.groups || Object.keys(byGroup)).forEach((g) => {
+    const list = byGroup[g] || [];
+    if (!list.length) return;
+    hxItems.push({
+      id: 'hx.' + g, label: g, group: '問診・身体所見',
+      detail: list.map((a) => a.label + '：' +
+        (a.options ? a.options.filter((o) => o !== '').join('／')
+                   : (a.unit || '') + ' 数値入力')).join('\n'),
+      note: list.filter((a) => a.note).map((a) => a.label + ' — ' + a.note).join('／'),
+      refs: [], star: false
+    });
+  });
+})();
+sections.push({ id: 'hx', title: '問診・身体所見の選択肢', lead:
+  '身体所見の入力肢そのものの妥当性です。臨床で実際に使う区分が落ちていないか、' +
+  '語（例：捻髪音／水泡音の呼び分け）が成書と合っているかをご覧ください。', items: hxItems });
+
+/* ---- 9. 主訴からの診断アプローチ ---- */
+const ccItems = [];
+(DXCC ? DXCC.list : []).forEach((cc) => {
+  const grp = '主訴：' + cc.label;
+  (cc.killers || []).forEach((k, i) => {
+    ccItems.push({
+      id: 'cc.' + cc.key + '.kill' + i, label: k.name, group: grp,
+      detail: '【この主訴で外す理由】' + k.why +
+        '\n【示唆する所見】' + (k.pointers || []).map(DXCC.sigText).join('・') +
+        '\n【外すためにすること】' + (k.tests || []).join('／'),
+      note: '', refs: k.refs || [], star: true
+    });
+  });
+  ccItems.push({
+    id: 'cc.' + cc.key + '.flags', label: '【' + cc.label + '】red flag と次の一手',
+    group: grp,
+    detail: '【red flag】' + (cc.redflags || []).map(DXCC.sigText).join('・') +
+      '\n【次に聞くこと】' + (cc.ask || []).join('／') +
+      '\n【次に診ること】' + (cc.exam || []).join('／'),
+    note: cc.frame, refs: cc.refs || [], star: true
+  });
+  ccItems.push({
+    id: 'cc.' + cc.key + '.map', label: '【' + cc.label + '】鑑別の地図',
+    group: grp,
+    detail: (cc.groups || []).map((g) => '《' + g.cat + '》' +
+      (g.dds || []).map((d) => d.name + '（' + (d.sup || []).map(DXCC.sigText).join('・') + '）').join('　|　')
+    ).join('\n'),
+    note: '', refs: cc.refs || [], star: false
+  });
+});
+sections.push({ id: 'cc', title: '主訴からの診断アプローチ', lead:
+  '★は「その主訴でまず外すべき疾患」と「red flag の一覧」です。' +
+  '外すべき疾患の抜け、red flag の抜け、鑑別の並べ方について、先生の診療の順序と突き合わせてください。',
+  items: ccItems });
 
 /* ---- 確信度を全項目へ付与 ---- */
 sections.forEach((sec) => sec.items.forEach((it) => Object.assign(it, confidenceOf(sec.id, it))));

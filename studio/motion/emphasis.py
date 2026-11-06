@@ -150,7 +150,13 @@ def validate_frames(tl, cam, overlays):
                 'Invalid camera interval or drift; keep reading view stable')
         if i:
             require(cam.keys[i-1]['t']+cam.keys[i-1]['move'] <= key['t'], 'Camera moves overlap')
+        # The initial key establishes the view; repeated identical views are
+        # harmless. Compare clamped views, matching what Camera actually renders.
+        jump = (i > 0 and key['move'] == 0
+                and cam.clamp(*cam.keys[i-1]['v']) != cam.clamp(*key['v']))
         for o in overlays:
+            require(not (jump and o['_t0'] <= key['t'] < o['_until']+o['_fade']),
+                    'Camera must arrive before reading and hold through fade')
             require(not (key['move'] > 0 and key['t'] < o['_until']+o['_fade'] and key['t']+key['move'] > o['_t0']),
                     'Camera must arrive before reading and hold through fade')
     require(cam.keys and cam.keys[0]['t'] == 0, 'Camera must start at zero')

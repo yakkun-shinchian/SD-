@@ -18,7 +18,10 @@ device's speech synthesis (Web Speech API) or by pre-rendered VOICEVOX
 The entire UI and all content are in **Japanese**, written in plain, standard
 polite Japanese (です・ます). The ずんだもん 「〜なのだ／〜のだ」 speech style was
 deliberately removed from all content copy — do **not** reintroduce it. Preserve
-this register and language when editing content.
+this register and language when editing content. **This applies to RadioDeck too**:
+its 「やさしく／しっかり」 switch changes the *depth* of the explanation, never the
+register — both levels are です・ます. `tests/radiology-medical.test.cjs` enforces
+this mechanically.
 
 ## How to run
 

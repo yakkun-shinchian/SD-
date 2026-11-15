@@ -1,5 +1,5 @@
 /* =========================================================================
- * RadioDeck — アプリ本体なのだ
+ * RadioDeck — アプリ本体です
  *
  *  ルーティング / 所見の逆引き / 辞典 / 読影手順 / AI読影（自前キー方式）
  *
@@ -26,7 +26,7 @@
       .replace(/'/g, "&#39;");
   }
 
-  // 改行を <br> に（escape した後にだけ使うのだ）
+  // 改行を <br> に（escape した後にだけ使います）
   function nl2br(safe) {
     return safe.replace(/\n/g, "<br>");
   }
@@ -37,7 +37,7 @@
       if (value === null) localStorage.removeItem(key);
       else localStorage.setItem(key, value);
     } catch (e) {
-      /* プライベートブラウジングなどでは黙って諦めるのだ */
+      /* プライベートブラウジングなどでは黙って諦めます */
     }
     return null;
   }
@@ -82,7 +82,7 @@
     level = next;
     store("radiodeck-level", next);
     applyLevel();
-    router(); // 表示中の内容を描き直すのだ
+    router(); // 表示中の内容を描き直します
   }
 
   function applyTheme(theme) {
@@ -148,7 +148,7 @@
 
     return `
       <div class="rhead">
-        <h1>「これは何？」と「どうしてそう見えるの？」に、両方こたえるのだ</h1>
+        <h1>「これは何？」と「どうしてそう見えるの？」に、両方こたえます</h1>
         <p>
           所見の名前を覚えるだけなら暗記で足ります。でも<strong>なぜそう見えるのか</strong>がわかると、
           見たことのない所見でも推論できるようになります。RadioDeck は、その「なぜ」を主役にした読影アトラスです。
@@ -205,7 +205,7 @@
    * 逆引きナビ
    * ===================================================================== */
 
-  // 選択状態は領域ごとに保持するのだ（タブを行き来しても消えないのだ）
+  // 選択状態は領域ごとに保持します（タブを行き来しても消えません）
   const navState = Object.create(null);
 
   function selectedTags(regionKey) {
@@ -742,7 +742,7 @@
           try {
             const err = await res.json();
             detail = (err && err.error && err.error.message) || "";
-          } catch (e) { /* JSONでない場合もあるのだ */ }
+          } catch (e) { /* JSONでない場合もあります */ }
           throw new Error(
             `APIがエラーを返しました（HTTP ${res.status}）${detail ? "：" + detail : ""}`
           );
@@ -769,7 +769,7 @@
     });
 
     function renderAnswer(text) {
-      // 回答文に出てくる所見名を辞典へつなぐのだ
+      // 回答文に出てくる所見名を辞典へつなぎます
       const mentioned = RAD_SIGNS.filter((s) => {
         const n = s.name.replace(/（.*?）/g, "");
         return text.indexOf(n) !== -1 || (s.en && text.toLowerCase().indexOf(s.en.toLowerCase()) !== -1);

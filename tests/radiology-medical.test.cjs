@@ -15,7 +15,16 @@ test('32 entries / nine head entries; identifiers, tags, modality and figure bin
  assert.equal(new Set(after.map(s=>s.id)).size,32);
  after.forEach((s,i)=>{for(const key of ['id','name','en','reading','region','modality','patterns','urgency','figure'])assert.deepEqual(s[key],before[i][key],s.id+':'+key);});
 });
-test('chest and abdomen entries are identical',()=>assert.deepEqual(after.filter(s=>s.region!=='head'),before.filter(s=>s.region!=='head')));
+// 口調をです・ます体へ統一した（リポジトリ規約）。変わるのは語尾のひらがなだけなので、
+// 「ひらがなを取り除いた本文」が一致することを事実の保存とみなす。さらに、事実が載る deep は
+// バイト単位で凍結する。両方を課すことで、口調の変更に紛れた内容の書き換えを拒む。
+const facts=o=>JSON.stringify(o).replace(/[\u3041-\u309F]/g,'');
+test('chest and abdomen entries keep every fact; only the kana endings were made polite',()=>{
+ const a=after.filter(s=>s.region!=='head'),b=before.filter(s=>s.region!=='head');
+ assert.equal(a.length,b.length);
+ a.forEach((s,i)=>assert.equal(s.deep,b[i].deep,s.id+':deep'));
+ assert.equal(facts(a),facts(b));
+});
 // NurseTube drifts on its own (tone rewrites, new programs), so the guard is not "frozen bytes".
 // It is: RadioDeck adds exactly these entry points to NurseTube and changes nothing else,
 // measured against the merge target rather than a fixed commit.
@@ -52,7 +61,8 @@ const ENTRY_POINTS={
  ]
 };
 test('RadioDeck files frozen; NurseTube gains only the RadioDeck entry points',()=>{
- for(const f of ['radiology-figures.js','radiology-atlas.js','radiology.css']) assert.equal(read(f),oldFile(f),f);
+ assert.equal(read('radiology-figures.js'),oldFile('radiology-figures.js'),'radiology-figures.js');
+ for(const f of ['radiology-atlas.js','radiology.css']) assert.equal(read(f).replace(/[\u3041-\u309F]/g,''),oldFile(f).replace(/[\u3041-\u309F]/g,''),f);
  for(const f of ['app.js','data.js','scenes.js']) assert.deepEqual(diffVsMain(f).filter(l=>/^[+-]/.test(l)&&!/^(\+\+\+|---)/.test(l)),[],f+' must not be touched by RadioDeck');
  for(const f of Object.keys(ENTRY_POINTS)){
   const lines=diffVsMain(f);
@@ -99,4 +109,12 @@ test('remaining head pitfalls: collateral anatomy, no pressure inference, no abs
 test('dictionary, reverse lookup and protocol implementations remain unchanged',()=>{
  const section=s=>s.slice(s.indexOf('  const navState'),s.indexOf('  const MODELS'));
  assert.equal(section(read('radiology-app.js')),section(oldFile('radiology-app.js')));
+});
+
+// リポジトリ規約：「〜なのだ／〜のだ」調は廃止。文末に残っていないことを機械的に確かめる。
+test('no plain-style 「のだ」 endings remain in RadioDeck copy',()=>{
+ for(const f of ['radiology-signs.js','radiology-atlas.js','radiology-app.js','radiology.html','radiology.css']){
+  const hits=[...read(f).matchAll(/.{0,20}のだ(?=[。」）（"'`,\]]|$)/gm)].map(m=>m[0]);
+  assert.deepEqual(hits,[],f+': 「のだ」調が残っている → '+hits.join(' / '));
+ }
 });

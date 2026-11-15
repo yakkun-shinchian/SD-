@@ -374,3 +374,42 @@ details.cc[open]>summary::before{content:"▾"}
   .cc-body{padding:10px 11px 12px}
   .cc-killer{padding:9px 10px}
 }
+
+/* ---------- 音声・貼り付けの取り込み（dx-intake.js） ---------- */
+#ik-text{width:100%; box-sizing:border-box; margin-top:8px; padding:10px 12px;
+  font:inherit; font-size:14px; line-height:1.7; color:var(--txt);
+  background:var(--panel2); border:1px solid var(--line2); border-radius:9px; resize:vertical}
+#ik-text:focus{outline:2px solid var(--accent); outline-offset:-1px}
+#ik-mic.rec{background:var(--red); color:#fff; border-color:var(--red)}
+.ik-result{margin-top:12px; border-top:1px solid var(--line); padding-top:11px}
+.ik-result h4{margin:0 0 6px; font-size:13px}
+.ik-row{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap;
+  padding:6px 9px; margin-bottom:4px; border:1px solid var(--line); border-radius:7px;
+  background:var(--panel); cursor:pointer; font-size:13px}
+.ik-row.off{opacity:.45}
+.ik-row input{margin:0; flex:none}
+.ik-label{font-weight:700; min-width:9em}
+.ik-val{font-variant-numeric:tabular-nums; font-weight:800; color:var(--accent)}
+.ik-row.off .ik-val{color:var(--dim)}
+.ik-note{font-size:11px; color:var(--amber); border:1px solid var(--amber);
+  border-radius:999px; padding:1px 7px}
+.ik-raw{margin-left:auto; font-size:11.5px; color:var(--dim)}
+@media (max-width:640px){
+  .ik-label{min-width:0}
+  .ik-raw{margin-left:0; width:100%}
+}
+
+/* ---------- 次に確かめること（dx-next.js） ---------- */
+.nx-head{font-size:13px; line-height:1.7; color:var(--txt); margin:0 0 8px; font-weight:700}
+.nx-item{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; width:100%;
+  text-align:left; padding:9px 12px; margin-bottom:5px; cursor:pointer;
+  background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  color:var(--txt); font:inherit; font-size:13px}
+.nx-item:hover{border-color:var(--accent); background:var(--panel3)}
+.nx-kind{flex:none; font-size:10.5px; font-weight:800; border-radius:999px; padding:2px 8px}
+.nx-kind.lab{background:var(--accent); color:#04231b}
+.nx-kind.exam{background:var(--violet); color:#fff}
+.nx-label{font-weight:700}
+.nx-unit{font-weight:500; font-size:11px; color:var(--dim)}
+.nx-why{margin-left:auto; font-size:11.5px; color:var(--sub)}
+@media (max-width:640px){ .nx-why{margin-left:0; width:100%} }

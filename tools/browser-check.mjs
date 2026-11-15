@@ -156,6 +156,78 @@ for (const width of [390, 1200]) {
 }
 await page.setViewportSize({ width: 1200, height: 1000 });
 
+/* 音声・貼り付けの取り込み：例 → 読み取る → 確認 → 反映 */
+await page.goto(base + '/dx.html', { waitUntil: 'networkidle' });
+if (await page.locator('#dlg-ok').count()) await page.locator('#dlg-ok').click();
+await page.locator('#btn-clear').click();
+await page.waitForTimeout(400);
+await openAll();
+await page.locator('#ik-example').click();
+await page.waitForTimeout(150);
+await page.locator('#ik-parse').click();
+await page.waitForTimeout(300);
+const ikRows = await page.locator('.ik-row').count();
+check('貼り付けた文章から項目を読み取る', ikRows >= 15, 'rows=' + ikRows);
+check('反映の前に確認表を出す', (await page.locator('#ik-apply').count()) === 1);
+check('単位の読み替えを明示する',
+  /×10⁴/.test(await page.locator('.ik-row:has-text("血小板")').first().textContent()));
+
+// 1行だけ外して、外したものが入力欄に入らないことを見る
+const naRow = page.locator('.ik-row:has-text("ナトリウム")').first();
+await naRow.locator('input[data-ik]').uncheck();
+await page.waitForTimeout(200);
+await page.locator('#ik-apply').click();
+await page.waitForTimeout(600);
+await openAll();
+check('読み取った検査値が入力欄に入る',
+  (await page.locator('input[data-lab="cr"]').inputValue()) === '1.4');
+check('チェックを外した項目は入らない',
+  (await page.locator('input[data-lab="na"]').inputValue()) === '');
+check('バイタルも入る', (await page.locator('input[data-vital="sbp"]').inputValue()) === '96');
+check('主訴・既往・内服も反映される',
+  (await page.locator('.chip[data-group="complaints"][data-key="chest_pain"].on').count()) === 1 &&
+  (await page.locator('.chip[data-group="history"][data-key="af"].on').count()) === 1 &&
+  (await page.locator('.chip[data-group="meds"][data-key="warfarin"].on').count()) === 1);
+check('身体所見も反映される',
+  (await page.locator('select[data-lab="hx_bp_lr"]').inputValue()) === 'あり（20mmHg 以上）');
+check('取り込んだ結果が主訴カードを立ち上げる',
+  (await page.locator('details.cc', { has: page.locator('summary:has-text("胸痛")') }).count()) === 1);
+
+/* 次に確かめること：主訴だけでも出る／押すと入力欄へ飛ぶ／入れると消える */
+await page.goto(base + '/dx.html', { waitUntil: 'networkidle' });
+if (await page.locator('#dlg-ok').count()) await page.locator('#dlg-ok').click();
+await page.locator('#btn-clear').click();
+await page.waitForTimeout(400);
+await openAll();
+await page.locator('.chip[data-group="complaints"][data-key="dyspnea"]').click();
+await page.waitForTimeout(500);
+const nxCard = page.locator('.card', { has: page.locator('h2:has-text("次に確かめること")') }).first();
+check('主訴だけでも「次に確かめること」が出る', (await nxCard.locator('.nx-item').count()) > 0);
+check('検査値が無くても候補を絞る前提を説明する',
+  /まだ候補を絞るだけの情報がありません/.test(await nxCard.locator('.nx-head').textContent()));
+
+// 提案された項目を実際に入れると、その項目は提案から消える
+const firstKey = await nxCard.locator('.nx-item').first().getAttribute('data-nx');
+await nxCard.locator('.nx-item').first().click();
+await page.waitForTimeout(500);
+const focused = await page.evaluate(() => {
+  const a = document.activeElement;
+  return a ? (a.getAttribute('data-lab') || a.getAttribute('data-vital')) : null;
+});
+check('項目を押すとその入力欄へ移る', focused === firstKey, firstKey + ' → ' + focused);
+
+const target = page.locator('[data-lab="' + firstKey + '"], [data-vital="' + firstKey + '"]').first();
+if ((await target.evaluate(el => el.tagName)) === 'SELECT') {
+  const opts = await target.evaluate(el => [...el.options].map(o => o.value).filter(Boolean));
+  await target.selectOption(opts[0]);
+} else {
+  await target.fill('1');
+}
+await page.waitForTimeout(600);
+await openAll();
+check('入力した項目は提案から消える',
+  (await nxCard.locator('.nx-item[data-nx="' + firstKey + '"]').count()) === 0);
+
 /* 公開されている原典へのリンクが出ること */
 await page.goto(base + '/dx.html', { waitUntil: 'networkidle' });
 if (await page.locator('#dlg-ok').count()) await page.locator('#dlg-ok').click();

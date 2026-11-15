@@ -6,6 +6,155 @@
   if (typeof LabsUI === "undefined") return;
   var esc = LabsCore.esc, C = LabsCore;
 
+  /* ---------- 入力：音声・貼り付けからの取り込み ---------- */
+
+  var EXAMPLE = "68歳男性、突然発症の胸痛。血圧 96/60、脈110、呼吸24、SpO2 95%、体温36度8。" +
+    "ナトリウム138、カリウム4.2、クレアチニン1.4、CRP 8.2、トロポニン0.08、Dダイマー3.5、血小板18万。" +
+    "冷汗あり、血圧の左右差あり。ワーファリン内服中。心房細動の既往。";
+
+  function speechAvailable() {
+    return typeof window !== "undefined" &&
+      !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  }
+
+  function intakeState(st) {
+    if (!st.intake) st.intake = { text: "", hits: [], notes: [], leftover: "", off: {} };
+    return st.intake;
+  }
+
+  /** 読み取り結果の確認表。音声認識は必ず誤るので、反映の前に必ずここを通す。 */
+  function intakeResultHtml(ik) {
+    if (!ik.hits.length && !ik.leftover) return "";
+    if (!ik.hits.length) {
+      return '<div class="empty">読み取れる項目がありませんでした。' +
+        "検査名と数値を続けて（例：ナトリウム 138）言うか、書いてみてください。</div>";
+    }
+    var rows = ik.hits.map(function (h, i) {
+      var val = (h.display !== undefined ? h.display : h.value);
+      return '<label class="ik-row' + (ik.off[i] ? " off" : "") + '">' +
+        '<input type="checkbox" data-ik="' + i + '"' + (ik.off[i] ? "" : " checked") + ">" +
+        '<span class="ik-label">' + esc(h.label) + "</span>" +
+        '<span class="ik-val">' + esc(String(val)) + " " + esc(h.unit || "") + "</span>" +
+        (h.note ? '<span class="ik-note">' + esc(h.note) + "</span>" : "") +
+        '<span class="ik-raw">「' + esc(h.raw) + "」</span></label>";
+    }).join("");
+    var n = ik.hits.filter(function (_, i) { return !ik.off[i]; }).length;
+    return '<div class="ik-result"><h4>読み取った内容（' + n + "／" + ik.hits.length + " 件を反映）</h4>" +
+      '<p class="note">音声認識も文字認識も必ず誤ります。<b>反映する前にここで必ず確かめてください。</b>' +
+      "違うものはチェックを外せます。</p>" +
+      rows +
+      (ik.leftover ? '<p class="note">読み取れなかった部分：' + esc(ik.leftover) + "</p>" : "") +
+      '<div class="btns"><button class="btn primary" id="ik-apply">この内容を入力欄へ反映する</button></div>' +
+      "</div>";
+  }
+
+  LabsUI.addInputPanel(function (x) {
+    if (typeof DXIntake === "undefined") return "";
+    var ik = intakeState(x.state);
+    return '<details class="card" id="ik-card" open><summary>🎤 音声・貼り付けで取り込む' +
+      '<span class="hint">1項目ずつ打たなくてよい</span></summary><div class="body">' +
+      '<p class="note">検査値も所見も、話し言葉のまま入れてください。' +
+      "電子カルテからの貼り付け、写真から選んだ文字、PDF から写した文字も同じように読み取ります。</p>" +
+      '<div class="btns">' +
+      (speechAvailable()
+        ? '<button class="btn" id="ik-mic">🎤 話して入力</button>'
+        : '<span class="note">この端末のブラウザは音声入力に対応していません（iOS・macOS の Safari、Chrome で使えます）。貼り付けはお使いいただけます。</span>') +
+      '<button class="btn" id="ik-parse">読み取る</button>' +
+      '<button class="btn" id="ik-example">例を入れる</button>' +
+      '<button class="btn" id="ik-reset">消す</button>' +
+      "</div>" +
+      '<textarea id="ik-text" rows="4" placeholder="' + esc(EXAMPLE) + '">' + esc(ik.text) + "</textarea>" +
+      '<div id="ik-result">' + intakeResultHtml(ik) + "</div>" +
+      "</div></details>";
+  });
+
+  LabsUI.addBinder(function (root, ui) {
+    var rec = null, listening = false;
+
+    function paint() {
+      var box = root.querySelector("#ik-result");
+      if (box) box.innerHTML = intakeResultHtml(intakeState(ui.state));
+    }
+    function setText(v) {
+      intakeState(ui.state).text = v;
+      var ta = root.querySelector("#ik-text");
+      if (ta && ta.value !== v) ta.value = v;
+      LabsUI.save();
+    }
+
+    root.addEventListener("input", function (e) {
+      if (e.target.id === "ik-text") { intakeState(ui.state).text = e.target.value; LabsUI.save(); }
+    });
+
+    root.addEventListener("change", function (e) {
+      var cb = e.target.closest("input[data-ik]");
+      if (!cb) return;
+      var ik = intakeState(ui.state);
+      ik.off[cb.getAttribute("data-ik")] = !cb.checked;
+      LabsUI.save(); paint();
+    });
+
+    root.addEventListener("click", function (e) {
+      var id = e.target.id;
+      var ik = intakeState(ui.state);
+
+      if (id === "ik-example") { setText(EXAMPLE); return; }
+      if (id === "ik-reset") {
+        ui.state.intake = { text: "", hits: [], notes: [], leftover: "", off: {} };
+        setText(""); LabsUI.save(); paint(); return;
+      }
+      if (id === "ik-parse") {
+        var ta = root.querySelector("#ik-text");
+        var r = DXIntake.parse(ta ? ta.value : ik.text);
+        ik.text = ta ? ta.value : ik.text;
+        ik.hits = r.hits; ik.notes = r.notes; ik.leftover = r.leftover; ik.off = {};
+        LabsUI.save(); paint(); return;
+      }
+      if (id === "ik-apply") {
+        var keep = ik.hits.filter(function (_, i) { return !ik.off[i]; });
+        if (!keep.length) return;
+        var n = DXIntake.apply(keep, ui.state);
+        ik.hits = []; ik.leftover = ""; ik.off = {};
+        LabsUI.save();
+        ui.redraw();
+        var out = document.getElementById("lab-result");
+        if (out) out.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (id === "ik-mic") {
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) return;
+        if (listening && rec) { rec.stop(); return; }
+        rec = new SR();
+        rec.lang = "ja-JP";
+        rec.continuous = true;
+        rec.interimResults = true;
+        var fixed = (root.querySelector("#ik-text") || {}).value || "";
+        rec.onresult = function (ev) {
+          var add = "";
+          for (var i = ev.resultIndex; i < ev.results.length; i++) {
+            if (ev.results[i].isFinal) fixed += ev.results[i][0].transcript;
+            else add += ev.results[i][0].transcript;
+          }
+          var ta2 = root.querySelector("#ik-text");
+          if (ta2) ta2.value = fixed + add;
+          intakeState(ui.state).text = fixed;
+        };
+        rec.onend = function () {
+          listening = false;
+          var b = root.querySelector("#ik-mic");
+          if (b) { b.textContent = "🎤 話して入力"; b.classList.remove("rec"); }
+          LabsUI.save();
+        };
+        rec.onerror = rec.onend;
+        try { rec.start(); } catch (err) { return; }
+        listening = true;
+        var btn = root.querySelector("#ik-mic");
+        if (btn) { btn.textContent = "⏹ 話し終わった"; btn.classList.add("rec"); }
+      }
+    });
+  });
+
   /* ---------- ⓪ 主訴からの診断アプローチ ---------- */
 
   /** 所見チップ。点灯しているものと、まだ確認されていないものを同じ列に並べる。
@@ -95,6 +244,56 @@
       (uncovered.length ? '<p class="note">※ 選択された主訴のうち、' +
         esc(uncovered.join("・")) + " は主訴別カードを未収載です。</p>" : "") +
       "</div></div>";
+  });
+
+  /* ---------- 次に確かめること ---------- */
+
+  LabsUI.addSection(function (x) {
+    if (typeof DXNext === "undefined") return "";
+    var ctx = x.input.context || {};
+    var r;
+    try { r = DXNext.suggest(x.result.findings, x.input.values, x.result.derived, ctx, { limit: 10 }); }
+    catch (e) { return ""; }
+    if (!r.tests.length) return "";
+
+    var head = r.candidates.length
+      ? "いま挙がっている候補：" + r.candidates.slice(0, 3).map(function (c) {
+          return c.name + "（合致度 " + c.fit + "%）";
+        }).join("、")
+      : "まだ候補を絞るだけの情報がありません。まず外すべき疾患から確かめます。";
+
+    return '<div class="card"><h2>🔎 次に確かめること' +
+      '<span class="hint">' + r.total + " 件のうち、効く順に</span></h2><div class=\"body\">" +
+      '<p class="nx-head">' + esc(head) + "</p>" +
+      '<p style="font-size:12px;color:var(--dim);margin:0 0 12px">' +
+      "ここに出るのは<b>まだ入力・確認されていない</b>ものです。「無い」という意味ではありません。" +
+      "項目を押すと入力欄へ移ります。分からないもの・測れないものは飛ばして構いません。" +
+      "<b>手元にある情報だけで鑑別は出ます。</b></p>" +
+      r.tests.map(function (t) {
+        return '<button class="nx-item" data-nx="' + esc(t.key) + '">' +
+          '<span class="nx-kind ' + (t.kind === "exam" ? "exam" : "lab") + '">' +
+          (t.kind === "exam" ? "診る" : "測る") + "</span>" +
+          '<span class="nx-label">' + esc(t.label) +
+          (t.unit ? ' <span class="nx-unit">' + esc(t.unit) + "</span>" : "") + "</span>" +
+          '<span class="nx-why">' + esc(t.reasons[0] || "") + "</span>" +
+          "</button>";
+      }).join("") +
+      "</div></div>";
+  });
+
+  LabsUI.addBinder(function (root) {
+    root.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-nx]");
+      if (!b) return;
+      var key = b.getAttribute("data-nx");
+      var el = root.querySelector('[data-lab="' + key + '"]') ||
+               root.querySelector('[data-vital="' + key + '"]');
+      if (!el) return;
+      var card = el.closest("details");
+      if (card && !card.open) card.open = true;
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(function () { try { el.focus(); } catch (err) { /* noop */ } }, 320);
+    });
   });
 
   /* ---------- ① 酸塩基平衡：体系的読影のステップ ---------- */

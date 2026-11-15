@@ -1,13 +1,13 @@
 /*! verify-data.js — tools/build-verify-checklist.mjs が自動生成。直接編集しないこと。 */
 var VERIFY_DATA = {
  "generated": "2026-11-15",
- "total": 458,
- "stars": 253,
+ "total": 500,
+ "stars": 291,
  "byConf": {
   "solid": 73,
   "facility": 72,
   "varies": 21,
-  "design": 292
+  "design": 334
  },
  "sections": [
   {
@@ -5334,6 +5334,475 @@ var VERIFY_DATA = {
      "star": false,
      "conf": "design",
      "confNote": "主訴ごとに「まず外す疾患」「red flag」「鑑別の並べ方」を選んだのは本アプリの設計判断です。抜けている疾患・所見のご指摘が最も有益です。"
+    }
+   ]
+  },
+  {
+   "id": "intake",
+   "title": "音声・貼り付けの取り込み語彙",
+   "lead": "話した言葉・貼り付けた文章から、どの語をどの項目として拾うかの一覧です。取り違えが起きうる語と、臨床で実際に使うのに拾えていない言い方を見てください。",
+   "items": [
+    {
+     "id": "intake.lab",
+     "label": "検査名の言い換え",
+     "group": "取り込み",
+     "detail": "WBC 白血球数：白血球数／白血球／WBC\n好中球（分葉核＋桿状核）：好中球\nリンパ球：リンパ球\n好酸球：好酸球\n芽球：芽球／ブラスト\n異型リンパ球：異型リンパ球\nRBC 赤血球数：赤血球数／赤血球／RBC\nHb ヘモグロビン：ヘモグロビン／血色素／Hb／HGB\nHt ヘマトクリット：ヘマトクリット／Ht／HCT\nPLT 血小板数：血小板数／血小板／PLT／プレート\n網赤血球：網赤血球／レチクロ\nAST（GOT）：AST／GOT\nALT（GPT）：ALT／GPT\nLD（LDH・IFCC法）：LDH／LD\nALP（IFCC法）：ALP\nγ-GT（γ-GTP）：γ-GTP／γGTP／ガンマGTP／GGT\n総ビリルビン：総ビリルビン／T-Bil／TBil／ビリルビン\n直接ビリルビン：直接ビリルビン／D-Bil／DBil\nChE（コリンエステラーゼ）：コリンエステラーゼ／ChE\n総蛋白：総蛋白／総タンパク／TP\nアルブミン：アルブミン／Alb\nアンモニア（NH₃）：アンモニア／NH3\n尿素窒素（BUN・UN）：尿素窒素／BUN／UN\nクレアチニン：クレアチニン／Cr／Cre\n尿酸：尿酸／UA\nナトリウム（Na）：ナトリウム／Na\nカリウム（K）：カリウム／K\nクロール（Cl）：クロール／クロル／Cl\nカルシウム（Ca）：カルシウム／Ca\n無機リン（P）：無機リン／リン／IP\nマグネシウム（Mg）：マグネシウム／Mg\n重炭酸イオン（HCO₃⁻）：重炭酸／ビカーボ／HCO3／HCO3-\n血糖（グルコース）：血糖／グルコース／BS／Glu\nHbA1c（NGSP）：ヘモグロビンエーワンシー／HbA1c／A1c\n総コレステロール：総コレステロール／T-Cho\nLDL コレステロール：LDL\nHDL コレステロール：HDL\n中性脂肪（TG）：中性脂肪／トリグリセリド／TG\nCK（CPK）：CPK／CK\nCK-MB：CK-MB／CKMB\nトロポニン（I または T）：高感度トロポニン／トロポニン\nNT-proBNP：NT-proBNP／NTproBNP／エヌティープロBNP\nBNP：BNP\nアミラーゼ（AMY）：アミラーゼ／AMY\nリパーゼ：リパーゼ\nCRP：CRP／シーアールピー\nプロカルシトニン（PCT）：プロカルシトニン／PCT\n乳酸（ラクテート）：乳酸／ラクテート／Lac\n血清浸透圧（実測）：血清浸透圧／実測浸透圧\n尿浸透圧：尿浸透圧\n尿中ナトリウム（随時尿）：尿中ナトリウム／尿中Na\n尿中K：尿中カリウム／尿中K\n尿中Cl：尿中クロール／尿中Cl\n尿比重：尿比重\npH：pH／ピーエッチ\nPaCO₂：PaCO2／pCO2／二酸化炭素分圧／炭酸ガス分圧\nPaO₂：PaO2／pO2／酸素分圧\nBE（base excess）：ベースエクセス／BE\nFiO₂：FiO2／吸入酸素濃度\nPT（プロトロンビン時間）：PT秒／プロトロンビン時間\nPT 活性：PT活性／PT%\nPT-INR：PT-INR／INR\nAPTT（活性化部分トロンボプラスチン時間）：APTT\nフィブリノゲン：フィブリノゲン／フィブリノーゲン／Fib\nFDP（フィブリン分解産物）：FDP\nD-ダイマー：Dダイマー／D-ダイマー／ディーダイマー／DD\nアンチトロンビン（AT-III）：アンチトロンビン／AT-III／ATIII／AT3\nTAT（トロンビン-アンチトロンビン複合体）：TAT\n補体 C3：補体C3／C3\n補体 C4：補体C4／C4\nCH50（血清補体価）：CH50\nIgG：IgG\nIgG4：IgG4\n可溶性IL-2レセプター：可溶性IL-2レセプター／sIL-2R／sIL2R\n抗 dsDNA 抗体：抗dsDNA抗体／dsDNA\nMPO-ANCA（P-ANCA）：MPO-ANCA／MPOANCA／P-ANCA\nPR3-ANCA（C-ANCA）：PR3-ANCA／PR3ANCA／C-ANCA\nリウマトイド因子（RF）：リウマトイド因子／RF\n抗 CCP 抗体：抗CCP抗体／抗CCP／CCP\nMMP-3：MMP-3／MMP3\nTRAb（TSH受容体抗体）：TRAb\n抗 AChR（アセチルコリン受容体）抗体：抗AChR抗体／AChR抗体\n抗 GAD 抗体：抗GAD抗体／GAD抗体",
+     "note": "話し言葉・カルテ表記からこの項目として拾う語。取り違えが起きうる語があればご指摘ください。",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.vital",
+     "label": "バイタルの言い換え",
+     "group": "取り込み",
+     "detail": "bt：体温／BT／KT／熱\nhr：心拍数／脈拍／脈／HR／PR\nrr：呼吸数／呼吸／RR\nspo2：SpO2／サチュレーション／サチュ／酸素飽和度\nsbp：収縮期血圧\ndbp：拡張期血圧",
+     "note": "",
+     "refs": [],
+     "star": false,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_onset",
+     "label": "発症様式 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "突然発症／突然／急に始ま → 突然（秒〜分で完成）\n数時間前から／急性発症 → 急性（数時間）\n数か月前から／慢性の経過 → 慢性（数か月以上）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_pain_max",
+     "label": "症状のピーク の言い回し",
+     "group": "取り込み・所見",
+     "detail": "発症直後が最強／最初が一番痛／突然最強 → 発症直後が最強",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_course",
+     "label": "その後の経過 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "増悪／悪化して → 進行・増悪",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_trigger",
+     "label": "契機・状況 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "労作時／歩くと／動くと → 労作時\n薬を始めて／投与開始後 → 薬剤開始後\n感染の後／感冒後／下痢の後 → 感染後",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_resp_effort",
+     "label": "呼吸様式 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "努力呼吸／補助筋 → 努力呼吸（補助筋使用）\nクスマウル／Kussmaul → Kussmaul（深く大きい）\nチェーンストークス／Cheyne → Cheyne-Stokes",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_orthopnea",
+     "label": "起坐呼吸 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "起坐呼吸／起座呼吸／坐位で楽 → あり",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_lung",
+     "label": "肺野の聴診 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "捻髪音／ファインクラックル／fine crackles → 捻髪音（両側下肺の fine crackles）\n水泡音／coarse crackles／コースクラックル → 水泡音（coarse crackles）\nwheeze／ウィーズ／喘鳴／笛音 → wheeze（笛音）\n片側の呼吸音減弱／片側呼吸音減弱／一側呼吸音減弱 → 片側で呼吸音減弱",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_cough",
+     "label": "咳・喀痰 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "膿性痰／膿性喀痰 → 膿性喀痰\n血痰／喀血 → 血痰・喀血",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_jvd",
+     "label": "頸静脈怒張 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "頸静脈怒張／けい静脈怒張／JVD → あり",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_murmur",
+     "label": "心雑音 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "収縮期雑音 → 収縮期\n拡張期雑音 → 拡張期\n新規の心雑音／新しい雑音 → 新規出現／性状が変化",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_heart_sound",
+     "label": "心音・心膜 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "心音減弱／心音が遠い → 減弱（遠い心音）\n3音／III音／ギャロップ → III音（ギャロップ）\n心膜摩擦音 → 心膜摩擦音",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_bp_lr",
+     "label": "血圧の左右差 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "血圧の左右差／左右差あり／上下肢差 → あり（20mmHg 以上）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_perfusion",
+     "label": "末梢循環 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "冷汗／冷や汗／湿潤 → 冷汗・湿潤\nCRT延長／毛細血管再充満時間の延長 → CRT 3秒以上",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_leg_edema",
+     "label": "下腿浮腫 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "両側の下腿浮腫／両下肢浮腫／両側浮腫 → 両側（圧痕性）\n片側の下腿腫脹／片側浮腫／一側の下腿腫脹 → 片側",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_abd_tender",
+     "label": "腹部圧痛の部位 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "右上腹部痛／右季肋部 → 右上腹部\n右下腹部痛 → 右下腹部\n左下腹部痛 → 左下腹部\n心窩部痛／心窩部の圧痛／上腹部痛 → 心窩部（上腹部）\n背部へ放散／背部に貫通／背中へ抜ける → 背部へ貫通・移動\n腹部全体の圧痛／びまん性の圧痛 → びまん性",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_peritoneal",
+     "label": "腹膜刺激徴候 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "腹膜刺激／反跳痛／筋性防御／ブルンベルグ → あり（反跳痛・筋性防御）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_bowel",
+     "label": "腸蠕動音 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "金属音 → 金属音（高調）\n腸蠕動音の減弱／蠕動音消失／腸雑音減弱 → 減弱〜消失",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_murphy",
+     "label": "Murphy 徴候 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "マーフィー徴候陽性／Murphy陽性／マーフィー陽性 → 陽性",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_abd_sign",
+     "label": "その他の腹部所見 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "腹水 → 波動あり（腹水）\n拍動性腫瘤 → 拍動性腫瘤",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_stool",
+     "label": "便の性状 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "黒色便／タール便／メレナ → 黒色・タール状\n血便／鮮血便 → 血便（鮮血）\n水様便 → 水様",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_focal",
+     "label": "局所神経症候 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "片麻痺／右片麻痺／左片麻痺 → 片麻痺\n失語 → 失語\n小脳症状／協調運動障害／失調 → 小脳性（協調運動障害）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_pupil",
+     "label": "瞳孔 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "瞳孔不同／アニソコリア → 左右不同（アニソコリア）\n縮瞳／ピンポイント → 両側縮小（pinpoint）\n瞳孔散大／散大固定 → 両側散大・固定",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_neck",
+     "label": "項部硬直 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "項部硬直／頸部硬直／項部強直 → あり",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_asterixis",
+     "label": "羽ばたき振戦 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "羽ばたき振戦／アステリキシス → あり",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_dtr",
+     "label": "腱反射 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "腱反射の低下／腱反射消失／深部腱反射低下 → 低下〜消失\n腱反射亢進／病的反射 → 亢進（＋病的反射）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_sensory",
+     "label": "感覚障害の分布 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "手袋靴下型／手袋・靴下 → 手袋・靴下型\n感覚レベル／髄節レベル → 髄節レベルあり（横断性）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_tremor",
+     "label": "振戦 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "細かい振戦／手指振戦 → 動作時（細かく速い）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_rash",
+     "label": "皮疹 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "点状出血／紫斑 → 点状出血・紫斑\n蝶形紅斑 → 蝶形紅斑\n粘膜疹／水疱 → 水疱・粘膜疹",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_purpura_palp",
+     "label": "紫斑の性状 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "触知可能な紫斑／palpable purpura → 触知可能（palpable）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_lymph",
+     "label": "リンパ節腫脹 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "全身のリンパ節腫脹／全身性リンパ節腫脹 → 全身性",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_joint",
+     "label": "関節所見 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "対称性多関節／手指小関節 → 多関節・対称性（手指小関節）\n単関節／一関節の腫脹 → 単関節の熱感・腫脹",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_raynaud",
+     "label": "Raynaud 現象 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "レイノー／Raynaud → あり",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_oral",
+     "label": "口腔・眼 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "口腔内潰瘍／アフタ → 口腔内潰瘍",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_thyroid",
+     "label": "甲状腺 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "甲状腺腫大／甲状腺のびまん性腫大 → びまん性腫大",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_skin_other",
+     "label": "その他の皮膚所見 の言い回し",
+     "group": "取り込み・所見",
+     "detail": "黄疸／眼球黄染／皮膚黄染 → 黄染（黄疸）\nクモ状血管腫／手掌紅斑 → クモ状血管腫・手掌紅斑\nチアノーゼ → チアノーゼ",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_volume",
+     "label": "体液量の見立て の言い回し",
+     "group": "取り込み・所見",
+     "detail": "脱水／体液量不足 → 不足（脱水）\n体液過剰／溢水 → 過剰（体液過剰）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.hx_jcs",
+     "label": "JCS（3-3-9度方式） の言い回し",
+     "group": "取り込み・所見",
+     "detail": "JCS300／JCS200／JCS100／昏睡 → III（刺激でも覚醒しない）\nJCS30／JCS20／JCS10 → II（刺激で覚醒）\nJCS3／JCS2／JCS1 → I（刺激なしで覚醒）",
+     "note": "",
+     "refs": [],
+     "star": true,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.complaints",
+     "label": "主訴の言い換え",
+     "group": "取り込み",
+     "detail": "fever：発熱／熱発\ndyspnea：呼吸困難／息苦し／呼吸苦\nchest_pain：胸痛／胸が痛\nabd_pain：腹痛／お腹が痛\nbleeding：出血\nconsciousness：意識障害／意識レベル低下\nconvulsion：痙攣／けいれん\nparalysis：麻痺\nheadache：頭痛\nedema：浮腫／むくみ\noliguria：乏尿／尿が出な\ndiarrhea：下痢\nvomiting：嘔吐／吐い\nfatigue：倦怠感／だるさ\njaundice：黄疸\nrash：皮疹／発疹\njoint_pain：関節痛\nnumbness：しびれ／痺れ",
+     "note": "",
+     "refs": [],
+     "star": false,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.history",
+     "label": "既往の言い換え",
+     "group": "取り込み",
+     "detail": "cirrhosis：肝硬変\nckd：慢性腎臓病／CKD\ndialysis：透析\ndm：糖尿病\nhtn：高血圧\nhf：心不全\ncad：狭心症／心筋梗塞の既往\naf：心房細動／AF\nstroke：脳梗塞／脳出血／脳卒中\nepilepsy：てんかん\ncopd：COPD／肺気腫\nmalignancy：悪性腫瘍／がんの既往／癌の既往\nautoimmune：膠原病\ntransplant：移植後",
+     "note": "",
+     "refs": [],
+     "star": false,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
+    },
+    {
+     "id": "intake.meds",
+     "label": "内服の言い換え",
+     "group": "取り込み",
+     "detail": "warfarin：ワルファリン／ワーファリン\ndoac：DOAC／エリキュース／リクシアナ／イグザレルト\nheparin：ヘパリン\nantiplatelet：抗血小板／バイアスピリン／クロピドグレル\nsteroid：ステロイド／プレドニン\nchemo：化学療法／抗がん剤\nimmunosuppressant：免疫抑制\ndiuretic_loop：ループ利尿薬／フロセミド／ラシックス\ndiuretic_thiazide：サイアザイド\nstatin：スタチン\nppi：PPI\nnsaid：NSAIDs／ロキソニン／エヌセイド\nacei_arb：ARB／ACE阻害薬\ninsulin：インスリン\nsu：SU薬\nmetformin：メトホルミン\nantibiotics：抗菌薬／抗生剤／抗生物質",
+     "note": "",
+     "refs": [],
+     "star": false,
+     "conf": "design",
+     "confNote": "話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。"
     }
    ]
   }

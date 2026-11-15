@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const sections=[];
-const c=vm.createContext({LabsUI:{addSection:f=>sections.push(f),addBinder(){},save(){}}});
+const c=vm.createContext({LabsUI:{addSection:f=>sections.push(f),addBinder(){},addInputPanel(){},save(){}}});
 for(const f of ['labs-core.js','dx-refs.js','dx-hx.js','dx-cc.js','dx-ui.js'])
   vm.runInContext(fs.readFileSync(new URL('../'+f,import.meta.url),'utf8'),c);
 let count=0;

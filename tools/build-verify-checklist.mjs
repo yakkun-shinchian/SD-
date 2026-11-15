@@ -13,9 +13,9 @@ const c = vm.createContext({ console, Math, Date, JSON, isFinite, Number, String
 const load = (f) => vm.runInContext(fs.readFileSync(new URL(f, root), 'utf8'), c, { filename: f });
 ['labs-core.js', 'labs-cbc.js', 'labs-chem.js', 'labs-coag.js', 'labs-autoab.js',
  'dx-refs.js', 'dx-abg.js', 'dx-hx.js', 'dx-scores.js', 'dx-core.js', 'dx-cc.js',
- 'labs-integrate.js'].forEach(load);
+ 'dx-intake.js', 'labs-integrate.js'].forEach(load);
 
-const { LabsCore, DXScores, DXCore, DXRefs, LabsIntegrate, DXCC, DXHx } = c;
+const { LabsCore, DXScores, DXCore, DXRefs, LabsIntegrate, DXCC, DXHx, DXIntake } = c;
 const sections = [];
 /* ---- 確信度の仕分け ----
  * solid    … 原典で値が確定しており、照合しても動く見込みが薄い
@@ -57,6 +57,8 @@ function confidenceOf(sec, it) {
     confNote: '支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。' };
   if (sec === 'hx') return { conf: 'design',
     confNote: '問診・身体所見の選択肢の立て方は本アプリの設計判断です。臨床で実際に使う区分が抜けていないかをご覧ください。' };
+  if (sec === 'intake') return { conf: 'design',
+    confNote: '話し言葉・記載の言い回しを項目へ結びつける対応は本アプリの設計判断です。取り違えが起きうる語、足りない言い方のご指摘が有益です。' };
   if (sec === 'cc') return { conf: 'design',
     confNote: '主訴ごとに「まず外す疾患」「red flag」「鑑別の並べ方」を選んだのは本アプリの設計判断です。抜けている疾患・所見のご指摘が最も有益です。' };
   if (sec === 'pat') return { conf: 'design',
@@ -267,6 +269,47 @@ sections.push({ id: 'cc', title: '主訴からの診断アプローチ', lead:
   '★は「その主訴でまず外すべき疾患」と「red flag の一覧」です。' +
   '外すべき疾患の抜け、red flag の抜け、鑑別の並べ方について、先生の診療の順序と突き合わせてください。',
   items: ccItems });
+
+/* ---- 10. 取り込みの語彙 ---- */
+const intakeItems = [];
+if (DXIntake) {
+  intakeItems.push({
+    id: 'intake.lab', label: '検査名の言い換え', group: '取り込み',
+    detail: Object.keys(DXIntake.LAB).map((k) => {
+      const a = LabsCore.findAnalyte(k);
+      return (a ? a.label : k) + '：' + DXIntake.LAB[k].join('／');
+    }).join('\n'),
+    note: '話し言葉・カルテ表記からこの項目として拾う語。取り違えが起きうる語があればご指摘ください。',
+    refs: [], star: true
+  });
+  intakeItems.push({
+    id: 'intake.vital', label: 'バイタルの言い換え', group: '取り込み',
+    detail: Object.keys(DXIntake.VITAL).map((k) => k + '：' + DXIntake.VITAL[k].join('／')).join('\n'),
+    note: '', refs: [], star: false
+  });
+  const byKey = {};
+  DXIntake.PHRASE.forEach(([key, val, words]) => {
+    const a = LabsCore.findAnalyte(key);
+    (byKey[key] = byKey[key] || { label: a ? a.label : key, rows: [] })
+      .rows.push(words.join('／') + ' → ' + val);
+  });
+  Object.keys(byKey).forEach((key) => {
+    intakeItems.push({
+      id: 'intake.' + key, label: byKey[key].label + ' の言い回し', group: '取り込み・所見',
+      detail: byKey[key].rows.join('\n'), note: '', refs: [], star: true
+    });
+  });
+  ['complaints', 'history', 'meds'].forEach((g) => {
+    intakeItems.push({
+      id: 'intake.' + g, label: DXIntake.GROUP_LABEL[g] + 'の言い換え', group: '取り込み',
+      detail: Object.keys(DXIntake.CHIP[g]).map((k) => k + '：' + DXIntake.CHIP[g][k].join('／')).join('\n'),
+      note: '', refs: [], star: false
+    });
+  });
+}
+sections.push({ id: 'intake', title: '音声・貼り付けの取り込み語彙', lead:
+  '話した言葉・貼り付けた文章から、どの語をどの項目として拾うかの一覧です。' +
+  '取り違えが起きうる語と、臨床で実際に使うのに拾えていない言い方を見てください。', items: intakeItems });
 
 /* ---- 確信度を全項目へ付与 ---- */
 sections.forEach((sec) => sec.items.forEach((it) => Object.assign(it, confidenceOf(sec.id, it))));

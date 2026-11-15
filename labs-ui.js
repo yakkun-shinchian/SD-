@@ -307,7 +307,8 @@ var LabsUI = (function () {
     var e = DXRefs.entries(ids);
     if (!e.length) return "";
     return '<div class="refs">出典：' + e.map(function (r) {
-      return '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+      var t = '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+      return r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + t + " ↗</a>" : t;
     }).join("、") + "</div>";
   }
 

@@ -1,12 +1,12 @@
 /*! verify-data.js — tools/build-verify-checklist.mjs が自動生成。直接編集しないこと。 */
 var VERIFY_DATA = {
- "generated": "2026-11-02",
- "total": 456,
- "stars": 251,
+ "generated": "2026-11-15",
+ "total": 458,
+ "stars": 253,
  "byConf": {
   "solid": 73,
-  "facility": 73,
-  "varies": 18,
+  "facility": 72,
+  "varies": 21,
   "design": 292
  },
  "sections": [
@@ -642,8 +642,8 @@ var VERIFY_DATA = {
      "tag": "施設依存",
      "group": "凝固・線溶／線溶・凝固因子",
      "star": false,
-     "conf": "facility",
-     "confNote": "JCCLS 未収載。自施設の検査室基準で確認してください。"
+     "conf": "varies",
+     "confNote": "カットオフは測定系で 2 倍違う。FEU 表記なら 0.5 µg/mL、DDU 表記なら 1.0 µg/mL が一般的。本アプリは 1.0 µg/mL。自施設の単位の確認が要る。"
     },
     {
      "id": "coag.at3",
@@ -1417,6 +1417,30 @@ var VERIFY_DATA = {
      "refs": [],
      "conf": "varies",
      "confNote": "2 という閾値は目安。"
+    },
+    {
+     "id": "calc.bnp",
+     "label": "BNP／NT-proBNP のカットオフ",
+     "detail": "上昇（急性期の除外ライン超え）：BNP >100 pg/mL／NT-proBNP >300 pg/mL\n除外域（実測で下回ったときのみ）：BNP <35 pg/mL／NT-proBNP <125 pg/mL",
+     "star": true,
+     "refs": [
+      "HF_JCS",
+      "BNP_CUT"
+     ],
+     "conf": "varies",
+     "confNote": "2025年改訂版 心不全診療ガイドラインの値を採用（急性期 BNP 100・NT-proBNP 300、慢性期 BNP 35・NT-proBNP 125）。2026-11-15 に NT-proBNP の上昇判定を 400 から 300 へ修正。"
+    },
+    {
+     "id": "calc.ddimer",
+     "label": "D-ダイマーの陰性カットオフ",
+     "detail": "≦1.0 µg/mL を陰性とする。50歳を超える症例では年齢調整カットオフ（年齢 × 10 µg/L FEU）の併用を検討",
+     "star": true,
+     "refs": [
+      "ADJ_DDIMER",
+      "JCS_PE"
+     ],
+     "conf": "varies",
+     "confNote": "陰性の境界は測定系（FEU／DDU）依存。年齢調整カットオフ（50歳超で 年齢 × 10 µg/L FEU）を併用するかも施設で割れる。"
     }
    ]
   },
@@ -1787,9 +1811,13 @@ var VERIFY_DATA = {
      "id": "ddx.hf",
      "label": "心不全",
      "group": "循環器",
-     "detail": "【トリガー】bnp_high\n【支持】BNP／NT-proBNP 上昇（重み 3）　|　低Na血症（希釈性）（重み 1）　|　腎機能低下（心腎連関）（重み 1）　|　肝うっ血（重み 1）　|　低酸素血症（重み 1）",
+     "detail": "【トリガー】bnp_high\n【支持】BNP／NT-proBNP 上昇（重み 3）　|　低Na血症（希釈性）（重み 1）　|　腎機能低下（心腎連関）（重み 1）　|　肝うっ血（重み 1）　|　低酸素血症（重み 1）\n【否定】BNP／NT-proBNP が除外域（BNP<35・NT-proBNP<125）（−3）",
      "note": "BNP は腎機能低下・高齢・心房細動でも上がり、肥満では低く出ます。数値だけでなく体重と浮腫の推移で読んでください。",
-     "refs": [],
+     "refs": [
+      "HF_JCS",
+      "BNP_CUT",
+      "PE_HF"
+     ],
      "star": true,
      "conf": "design",
      "confNote": "支持所見の選択と重みづけは本アプリの設計判断で、原典があるものではありません。抜けている所見のご指摘が最も有益です。"
@@ -2833,7 +2861,10 @@ var VERIFY_DATA = {
      "label": "D-ダイマー陰性 — 血栓症の可能性は低い",
      "group": "凝固・線溶",
      "detail": "【根拠】D-ダイマー ≦ 1.0 µg/mL",
-     "note": "陰性的中率が高い検査です。臨床的な事前確率が低〜中等度であれば、静脈血栓塞栓症はかなり否定的です。",
+     "note": "陰性的中率が高い検査です。臨床的な事前確率が低〜中等度であれば、静脈血栓塞栓症はかなり否定的です。ただし 1.0 µg/mL という境界は測定系に依存します。FEU 表記の測定系では 0.5 µg/mL を境界とするのが一般的で、その場合この表示は安心させすぎます。自施設の測定系と単位（FEU／DDU）を必ず確認してください。",
+     "refs": [
+      "ADJ_DDIMER"
+     ],
      "star": false,
      "conf": "design",
      "confNote": "判定条件の組み立ては本アプリの設計判断です。閾値そのものは各項目の基準値に従います。"
@@ -3761,6 +3792,7 @@ var VERIFY_DATA = {
      "detail": "【この主訴で外す理由】弁上の感染巣から菌が持続的に血流へ出続け、塞栓と免疫学的機序で全身の臓器を侵す。不明熱のまま見逃されやすい。\n【示唆する所見】新規の心雑音・収縮期雑音・点状出血・紫斑・触知可能な紫斑・局所神経症候あり・CRP 上昇\n【外すためにすること】血液培養を時間をずらして3セット／経胸壁心エコー（陰性でも疑いが強ければ経食道）／修正 Duke 基準での整理／塞栓巣の検索（頭部MRI・脾・腎）",
      "note": "",
      "refs": [
+      "JCS_IE",
       "DUKE"
      ],
      "star": true,
@@ -3831,8 +3863,10 @@ var VERIFY_DATA = {
      "detail": "【この主訴で外す理由】肺血管床の急な閉塞で右心が後負荷に耐えられなくなる。呼吸困難と頻呼吸だけで、聴診も胸部X線も正常なことがある。\n【示唆する所見】呼吸数 22/分 以上・心拍数 100/分 以上・突然発症（秒〜分で完成）・片側下腿浮腫・D-ダイマー著明上昇・一次性呼吸性アルカローシス・A-aDO₂ 開大・頸静脈怒張・悪性腫瘍の既往\n【外すためにすること】Wells スコアで事前確率を立ててから D-ダイマー（高確率なら D-ダイマーを飛ばす）／造影CT肺動脈相／心エコー（右心負荷）／下肢静脈エコー／簡易PESI で重症度",
      "note": "",
      "refs": [
+      "JCS_PE",
       "WELLS_PE",
-      "SPESI"
+      "SPESI",
+      "ADJ_DDIMER"
      ],
      "star": true,
      "conf": "design",
@@ -3846,6 +3880,7 @@ var VERIFY_DATA = {
      "note": "",
      "refs": [
       "HF_JCS",
+      "BNP_CUT",
       "PE_HF"
      ],
      "star": true,
@@ -3947,6 +3982,7 @@ var VERIFY_DATA = {
      "detail": "【この主訴で外す理由】内膜が裂け、偽腔が分枝をつぎつぎ塞ぐ。痛みの最強点が発症直後にあり、血圧の左右差や新規の拡張期雑音が手がかりになる。\n【示唆する所見】発症直後が最強（thunderclap 型）・突然発症（秒〜分で完成）・血圧の左右差 20mmHg 以上・拡張期雑音・背部へ貫通する痛み・局所神経症候あり・D-ダイマー著明上昇\n【外すためにすること】血圧の左右差と上下肢差の実測／造影CT（上行〜腸骨まで）／D-ダイマー陰性は否定の補助になるが、確定診断は画像／降圧・心拍数管理を並行して開始",
      "note": "",
      "refs": [
+      "JCS_AORTA",
       "AORTA_ACC"
      ],
      "star": true,
@@ -3985,7 +4021,9 @@ var VERIFY_DATA = {
      "note": "胸痛では「頻度の高い診断」より「外し損ねたら死ぬ診断」を先に並べる。心・大血管・肺・食道の四つの管を順に潰していく。",
      "refs": [
       "ACS_JCS",
+      "JCS_AORTA",
       "AORTA_ACC",
+      "JCS_PE",
       "WELLS_PE"
      ],
      "star": true,
@@ -4000,7 +4038,9 @@ var VERIFY_DATA = {
      "note": "",
      "refs": [
       "ACS_JCS",
+      "JCS_AORTA",
       "AORTA_ACC",
+      "JCS_PE",
       "WELLS_PE"
      ],
      "star": false,
@@ -4036,6 +4076,7 @@ var VERIFY_DATA = {
      "detail": "【この主訴で外す理由】破裂すれば分単位で失血する。拍動性腫瘤・腹背部痛・低血圧の三つで即断。\n【示唆する所見】拍動性腹部腫瘤・背部へ貫通する痛み・収縮期血圧 90mmHg 未満・収縮期血圧 100mmHg 以下・突然発症（秒〜分で完成）・75歳以上・貧血\n【外すためにすること】ベッドサイドエコーで大動脈径／造影CT（安定していれば）／直ちに血管外科と輸血の手配",
      "note": "",
      "refs": [
+      "JCS_AORTA",
       "AORTA_ACC"
      ],
      "star": true,
@@ -4582,6 +4623,7 @@ var VERIFY_DATA = {
      "note": "浮腫は片側か両側かで世界が分かれる。片側は局所の閉塞（DVT・リンパ・感染）、両側は全身の問題（心・腎・肝・栄養・薬剤）。",
      "refs": [
       "WELLS_DVT",
+      "JCS_PE",
       "HF_JCS",
       "KDIGO_CKD",
       "CHILDPUGH"
@@ -4598,6 +4640,7 @@ var VERIFY_DATA = {
      "note": "",
      "refs": [
       "WELLS_DVT",
+      "JCS_PE",
       "HF_JCS",
       "KDIGO_CKD",
       "CHILDPUGH"
@@ -5235,297 +5278,386 @@ var VERIFY_DATA = {
   {
    "id": "JCCLS",
    "label": "JCCLS 共用基準範囲",
-   "cite": "日本臨床検査標準協議会（JCCLS）基準範囲共用化委員会. 共用基準範囲に基づく医学的判断値."
+   "cite": "日本臨床検査標準協議会（JCCLS）基準範囲共用化委員会. 共用基準範囲に基づく医学的判断値.",
+   "url": ""
   },
   {
    "id": "EGFR_JP",
    "label": "日本人 eGFR 推算式",
-   "cite": "Matsuo S, et al. Revised equations for estimated GFR from serum creatinine in Japan. Am J Kidney Dis. 2009;53(6):982-992."
+   "cite": "Matsuo S, et al. Revised equations for estimated GFR from serum creatinine in Japan. Am J Kidney Dis. 2009;53(6):982-992.",
+   "url": ""
   },
   {
    "id": "PAYNE",
    "label": "Payne 補正Ca式",
-   "cite": "Payne RB, et al. Interpretation of serum calcium in patients with abnormal serum proteins. Br Med J. 1973;4(5893):643-646."
+   "cite": "Payne RB, et al. Interpretation of serum calcium in patients with abnormal serum proteins. Br Med J. 1973;4(5893):643-646.",
+   "url": ""
   },
   {
    "id": "WINTER",
    "label": "Winter 式",
-   "cite": "Albert MS, Dell RB, Winters RW. Quantitative displacement of acid-base equilibrium in metabolic acidosis. Ann Intern Med. 1967;66(2):312-322."
+   "cite": "Albert MS, Dell RB, Winters RW. Quantitative displacement of acid-base equilibrium in metabolic acidosis. Ann Intern Med. 1967;66(2):312-322.",
+   "url": ""
   },
   {
    "id": "FIGGE",
    "label": "アルブミン補正アニオンギャップ",
-   "cite": "Figge J, et al. Anion gap and hypoalbuminemia. Crit Care Med. 1998;26(11):1807-1810."
+   "cite": "Figge J, et al. Anion gap and hypoalbuminemia. Crit Care Med. 1998;26(11):1807-1810.",
+   "url": ""
   },
   {
    "id": "GOLDMARK",
    "label": "GOLD MARK（AG開大の鑑別）",
-   "cite": "Mehta AN, Emmett JB, Emmett M. GOLD MARK: an anion gap mnemonic for the 21st century. Lancet. 2008;372(9642):892."
+   "cite": "Mehta AN, Emmett JB, Emmett M. GOLD MARK: an anion gap mnemonic for the 21st century. Lancet. 2008;372(9642):892.",
+   "url": ""
   },
   {
    "id": "UAG",
    "label": "尿アニオンギャップ",
-   "cite": "Batlle DC, et al. The use of the urinary anion gap in the diagnosis of hyperchloremic metabolic acidosis. N Engl J Med. 1988;318(10):594-599."
+   "cite": "Batlle DC, et al. The use of the urinary anion gap in the diagnosis of hyperchloremic metabolic acidosis. N Engl J Med. 1988;318(10):594-599.",
+   "url": ""
   },
   {
    "id": "BERLIN",
    "label": "ARDS ベルリン定義",
-   "cite": "ARDS Definition Task Force. Acute respiratory distress syndrome: the Berlin Definition. JAMA. 2012;307(23):2526-2533."
+   "cite": "ARDS Definition Task Force. Acute respiratory distress syndrome: the Berlin Definition. JAMA. 2012;307(23):2526-2533.",
+   "url": ""
   },
   {
    "id": "SEPSIS3",
    "label": "Sepsis-3",
-   "cite": "Singer M, et al. The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA. 2016;315(8):801-810."
+   "cite": "Singer M, et al. The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA. 2016;315(8):801-810.",
+   "url": ""
   },
   {
    "id": "SOFA",
    "label": "SOFA スコア",
-   "cite": "Vincent JL, et al. The SOFA score to describe organ dysfunction/failure. Intensive Care Med. 1996;22(7):707-710."
+   "cite": "Vincent JL, et al. The SOFA score to describe organ dysfunction/failure. Intensive Care Med. 1996;22(7):707-710.",
+   "url": ""
   },
   {
    "id": "CURB65",
    "label": "CURB-65",
-   "cite": "Lim WS, et al. Defining community acquired pneumonia severity on presentation to hospital. Thorax. 2003;58(5):377-382."
+   "cite": "Lim WS, et al. Defining community acquired pneumonia severity on presentation to hospital. Thorax. 2003;58(5):377-382.",
+   "url": ""
   },
   {
    "id": "ADROP",
    "label": "A-DROP",
-   "cite": "日本呼吸器学会. 成人肺炎診療ガイドライン."
+   "cite": "日本呼吸器学会. 成人肺炎診療ガイドライン.",
+   "url": ""
   },
   {
    "id": "CENTOR",
    "label": "McIsaac（修正Centor）スコア",
-   "cite": "McIsaac WJ, et al. A clinical score to reduce unnecessary antibiotic use in patients with sore throat. CMAJ. 1998;158(1):75-83."
+   "cite": "McIsaac WJ, et al. A clinical score to reduce unnecessary antibiotic use in patients with sore throat. CMAJ. 1998;158(1):75-83.",
+   "url": ""
   },
   {
    "id": "CHADSVASC",
    "label": "CHA₂DS₂-VASc",
-   "cite": "Lip GY, et al. Refining clinical risk stratification for predicting stroke and thromboembolism in atrial fibrillation. Chest. 2010;137(2):263-272."
+   "cite": "Lip GY, et al. Refining clinical risk stratification for predicting stroke and thromboembolism in atrial fibrillation. Chest. 2010;137(2):263-272.",
+   "url": ""
   },
   {
    "id": "HASBLED",
    "label": "HAS-BLED",
-   "cite": "Pisters R, et al. A novel user-friendly score (HAS-BLED) to assess 1-year risk of major bleeding. Chest. 2010;138(5):1093-1100."
+   "cite": "Pisters R, et al. A novel user-friendly score (HAS-BLED) to assess 1-year risk of major bleeding. Chest. 2010;138(5):1093-1100.",
+   "url": ""
   },
   {
    "id": "WELLS_DVT",
    "label": "Wells スコア（DVT）",
-   "cite": "Wells PS, et al. Value of assessment of pretest probability of deep-vein thrombosis in clinical management. Lancet. 1997;350(9094):1795-1798."
+   "cite": "Wells PS, et al. Value of assessment of pretest probability of deep-vein thrombosis in clinical management. Lancet. 1997;350(9094):1795-1798.",
+   "url": ""
   },
   {
    "id": "WELLS_PE",
    "label": "Wells スコア（肺塞栓）",
-   "cite": "Wells PS, et al. Derivation of a simple clinical model to categorize patients probability of pulmonary embolism. Thromb Haemost. 2000;83(3):416-420."
+   "cite": "Wells PS, et al. Derivation of a simple clinical model to categorize patients probability of pulmonary embolism. Thromb Haemost. 2000;83(3):416-420.",
+   "url": ""
   },
   {
    "id": "SPESI",
    "label": "簡易版 PESI",
-   "cite": "Jiménez D, et al. Simplification of the pulmonary embolism severity index for prognostication. Arch Intern Med. 2010;170(15):1383-1389."
+   "cite": "Jiménez D, et al. Simplification of the pulmonary embolism severity index for prognostication. Arch Intern Med. 2010;170(15):1383-1389.",
+   "url": ""
   },
   {
    "id": "KDIGO_AKI",
    "label": "KDIGO AKI 診療ガイドライン",
-   "cite": "KDIGO Clinical Practice Guideline for Acute Kidney Injury. Kidney Int Suppl. 2012;2(1):1-138."
+   "cite": "KDIGO Clinical Practice Guideline for Acute Kidney Injury. Kidney Int Suppl. 2012;2(1):1-138.",
+   "url": ""
   },
   {
    "id": "KDIGO_CKD",
    "label": "KDIGO CKD 診療ガイドライン",
-   "cite": "KDIGO 2012 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. Kidney Int Suppl. 2013;3(1):1-150."
+   "cite": "KDIGO 2012 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. Kidney Int Suppl. 2013;3(1):1-150.",
+   "url": ""
   },
   {
    "id": "CHILDPUGH",
    "label": "Child-Pugh 分類",
-   "cite": "Pugh RN, et al. Transection of the oesophagus for bleeding oesophageal varices. Br J Surg. 1973;60(8):646-649."
+   "cite": "Pugh RN, et al. Transection of the oesophagus for bleeding oesophageal varices. Br J Surg. 1973;60(8):646-649.",
+   "url": ""
   },
   {
    "id": "MELD",
    "label": "MELD スコア",
-   "cite": "Kamath PS, et al. A model to predict survival in patients with end-stage liver disease. Hepatology. 2001;33(2):464-470."
+   "cite": "Kamath PS, et al. A model to predict survival in patients with end-stage liver disease. Hepatology. 2001;33(2):464-470.",
+   "url": ""
   },
   {
    "id": "MELDNA",
    "label": "MELD-Na",
-   "cite": "Kim WR, et al. Hyponatremia and mortality among patients on the liver-transplant waiting list. N Engl J Med. 2008;359(10):1018-1026."
+   "cite": "Kim WR, et al. Hyponatremia and mortality among patients on the liver-transplant waiting list. N Engl J Med. 2008;359(10):1018-1026.",
+   "url": ""
   },
   {
    "id": "WESTHAVEN",
    "label": "West-Haven 分類（肝性脳症）",
-   "cite": "Vilstrup H, et al. Hepatic encephalopathy in chronic liver disease: 2014 practice guideline by AASLD and EASL. Hepatology. 2014;60(2):715-735."
+   "cite": "Vilstrup H, et al. Hepatic encephalopathy in chronic liver disease: 2014 practice guideline by AASLD and EASL. Hepatology. 2014;60(2):715-735.",
+   "url": ""
   },
   {
    "id": "GBS",
    "label": "Glasgow-Blatchford スコア",
-   "cite": "Blatchford O, Murray WR, Blatchford M. A risk score to predict need for treatment for upper-gastrointestinal haemorrhage. Lancet. 2000;356(9238):1318-1321."
+   "cite": "Blatchford O, Murray WR, Blatchford M. A risk score to predict need for treatment for upper-gastrointestinal haemorrhage. Lancet. 2000;356(9238):1318-1321.",
+   "url": ""
   },
   {
    "id": "ROCKALL",
    "label": "Rockall スコア",
-   "cite": "Rockall TA, et al. Risk assessment after acute upper gastrointestinal haemorrhage. Gut. 1996;38(3):316-321."
+   "cite": "Rockall TA, et al. Risk assessment after acute upper gastrointestinal haemorrhage. Gut. 1996;38(3):316-321.",
+   "url": ""
   },
   {
    "id": "JSS_AP",
    "label": "急性膵炎 重症度判定基準（厚生労働省）",
-   "cite": "厚生労働省難治性膵疾患に関する調査研究班. 急性膵炎重症度判定基準（2008年改訂）／急性膵炎診療ガイドライン."
+   "cite": "厚生労働省難治性膵疾患に関する調査研究班. 急性膵炎重症度判定基準（2008年改訂）／急性膵炎診療ガイドライン.",
+   "url": ""
   },
   {
    "id": "LIGHT",
    "label": "Light の基準（胸水）",
-   "cite": "Light RW, et al. Pleural effusions: the diagnostic separation of transudates and exudates. Ann Intern Med. 1972;77(4):507-513."
+   "cite": "Light RW, et al. Pleural effusions: the diagnostic separation of transudates and exudates. Ann Intern Med. 1972;77(4):507-513.",
+   "url": ""
   },
   {
    "id": "JAAM_DIC",
    "label": "急性期DIC診断基準（日本救急医学会）",
-   "cite": "Gando S, et al. A multicenter, prospective validation of disseminated intravascular coagulation diagnostic criteria for critically ill patients. Crit Care Med. 2006;34(3):625-631."
+   "cite": "Gando S, et al. A multicenter, prospective validation of disseminated intravascular coagulation diagnostic criteria for critically ill patients. Crit Care Med. 2006;34(3):625-631.",
+   "url": ""
   },
   {
    "id": "ISTH_DIC",
    "label": "ISTH overt DIC スコア",
-   "cite": "Taylor FB Jr, et al. Towards definition, clinical and laboratory criteria, and a scoring system for disseminated intravascular coagulation. Thromb Haemost. 2001;86(5):1327-1330."
+   "cite": "Taylor FB Jr, et al. Towards definition, clinical and laboratory criteria, and a scoring system for disseminated intravascular coagulation. Thromb Haemost. 2001;86(5):1327-1330.",
+   "url": ""
   },
   {
    "id": "FOURTS",
    "label": "4Ts スコア（HIT）",
-   "cite": "Lo GK, et al. Evaluation of pretest clinical score (4 T's) for the diagnosis of heparin-induced thrombocytopenia. J Thromb Haemost. 2006;4(4):759-765."
+   "cite": "Lo GK, et al. Evaluation of pretest clinical score (4 T's) for the diagnosis of heparin-induced thrombocytopenia. J Thromb Haemost. 2006;4(4):759-765.",
+   "url": ""
   },
   {
    "id": "HSCORE",
    "label": "HScore（血球貪食症候群）",
-   "cite": "Fardet L, et al. Development and validation of the HScore, a score for the diagnosis of reactive hemophagocytic syndrome. Arthritis Rheumatol. 2014;66(9):2613-2620."
+   "cite": "Fardet L, et al. Development and validation of the HScore, a score for the diagnosis of reactive hemophagocytic syndrome. Arthritis Rheumatol. 2014;66(9):2613-2620.",
+   "url": ""
   },
   {
    "id": "BURCH",
    "label": "Burch-Wartofsky スコア（甲状腺クリーゼ）",
-   "cite": "Burch HB, Wartofsky L. Life-threatening thyrotoxicosis: thyroid storm. Endocrinol Metab Clin North Am. 1993;22(2):263-277."
+   "cite": "Burch HB, Wartofsky L. Life-threatening thyrotoxicosis: thyroid storm. Endocrinol Metab Clin North Am. 1993;22(2):263-277.",
+   "url": ""
   },
   {
    "id": "JTA_STORM",
    "label": "甲状腺クリーゼ診断基準（日本甲状腺学会）",
-   "cite": "日本甲状腺学会・日本内分泌学会. 甲状腺クリーゼ診断基準."
+   "cite": "日本甲状腺学会・日本内分泌学会. 甲状腺クリーゼ診断基準.",
+   "url": ""
   },
   {
    "id": "SLE2019",
    "label": "SLE 分類基準（EULAR/ACR 2019）",
-   "cite": "Aringer M, et al. 2019 European League Against Rheumatism/American College of Rheumatology classification criteria for systemic lupus erythematosus. Ann Rheum Dis. 2019;78(9):1151-1159."
+   "cite": "Aringer M, et al. 2019 European League Against Rheumatism/American College of Rheumatology classification criteria for systemic lupus erythematosus. Ann Rheum Dis. 2019;78(9):1151-1159.",
+   "url": ""
   },
   {
    "id": "RA2010",
    "label": "RA 分類基準（ACR/EULAR 2010）",
-   "cite": "Aletaha D, et al. 2010 Rheumatoid arthritis classification criteria. Arthritis Rheum. 2010;62(9):2569-2581."
+   "cite": "Aletaha D, et al. 2010 Rheumatoid arthritis classification criteria. Arthritis Rheum. 2010;62(9):2569-2581.",
+   "url": ""
   },
   {
    "id": "SSC2013",
    "label": "全身性強皮症 分類基準（ACR/EULAR 2013）",
-   "cite": "van den Hoogen F, et al. 2013 classification criteria for systemic sclerosis. Ann Rheum Dis. 2013;72(11):1747-1755."
+   "cite": "van den Hoogen F, et al. 2013 classification criteria for systemic sclerosis. Ann Rheum Dis. 2013;72(11):1747-1755.",
+   "url": ""
   },
   {
    "id": "APS_SYD",
    "label": "抗リン脂質抗体症候群 分類基準（Sydney）",
-   "cite": "Miyakis S, et al. International consensus statement on an update of the classification criteria for definite antiphospholipid syndrome. J Thromb Haemost. 2006;4(2):295-306."
+   "cite": "Miyakis S, et al. International consensus statement on an update of the classification criteria for definite antiphospholipid syndrome. J Thromb Haemost. 2006;4(2):295-306.",
+   "url": ""
   },
   {
    "id": "ABCD2",
    "label": "ABCD² スコア（TIA）",
-   "cite": "Johnston SC, et al. Validation and refinement of scores to predict very early stroke risk after transient ischaemic attack. Lancet. 2007;369(9558):283-292."
+   "cite": "Johnston SC, et al. Validation and refinement of scores to predict very early stroke risk after transient ischaemic attack. Lancet. 2007;369(9558):283-292.",
+   "url": ""
   },
   {
    "id": "NEWS2",
    "label": "NEWS2",
-   "cite": "Royal College of Physicians. National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. 2017."
+   "cite": "Royal College of Physicians. National Early Warning Score (NEWS) 2: Standardising the assessment of acute-illness severity in the NHS. 2017.",
+   "url": ""
   },
   {
    "id": "GCS",
    "label": "Glasgow Coma Scale",
-   "cite": "Teasdale G, Jennett B. Assessment of coma and impaired consciousness. A practical scale. Lancet. 1974;2(7872):81-84."
+   "cite": "Teasdale G, Jennett B. Assessment of coma and impaired consciousness. A practical scale. Lancet. 1974;2(7872):81-84.",
+   "url": ""
   },
   {
    "id": "JCS",
    "label": "Japan Coma Scale（3-3-9度方式）",
-   "cite": "太田富雄, 他. 急性期意識障害の新しいgrading とその表現法（いわゆる3-3-9度方式）. 脳神経外科学会（第3回脳卒中の外科研究会）講演集. 1975:61-69."
+   "cite": "太田富雄, 他. 急性期意識障害の新しいgrading とその表現法（いわゆる3-3-9度方式）. 脳神経外科学会（第3回脳卒中の外科研究会）講演集. 1975:61-69.",
+   "url": ""
   },
   {
    "id": "NIHSS",
    "label": "NIHSS",
-   "cite": "Brott T, et al. Measurements of acute cerebral infarction: a clinical examination scale. Stroke. 1989;20(7):864-870."
+   "cite": "Brott T, et al. Measurements of acute cerebral infarction: a clinical examination scale. Stroke. 1989;20(7):864-870.",
+   "url": ""
   },
   {
    "id": "STROKE_JP",
    "label": "脳卒中治療ガイドライン",
-   "cite": "日本脳卒中学会 脳卒中ガイドライン委員会. 脳卒中治療ガイドライン 2021."
+   "cite": "日本脳卒中学会 脳卒中ガイドライン委員会. 脳卒中治療ガイドライン 2021.",
+   "url": ""
   },
   {
    "id": "OTTAWA_SAH",
    "label": "Ottawa SAH ルール",
-   "cite": "Perry JJ, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA. 2013;310(12):1248-1255."
+   "cite": "Perry JJ, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA. 2013;310(12):1248-1255.",
+   "url": ""
   },
   {
    "id": "SE_ILAE",
    "label": "てんかん重積の定義（ILAE）",
-   "cite": "Trinka E, et al. A definition and classification of status epilepticus - Report of the ILAE Task Force on Classification of Status Epilepticus. Epilepsia. 2015;56(10):1515-1523."
+   "cite": "Trinka E, et al. A definition and classification of status epilepticus - Report of the ILAE Task Force on Classification of Status Epilepticus. Epilepsia. 2015;56(10):1515-1523.",
+   "url": ""
   },
   {
    "id": "GBS_CRIT",
    "label": "ギラン・バレー症候群 診断基準",
-   "cite": "Asbury AK, Cornblath DR. Assessment of current diagnostic criteria for Guillain-Barre syndrome. Ann Neurol. 1990;27(Suppl):S21-S24."
+   "cite": "Asbury AK, Cornblath DR. Assessment of current diagnostic criteria for Guillain-Barre syndrome. Ann Neurol. 1990;27(Suppl):S21-S24.",
+   "url": ""
   },
   {
    "id": "DUKE",
    "label": "修正 Duke 基準（感染性心内膜炎）",
-   "cite": "Li JS, et al. Proposed modifications to the Duke criteria for the diagnosis of infective endocarditis. Clin Infect Dis. 2000;30(4):633-638."
+   "cite": "Li JS, et al. Proposed modifications to the Duke criteria for the diagnosis of infective endocarditis. Clin Infect Dis. 2000;30(4):633-638.",
+   "url": ""
   },
   {
    "id": "GOUT2015",
    "label": "痛風 分類基準（ACR/EULAR 2015）",
-   "cite": "Neogi T, et al. 2015 Gout Classification Criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative. Arthritis Rheumatol. 2015;67(10):2557-2568."
+   "cite": "Neogi T, et al. 2015 Gout Classification Criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative. Arthritis Rheumatol. 2015;67(10):2557-2568.",
+   "url": ""
   },
   {
    "id": "MENINGITIS",
    "label": "成人細菌性髄膜炎の臨床所見",
-   "cite": "van de Beek D, et al. Clinical features and prognostic factors in adults with bacterial meningitis. N Engl J Med. 2004;351(18):1849-1859."
+   "cite": "van de Beek D, et al. Clinical features and prognostic factors in adults with bacterial meningitis. N Engl J Med. 2004;351(18):1849-1859.",
+   "url": ""
   },
   {
    "id": "ACS_JCS",
-   "label": "急性冠症候群ガイドライン（日本循環器学会）",
-   "cite": "日本循環器学会. 急性冠症候群ガイドライン（2018年改訂版）."
+   "label": "急性冠症候群ガイドライン（2018年改訂版）",
+   "cite": "日本循環器学会. 急性冠症候群ガイドライン（2018年改訂版）. 班長: 木村一雄.",
+   "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2018/11/JCS2018_kimura.pdf"
   },
   {
    "id": "AORTA_ACC",
    "label": "大動脈疾患ガイドライン（ACC/AHA 2022）",
-   "cite": "Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482."
+   "cite": "Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482.",
+   "url": ""
   },
   {
    "id": "HF_JCS",
-   "label": "急性・慢性心不全診療ガイドライン",
-   "cite": "日本循環器学会／日本心不全学会. 急性・慢性心不全診療ガイドライン（2017年改訂版）および2021年フォーカスアップデート."
+   "label": "心不全診療ガイドライン（2025年改訂版）",
+   "cite": "日本循環器学会／日本心不全学会. 2025年改訂版 心不全診療ガイドライン. 班長: 加藤貴雄.",
+   "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2025/03/JCS2025_Kato.pdf"
+  },
+  {
+   "id": "BNP_CUT",
+   "label": "BNP／NT-proBNP のカットオフ",
+   "cite": "日本循環器学会／日本心不全学会. 2025年改訂版 心不全診療ガイドライン. 慢性期の除外 BNP 35 pg/mL・NT-proBNP 125 pg/mL、急性期の除外 BNP 100 pg/mL・NT-proBNP 300 pg/mL.",
+   "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2025/03/JCS2025_Kato.pdf"
+  },
+  {
+   "id": "JCS_PE",
+   "label": "肺血栓塞栓症・深部静脈血栓症・肺高血圧症ガイドライン（2025年改訂版）",
+   "cite": "日本循環器学会／日本肺高血圧・肺循環学会. 2025年改訂版 肺血栓塞栓症・深部静脈血栓症および肺高血圧症に関するガイドライン. 班長: 田村雄一.",
+   "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2025/03/JCS2025_Tamura.pdf"
+  },
+  {
+   "id": "JCS_AORTA",
+   "label": "大動脈瘤・大動脈解離診療ガイドライン（2020年改訂版）",
+   "cite": "日本循環器学会 他. 2020年改訂版 大動脈瘤・大動脈解離診療ガイドライン. 班長: 荻野均.",
+   "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2020/07/JCS2020_Ogino.pdf"
+  },
+  {
+   "id": "JCS_IE",
+   "label": "感染性心内膜炎診療ガイドライン（2026年改訂版）",
+   "cite": "日本循環器学会. 2026年改訂版 感染性心内膜炎診療ガイドライン. 班長: 泉知里.",
+   "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2026/03/JCS2026_Izumi.pdf"
+  },
+  {
+   "id": "ADJ_DDIMER",
+   "label": "年齢調整 D-ダイマー（ADJUST-PE）",
+   "cite": "Righini M, et al. Age-adjusted D-dimer cutoff levels to rule out pulmonary embolism: the ADJUST-PE study. JAMA. 2014;311(11):1117-1124.",
+   "url": ""
   },
   {
    "id": "PE_HF",
    "label": "心不全の身体所見の診断精度",
-   "cite": "Wang CS, et al. Does this dyspneic patient in the emergency department have congestive heart failure? JAMA. 2005;294(15):1944-1956."
+   "cite": "Wang CS, et al. Does this dyspneic patient in the emergency department have congestive heart failure? JAMA. 2005;294(15):1944-1956.",
+   "url": ""
   },
   {
    "id": "TG18",
    "label": "Tokyo Guidelines 2018（急性胆嚢炎・胆管炎）",
-   "cite": "Yokoe M, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholecystitis. J Hepatobiliary Pancreat Sci. 2018;25(1):41-54."
+   "cite": "Yokoe M, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholecystitis. J Hepatobiliary Pancreat Sci. 2018;25(1):41-54.",
+   "url": ""
   },
   {
    "id": "ALVARADO",
    "label": "Alvarado スコア（急性虫垂炎）",
-   "cite": "Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15(5):557-564."
+   "cite": "Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15(5):557-564.",
+   "url": ""
   },
   {
    "id": "IDSA_DIAR",
    "label": "感染性腸炎 診療ガイドライン（IDSA）",
-   "cite": "Shane AL, et al. 2017 Infectious Diseases Society of America Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80."
+   "cite": "Shane AL, et al. 2017 Infectious Diseases Society of America Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.",
+   "url": ""
   },
   {
    "id": "ANAPHYLAXIS",
    "label": "アナフィラキシー診断基準（WAO）",
-   "cite": "Cardona V, et al. World Allergy Organization Anaphylaxis Guidance 2020. World Allergy Organ J. 2020;13(10):100472."
+   "cite": "Cardona V, et al. World Allergy Organization Anaphylaxis Guidance 2020. World Allergy Organ J. 2020;13(10):100472.",
+   "url": ""
   },
   {
    "id": "REGISCAR",
    "label": "RegiSCAR（重症薬疹・DRESS）",
-   "cite": "Kardaun SH, et al. Variability in the clinical pattern of cutaneous side-effects of drugs with systemic symptoms: does a DRESS syndrome really exist? Br J Dermatol. 2007;156(3):609-611."
+   "cite": "Kardaun SH, et al. Variability in the clinical pattern of cutaneous side-effects of drugs with systemic symptoms: does a DRESS syndrome really exist? Br J Dermatol. 2007;156(3):609-611.",
+   "url": ""
   }
  ]
 };

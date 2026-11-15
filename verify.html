@@ -107,7 +107,9 @@
   function refsOf(ids) {
     if (!ids || !ids.length) return "";
     return '<div class="refs">出典：' + DXRefs.entries(ids).map(function (r) {
-      return '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+      var t = '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+      // 公開されている原典は、その場で開いて突き合わせられるようにする
+      return r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + t + " ↗</a>" : t;
     }).join("、") + "</div>";
   }
 

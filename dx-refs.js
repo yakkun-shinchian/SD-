@@ -132,12 +132,28 @@ var DXRefs = (function () {
                   cite: "van de Beek D, et al. Clinical features and prognostic factors in adults with bacterial meningitis. N Engl J Med. 2004;351(18):1849-1859." },
 
     /* ---- 循環・呼吸の主訴別アプローチ ---- */
-    ACS_JCS:    { label: "急性冠症候群ガイドライン（日本循環器学会）",
-                  cite: "日本循環器学会. 急性冠症候群ガイドライン（2018年改訂版）." },
+    ACS_JCS:    { label: "急性冠症候群ガイドライン（2018年改訂版）",
+                  cite: "日本循環器学会. 急性冠症候群ガイドライン（2018年改訂版）. 班長: 木村一雄.",
+                  url: "https://www.j-circ.or.jp/cms/wp-content/uploads/2018/11/JCS2018_kimura.pdf" },
     AORTA_ACC:  { label: "大動脈疾患ガイドライン（ACC/AHA 2022）",
                   cite: "Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation. 2022;146(24):e334-e482." },
-    HF_JCS:     { label: "急性・慢性心不全診療ガイドライン",
-                  cite: "日本循環器学会／日本心不全学会. 急性・慢性心不全診療ガイドライン（2017年改訂版）および2021年フォーカスアップデート." },
+    HF_JCS:     { label: "心不全診療ガイドライン（2025年改訂版）",
+                  cite: "日本循環器学会／日本心不全学会. 2025年改訂版 心不全診療ガイドライン. 班長: 加藤貴雄.",
+                  url: "https://www.j-circ.or.jp/cms/wp-content/uploads/2025/03/JCS2025_Kato.pdf" },
+    BNP_CUT:    { label: "BNP／NT-proBNP のカットオフ",
+                  cite: "日本循環器学会／日本心不全学会. 2025年改訂版 心不全診療ガイドライン. 慢性期の除外 BNP 35 pg/mL・NT-proBNP 125 pg/mL、急性期の除外 BNP 100 pg/mL・NT-proBNP 300 pg/mL.",
+                  url: "https://www.j-circ.or.jp/cms/wp-content/uploads/2025/03/JCS2025_Kato.pdf" },
+    JCS_PE:     { label: "肺血栓塞栓症・深部静脈血栓症・肺高血圧症ガイドライン（2025年改訂版）",
+                  cite: "日本循環器学会／日本肺高血圧・肺循環学会. 2025年改訂版 肺血栓塞栓症・深部静脈血栓症および肺高血圧症に関するガイドライン. 班長: 田村雄一.",
+                  url: "https://www.j-circ.or.jp/cms/wp-content/uploads/2025/03/JCS2025_Tamura.pdf" },
+    JCS_AORTA:  { label: "大動脈瘤・大動脈解離診療ガイドライン（2020年改訂版）",
+                  cite: "日本循環器学会 他. 2020年改訂版 大動脈瘤・大動脈解離診療ガイドライン. 班長: 荻野均.",
+                  url: "https://www.j-circ.or.jp/cms/wp-content/uploads/2020/07/JCS2020_Ogino.pdf" },
+    JCS_IE:     { label: "感染性心内膜炎診療ガイドライン（2026年改訂版）",
+                  cite: "日本循環器学会. 2026年改訂版 感染性心内膜炎診療ガイドライン. 班長: 泉知里.",
+                  url: "https://www.j-circ.or.jp/cms/wp-content/uploads/2026/03/JCS2026_Izumi.pdf" },
+    ADJ_DDIMER: { label: "年齢調整 D-ダイマー（ADJUST-PE）",
+                  cite: "Righini M, et al. Age-adjusted D-dimer cutoff levels to rule out pulmonary embolism: the ADJUST-PE study. JAMA. 2014;311(11):1117-1124." },
     PE_HF:      { label: "心不全の身体所見の診断精度",
                   cite: "Wang CS, et al. Does this dyspneic patient in the emergency department have congestive heart failure? JAMA. 2005;294(15):1944-1956." },
 
@@ -163,13 +179,14 @@ var DXRefs = (function () {
   /** 出典IDの配列から、書誌情報付きのエントリ配列を返す。 */
   function entries(ids) {
     return (ids || []).map(function (id) {
-      return R[id] ? { id: id, label: R[id].label, cite: R[id].cite } : { id: id, label: id, cite: "" };
+      return R[id] ? { id: id, label: R[id].label, cite: R[id].cite, url: R[id].url || "" }
+                   : { id: id, label: id, cite: "", url: "" };
     });
   }
   function get(id) { return R[id] || null; }
   function all() {
     return Object.keys(R).map(function (id) {
-      return { id: id, label: R[id].label, cite: R[id].cite };
+      return { id: id, label: R[id].label, cite: R[id].cite, url: R[id].url || "" };
     });
   }
 

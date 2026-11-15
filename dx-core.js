@@ -40,12 +40,13 @@ var DXCore = (function () {
       next: ["12誘導心電図（経時的に反復）", "トロポニンの経時変化（上昇・下降パターン）", "心エコーで壁運動評価"],
       pearl: "トロポニン上昇は「心筋が傷んだ」という事実にすぎません。冠動脈閉塞か、需給不均衡（2型）か、心筋炎・肺塞栓・腎不全かは経時変化と文脈で決まります。" },
 
-    { id: "hf", name: "心不全", cat: "循環器", refs: [],
+    { id: "hf", name: "心不全", cat: "循環器", refs: ["HF_JCS", "BNP_CUT", "PE_HF"],
       trigger: ["bnp_high"],
       supports: [s("bnp_high", "BNP／NT-proBNP 上昇", 3), s("hypona", "低Na血症（希釈性）", 1),
                  s("renal_impair", "腎機能低下（心腎連関）", 1), s("transaminase_high", "肝うっ血", 1),
                  s("resp_failure", "低酸素血症", 1)],
-      opposes: [],
+      // 実測して除外域を下回った場合だけ否定に働かせる（未測定は何も語らない）
+      opposes: [s("bnp_ruleout", "BNP／NT-proBNP が除外域（BNP<35・NT-proBNP<125）", 3)],
       next: ["心エコー（左室駆出率・弁膜症・下大静脈径）", "胸部X線", "体重推移と水分出納"],
       pearl: "BNP は腎機能低下・高齢・心房細動でも上がり、肥満では低く出ます。数値だけでなく体重と浮腫の推移で読んでください。" },
 

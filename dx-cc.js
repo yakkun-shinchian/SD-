@@ -190,7 +190,7 @@ var DXCC = (function () {
                      "hx_focal_deficit", "crp_high"],
           tests: ["血液培養を時間をずらして3セット", "経胸壁心エコー（陰性でも疑いが強ければ経食道）",
                   "修正 Duke 基準での整理", "塞栓巣の検索（頭部MRI・脾・腎）"],
-          refs: ["DUKE"]
+          refs: ["JCS_IE", "DUKE"]
         },
         {
           name: "発熱性好中球減少症",
@@ -269,7 +269,7 @@ var DXCC = (function () {
                      "primary_resp_alkalosis", "aado2_high", "hx_jvd", S.malignancy],
           tests: ["Wells スコアで事前確率を立ててから D-ダイマー（高確率なら D-ダイマーを飛ばす）",
                   "造影CT肺動脈相", "心エコー（右心負荷）", "下肢静脈エコー", "簡易PESI で重症度"],
-          refs: ["WELLS_PE", "SPESI"]
+          refs: ["JCS_PE", "WELLS_PE", "SPESI", "ADJ_DDIMER"]
         },
         {
           name: "急性心不全・肺水腫",
@@ -278,7 +278,7 @@ var DXCC = (function () {
                      "bnp_high", "hx_weight_gain", S.hf],
           tests: ["BNP／NT-proBNP", "胸部X線（肺うっ血・心拡大）", "心エコー（左室機能・弁・下大静脈）",
                   "心電図と心筋トロポニン（虚血が引き金でないか）"],
-          refs: ["HF_JCS", "PE_HF"]
+          refs: ["HF_JCS", "BNP_CUT", "PE_HF"]
         },
         {
           name: "緊張性気胸",
@@ -385,7 +385,7 @@ var DXCC = (function () {
                      "hx_tender_back", "hx_focal_deficit", "ddimer_veryhigh"],
           tests: ["血圧の左右差と上下肢差の実測", "造影CT（上行〜腸骨まで）",
                   "D-ダイマー陰性は否定の補助になるが、確定診断は画像", "降圧・心拍数管理を並行して開始"],
-          refs: ["AORTA_ACC"]
+          refs: ["JCS_AORTA", "AORTA_ACC"]
         },
         {
           name: "肺血栓塞栓症",
@@ -453,7 +453,7 @@ var DXCC = (function () {
              "心音（新規の拡張期雑音・摩擦音・心音減弱）と頸静脈",
              "左右の呼吸音差、皮下気腫",
              "胸壁の圧痛点と皮疹（デルマトーム）"],
-      refs: ["ACS_JCS", "AORTA_ACC", "WELLS_PE"]
+      refs: ["ACS_JCS", "JCS_AORTA", "AORTA_ACC", "JCS_PE", "WELLS_PE"]
     },
 
     /* ============== 腹痛 ============== */
@@ -484,7 +484,7 @@ var DXCC = (function () {
           why: "破裂すれば分単位で失血する。拍動性腫瘤・腹背部痛・低血圧の三つで即断。",
           pointers: ["hx_pulsatile_mass", "hx_tender_back", S.shockBp, S.hypotension, "hx_sudden_onset", S.elderly, "anemia"],
           tests: ["ベッドサイドエコーで大動脈径", "造影CT（安定していれば）", "直ちに血管外科と輸血の手配"],
-          refs: ["AORTA_ACC"]
+          refs: ["JCS_AORTA", "AORTA_ACC"]
         },
         {
           name: "急性胆管炎",
@@ -1100,7 +1100,7 @@ var DXCC = (function () {
              "圧痕の残り方（残る＝水分、残らない＝リンパ・粘液）",
              "頸静脈・III音・両側下肺の捻髪音",
              "腹水と肝脾、皮膚の熱感・境界"],
-      refs: ["WELLS_DVT", "HF_JCS", "KDIGO_CKD", "CHILDPUGH"]
+      refs: ["WELLS_DVT", "JCS_PE", "HF_JCS", "KDIGO_CKD", "CHILDPUGH"]
     },
 
     /* ============== 乏尿 ============== */

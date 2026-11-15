@@ -172,8 +172,16 @@
       if (n(V.ck) > 5000) F.rhabdo_range = true;
     }
     if (n(V.tnt) != null && n(V.tnt) > 0.014) F.troponin_high = true;
-    if (n(V.bnp) != null && n(V.bnp) > 100) F.bnp_high = true;
-    if (n(V.ntprobnp) != null && n(V.ntprobnp) > 400) F.bnp_high = true;
+    /* BNP／NT-proBNP のカットオフは 2025年改訂版 心不全診療ガイドラインに合わせる。
+       急性期の除外は BNP 100 pg/mL・NT-proBNP 300 pg/mL（従来 400 としていたのは誤り）、
+       慢性期の除外は BNP 35 pg/mL・NT-proBNP 125 pg/mL。 */
+    var bnpHi = (n(V.bnp) != null && n(V.bnp) > 100) ||
+                (n(V.ntprobnp) != null && n(V.ntprobnp) > 300);
+    // 除外域の判定は「実測して下回った」ときだけ。未測定から心不全の否定を導かない。
+    var bnpLo = (n(V.bnp) != null && n(V.bnp) < 35) ||
+                (n(V.ntprobnp) != null && n(V.ntprobnp) < 125);
+    if (bnpHi) F.bnp_high = true;
+    if (bnpLo && !bnpHi) F.bnp_ruleout = true;
 
     /* 膵 */
     if (n(V.amy) != null && n(V.amy) > 132) F.amy_high = true;

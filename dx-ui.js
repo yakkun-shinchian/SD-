@@ -115,9 +115,7 @@
           "</li>";
       }).join("") + "</ul>" +
       '<div class="refs">計算式の出典：' +
-        DXRefs.entries(["WINTER", "FIGGE", "GOLDMARK", "UAG", "BERLIN"]).map(function (r) {
-          return '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
-        }).join("、") + "</div>" +
+        DXRefs.entries(["WINTER", "FIGGE", "GOLDMARK", "UAG", "BERLIN"]).map(refLink).join("、") + "</div>" +
       "</div></div>";
   });
 
@@ -148,11 +146,16 @@
       }).join("") + "</div></div>";
   });
 
+  /** 原典が公開されているものは、書誌だけでなくそこへ飛べるようにする。 */
+  function refLink(r) {
+    var t = '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
+    return r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + t + " ↗</a>" : t;
+  }
+
   function refs(ids) {
     if (!ids || !ids.length) return "";
-    return '<div class="refs">出典：' + DXRefs.entries(ids).map(function (r) {
-      return '<span title="' + esc(r.cite) + '">' + esc(r.label) + "</span>";
-    }).join("、") + "</div>";
+    return '<div class="refs">出典：' +
+      DXRefs.entries(ids).map(refLink).join("、") + "</div>";
   }
 
   /* ---------- ③ 臨床スコア ---------- */
@@ -255,7 +258,7 @@
       '⚠ 書誌情報は実装時点のものです。臨床判断に用いる前に、必ず原典および最新版のガイドラインで照合してください。</p>' +
       '<table class="tbl"><thead><tr><th>項目</th><th>出典</th></tr></thead><tbody>' +
       all.map(function (r) {
-        return "<tr><td style=\"white-space:nowrap\">" + esc(r.label) + "</td><td style=\"font-size:11.5px;color:var(--sub)\">" +
+        return "<tr><td style=\"white-space:nowrap\">" + refLink(r) + "</td><td style=\"font-size:11.5px;color:var(--sub)\">" +
           esc(r.cite) + "</td></tr>";
       }).join("") + "</tbody></table></div></details>";
   });

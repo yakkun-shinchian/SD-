@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const c = vm.createContext({});
 for (const name of ['core','cbc','chem','coag','autoab']) vm.runInContext(fs.readFileSync(new URL('../labs-'+name+'.js', import.meta.url),'utf8'), c);
-for (const name of ['refs','abg','scores','core']) vm.runInContext(fs.readFileSync(new URL('../dx-'+name+'.js', import.meta.url),'utf8'), c);
+for (const name of ['refs','abg','hx','scores','core','cc']) vm.runInContext(fs.readFileSync(new URL('../dx-'+name+'.js', import.meta.url),'utf8'), c);
 vm.runInContext(fs.readFileSync(new URL('../labs-integrate.js', import.meta.url),'utf8'), c);
 const domains = ['cbc','chem','coag','autoab','abg'];
 function run(values, ds=domains, context={sex:'m',age:50}) {
@@ -263,6 +263,43 @@ test('LabsCore.calcOsm も3項目を要求する', () => {
     {values:{na:140,cl:104,sosm:295},context:{sex:'m',age:60}}).derived;
   assert.equal(d.osmCalc, null);
   assert.equal(d.osmGap, undefined);
+});
+
+/* 出典IDの綴り間違いを検出する。存在しないIDを書くと DXRefs.entries() は
+   ラベルの代わりに生のID（"JCS_PE" など）をそのまま画面へ出してしまうため、
+   臨床家には「出典がある」ように見えて実体がない状態になる。 */
+test('すべての判定の出典IDが実在する', () => {
+ const known = new Set(c.DXRefs.all().map(r => r.id));
+ const bad = [];
+ const see = (where, ids) => (ids || []).forEach(id => { if (!known.has(id)) bad.push(where + ' → ' + id); });
+ c.LabsCore.domains.forEach(d => (d.patterns || []).forEach(p => see('pattern ' + p.id, p.refs)));
+ c.DXCore.DDX.forEach(d => see('ddx ' + d.id, d.refs));
+ c.DXScores.list.forEach(x => see('score ' + x.id, x.refs));
+ c.DXCC.list.forEach(cc => {
+  see('cc ' + cc.key, cc.refs);
+  (cc.killers || []).forEach(k => see('cc ' + cc.key + '/' + k.name, k.refs));
+ });
+ assert.deepEqual(bad, [], '存在しない出典ID: ' + bad.join(' / '));
+});
+
+test('公開原典のURLは https の絶対URLである', () => {
+ c.DXRefs.all().filter(r => r.url).forEach(r => {
+  assert.match(r.url, /^https:\/\/[^\s"'<>]+$/, r.id + ' の url が不正: ' + r.url);
+ });
+});
+
+/* 心不全のカットオフが 2025年改訂版ガイドラインの値であること（400 への逆戻り防止） */
+test('BNP／NT-proBNP のカットオフがガイドライン通り', () => {
+ const F = v => c.LabsCore.evaluate(['chem'], {values:v, context:{sex:'m',age:60}}).findings;
+ assert.ok(F({ntprobnp:350}).bnp_high, 'NT-proBNP 350 は上昇と判定されるべき');
+ assert.ok(!F({ntprobnp:250}).bnp_high, 'NT-proBNP 250 を上昇と判定してはいけない');
+ assert.ok(F({bnp:120}).bnp_high);
+ assert.ok(!F({bnp:60}).bnp_high);
+ // 除外域は「実測して下回った」ときだけ
+ assert.ok(F({bnp:20}).bnp_ruleout);
+ assert.ok(F({ntprobnp:80}).bnp_ruleout);
+ assert.ok(!F({}).bnp_ruleout, '未測定から心不全の除外を導いてはいけない');
+ assert.ok(!F({bnp:20, ntprobnp:900}).bnp_ruleout, '片方が高ければ除外域にしない');
 });
 
 console.log(`${checks} checks passed; ${presets} presets evaluated in standalone and integrated modes.`);

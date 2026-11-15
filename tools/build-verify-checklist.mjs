@@ -42,6 +42,9 @@ const VARIES = {
   'score.meldna': 'MELD の上下限（6〜40）と Cr の上限 4.0、透析時の扱いは版により異なる。',
   'score.news2': 'SpO₂ はスケール1のみ実装。慢性II型呼吸不全に用いるスケール2は未実装。',
   'pat.ch-siadh': '尿中Na の閾値は 20 以上とする基準と 40 以上とする基準がある。本アプリは特異度を優先して 40 以上（2026-10-31 に 30 から変更）。',
+  'coag.ddimer': 'カットオフは測定系で 2 倍違う。FEU 表記なら 0.5 µg/mL、DDU 表記なら 1.0 µg/mL が一般的。本アプリは 1.0 µg/mL。自施設の単位の確認が要る。',
+  'calc.ddimer': '陰性の境界は測定系（FEU／DDU）依存。年齢調整カットオフ（50歳超で 年齢 × 10 µg/L FEU）を併用するかも施設で割れる。',
+  'calc.bnp': '2025年改訂版 心不全診療ガイドラインの値を採用（急性期 BNP 100・NT-proBNP 300、慢性期 BNP 35・NT-proBNP 125）。2026-11-15 に NT-proBNP の上昇判定を 400 から 300 へ修正。',
 };
 
 function confidenceOf(sec, it) {
@@ -144,7 +147,13 @@ sections.push({ id: 'calc', title: 'その他の計算式', lead: '', items: [
   { id:'calc.anc', label:'好中球絶対数', detail:'WBC × 好中球% ÷ 100。<1500 好中球減少、<500 高度', star:true, refs:[] },
   { id:'calc.retic', label:'網赤血球絶対数', detail:'RBC(×10⁶/µL) × 10000 × 網赤血球(%)。>10万 増加、<2.5万 低値', star:true, refs:[] },
   { id:'calc.buncr', label:'BUN／Cr 比', detail:'>20 で腎前性・消化管出血を示唆', star:false, refs:[] },
-  { id:'calc.deritis', label:'De Ritis 比（AST/ALT）', detail:'≧2 でアルコール性・肝硬変、<1 で慢性肝炎を示唆', star:false, refs:[] }
+  { id:'calc.deritis', label:'De Ritis 比（AST/ALT）', detail:'≧2 でアルコール性・肝硬変、<1 で慢性肝炎を示唆', star:false, refs:[] },
+  { id:'calc.bnp', label:'BNP／NT-proBNP のカットオフ',
+    detail:'上昇（急性期の除外ライン超え）：BNP >100 pg/mL／NT-proBNP >300 pg/mL\n除外域（実測で下回ったときのみ）：BNP <35 pg/mL／NT-proBNP <125 pg/mL',
+    star:true, refs:['HF_JCS','BNP_CUT'] },
+  { id:'calc.ddimer', label:'D-ダイマーの陰性カットオフ',
+    detail:'≦1.0 µg/mL を陰性とする。50歳を超える症例では年齢調整カットオフ（年齢 × 10 µg/L FEU）の併用を検討',
+    star:true, refs:['ADJ_DDIMER','JCS_PE'] }
 ]});
 
 /* ---- 5. 臨床スコア ---- */

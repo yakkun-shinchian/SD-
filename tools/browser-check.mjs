@@ -129,6 +129,21 @@ check('点灯件数が主訴カードの見出しにも出る',
 check('問診・身体所見が入力値一覧表に混ざらない',
   !/血圧の左右差/.test(await page.locator('.card:has-text("入力値の一覧と判定")').first().textContent()));
 
+/* 公開されている原典へのリンクが出ること */
+await page.goto(base + '/dx.html', { waitUntil: 'networkidle' });
+if (await page.locator('#dlg-ok').count()) await page.locator('#dlg-ok').click();
+await openAll();
+const jcsLinks = await page.locator('.refs a[href^="https://www.j-circ.or.jp/"]').count();
+check('判定カードから日本循環器学会ガイドラインの原典へ飛べる', jcsLinks > 0, 'links=' + jcsLinks);
+check('原典リンクが新しいタブで安全に開く',
+  (await page.locator('.refs a[target="_blank"][rel="noopener"]').count()) > 0);
+
+await page.goto(base + '/verify.html', { waitUntil: 'networkidle' });
+await page.locator('#b-open').click();
+await page.waitForTimeout(300);
+check('照合チェックリストからも原典へ飛べる',
+  (await page.locator('.refs a[href^="https://"]').count()) > 0);
+
 /* 照合チェックリストの記録と書き出し */
 await page.goto(base + '/verify.html', { waitUntil: 'networkidle' });
 await page.locator('#b-open').click();

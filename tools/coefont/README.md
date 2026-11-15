@@ -11,24 +11,99 @@
 | --- | --- | --- |
 | ① 初回ログイン | `coefont-login.mjs` | ✅ 使えます |
 | ② 画面の採寸 | `coefont-probe.mjs` | ✅ 使えます |
-| ③ 選択子の記入 | `selectors.js` | ⏳ 仕組みは完成・**中身は未記入15項目**（②の結果待ち） |
+| ③ 選択子の書き起こし | `derive-selectors.mjs` | ✅ 使えます（採寸結果から自動で起こします） |
+| ③' 選択子の表 | `selectors.mjs` | ✅ 既定は未記入・実測は `selectors.local.json` から重ねます |
 | ④ 音声の量産 | `coefont-batch.mjs` | ✅ 実装済み（③の記入後に動きます） |
 
-③④ は、②で実物の画面を測ってから作ります。推測で書いた選択子は初回で外れるため、
-「測ってから作る」順序を崩しません。
+③ は②で測った実物から起こします。推測で書いた選択子は初回で外れるため、
+「測ってから作る」順序を崩しません。採寸結果はお手元にあるので、**書き起こしも
+お手元で走ります**（ファイルを貼っていただく必要はありません）。
 
 ## 必要なもの
 
 - **Node.js**（Node 22 で確認）
 - **Playwright**（この道具だけが使います。NurseTube 本体は依存ゼロのままです）
-
-  ```bash
-  npm install -g playwright && npx playwright install chromium
-  ```
-
 - **CoeFont のアカウント**（Google ログイン可）
-- **インターネットに出られる環境** — クラウド実行環境からは `coefont.cloud` に
-  到達できないため、**ご自分のパソコンで実行してください**
+- **画面のあるパソコン** — ブラウザを実際に開くため、デスクトップ環境が必要です。
+  クラウド実行環境からは `coefont.cloud` に到達できないので、**ご自分のパソコンで**
+  実行してください
+
+### Windows で動かす
+
+**Windows Terminal（PowerShell）でも、VS Code のターミナルでも、どちらでも動きます。**
+VS Code のターミナルは PowerShell と同じものなので、違いはありません。
+
+**1行ずつ実行してください。** `&&` でつなぐ書き方は避けます（理由は下記）。
+
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+Node.js を入れたら、**ターミナルを一度閉じて開き直してください。** PATH が通ります。
+ここを飛ばすと「`node` は認識されません」と言われます。
+（winget を使わない場合は https://nodejs.org/ja から LTS 版を入れてください）
+
+```powershell
+node -v
+```
+
+`v22` 以上が出れば大丈夫です。続けて：
+
+```powershell
+npm install -g playwright
+```
+
+```powershell
+npx playwright install chromium
+```
+
+> ### ⚠ `&&` でつながないこと
+>
+> Windows には PowerShell が2種類あります。
+>
+> | | `&&` |
+> | --- | --- |
+> | **Windows PowerShell 5.1**（Windows 標準） | ❌ 構文エラーになります |
+> | **PowerShell 7 以降**（`pwsh`） | ✅ 使えます |
+>
+> どちらが開いているか分かりにくいので、**1行ずつ**実行するのが確実です。
+> 自分のバージョンは `$PSVersionTable.PSVersion` で確認できます。
+>
+> また、**コマンドプロンプト（cmd）では `#` のコメントを付けないでください。**
+> コマンドの一部として解釈され、失敗します。
+
+> **補足**：`npm install -g` で入れた場所は Node の既定の探索経路に入らないため、
+> プロジェクト内のスクリプトから見つからないことがあります
+> （Windows では `%APPDATA%\npm\node_modules`）。
+> `playwright-resolve.mjs` が `npm root -g` に場所を聞いて解決するので、
+> グローバル導入のままで動きます。
+>
+> それでも見つからない場合は、プロジェクトのフォルダで `npm install playwright`
+> として、その場に入れてしまうのが確実です。
+
+### macOS / Linux で動かす
+
+**いちばん確実なのは、このフォルダに直接入れることです。**
+
+```bash
+npm install playwright
+npx playwright install chromium
+```
+
+`node_modules/` と `package.json` は `.gitignore` 済みなので、
+リポジトリには入りません（本体は依存ゼロの方針のままです）。
+
+グローバルに入れたい場合は次のとおりですが、**入れた場所が Node の探索経路に
+入らず見つからないことがあります**（macOS の Homebrew、Linux の各種配置）。
+
+```bash
+npm install -g playwright
+npx playwright install chromium
+```
+
+`playwright-resolve.mjs` が `npm root -g` に場所を聞いて解決を試みます。
+それでも見つからない場合は、**探した場所の一覧を表示して止まる**ので、
+その一覧をそのまま共有してください。原因が特定できます。
 
 ## 手順
 
@@ -69,7 +144,7 @@ node tools/coefont/coefont-probe.mjs
 
 | ファイル | 中身 |
 | --- | --- |
-| `ui-map/summary.txt` | **全段階をまとめた1枚。これをそのままチャットに貼ってください**（目安10〜20KB） |
+| `ui-map/summary.txt` | 全段階をまとめた1枚（貼れば直接書けます。③で自動化したので任意） |
 | `ui-map/ui-map-NN.txt` | 段階ごとの要約（summary.txt が大きすぎるとき用） |
 | `ui-map/ui-map-NN.json` | 全情報（手元の確認用。貼る必要はありません） |
 | `ui-map/ui-map-NN.png` | 画面写真（貼れないので、文字で足りないときに仰ってください） |
@@ -79,9 +154,36 @@ node tools/coefont/coefont-probe.mjs
 CSS は最も模様替えに弱いので、最後の手段に回しています。
 個人情報は含みませんが、念のため目を通してから貼ってください。
 
-### ③ 選択子の記入（採寸後）
+### ③ 選択子の書き起こし（採寸後）
 
-`selectors.js` の空配列を埋めます。ここだけが画面の知識を持つため、
+```bash
+node tools/coefont/derive-selectors.mjs
+```
+
+採寸結果（`ui-map/ui-map-*.json`）を読み、目標ごとに「それらしい要素」を採点して
+候補を並べ、`selectors.local.json` に書き出します。`selectors.mjs` はこの上書きを
+自動で読み込みます。**推測ではなく実測から起こす**ので、「測ってから作る」原則は
+そのままです。
+
+画面には1目標1行の報告が出ます。
+
+```
+✓ loggedIn.marker      段階1  {"role":"link","name":"マイページ"}
+✓ voice.openPicker     段階2  {"role":"button","name":"声を選ぶ"}
+✗ export.download      見つかりません
+－ voice.confirm        （無くても動きます）
+```
+
+- `✓` … 埋まりました
+- `－` … 任意の項目。空のままでも本番は回ります
+- `✗` … 必須なのに見つかりません。**この報告（`ui-map/derive-report.txt`）を
+  貼っていただければ、こちらで直します**
+
+`selectors.local.json` は手で直しても構いません。消せば既定（未記入）に戻ります。
+
+#### 手で書く場合
+
+`selectors.mjs` の空配列を埋めます。ここだけが画面の知識を持つため、
 CoeFont が模様替えしたときに直すのもこの1枚だけです。
 
 **1つの目標に当て方を複数持たせます。** 上から順に試し、最初に見つかった
@@ -194,6 +296,6 @@ CoeFont で生成した音声の利用範囲とクレジット表記の要否は
 CoeFont には公式 REST API がありますが、**費用を理由に採用しない**と決定しました。
 この道具のブラウザ自動化が唯一の経路です。
 
-そのため `selectors.js` は、1つの目標に対して**当て方を複数持ちます**
+そのため `selectors.mjs` は、1つの目標に対して**当て方を複数持ちます**
 （役割＋文言 → 文言 → テスト属性 → CSS の順に試す）。退路が無い道なので、
 手すりを厚くしてあります。

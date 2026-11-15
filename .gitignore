@@ -10,6 +10,13 @@ tools/coefont/.profile/
 tools/coefont/ui-map/
 tools/coefont/login-state.json
 tools/coefont/progress.json
+tools/coefont/selectors.local.json
 # ダウンロードした音声と取り込み指示（PR #30 の import.json からの相対で export/）
 coefont/export/
 coefont/import.json
+
+# Playwright をこのフォルダに直接入れた場合の生成物
+# （本体は依存ゼロの方針なので、これらはコミットしない）
+node_modules/
+package.json
+package-lock.json

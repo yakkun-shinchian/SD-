@@ -1,5 +1,5 @@
 // =========================================================================
-// selectors.js  ── 画面の知識を閉じ込める唯一のファイル
+// selectors.mjs  ── 画面の知識を閉じ込める唯一のファイル
 //
 // ■ なぜ1ファイルにまとめるのか
 //   ブラウザ自動化が壊れる原因は、ほぼすべて「サイトの模様替え」です。
@@ -21,11 +21,22 @@
 //   ボタンの文字が変わっても ④⑤ が残り、クラス名が変わっても ①② が残ります。
 //   全部が同時に外れないと壊れない、という形にしてあります。
 //
-// ■ いまの状態：未記入
-//   実物を測る前に推測で書くと初回で確実に外れるため、空配列にしてあります。
-//   先に `node tools/coefont/coefont-probe.mjs` で採寸し、ui-map/ の内容を
-//   見てから埋めます。文言は正規表現も使えます（例 name: /新規|作成/）。
+// ■ いまの状態：既定は未記入、実測は selectors.local.json から
+//   推測で書くと初回で確実に外れるため、この表は空のままにしてあります。
+//   実際の当て方は採寸結果から起こします。
+//
+//     node tools/coefont/coefont-probe.mjs       # 採寸（画面を測る）
+//     node tools/coefont/derive-selectors.mjs    # 採寸結果 → selectors.local.json
+//
+//   selectors.local.json があれば、この表に重ねて使います（git 管理外）。
+//   手で直しても構いません。消せば既定（未記入）に戻ります。
+//   文言は正規表現も使えます（例 name: /新規|作成/）。
 // =========================================================================
+
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { REQUIRED_TARGETS } from "./derive-selectors.mjs";
 
 const SELECTORS = {
   loggedIn: {
@@ -67,11 +78,46 @@ const SELECTORS = {
   },
 };
 
+/* ───────────────────────────────────────────────────────────────────────
+   採寸から起こした上書き（selectors.local.json）を重ねます。
+   無ければ何もしません。壊れていたら黙らず警告します。
+   ─────────────────────────────────────────────────────────────────────── */
+export const LOCAL_PATH = path.join(path.dirname(fileURLToPath(import.meta.url)), "selectors.local.json");
+
+export function applyLocal(target = SELECTORS, file = LOCAL_PATH) {
+  if (!fs.existsSync(file)) return { applied: 0, file: null };
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch (e) {
+    console.warn(`⚠ ${file} が読めません（無視します）: ${e.message}`);
+    return { applied: 0, file };
+  }
+  let applied = 0;
+  for (const [dotted, list] of Object.entries(data.candidates || {})) {
+    if (!Array.isArray(list) || list.length === 0) continue;
+    const keys = dotted.split(".");
+    let node = target;
+    for (const k of keys.slice(0, -1)) node = node?.[k];
+    const last = keys[keys.length - 1];
+    if (!node || !Array.isArray(node[last])) {
+      console.warn(`⚠ 知らない選択子の名前です（無視します）: ${dotted}`);
+      continue;
+    }
+    node[last] = list;
+    applied++;
+  }
+  return { applied, file };
+}
+
+export const localStatus = applyLocal();
+
 export default SELECTORS;
 
 /* ───────────────────────────────────────────────────────────────────────
    候補の配列から、実際に画面にあるものを1つ選びます。
-   上から順に試し、見つかったものを返します。全部外れたら、
+   上から順に試し、見つかったものを返します（{ locator, all, how }。
+   locator は1つに絞ったもの、all は絞る前の全部）。全部外れたら、
    「何をどの順で試して、どう外れたか」を添えて例外にします。
    （黙って null を返すと、原因を追うのに何時間もかかります）
    ─────────────────────────────────────────────────────────────────────── */
@@ -81,7 +127,7 @@ export async function resolve(page, candidates, opts = {}) {
     throw new Error(
       `選択子が未記入です: ${label}\n` +
       `  先に \`node tools/coefont/coefont-probe.mjs\` で採寸し、\n` +
-      `  tools/coefont/selectors.js の該当項目を埋めてください。`
+      `  tools/coefont/selectors.mjs の該当項目を埋めてください。`
     );
   }
 
@@ -113,11 +159,14 @@ export async function resolve(page, candidates, opts = {}) {
         continue;
       }
 
+      // 絞る前のものも返します。検索結果の一覧のように
+      // 「並んでいる全部」を読みたい場面があるためです。
+      const all = locator;
       if (c.nth !== undefined) locator = locator.nth(c.nth);
       else locator = locator.first();
 
       await locator.waitFor({ state: requireVisible ? "visible" : "attached", timeout });
-      return { locator, how };
+      return { locator, all, how };
     } catch (e) {
       tried.push(`${how} → ${String(e.message || e).split("\n")[0].slice(0, 80)}`);
     }
@@ -128,7 +177,7 @@ export async function resolve(page, candidates, opts = {}) {
     `  試した順:\n` +
     tried.map((t, i) => `    ${i + 1}. ${t}`).join("\n") +
     `\n  CoeFont の画面が変わった可能性があります。\n` +
-    `  \`node tools/coefont/coefont-probe.mjs\` で再採寸し、selectors.js を直してください。`
+    `  \`node tools/coefont/coefont-probe.mjs\` で再採寸し、selectors.mjs を直してください。`
   );
 }
 
@@ -141,4 +190,11 @@ export function missingTargets(obj = SELECTORS, prefix = "") {
     else if (v && typeof v === "object") out.push(...missingTargets(v, p));
   }
   return out;
+}
+
+/* 本番で必ず使う目標のうち、未記入のものだけを返します。
+   任意の目標（voice.confirm, script.addLine など）は本番を止めません。 */
+export function missingRequired() {
+  const all = new Set(missingTargets());
+  return REQUIRED_TARGETS.filter((t) => all.has(t));
 }

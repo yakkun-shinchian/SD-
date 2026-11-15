@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const sections = [], binders = [];
-const c = vm.createContext({LabsUI: {addSection: f=>sections.push(f), addBinder: f=>binders.push(f), save() {}}});
+const panels = [];
+const c = vm.createContext({LabsUI: {addSection: f=>sections.push(f), addBinder: f=>binders.push(f), addInputPanel: f=>panels.push(f), save() {}}});
 for (const f of ['labs-core.js','dx-refs.js','dx-scores.js','dx-ui.js'])
   vm.runInContext(fs.readFileSync(new URL('../'+f, import.meta.url),'utf8'), c);
 let checks = 0;
@@ -68,7 +69,15 @@ test('compound autofill does not infer normal from missing components',()=>{
  assert.equal(c.DXScores.get('hscore').autofill({hb:8}, {}).cyto,undefined);
  assert.equal(c.DXScores.get('jss_ap').autofill({bun:10,cr:1,be:0,pao2:100}, {}).bun,undefined);
 });
-const render=(state={},values={},context={})=>sections[2]({state,input:{values,context}});
+// 臨床スコアのセクションを「登録順の番号」ではなく中身で特定する。
+// dx-ui.js にセクションが増えても、この検査が静かに別のセクションを見にいかないようにする。
+const scoreSection = (()=>{
+ const probe = {state:{},input:{values:{},context:{}},result:{findings:{},derived:{}}};
+ const hits = sections.filter(f=>{ try { return /臨床スコア/.test(f(probe)||''); } catch { return false; } });
+ assert.equal(hits.length,1,'臨床スコアのセクションが一意に特定できない');
+ return hits[0];
+})();
+const render=(state={},values={},context={})=>scoreSection({state,input:{values,context}});
 const card=(html,name)=>html.split('<div class="score-card">').find(s=>s.startsWith('<h4>'+name+'<'));
 test('rendered UI hides reassuring results and offers explicit false / reset',()=>{
  const html=render();
@@ -82,9 +91,22 @@ test('rendered UI hides reassuring results and offers explicit false / reset',()
  assert.match(card(full,'qSOFA'),/0 点/);
  assert.match(card(full,'qSOFA'),/陰性/);
 });
+// スコア編集の binder を「登録順の番号」ではなく、実際に state.scores を書くかどうかで選ぶ。
+// dx-ui.js に binder が増えても、この検査が別の binder を叩かないようにする。
+const scoreTarget = () => ({value:'false',closest(){return {getAttribute:k=>({'data-score':'qsofa','data-item':'rr','data-kind':'bool'})[k]};}});
+const scoreBinder = (()=>{
+ const found = binders.filter(b=>{
+  let h; const st={};
+  try { b({addEventListener:(_,f)=>{h=f;}},{state:st,rerender(){}}); h({target:scoreTarget()}); }
+  catch { return false; }
+  return !!(st.scores && 'rr' in (st.scores.qsofa||{}));
+ });
+ assert.equal(found.length,1,'スコア編集の binder が一意に特定できない');
+ return found[0];
+})();
 test('binder false → true → unanswered and auto values refresh',()=>{
- let handler; binders[0]({addEventListener:(_,f)=>{handler=f;}},{state:c.state={},rerender(){}});
- const target={value:'false',closest(){return {getAttribute:k=>({'data-score':'qsofa','data-item':'rr','data-kind':'bool'})[k]};}};
+ let handler; scoreBinder({addEventListener:(_,f)=>{handler=f;}},{state:c.state={},rerender(){}});
+ const target=scoreTarget();
  for(const [value,expected] of [['false',false],['true',true],['',undefined]]) {
   target.value=value;handler({target});assert.equal(c.state.scores.qsofa.rr,expected);
  }

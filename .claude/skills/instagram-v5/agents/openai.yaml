@@ -1,0 +1,13 @@
+interface:
+  display_name: Instagram V5
+  short_description: 参考10枚を固定基準にYAKUBON看護教材の絵柄を再現
+  default_prompt: $instagram-v5 を使い、添付または固定参考画像と同じシリーズに見えるInstagram看護教材を制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

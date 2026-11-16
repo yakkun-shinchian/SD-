@@ -1,0 +1,13 @@
+interface:
+  display_name: CoeFont｜Googleログインと案件別新規プロジェクト
+  short_description: CoeFontはGoogleログインを確認し、案件ごとの新規プロジェクトで音声を制作する
+  default_prompt: CoeFontでGoogleログイン状態を確認し、この案件専用の新規プロジェクトを作成して音声を制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

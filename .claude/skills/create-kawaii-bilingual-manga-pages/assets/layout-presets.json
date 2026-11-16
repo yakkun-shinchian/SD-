@@ -1,0 +1,49 @@
+{
+  "canvas": {"width": 2048, "height": 3072, "color_space": "sRGB"},
+  "default_preset": "hero-plus-three",
+  "style_contract": {
+    "panel_frame": "bordered-rectangle",
+    "balloon_shape": "soft-oval",
+    "balloon_language_order": "ja-then-en",
+    "face_overlap_policy": "zero-intersection",
+    "collision_action": "reject-and-recompose"
+  },
+  "zones": {
+    "header_title": {"x": 0.04, "y": 0.03, "w": 0.92, "h": 0.08},
+    "story": {"x": 0.04, "y": 0.12, "w": 0.92, "h": 0.60},
+    "reflection": {"x": 0.04, "y": 0.74, "w": 0.92, "h": 0.21},
+    "footer": {"x": 0.04, "y": 0.96, "w": 0.92, "h": 0.03}
+  },
+  "presets": {
+    "single": {
+      "panel_count": 1,
+      "frames": [
+        {"panel_id": "panel-1", "role": "lead", "x": 0.04, "y": 0.12, "w": 0.92, "h": 0.60}
+      ]
+    },
+    "hero-plus-one": {
+      "panel_count": 2,
+      "frames": [
+        {"panel_id": "panel-1", "role": "lead", "x": 0.04, "y": 0.12, "w": 0.92, "h": 0.36},
+        {"panel_id": "panel-2", "role": "support", "x": 0.04, "y": 0.50, "w": 0.92, "h": 0.22}
+      ]
+    },
+    "hero-plus-two": {
+      "panel_count": 3,
+      "frames": [
+        {"panel_id": "panel-1", "role": "lead", "x": 0.04, "y": 0.12, "w": 0.92, "h": 0.36},
+        {"panel_id": "panel-2", "role": "support", "x": 0.04, "y": 0.50, "w": 0.45, "h": 0.22},
+        {"panel_id": "panel-3", "role": "support", "x": 0.51, "y": 0.50, "w": 0.45, "h": 0.22}
+      ]
+    },
+    "hero-plus-three": {
+      "panel_count": 4,
+      "frames": [
+        {"panel_id": "panel-1", "role": "lead", "x": 0.04, "y": 0.12, "w": 0.92, "h": 0.36},
+        {"panel_id": "panel-2", "role": "support", "x": 0.04, "y": 0.50, "w": 0.293, "h": 0.22},
+        {"panel_id": "panel-3", "role": "support", "x": 0.354, "y": 0.50, "w": 0.292, "h": 0.22},
+        {"panel_id": "panel-4", "role": "support", "x": 0.667, "y": 0.50, "w": 0.293, "h": 0.22}
+      ]
+    }
+  }
+}

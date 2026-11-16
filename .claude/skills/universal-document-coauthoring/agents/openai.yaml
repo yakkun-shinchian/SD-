@@ -1,0 +1,14 @@
+interface:
+  display_name: 文書共同執筆
+  short_description: 目的確認から構成、草稿、読者視点レビューまで伴走します
+  default_prompt: Use $universal-document-coauthoring to help me plan, draft, and
+    review this document.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

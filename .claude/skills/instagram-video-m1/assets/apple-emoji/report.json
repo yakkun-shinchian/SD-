@@ -1,0 +1,11 @@
+{
+  "exported" : 3548,
+  "needs_review" : 415,
+  "note" : "This is the supported subset on this Mac, not a guarantee of all Apple versions. Review sample PNGs before video use.",
+  "os" : "Version 27.0.1 (Build 26A434)",
+  "source" : "https:\/\/www.unicode.org\/Public\/emoji\/latest\/emoji-test.txt",
+  "unicode_header" : [
+    "# Date: 2026-04-30, 22:40:18 GMT",
+    "# Version: 18.0"
+  ]
+}

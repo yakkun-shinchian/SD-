@@ -1,0 +1,13 @@
+interface:
+  display_name: スキル安全審査
+  short_description: 導入前のスキルを静的に点検し、権限と危険性を判定します
+  default_prompt: Use $universal-skill-safety-audit to review this skill before installation.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

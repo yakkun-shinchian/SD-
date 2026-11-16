@@ -1,0 +1,14 @@
+interface:
+  display_name: 病原体イラストの音声同期モーション
+  short_description: 完成イラストを分解し、吹き出しと音声を同期した縦型動画にする
+  default_prompt: Use $animate-pathogen-layer-reel to create a narrated 40-second
+    reel from this finished pathogen illustration.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

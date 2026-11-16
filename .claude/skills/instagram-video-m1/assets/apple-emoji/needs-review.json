@@ -1,0 +1,3322 @@
+[
+  {
+    "codepoints" : "1faeb",
+    "description" : "🫫 E18.0 cracking face",
+    "emoji" : "🫫",
+    "group" : "Smileys & Emotion",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "face-smiling"
+  },
+  {
+    "codepoints" : "1faf9",
+    "description" : "🫹 E18.0 leftwards thumb sign",
+    "emoji" : "🫹",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1faf9-1f3fb",
+    "description" : "🫹🏻 E18.0 leftwards thumb sign: light skin tone",
+    "emoji" : "🫹🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1faf9-1f3fc",
+    "description" : "🫹🏼 E18.0 leftwards thumb sign: medium-light skin tone",
+    "emoji" : "🫹🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1faf9-1f3fd",
+    "description" : "🫹🏽 E18.0 leftwards thumb sign: medium skin tone",
+    "emoji" : "🫹🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1faf9-1f3fe",
+    "description" : "🫹🏾 E18.0 leftwards thumb sign: medium-dark skin tone",
+    "emoji" : "🫹🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1faf9-1f3ff",
+    "description" : "🫹🏿 E18.0 leftwards thumb sign: dark skin tone",
+    "emoji" : "🫹🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1fafa",
+    "description" : "🫺 E18.0 rightwards thumb sign",
+    "emoji" : "🫺",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1fafa-1f3fb",
+    "description" : "🫺🏻 E18.0 rightwards thumb sign: light skin tone",
+    "emoji" : "🫺🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1fafa-1f3fc",
+    "description" : "🫺🏼 E18.0 rightwards thumb sign: medium-light skin tone",
+    "emoji" : "🫺🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1fafa-1f3fd",
+    "description" : "🫺🏽 E18.0 rightwards thumb sign: medium skin tone",
+    "emoji" : "🫺🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1fafa-1f3fe",
+    "description" : "🫺🏾 E18.0 rightwards thumb sign: medium-dark skin tone",
+    "emoji" : "🫺🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1fafa-1f3ff",
+    "description" : "🫺🏿 E18.0 rightwards thumb sign: dark skin tone",
+    "emoji" : "🫺🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hand-fingers-closed"
+  },
+  {
+    "codepoints" : "1faf1-1f3fb-200d-1faf2-1f3fc",
+    "description" : "🫱🏻‍🫲🏼 E14.0 handshake: light skin tone, medium-light skin tone",
+    "emoji" : "🫱🏻‍🫲🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fb-200d-1faf2-1f3fd",
+    "description" : "🫱🏻‍🫲🏽 E14.0 handshake: light skin tone, medium skin tone",
+    "emoji" : "🫱🏻‍🫲🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fb-200d-1faf2-1f3fe",
+    "description" : "🫱🏻‍🫲🏾 E14.0 handshake: light skin tone, medium-dark skin tone",
+    "emoji" : "🫱🏻‍🫲🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fb-200d-1faf2-1f3ff",
+    "description" : "🫱🏻‍🫲🏿 E14.0 handshake: light skin tone, dark skin tone",
+    "emoji" : "🫱🏻‍🫲🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fc-200d-1faf2-1f3fb",
+    "description" : "🫱🏼‍🫲🏻 E14.0 handshake: medium-light skin tone, light skin tone",
+    "emoji" : "🫱🏼‍🫲🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fc-200d-1faf2-1f3fd",
+    "description" : "🫱🏼‍🫲🏽 E14.0 handshake: medium-light skin tone, medium skin tone",
+    "emoji" : "🫱🏼‍🫲🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fc-200d-1faf2-1f3fe",
+    "description" : "🫱🏼‍🫲🏾 E14.0 handshake: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "🫱🏼‍🫲🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fc-200d-1faf2-1f3ff",
+    "description" : "🫱🏼‍🫲🏿 E14.0 handshake: medium-light skin tone, dark skin tone",
+    "emoji" : "🫱🏼‍🫲🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fd-200d-1faf2-1f3fb",
+    "description" : "🫱🏽‍🫲🏻 E14.0 handshake: medium skin tone, light skin tone",
+    "emoji" : "🫱🏽‍🫲🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fd-200d-1faf2-1f3fc",
+    "description" : "🫱🏽‍🫲🏼 E14.0 handshake: medium skin tone, medium-light skin tone",
+    "emoji" : "🫱🏽‍🫲🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fd-200d-1faf2-1f3fe",
+    "description" : "🫱🏽‍🫲🏾 E14.0 handshake: medium skin tone, medium-dark skin tone",
+    "emoji" : "🫱🏽‍🫲🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fd-200d-1faf2-1f3ff",
+    "description" : "🫱🏽‍🫲🏿 E14.0 handshake: medium skin tone, dark skin tone",
+    "emoji" : "🫱🏽‍🫲🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fe-200d-1faf2-1f3fb",
+    "description" : "🫱🏾‍🫲🏻 E14.0 handshake: medium-dark skin tone, light skin tone",
+    "emoji" : "🫱🏾‍🫲🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fe-200d-1faf2-1f3fc",
+    "description" : "🫱🏾‍🫲🏼 E14.0 handshake: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "🫱🏾‍🫲🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fe-200d-1faf2-1f3fd",
+    "description" : "🫱🏾‍🫲🏽 E14.0 handshake: medium-dark skin tone, medium skin tone",
+    "emoji" : "🫱🏾‍🫲🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3fe-200d-1faf2-1f3ff",
+    "description" : "🫱🏾‍🫲🏿 E14.0 handshake: medium-dark skin tone, dark skin tone",
+    "emoji" : "🫱🏾‍🫲🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3ff-200d-1faf2-1f3fb",
+    "description" : "🫱🏿‍🫲🏻 E14.0 handshake: dark skin tone, light skin tone",
+    "emoji" : "🫱🏿‍🫲🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3ff-200d-1faf2-1f3fc",
+    "description" : "🫱🏿‍🫲🏼 E14.0 handshake: dark skin tone, medium-light skin tone",
+    "emoji" : "🫱🏿‍🫲🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3ff-200d-1faf2-1f3fd",
+    "description" : "🫱🏿‍🫲🏽 E14.0 handshake: dark skin tone, medium skin tone",
+    "emoji" : "🫱🏿‍🫲🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1faf1-1f3ff-200d-1faf2-1f3fe",
+    "description" : "🫱🏿‍🫲🏾 E14.0 handshake: dark skin tone, medium-dark skin tone",
+    "emoji" : "🫱🏿‍🫲🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "hands"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1f430-200d-1f9d1-1f3fc",
+    "description" : "🧑🏻‍🐰‍🧑🏼 E17.0 people with bunny ears: light skin tone, medium-light skin tone",
+    "emoji" : "🧑🏻‍🐰‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1f430-200d-1f9d1-1f3fd",
+    "description" : "🧑🏻‍🐰‍🧑🏽 E17.0 people with bunny ears: light skin tone, medium skin tone",
+    "emoji" : "🧑🏻‍🐰‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1f430-200d-1f9d1-1f3fe",
+    "description" : "🧑🏻‍🐰‍🧑🏾 E17.0 people with bunny ears: light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏻‍🐰‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1f430-200d-1f9d1-1f3ff",
+    "description" : "🧑🏻‍🐰‍🧑🏿 E17.0 people with bunny ears: light skin tone, dark skin tone",
+    "emoji" : "🧑🏻‍🐰‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1f430-200d-1f9d1-1f3fb",
+    "description" : "🧑🏼‍🐰‍🧑🏻 E17.0 people with bunny ears: medium-light skin tone, light skin tone",
+    "emoji" : "🧑🏼‍🐰‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1f430-200d-1f9d1-1f3fd",
+    "description" : "🧑🏼‍🐰‍🧑🏽 E17.0 people with bunny ears: medium-light skin tone, medium skin tone",
+    "emoji" : "🧑🏼‍🐰‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1f430-200d-1f9d1-1f3fe",
+    "description" : "🧑🏼‍🐰‍🧑🏾 E17.0 people with bunny ears: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏼‍🐰‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1f430-200d-1f9d1-1f3ff",
+    "description" : "🧑🏼‍🐰‍🧑🏿 E17.0 people with bunny ears: medium-light skin tone, dark skin tone",
+    "emoji" : "🧑🏼‍🐰‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1f430-200d-1f9d1-1f3fb",
+    "description" : "🧑🏽‍🐰‍🧑🏻 E17.0 people with bunny ears: medium skin tone, light skin tone",
+    "emoji" : "🧑🏽‍🐰‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1f430-200d-1f9d1-1f3fc",
+    "description" : "🧑🏽‍🐰‍🧑🏼 E17.0 people with bunny ears: medium skin tone, medium-light skin tone",
+    "emoji" : "🧑🏽‍🐰‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1f430-200d-1f9d1-1f3fe",
+    "description" : "🧑🏽‍🐰‍🧑🏾 E17.0 people with bunny ears: medium skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏽‍🐰‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1f430-200d-1f9d1-1f3ff",
+    "description" : "🧑🏽‍🐰‍🧑🏿 E17.0 people with bunny ears: medium skin tone, dark skin tone",
+    "emoji" : "🧑🏽‍🐰‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1f430-200d-1f9d1-1f3fb",
+    "description" : "🧑🏾‍🐰‍🧑🏻 E17.0 people with bunny ears: medium-dark skin tone, light skin tone",
+    "emoji" : "🧑🏾‍🐰‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1f430-200d-1f9d1-1f3fc",
+    "description" : "🧑🏾‍🐰‍🧑🏼 E17.0 people with bunny ears: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏾‍🐰‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1f430-200d-1f9d1-1f3fd",
+    "description" : "🧑🏾‍🐰‍🧑🏽 E17.0 people with bunny ears: medium-dark skin tone, medium skin tone",
+    "emoji" : "🧑🏾‍🐰‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1f430-200d-1f9d1-1f3ff",
+    "description" : "🧑🏾‍🐰‍🧑🏿 E17.0 people with bunny ears: medium-dark skin tone, dark skin tone",
+    "emoji" : "🧑🏾‍🐰‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1f430-200d-1f9d1-1f3fb",
+    "description" : "🧑🏿‍🐰‍🧑🏻 E17.0 people with bunny ears: dark skin tone, light skin tone",
+    "emoji" : "🧑🏿‍🐰‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1f430-200d-1f9d1-1f3fc",
+    "description" : "🧑🏿‍🐰‍🧑🏼 E17.0 people with bunny ears: dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏿‍🐰‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1f430-200d-1f9d1-1f3fd",
+    "description" : "🧑🏿‍🐰‍🧑🏽 E17.0 people with bunny ears: dark skin tone, medium skin tone",
+    "emoji" : "🧑🏿‍🐰‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1f430-200d-1f9d1-1f3fe",
+    "description" : "🧑🏿‍🐰‍🧑🏾 E17.0 people with bunny ears: dark skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏿‍🐰‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f430-200d-1f468-1f3fc",
+    "description" : "👨🏻‍🐰‍👨🏼 E17.0 men with bunny ears: light skin tone, medium-light skin tone",
+    "emoji" : "👨🏻‍🐰‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f430-200d-1f468-1f3fd",
+    "description" : "👨🏻‍🐰‍👨🏽 E17.0 men with bunny ears: light skin tone, medium skin tone",
+    "emoji" : "👨🏻‍🐰‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f430-200d-1f468-1f3fe",
+    "description" : "👨🏻‍🐰‍👨🏾 E17.0 men with bunny ears: light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏻‍🐰‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f430-200d-1f468-1f3ff",
+    "description" : "👨🏻‍🐰‍👨🏿 E17.0 men with bunny ears: light skin tone, dark skin tone",
+    "emoji" : "👨🏻‍🐰‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f430-200d-1f468-1f3fb",
+    "description" : "👨🏼‍🐰‍👨🏻 E17.0 men with bunny ears: medium-light skin tone, light skin tone",
+    "emoji" : "👨🏼‍🐰‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f430-200d-1f468-1f3fd",
+    "description" : "👨🏼‍🐰‍👨🏽 E17.0 men with bunny ears: medium-light skin tone, medium skin tone",
+    "emoji" : "👨🏼‍🐰‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f430-200d-1f468-1f3fe",
+    "description" : "👨🏼‍🐰‍👨🏾 E17.0 men with bunny ears: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏼‍🐰‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f430-200d-1f468-1f3ff",
+    "description" : "👨🏼‍🐰‍👨🏿 E17.0 men with bunny ears: medium-light skin tone, dark skin tone",
+    "emoji" : "👨🏼‍🐰‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f430-200d-1f468-1f3fb",
+    "description" : "👨🏽‍🐰‍👨🏻 E17.0 men with bunny ears: medium skin tone, light skin tone",
+    "emoji" : "👨🏽‍🐰‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f430-200d-1f468-1f3fc",
+    "description" : "👨🏽‍🐰‍👨🏼 E17.0 men with bunny ears: medium skin tone, medium-light skin tone",
+    "emoji" : "👨🏽‍🐰‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f430-200d-1f468-1f3fe",
+    "description" : "👨🏽‍🐰‍👨🏾 E17.0 men with bunny ears: medium skin tone, medium-dark skin tone",
+    "emoji" : "👨🏽‍🐰‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f430-200d-1f468-1f3ff",
+    "description" : "👨🏽‍🐰‍👨🏿 E17.0 men with bunny ears: medium skin tone, dark skin tone",
+    "emoji" : "👨🏽‍🐰‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f430-200d-1f468-1f3fb",
+    "description" : "👨🏾‍🐰‍👨🏻 E17.0 men with bunny ears: medium-dark skin tone, light skin tone",
+    "emoji" : "👨🏾‍🐰‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f430-200d-1f468-1f3fc",
+    "description" : "👨🏾‍🐰‍👨🏼 E17.0 men with bunny ears: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏾‍🐰‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f430-200d-1f468-1f3fd",
+    "description" : "👨🏾‍🐰‍👨🏽 E17.0 men with bunny ears: medium-dark skin tone, medium skin tone",
+    "emoji" : "👨🏾‍🐰‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f430-200d-1f468-1f3ff",
+    "description" : "👨🏾‍🐰‍👨🏿 E17.0 men with bunny ears: medium-dark skin tone, dark skin tone",
+    "emoji" : "👨🏾‍🐰‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f430-200d-1f468-1f3fb",
+    "description" : "👨🏿‍🐰‍👨🏻 E17.0 men with bunny ears: dark skin tone, light skin tone",
+    "emoji" : "👨🏿‍🐰‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f430-200d-1f468-1f3fc",
+    "description" : "👨🏿‍🐰‍👨🏼 E17.0 men with bunny ears: dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏿‍🐰‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f430-200d-1f468-1f3fd",
+    "description" : "👨🏿‍🐰‍👨🏽 E17.0 men with bunny ears: dark skin tone, medium skin tone",
+    "emoji" : "👨🏿‍🐰‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f430-200d-1f468-1f3fe",
+    "description" : "👨🏿‍🐰‍👨🏾 E17.0 men with bunny ears: dark skin tone, medium-dark skin tone",
+    "emoji" : "👨🏿‍🐰‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f430-200d-1f469-1f3fc",
+    "description" : "👩🏻‍🐰‍👩🏼 E17.0 women with bunny ears: light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍🐰‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f430-200d-1f469-1f3fd",
+    "description" : "👩🏻‍🐰‍👩🏽 E17.0 women with bunny ears: light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍🐰‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f430-200d-1f469-1f3fe",
+    "description" : "👩🏻‍🐰‍👩🏾 E17.0 women with bunny ears: light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍🐰‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f430-200d-1f469-1f3ff",
+    "description" : "👩🏻‍🐰‍👩🏿 E17.0 women with bunny ears: light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍🐰‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f430-200d-1f469-1f3fb",
+    "description" : "👩🏼‍🐰‍👩🏻 E17.0 women with bunny ears: medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍🐰‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f430-200d-1f469-1f3fd",
+    "description" : "👩🏼‍🐰‍👩🏽 E17.0 women with bunny ears: medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍🐰‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f430-200d-1f469-1f3fe",
+    "description" : "👩🏼‍🐰‍👩🏾 E17.0 women with bunny ears: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍🐰‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f430-200d-1f469-1f3ff",
+    "description" : "👩🏼‍🐰‍👩🏿 E17.0 women with bunny ears: medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍🐰‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f430-200d-1f469-1f3fb",
+    "description" : "👩🏽‍🐰‍👩🏻 E17.0 women with bunny ears: medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍🐰‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f430-200d-1f469-1f3fc",
+    "description" : "👩🏽‍🐰‍👩🏼 E17.0 women with bunny ears: medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍🐰‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f430-200d-1f469-1f3fe",
+    "description" : "👩🏽‍🐰‍👩🏾 E17.0 women with bunny ears: medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍🐰‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f430-200d-1f469-1f3ff",
+    "description" : "👩🏽‍🐰‍👩🏿 E17.0 women with bunny ears: medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍🐰‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f430-200d-1f469-1f3fb",
+    "description" : "👩🏾‍🐰‍👩🏻 E17.0 women with bunny ears: medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍🐰‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f430-200d-1f469-1f3fc",
+    "description" : "👩🏾‍🐰‍👩🏼 E17.0 women with bunny ears: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍🐰‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f430-200d-1f469-1f3fd",
+    "description" : "👩🏾‍🐰‍👩🏽 E17.0 women with bunny ears: medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍🐰‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f430-200d-1f469-1f3ff",
+    "description" : "👩🏾‍🐰‍👩🏿 E17.0 women with bunny ears: medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍🐰‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f430-200d-1f469-1f3fb",
+    "description" : "👩🏿‍🐰‍👩🏻 E17.0 women with bunny ears: dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍🐰‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f430-200d-1f469-1f3fc",
+    "description" : "👩🏿‍🐰‍👩🏼 E17.0 women with bunny ears: dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍🐰‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f430-200d-1f469-1f3fd",
+    "description" : "👩🏿‍🐰‍👩🏽 E17.0 women with bunny ears: dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍🐰‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f430-200d-1f469-1f3fe",
+    "description" : "👩🏿‍🐰‍👩🏾 E17.0 women with bunny ears: dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍🐰‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-activity"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1faef-200d-1f9d1-1f3fc",
+    "description" : "🧑🏻‍🫯‍🧑🏼 E17.0 people wrestling: light skin tone, medium-light skin tone",
+    "emoji" : "🧑🏻‍🫯‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1faef-200d-1f9d1-1f3fd",
+    "description" : "🧑🏻‍🫯‍🧑🏽 E17.0 people wrestling: light skin tone, medium skin tone",
+    "emoji" : "🧑🏻‍🫯‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1faef-200d-1f9d1-1f3fe",
+    "description" : "🧑🏻‍🫯‍🧑🏾 E17.0 people wrestling: light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏻‍🫯‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-1faef-200d-1f9d1-1f3ff",
+    "description" : "🧑🏻‍🫯‍🧑🏿 E17.0 people wrestling: light skin tone, dark skin tone",
+    "emoji" : "🧑🏻‍🫯‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1faef-200d-1f9d1-1f3fb",
+    "description" : "🧑🏼‍🫯‍🧑🏻 E17.0 people wrestling: medium-light skin tone, light skin tone",
+    "emoji" : "🧑🏼‍🫯‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1faef-200d-1f9d1-1f3fd",
+    "description" : "🧑🏼‍🫯‍🧑🏽 E17.0 people wrestling: medium-light skin tone, medium skin tone",
+    "emoji" : "🧑🏼‍🫯‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1faef-200d-1f9d1-1f3fe",
+    "description" : "🧑🏼‍🫯‍🧑🏾 E17.0 people wrestling: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏼‍🫯‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-1faef-200d-1f9d1-1f3ff",
+    "description" : "🧑🏼‍🫯‍🧑🏿 E17.0 people wrestling: medium-light skin tone, dark skin tone",
+    "emoji" : "🧑🏼‍🫯‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1faef-200d-1f9d1-1f3fb",
+    "description" : "🧑🏽‍🫯‍🧑🏻 E17.0 people wrestling: medium skin tone, light skin tone",
+    "emoji" : "🧑🏽‍🫯‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1faef-200d-1f9d1-1f3fc",
+    "description" : "🧑🏽‍🫯‍🧑🏼 E17.0 people wrestling: medium skin tone, medium-light skin tone",
+    "emoji" : "🧑🏽‍🫯‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1faef-200d-1f9d1-1f3fe",
+    "description" : "🧑🏽‍🫯‍🧑🏾 E17.0 people wrestling: medium skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏽‍🫯‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-1faef-200d-1f9d1-1f3ff",
+    "description" : "🧑🏽‍🫯‍🧑🏿 E17.0 people wrestling: medium skin tone, dark skin tone",
+    "emoji" : "🧑🏽‍🫯‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1faef-200d-1f9d1-1f3fb",
+    "description" : "🧑🏾‍🫯‍🧑🏻 E17.0 people wrestling: medium-dark skin tone, light skin tone",
+    "emoji" : "🧑🏾‍🫯‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1faef-200d-1f9d1-1f3fc",
+    "description" : "🧑🏾‍🫯‍🧑🏼 E17.0 people wrestling: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏾‍🫯‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1faef-200d-1f9d1-1f3fd",
+    "description" : "🧑🏾‍🫯‍🧑🏽 E17.0 people wrestling: medium-dark skin tone, medium skin tone",
+    "emoji" : "🧑🏾‍🫯‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-1faef-200d-1f9d1-1f3ff",
+    "description" : "🧑🏾‍🫯‍🧑🏿 E17.0 people wrestling: medium-dark skin tone, dark skin tone",
+    "emoji" : "🧑🏾‍🫯‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1faef-200d-1f9d1-1f3fb",
+    "description" : "🧑🏿‍🫯‍🧑🏻 E17.0 people wrestling: dark skin tone, light skin tone",
+    "emoji" : "🧑🏿‍🫯‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1faef-200d-1f9d1-1f3fc",
+    "description" : "🧑🏿‍🫯‍🧑🏼 E17.0 people wrestling: dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏿‍🫯‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1faef-200d-1f9d1-1f3fd",
+    "description" : "🧑🏿‍🫯‍🧑🏽 E17.0 people wrestling: dark skin tone, medium skin tone",
+    "emoji" : "🧑🏿‍🫯‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-1faef-200d-1f9d1-1f3fe",
+    "description" : "🧑🏿‍🫯‍🧑🏾 E17.0 people wrestling: dark skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏿‍🫯‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1faef-200d-1f468-1f3fc",
+    "description" : "👨🏻‍🫯‍👨🏼 E17.0 men wrestling: light skin tone, medium-light skin tone",
+    "emoji" : "👨🏻‍🫯‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1faef-200d-1f468-1f3fd",
+    "description" : "👨🏻‍🫯‍👨🏽 E17.0 men wrestling: light skin tone, medium skin tone",
+    "emoji" : "👨🏻‍🫯‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1faef-200d-1f468-1f3fe",
+    "description" : "👨🏻‍🫯‍👨🏾 E17.0 men wrestling: light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏻‍🫯‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1faef-200d-1f468-1f3ff",
+    "description" : "👨🏻‍🫯‍👨🏿 E17.0 men wrestling: light skin tone, dark skin tone",
+    "emoji" : "👨🏻‍🫯‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1faef-200d-1f468-1f3fb",
+    "description" : "👨🏼‍🫯‍👨🏻 E17.0 men wrestling: medium-light skin tone, light skin tone",
+    "emoji" : "👨🏼‍🫯‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1faef-200d-1f468-1f3fd",
+    "description" : "👨🏼‍🫯‍👨🏽 E17.0 men wrestling: medium-light skin tone, medium skin tone",
+    "emoji" : "👨🏼‍🫯‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1faef-200d-1f468-1f3fe",
+    "description" : "👨🏼‍🫯‍👨🏾 E17.0 men wrestling: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏼‍🫯‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1faef-200d-1f468-1f3ff",
+    "description" : "👨🏼‍🫯‍👨🏿 E17.0 men wrestling: medium-light skin tone, dark skin tone",
+    "emoji" : "👨🏼‍🫯‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1faef-200d-1f468-1f3fb",
+    "description" : "👨🏽‍🫯‍👨🏻 E17.0 men wrestling: medium skin tone, light skin tone",
+    "emoji" : "👨🏽‍🫯‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1faef-200d-1f468-1f3fc",
+    "description" : "👨🏽‍🫯‍👨🏼 E17.0 men wrestling: medium skin tone, medium-light skin tone",
+    "emoji" : "👨🏽‍🫯‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1faef-200d-1f468-1f3fe",
+    "description" : "👨🏽‍🫯‍👨🏾 E17.0 men wrestling: medium skin tone, medium-dark skin tone",
+    "emoji" : "👨🏽‍🫯‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1faef-200d-1f468-1f3ff",
+    "description" : "👨🏽‍🫯‍👨🏿 E17.0 men wrestling: medium skin tone, dark skin tone",
+    "emoji" : "👨🏽‍🫯‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1faef-200d-1f468-1f3fb",
+    "description" : "👨🏾‍🫯‍👨🏻 E17.0 men wrestling: medium-dark skin tone, light skin tone",
+    "emoji" : "👨🏾‍🫯‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1faef-200d-1f468-1f3fc",
+    "description" : "👨🏾‍🫯‍👨🏼 E17.0 men wrestling: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏾‍🫯‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1faef-200d-1f468-1f3fd",
+    "description" : "👨🏾‍🫯‍👨🏽 E17.0 men wrestling: medium-dark skin tone, medium skin tone",
+    "emoji" : "👨🏾‍🫯‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1faef-200d-1f468-1f3ff",
+    "description" : "👨🏾‍🫯‍👨🏿 E17.0 men wrestling: medium-dark skin tone, dark skin tone",
+    "emoji" : "👨🏾‍🫯‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1faef-200d-1f468-1f3fb",
+    "description" : "👨🏿‍🫯‍👨🏻 E17.0 men wrestling: dark skin tone, light skin tone",
+    "emoji" : "👨🏿‍🫯‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1faef-200d-1f468-1f3fc",
+    "description" : "👨🏿‍🫯‍👨🏼 E17.0 men wrestling: dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏿‍🫯‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1faef-200d-1f468-1f3fd",
+    "description" : "👨🏿‍🫯‍👨🏽 E17.0 men wrestling: dark skin tone, medium skin tone",
+    "emoji" : "👨🏿‍🫯‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1faef-200d-1f468-1f3fe",
+    "description" : "👨🏿‍🫯‍👨🏾 E17.0 men wrestling: dark skin tone, medium-dark skin tone",
+    "emoji" : "👨🏿‍🫯‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1faef-200d-1f469-1f3fc",
+    "description" : "👩🏻‍🫯‍👩🏼 E17.0 women wrestling: light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍🫯‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1faef-200d-1f469-1f3fd",
+    "description" : "👩🏻‍🫯‍👩🏽 E17.0 women wrestling: light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍🫯‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1faef-200d-1f469-1f3fe",
+    "description" : "👩🏻‍🫯‍👩🏾 E17.0 women wrestling: light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍🫯‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1faef-200d-1f469-1f3ff",
+    "description" : "👩🏻‍🫯‍👩🏿 E17.0 women wrestling: light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍🫯‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1faef-200d-1f469-1f3fb",
+    "description" : "👩🏼‍🫯‍👩🏻 E17.0 women wrestling: medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍🫯‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1faef-200d-1f469-1f3fd",
+    "description" : "👩🏼‍🫯‍👩🏽 E17.0 women wrestling: medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍🫯‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1faef-200d-1f469-1f3fe",
+    "description" : "👩🏼‍🫯‍👩🏾 E17.0 women wrestling: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍🫯‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1faef-200d-1f469-1f3ff",
+    "description" : "👩🏼‍🫯‍👩🏿 E17.0 women wrestling: medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍🫯‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1faef-200d-1f469-1f3fb",
+    "description" : "👩🏽‍🫯‍👩🏻 E17.0 women wrestling: medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍🫯‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1faef-200d-1f469-1f3fc",
+    "description" : "👩🏽‍🫯‍👩🏼 E17.0 women wrestling: medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍🫯‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1faef-200d-1f469-1f3fe",
+    "description" : "👩🏽‍🫯‍👩🏾 E17.0 women wrestling: medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍🫯‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1faef-200d-1f469-1f3ff",
+    "description" : "👩🏽‍🫯‍👩🏿 E17.0 women wrestling: medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍🫯‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1faef-200d-1f469-1f3fb",
+    "description" : "👩🏾‍🫯‍👩🏻 E17.0 women wrestling: medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍🫯‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1faef-200d-1f469-1f3fc",
+    "description" : "👩🏾‍🫯‍👩🏼 E17.0 women wrestling: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍🫯‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1faef-200d-1f469-1f3fd",
+    "description" : "👩🏾‍🫯‍👩🏽 E17.0 women wrestling: medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍🫯‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1faef-200d-1f469-1f3ff",
+    "description" : "👩🏾‍🫯‍👩🏿 E17.0 women wrestling: medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍🫯‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1faef-200d-1f469-1f3fb",
+    "description" : "👩🏿‍🫯‍👩🏻 E17.0 women wrestling: dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍🫯‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1faef-200d-1f469-1f3fc",
+    "description" : "👩🏿‍🫯‍👩🏼 E17.0 women wrestling: dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍🫯‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1faef-200d-1f469-1f3fd",
+    "description" : "👩🏿‍🫯‍👩🏽 E17.0 women wrestling: dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍🫯‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1faef-200d-1f469-1f3fe",
+    "description" : "👩🏿‍🫯‍👩🏾 E17.0 women wrestling: dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍🫯‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "person-sport"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f469-1f3fc",
+    "description" : "👩🏻‍🤝‍👩🏼 E12.1 women holding hands: light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍🤝‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f469-1f3fd",
+    "description" : "👩🏻‍🤝‍👩🏽 E12.1 women holding hands: light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍🤝‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f469-1f3fe",
+    "description" : "👩🏻‍🤝‍👩🏾 E12.1 women holding hands: light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍🤝‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f469-1f3ff",
+    "description" : "👩🏻‍🤝‍👩🏿 E12.1 women holding hands: light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍🤝‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f469-1f3fb",
+    "description" : "👩🏼‍🤝‍👩🏻 E12.0 women holding hands: medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍🤝‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f469-1f3fd",
+    "description" : "👩🏼‍🤝‍👩🏽 E12.1 women holding hands: medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍🤝‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f469-1f3fe",
+    "description" : "👩🏼‍🤝‍👩🏾 E12.1 women holding hands: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍🤝‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f469-1f3ff",
+    "description" : "👩🏼‍🤝‍👩🏿 E12.1 women holding hands: medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍🤝‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f469-1f3fb",
+    "description" : "👩🏽‍🤝‍👩🏻 E12.0 women holding hands: medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍🤝‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f469-1f3fc",
+    "description" : "👩🏽‍🤝‍👩🏼 E12.0 women holding hands: medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍🤝‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f469-1f3fe",
+    "description" : "👩🏽‍🤝‍👩🏾 E12.1 women holding hands: medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍🤝‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f469-1f3ff",
+    "description" : "👩🏽‍🤝‍👩🏿 E12.1 women holding hands: medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍🤝‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f469-1f3fb",
+    "description" : "👩🏾‍🤝‍👩🏻 E12.0 women holding hands: medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍🤝‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f469-1f3fc",
+    "description" : "👩🏾‍🤝‍👩🏼 E12.0 women holding hands: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍🤝‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f469-1f3fd",
+    "description" : "👩🏾‍🤝‍👩🏽 E12.0 women holding hands: medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍🤝‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f469-1f3ff",
+    "description" : "👩🏾‍🤝‍👩🏿 E12.1 women holding hands: medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍🤝‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f469-1f3fb",
+    "description" : "👩🏿‍🤝‍👩🏻 E12.0 women holding hands: dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍🤝‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f469-1f3fc",
+    "description" : "👩🏿‍🤝‍👩🏼 E12.0 women holding hands: dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍🤝‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f469-1f3fd",
+    "description" : "👩🏿‍🤝‍👩🏽 E12.0 women holding hands: dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍🤝‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f469-1f3fe",
+    "description" : "👩🏿‍🤝‍👩🏾 E12.0 women holding hands: dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍🤝‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👩🏻‍🤝‍👨🏼 E12.0 woman and man holding hands: light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👩🏻‍🤝‍👨🏽 E12.0 woman and man holding hands: light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👩🏻‍🤝‍👨🏾 E12.0 woman and man holding hands: light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👩🏻‍🤝‍👨🏿 E12.0 woman and man holding hands: light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👩🏼‍🤝‍👨🏻 E12.0 woman and man holding hands: medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👩🏼‍🤝‍👨🏽 E12.0 woman and man holding hands: medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👩🏼‍🤝‍👨🏾 E12.0 woman and man holding hands: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👩🏼‍🤝‍👨🏿 E12.0 woman and man holding hands: medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👩🏽‍🤝‍👨🏻 E12.0 woman and man holding hands: medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👩🏽‍🤝‍👨🏼 E12.0 woman and man holding hands: medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👩🏽‍🤝‍👨🏾 E12.0 woman and man holding hands: medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👩🏽‍🤝‍👨🏿 E12.0 woman and man holding hands: medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👩🏾‍🤝‍👨🏻 E12.0 woman and man holding hands: medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👩🏾‍🤝‍👨🏼 E12.0 woman and man holding hands: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👩🏾‍🤝‍👨🏽 E12.0 woman and man holding hands: medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👩🏾‍🤝‍👨🏿 E12.0 woman and man holding hands: medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👩🏿‍🤝‍👨🏻 E12.0 woman and man holding hands: dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👩🏿‍🤝‍👨🏼 E12.0 woman and man holding hands: dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👩🏿‍🤝‍👨🏽 E12.0 woman and man holding hands: dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👩🏿‍🤝‍👨🏾 E12.0 woman and man holding hands: dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👨🏻‍🤝‍👨🏼 E12.1 men holding hands: light skin tone, medium-light skin tone",
+    "emoji" : "👨🏻‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👨🏻‍🤝‍👨🏽 E12.1 men holding hands: light skin tone, medium skin tone",
+    "emoji" : "👨🏻‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👨🏻‍🤝‍👨🏾 E12.1 men holding hands: light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏻‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👨🏻‍🤝‍👨🏿 E12.1 men holding hands: light skin tone, dark skin tone",
+    "emoji" : "👨🏻‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👨🏼‍🤝‍👨🏻 E12.0 men holding hands: medium-light skin tone, light skin tone",
+    "emoji" : "👨🏼‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👨🏼‍🤝‍👨🏽 E12.1 men holding hands: medium-light skin tone, medium skin tone",
+    "emoji" : "👨🏼‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👨🏼‍🤝‍👨🏾 E12.1 men holding hands: medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏼‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👨🏼‍🤝‍👨🏿 E12.1 men holding hands: medium-light skin tone, dark skin tone",
+    "emoji" : "👨🏼‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👨🏽‍🤝‍👨🏻 E12.0 men holding hands: medium skin tone, light skin tone",
+    "emoji" : "👨🏽‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👨🏽‍🤝‍👨🏼 E12.0 men holding hands: medium skin tone, medium-light skin tone",
+    "emoji" : "👨🏽‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👨🏽‍🤝‍👨🏾 E12.1 men holding hands: medium skin tone, medium-dark skin tone",
+    "emoji" : "👨🏽‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👨🏽‍🤝‍👨🏿 E12.1 men holding hands: medium skin tone, dark skin tone",
+    "emoji" : "👨🏽‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👨🏾‍🤝‍👨🏻 E12.0 men holding hands: medium-dark skin tone, light skin tone",
+    "emoji" : "👨🏾‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👨🏾‍🤝‍👨🏼 E12.0 men holding hands: medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏾‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👨🏾‍🤝‍👨🏽 E12.0 men holding hands: medium-dark skin tone, medium skin tone",
+    "emoji" : "👨🏾‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-1f91d-200d-1f468-1f3ff",
+    "description" : "👨🏾‍🤝‍👨🏿 E12.1 men holding hands: medium-dark skin tone, dark skin tone",
+    "emoji" : "👨🏾‍🤝‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f91d-200d-1f468-1f3fb",
+    "description" : "👨🏿‍🤝‍👨🏻 E12.0 men holding hands: dark skin tone, light skin tone",
+    "emoji" : "👨🏿‍🤝‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f91d-200d-1f468-1f3fc",
+    "description" : "👨🏿‍🤝‍👨🏼 E12.0 men holding hands: dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏿‍🤝‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f91d-200d-1f468-1f3fd",
+    "description" : "👨🏿‍🤝‍👨🏽 E12.0 men holding hands: dark skin tone, medium skin tone",
+    "emoji" : "👨🏿‍🤝‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-1f91d-200d-1f468-1f3fe",
+    "description" : "👨🏿‍🤝‍👨🏾 E12.0 men holding hands: dark skin tone, medium-dark skin tone",
+    "emoji" : "👨🏿‍🤝‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fc",
+    "description" : "🧑🏻‍❤️‍💋‍🧑🏼 E13.1 kiss: person, person, light skin tone, medium-light skin tone",
+    "emoji" : "🧑🏻‍❤️‍💋‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fd",
+    "description" : "🧑🏻‍❤️‍💋‍🧑🏽 E13.1 kiss: person, person, light skin tone, medium skin tone",
+    "emoji" : "🧑🏻‍❤️‍💋‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fe",
+    "description" : "🧑🏻‍❤️‍💋‍🧑🏾 E13.1 kiss: person, person, light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏻‍❤️‍💋‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3ff",
+    "description" : "🧑🏻‍❤️‍💋‍🧑🏿 E13.1 kiss: person, person, light skin tone, dark skin tone",
+    "emoji" : "🧑🏻‍❤️‍💋‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fb",
+    "description" : "🧑🏼‍❤️‍💋‍🧑🏻 E13.1 kiss: person, person, medium-light skin tone, light skin tone",
+    "emoji" : "🧑🏼‍❤️‍💋‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fd",
+    "description" : "🧑🏼‍❤️‍💋‍🧑🏽 E13.1 kiss: person, person, medium-light skin tone, medium skin tone",
+    "emoji" : "🧑🏼‍❤️‍💋‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fe",
+    "description" : "🧑🏼‍❤️‍💋‍🧑🏾 E13.1 kiss: person, person, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏼‍❤️‍💋‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3ff",
+    "description" : "🧑🏼‍❤️‍💋‍🧑🏿 E13.1 kiss: person, person, medium-light skin tone, dark skin tone",
+    "emoji" : "🧑🏼‍❤️‍💋‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fb",
+    "description" : "🧑🏽‍❤️‍💋‍🧑🏻 E13.1 kiss: person, person, medium skin tone, light skin tone",
+    "emoji" : "🧑🏽‍❤️‍💋‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fc",
+    "description" : "🧑🏽‍❤️‍💋‍🧑🏼 E13.1 kiss: person, person, medium skin tone, medium-light skin tone",
+    "emoji" : "🧑🏽‍❤️‍💋‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fe",
+    "description" : "🧑🏽‍❤️‍💋‍🧑🏾 E13.1 kiss: person, person, medium skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏽‍❤️‍💋‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3ff",
+    "description" : "🧑🏽‍❤️‍💋‍🧑🏿 E13.1 kiss: person, person, medium skin tone, dark skin tone",
+    "emoji" : "🧑🏽‍❤️‍💋‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fb",
+    "description" : "🧑🏾‍❤️‍💋‍🧑🏻 E13.1 kiss: person, person, medium-dark skin tone, light skin tone",
+    "emoji" : "🧑🏾‍❤️‍💋‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fc",
+    "description" : "🧑🏾‍❤️‍💋‍🧑🏼 E13.1 kiss: person, person, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏾‍❤️‍💋‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fd",
+    "description" : "🧑🏾‍❤️‍💋‍🧑🏽 E13.1 kiss: person, person, medium-dark skin tone, medium skin tone",
+    "emoji" : "🧑🏾‍❤️‍💋‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3ff",
+    "description" : "🧑🏾‍❤️‍💋‍🧑🏿 E13.1 kiss: person, person, medium-dark skin tone, dark skin tone",
+    "emoji" : "🧑🏾‍❤️‍💋‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fb",
+    "description" : "🧑🏿‍❤️‍💋‍🧑🏻 E13.1 kiss: person, person, dark skin tone, light skin tone",
+    "emoji" : "🧑🏿‍❤️‍💋‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fc",
+    "description" : "🧑🏿‍❤️‍💋‍🧑🏼 E13.1 kiss: person, person, dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏿‍❤️‍💋‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fd",
+    "description" : "🧑🏿‍❤️‍💋‍🧑🏽 E13.1 kiss: person, person, dark skin tone, medium skin tone",
+    "emoji" : "🧑🏿‍❤️‍💋‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f9d1-1f3fe",
+    "description" : "🧑🏿‍❤️‍💋‍🧑🏾 E13.1 kiss: person, person, dark skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏿‍❤️‍💋‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-200d-2764-fe0f-200d-1f48b-200d-1f468",
+    "description" : "👩‍❤️‍💋‍👨 E2.0 kiss: woman, man",
+    "emoji" : "👩‍❤️‍💋‍👨",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👩🏻‍❤️‍💋‍👨🏻 E13.1 kiss: woman, man, light skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👩🏻‍❤️‍💋‍👨🏼 E13.1 kiss: woman, man, light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👩🏻‍❤️‍💋‍👨🏽 E13.1 kiss: woman, man, light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👩🏻‍❤️‍💋‍👨🏾 E13.1 kiss: woman, man, light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👩🏻‍❤️‍💋‍👨🏿 E13.1 kiss: woman, man, light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👩🏼‍❤️‍💋‍👨🏻 E13.1 kiss: woman, man, medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👩🏼‍❤️‍💋‍👨🏼 E13.1 kiss: woman, man, medium-light skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👩🏼‍❤️‍💋‍👨🏽 E13.1 kiss: woman, man, medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👩🏼‍❤️‍💋‍👨🏾 E13.1 kiss: woman, man, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👩🏼‍❤️‍💋‍👨🏿 E13.1 kiss: woman, man, medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👩🏽‍❤️‍💋‍👨🏻 E13.1 kiss: woman, man, medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👩🏽‍❤️‍💋‍👨🏼 E13.1 kiss: woman, man, medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👩🏽‍❤️‍💋‍👨🏽 E13.1 kiss: woman, man, medium skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👩🏽‍❤️‍💋‍👨🏾 E13.1 kiss: woman, man, medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👩🏽‍❤️‍💋‍👨🏿 E13.1 kiss: woman, man, medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👩🏾‍❤️‍💋‍👨🏻 E13.1 kiss: woman, man, medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👩🏾‍❤️‍💋‍👨🏼 E13.1 kiss: woman, man, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👩🏾‍❤️‍💋‍👨🏽 E13.1 kiss: woman, man, medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👩🏾‍❤️‍💋‍👨🏾 E13.1 kiss: woman, man, medium-dark skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👩🏾‍❤️‍💋‍👨🏿 E13.1 kiss: woman, man, medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👩🏿‍❤️‍💋‍👨🏻 E13.1 kiss: woman, man, dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👩🏿‍❤️‍💋‍👨🏼 E13.1 kiss: woman, man, dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👩🏿‍❤️‍💋‍👨🏽 E13.1 kiss: woman, man, dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👩🏿‍❤️‍💋‍👨🏾 E13.1 kiss: woman, man, dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👩🏿‍❤️‍💋‍👨🏿 E13.1 kiss: woman, man, dark skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-200d-2764-fe0f-200d-1f48b-200d-1f468",
+    "description" : "👨‍❤️‍💋‍👨 E2.0 kiss: man, man",
+    "emoji" : "👨‍❤️‍💋‍👨",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👨🏻‍❤️‍💋‍👨🏻 E13.1 kiss: man, man, light skin tone",
+    "emoji" : "👨🏻‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👨🏻‍❤️‍💋‍👨🏼 E13.1 kiss: man, man, light skin tone, medium-light skin tone",
+    "emoji" : "👨🏻‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👨🏻‍❤️‍💋‍👨🏽 E13.1 kiss: man, man, light skin tone, medium skin tone",
+    "emoji" : "👨🏻‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👨🏻‍❤️‍💋‍👨🏾 E13.1 kiss: man, man, light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏻‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👨🏻‍❤️‍💋‍👨🏿 E13.1 kiss: man, man, light skin tone, dark skin tone",
+    "emoji" : "👨🏻‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👨🏼‍❤️‍💋‍👨🏻 E13.1 kiss: man, man, medium-light skin tone, light skin tone",
+    "emoji" : "👨🏼‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👨🏼‍❤️‍💋‍👨🏼 E13.1 kiss: man, man, medium-light skin tone",
+    "emoji" : "👨🏼‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👨🏼‍❤️‍💋‍👨🏽 E13.1 kiss: man, man, medium-light skin tone, medium skin tone",
+    "emoji" : "👨🏼‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👨🏼‍❤️‍💋‍👨🏾 E13.1 kiss: man, man, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏼‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👨🏼‍❤️‍💋‍👨🏿 E13.1 kiss: man, man, medium-light skin tone, dark skin tone",
+    "emoji" : "👨🏼‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👨🏽‍❤️‍💋‍👨🏻 E13.1 kiss: man, man, medium skin tone, light skin tone",
+    "emoji" : "👨🏽‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👨🏽‍❤️‍💋‍👨🏼 E13.1 kiss: man, man, medium skin tone, medium-light skin tone",
+    "emoji" : "👨🏽‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👨🏽‍❤️‍💋‍👨🏽 E13.1 kiss: man, man, medium skin tone",
+    "emoji" : "👨🏽‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👨🏽‍❤️‍💋‍👨🏾 E13.1 kiss: man, man, medium skin tone, medium-dark skin tone",
+    "emoji" : "👨🏽‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👨🏽‍❤️‍💋‍👨🏿 E13.1 kiss: man, man, medium skin tone, dark skin tone",
+    "emoji" : "👨🏽‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👨🏾‍❤️‍💋‍👨🏻 E13.1 kiss: man, man, medium-dark skin tone, light skin tone",
+    "emoji" : "👨🏾‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👨🏾‍❤️‍💋‍👨🏼 E13.1 kiss: man, man, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏾‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👨🏾‍❤️‍💋‍👨🏽 E13.1 kiss: man, man, medium-dark skin tone, medium skin tone",
+    "emoji" : "👨🏾‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👨🏾‍❤️‍💋‍👨🏾 E13.1 kiss: man, man, medium-dark skin tone",
+    "emoji" : "👨🏾‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👨🏾‍❤️‍💋‍👨🏿 E13.1 kiss: man, man, medium-dark skin tone, dark skin tone",
+    "emoji" : "👨🏾‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fb",
+    "description" : "👨🏿‍❤️‍💋‍👨🏻 E13.1 kiss: man, man, dark skin tone, light skin tone",
+    "emoji" : "👨🏿‍❤️‍💋‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fc",
+    "description" : "👨🏿‍❤️‍💋‍👨🏼 E13.1 kiss: man, man, dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏿‍❤️‍💋‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fd",
+    "description" : "👨🏿‍❤️‍💋‍👨🏽 E13.1 kiss: man, man, dark skin tone, medium skin tone",
+    "emoji" : "👨🏿‍❤️‍💋‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3fe",
+    "description" : "👨🏿‍❤️‍💋‍👨🏾 E13.1 kiss: man, man, dark skin tone, medium-dark skin tone",
+    "emoji" : "👨🏿‍❤️‍💋‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f468-1f3ff",
+    "description" : "👨🏿‍❤️‍💋‍👨🏿 E13.1 kiss: man, man, dark skin tone",
+    "emoji" : "👨🏿‍❤️‍💋‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-200d-2764-fe0f-200d-1f48b-200d-1f469",
+    "description" : "👩‍❤️‍💋‍👩 E2.0 kiss: woman, woman",
+    "emoji" : "👩‍❤️‍💋‍👩",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fb",
+    "description" : "👩🏻‍❤️‍💋‍👩🏻 E13.1 kiss: woman, woman, light skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fc",
+    "description" : "👩🏻‍❤️‍💋‍👩🏼 E13.1 kiss: woman, woman, light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fd",
+    "description" : "👩🏻‍❤️‍💋‍👩🏽 E13.1 kiss: woman, woman, light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fe",
+    "description" : "👩🏻‍❤️‍💋‍👩🏾 E13.1 kiss: woman, woman, light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3ff",
+    "description" : "👩🏻‍❤️‍💋‍👩🏿 E13.1 kiss: woman, woman, light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍❤️‍💋‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fb",
+    "description" : "👩🏼‍❤️‍💋‍👩🏻 E13.1 kiss: woman, woman, medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fc",
+    "description" : "👩🏼‍❤️‍💋‍👩🏼 E13.1 kiss: woman, woman, medium-light skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fd",
+    "description" : "👩🏼‍❤️‍💋‍👩🏽 E13.1 kiss: woman, woman, medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fe",
+    "description" : "👩🏼‍❤️‍💋‍👩🏾 E13.1 kiss: woman, woman, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3ff",
+    "description" : "👩🏼‍❤️‍💋‍👩🏿 E13.1 kiss: woman, woman, medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍❤️‍💋‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fb",
+    "description" : "👩🏽‍❤️‍💋‍👩🏻 E13.1 kiss: woman, woman, medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fc",
+    "description" : "👩🏽‍❤️‍💋‍👩🏼 E13.1 kiss: woman, woman, medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fd",
+    "description" : "👩🏽‍❤️‍💋‍👩🏽 E13.1 kiss: woman, woman, medium skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fe",
+    "description" : "👩🏽‍❤️‍💋‍👩🏾 E13.1 kiss: woman, woman, medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3ff",
+    "description" : "👩🏽‍❤️‍💋‍👩🏿 E13.1 kiss: woman, woman, medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍❤️‍💋‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fb",
+    "description" : "👩🏾‍❤️‍💋‍👩🏻 E13.1 kiss: woman, woman, medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fc",
+    "description" : "👩🏾‍❤️‍💋‍👩🏼 E13.1 kiss: woman, woman, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fd",
+    "description" : "👩🏾‍❤️‍💋‍👩🏽 E13.1 kiss: woman, woman, medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fe",
+    "description" : "👩🏾‍❤️‍💋‍👩🏾 E13.1 kiss: woman, woman, medium-dark skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3ff",
+    "description" : "👩🏾‍❤️‍💋‍👩🏿 E13.1 kiss: woman, woman, medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍❤️‍💋‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fb",
+    "description" : "👩🏿‍❤️‍💋‍👩🏻 E13.1 kiss: woman, woman, dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fc",
+    "description" : "👩🏿‍❤️‍💋‍👩🏼 E13.1 kiss: woman, woman, dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fd",
+    "description" : "👩🏿‍❤️‍💋‍👩🏽 E13.1 kiss: woman, woman, dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3fe",
+    "description" : "👩🏿‍❤️‍💋‍👩🏾 E13.1 kiss: woman, woman, dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f48b-200d-1f469-1f3ff",
+    "description" : "👩🏿‍❤️‍💋‍👩🏿 E13.1 kiss: woman, woman, dark skin tone",
+    "emoji" : "👩🏿‍❤️‍💋‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f9d1-1f3fc",
+    "description" : "🧑🏻‍❤️‍🧑🏼 E13.1 couple with heart: person, person, light skin tone, medium-light skin tone",
+    "emoji" : "🧑🏻‍❤️‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f9d1-1f3fd",
+    "description" : "🧑🏻‍❤️‍🧑🏽 E13.1 couple with heart: person, person, light skin tone, medium skin tone",
+    "emoji" : "🧑🏻‍❤️‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f9d1-1f3fe",
+    "description" : "🧑🏻‍❤️‍🧑🏾 E13.1 couple with heart: person, person, light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏻‍❤️‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fb-200d-2764-fe0f-200d-1f9d1-1f3ff",
+    "description" : "🧑🏻‍❤️‍🧑🏿 E13.1 couple with heart: person, person, light skin tone, dark skin tone",
+    "emoji" : "🧑🏻‍❤️‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f9d1-1f3fb",
+    "description" : "🧑🏼‍❤️‍🧑🏻 E13.1 couple with heart: person, person, medium-light skin tone, light skin tone",
+    "emoji" : "🧑🏼‍❤️‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f9d1-1f3fd",
+    "description" : "🧑🏼‍❤️‍🧑🏽 E13.1 couple with heart: person, person, medium-light skin tone, medium skin tone",
+    "emoji" : "🧑🏼‍❤️‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f9d1-1f3fe",
+    "description" : "🧑🏼‍❤️‍🧑🏾 E13.1 couple with heart: person, person, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏼‍❤️‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fc-200d-2764-fe0f-200d-1f9d1-1f3ff",
+    "description" : "🧑🏼‍❤️‍🧑🏿 E13.1 couple with heart: person, person, medium-light skin tone, dark skin tone",
+    "emoji" : "🧑🏼‍❤️‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f9d1-1f3fb",
+    "description" : "🧑🏽‍❤️‍🧑🏻 E13.1 couple with heart: person, person, medium skin tone, light skin tone",
+    "emoji" : "🧑🏽‍❤️‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f9d1-1f3fc",
+    "description" : "🧑🏽‍❤️‍🧑🏼 E13.1 couple with heart: person, person, medium skin tone, medium-light skin tone",
+    "emoji" : "🧑🏽‍❤️‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f9d1-1f3fe",
+    "description" : "🧑🏽‍❤️‍🧑🏾 E13.1 couple with heart: person, person, medium skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏽‍❤️‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fd-200d-2764-fe0f-200d-1f9d1-1f3ff",
+    "description" : "🧑🏽‍❤️‍🧑🏿 E13.1 couple with heart: person, person, medium skin tone, dark skin tone",
+    "emoji" : "🧑🏽‍❤️‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f9d1-1f3fb",
+    "description" : "🧑🏾‍❤️‍🧑🏻 E13.1 couple with heart: person, person, medium-dark skin tone, light skin tone",
+    "emoji" : "🧑🏾‍❤️‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f9d1-1f3fc",
+    "description" : "🧑🏾‍❤️‍🧑🏼 E13.1 couple with heart: person, person, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏾‍❤️‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f9d1-1f3fd",
+    "description" : "🧑🏾‍❤️‍🧑🏽 E13.1 couple with heart: person, person, medium-dark skin tone, medium skin tone",
+    "emoji" : "🧑🏾‍❤️‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3fe-200d-2764-fe0f-200d-1f9d1-1f3ff",
+    "description" : "🧑🏾‍❤️‍🧑🏿 E13.1 couple with heart: person, person, medium-dark skin tone, dark skin tone",
+    "emoji" : "🧑🏾‍❤️‍🧑🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f9d1-1f3fb",
+    "description" : "🧑🏿‍❤️‍🧑🏻 E13.1 couple with heart: person, person, dark skin tone, light skin tone",
+    "emoji" : "🧑🏿‍❤️‍🧑🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f9d1-1f3fc",
+    "description" : "🧑🏿‍❤️‍🧑🏼 E13.1 couple with heart: person, person, dark skin tone, medium-light skin tone",
+    "emoji" : "🧑🏿‍❤️‍🧑🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f9d1-1f3fd",
+    "description" : "🧑🏿‍❤️‍🧑🏽 E13.1 couple with heart: person, person, dark skin tone, medium skin tone",
+    "emoji" : "🧑🏿‍❤️‍🧑🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f9d1-1f3ff-200d-2764-fe0f-200d-1f9d1-1f3fe",
+    "description" : "🧑🏿‍❤️‍🧑🏾 E13.1 couple with heart: person, person, dark skin tone, medium-dark skin tone",
+    "emoji" : "🧑🏿‍❤️‍🧑🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-200d-2764-fe0f-200d-1f468",
+    "description" : "👩‍❤️‍👨 E2.0 couple with heart: woman, man",
+    "emoji" : "👩‍❤️‍👨",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👩🏻‍❤️‍👨🏻 E13.1 couple with heart: woman, man, light skin tone",
+    "emoji" : "👩🏻‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👩🏻‍❤️‍👨🏼 E13.1 couple with heart: woman, man, light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👩🏻‍❤️‍👨🏽 E13.1 couple with heart: woman, man, light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👩🏻‍❤️‍👨🏾 E13.1 couple with heart: woman, man, light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👩🏻‍❤️‍👨🏿 E13.1 couple with heart: woman, man, light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👩🏼‍❤️‍👨🏻 E13.1 couple with heart: woman, man, medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👩🏼‍❤️‍👨🏼 E13.1 couple with heart: woman, man, medium-light skin tone",
+    "emoji" : "👩🏼‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👩🏼‍❤️‍👨🏽 E13.1 couple with heart: woman, man, medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👩🏼‍❤️‍👨🏾 E13.1 couple with heart: woman, man, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👩🏼‍❤️‍👨🏿 E13.1 couple with heart: woman, man, medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👩🏽‍❤️‍👨🏻 E13.1 couple with heart: woman, man, medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👩🏽‍❤️‍👨🏼 E13.1 couple with heart: woman, man, medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👩🏽‍❤️‍👨🏽 E13.1 couple with heart: woman, man, medium skin tone",
+    "emoji" : "👩🏽‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👩🏽‍❤️‍👨🏾 E13.1 couple with heart: woman, man, medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👩🏽‍❤️‍👨🏿 E13.1 couple with heart: woman, man, medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👩🏾‍❤️‍👨🏻 E13.1 couple with heart: woman, man, medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👩🏾‍❤️‍👨🏼 E13.1 couple with heart: woman, man, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👩🏾‍❤️‍👨🏽 E13.1 couple with heart: woman, man, medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👩🏾‍❤️‍👨🏾 E13.1 couple with heart: woman, man, medium-dark skin tone",
+    "emoji" : "👩🏾‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👩🏾‍❤️‍👨🏿 E13.1 couple with heart: woman, man, medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👩🏿‍❤️‍👨🏻 E13.1 couple with heart: woman, man, dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👩🏿‍❤️‍👨🏼 E13.1 couple with heart: woman, man, dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👩🏿‍❤️‍👨🏽 E13.1 couple with heart: woman, man, dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👩🏿‍❤️‍👨🏾 E13.1 couple with heart: woman, man, dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👩🏿‍❤️‍👨🏿 E13.1 couple with heart: woman, man, dark skin tone",
+    "emoji" : "👩🏿‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-200d-2764-fe0f-200d-1f468",
+    "description" : "👨‍❤️‍👨 E2.0 couple with heart: man, man",
+    "emoji" : "👨‍❤️‍👨",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👨🏻‍❤️‍👨🏻 E13.1 couple with heart: man, man, light skin tone",
+    "emoji" : "👨🏻‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👨🏻‍❤️‍👨🏼 E13.1 couple with heart: man, man, light skin tone, medium-light skin tone",
+    "emoji" : "👨🏻‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👨🏻‍❤️‍👨🏽 E13.1 couple with heart: man, man, light skin tone, medium skin tone",
+    "emoji" : "👨🏻‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👨🏻‍❤️‍👨🏾 E13.1 couple with heart: man, man, light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏻‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fb-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👨🏻‍❤️‍👨🏿 E13.1 couple with heart: man, man, light skin tone, dark skin tone",
+    "emoji" : "👨🏻‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👨🏼‍❤️‍👨🏻 E13.1 couple with heart: man, man, medium-light skin tone, light skin tone",
+    "emoji" : "👨🏼‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👨🏼‍❤️‍👨🏼 E13.1 couple with heart: man, man, medium-light skin tone",
+    "emoji" : "👨🏼‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👨🏼‍❤️‍👨🏽 E13.1 couple with heart: man, man, medium-light skin tone, medium skin tone",
+    "emoji" : "👨🏼‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👨🏼‍❤️‍👨🏾 E13.1 couple with heart: man, man, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👨🏼‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fc-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👨🏼‍❤️‍👨🏿 E13.1 couple with heart: man, man, medium-light skin tone, dark skin tone",
+    "emoji" : "👨🏼‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👨🏽‍❤️‍👨🏻 E13.1 couple with heart: man, man, medium skin tone, light skin tone",
+    "emoji" : "👨🏽‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👨🏽‍❤️‍👨🏼 E13.1 couple with heart: man, man, medium skin tone, medium-light skin tone",
+    "emoji" : "👨🏽‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👨🏽‍❤️‍👨🏽 E13.1 couple with heart: man, man, medium skin tone",
+    "emoji" : "👨🏽‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👨🏽‍❤️‍👨🏾 E13.1 couple with heart: man, man, medium skin tone, medium-dark skin tone",
+    "emoji" : "👨🏽‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fd-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👨🏽‍❤️‍👨🏿 E13.1 couple with heart: man, man, medium skin tone, dark skin tone",
+    "emoji" : "👨🏽‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👨🏾‍❤️‍👨🏻 E13.1 couple with heart: man, man, medium-dark skin tone, light skin tone",
+    "emoji" : "👨🏾‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👨🏾‍❤️‍👨🏼 E13.1 couple with heart: man, man, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏾‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👨🏾‍❤️‍👨🏽 E13.1 couple with heart: man, man, medium-dark skin tone, medium skin tone",
+    "emoji" : "👨🏾‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👨🏾‍❤️‍👨🏾 E13.1 couple with heart: man, man, medium-dark skin tone",
+    "emoji" : "👨🏾‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3fe-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👨🏾‍❤️‍👨🏿 E13.1 couple with heart: man, man, medium-dark skin tone, dark skin tone",
+    "emoji" : "👨🏾‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f468-1f3fb",
+    "description" : "👨🏿‍❤️‍👨🏻 E13.1 couple with heart: man, man, dark skin tone, light skin tone",
+    "emoji" : "👨🏿‍❤️‍👨🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f468-1f3fc",
+    "description" : "👨🏿‍❤️‍👨🏼 E13.1 couple with heart: man, man, dark skin tone, medium-light skin tone",
+    "emoji" : "👨🏿‍❤️‍👨🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f468-1f3fd",
+    "description" : "👨🏿‍❤️‍👨🏽 E13.1 couple with heart: man, man, dark skin tone, medium skin tone",
+    "emoji" : "👨🏿‍❤️‍👨🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f468-1f3fe",
+    "description" : "👨🏿‍❤️‍👨🏾 E13.1 couple with heart: man, man, dark skin tone, medium-dark skin tone",
+    "emoji" : "👨🏿‍❤️‍👨🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f468-1f3ff-200d-2764-fe0f-200d-1f468-1f3ff",
+    "description" : "👨🏿‍❤️‍👨🏿 E13.1 couple with heart: man, man, dark skin tone",
+    "emoji" : "👨🏿‍❤️‍👨🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-200d-2764-fe0f-200d-1f469",
+    "description" : "👩‍❤️‍👩 E2.0 couple with heart: woman, woman",
+    "emoji" : "👩‍❤️‍👩",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f469-1f3fb",
+    "description" : "👩🏻‍❤️‍👩🏻 E13.1 couple with heart: woman, woman, light skin tone",
+    "emoji" : "👩🏻‍❤️‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f469-1f3fc",
+    "description" : "👩🏻‍❤️‍👩🏼 E13.1 couple with heart: woman, woman, light skin tone, medium-light skin tone",
+    "emoji" : "👩🏻‍❤️‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f469-1f3fd",
+    "description" : "👩🏻‍❤️‍👩🏽 E13.1 couple with heart: woman, woman, light skin tone, medium skin tone",
+    "emoji" : "👩🏻‍❤️‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f469-1f3fe",
+    "description" : "👩🏻‍❤️‍👩🏾 E13.1 couple with heart: woman, woman, light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏻‍❤️‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fb-200d-2764-fe0f-200d-1f469-1f3ff",
+    "description" : "👩🏻‍❤️‍👩🏿 E13.1 couple with heart: woman, woman, light skin tone, dark skin tone",
+    "emoji" : "👩🏻‍❤️‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f469-1f3fb",
+    "description" : "👩🏼‍❤️‍👩🏻 E13.1 couple with heart: woman, woman, medium-light skin tone, light skin tone",
+    "emoji" : "👩🏼‍❤️‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f469-1f3fc",
+    "description" : "👩🏼‍❤️‍👩🏼 E13.1 couple with heart: woman, woman, medium-light skin tone",
+    "emoji" : "👩🏼‍❤️‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f469-1f3fd",
+    "description" : "👩🏼‍❤️‍👩🏽 E13.1 couple with heart: woman, woman, medium-light skin tone, medium skin tone",
+    "emoji" : "👩🏼‍❤️‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f469-1f3fe",
+    "description" : "👩🏼‍❤️‍👩🏾 E13.1 couple with heart: woman, woman, medium-light skin tone, medium-dark skin tone",
+    "emoji" : "👩🏼‍❤️‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fc-200d-2764-fe0f-200d-1f469-1f3ff",
+    "description" : "👩🏼‍❤️‍👩🏿 E13.1 couple with heart: woman, woman, medium-light skin tone, dark skin tone",
+    "emoji" : "👩🏼‍❤️‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f469-1f3fb",
+    "description" : "👩🏽‍❤️‍👩🏻 E13.1 couple with heart: woman, woman, medium skin tone, light skin tone",
+    "emoji" : "👩🏽‍❤️‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f469-1f3fc",
+    "description" : "👩🏽‍❤️‍👩🏼 E13.1 couple with heart: woman, woman, medium skin tone, medium-light skin tone",
+    "emoji" : "👩🏽‍❤️‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f469-1f3fd",
+    "description" : "👩🏽‍❤️‍👩🏽 E13.1 couple with heart: woman, woman, medium skin tone",
+    "emoji" : "👩🏽‍❤️‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f469-1f3fe",
+    "description" : "👩🏽‍❤️‍👩🏾 E13.1 couple with heart: woman, woman, medium skin tone, medium-dark skin tone",
+    "emoji" : "👩🏽‍❤️‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fd-200d-2764-fe0f-200d-1f469-1f3ff",
+    "description" : "👩🏽‍❤️‍👩🏿 E13.1 couple with heart: woman, woman, medium skin tone, dark skin tone",
+    "emoji" : "👩🏽‍❤️‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f469-1f3fb",
+    "description" : "👩🏾‍❤️‍👩🏻 E13.1 couple with heart: woman, woman, medium-dark skin tone, light skin tone",
+    "emoji" : "👩🏾‍❤️‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f469-1f3fc",
+    "description" : "👩🏾‍❤️‍👩🏼 E13.1 couple with heart: woman, woman, medium-dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏾‍❤️‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f469-1f3fd",
+    "description" : "👩🏾‍❤️‍👩🏽 E13.1 couple with heart: woman, woman, medium-dark skin tone, medium skin tone",
+    "emoji" : "👩🏾‍❤️‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f469-1f3fe",
+    "description" : "👩🏾‍❤️‍👩🏾 E13.1 couple with heart: woman, woman, medium-dark skin tone",
+    "emoji" : "👩🏾‍❤️‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3fe-200d-2764-fe0f-200d-1f469-1f3ff",
+    "description" : "👩🏾‍❤️‍👩🏿 E13.1 couple with heart: woman, woman, medium-dark skin tone, dark skin tone",
+    "emoji" : "👩🏾‍❤️‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f469-1f3fb",
+    "description" : "👩🏿‍❤️‍👩🏻 E13.1 couple with heart: woman, woman, dark skin tone, light skin tone",
+    "emoji" : "👩🏿‍❤️‍👩🏻",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f469-1f3fc",
+    "description" : "👩🏿‍❤️‍👩🏼 E13.1 couple with heart: woman, woman, dark skin tone, medium-light skin tone",
+    "emoji" : "👩🏿‍❤️‍👩🏼",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f469-1f3fd",
+    "description" : "👩🏿‍❤️‍👩🏽 E13.1 couple with heart: woman, woman, dark skin tone, medium skin tone",
+    "emoji" : "👩🏿‍❤️‍👩🏽",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f469-1f3fe",
+    "description" : "👩🏿‍❤️‍👩🏾 E13.1 couple with heart: woman, woman, dark skin tone, medium-dark skin tone",
+    "emoji" : "👩🏿‍❤️‍👩🏾",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1f469-1f3ff-200d-2764-fe0f-200d-1f469-1f3ff",
+    "description" : "👩🏿‍❤️‍👩🏿 E13.1 couple with heart: woman, woman, dark skin tone",
+    "emoji" : "👩🏿‍❤️‍👩🏿",
+    "group" : "People & Body",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "family"
+  },
+  {
+    "codepoints" : "1facc",
+    "description" : "🫌 E18.0 monarch butterfly",
+    "emoji" : "🫌",
+    "group" : "Animals & Nature",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "animal-bug"
+  },
+  {
+    "codepoints" : "1fadd",
+    "description" : "🫝 E18.0 pickle",
+    "emoji" : "🫝",
+    "group" : "Food & Drink",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "food-vegetable"
+  },
+  {
+    "codepoints" : "1f6d9",
+    "description" : "🛙 E18.0 lighthouse",
+    "emoji" : "🛙",
+    "group" : "Travel & Places",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "transport-water"
+  },
+  {
+    "codepoints" : "1fa8b",
+    "description" : "🪋 E18.0 meteor",
+    "emoji" : "🪋",
+    "group" : "Travel & Places",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "sky & weather"
+  },
+  {
+    "codepoints" : "1fa8c",
+    "description" : "🪌 E18.0 eraser",
+    "emoji" : "🪌",
+    "group" : "Objects",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "writing"
+  },
+  {
+    "codepoints" : "1fa8d",
+    "description" : "🪍 E18.0 net with handle",
+    "emoji" : "🪍",
+    "group" : "Objects",
+    "reason" : "unsupported_or_needs_review",
+    "subgroup" : "tool"
+  }
+]

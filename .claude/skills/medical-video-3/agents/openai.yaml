@@ -1,0 +1,4 @@
+interface:
+  display_name: "3D医療動画3"
+  short_description: "血管・臓器は透明な青のグラデーション、赤血球だけ赤いリアルな3Dで描く"
+  default_prompt: "$medical-video-3 を使って、血管と臓器は透明な青のグラデーション、赤血球だけリアルな赤い3Dで描いてください。"

@@ -1,0 +1,18 @@
+name: VOICEVOX export consistency
+on:
+  push:
+    paths: ['data.js', 'scenes.js', 'voicevox/**', 'tools/build-voicevox*', '.github/workflows/check-voicevox.yml']
+  pull_request:
+    paths: ['data.js', 'scenes.js', 'voicevox/**', 'tools/build-voicevox*', '.github/workflows/check-voicevox.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/build-voicevox.mjs --check
+      - run: node --test tools/build-voicevox.test.mjs

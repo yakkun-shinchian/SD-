@@ -1,0 +1,13 @@
+interface:
+  display_name: 台本スキル
+  short_description: 正確な比喩を使って、新人看護師に伝わる医療教材の台本を作る
+  default_prompt: $daihon-skill を使って、この医学テーマを正確でわかりやすい看護教育台本にしてください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

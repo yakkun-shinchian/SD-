@@ -1,0 +1,66 @@
+{
+  "page_id": "inner-voice-001",
+  "template_scope": "single-panel-fallback",
+  "layout": "bilingual-portrait",
+  "allow_non_round_balloons": false,
+  "scene": "A night-shift nurse checks an order screen while the clock advances.",
+  "alt_text": "A tired nurse looks at the order screen while waiting for a doctor's instruction.",
+  "review_status": "draft",
+  "canvas": {
+    "width": 1024,
+    "height": 1536,
+    "background": [248, 245, 238],
+    "frame": [20, 28, 38]
+  },
+  "header": {
+    "category_ja": "医師・指示",
+    "category_color": [231, 88, 88],
+    "series_label": "INNER VOICE",
+    "number": "01"
+  },
+  "artwork": {
+    "fit": "cover",
+    "protected_zones": [
+      {
+        "id": "main-head",
+        "kind": "face",
+        "x": 0.35,
+        "y": 0.38,
+        "w": 0.24,
+        "h": 0.23
+      }
+    ]
+  },
+  "balloons": [
+    {
+      "id": "b1",
+      "speaker": "nurse",
+      "kind": "speech",
+      "text": "まだ指示\n入ってないの……",
+      "translation": "Still no orders...",
+      "language_order": "ja-then-en",
+      "translation_position": "bottom-right",
+      "x": 0.05,
+      "y": 0.03,
+      "w": 0.84,
+      "h": 0.29,
+      "tail_x": 0.45,
+      "tail_y": 0.35,
+      "font_size": 0.06,
+      "translation_font_size": 0.026
+    }
+  ],
+  "caption": {
+    "headline_ja": "指示は、まだですか",
+    "accent_span_ja": "指示は",
+    "body_ja": [
+      "時計は進む。点滴は待てない。",
+      "私たちの段取りだけが、宙に浮いている。"
+    ],
+    "body_en": [
+      "The clock keeps moving; the IV cannot wait.",
+      "Only our carefully laid plans remain suspended."
+    ],
+    "footer": "KAWAII NURSES’ INNER VOICES"
+  }
+}

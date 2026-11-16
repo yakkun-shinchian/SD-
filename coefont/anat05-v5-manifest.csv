@@ -1,0 +1,18 @@
+seq,gen_no,page,speaker,voice,target_mp3,reuse_from,speech
+1,1,1,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-01.mp3,,ホルモンって、名前が多くて混乱します。
+2,2,1,senior,後藤邑子,anat05-v5-voice-02.mp3,,どこから出て、何を調整するかで整理しよう。症状と検査を合わせて見るのが大切だよ。
+3,3,2,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-03.mp3,,血液に乗れば、どの細胞にも効くんですか？
+4,4,2,senior,後藤邑子,anat05-v5-voice-04.mp3,,受容体という受け取り口がある細胞に働くよ。鍵と鍵穴のような関係なんだ。
+5,5,3,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-05.mp3,,全部、下垂体の命令で動くんですか？
+6,6,3,senior,後藤邑子,anat05-v5-voice-06.mp3,,多くは視床下部と下垂体が調整するよ。でも、血糖で調整されるインスリンなど例外もあるんだ。
+7,7,4,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-07.mp3,,ホルモンは、出し続けるんですか？
+8,8,4,senior,後藤邑子,anat05-v5-voice-08.mp3,,増えたホルモンが上流の分泌を抑える仕組みがあるよ。負のフィードバックと呼ぶんだ。
+9,9,5,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-09.mp3,,血糖を調整するのは、インスリンだけですか？
+10,10,5,senior,後藤邑子,anat05-v5-voice-10.mp3,,膵臓のインスリンは血糖を下げ、グルカゴンは上げる方向に働くよ。二つの役割で覚えよう。
+11,11,6,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-11.mp3,,甲状腺ホルモンは、何をするんですか？
+12,12,6,senior,後藤邑子,anat05-v5-voice-12.mp3,,体のエネルギーの使い方に関わるよ。多いと動悸や暑がり、少ないと寒がりや疲れやすさが見られるんだ。
+13,13,7,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-13.mp3,,副腎のホルモンは、全部同じですか？
+14,14,7,senior,後藤邑子,anat05-v5-voice-14.mp3,,外側の皮質からコルチゾール、内側の髄質からアドレナリンなどが出るよ。場所と働きを分けよう。
+15,15,8,junior,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-15.mp3,,ホルモンの量だけ見れば、わかりますか？
+16,16,8,senior,後藤邑子,anat05-v5-voice-16.mp3,,量だけでは決められないよ。受け取り方の問題もあるから、症状、検査、薬の影響を合わせて考えよう。
+17,,8,cta,汎用式概念χ-soft-v2[最高精度] ¦CV:ろさちゃん Losa-chan -soft,anat05-v5-voice-17.mp3,exam02-v6-voice-13.mp3,フォローしていただけると励みになります。よろしくお願いします。

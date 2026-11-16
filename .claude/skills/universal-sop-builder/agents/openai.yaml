@@ -1,0 +1,14 @@
+interface:
+  display_name: SOP・手順書作成
+  short_description: 業務を担当、手順、例外、確認方法まで再現可能にします
+  default_prompt: Use $universal-sop-builder to turn this process into a clear, testable
+    SOP.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

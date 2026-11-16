@@ -1,0 +1,71 @@
+{
+  "page_id": "beauty-001",
+  "layout": "single-balloon-portrait",
+  "scene": "A fictional adult hairstylist listens carefully while consulting with an adult client in a bright, calm salon.",
+  "alt_text": "明るい美容室で、成人の美容師が成人のお客様の希望を丁寧に聞いている。",
+  "review_status": "draft",
+  "canvas": {
+    "width": 1009,
+    "height": 1536,
+    "background": [248, 245, 238],
+    "frame": [20, 28, 38]
+  },
+  "header": {
+    "category_ja": "カウンセリング",
+    "category_color": [231, 110, 110],
+    "series_label": "HAIR & MAKEUP ARUARU",
+    "number": "01"
+  },
+  "artwork": {
+    "fit": "cover",
+    "protected_zones": [
+      {
+        "id": "stylist-head",
+        "kind": "head",
+        "x": 0.29,
+        "y": 0.39,
+        "w": 0.23,
+        "h": 0.25
+      },
+      {
+        "id": "client-head",
+        "kind": "head",
+        "x": 0.58,
+        "y": 0.50,
+        "w": 0.25,
+        "h": 0.29
+      }
+    ]
+  },
+  "balloons": [
+    {
+      "id": "b1",
+      "speaker": "stylist",
+      "kind": "thought",
+      "text": "「おまかせ」が\nいちばん難しい！",
+      "translation": "“Surprise me” is hard!",
+      "translation_position": "bottom-right",
+      "x": 0.04,
+      "y": 0.03,
+      "w": 0.91,
+      "h": 0.28,
+      "tail_x": 0.86,
+      "tail_y": 0.36,
+      "font_size": 0.06,
+      "translation_font_size": 0.026
+    }
+  ],
+  "caption": {
+    "headline_ja": "おまかせの重み",
+    "accent_span_ja": "おまかせ",
+    "body_ja": [
+      "自由に見えて、責任は最大級。",
+      "似合う答えを、会話と表情から探していく。"
+    ],
+    "body_en": [
+      "Freedom comes with the greatest responsibility.",
+      "We read every word and expression to find the right look."
+    ],
+    "footer": "KAWAII JAPAN COLLECTION"
+  }
+}

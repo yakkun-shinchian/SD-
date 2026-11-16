@@ -1,0 +1,14 @@
+interface:
+  display_name: 個人情報マスキング
+  short_description: 公開前の文書から個人情報や秘密情報を安全に伏せます
+  default_prompt: Use $universal-privacy-redaction to redact private or secret information
+    from this content.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

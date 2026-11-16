@@ -1,0 +1,11 @@
+interface:
+  display_name: "SNSキャプション"
+  short_description: "キャプション・キーワード・ハッシュタグを絵文字つき500文字以内の1ブロックにまとめる"
+  default_prompt: "$yakubon-sns-caption を使って、SNSキャプションをまとめてください。"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

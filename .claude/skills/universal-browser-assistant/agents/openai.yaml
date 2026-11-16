@@ -1,0 +1,13 @@
+interface:
+  display_name: 安全なブラウザ作業代行
+  short_description: Webの閲覧や入力を代行し、外部送信の前には必ず確認します
+  default_prompt: Use $universal-browser-assistant to complete this browser task safely.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

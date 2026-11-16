@@ -1,0 +1,14 @@
+interface:
+  display_name: Kindle画集・漫画KDP出版スタジオ
+  short_description: 画集と日英漫画をKDP用EPUB・確認PDFまで顔安全に制作
+  default_prompt: Use $kindle-visual-book-studio to assemble a bilingual face-safe
+    manga book, create its iPad review PDF, and preflight the KDP files.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  allow_implicit_invocation: true
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas

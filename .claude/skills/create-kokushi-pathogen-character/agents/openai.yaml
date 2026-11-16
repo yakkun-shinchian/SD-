@@ -1,0 +1,14 @@
+interface:
+  display_name: 国試対応 病原体擬人化図鑑
+  short_description: 細菌・真菌・ウイルスを国試の根拠つきで一枚絵にする
+  default_prompt: Use $create-kokushi-pathogen-character to make a nursing-exam pathogen
+    character illustration.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,13 @@
+interface:
+  display_name: Instagram V6｜会話イラスト制作
+  short_description: V5の絵柄で会話イラストを制作・検品し、動画工程をM1へ引き渡す
+  default_prompt: $instagram-v6 で先輩と後輩の看護会話イラストを作成してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

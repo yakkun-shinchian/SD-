@@ -1,0 +1,11 @@
+interface:
+  display_name: "CTスキル1｜白黒×カラー対比の断面動画"
+  short_description: "CT・MRIの断面を白黒とカラーで上下に並べ線でつなぐ縦型動画を作る"
+  default_prompt: "$ct-skill-1 を使って、CT断面の白黒×カラー対比の縦型教育動画を作ってください。"
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,15 @@
+interface:
+  display_name: Instagram看護カルーセル V3
+  short_description: 囲みなし・鉛筆調ふきだし・手書き風文字で看護教材を統一
+  default_prompt: Use $instagram-nursing-carousel-v3 to create a 10-slide nursing
+    Instagram carousel with full-bleed illustrations, pencil-style natural speech
+    balloons, and thick handwritten Japanese lettering.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

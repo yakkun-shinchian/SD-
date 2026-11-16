@@ -1,0 +1,14 @@
+interface:
+  display_name: 薬の作用・副作用インフォグラフィック
+  short_description: 薬の作用・副作用・特徴・ジェネリックを調べ、図解します
+  default_prompt: Use $explain-drug-infographic to explain a medicine in Japanese
+    and create a clear infographic.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

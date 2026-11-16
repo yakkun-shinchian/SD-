@@ -1,0 +1,13 @@
+interface:
+  display_name: 医療動画1
+  short_description: 透明な青い血管とシアンの血球、深紺の空間で美しい医療CGを制作
+  default_prompt: $medical-video-1 を使い、見本の透明感と青い血球を保った医療動画を制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

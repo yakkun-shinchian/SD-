@@ -1,0 +1,13 @@
+interface:
+  display_name: Instagram動画スキル M1
+  short_description: 完成イラストの構図を保ち、医学的意味に合う動きと全文音声で動画化する
+  default_prompt: $instagram-video-m1 でV6の完成イラストを、構図を保って医学的意味と音声に合う縦長動画にしてください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

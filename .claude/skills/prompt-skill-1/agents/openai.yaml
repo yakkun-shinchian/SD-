@@ -1,0 +1,13 @@
+interface:
+  display_name: プロンプトスキル1
+  short_description: 外部動画AI向けの詳細な英語指示と禁止事項を毎回そろえて作成
+  default_prompt: $prompt-skill-1 を使い、添付画像を外部AIで動画化する詳細な英語プロンプトを作成してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

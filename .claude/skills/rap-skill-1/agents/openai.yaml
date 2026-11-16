@@ -1,0 +1,13 @@
+interface:
+  display_name: ラップスキル1
+  short_description: 青い美麗アニメと声・ビートに同期して大きく飛び込み揺れる文字で医療ラップを制作する
+  default_prompt: $rap-skill-1 を使って、青を基調とした美しくかっこよく少し可愛い縦長イラストと、声・ビートに合わせて巨大文字がバーンと飛び込み揺れる映像を制作してください。
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

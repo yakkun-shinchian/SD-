@@ -1,0 +1,14 @@
+interface:
+  display_name: AI論文リサーチ
+  short_description: Hugging FaceとarXivのAI論文を読み取り専用で批判的に検証します
+  default_prompt: Use $huggingface-ai-research-readonly to explain and critically
+    appraise this AI paper.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

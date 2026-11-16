@@ -26,6 +26,18 @@
       .replace(/'/g, "&#39;");
   }
 
+  /* 出典を表示用に展開する。
+     refs の各要素は出典ID（文字列）か、旧形式の {label, url} のどちらでもよい。
+     radiology-refs.js が未読込でも落ちないよう、素のまま返す道を残してあります。 */
+  function resolveRefs(refs) {
+    if (typeof RadioRefs !== "undefined" && RadioRefs && RadioRefs.entries) {
+      return RadioRefs.entries(refs);
+    }
+    return (refs || [])
+      .filter((r) => r && typeof r === "object")
+      .map((r) => ({ kind: "", label: r.label || "", cite: "", url: r.url || "" }));
+  }
+
   // 改行を <br> に（escape した後にだけ使います）
   function nl2br(safe) {
     return safe.replace(/\n/g, "<br>");
@@ -383,8 +395,17 @@
     const ddx = (sign.ddx || []).map((d) => `
       <tr><td>${escapeHtml(d.name)}</td><td>${escapeHtml(d.hint || "")}</td></tr>`).join("");
 
-    const refs = (sign.refs || [])
-      .map((r) => `<a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label)}</a>`)
+    const refs = resolveRefs(sign.refs)
+      .map((r) => {
+        const head = r.url
+          ? `<a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label)}</a>`
+          : `<span class="rref__label">${escapeHtml(r.label)}</span>`;
+        const badge = r.kind === "primary"
+          ? `<span class="rref__badge">一次資料</span>`
+          : (r.kind === "edu" ? `<span class="rref__badge rref__badge--edu">教育資料</span>` : "");
+        const cite = r.cite ? `<span class="rref__cite">${escapeHtml(r.cite)}</span>` : "";
+        return `<li class="rref">${badge}${head}${cite}</li>`;
+      })
       .join("");
 
     const related = RAD_SIGNS.filter(
@@ -460,8 +481,9 @@
             <a href="${escapeHtml(radiopaediaLink(sign))}" target="_blank" rel="noopener noreferrer">
               Radiopaedia で「${escapeHtml(sign.en || sign.name)}」の実例を見る
             </a>
-            ${refs}
           </div>
+          ${refs ? `<ul class="rreflist">${refs}</ul>` : `
+          <p class="rrefs rrefs--none">この所見は、まだ一次資料を紐付けていません。</p>`}
         </div>
       </section>
 

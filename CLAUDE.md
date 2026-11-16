@@ -84,11 +84,12 @@ navigates or toggles. Always call `activeLesson.destroy()` on route change
 | `index.html` | **Site landing: VentSim ventilator monitor simulator** (standalone, self-contained; not part of NurseTube) |
 | `ventilator.html` | Legacy-URL redirect to `index.html` |
 | `nurse.html` | NurseTube page skeleton (header, sidebar, main); loads the scripts below |
-| `radiology.html` | **RadioDeck: standalone radiology reading atlas** (head/chest/abdomen); loads the four `radiology-*` files below |
+| `radiology.html` | **RadioDeck: standalone radiology reading atlas** (head/chest/abdomen); loads the five `radiology-*` files below |
 | `radiology.css` | RadioDeck styles (dark by default) + SVG figure palette |
 | `radiology-atlas.js` | Regions, reverse-lookup axes, reading protocols, HU table |
 | `radiology-figures.js` | Hand-drawn SVG schematics (`RAD_FIGURES`) — never real patient images |
 | `radiology-signs.js` | The sign dictionary (**add findings here**) |
+| `radiology-refs.js` | Citation registry (`RadioRefs`) — guidelines and primary papers, resolved by ID |
 | `radiology-app.js` | RadioDeck routing, reverse lookup, rendering, BYOK AI tab (IIFE) |
 | `styles.css` | YouTube-style UI, player, light/dark theme |
 | `app.js` | Rendering, routing, search, slideshow player (IIFE) |

@@ -101,6 +101,7 @@ const RAD_SIGNS = [
     ],
     figure: "kerleyB",
     refs: [
+      "FLEISCHNER2024",
       { label: "Kerley B lines（Radiopaedia 症例）", url: "https://radiopaedia.org/cases/kerley-b-lines" },
       { label: "Interlobular septal thickening（The Common Vein）", url: "https://lungs.thecommonvein.net/interlobular-septal-thickening" },
     ],
@@ -230,6 +231,10 @@ const RAD_SIGNS = [
       "心拡大や脂肪沈着（心膜脂肪）でも心縁が不明瞭になることがあります",
     ],
     figure: "silhouette",
+    refs: [
+      "FLEISCHNER2024",
+      "RADMASTER_CHEST",
+    ],
   },
 
   {
@@ -272,6 +277,9 @@ const RAD_SIGNS = [
     ],
     pitfalls: ["圧迫性無気肺（胸水による）ではエアブロンコグラムが見えることがあります"],
     figure: "airBronchogram",
+    refs: [
+      "FLEISCHNER2024",
+    ],
   },
 
   {
@@ -322,6 +330,10 @@ const RAD_SIGNS = [
       "皮膚のしわを胸膜線と誤ること。線の外に血管影があるかで見分けます",
     ],
     figure: "pneumothorax",
+    refs: [
+      "FLEISCHNER2024",
+      "BTS_PLEURAL2023",
+    ],
   },
 
   {
@@ -378,6 +390,9 @@ const RAD_SIGNS = [
       "仰臥位撮影での見落としが最も多いです",
     ],
     figure: "effusion",
+    refs: [
+      "BTS_PLEURAL2023",
+    ],
   },
 
   {
@@ -439,6 +454,9 @@ const RAD_SIGNS = [
       "片側全体が真っ白なとき、縦隔の向きで一気に鑑別できます。患側に引かれれば無気肺、健側に押されれば大量胸水です",
     ],
     figure: "atelectasis",
+    refs: [
+      "FLEISCHNER2024",
+    ],
   },
 
   {
@@ -495,6 +513,9 @@ const RAD_SIGNS = [
     pearls: ["ポータブル写真でCTRを論じるときは「AP臥位であること」を必ず添えて伝えます。それが誠実な申し送りです"],
     pitfalls: ["一枚の写真の絶対値で判断しないこと。心臓は経過で語ります"],
     figure: "cxrNormal",
+    refs: [
+      "RADMASTER_CHEST",
+    ],
   },
 
   {
@@ -581,6 +602,9 @@ const RAD_SIGNS = [
     pearls: ["GGOは所見名であって病名ではありません。「分布」と「経過」をセットにして初めて意味を持ちます"],
     pitfalls: ["呼気時のCTでは生理的に濃度が上がります。吸気不十分をGGOと誤らないこと"],
     figure: "ggo",
+    refs: [
+      "FLEISCHNER2024",
+    ],
   },
 
   {
@@ -620,6 +644,9 @@ const RAD_SIGNS = [
     pearls: ["「crazy-paving ＝ 肺胞蛋白症」は過去の知識です。今は非特異的所見として扱います"],
     pitfalls: ["所見の名前の華やかさに引っぱられて、臨床経過を軽視しないこと"],
     figure: "crazyPaving",
+    refs: [
+      "FLEISCHNER2024",
+    ],
   },
 
   {
@@ -662,6 +689,9 @@ const RAD_SIGNS = [
     pearls: ["蜂巣肺は不可逆です。だからこそ、見つけた時点で呼吸器専門医に繋ぐ意味があります"],
     pitfalls: ["傍隔壁型肺気腫との誤認が最も多いです。「層をなしているか」で見分けます"],
     figure: "honeycomb",
+    refs: [
+      "FLEISCHNER2024",
+    ],
   },
 
   /* =====================================================================
@@ -713,6 +743,8 @@ const RAD_SIGNS = [
     ],
     figure: "hyperdenseMca",
     refs: [
+      "MCA_DOT2001",
+      "ASPECTS2000",
       {"label": "Mair et al. 2015：hyperdense artery signの診断精度", "url": "https://doi.org/10.1161/STROKEAHA.114.007036"},
       { label: "Hyperdense MCA sign in relation to ASPECTS（Neurol Neurochir Pol）", url: "https://journals.viamedica.pl/neurologia_neurochirurgia_polska/article/view/61204" },
     ],
@@ -767,6 +799,7 @@ const RAD_SIGNS = [
     ],
     figure: "insularRibbon",
     refs: [
+      "ASPECTS2000",
       {"label": "Truwit et al. 1990：島皮質リボン（原著）", "url": "https://pubmed.ncbi.nlm.nih.gov/2389039/"},
       { label: "Insular ribbon sign（Radiogyan）", url: "https://radiogyan.com/articles/insular-ribbon-sign-radiology-sign/" },
     ],
@@ -1314,6 +1347,7 @@ const RAD_SIGNS = [
     ],
     figure: "hccWashout",
     refs: [
+      "LIRADS2018",
       { label: "CT/MRI LI-RADS（Radiopaedia）", url: "https://radiopaedia.org/articles/ctmri-li-rads" },
     ],
   },
@@ -1364,6 +1398,9 @@ const RAD_SIGNS = [
     ],
     pitfalls: ["flash filling型の小血管腫は、動脈相だけ見ると肝細胞癌と紛らわしいです。必ず遅延相まで見ます"],
     figure: "hemangioma",
+    refs: [
+      "LIRADS2018",
+    ],
   },
 
   {
@@ -1567,6 +1604,9 @@ const RAD_SIGNS = [
       "無石胆嚢炎は結石がないので疑われにくいです。ICU患者では常に念頭に置きます",
     ],
     figure: "gallbladder",
+    refs: [
+      "TG18_CHOLECYSTITIS",
+    ],
   },
 
   {

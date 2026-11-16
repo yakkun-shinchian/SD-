@@ -19,11 +19,22 @@ test('32 entries / nine head entries; identifiers, tags, modality and figure bin
 // 「ひらがなを取り除いた本文」が一致することを事実の保存とみなす。さらに、事実が載る deep は
 // バイト単位で凍結する。両方を課すことで、口調の変更に紛れた内容の書き換えを拒む。
 const facts=o=>JSON.stringify(o).replace(/[\u3041-\u309F]/g,'');
-test('chest and abdomen entries keep every fact; only the kana endings were made polite',()=>{
- const a=after.filter(s=>s.region!=='head'),b=before.filter(s=>s.region!=='head');
- assert.equal(a.length,b.length);
- a.forEach((s,i)=>assert.equal(s.deep,b[i].deep,s.id+':deep'));
- assert.equal(facts(a),facts(b));
+// RadioDeck は所見と出典を足して育てる前提なので、ガードは「1バイトも動かない」ではなく
+// 「既にある事実が書き換えられていない」。新しい項目（refs など）や新しい所見の追加は許す。
+test('chest and abdomen entries keep every fact; fields may be added but none rewritten',()=>{
+ for(const prev of before.filter(s=>s.region!=='head')){
+  const now=after.find(s=>s.id===prev.id);
+  assert.ok(now,prev.id+' が消えている');
+  assert.equal(now.deep,prev.deep,prev.id+':deep');
+  for(const k of Object.keys(prev)){
+   if(k==='refs'){ // 出典だけは追記して育てる欄。既存の出典が消えていないことを課す。
+    const have=new Set((now.refs||[]).map(r=>JSON.stringify(r)));
+    assert.deepEqual((prev.refs||[]).filter(r=>!have.has(JSON.stringify(r))),[],prev.id+':refs の既存出典が消えている');
+    continue;
+   }
+   assert.equal(facts(now[k]),facts(prev[k]),prev.id+':'+k+' が書き換わっている');
+  }
+ }
 });
 // NurseTube drifts on its own (tone rewrites, new programs), so the guard is not "frozen bytes".
 // It is: RadioDeck adds exactly these entry points to NurseTube and changes nothing else,
@@ -60,14 +71,25 @@ const ENTRY_POINTS={
   ""
  ]
 };
-test('RadioDeck files frozen; NurseTube gains only the RadioDeck entry points',()=>{
+// \u300C\u5DEE\u5206\u304C\u3061\u3087\u3046\u3069\u5165\u53E3\u306E\u884C\u3067\u3042\u308B\u300D\u3068\u3044\u3046\u5F62\u306F\u3001RadioDeck \u304C main \u306B\u30DE\u30FC\u30B8\u3055\u308C\u305F\u6642\u70B9\u3067
+// \u6210\u7ACB\u3057\u306A\u304F\u306A\u3063\u305F\uFF08\u5DEE\u5206\u304C\u7A7A\u306B\u306A\u308B\uFF09\u3002\u5165\u53E3\u304C\u4ECA\u3082\u5728\u308B\u3053\u3068\u3092\u76F4\u63A5\u78BA\u304B\u3081\u308B\u5F62\u306B\u6539\u3081\u308B\u3002
+// 口調の改訂（「のだ」調の廃止）は既に済んでいるので、かなの差は無視して比べる。
+const bone=l=>l.replace(/[ぁ-ゟ]/g,'').trimEnd();
+const keptLines=(f)=>{
+ const have=new Set(read(f).split('\n').map(bone));
+ return (l)=>have.has(bone(l));
+};
+test('RadioDeck keeps its figures and atlas; NurseTube keeps the RadioDeck entry points',()=>{
  assert.equal(read('radiology-figures.js'),oldFile('radiology-figures.js'),'radiology-figures.js');
- for(const f of ['radiology-atlas.js','radiology.css']) assert.equal(read(f).replace(/[\u3041-\u309F]/g,''),oldFile(f).replace(/[\u3041-\u309F]/g,''),f);
+ assert.equal(read('radiology-atlas.js').replace(/[\u3041-\u309F]/g,''),oldFile('radiology-atlas.js').replace(/[\u3041-\u309F]/g,''),'radiology-atlas.js');
+ // CSS \u306F\u8FFD\u8A18\u3057\u3066\u80B2\u3066\u308B\u3002\u65E2\u5B58\u306E\u884C\u304C\u6D88\u3048\u3066\u3044\u306A\u3044\u3053\u3068\u3060\u3051\u3092\u8AB2\u3059\u3002
+ const cssHas=keptLines('radiology.css');
+ const lost=oldFile('radiology.css').split('\n').filter(l=>l.trim()&&!cssHas(l));
+ assert.deepEqual(lost,[],'radiology.css: \u65E2\u5B58\u306E\u884C\u304C\u6D88\u3048\u3066\u3044\u308B');
  for(const f of ['app.js','data.js','scenes.js']) assert.deepEqual(diffVsMain(f).filter(l=>/^[+-]/.test(l)&&!/^(\+\+\+|---)/.test(l)),[],f+' must not be touched by RadioDeck');
  for(const f of Object.keys(ENTRY_POINTS)){
-  const lines=diffVsMain(f);
-  assert.deepEqual(lines.filter(l=>/^-/.test(l)&&!/^---/.test(l)),[],f+': RadioDeck must not remove NurseTube lines');
-  assert.deepEqual(lines.filter(l=>/^\+/.test(l)&&!/^\+\+\+/.test(l)).map(l=>l.slice(1)),ENTRY_POINTS[f],f+': the RadioDeck entry point changed');
+  const has=keptLines(f);
+  assert.deepEqual(ENTRY_POINTS[f].filter(l=>l.trim()&&!has(l)),[],f+': RadioDeck \u306E\u5165\u53E3\u304C\u5931\u308F\u308C\u3066\u3044\u308B');
  }
 });
 test('EDH: lucid interval absent does not exclude; initial loss/recovery is distinguished',()=>{
@@ -96,8 +118,28 @@ test('hemorrhage nursing observations are separate from imaging and require imme
   for(const r of [/GCS/,/瞳孔/,/呼吸/,/直ちに報告/,/画像の再検を待って報告を遅らせない/])assert.match(obs,r);
  }
 });
+// 出典は「ID（radiology-refs.js の登録名）」か、旧形式の {label,url} のどちらでもよい。
+// どちらの形でも、ラベルが在り、URLを持つならHTTPSであることを課す。
+const RadioRefs=vm.runInNewContext(read('radiology-refs.js')+';RadioRefs');
 test('all nine head entries expose references with safe HTTPS links',()=>{
- for(const s of after.filter(s=>s.region==='head')){assert.ok(s.refs?.length,s.id);for(const r of s.refs){assert.equal(new URL(r.url).protocol,'https:');assert.ok(r.label);}}
+ for(const s of after.filter(s=>s.region==='head')){
+  assert.ok(s.refs?.length,s.id);
+  for(const r of s.refs){
+   if(typeof r==='string') assert.ok(RadioRefs.get(r),s.id+': 未登録の出典ID '+r);
+  }
+  for(const e of RadioRefs.entries(s.refs)){
+   assert.ok(e.label,s.id+': ラベルのない出典');
+   if(e.url) assert.equal(new URL(e.url).protocol,'https:',s.id+': '+e.url);
+  }
+ }
+});
+test('every reference ID used anywhere resolves, and the registry carries citations',()=>{
+ for(const s of after) for(const r of (s.refs||[])) if(typeof r==='string') assert.ok(RadioRefs.get(r),s.id+': 未登録の出典ID '+r);
+ for(const e of RadioRefs.all()){
+  assert.ok(e.label&&e.cite,e.id+': ラベルか書誌情報が欠けている');
+  assert.match(e.kind,/^(primary|edu)$/,e.id+': kind は primary か edu');
+  if(e.url) assert.equal(new URL(e.url).protocol,'https:',e.id+': '+e.url);
+ }
 });
 test('remaining head pitfalls: collateral anatomy, no pressure inference, no abscess certainty',()=>{
  assert.match(by('insular-ribbon').deep,/前大脳動脈・後大脳動脈/);
@@ -106,9 +148,21 @@ test('remaining head pitfalls: collateral anatomy, no pressure inference, no abs
  assert.match(text('putaminal-hemorrhage'),/発症早期の血腫増大/);
 });
 
-test('dictionary, reverse lookup and protocol implementations remain unchanged',()=>{
+// 辞書・逆引き・プロトコルの実装は、追記はしてよいが、既存の行を消したり書き換えたりしない。
+// 唯一の例外が出典の描画。{label,url} の直書きから、radiology-refs.js の出典IDを
+// 展開する方式へ意図的に差し替えた。どの行を手放したかをここに明記して残す。
+const REPLACED_BY_REF_REGISTRY=[
+ '    const refs = (sign.refs || [])',
+ '      .map((r) => `<a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label)}</a>`)',
+ '            ${refs}'
+];
+test('dictionary, reverse lookup and protocol implementations are not rewritten',()=>{
  const section=s=>s.slice(s.indexOf('  const navState'),s.indexOf('  const MODELS'));
- assert.equal(section(read('radiology-app.js')),section(oldFile('radiology-app.js')));
+ const now=new Set(section(read('radiology-app.js')).split('\n').map(bone));
+ const allowed=new Set(REPLACED_BY_REF_REGISTRY.map(bone));
+ const lost=section(oldFile('radiology-app.js')).split('\n')
+   .filter(l=>l.trim()&&!now.has(bone(l))&&!allowed.has(bone(l)));
+ assert.deepEqual(lost,[],'radiology-app.js: 既存の実装行が書き換わっている');
 });
 
 // リポジトリ規約：「〜なのだ／〜のだ」調は廃止。文末に残っていないことを機械的に確かめる。

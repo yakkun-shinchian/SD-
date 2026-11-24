@@ -8,6 +8,7 @@ ffmpeg だけを使います。生成・課金・外部接続はありません�
     python3 studio/mp4/check_dynamics.py 作品/_完成.mp4
     python3 studio/mp4/check_dynamics.py 作品/_完成.mp4 --highlight 7,12
     python3 studio/mp4/check_dynamics.py 作品/_完成.mp4 --json 作品/dynamics.json
+    python3 studio/mp4/check_dynamics.py 作品/_完成.mp4 --profile slides-4x5 --highlight 3
 
 測るもの（すべて相対値。絶対的な「良い動画」の基準ではありません）:
   動き量  … 1コマ前との差の平均（縮小・白黒にしてから測る）
@@ -89,23 +90,34 @@ def find_cuts(scenes, threshold, min_gap):
     return marks
 
 
-def build_cuts(motion, marks, duration, skip):
+def build_cuts(motion, marks, duration, skip, *, medical=False):
     """カットごとに統計を出す。切り替わり直後の数コマは差が大きいので捨てる。"""
     bounds = [0.0] + marks + [duration]
     cuts = []
     for i in range(len(bounds) - 1):
         a, b = bounds[i], bounds[i + 1]
-        vals = [v for t, v in motion if a + skip <= t < b]
-        if len(vals) < 2:
-            vals = [v for t, v in motion if a <= t < b] or [0.0]
+        if medical:
+            # 切替フレームは常に除外。測定不足を切替の差分や仮のゼロで補わない。
+            samples = [(t, v) for t, v in motion if a < t < b]
+            vals = [v for t, v in samples if t >= a + skip]
+            if len(vals) < 2:
+                vals = []
+        else:
+            vals = [v for t, v in motion if a + skip <= t < b]
+            if len(vals) < 2:
+                vals = [v for t, v in motion if a <= t < b] or [0.0]
         cuts.append({
             "no": i + 1,
             "start": round(a, 2),
             "end": round(b, 2),
             "dur": round(b - a, 2),
-            "motion": round(statistics.median(vals), 2),
-            "motion_peak": round(max(vals), 2),
+            "motion": round(statistics.median(vals), 2) if vals else None,
+            "motion_peak": round(max(vals), 2) if vals else None,
         })
+        if medical:
+            # 切替そのものは除く。直後にも大きな差があるときは、点滅などの確認材料にする。
+            early = [v for t, v in samples if t < a + skip]
+            cuts[-1]["transition_peak"] = round(max(early), 2) if early else None
     return cuts
 
 
@@ -179,20 +191,88 @@ def judge(cuts, highlights, opening_sec):
     return med, avg_dur, notes
 
 
+# 縮小画像のフレーム間輝度差 × 10。中央値とピークの暫定上限（上限ちょうどは許容）。
+MEDICAL_LIMITS = {
+    "slides-4x5": (3.0, 12.0),
+    "infographic": (3.0, 12.0),
+    "organ-cg": (10.0, 40.0),
+}
+SLIDE_TOLERANCE = 0.25  # 秒。1枚の表示時間と全尺をそれぞれ判定
+MANUAL_REVIEW = (
+    "スマホで字幕の文字サイズ・コントラスト・表示時間を確認してください。",
+    "臓器・血管の位置関係、形、動く向きは医学的な目視確認が必要です。",
+    "読み上げた箇所と字幕・アンダーラインが一致するか、音声付きで確認してください。",
+)
+
+
+def judge_medical(cuts, highlights, profile):
+    """全画面の変化と表示時間を調べる。静止やズームの意図は推定しない。"""
+    median_limit, peak_limit = MEDICAL_LIMITS[profile]
+    notes = []
+    total = cuts[-1]["end"] - cuts[0]["start"] if cuts else 0.0
+    if profile == "slides-4x5":
+        if len(cuts) != 4:
+            notes.append(f"△ 自動検出は{len(cuts)}カットです。予定の4枚と切替位置を照合してください。")
+        if abs(total - 20.0) > SLIDE_TOLERANCE:
+            notes.append(f"△ 全尺は{total:.2f}秒です（予定20秒 ±{SLIDE_TOLERANCE}秒）。")
+
+    for c in cuts:
+        n = c["no"]
+        c["highlight"] = n in highlights
+        if profile == "slides-4x5" and abs(c["dur"] - 5.0) > SLIDE_TOLERANCE:
+            notes.append(f"△ カット{n}の検出尺は{c['dur']:.2f}秒です（予定5秒 ±{SLIDE_TOLERANCE}秒）。")
+
+        motion, peak = c["motion"], c["motion_peak"]
+        if motion is None:
+            c["level"] = "測定不足"
+            notes.append(f"? カット{n}は切替後の測定点が不足しています。動きは判定保留です。")
+        elif motion > median_limit:
+            c["level"] = "要確認"
+            notes.append(f"△ カット{n}は画面の変化が大きい区間です"
+                         f"（中央値 {motion:.2f}、暫定上限 {median_limit:g}）。")
+        elif peak > peak_limit:
+            c["level"] = "要確認"
+            notes.append(f"△ カット{n}で一時的に大きな画面変化がありました"
+                         f"（ピーク {peak:.2f}、暫定上限 {peak_limit:g}）。")
+        else:
+            c["level"] = "ほぼ静止" if motion <= STILL else "範囲内"
+            if profile == "organ-cg" and c["highlight"] and peak <= STILL:
+                notes.append(f"◇ カット{n}（山場）は画面全体の変化が微小です。"
+                             "意図した臓器の動きが見えるか確認してください。")
+        early_peak = c.get("transition_peak")
+        if early_peak is not None and early_peak > peak_limit:
+            if motion is not None:
+                c["level"] = "要確認"
+            notes.append(f"△ カット{n}の開始直後にも大きな変化があります"
+                         f"（ピーク {early_peak:.2f}、暫定上限 {peak_limit:g}）。"
+                         "切替の演出や一瞬のちらつきを確認してください。")
+
+    for n in sorted(highlights.difference(c["no"] for c in cuts)):
+        notes.append(f"? カット{n}は見つかりません（全{len(cuts)}カット）。")
+    measured = [c["motion"] for c in cuts if c["motion"] is not None]
+    median = statistics.median(measured) if measured else None
+    mean_duration = total / len(cuts) if cuts else 0.0
+    return median, mean_duration, notes
+
+
 def main():
     ap = argparse.ArgumentParser(description="完成動画の見せ場を数字で測ります。")
     ap.add_argument("video", type=Path)
+    ap.add_argument("--profile", choices=("classic", *MEDICAL_LIMITS), default="classic",
+                    help="classic=従来の見せ場、slides-4x5=4枚×5秒、infographic=静止画教材、organ-cg=臓器CG")
     ap.add_argument("--highlight", default="", help="山場のカット番号（例 7,12）")
     ap.add_argument("--cut-threshold", type=float, default=0.4, help="切り替わりの検出のきびしさ（既定0.4）")
     ap.add_argument("--min-gap", type=float, default=0.8, help="これより近い検出はまとめる秒数（既定0.8）")
-    ap.add_argument("--skip", type=float, default=0.25, help="切り替わり直後に捨てる秒数（既定0.25）")
-    ap.add_argument("--opening", type=float, default=3.0, help="つかみとみなす秒数（既定3.0）")
+    ap.add_argument("--skip", type=float, default=0.25, help="切替後、区間内の集計から外す秒数（既定0.25）")
+    ap.add_argument("--opening", type=float, default=3.0, help="classicでつかみとみなす秒数（既定3.0）")
     ap.add_argument("--width", type=int, default=240, help="測るときの横幅（既定240）")
     ap.add_argument("--json", type=Path, help="結果をJSONで保存")
     a = ap.parse_args()
 
     if not a.video.exists():
         raise SystemExit(f"動画が見つかりません: {a.video}")
+    if a.json and a.json.exists() and a.video.samefile(a.json):
+        ap.error("JSONの保存先には入力動画と異なるファイルを指定してください。")
     highlights = {int(x) for x in a.highlight.replace("、", ",").split(",") if x.strip()}
 
     info = probe(a.video)
@@ -201,35 +281,63 @@ def main():
         raise SystemExit("動きを測れませんでした（コマが取り出せません）。")
     scenes = scene_series(a.video, a.width)
     marks = find_cuts(scenes, a.cut_threshold, a.min_gap)
-    cuts = build_cuts(motion, marks, info["duration"], a.skip)
-    med, avg_dur, notes = judge(cuts, highlights, a.opening)
+    medical = a.profile in MEDICAL_LIMITS
+    cuts = build_cuts(motion, marks, info["duration"], a.skip, medical=medical)
+    if medical:
+        med, avg_dur, notes = judge_medical(cuts, highlights, a.profile)
+    else:
+        med, avg_dur, notes = judge(cuts, highlights, a.opening)
 
     print(f"\n{a.video.name}  {info['width']}x{info['height']}  {info['fps']}fps  "
           f"{info['duration']:.1f}秒  {len(cuts)}カット\n")
-    print("  No  開始     尺     動き   山   調子   めやす")
+    if medical:
+        print(f"  医療教材の評価（{a.profile}）")
+        print("  No  開始     尺   中央値  ピーク   山   区間内の動き")
+    else:
+        print("  No  開始     尺     動き   山   調子   めやす")
     print("  " + "-" * 56)
     for c in cuts:
+        if medical:
+            motion_str, peak_str = (f"{c[k]:.2f}" if c[k] is not None else "—"
+                                    for k in ("motion", "motion_peak"))
+            print(f"  {c['no']:>2}  {c['start']:>6.2f} {c['dur']:>5.2f}  {motion_str:>5}  "
+                  f"{peak_str:>6}   {'★' if c['highlight'] else ' '}   {c['level']}")
+            continue
         bar = "█" * min(20, max(1, int(c["motion"] / max(med, 0.01) * 5)))
         print(f"  {c['no']:>2}  {c['start']:>6.2f} {c['dur']:>5.2f}  {c['motion']:>6.2f}  "
               f"{'★' if c['highlight'] else ' '}   {c['level']}    {bar}")
     print("  " + "-" * 56)
-    print(f"  動きの中央値 {med:.2f} ／ 平均の尺 {avg_dur:.2f}秒\n")
+    med_str = f"{med:.2f}" if med is not None else "測定不足"
+    print(f"  動きの中央値 {med_str} ／ 平均の尺 {avg_dur:.2f}秒\n")
 
     if notes:
         print("気になるところ")
         for n in notes:
             print(f"  {n}")
+    elif medical:
+        print("この評価基準で気になる箇所はありません。")
     else:
         print("気になるところ：ありません（指定した山場は立っています）。")
-    print("\n※ 測ったのは動きの量と尺だけです。解剖の正しさ・テロップ・声の合いは"
-          "測っていません。最後は必ず通しで見てください。")
+    if medical:
+        print("\n別途確認する項目")
+        for item in MANUAL_REVIEW:
+            print(f"  {item}")
+    else:
+        print("\n※ 測ったのは動きの量と尺だけです。解剖の正しさ・テロップ・声の合いは"
+              "測っていません。最後は必ず通しで見てください。")
 
     if a.json:
-        a.json.write_text(json.dumps({
+        report = {
             "video": str(a.video), "info": info, "cuts": cuts,
-            "motion_median": round(med, 3), "duration_mean": round(avg_dur, 3),
+            "motion_median": round(med, 3) if med is not None else None,
+            "duration_mean": round(avg_dur, 3),
             "highlights": sorted(highlights), "notes": notes,
-        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        }
+        if medical:
+            median_limit, peak_limit = MEDICAL_LIMITS[a.profile]
+            report.update(profile=a.profile, motion_limits={"median": median_limit, "peak": peak_limit},
+                          manual_review=MANUAL_REVIEW)
+        a.json.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"\n保存しました: {a.json}")
 
 

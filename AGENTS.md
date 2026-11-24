@@ -9,6 +9,7 @@ Claude Code 用のリポジトリ規約は `CLAUDE.md`、スキル定義は `.cl
 |---|---|
 | **スキル台帳・受領状態・動作確認結果** | `.claude/skills/REGISTRY.md` ← **まずこれ** |
 | 制作スキル定義（正本のミラー） | `.claude/skills/*/SKILL.md` |
+| インフォC1・C2・C3を作るとき（原図・リール・投稿文） | 各シリーズの手順と併せて[純黒背景・キャプションの共通ルール](.claude/skills/infographic-series-style/SKILL.md)を適用する。旧版の背景色・投稿書式よりこちらを優先する。 |
 | リポジトリ構造・NurseTube仕様 | `CLAUDE.md` |
 | 利用者向けドキュメント | `README.md` |
 

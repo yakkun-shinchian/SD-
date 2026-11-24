@@ -292,6 +292,7 @@ loses the reader's place.
 | 制作スキル定義 64件（`SKILL.md` / `references/` / `assets/` / `scripts/` / `agents/`） | `.claude/skills/` |
 | バンドル同梱の索引 | `.claude/skills/SKILL_INDEX.md` |
 | Codex等との共通申し送り・動画検品手順 | `AGENTS.md` |
+| インフォC1・C2・C3の原図・リール・投稿文 | 各シリーズに[純黒背景・キャプションの共通ルール](.claude/skills/infographic-series-style/SKILL.md)を適用する。 |
 
 - **受領状態は3段階で区別する**（`REGISTRY.md` §0）。
   ①手順書原本 **64/64** ②素材・プログラム **64/64** ③動作確認 **0/64**。

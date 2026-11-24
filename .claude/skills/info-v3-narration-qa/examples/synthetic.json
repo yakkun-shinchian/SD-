@@ -1,0 +1,463 @@
+{
+  "version": 1,
+  "part": "前半・観察記録（仮想例）",
+  "evidence": "synthetic",
+  "audio_timing": "fixture",
+  "underline_timing": "fixture",
+  "duration_ms": 58000,
+  "speed": 1.3,
+  "listenability": "unchecked",
+  "underline_colors": {
+    "all": "#80DEEA"
+  },
+  "slides": [
+    {
+      "id": "p1",
+      "image": "synthetic-p1.png",
+      "start_ms": 0,
+      "end_ms": 12500,
+      "sentences": [
+        {
+          "id": "S1",
+          "kind": "heading",
+          "role": "conclusion",
+          "essential": true,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S1-1",
+              "text": "観察した変化は、いつから何が変わったかを伝えます。",
+              "box": [
+                90,
+                330,
+                940,
+                366
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S2",
+          "kind": "body",
+          "role": "context",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S2-1",
+              "text": "この例では、歩き始めるときの様子を記録します。",
+              "box": [
+                90,
+                520,
+                940,
+                556
+              ]
+            }
+          ]
+        },
+        {
+          "id": "D1",
+          "kind": "body",
+          "role": "detail",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "D1-1",
+              "text": "用紙の右上に記入欄があります。",
+              "box": [
+                90,
+                870,
+                940,
+                906
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "image": "synthetic-p2.png",
+      "start_ms": 12500,
+      "end_ms": 27000,
+      "sentences": [
+        {
+          "id": "S3",
+          "kind": "body",
+          "role": "mechanism",
+          "essential": true,
+          "can_open": false,
+          "lines": [
+            {
+              "id": "S3-1",
+              "text": "前回の様子と並べると、",
+              "box": [
+                90,
+                420,
+                940,
+                456
+              ]
+            },
+            {
+              "id": "S3-2",
+              "text": "今回どこが変わったかが分かります。",
+              "box": [
+                90,
+                500,
+                940,
+                536
+              ]
+            }
+          ],
+          "requires": [
+            "S2"
+          ]
+        },
+        {
+          "id": "S4",
+          "kind": "body",
+          "role": "context",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S4-1",
+              "text": "前回も今回も、椅子から立った直後の様子を比べます。",
+              "box": [
+                90,
+                760,
+                940,
+                796
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "image": "synthetic-p3.png",
+      "start_ms": 27000,
+      "end_ms": 40700,
+      "sentences": [
+        {
+          "id": "S5",
+          "kind": "body",
+          "role": "observation",
+          "essential": true,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S5-1",
+              "text": "最初の一歩までにかかった時間を確かめます。",
+              "box": [
+                90,
+                400,
+                940,
+                436
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S6",
+          "kind": "body",
+          "role": "observation",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S6-1",
+              "text": "そのとき、本人がどんな言葉で説明したかも記録します。",
+              "box": [
+                90,
+                590,
+                940,
+                626
+              ]
+            }
+          ]
+        },
+        {
+          "id": "D3",
+          "kind": "body",
+          "role": "detail",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "D3-1",
+              "text": "記録例は下の表にあります。",
+              "box": [
+                90,
+                840,
+                940,
+                876
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "image": "synthetic-p4.png",
+      "start_ms": 40700,
+      "end_ms": 58000,
+      "sentences": [
+        {
+          "id": "S7",
+          "kind": "body",
+          "role": "conclusion",
+          "essential": true,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S7-1",
+              "text": "観察した時刻と、前回からの変化を一緒に伝えます。",
+              "box": [
+                90,
+                390,
+                940,
+                426
+              ]
+            }
+          ]
+        },
+        {
+          "id": "S8",
+          "kind": "body",
+          "role": "observation",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "S8-1",
+              "text": "記録を読み返し、見たことと本人の言葉を区別できるか確かめます。",
+              "box": [
+                90,
+                580,
+                940,
+                616
+              ]
+            }
+          ]
+        },
+        {
+          "id": "D4",
+          "kind": "body",
+          "role": "detail",
+          "essential": false,
+          "can_open": true,
+          "lines": [
+            {
+              "id": "D4-1",
+              "text": "観察した時刻と、前回からの変化を一緒に伝えます。",
+              "box": [
+                90,
+                910,
+                940,
+                946
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "plan": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "speech": [
+    {
+      "id": "c1",
+      "line_id": "S1-1",
+      "transcript": "観察した変化は、いつから何が変わったかを伝えます。",
+      "start_ms": 150,
+      "end_ms": 6350
+    },
+    {
+      "id": "c2",
+      "line_id": "S2-1",
+      "transcript": "この例では、歩き始めるときの様子を記録します。",
+      "start_ms": 6590,
+      "end_ms": 12460
+    },
+    {
+      "id": "c3",
+      "line_id": "S3-1",
+      "transcript": "前回の様子と並べると、",
+      "start_ms": 12620,
+      "end_ms": 15400
+    },
+    {
+      "id": "c4",
+      "line_id": "S3-2",
+      "transcript": "今回どこが変わったかが分かります。",
+      "start_ms": 15400,
+      "end_ms": 19750
+    },
+    {
+      "id": "c5",
+      "line_id": "S4-1",
+      "transcript": "前回も今回も、椅子から立った直後の様子を比べます。",
+      "start_ms": 20000,
+      "end_ms": 26700
+    },
+    {
+      "id": "c6",
+      "line_id": "S5-1",
+      "transcript": "最初の一歩までにかかった時間を確かめます。",
+      "start_ms": 27100,
+      "end_ms": 33100
+    },
+    {
+      "id": "c7",
+      "line_id": "S6-1",
+      "transcript": "そのとき、本人がどんな言葉で説明したかも記録します。",
+      "start_ms": 33410,
+      "end_ms": 40500
+    },
+    {
+      "id": "c8",
+      "line_id": "S7-1",
+      "transcript": "観察した時刻と、前回からの変化を一緒に伝えます。",
+      "start_ms": 40800,
+      "end_ms": 47700
+    },
+    {
+      "id": "c9",
+      "line_id": "S8-1",
+      "transcript": "記録を読み返し、見たことと本人の言葉を区別できるか確かめます。",
+      "start_ms": 48150,
+      "end_ms": 57800
+    }
+  ],
+  "underlines": [
+    {
+      "cue_id": "c1",
+      "line_id": "S1-1",
+      "on_ms": 150,
+      "focus_end_ms": 6350,
+      "off_ms": 6450,
+      "segment": [
+        90,
+        368,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c2",
+      "line_id": "S2-1",
+      "on_ms": 6590,
+      "focus_end_ms": 12460,
+      "off_ms": 12500,
+      "segment": [
+        90,
+        558,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c3",
+      "line_id": "S3-1",
+      "on_ms": 12620,
+      "focus_end_ms": 15400,
+      "off_ms": 15500,
+      "segment": [
+        90,
+        458,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c4",
+      "line_id": "S3-2",
+      "on_ms": 15400,
+      "focus_end_ms": 19750,
+      "off_ms": 19850,
+      "segment": [
+        90,
+        538,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c5",
+      "line_id": "S4-1",
+      "on_ms": 20000,
+      "focus_end_ms": 26700,
+      "off_ms": 26800,
+      "segment": [
+        90,
+        798,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c6",
+      "line_id": "S5-1",
+      "on_ms": 27100,
+      "focus_end_ms": 33100,
+      "off_ms": 33200,
+      "segment": [
+        90,
+        438,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c7",
+      "line_id": "S6-1",
+      "on_ms": 33410,
+      "focus_end_ms": 40500,
+      "off_ms": 40600,
+      "segment": [
+        90,
+        628,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c8",
+      "line_id": "S7-1",
+      "on_ms": 40800,
+      "focus_end_ms": 47700,
+      "off_ms": 47800,
+      "segment": [
+        90,
+        428,
+        940
+      ],
+      "color": "#80DEEA"
+    },
+    {
+      "cue_id": "c9",
+      "line_id": "S8-1",
+      "on_ms": 48150,
+      "focus_end_ms": 57800,
+      "off_ms": 57900,
+      "segment": [
+        90,
+        618,
+        940
+      ],
+      "color": "#80DEEA"
+    }
+  ]
+}

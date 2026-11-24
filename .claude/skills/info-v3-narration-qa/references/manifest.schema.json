@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "インフォV3 発話・下線対応表（1ファイル1部）",
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "line": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "text": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "spoken": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "box": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "box"
+      ],
+      "additionalProperties": false
+    },
+    "sentence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "body"
+          ]
+        },
+        "role": {
+          "enum": [
+            "conclusion",
+            "mechanism",
+            "observation",
+            "context",
+            "detail"
+          ]
+        },
+        "essential": {
+          "type": "boolean"
+        },
+        "can_open": {
+          "type": "boolean"
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "minItems": 0
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/line"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "role",
+        "essential",
+        "can_open",
+        "lines"
+      ],
+      "additionalProperties": false
+    },
+    "slide": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "image": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "start_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sentence"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "image",
+        "start_ms",
+        "end_ms",
+        "sentences"
+      ],
+      "additionalProperties": false
+    },
+    "speech": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "line_id": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transcript": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "start_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "line_id",
+        "transcript",
+        "start_ms",
+        "end_ms"
+      ],
+      "additionalProperties": false
+    },
+    "underline": {
+      "type": "object",
+      "properties": {
+        "cue_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "line_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "on_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "focus_end_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "off_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "segment": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^(#[A-Fa-f0-9]{6}|red|yellow|blue|green|lightblue|cyan|white)$"
+        }
+      },
+      "required": [
+        "cue_id",
+        "line_id",
+        "on_ms",
+        "focus_end_ms",
+        "off_ms",
+        "segment",
+        "color"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1,
+      "type": "integer"
+    },
+    "part": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "evidence": {
+      "enum": [
+        "synthetic",
+        "measured"
+      ]
+    },
+    "audio_timing": {
+      "enum": [
+        "fixture",
+        "final_audio_listening",
+        "reviewed_alignment"
+      ]
+    },
+    "underline_timing": {
+      "enum": [
+        "fixture",
+        "render_log",
+        "frame_review"
+      ]
+    },
+    "media": {
+      "type": "object",
+      "properties": {
+        "audio": {
+          "$ref": "#/$defs/asset"
+        },
+        "video": {
+          "$ref": "#/$defs/asset"
+        }
+      },
+      "required": [
+        "audio",
+        "video"
+      ],
+      "additionalProperties": false
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "speed": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "default": 1.3
+    },
+    "listenability": {
+      "enum": [
+        "unchecked",
+        "clear",
+        "revise"
+      ]
+    },
+    "underline_colors": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "string",
+          "pattern": "^(#[A-Fa-f0-9]{6}|red|yellow|blue|green|lightblue|cyan|white)$"
+        },
+        "heading": {
+          "type": "string",
+          "pattern": "^(#[A-Fa-f0-9]{6}|red|yellow|blue|green|lightblue|cyan|white)$"
+        },
+        "body": {
+          "type": "string",
+          "pattern": "^(#[A-Fa-f0-9]{6}|red|yellow|blue|green|lightblue|cyan|white)$"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "bridges": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "\\S"
+      }
+    },
+    "slides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/slide"
+      },
+      "minItems": 1
+    },
+    "plan": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_-]+$"
+      },
+      "minItems": 1
+    },
+    "speech": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/speech"
+      },
+      "minItems": 1
+    },
+    "underlines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/underline"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "version",
+    "part",
+    "evidence",
+    "audio_timing",
+    "underline_timing",
+    "duration_ms",
+    "listenability",
+    "slides",
+    "plan",
+    "speech",
+    "underlines"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "const": "measured"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "media",
+          "speed"
+        ],
+        "properties": {
+          "audio_timing": {
+            "enum": [
+              "final_audio_listening",
+              "reviewed_alignment"
+            ]
+          },
+          "underline_timing": {
+            "enum": [
+              "render_log",
+              "frame_review"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "audio_timing": {
+            "const": "fixture"
+          },
+          "underline_timing": {
+            "const": "fixture"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "インフォV3 重要文と下線の検品"
+  short_description: "4枚の重要文を選び、完成音声と原図の行・下線の時刻を照合する"
+  default_prompt: "$info-v3-narration-qa で前半・後半の重要文を選び、完成音声と下線の対応を検品してください。"

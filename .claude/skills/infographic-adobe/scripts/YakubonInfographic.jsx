@@ -3,6 +3,7 @@
 (function () {
     var job = /* @V3_JOB@ */ null;
     var headingFont = "SourceHanSerifJP-Bold";
+    var c2HeadingFont = "SourceHanSansJP-Bold";
     var bodyFont = "SourceHanSansJP-Medium";
     var newItems = [];
 
@@ -81,13 +82,13 @@
             trim.setValueAtTime(start + draw, 100);
         } else { trim.setValue(100); }
     }
-    function addSampleText(comp, value, font, size, x, y) {
+    function addSampleText(comp, value, font, size, x, y, fill) {
         var layer = comp.layers.addText(value), prop = sourceText(layer), doc = prop.value;
         doc.fontObject = font;
         doc.fontSize = size;
         doc.justification = ParagraphJustification.LEFT_JUSTIFY;
         doc.applyFill = true;
-        doc.fillColor = [0.95, 0.97, 1.0];
+        doc.fillColor = fill;
         doc.applyStroke = false;
         prop.setValue(doc);
         var tr = layer.property("ADBE Transform Group");
@@ -96,13 +97,15 @@
         var rect = layer.sourceRectAtTime(0, false);
         return [x + rect.left, y + rect.top, x + rect.left + rect.width, y + rect.top + rect.height];
     }
-    function demo() {
-        var title = fontByName(headingFont), body = fontByName(bodyFont);
-        var comp = own(app.project.items.addComp("YAKUBON｜書体・下線の確認（無音見本）", 1080, 1920, 1, 3, 30));
+    function demo(isC2) {
+        var title = fontByName(isC2 ? c2HeadingFont : headingFont), body = fontByName(bodyFont);
+        var fill = isC2 ? [0.82, 0.89, 0.94] : [0.95, 0.97, 1.0];
+        var name = isC2 ? "C2｜書体・下線の確認（無音見本）" : "YAKUBON｜書体・下線の確認（無音見本）";
+        var comp = own(app.project.items.addComp(name, 1080, 1920, 1, 3, 30));
         var bg = comp.layers.addSolid([0.018, 0.035, 0.075], "背景", 1080, 1920, 1, 3);
         own(bg.source);
-        var a = addSampleText(comp, "観察のポイント", title, 86, 96, 780);
-        var b = addSampleText(comp, "いつから、何が変わった？", body, 54, 96, 951);
+        var a = addSampleText(comp, "観察のポイント", title, 86, 96, 780, fill);
+        var b = addSampleText(comp, "いつから、何が変わった？", body, 54, 96, 951, fill);
         underline(comp, "見出し｜水色", a, [0.50, 0.87, 0.92], 0, 1.25);
         underline(comp, "本文｜水色", b, [0.50, 0.87, 0.92], 1.25, 3);
         comp.time = 0.65;
@@ -163,21 +166,25 @@
     }
     function choose() {
         var w = new Window("dialog", "YAKUBON｜インフォグラフィック");
+        var series = w.add("dropdownlist", undefined, ["C1・C3", "C2"]);
+        series.selection = 0;
         var menu = w.add("dropdownlist", undefined, ["3秒の書体・下線見本を開く", "選択文字に見出し書体を適用", "選択文字に本文書体を適用"]);
         menu.selection = 0;
         w.add("statictext", undefined, "書体のPostScript名（文字に適用するときに変更できます）");
         var field = w.add("edittext", undefined, headingFont);
         field.characters = 32;
         field.enabled = false;
-        menu.onChange = function () {
+        function refreshFont() {
             field.enabled = menu.selection.index > 0;
-            field.text = menu.selection.index === 2 ? bodyFont : headingFont;
-        };
+            var title = series.selection.index === 1 ? c2HeadingFont : headingFont;
+            field.text = menu.selection.index === 2 ? bodyFont : title;
+        }
+        menu.onChange = series.onChange = refreshFont;
         var buttons = w.add("group");
         buttons.add("button", undefined, "キャンセル", {name:"cancel"});
         buttons.add("button", undefined, "実行", {name:"ok"});
         if (w.show() !== 1) { return; }
-        if (menu.selection.index === 0) { demo(); }
+        if (menu.selection.index === 0) { demo(series.selection.index === 1); }
         else { applyToSelection(fontByName(field.text)); }
     }
     app.beginUndoGroup("YAKUBON｜インフォグラフィック");

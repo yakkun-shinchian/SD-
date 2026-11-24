@@ -1,0 +1,4 @@
+interface:
+  display_name: "専門用語・理解度チェック"
+  short_description: "医療教材の初出用語と説明順を点検し、看護学生の言葉で理解を確かめる"
+  default_prompt: "$yakubon-medical-terms を制作スキルと併用し、初出の専門用語とページごとの理解を点検してください。"

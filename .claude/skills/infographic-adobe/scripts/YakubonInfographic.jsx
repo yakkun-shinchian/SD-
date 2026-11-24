@@ -13,6 +13,17 @@
         if (folder) { item.parentFolder = folder; }
         return item;
     }
+    function addBlackBackground(comp, folder) {
+        var black = [0, 0, 0];
+        comp.bgColor = black;
+        var layer = comp.layers.addSolid(black, "背景｜純黒 #000000", comp.width, comp.height, 1, comp.duration);
+        own(layer.source, folder);
+        layer.startTime = 0;
+        layer.inPoint = 0;
+        layer.outPoint = comp.duration;
+        layer.moveToEnd();
+        layer.locked = true;
+    }
     function fontByName(name) {
         if (!app.fonts) { fail("書体照合には After Effects 24.0 以降が必要です。"); }
         var found = app.fonts.getFontsByPostScriptName(name);
@@ -102,8 +113,7 @@
         var fill = isC2 ? [0.82, 0.89, 0.94] : [0.95, 0.97, 1.0];
         var name = isC2 ? "C2｜書体・下線の確認（無音見本）" : "YAKUBON｜書体・下線の確認（無音見本）";
         var comp = own(app.project.items.addComp(name, 1080, 1920, 1, 3, 30));
-        var bg = comp.layers.addSolid([0.018, 0.035, 0.075], "背景", 1080, 1920, 1, 3);
-        own(bg.source);
+        addBlackBackground(comp);
         var a = addSampleText(comp, "観察のポイント", title, 86, 96, 780, fill);
         var b = addSampleText(comp, "いつから、何が変わった？", body, 54, 96, 951, fill);
         underline(comp, "見出し｜水色", a, [0.50, 0.87, 0.92], 0, 1.25);
@@ -144,6 +154,7 @@
             var still = scene.layers.add(art);
             still.startTime = 0;
             still.outPoint = scene.duration;
+            addBlackBackground(scene, folder);
             for (j = 0; j < page.marks.length; j++) {
                 var m = page.marks[j], b = m.box;
                 if (b[0] < 0 || b[1] < 0 || b[2] > art.width || b[3] >= art.height) { fail("原図と文字座標を確認してください。\n" + m.line); }
@@ -162,6 +173,7 @@
         sound.audioEnabled = true;
         sound.outPoint = Math.min(voice.duration, data.durationMs / 1000);
         sound.moveToEnd();
+        addBlackBackground(master, folder);
         master.openInViewer();
     }
     function choose() {

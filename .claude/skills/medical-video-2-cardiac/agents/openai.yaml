@@ -1,0 +1,4 @@
+interface:
+  display_name: "医療動画2・心臓シリーズ"
+  short_description: "Create and review consistent cardiac surgery illustrations"
+  default_prompt: "Use $medical-video-2-cardiac for this cardiac illustration series."

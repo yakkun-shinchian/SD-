@@ -1,0 +1,51 @@
+---
+skill: "yakubon-codex-image-handoff"
+current_version: 1
+skill_updated_at: "2026-11-27T00:36:37.197025Z"
+skill_id: "skill_01E69FG5pJmRQewGzkEW73c5"
+description: "YAKUBONの医療動画で、イラストをPCのCodex（codex exec・画像生成）に描かせ、Claudeが指示・監修・編集・最終チェックをするときに使う。"
+tags:
+  - "スキル"
+  - "最新版"
+---
+
+> [!tip] 最新版 v1（2026-11-27）
+> 変更点：[[yakubon-codex-image-handoff_変更履歴]] ／ 全版：「履歴」フォルダ ／ 一覧：[[スキル一覧]]
+
+---
+name: "yakubon-codex-image-handoff"
+description: "YAKUBONの医療動画で、イラストをPCのCodex（codex exec・画像生成）に描かせ、Claudeが指示・監修・編集・最終チェックをするときに使う。"
+---
+
+# イラストはCodex、指示・編集・最終チェックはClaude（2026-11-27 本人指示）
+
+これからの医療動画は、チャッピー（ChatGPTアプリ）に手で貼って描いてもらう代わりに、**PCのCodexにClaudeが直接頼んで**絵を作る。Claudeは指示を書き、届いた絵を医学監修し、ComfyUI・テロップ・引き出し線・IRISで編集し、最後のチェックまでやる。
+
+## 役割
+- **Codex**：イラストを描いて、作品フォルダの `images\` に決めた名前で保存するだけ。動画・文字入れ・ナレーションはしない。
+- **Claude**：ストーリーと台本 → Codexへの指示 → 届いた絵の確認（医学・文字混入・構図のそろい）→ 描き直しの依頼 → ComfyUI → 組み立て → 医学監修 → 最終チェック → キャプション。
+
+## 道具（PC）
+- Codex CLI：`C:\Users\shins\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe`（features の image_generation が有効）
+- 橋渡し：`C:\YAKUBON_STUDIO\pipeline\codex_image_run.ps1 -Work <作品フォルダ> -Prompt <指示.txt> -Tag <名前> [-Images 参照1.png,参照2.png]`
+  - 中身は `codex exec --skip-git-repo-check -C <作品フォルダ> -s workspace-write -c approval_policy="never" --enable image_generation`。指示は標準入力で渡す（引数で渡すと日本語・空白で壊れる）。
+  - 結果：`codex_<Tag>_status.txt`（start/done）、`codex_<Tag>_log.txt`、`codex_<Tag>_last.txt`（最後の返事）。
+  - 必ず **単独の Start-Process** で投げ、status の done を待つ。1枚およそ50秒〜1分（2026-11-27 テスト：936×1664のPNGを保存できた）。
+
+## 指示ファイルの書き方
+1. 1行目：「C:/YAKUBON_STUDIO/.claude/skills/medical-video-2/SKILL.md（医療動画2）を読み、その絵柄で描いてください。」（チャッピーの『医療動画2』スキルにあたる）
+2. 共通ルール（5行以内）：イラストだけ・動画は作らない／縦長9:16／文字・数字・記号・矢印・ラベルは一切入れない（入っていたら作り直す）／同じカット群は同じ向き・同じ大きさ／人を出すカット
+3. 保存のしかた：「1枚ずつ画像生成ツールで作り、このフォルダの images\C03.png のように決めた名前で保存。ツールが別の場所に保存したら、ここへコピー。9:16でなければ黒を足さずに中央で切ってそろえる。最後に保存したパスの一覧だけを返す」
+4. カット一覧：番号｜絵の指示（日本語で1〜3行）。全部のカットを毎回最初から全部書く（前のカットを参照する書き方はしない）。色の指示はしない（ただし酸素の多い血と少ない血を見分けられるように、は書いてよい）。
+5. 同じ構図のシリーズ・描き直しでは、参照画像を `-Images` で渡し、「添付した絵と同じ構図・同じ大きさ・同じ絵柄で」と書く。
+6. 枚数が多いときは、4〜6枚ずつに分けて頼む（途中で止まっても続きから頼めるように）。
+
+## 届いた絵の確認（Claude）
+- 作品フォルダから取り込み、全部を一覧にして見る。
+- 文字・数字・矢印の混入、構図のずれ（同じ向き・大きさか）、医学的な誤り（血の色と流れ、つながり方、器具の数）を確かめる（yakubon-medical-review）。
+- だめな絵は、理由と直し方を書いた指示で同じ番号を描き直してもらう（参照画像を添える）。同じカットが2枚あるときは後の方を使う。
+- 人物は nurse_v1 などのお手本画像を `-Images` で渡し、顔・画風をそろえる。
+
+## そのあと
+- 動画化・組み立ては今までどおり（yakubon-medical-video-assembly、illust3s・run_ltx_generic、build_base_timed → make_iris_v2 → render_iris（単独 Start-Process）→ add_callouts → add_tips）。
+- 有料サービスのクレジットのルールは変わらない。Codexの画像生成はChatGPTの契約の範囲で使う。

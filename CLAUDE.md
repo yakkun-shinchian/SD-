@@ -285,6 +285,22 @@ loses the reader's place.
 - **No tests / no CI / no linter** are configured. Verify changes by opening
   the app in a browser and exercising the affected route.
 
+## Long-term memory: the Obsidian vault (`obsidian/YAKUBON-Memory/`)
+
+The user's long-term memory and the full history of their own Claude skills
+live in an Obsidian vault in this repo. Treat it as memory, not as content.
+
+- **Read lazily.** At the start of a task read only `00_ホーム.md` and
+  `スキル一覧.md`; open a skill's `スキル/<name>/<name>.md` only when the task
+  touches it, and its `_変更履歴.md` / `履歴/` only when asked about past versions.
+- **Record every skill change.** After a skill is edited, run
+  `node tools/skill-vault-sync.mjs --note "<reason>"`. It snapshots the new text
+  as `履歴/vN_<date>.md`, appends a diff to the changelog and refreshes the index.
+- **Never edit or delete anything in `履歴/`.** Snapshots are append-only; a
+  rollback is recorded as a new version.
+- Durable decisions and learnings go in `記憶/<date>_<topic>.md`.
+- Vault notes are written in Japanese (です・ます).
+
 ## Git workflow
 
 - Develop on the branch assigned for the task; create it locally if missing.

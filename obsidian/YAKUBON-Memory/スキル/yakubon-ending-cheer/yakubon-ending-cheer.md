@@ -1,0 +1,128 @@
+---
+skill: "yakubon-ending-cheer"
+current_version: 1
+skill_updated_at: "2026-11-12T13:42:55.134468Z"
+skill_id: "skill_01Sp7ddYNb1RMz3eehPaoTdw"
+description: "YAKUBON STUDIOの医療ショート動画の最後に、いつもの女の子（v2）が約1.5秒の決めアクションをして新人看護師への激励テロップを出す締めカットを毎回つけるときに使う。"
+tags:
+  - "スキル"
+  - "最新版"
+---
+
+> [!tip] 最新版 v1（2026-11-12）
+> 変更点：[[yakubon-ending-cheer_変更履歴]] ／ 全版：「履歴」フォルダ ／ 一覧：[[スキル一覧]]
+
+---
+name: "yakubon-ending-cheer"
+description: "YAKUBON STUDIOの医療ショート動画の最後に、いつもの女の子（v2）が約1.5秒の決めアクションをして新人看護師への激励テロップを出す締めカットを毎回つけるときに使う。"
+---
+
+# 締めの激励カット（エンディング・チア）
+
+2026-11-12 シンサクさんが決定。これまで動画の最後が静止画で終わっていて物足りなかったため、**毎回かならず**最後に「いつもの女の子が動く＋激励テロップ」の締めカットを入れる。
+
+## ねらい
+- 終わりの印象が動画全体の評価を決める（ピーク・エンドの法則：Kahneman, Fredrickson ほか 1993）。最後に明るい動きと一言があると「見てよかった」で終われる。
+- 毎回同じ型の締めは「YAKUBONのいつものやつ」というブランドの儀式になる。
+- ただし長いと離脱が増えるので、**動き1.5秒・全体約2秒**を守る。
+
+## 尺とタイミング（全体 約2.0〜2.2秒）
+| 時間 | 内容 |
+|---|---|
+| 0.0s | 直前のカットから0.2秒のクロスフェード（下地は黒） |
+| 0.0〜1.5s | 女の子の決めアクション |
+| 0.3s | 激励テロップがフェードイン（0.2秒弱） |
+| 1.5〜2.2s | 決めポーズで止まる（まばたき・髪のゆれ程度は可）＋テロップを読ませる |
+- 声は不要（入れるときは声の長さに合わせて止めの時間をのばす。声は速めない）。
+- BGM・効果音は入れない。
+- 背景は純黒 #000000（`yakubon-medical-video-assembly` の黒ルールどおり。黒締めもかける）。
+
+## アクション・ストック（一度作って使い回す）
+毎回生成するとクレジットがかかるので、下の動きを**最初に1回ずつ作ってストックし、ローテーションで使う**。
+
+| ID | 動き | 動画化 |
+|---|---|---|
+| turn | 片足でくるっと一回転して正面で決め | Seedance 2.0 Mini 720p |
+| parapara | 右手を斜め上・左手を斜め下 → 逆に切り替えを2回 → 決め（パラパラ風） | Seedance 2.0 Mini 720p |
+| ok | 胸の前でOKサイン＋ウインク | ComfyUI（LTX-2.3） |
+| guts | 小さくガッツポーズ「ファイト」 | ComfyUI（LTX-2.3） |
+| wave | 笑顔で手を振る（バイバイ） | ComfyUI（LTX-2.3） |
+| salute | 軽く敬礼「了解！」 | ComfyUI（LTX-2.3） |
+| stetho | 聴診器をくるっと首にかけて決め | Seedance 2.0 Mini 720p |
+| sparkle | 胸の前で両手をぎゅっ→パッと開くと青い光の粒 | ComfyUI（LTX-2.3）＋必要ならIRISの粒子 |
+
+- 大きく体が回る・腕が交差する動き（turn / parapara / stetho）はAIが崩しやすいので Seedance 2.0 Mini。小さな動きは無料のComfyUI。ComfyUIで崩れたら Seedance 2.0 Mini に切り替える。
+- 生成前にクレジット見積もりと残りを報告する。
+- 保存先：`C:\YAKUBON_STUDIO\characters\nurse_v1\ending_moves\{ID}.mp4`（文字なし・黒締め済み・1080×1920・30fps）。一覧は同じフォルダの `index.json`（ID・動き・道具・作った日・状態）。
+- 生成した動画が長いときは、決めポーズに着くまでの約1.5秒を切り出す。動きがもたつくときは**映像だけ**1.2〜1.5倍速にしてよい。
+
+### ストックの作り方
+1. **チャッピーに始点・終点の2枚を描いてもらう**（Claudeは描かない）。`yakubon-nurse-character-v2` のとおり、お手本画像（face_ref_brain.png と CHARACTER REFERENCE v2）を毎回チャットに貼る。チャッピーには静止画だけを頼み、動画は作らせない。
+   指示文（英語、[ ]を動きごとに差し替え）：
+   ```
+   Use the attached images as the exact identity: a young Japanese female nurse with a slim oval face, refined gentle features, warm brown eyes, long side-swept bangs with loose strands, dark brown hair tied in a low bun, navy V-neck short-sleeve scrubs and navy trousers, a blank white ID badge on a reel on the left chest, white nurse shoes. Refined semi-realistic anime illustration with soft painterly shading, soft blue rim light.
+   Create TWO images with the identical framing (vertical 9:16, knee-up to full body, she stands in the lower two-thirds of the frame, empty space at the top):
+   Image 1 (start): [START POSE — e.g. standing relaxed, hands at her sides, gentle smile].
+   Image 2 (end): [END POSE — e.g. right arm raised diagonally up, left arm diagonally down, confident bright smile].
+   Pure black background (#000000), no gradient, no vignette, no floor, no backdrop texture.
+   Not a photograph, no realistic skin texture, not Western, not chibi. Only one person. No text. Do not make a video.
+   ```
+2. **動画化**（Claudeが書く英語プロンプト）：
+   ```
+   Vertical 9:16, one continuous shot, fixed camera, no cuts.
+   The young Japanese nurse in the start frame performs [MOVE] in about 1.5 seconds, lands exactly on the end-frame pose and holds still.
+   Keep her exact face, low dark-brown bun, navy V-neck scrubs, white ID badge and white shoes in every frame.
+   Refined semi-realistic anime illustration style, soft painterly shading, soft blue rim light. Pure black background (#000000).
+   She stays in the lower two-thirds of the frame; empty space at the top for text.
+   No text, no extra people, no morphing of face or hands.
+   ```
+   ネガティブ：`photorealistic, realistic skin, western face, chibi, extra fingers, extra arms, distorted face, navy background, gray background, gradient background, fog, vignette, floor, wall, text`
+3. コマを3〜4枚抜いて、顔・おだんご・濃紺スクラブ・手指・名札がくずれていないか、実写化・白人風になっていないか確認してから `ending_moves` に入れる。
+
+## 毎回の使い方（動画の組み立て時）
+1. `ending_moves\ending_log.txt` を見て、**直前2本と同じ動きは避けて**ストックから1つ選ぶ。ストックがまだ無い動きは、上の手順で作るか、ある動きで代用する（作る前にひとこと相談）。
+2. 激励フレーズを選ぶ（下のフレーズ帳）。**直近10本で使ったフレーズは使わない**。動画のテーマに結びつけた一言が作れるなら、そちらを優先する（例：「ASの音、もう怖くない」）。
+3. edit.json の最後の場面に締めカットを追加し、`build_mincho.py` → `yakubon-medical-video-iris` の流れで仕上げる。
+4. 使った動きとフレーズを `ending_log.txt` に1行で記録する（日付・動画名・ID・フレーズ）。
+
+## テロップ（組み立てスキルの標準どおり）
+- メイン：Noto Serif JP Black（900）、エメラルドグリーン #2EE6A8、104px（＋2px太らせ）。
+- 補足：白、60px（800）。
+- 濃紺の縁取り8px＋半透明の濃紺帯。位置は上部（顔にかけない）。
+- メインは14文字前後まで、長ければ読みやすい位置で2行。補足は1行。
+- 「国家試験対策」「国試対策」という言葉は使わない。
+- 決めポーズの瞬間だけ、テロップのまわりに小さな光の粒を0.3秒出してよい（IRISは控えめに。毎回同じ演出でよい）。
+
+## 激励フレーズ帳（メイン ／ 補足）
+新人看護師向け（基本はこちら）：
+- 先輩の圧、強いかもだけど ／ あなたなら大丈夫
+- わからないは、伸びしろ ／ 聞けたあなたは、えらい
+- 今日もよくがんばったね ／ 明日のあなたは、もっと強い
+- 失敗した日も ／ ちゃんと前に進んでる
+- 一歩ずつでいい ／ 昨日より今日、ちゃんと看護師
+- 夜勤、おつかれさま ／ 帰ったらゆっくり休んでね
+- 覚えることだらけ？ ／ 全部、未来のあなたの武器
+- 泣いた日があっても ／ それは本気の証拠
+- 質問できる新人は ／ ぐんぐん伸びる新人
+- 先輩もみんな通った道 ／ 大丈夫、ここまで来れた
+- 深呼吸して ／ 今日もいってらっしゃい
+- ファイト、新人ナース ／ ずっと応援してるよ
+- 1年後のあなたは ／ きっと笑って振り返れる
+- 患者さんの安心は ／ あなたの一言から
+- 今日のひとつが ／ 明日の自信になる
+
+テーマ連動の型（動画の内容に合わせて作る）：
+- 「○○、もう怖くない」／「明日の病棟で、思い出してね」
+- 「○○が見えたら」／「あなたはもう一人前に近い」
+
+看護学生向けの動画のときだけ：
+- 国試まで、あと少し ／ 毎日の1問が、未来の私
+- 今日の勉強、えらすぎる ／ 春に笑うのはあなた
+
+## 確認
+- [ ] 締めカットが全体で約2秒（動き1.5秒）に収まっている
+- [ ] 女の子の顔・髪・服がいつもの子のまま（実写化・白人風・ちびキャラになっていない）
+- [ ] 背景が純黒（四隅と上下の端の平均が RGB 8 以下）
+- [ ] テロップが顔にかかっていない、読み切れる
+- [ ] 直前2本と動きが、直近10本とフレーズが重なっていない
+- [ ] キャプション（`yakubon-sns-caption`）の最後の呼びかけと、締めのフレーズの雰囲気がそろっている
